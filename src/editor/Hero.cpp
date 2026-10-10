@@ -22,11 +22,6 @@
 
 const unsigned int kNumHeroReserved = 16;
 
-VA(0x0044a035, 0x27)
-TObjectTypeTable::TObjectTypeTable(unsigned int numTypes) : m_objectTypes(numTypes)
-{
-}
-
 namespace {
 DATA(0x0059e690) TObjectTypeTable aHeroObjType(kNumHeroClasses + 1);
 

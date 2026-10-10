@@ -1342,6 +1342,7 @@ rva	size	kind	name	unit	evidence
 0x00049d72	0x24	func	?seekpos@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE?AV?$fpos@H@2@V32@H@Z	resourcemanager	masked body (36 bytes, 1 relocations) unique at a census start
 0x00049d96	0x1c	func	??_G?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEPAXI@Z	resourcemanager	vtable of ?$basic_streambuf@DU?$char_traits@D@std@@@std (RTTI) slot 0
 0x00049e08	0x1d	func	??_GTAbstractFile@@UAEPAXI@Z	resourcemanager	vtable of TAbstractFile (RTTI) slot 0
+0x0004a035	0x27	func	??0TObjectTypeTable@@QAE@I@Z	Hero	masked body (39 bytes, 2 relocations) unique at a census start
 0x0004a093	0x1b	func	??0TTraits@THero@@QAE@XZ	Hero	masked body (27 bytes, 1 relocations) unique at a census start
 0x0004a882	0x33	func	??0TClassTraits@THero@@QAE@ABUTObjectType@@W4TTownType@@@Z	Hero	masked body (51 bytes, 1 relocations) unique at a census start
 0x0004b906	0x18	func	??0TImportTextFailure@TGameObject@@QAE@ABV01@@Z	Hero	referenced by __CT??_R0?AVTImportTextFailure@TGameObject@@@8??0TImportTextFailure@TGameObject@@QAE@ABV01@@Z12 at +0x18
@@ -2180,7 +2181,7 @@ rva	size	kind	name	unit	evidence
 0x000bdaf6	0x57	func	?_Ubound@?$_Tree@V?$TPoint@I@@V1@U_Kfn@?$set@V?$TPoint@I@@U?$less@V?$TPoint@I@@@std@@V?$allocator@V?$TPoint@I@@@3@@std@@U?$less@V?$TPoint@I@@@4@V?$allocator@V?$TPoint@I@@@4@@std@@IBEPAU_Node@12@ABV?$TPoint@I@@@Z	rmg_terrain	masked body (87 bytes, 3 relocations) unique at a census start
 0x000bdb4d	0x80	func	?_Inc@const_iterator@?$_Tree@V?$TPoint@I@@V1@U_Kfn@?$set@V?$TPoint@I@@U?$less@V?$TPoint@I@@@std@@V?$allocator@V?$TPoint@I@@@3@@std@@U?$less@V?$TPoint@I@@@4@V?$allocator@V?$TPoint@I@@@4@@std@@QAEXXZ	rmg_terrain	referenced by ?erase@?$_Tree@V?$TPoint@I@@V1@U_Kfn@?$set@V?$TPoint@I@@U?$less@V?$TPoint@I@@@std@@V?$allocator@V?$TPoint@I@@@3@@std@@U?$less@V?$TPoint@I@@@4@V?$allocator@V?$TPoint@I@@@4@@std@@QAEIABV?$TPoint@I@@@Z at +0x31
 0x000bdbcd	0x24	func	??M@YA_NABV?$TPoint@I@@0@Z	rmg_terrain	masked body (36 bytes, 0 relocations) unique at a census start
-0x000be6e6	0x8	func	??_F?$TAutoArrayPtr@D@@QAEXXZ	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x1f9; ICF-folded with 1 identical bodies
+0x000be6e6	0x8	func	??_F?$TAutoArrayPtr@D@@QAEXXZ	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x1f9; ICF-folded with 2 identical bodies
 0x000bf30a	0x1c	func	??_GCFont@@UAEPAXI@Z	TileHRuler	vtable of CFont (RTTI) slot 1
 0x000bf326	0x29	func	??1CFont@@UAE@XZ	TileHRuler	referenced by ??_GCFont@@UAEPAXI@Z at +0x4
 0x000bf381	0x5	func	??_9@$BDA@AE	TileHRuler	referenced by ??1?$TDCAttributeSelector@K$1??_9@$BDA@AE@@QAE@XZ at +0x6
@@ -2341,7 +2342,7 @@ rva	size	kind	name	unit	evidence
 0x000db110	0x44	func	?AddToCache@ResourceManager@@YAXPAVresource@@@Z	resourcemanager	referenced by ?GetText@ResourceManager@@YAPAVTTextResource@@PBD@Z at +0x23
 0x000db160	0xb2	func	?openArchiveResource@@YA_NH@Z	resourcemanager	masked body (178 bytes, 12 relocations) unique at a census start
 0x000db220	0x75	func	?findSpriteResource@@YAPAVLODFile@@PBD@Z	resourcemanager	referenced by ?GetSprite@ResourceManager@@YAPAVCSprite@@PBD@Z at +0x39
-0x000db2a0	0x75	func	?findBitmapResource@@YAPAVLODFile@@PBD@Z	resourcemanager	referenced by ?loadText@ResourceManager@@YAPAVTTextResource@@PBD@Z at +0xef
+0x000db2a0	0x75	func	?findBitmapResource@@YAPAVLODFile@@PBD@Z	resourcemanager	referenced by ?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z at +0x119
 0x000db320	0x21c	func	?reportMissingResource@@YAXPBD00@Z	resourcemanager	masked body (540 bytes, 38 relocations) unique at a census start
 0x000db540	0x14	func	??_D?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXXZ	resourcemanager	masked body (20 bytes, 2 relocations) unique at a census start
 0x000db560	0x4a9	func	?reportMissingTypedResource@@YIXPBDH0@Z	resourcemanager	string literal anchor (??_C@_04ENMD@midi?$AA@, ??_C@_04GOCP@null?$AA@, ??_C@_04IBNA@font?$AA@, ??_C@_04LHJL@text?$AA@, ??_C@_04OMKF@data?$AA@, ??_C@_07DOH@palette?$AA@, ??_C@_07KDH@bitmap8?$AA@, ??_C@_08LBMH@bitmap24?$AA@, ??_C@_08NPBG@bitmap16?$AA@, ??_C@_09ICNO@bitmap565?$AA@, ??_C@_09LJCB@bitmap555?$AA@, ??_C@_0L@MKKK@bitmap1555?$AA@)
@@ -2351,7 +2352,7 @@ rva	size	kind	name	unit	evidence
 0x000dc180	0xf1	func	?SetPixelFormat@ResourceManager@@YAXKKK@Z	resourcemanager	masked body (241 bytes, 22 relocations) unique at a census start
 0x000dc280	0x7	func	??1t_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAE@XZ	resourcemanager	referenced by 0x000dc290 at +0x4; ICF-folded with 1 identical bodies
 0x000dc290	0x1e	func	??_Gt_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEPAXI@Z	resourcemanager	vtable of t_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager (RTTI) slot 0; ICF-folded with 1 identical bodies
-0x000dc2b0	0x300	func	?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z	resourcemanager	string literal anchor (??_C@_0N@NNLG@GetBitmap816?$AA@)
+0x000dc2b0	0x300	func	?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z	resourcemanager	referenced by ??0TIdentifiedHeroPropsGeneralPage@@QAE@IPAVTIdentifiedHeroPropsGeneralPageParentSheet@@ABVTGameMap@@AAV2@_NI@Z at +0x23f
 0x000dc5b0	0x114	func	?loadPaletteData@ResourceManager@@YAPAVTPalette16@@PBDPAVTAbstractFile@@@Z	resourcemanager	masked body (276 bytes, 16 relocations) unique at a census start
 0x000dc6d0	0x153	func	?loadPalette@ResourceManager@@YAPAVTPalette16@@PBD@Z	resourcemanager	referenced by ?GetPalette@ResourceManager@@YAPAVTPalette16@@PBD@Z at +0x14
 0x000dc830	0x2e	func	?GetPalette@ResourceManager@@YAPAVTPalette16@@PBD@Z	resourcemanager	referenced by ?initColors@@YAXXZ at +0x3f

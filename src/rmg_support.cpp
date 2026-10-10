@@ -16,7 +16,7 @@
 #include "exceptions.h"
 #include "rmg.h"
 #include "rmg_terrain.h"
-#include "lineerase.h"
+#include "lineplacement.h"
 #include "tiles.h"
 
 

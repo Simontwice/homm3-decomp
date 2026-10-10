@@ -11,7 +11,7 @@
 
 #include "rmg.h"
 #include "rmg_terrain.h"
-#include "lineerase.h"
+#include "lineplacement.h"
 #include "tiles.h"
 
 // Complete-only pattern globals: retail cinit 0x55ed70/0x55f2f0 passes the

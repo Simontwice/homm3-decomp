@@ -215,6 +215,18 @@ public:
     void paintPoint(const TTilePoint& point);
 };
 
+// Loki's TLineEraseOp without its client: clears the lines of a rectangle
+// through the painter (the walker's rectangle clear). Only the map editor
+// builds the erase operations; the game links their bodies unreferenced.
+class TLineEraseOp {
+public:
+    TLineEraseOp(TMapLineFilter* newPainter);
+    void operator()(unsigned int left, unsigned int top, unsigned int width,
+                    unsigned int height);
+
+    TMapLineFilter* m_painter;
+};
+
 // The editor's RTTI lists only TRiverOp's lineage as bases: the line walker
 // the constructor builds at +0x10 is a member.
 class TRiverPlacementOp : public TRiverOp {
@@ -226,6 +238,23 @@ public:
     virtual ~TRiverPlacementOp();
 
     TRmgLineWalker m_walker;
+};
+
+class TRiverEraseOp : public TRiverOp {
+public:
+    // Erases the river of a cell whose terrain became water or rock.
+    static void onTerrainTypeChanged(TRiverOp::TAbstractMap* map, const TTilePoint& point);
+
+    TRiverEraseOp(TRiverOp::TAbstractMap* newAdapter);
+    virtual ~TRiverEraseOp() {}
+
+    void operator()(unsigned int left, unsigned int top, unsigned int width,
+                    unsigned int height)
+    {
+        m_eraser(left, top, width, height);
+    }
+
+    TLineEraseOp m_eraser;
 };
 
 // The road-building cluster at 0x548040 uses a parallel painter hierarchy.
@@ -283,6 +312,23 @@ public:
     virtual ~TRoadPlacementOp();
 
     TRmgLineWalker m_walker;
+};
+
+class TRoadEraseOp : public TRoadOp {
+public:
+    // Erases the road of a cell whose terrain became water or rock.
+    static void onTerrainTypeChanged(TRoadOp::TAbstractMap* map, const TTilePoint& point);
+
+    TRoadEraseOp(TRoadOp::TAbstractMap* newAdapter);
+    virtual ~TRoadEraseOp() {}
+
+    void operator()(unsigned int left, unsigned int top, unsigned int width,
+                    unsigned int height)
+    {
+        m_eraser(left, top, width, height);
+    }
+
+    TLineEraseOp m_eraser;
 };
 
 #endif  // HOMM3_LINEPLACEMENT_H

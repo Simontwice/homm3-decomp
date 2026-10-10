@@ -42,6 +42,10 @@ public:
     DC_ADDRESS(0x05b2bc, 0x18)
     T* operator->() const { return get(); }
 
+    // CodeView 0x57b2 declares release with no procedure location; Loki's
+    // assignment calls it. GUIGameObject.cpp defines it beside the assignment.
+    T* release() const;
+
 private:
     mutable unsigned char m_owns;
     T* m_ptr;

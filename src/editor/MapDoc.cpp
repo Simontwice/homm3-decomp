@@ -5,7 +5,7 @@
 // each map in its undo queue, generates random maps and autosaves.
 //
 // The terrain, river and road operations are the random map generator's
-// (terrainplacement.h, lineplacement.h, lineerase.h); the document adapts
+// (terrainplacement.h, lineplacement.h); the document adapts
 // its map to their map interfaces and reports what they change; the Tools
 // menu repaint is editor-only code of the game's terrain source.
 #include "editor/stdafx.h"
@@ -21,7 +21,7 @@
 #include "va.h"
 #include "abstractfile.h"
 #include "gzinflatebuf.h"
-#include "lineerase.h"
+#include "lineplacement.h"
 #include "progress_bar.h"
 #include "rmg_terrain_tile.h"
 #include "terrainplacement.h"

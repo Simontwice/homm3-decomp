@@ -17,7 +17,7 @@ executables.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           4,531 |   98.92% | last measured score                            |
+| CUR   |           4,530 |   98.92% | last measured score                            |
 | MAX   |           4,534 |   98.92% | best result for each function's current source |
 | HIST  |           4,551 |   99.09% | all-time peak across source revisions          |
 
@@ -51,19 +51,19 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- h3maped-match-score:start -->
 
-**GOG Complete map editor `h3maped.exe`: 78.18% matched (MAX)** — 4,688 / 6,850 functions exact (68.4%), weighted by size over 851,461 bytes of code.
+**GOG Complete map editor `h3maped.exe`: 78.19% matched (MAX)** — 4,691 / 6,850 functions exact (68.5%), weighted by size over 851,461 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           4,659 |   78.12% | last measured score                            |
-| MAX   |           4,688 |   78.18% | best result for each function's current source |
-| HIST  |           4,688 |   78.19% | all-time peak across source revisions          |
+| CUR   |           4,662 |   78.13% | last measured score                            |
+| MAX   |           4,691 |   78.19% | best result for each function's current source |
+| HIST  |           4,691 |   78.21% | all-time peak across source revisions          |
 
 MAX by module:
 
 | Module        | Units | Functions exact MAX | Fuzzy MAX |
 | :------------ | ----: | ------------------: | --------: |
-| `game`        |   138 | 4272 / 4699 (90.9%) |    97.68% |
+| `game`        |   138 | 4275 / 4699 (91.0%) |    97.71% |
 | `rmg`         |     6 |   307 / 384 (79.9%) |    92.85% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
 | `codec`       |     3 |     37 / 50 (74.0%) |    90.87% |
