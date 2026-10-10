@@ -1065,3 +1065,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "EditQuestDlg"
 source = "src/editor/EditQuestDlg.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "EditRewardDlg"
+source = "src/editor/EditRewardDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"
