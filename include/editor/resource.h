@@ -675,6 +675,37 @@ enum {
     IDC_POTENTIAL_SKILLS_STATIC = 1919
 };
 
+// The quest locations' properties dialogs (QuestLocationPropsDlg.cpp,
+// QuestGuardPropsDlg.cpp, SeersHutPropsDlg.cpp): the Seer's Hut adds its
+// reward to the Quest Guard's controls.
+enum {
+    IDD_SEERS_HUT_PROPS = 202,
+    IDD_QUEST_GUARD_PROPS = 334,
+    IDC_EDIT_QUEST_BUTTON = 1768,
+    IDC_EDIT_REWARD_BUTTON = 1781,
+    IDC_QUEST_EDIT = 1793,
+    IDC_MONTH_EDIT = 1794,
+    IDC_WEEK_EDIT = 1795,
+    IDC_DAY_EDIT = 1796,
+    IDC_QUEST_REWARD_STATIC = 1797,
+    IDC_CUSTOMIZE_MESSAGE_CHECK = 1798,
+    IDC_DEADLINE_CHECK = 1799,
+    IDC_MONTH_SPIN = 1803,
+    IDC_WEEK_SPIN = 1804,
+    IDC_DAY_SPIN = 1805,
+    IDC_MESSAGE_TAB = 1841,
+    IDC_QUEST_GROUP = 1874,
+    IDC_MONTH_STATIC = 1875,
+    IDC_WEEK_STATIC = 1876,
+    IDC_DAY_STATIC = 1877,
+    IDC_QUEST_REWARD_GROUP = 1878
+};
+
+// The quest editor and its pages (EditQuestDlg.cpp).
+enum {
+    IDD_EDIT_QUEST = 325
+};
+
 // The abandoned mine's properties dialog (AbandonedMinePropsDlg.cpp).
 enum {
     IDD_ABANDONED_MINE_PROPS = 307,

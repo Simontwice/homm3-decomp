@@ -332,6 +332,12 @@ void TQuestLocation::clearQuest()
     resetQuestTerms();
 }
 
+// Folded by /OPT:ICF onto TScholar::setSpell.
+void TQuestLocation::setDeadline(int newDeadline)
+{
+    _m_deadline = newDeadline;
+}
+
 VA(0x00496bea, 0x1f)
 void TQuestLocation::setMessage(unsigned int i, const std::string& newMessage)
 {

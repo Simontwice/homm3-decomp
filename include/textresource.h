@@ -905,6 +905,10 @@ public:
     DC_ADDRESS(0x002d8c, 0x18)
     const char* operator[](int i) const { return GetText(i); }
 
+    // Loki h3maped TTextResource::GetNumberOfStrings; the map editor's
+    // direction names search ArrayTxt.txt with it.
+    int GetNumberOfStrings() const { return Text.size(); }
+
 private:
     TTextVector Text;  // +0x1c (_First +0x20)
     char* Data;  // +0x2c

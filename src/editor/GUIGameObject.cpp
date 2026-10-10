@@ -43,30 +43,6 @@
 #include "editor/Tile.h"
 #include "editor/Town.h"
 
-// auto_ptr's release: the pointer leaves with its ownership.
-template<class T>
-T* TResourcePtr<T>::release() const
-{
-    m_owns = false;
-    return m_ptr;
-}
-
-// auto_ptr's transfer: the source gives up ownership and the pointer.
-template<class T>
-TResourcePtr<T>& TResourcePtr<T>::operator=(const TResourcePtr<T>& rhs)
-{
-    if (this != &rhs) {
-        if (m_ptr != rhs.m_ptr) {
-            if (m_owns && m_ptr)
-                ResourceManager::Dispose(m_ptr);
-            m_owns = rhs.m_owns;
-        } else if (rhs.m_owns)
-            m_owns = true;
-        m_ptr = rhs.release();
-    }
-    return *this;
-}
-
 namespace {
 
 // The check mark drawn over a customized object's trigger corner: a

@@ -31,10 +31,26 @@ public:
             ResourceManager::Dispose(m_ptr);
     }
 
-    // CodeView 0x57b0 declares the assignment with no procedure location:
-    // auto_ptr's transfer. The map editor's town sprite cache defines it
-    // (GUIGameObject.cpp; h3maped 0x499b7e).
-    TResourcePtr& operator=(const TResourcePtr& rhs);
+    // auto_ptr's transfer: the source gives up ownership and the pointer.
+    // The map editor's town sprite cache (GUIGameObject.cpp) and its quest
+    // texts (QuestLocationPropsDlg.cpp) emit it; /OPT:ICF keeps the quest
+    // texts' copy (h3maped 0x499b7e).
+    // The DC declaration survives, but no body source location does.
+    // Header ownership is provisional; no source order is claimed.
+    // @dc-declaration-only: 0x57b0
+    TResourcePtr& operator=(const TResourcePtr& rhs)
+    {
+        if (this != &rhs) {
+            if (m_ptr != rhs.m_ptr) {
+                if (m_owns && m_ptr)
+                    ResourceManager::Dispose(m_ptr);
+                m_owns = rhs.m_owns;
+            } else if (rhs.m_owns)
+                m_owns = true;
+            m_ptr = rhs.release();
+        }
+        return *this;
+    }
 
     DC_ADDRESS(0x05b2b8, 0x4)
     T* get() const { return m_ptr; }
@@ -42,9 +58,16 @@ public:
     DC_ADDRESS(0x05b2bc, 0x18)
     T* operator->() const { return get(); }
 
-    // CodeView 0x57b2 declares release with no procedure location; Loki's
-    // assignment calls it. GUIGameObject.cpp defines it beside the assignment.
-    T* release() const;
+    // auto_ptr's release: the pointer leaves with its ownership. Loki's
+    // assignment calls it.
+    // The DC declaration survives, but no body source location does.
+    // Header ownership is provisional; no source order is claimed.
+    // @dc-declaration-only: 0x57b2
+    T* release() const
+    {
+        m_owns = false;
+        return m_ptr;
+    }
 
 private:
     mutable unsigned char m_owns;

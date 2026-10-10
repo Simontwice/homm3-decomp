@@ -37,7 +37,9 @@ public:
     // No quest, and no deadline or messages.
     void clearQuest();
     int getDeadline() const { return _m_deadline; }
-    void setDeadline(int newDeadline) { _m_deadline = newDeadline; }
+    // Out of line: the props dialog calls the body /OPT:ICF folds onto
+    // TScholar::setSpell.
+    void setDeadline(int newDeadline);
     const std::string& getMessage(unsigned int i) const;
     void setMessage(unsigned int i, const std::string& newMessage);
 

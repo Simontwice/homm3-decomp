@@ -1045,3 +1045,18 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "FindDlg"
 source = "src/editor/FindDlg.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "QuestGuardPropsDlg"
+source = "src/editor/QuestGuardPropsDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "QuestLocationPropsDlg"
+source = "src/editor/QuestLocationPropsDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "WorldDirections"
+source = "src/editor/WorldDirections.cpp"
+flags = "editor_o1_ob2_gr_windows"
