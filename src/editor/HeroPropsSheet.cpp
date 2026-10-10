@@ -145,14 +145,15 @@ TRandomHeroPropsSheet::TRandomHeroPropsSheet(CWnd* pParentWnd, TGameMap* pMap, b
     : THeroPropsSheet(TFormattedString(kObjectPropertiesCaptionFmtStr, akAdvObjectTypeTraits[RANDOM_HERO].m_name),
                       pParentWnd, *pMap, bSecondLayer, objID),
       _m_pMap(pMap),
-      _m_heroRef(bSecondLayer, objID)
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID)
 {
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())
         throw TAllocationFailure();
     _setNewMap(_m_pNewMap.get());
     _m_pGeneralPage = std::auto_ptr<TRandomHeroPropsGeneralPage>(
-        new TRandomHeroPropsGeneralPage(*_m_pMap, *_m_pNewMap, _m_heroRef, bAnyAvailableOwner));
+        new TRandomHeroPropsGeneralPage(*_m_pMap, *_m_pNewMap, _m_bSecondLayer, objID, bAnyAvailableOwner));
     if (!_m_pGeneralPage.get())
         throw TAllocationFailure();
     AddPage(_m_pGeneralPage.get());
@@ -196,7 +197,8 @@ TNonRandomHeroPropsSheet::TNonRandomHeroPropsSheet(CWnd* pParentWnd, TGameMap* p
     : THeroPropsSheet(TFormattedString(kObjectPropertiesCaptionFmtStr, akAdvObjectTypeTraits[HERO].m_name),
                       pParentWnd, *pMap, bSecondLayer, objID),
       _m_pMap(pMap),
-      _m_heroRef(bSecondLayer, objID),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_pOldHero(NULL),
       _m_pNewHero(NULL)
 {
@@ -204,19 +206,19 @@ TNonRandomHeroPropsSheet::TNonRandomHeroPropsSheet(CWnd* pParentWnd, TGameMap* p
     if (!_m_pNewMap.get())
         throw TAllocationFailure();
     const TGameMap& oldMap = *_m_pMap;
-    const TGameMap::TLayer& oldLayer = oldMap.getLayer(_m_heroRef.getBSecondLayer());
-    const TGameObject* pOldObject = oldLayer.getPObject(_m_heroRef.getObjectID());
+    const TGameMap::TLayer& oldLayer = oldMap.getLayer(_m_bSecondLayer);
+    const TGameObject* pOldObject = oldLayer.getPObject(_m_objectID);
     _m_pOldHero = dynamic_cast<const TNonRandomHero*>(pOldObject);
     if (_m_pOldHero == NULL)
         _m_pOldHero = dynamic_cast<const TTown*>(pOldObject)->getPVisitingHero();
-    TGameMap::TLayer& newLayer = _m_pNewMap->getLayer(_m_heroRef.getBSecondLayer());
-    TGameObject* pNewObject = newLayer.getPObject(_m_heroRef.getObjectID());
+    TGameMap::TLayer& newLayer = _m_pNewMap->getLayer(_m_bSecondLayer);
+    TGameObject* pNewObject = newLayer.getPObject(_m_objectID);
     _m_pNewHero = dynamic_cast<TNonRandomHero*>(pNewObject);
     if (_m_pNewHero == NULL)
         _m_pNewHero = dynamic_cast<TTown*>(pNewObject)->getPVisitingHero();
     _setNewMap(_m_pNewMap.get());
     _m_pGeneralPage = std::auto_ptr<TNonRandomHeroPropsGeneralPage>(
-        new TNonRandomHeroPropsGeneralPage(this, *_m_pMap, *_m_pNewMap, _m_heroRef, bAnyAvailableOwner));
+        new TNonRandomHeroPropsGeneralPage(this, *_m_pMap, *_m_pNewMap, _m_bSecondLayer, objID, bAnyAvailableOwner));
     if (!_m_pGeneralPage.get())
         throw TAllocationFailure();
     _m_pBiographyPage = std::auto_ptr<THeroPropsBiographyPage>(
@@ -269,7 +271,8 @@ TPrisonPropsSheet::TPrisonPropsSheet(CWnd* pParentWnd, TGameMap* pMap, bool bSec
     : THeroPropsSheet(TFormattedString(kObjectPropertiesCaptionFmtStr, akAdvObjectTypeTraits[PRISON].m_name),
                       pParentWnd, *pMap, bSecondLayer, objID),
       _m_pMap(pMap),
-      _m_prisonRef(bSecondLayer, objID),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_pOldPrison(NULL),
       _m_pNewPrison(NULL)
 {
@@ -277,13 +280,13 @@ TPrisonPropsSheet::TPrisonPropsSheet(CWnd* pParentWnd, TGameMap* pMap, bool bSec
     if (!_m_pNewMap.get())
         throw TAllocationFailure();
     const TGameMap& oldMap = *_m_pMap;
-    const TGameMap::TLayer& oldLayer = oldMap.getLayer(_m_prisonRef.getBSecondLayer());
-    _m_pOldPrison = dynamic_cast<const TPrison*>(oldLayer.getPObject(_m_prisonRef.getObjectID()));
-    TGameMap::TLayer& newLayer = _m_pNewMap->getLayer(_m_prisonRef.getBSecondLayer());
-    _m_pNewPrison = dynamic_cast<TPrison*>(newLayer.getPObject(_m_prisonRef.getObjectID()));
+    const TGameMap::TLayer& oldLayer = oldMap.getLayer(_m_bSecondLayer);
+    _m_pOldPrison = dynamic_cast<const TPrison*>(oldLayer.getPObject(_m_objectID));
+    TGameMap::TLayer& newLayer = _m_pNewMap->getLayer(_m_bSecondLayer);
+    _m_pNewPrison = dynamic_cast<TPrison*>(newLayer.getPObject(_m_objectID));
     _setNewMap(_m_pNewMap.get());
     _m_pGeneralPage = std::auto_ptr<TPrisonPropsGeneralPage>(
-        new TPrisonPropsGeneralPage(this, *_m_pMap, *_m_pNewMap, _m_prisonRef));
+        new TPrisonPropsGeneralPage(this, *_m_pMap, *_m_pNewMap, _m_bSecondLayer, objID));
     if (!_m_pGeneralPage.get())
         throw TAllocationFailure();
     _m_pBiographyPage = std::auto_ptr<THeroPropsBiographyPage>(

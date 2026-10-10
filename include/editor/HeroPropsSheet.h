@@ -24,7 +24,6 @@
 #include "editor/GameMap.h"
 #include "editor/HeroPropsCreaturesPage.h"
 #include "editor/HeroPropsGeneralPage.h"
-#include "editor/MapObjectRef.h"
 
 class THeroPropsArtifactsPage;
 class THeroPropsBiographyPage;
@@ -87,7 +86,8 @@ public:
 
 private:
     TGameMap* _m_pMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     std::auto_ptr<TGameMap> _m_pNewMap;
     std::auto_ptr<TRandomHeroPropsGeneralPage> _m_pGeneralPage;
 };
@@ -108,7 +108,8 @@ public:
 
 private:
     TGameMap* _m_pMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     std::auto_ptr<TGameMap> _m_pNewMap;
     const THero* _m_pOldHero;
     THero* _m_pNewHero;
@@ -132,7 +133,8 @@ public:
 
 private:
     TGameMap* _m_pMap;
-    TMapObjectRef _m_prisonRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     std::auto_ptr<TGameMap> _m_pNewMap;
     const TPrison* _m_pOldPrison;
     TPrison* _m_pNewPrison;

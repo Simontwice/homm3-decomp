@@ -46,11 +46,12 @@ END_MESSAGE_MAP()
 
 VA(0x0044f722, 0xdb)
 THeroPropsGeneralPage::THeroPropsGeneralPage(UINT nIDTemplate, const TGameMap& oldMap, TGameMap& newMap,
-                                             TMapObjectRef heroRef)
+                                             bool bSecondLayer, unsigned int objID)
     : CPropertyPage(nIDTemplate),
       _m_oldMap(oldMap),
       _m_newMap(newMap),
-      _m_heroRef(heroRef),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_pOldHero(_getOldHero()),
       _m_pNewHero(_getNewHero()),
       _m_bModified(false)
@@ -73,8 +74,8 @@ void THeroPropsGeneralPage::_setDefaultExperience(THeroID heroID)
 VA(0x0044f8d8, 0x62)
 const THero* THeroPropsGeneralPage::_getOldHero() const
 {
-    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_heroRef.getBSecondLayer());
-    const TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_bSecondLayer);
+    const TGameObject* pObject = layer.getPObject(_m_objectID);
     const THero* pHero = dynamic_cast<const THero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<const TTown*>(pObject)->getPVisitingHero();
@@ -84,8 +85,8 @@ const THero* THeroPropsGeneralPage::_getOldHero() const
 VA(0x0044f93a, 0x62)
 THero* THeroPropsGeneralPage::_getNewHero()
 {
-    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_heroRef.getBSecondLayer());
-    TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_bSecondLayer);
+    TGameObject* pObject = layer.getPObject(_m_objectID);
     THero* pHero = dynamic_cast<THero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<TTown*>(pObject)->getPVisitingHero();
@@ -191,11 +192,12 @@ void THeroPropsGeneralPage::OnCustomizeExperienceCheck()
 
 VA(0x0044ff82, 0xaa)
 TRandomHeroPropsGeneralPage::TRandomHeroPropsGeneralPage(const TGameMap& oldMap, TGameMap& newMap,
-                                                         TMapObjectRef heroRef, bool bAnyAvailableOwner)
-    : THeroPropsGeneralPage(TRandomHeroPropsGeneralPage::IDD, oldMap, newMap, heroRef),
+                                                         bool bSecondLayer, unsigned int objID, bool bAnyAvailableOwner)
+    : THeroPropsGeneralPage(TRandomHeroPropsGeneralPage::IDD, oldMap, newMap, bSecondLayer, objID),
       _m_oldMap(oldMap),
       _m_newMap(newMap),
-      _m_heroRef(heroRef),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_bAnyAvailableOwner(bAnyAvailableOwner),
       _m_pOldHero(_getOldHero()),
       _m_pNewHero(_getNewHero()),
@@ -211,8 +213,8 @@ VA_COMPGEN(0x00450048, 0x38, IMPLICIT_DTOR, TRandomHeroPropsGeneralPage)
 VA(0x00450080, 0x75)
 const TRandomHero* TRandomHeroPropsGeneralPage::_getOldHero() const
 {
-    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_heroRef.getBSecondLayer());
-    const TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_bSecondLayer);
+    const TGameObject* pObject = layer.getPObject(_m_objectID);
     const TRandomHero* pHero = dynamic_cast<const TRandomHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<const TRandomHero*>(dynamic_cast<const TTown*>(pObject)->getPVisitingHero());
@@ -222,8 +224,8 @@ const TRandomHero* TRandomHeroPropsGeneralPage::_getOldHero() const
 VA(0x004500f5, 0x75)
 TRandomHero* TRandomHeroPropsGeneralPage::_getNewHero()
 {
-    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_heroRef.getBSecondLayer());
-    TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_bSecondLayer);
+    TGameObject* pObject = layer.getPObject(_m_objectID);
     TRandomHero* pHero = dynamic_cast<TRandomHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<TRandomHero*>(dynamic_cast<TTown*>(pObject)->getPVisitingHero());
@@ -264,7 +266,7 @@ void TRandomHeroPropsGeneralPage::OnOK()
     THeroPropsGeneralPage::OnOK();
     TPlayer owner = TPlayer(_m_ownerCombo.GetItemData(_m_ownerCombo.GetCurSel()));
     if (owner != _m_pNewHero->getOwner())
-        _m_newMap.setHeroOwner(_m_heroRef.getBSecondLayer(), _m_heroRef.getObjectID(), owner);
+        _m_newMap.setHeroOwner(_m_bSecondLayer, _m_objectID, owner);
     _m_bModified = THeroPropsGeneralPage::wasModified() || _m_bModified
                    || _m_pNewHero->getOwner() != _m_pOldHero->getOwner();
 }
@@ -281,12 +283,13 @@ END_MESSAGE_MAP()
 VA(0x0045031d, 0x356)
 TIdentifiedHeroPropsGeneralPage::TIdentifiedHeroPropsGeneralPage(
     UINT nIDTemplate, TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet, const TGameMap& oldMap,
-    TGameMap& newMap, TMapObjectRef heroRef)
-    : THeroPropsGeneralPage(nIDTemplate, oldMap, newMap, heroRef),
+    TGameMap& newMap, bool bSecondLayer, unsigned int objID)
+    : THeroPropsGeneralPage(nIDTemplate, oldMap, newMap, bSecondLayer, objID),
       _m_pParentSheet(pParentSheet),
       _m_oldMap(oldMap),
       _m_newMap(newMap),
-      _m_heroRef(heroRef),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_pOldHero(_getOldHero()),
       _m_pNewHero(_getNewHero()),
       _m_bModified(false)
@@ -340,8 +343,8 @@ void TIdentifiedHeroPropsGeneralPage::setHeroID(THeroID heroID)
 VA(0x00450950, 0x75)
 const TIdentifiedHero* TIdentifiedHeroPropsGeneralPage::_getOldHero() const
 {
-    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_heroRef.getBSecondLayer());
-    const TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_bSecondLayer);
+    const TGameObject* pObject = layer.getPObject(_m_objectID);
     const TIdentifiedHero* pHero = dynamic_cast<const TIdentifiedHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<const TIdentifiedHero*>(dynamic_cast<const TTown*>(pObject)->getPVisitingHero());
@@ -351,8 +354,8 @@ const TIdentifiedHero* TIdentifiedHeroPropsGeneralPage::_getOldHero() const
 VA(0x004509c5, 0x75)
 TIdentifiedHero* TIdentifiedHeroPropsGeneralPage::_getNewHero()
 {
-    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_heroRef.getBSecondLayer());
-    TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_bSecondLayer);
+    TGameObject* pObject = layer.getPObject(_m_objectID);
     TIdentifiedHero* pHero = dynamic_cast<TIdentifiedHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<TIdentifiedHero*>(dynamic_cast<TTown*>(pObject)->getPVisitingHero());
@@ -503,7 +506,7 @@ void TIdentifiedHeroPropsGeneralPage::OnOK()
 {
     THeroPropsGeneralPage::OnOK();
     if (_m_heroID != _m_pNewHero->getHeroID())
-        _m_newMap.setHeroID(_m_heroRef.getBSecondLayer(), _m_heroRef.getObjectID(), _m_heroID);
+        _m_newMap.setHeroID(_m_bSecondLayer, _m_objectID, _m_heroID);
     bool bCustomName = _m_customizeNameCheck.GetCheck() != 0;
     _m_pNewHero->setBCustomName(bCustomName);
     if (bCustomName) {
@@ -601,11 +604,12 @@ void TIdentifiedHeroPropsGeneralPage::OnCustomizePortraitCheck()
 VA(0x00451783, 0xb1)
 TNonRandomHeroPropsGeneralPage::TNonRandomHeroPropsGeneralPage(TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet,
                                                                const TGameMap& oldMap, TGameMap& newMap,
-                                                               TMapObjectRef heroRef, bool bAnyAvailableOwner)
-    : TIdentifiedHeroPropsGeneralPage(TNonRandomHeroPropsGeneralPage::IDD, pParentSheet, oldMap, newMap, heroRef),
+                                                               bool bSecondLayer, unsigned int objID, bool bAnyAvailableOwner)
+    : TIdentifiedHeroPropsGeneralPage(TNonRandomHeroPropsGeneralPage::IDD, pParentSheet, oldMap, newMap, bSecondLayer, objID),
       _m_oldMap(oldMap),
       _m_newMap(newMap),
-      _m_heroRef(heroRef),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_bAnyAvailableOwner(bAnyAvailableOwner),
       _m_pOldHero(_getOldHero()),
       _m_pNewHero(_getNewHero()),
@@ -620,8 +624,8 @@ VA_COMPGEN(0x00451850, 0x4a, IMPLICIT_DTOR, TNonRandomHeroPropsGeneralPage)
 VA(0x0045189a, 0x75)
 const TNonRandomHero* TNonRandomHeroPropsGeneralPage::_getOldHero() const
 {
-    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_heroRef.getBSecondLayer());
-    const TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_bSecondLayer);
+    const TGameObject* pObject = layer.getPObject(_m_objectID);
     const TNonRandomHero* pHero = dynamic_cast<const TNonRandomHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<const TNonRandomHero*>(dynamic_cast<const TTown*>(pObject)->getPVisitingHero());
@@ -631,8 +635,8 @@ const TNonRandomHero* TNonRandomHeroPropsGeneralPage::_getOldHero() const
 VA(0x0045190f, 0x75)
 TNonRandomHero* TNonRandomHeroPropsGeneralPage::_getNewHero()
 {
-    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_heroRef.getBSecondLayer());
-    TGameObject* pObject = layer.getPObject(_m_heroRef.getObjectID());
+    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_bSecondLayer);
+    TGameObject* pObject = layer.getPObject(_m_objectID);
     TNonRandomHero* pHero = dynamic_cast<TNonRandomHero*>(pObject);
     if (pHero == NULL)
         pHero = dynamic_cast<TNonRandomHero*>(dynamic_cast<TTown*>(pObject)->getPVisitingHero());
@@ -676,7 +680,7 @@ void TNonRandomHeroPropsGeneralPage::OnOK()
     TIdentifiedHeroPropsGeneralPage::OnOK();
     TPlayer owner = TPlayer(_m_ownerCombo.GetItemData(_m_ownerCombo.GetCurSel()));
     if (owner != _m_pNewHero->getOwner())
-        _m_newMap.setHeroOwner(_m_heroRef.getBSecondLayer(), _m_heroRef.getObjectID(), owner);
+        _m_newMap.setHeroOwner(_m_bSecondLayer, _m_objectID, owner);
     _m_bModified = TIdentifiedHeroPropsGeneralPage::wasModified() || _m_bModified
                    || _m_pNewHero->getOwner() != _m_pOldHero->getOwner();
 }
@@ -688,12 +692,13 @@ END_MESSAGE_MAP()
 
 VA(0x00451b94, 0xa6)
 TPrisonPropsGeneralPage::TPrisonPropsGeneralPage(TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet,
-                                                 const TGameMap& oldMap, TGameMap& newMap, TMapObjectRef prisonRef)
-    : TIdentifiedHeroPropsGeneralPage(TPrisonPropsGeneralPage::IDD, pParentSheet, oldMap, newMap, prisonRef),
+                                                 const TGameMap& oldMap, TGameMap& newMap, bool bSecondLayer, unsigned int objID)
+    : TIdentifiedHeroPropsGeneralPage(TPrisonPropsGeneralPage::IDD, pParentSheet, oldMap, newMap, bSecondLayer, objID),
       _m_pParentSheet(pParentSheet),
       _m_oldMap(oldMap),
       _m_newMap(newMap),
-      _m_prisonRef(prisonRef),
+      _m_bSecondLayer(bSecondLayer),
+      _m_objectID(objID),
       _m_pOldPrison(_getOldPrison()),
       _m_pNewPrison(_getNewPrison()),
       _m_bModified(false)
@@ -707,15 +712,15 @@ VA_COMPGEN(0x00451c56, 0x38, IMPLICIT_DTOR, TPrisonPropsGeneralPage)
 VA(0x00451c8e, 0x42)
 const TPrison* TPrisonPropsGeneralPage::_getOldPrison() const
 {
-    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_prisonRef.getBSecondLayer());
-    return dynamic_cast<const TPrison*>(layer.getPObject(_m_prisonRef.getObjectID()));
+    const TGameMap::TLayer& layer = _m_oldMap.getLayer(_m_bSecondLayer);
+    return dynamic_cast<const TPrison*>(layer.getPObject(_m_objectID));
 }
 
 VA(0x00451cd0, 0x42)
 TPrison* TPrisonPropsGeneralPage::_getNewPrison()
 {
-    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_prisonRef.getBSecondLayer());
-    return dynamic_cast<TPrison*>(layer.getPObject(_m_prisonRef.getObjectID()));
+    TGameMap::TLayer& layer = _m_newMap.getLayer(_m_bSecondLayer);
+    return dynamic_cast<TPrison*>(layer.getPObject(_m_objectID));
 }
 
 VA(0x00451d12, 0x25)

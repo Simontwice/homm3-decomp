@@ -1,6 +1,6 @@
 // HeroPropsGeneralPage.h - the general pages of the hero property sheets
 // (HeroPropsGeneralPage.cpp; Loki h3maped object 84). Each page edits the
-// hero in a copy of the map, found by its reference: a hero object or the
+// hero in a copy of the map, found by its layer and id: a hero object or the
 // visiting hero of a town. The common page holds the experience and the
 // patrol radius; the random hero's page adds the owner. A specific hero's
 // page (RTTI TIdentifiedHeroPropsGeneralPage) adds the identity, name,
@@ -27,14 +27,13 @@
 #include "heroclass.h"
 #include "editor/DIBSection.h"
 #include "editor/Hero.h"
-#include "editor/MapObjectRef.h"
 #include "editor/resource.h"
 
 class TGameMap;
 
 class THeroPropsGeneralPage : public CPropertyPage {
 public:
-    THeroPropsGeneralPage(UINT nIDTemplate, const TGameMap& oldMap, TGameMap& newMap, TMapObjectRef heroRef);
+    THeroPropsGeneralPage(UINT nIDTemplate, const TGameMap& oldMap, TGameMap& newMap, bool bSecondLayer, unsigned int objID);
 
     bool wasModified() const { return _m_bModified; }
 
@@ -58,7 +57,8 @@ private:
 
     const TGameMap& _m_oldMap;
     TGameMap& _m_newMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     int _m_unused;
     const THero* _m_pOldHero;
     THero* _m_pNewHero;
@@ -74,7 +74,7 @@ public:
 
 class TRandomHeroPropsGeneralPage : public THeroPropsGeneralPage {
 public:
-    TRandomHeroPropsGeneralPage(const TGameMap& oldMap, TGameMap& newMap, TMapObjectRef heroRef,
+    TRandomHeroPropsGeneralPage(const TGameMap& oldMap, TGameMap& newMap, bool bSecondLayer, unsigned int objID,
                                 bool bAnyAvailableOwner);
 
     bool wasModified() const { return _m_bModified; }
@@ -93,7 +93,8 @@ private:
 
     const TGameMap& _m_oldMap;
     TGameMap& _m_newMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     bool _m_bAnyAvailableOwner;
     const TRandomHero* _m_pOldHero;
     TRandomHero* _m_pNewHero;
@@ -115,7 +116,7 @@ public:
 class TIdentifiedHeroPropsGeneralPage : public THeroPropsGeneralPage {
 public:
     TIdentifiedHeroPropsGeneralPage(UINT nIDTemplate, TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet,
-                                    const TGameMap& oldMap, TGameMap& newMap, TMapObjectRef heroRef);
+                                    const TGameMap& oldMap, TGameMap& newMap, bool bSecondLayer, unsigned int objID);
     virtual ~TIdentifiedHeroPropsGeneralPage();
 
     // Picks the hero, listing the available heroes of its class first
@@ -154,7 +155,8 @@ private:
     TIdentifiedHeroPropsGeneralPageParentSheet* _m_pParentSheet;
     const TGameMap& _m_oldMap;
     TGameMap& _m_newMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     const TIdentifiedHero* _m_pOldHero;
     TIdentifiedHero* _m_pNewHero;
     bool _m_bModified;
@@ -185,7 +187,7 @@ private:
 class TNonRandomHeroPropsGeneralPage : public TIdentifiedHeroPropsGeneralPage {
 public:
     TNonRandomHeroPropsGeneralPage(TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet, const TGameMap& oldMap,
-                                   TGameMap& newMap, TMapObjectRef heroRef, bool bAnyAvailableOwner);
+                                   TGameMap& newMap, bool bSecondLayer, unsigned int objID, bool bAnyAvailableOwner);
 
     bool wasModified() const { return _m_bModified; }
 
@@ -203,7 +205,8 @@ private:
 
     const TGameMap& _m_oldMap;
     TGameMap& _m_newMap;
-    TMapObjectRef _m_heroRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     bool _m_bAnyAvailableOwner;
     const TNonRandomHero* _m_pOldHero;
     TNonRandomHero* _m_pNewHero;
@@ -217,7 +220,7 @@ public:
 class TPrisonPropsGeneralPage : public TIdentifiedHeroPropsGeneralPage {
 public:
     TPrisonPropsGeneralPage(TIdentifiedHeroPropsGeneralPageParentSheet* pParentSheet, const TGameMap& oldMap,
-                            TGameMap& newMap, TMapObjectRef prisonRef);
+                            TGameMap& newMap, bool bSecondLayer, unsigned int objID);
 
     bool wasModified() const { return _m_bModified; }
 
@@ -238,7 +241,8 @@ private:
     TIdentifiedHeroPropsGeneralPageParentSheet* _m_pParentSheet;
     const TGameMap& _m_oldMap;
     TGameMap& _m_newMap;
-    TMapObjectRef _m_prisonRef;
+    bool _m_bSecondLayer;
+    unsigned int _m_objectID;
     const TPrison* _m_pOldPrison;
     TPrison* _m_pNewPrison;
     bool _m_bModified;
