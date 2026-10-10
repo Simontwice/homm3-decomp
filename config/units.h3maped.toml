@@ -1060,3 +1060,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "WorldDirections"
 source = "src/editor/WorldDirections.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "EditQuestDlg"
+source = "src/editor/EditQuestDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"
