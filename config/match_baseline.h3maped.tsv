@@ -4472,7 +4472,7 @@ RandomGeneratorPropsDlg	?_Sort_0@std@@YAXPAVTMapObjectRef@@0VTTownDistanceLess@?
 RandomGeneratorPropsDlg	?_Unguarded_partition@std@@YAPAVTMapObjectRef@@PAV2@0V2@VTTownDistanceLess@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@@Z	100.0000	100.0000	100.0000	0xb2617	-
 RandomGeneratorPropsDlg	?_getNewGenerator@TRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@AAEPAVTAbstractRandomlyAlignedGenerator@@XZ	100.0000	100.0000	100.0000	0xb0907	tokens1:c70fd88308cf
 RandomGeneratorPropsDlg	?_getOldGenerator@TRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@ABEPBVTAbstractRandomlyAlignedGenerator@@XZ	100.0000	100.0000	100.0000	0xb08ce	tokens1:9ca5b9806208
-RandomGeneratorPropsDlg	?_onAlignmentCheck@TRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@AAEXH@Z	59.0000	59.0000	59.0000	0xb0854	tokens1:31a63e8be5c3
+RandomGeneratorPropsDlg	?_onAlignmentCheck@TRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@AAEXH@Z	100.0000	100.0000	100.0000	0xb0854	tokens1:8f8a1b639302
 ResourcePropsGeneralPage	??0TResourcePropsGeneralPage@@QAE@PAVTGameResource@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0xb2822	tokens1:6e71c0ca811e
 ResourcePropsGeneralPage	??1TResourcePropsGeneralPage@@UAE@XZ	100.0000	100.0000	100.0000	0xb2924	tokens1:bcec43cf7cd4
 ResourcePropsGeneralPage	??_GTResourcePropsGeneralPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb2908	-
@@ -4784,7 +4784,7 @@ TileHRuler	??1?$TDCAttributeSelector@K$1??_9@$BDA@AE@@QAE@XZ	100.0000	100.0000	1
 TileHRuler	??1?$TGDIObjectSelector@VCFont@@@@QAE@XZ	100.0000	100.0000	100.0000	0x5b3af	tokens1:a499df6024c1
 TileHRuler	??1CFont@@UAE@XZ	100.0000	100.0000	100.0000	0xbf326	-
 TileHRuler	??1TError@?$TGDIObjectSelector@VCFont@@@@UAE@XZ	100.0000	100.0000	100.0000	0x5b3dd	-
-TileHRuler	??1TTileHRuler@@UAE@XZ	96.9394	96.9394	96.9394	0xbeb55	-
+TileHRuler	??1TTileHRuler@@UAE@XZ	100.0000	100.0000	100.0000	0xbeb55	tokens1:02c4f543830d
 TileHRuler	??_9@$BDA@AE	100.0000	100.0000	100.0000	0xbf381	-
 TileHRuler	??_GCFont@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xbf30a	-
 TileHRuler	??_GTError@?$TGDIObjectSelector@VCFont@@@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x5b445	-
@@ -4793,7 +4793,7 @@ TileHRuler	?GetMessageMap@TTileHRuler@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	10
 TileHRuler	?OnPaint@TTileHRuler@@IAEXXZ	96.8418	96.8418	96.8418	0xbedc5	tokens1:e8c22950f126
 TileHRuler	?OnSize@TTileHRuler@@IAEXIHH@Z	100.0000	100.0000	100.0000	0xbf293	tokens1:fd55d8ec4cce
 TileHRuler	?OnWindowPosChanging@TTileHRuler@@IAEXPAUtagWINDOWPOS@@@Z	100.0000	100.0000	100.0000	0xbedaf	tokens1:771a1229789e
-TileHRuler	?_computeHighlightWidth@TTileHRuler@@AAEIPAVCDC@@@Z	98.1081	98.1081	98.1081	0xbed4d	tokens1:b58ba307fa40
+TileHRuler	?_computeHighlightWidth@TTileHRuler@@AAEIPAVCDC@@@Z	100.0000	100.0000	100.0000	0xbed4d	tokens1:c5de2b187fe9
 TileHRuler	?move@TTileHRuler@@QAEXABVCPoint@@I@Z	100.0000	100.0000	100.0000	0xbebbe	tokens1:dc5421525b43
 TileHRuler	?setHighlight@TTileHRuler@@QAEXI@Z	100.0000	100.0000	100.0000	0xbec15	tokens1:a5cfd9a044a3
 TileHRuler	?setRange@TTileHRuler@@QAEXI@Z	100.0000	100.0000	100.0000	0xbec01	tokens1:80aa40f59a13
@@ -4801,13 +4801,13 @@ TileHRuler	?setZoom@TTileHRuler@@QAEXW4TZoom@@@Z	100.0000	100.0000	100.0000	0xbe
 TileHRuler	__h3cg$TileHRuler$static_dtor$className	100.0000	100.0000	100.0000	0xbeb2f	-
 TilePoint	?computeAdjacentDirs@@YAXIIIIAAY07_N@Z	100.0000	100.0000	100.0000	0xbf3f4	tokens1:c1141e518ebd
 TileVRuler	??0TTileVRuler@@QAE@PAVCWnd@@IW4TZoom@@@Z	99.7479	99.7479	99.7479	0xbf61b	tokens1:682883d7d5a6
-TileVRuler	??1TTileVRuler@@UAE@XZ	96.3929	96.3929	96.3929	0xbf7be	-
+TileVRuler	??1TTileVRuler@@UAE@XZ	100.0000	100.0000	100.0000	0xbf7be	tokens1:c95dbe756ef1
 TileVRuler	??_GTTileVRuler@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xbf7a2	-
 TileVRuler	?GetMessageMap@TTileVRuler@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xbf9f6	tokens1:ffad1f08dc67
 TileVRuler	?OnPaint@TTileVRuler@@IAEXXZ	90.1201	90.1201	90.1201	0xbfa12	tokens1:b576455d6fca
 TileVRuler	?OnSize@TTileVRuler@@IAEXIHH@Z	100.0000	100.0000	100.0000	0xc0142	tokens1:fa7627df9dda
 TileVRuler	?OnWindowPosChanging@TTileVRuler@@IAEXPAUtagWINDOWPOS@@@Z	100.0000	100.0000	100.0000	0xbf9fc	tokens1:e18775fd2c45
-TileVRuler	?_computeHighlightHeight@TTileVRuler@@AAEIPAVCDC@@@Z	98.1081	98.1081	98.1081	0xbf99a	tokens1:317158c6ae98
+TileVRuler	?_computeHighlightHeight@TTileVRuler@@AAEIPAVCDC@@@Z	100.0000	100.0000	100.0000	0xbf99a	tokens1:eff9bb09c958
 TileVRuler	?move@TTileVRuler@@QAEXABVCPoint@@I@Z	100.0000	100.0000	100.0000	0xbf81f	tokens1:36acbddfd575
 TileVRuler	?setHighlight@TTileVRuler@@QAEXI@Z	100.0000	100.0000	100.0000	0xbf862	tokens1:91d81db064ff
 TileVRuler	?setStartTile@TTileVRuler@@QAEXI@Z	100.0000	100.0000	100.0000	0xbf839	tokens1:9a34efa48d54
@@ -5677,7 +5677,7 @@ rmg	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZ
 rmg	?createGuard@type_random_map_generator@@QAEPAVtype_object@@HPAUTRmgZone@@@Z	99.1751	99.1751	99.1751	0xa5c07	-
 rmg	?createMonolithConnection@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgZoneConnection@@H@Z	96.2915	96.2915	96.2915	0xa7605	-
 rmg	?createRiverToJoin@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	98.3755	98.3755	98.3755	0xab6ac	-
-rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3805	84.3805	84.3805	0xabd5f	-
+rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3709	84.3805	84.3805	0xabd5f	-
 rmg	?createRivers@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xac4ae	-
 rmg	?createRoads@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xab52a	-
 rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	89.1568	89.5710	89.5710	0xa696b	-
