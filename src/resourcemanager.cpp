@@ -1753,18 +1753,6 @@ DATA(0x00641074) static const int g_context3Sprites[2] = { 1, 3 };
 DATA(0x0064107c) static const int g_context3Bitmaps[2] = { 0, 2 };
 DATA(0x00641084) static const int g_context3Sounds[2] = { 1, 0 };
 
-TResourceArchiveContext::TResourceArchiveContext(
-    int spriteCount, const int* sprites, int bitmapCount, const int* bitmaps,
-    int soundCount, const int* sounds)
-{
-    m_sprites.m_count = spriteCount;
-    m_sprites.m_indices = sprites;
-    m_bitmaps.m_count = bitmapCount;
-    m_bitmaps.m_indices = bitmaps;
-    m_sounds.m_count = soundCount;
-    m_sounds.m_indices = sounds;
-}
-
 DATA(0x0069e538)
 TResourceArchiveContext g_resourceArchiveContexts[4] = {
     TResourceArchiveContext(2, g_context0Sprites, 2, g_context0Bitmaps,
@@ -1776,6 +1764,12 @@ TResourceArchiveContext g_resourceArchiveContexts[4] = {
     TResourceArchiveContext(2, g_context3Sprites, 2, g_context3Bitmaps,
                            2, g_context3Sounds)
 };
+
+// The two tables' static initializers (h3maped InitLodFiles 0x4dacc0 and
+// InitLodDescriptors 0x4daec0 build the same tables).
+VA_COMPGEN(0x00559150, 0x84, STATIC_CTOR, g_resourceLodSlots)
+VA_COMPGEN(0x00559200, 0x17, STATIC_DTOR, g_resourceLodSlots)
+VA_COMPGEN(0x00559320, 0xD1, STATIC_CTOR, g_resourceArchiveContexts)
 
 VA(0x0055cf00, 0x4B)
 DC_ADDRESS(0x122434, 0x4e)

@@ -17,11 +17,22 @@ public:
     const int* m_indices;
 };
 
+// Defined in the class: the map editor's /Ob1 Libraries build still expands
+// the constructor into the table's static initializer (h3maped 0x4daec0),
+// which only a declared-inline body allows.
 struct TResourceArchiveContext {
 public:
     TResourceArchiveContext(int spriteCount, const int* sprites,
                             int bitmapCount, const int* bitmaps,
-                            int soundCount, const int* sounds);
+                            int soundCount, const int* sounds)
+    {
+        m_sprites.m_count = spriteCount;
+        m_sprites.m_indices = sprites;
+        m_bitmaps.m_count = bitmapCount;
+        m_bitmaps.m_indices = bitmaps;
+        m_sounds.m_count = soundCount;
+        m_sounds.m_indices = sounds;
+    }
 
     TResourceArchiveList m_sprites;
     TResourceArchiveList m_bitmaps;

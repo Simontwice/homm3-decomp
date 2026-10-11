@@ -8,6 +8,19 @@
 #include "editor/Options.h"
 #include "editor/Tile.h"
 
+// This object's copies of terrain.h's ten masks open its code: each
+// initializer (behind its five-byte jump) builds bitset<10>(1) << K.
+VA_COMPGEN(0x00492cdb, 0x27, STATIC_CTOR, g_dirtMask)
+VA_COMPGEN(0x00492d07, 0x27, STATIC_CTOR, g_sandMask)
+VA_COMPGEN(0x00492d33, 0x27, STATIC_CTOR, g_grassMask)
+VA_COMPGEN(0x00492d5f, 0x27, STATIC_CTOR, g_snowMask)
+VA_COMPGEN(0x00492d8b, 0x27, STATIC_CTOR, g_swampMask)
+VA_COMPGEN(0x00492db7, 0x27, STATIC_CTOR, g_roughMask)
+VA_COMPGEN(0x00492de3, 0x27, STATIC_CTOR, g_subterraneanMask)
+VA_COMPGEN(0x00492e0f, 0x27, STATIC_CTOR, g_lavaMask)
+VA_COMPGEN(0x00492e3b, 0x27, STATIC_CTOR, g_waterMask)
+VA_COMPGEN(0x00492e67, 0x27, STATIC_CTOR, g_rockMask)
+
 namespace {
 DATA(0x005a2400) int zoomImp;
 DATA(0x005a2404) bool bGridImp;

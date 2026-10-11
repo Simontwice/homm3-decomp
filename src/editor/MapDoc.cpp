@@ -390,7 +390,11 @@ void TRoadMap::_touch(const TTilePoint& loc)
         _m_bottomRight.y(loc.y() + 1);
 }
 
-// A stream buffer as the random map generator's output file.
+// A stream buffer as the random map generator's output file. The game's
+// customcampaign.cpp has the same class and the same two bodies (0x483f10/
+// 0x483f30), but this one stays here: the editor's RTTI names it in
+// MapDoc.cpp's anonymous namespace (TStreamBufFile@?%...MapDoc.cpp, vtable
+// 0x539918).
 class TStreamBufFile : public TAbstractFile {
 public:
     TStreamBufFile(std::streambuf* pStreamBuf) : _m_pStreamBuf(pStreamBuf) {}

@@ -1205,6 +1205,7 @@ resourcemanager	??0?$fpos@H@std@@QAE@J@Z	99.1176	99.1176	99.1176	0x15dd0	-
 resourcemanager	??0?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@std@@QAE@ABU?$less@VTCacheMapKey@ResourceManager@@@1@ABV?$allocator@PAVresource@@@1@@Z	100.0000	100.0000	100.0000	0x46110	-
 resourcemanager	??0?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@QAE@I@Z	100.0000	100.0000	100.0000	0x47ad0	-
 resourcemanager	??0?$numpunct@D@std@@QAE@I@Z	100.0000	100.0000	100.0000	0x48d20	-
+resourcemanager	??0TResourceLODSlot@@QAE@PBD@Z	40.9091	40.9091	40.9091	0x44250	-
 resourcemanager	??0bad_cast@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0xf180	-
 resourcemanager	??0ios_base@std@@IAE@XZ	100.0000	100.0000	100.0000	0x152e0	-
 resourcemanager	??1?$TAutoArrayPtr@D@@QAE@XZ	100.0000	100.0000	100.0000	0x15c20	-
@@ -1328,6 +1329,8 @@ resourcemanager	?underflow@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator
 resourcemanager	?write@t_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEHPBXH@Z	100.0000	100.0000	100.0000	0x441b0	-
 resourcemanager	?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHPADH@Z	100.0000	100.0000	100.0000	0x159e0	-
 resourcemanager	?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHPBDH@Z	100.0000	100.0000	100.0000	0x15a80	-
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceArchiveContexts	99.6000	99.6000	99.6000	0x443d0	-
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceLodSlots	100.0000	100.0000	100.0000	0x441d0	-
 spelldefs	?InitializeSpellTraitsTable@@YAEXZ	100.0000	100.0000	100.0000	0x326b0	-
 spelldefs	?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	100.0000	100.0000	100.0000	0x32760	-
 spelldefs	__h3cg$spelldefs$static_dtor$abbreviatedSpellNames	100.0000	100.0000	100.0000	0x32ad0	-

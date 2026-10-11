@@ -4049,6 +4049,16 @@ Options	?setGrid@SOptions@@YAX_N@Z	100.0000	100.0000	100.0000	0x92fe6	tokens1:a8
 Options	?setPassability@SOptions@@YAX_N@Z	100.0000	100.0000	100.0000	0x92ff0	tokens1:59a21ddf0887
 Options	?setSpecialTileFrequency@SOptions@@YAXI@Z	100.0000	100.0000	100.0000	0x93018	tokens1:ea4934760eea
 Options	?setZoom@SOptions@@YAXH@Z	100.0000	100.0000	100.0000	0x92fdc	tokens1:a98dd34c451e
+Options	__h3cg$Options$static_ctor$g_dirtMask	99.6875	99.6875	99.6875	0x92cdb	-
+Options	__h3cg$Options$static_ctor$g_grassMask	99.6875	99.6875	99.6875	0x92d33	-
+Options	__h3cg$Options$static_ctor$g_lavaMask	99.6875	99.6875	99.6875	0x92e0f	-
+Options	__h3cg$Options$static_ctor$g_rockMask	99.6875	99.6875	99.6875	0x92e67	-
+Options	__h3cg$Options$static_ctor$g_roughMask	99.6875	99.6875	99.6875	0x92db7	-
+Options	__h3cg$Options$static_ctor$g_sandMask	99.6875	99.6875	99.6875	0x92d07	-
+Options	__h3cg$Options$static_ctor$g_snowMask	99.6875	99.6875	99.6875	0x92d5f	-
+Options	__h3cg$Options$static_ctor$g_subterraneanMask	99.6875	99.6875	99.6875	0x92de3	-
+Options	__h3cg$Options$static_ctor$g_swampMask	99.6875	99.6875	99.6875	0x92d8b	-
+Options	__h3cg$Options$static_ctor$g_waterMask	99.6875	99.6875	99.6875	0x92e3b	-
 OptionsDlg	??0TOptionsDlg@@QAE@PAVCWnd@@@Z	100.0000	100.0000	100.0000	0x9329c	tokens1:d02a8ee52d32
 OptionsDlg	??1TOptionsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x5d4ca	-
 OptionsDlg	??_GCSliderCtrl@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x93801	-
@@ -5390,6 +5400,7 @@ resourcemanager	??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAE@XZ	99.8980
 resourcemanager	??0?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@H@Z	0.0000	0.0000	0.0000	0x6119c	-
 resourcemanager	??0?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@std@@QAE@ABU?$less@VTCacheMapKey@ResourceManager@@@1@ABV?$allocator@PAVresource@@@1@@Z	100.0000	100.0000	100.0000	0xdd4d0	-
 resourcemanager	??0?$numpunct@D@std@@QAE@I@Z	0.0000	0.0000	0.0000	0x371ca	-
+resourcemanager	??0TResourceLODSlot@@QAE@PBD@Z	40.9091	40.9091	40.9091	0xdad40	-
 resourcemanager	??0bad_cast@std@@QAE@ABV01@@Z	80.0000	80.0000	80.0000	0x328a7	-
 resourcemanager	??0ios_base@std@@IAE@XZ	100.0000	100.0000	100.0000	0xdccf0	-
 resourcemanager	??1?$TAutoArrayPtr@D@@QAE@XZ	73.3333	73.3333	73.3333	0x5b3bc	-
@@ -5498,6 +5509,8 @@ resourcemanager	?truename@?$numpunct@D@std@@QBE?AV?$basic_string@DU?$char_traits
 resourcemanager	?underflow@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ	100.0000	100.0000	100.0000	0x49c67	-
 resourcemanager	?underflow@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAEHXZ	54.5946	54.5946	54.5946	0x6158c	-
 resourcemanager	?write@t_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEHPBXH@Z	100.0000	100.0000	100.0000	0xdaca0	-
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceArchiveContexts	100.0000	100.0000	100.0000	0xdaec0	-
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceLodSlots	100.0000	100.0000	100.0000	0xdacc0	-
 rmg	??0?$vector@HV?$allocator@H@std@@@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x78f3	-
 rmg	??0?$vector@PAUTRmgTemplateZone@@V?$allocator@PAUTRmgTemplateZone@@@std@@@std@@QAE@ABV?$allocator@PAUTRmgTemplateZone@@@1@@Z	100.0000	100.0000	100.0000	0xae177	-
 rmg	??0TRandomMapRequest@@QAE@HHH@Z	59.3939	59.3939	59.3939	0xadf88	-
