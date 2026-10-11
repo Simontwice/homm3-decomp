@@ -1825,9 +1825,13 @@ type_shrine::type_shrine(TRmgObjectPropertiesRef* properties)
 {
 }
 
+// Assigned in the body: the map editor's expansion in
+// type_spell_scroll_def::generate stores the vtable before the spell, which
+// a member initializer would precede (the game's /O2 copy is the same either way).
 type_spell_scroll::type_spell_scroll(TRmgObjectPropertiesRef* properties, int spell)
-    : type_object(properties), m_spell(spell)
+    : type_object(properties)
 {
+    m_spell = spell;
 }
 
 type_witch_hut::type_witch_hut(TRmgObjectPropertiesRef* properties)
