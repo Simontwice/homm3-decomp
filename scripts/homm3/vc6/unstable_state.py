@@ -28,6 +28,7 @@ import re
 import shutil
 import struct
 import sys
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -344,6 +345,11 @@ def compile_m(unit: Unit, *, phases=PHASES, offsets=range(DECL_PERIOD), jobs: in
     else:
         todo = states(phases, offsets) + [State(None, 0, j) for j in range(rounds)]
 
+    table: dict[str, dict[bytes, list]] = collections.defaultdict(dict)
+    fuzzy: dict[tuple[str, bytes], float] = {}
+    claimed: set[tuple[str, bytes]] = set()
+    lock = threading.Lock()
+
     def one(item):
         index, state = item
         compiled = (compiled_round(prefixes, state.callee_order)
@@ -351,14 +357,19 @@ def compile_m(unit: Unit, *, phases=PHASES, offsets=range(DECL_PERIOD), jobs: in
         obj, _ = unit.replay(state, f"slot{index}-{state.phase}-{state.offset}-{state.callee_order}",
                              compiled=compiled)
         funcs = object_functions(obj)
-        scores = score_object(unit.name, obj) if score else {}
+        scores = {}
+        if score:
+            # objdiff only for an object that brings some function a new assembly
+            with lock:
+                fresh = {(name, code) for name, code in funcs.items()} - claimed
+                claimed.update(fresh)
+            if fresh:
+                scores = score_object(unit.name, obj)
         shutil.rmtree(obj.parent, ignore_errors=True)
         return state, funcs, scores
-
-    table: dict[str, dict[bytes, list]] = collections.defaultdict(dict)
-    fuzzy: dict[tuple[str, bytes], float] = {}
     for name, code in captured.items():
         table[name].setdefault(code, []).append(State().as_dict())
+        claimed.add((name, code))
         if name in plain_scores:
             fuzzy[name, code] = plain_scores[name]
 
@@ -398,7 +409,13 @@ def compile_m(unit: Unit, *, phases=PHASES, offsets=range(DECL_PERIOD), jobs: in
             functions[name]["current_score"] = plain_scores[name]
     return {"unit": unit.name, "period": DECL_PERIOD, "phases": list(phases),
             "offsets": list(offsets), "axes": axes, "callee_order_rounds": rounds,
+            "scored": score, "source_sha256": source_digest(unit.source),
             "functions": functions}
+
+
+def source_digest(source: Path) -> str:
+    """Identity of the unit source a prediction was made from."""
+    return hashlib.sha256(Path(source).read_bytes()).hexdigest()
 
 
 def write_prediction(result: dict) -> Path:
@@ -608,7 +625,7 @@ def run_compile_m(args) -> int:
     offsets = range(args.offsets)
     with _shim():
         unit = Unit.open(unit_name)
-        result = compile_m(unit, offsets=offsets, jobs=args.jobs)
+        result = compile_m(unit, offsets=offsets, jobs=args.jobs, score=args.score)
     path = write_prediction(result)
     against = None
     if args.against:
@@ -617,6 +634,9 @@ def run_compile_m(args) -> int:
         if symbol and name != symbol:
             continue
         line = f"M={data['m']:<3} {name}"
+        if args.score and data.get("variants"):
+            best = max((v.get("score") or 0.0) for v in data["variants"])
+            line += f"  [current {data.get('current_score', 0.0):.4f} best {best:.4f}]"
         if against is not None and name in against:
             line += "  [against: IN SET]" if digest(against[name]) in {
                 v["sha"] for v in data["variants"]} else "  [against: absent]"
@@ -625,7 +645,8 @@ def run_compile_m(args) -> int:
             for v in data["variants"]:
                 labels = [State(s["phase"], s["decl_offset"], s.get("callee_order")).label()
                           for s in v["states"][:4]]
-                print(f"   {v['sha']}  x{len(v['states']):<3} {'; '.join(labels)}")
+                shown = f"{v['score']:8.4f} " if "score" in v else ""
+                print(f"   {v['sha']}  {shown}x{len(v['states']):<3} {'; '.join(labels)}")
     print(f"[compile-m] {path}")
     return 0
 

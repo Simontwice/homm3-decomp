@@ -13,7 +13,7 @@ from homm3.match.status import MatchRow
 from homm3.vc6.tu_state_sweep import (
     _files_digest, _initial_include_insertion, _project_header_pool, affected_by_unit,
     bank_rows, insertion_for, insert_variant, make_variants, _report_scores,
-    _normalized_pair,
+    _normalized_pair, state_reachable, _best_results, _sha256, PLACEMENT_TOP,
 )
 
 
@@ -187,6 +187,25 @@ class TuStateSweepTests(unittest.TestCase):
             "autostrptr.h",
             _project_header_pool('#include "spells.h"\n', "spells"))
 
+    def test_editor_header_directories_are_not_in_the_game_pool(self):
+        from homm3.vc6 import tu_state_sweep as sweep
+
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            (root / "include/editor").mkdir(parents=True)
+            (root / "include/campaign_editor").mkdir()
+            (root / "include/game.h").write_text("int game;\n")
+            (root / "include/editor/OptionsDlg.h").write_text("afx_msg void f();\n")
+            (root / "include/campaign_editor/resource.h").write_text("#define IDC_X 1\n")
+            sweep._project_header_closure.cache_clear()
+            sweep._project_header_macros.cache_clear()
+            try:
+                with patch.object(sweep.common, "HOMM3_DIR", root):
+                    self.assertEqual(sweep._project_header_pool("int body;\n"), ("game.h",))
+            finally:
+                sweep._project_header_closure.cache_clear()
+                sweep._project_header_macros.cache_clear()
+
     def test_bank_keeps_cur_and_raises_hist_only_for_new_peak(self):
         hashed = ("u", "hashed")
         no_hash = ("u", "generated")
@@ -206,6 +225,70 @@ class TuStateSweepTests(unittest.TestCase):
         updated, changes = bank_rows({key: row}, {key: 100}, {key: "new"})
         self.assertEqual(updated[key], row)
         self.assertEqual(changes, [])
+
+    def _prediction(self, root, unit, source, functions, scored=True, digest=None):
+        directory = root / unit
+        directory.mkdir(parents=True, exist_ok=True)
+        (directory / "compile-m.json").write_text(json.dumps({
+            "unit": unit, "scored": scored,
+            "source_sha256": digest or _sha256(source.read_bytes()),
+            "functions": {name: {"variants": [{"score": score} for score in scores]}
+                          for name, scores in functions.items()}}))
+
+    def test_state_reachable_rows_come_from_scored_current_predictions(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            source = root / "a.cpp"
+            source.write_text("int a;\n")
+            stale = root / "b.cpp"
+            stale.write_text("int b;\n")
+            self._prediction(root, "a", source, {
+                "better": [95.0, 100.0],
+                "same": [90.0, 90.00001],
+                "exact": [100.0, 99.0],
+                "unscored": [None],
+                "generated": [99.0],
+            })
+            self._prediction(root, "b", stale, {"better": [100.0]}, digest="old")
+            self._prediction(root, "c", source, {"better": [100.0]}, scored=False)
+            rows = {
+                ("a", "better"): MatchRow(95, 95, 95),
+                ("a", "same"): MatchRow(90, 90, 90),
+                ("a", "exact"): MatchRow(100, 100, 100),
+                ("a", "unscored"): MatchRow(80, 80, 80),
+                ("a", "generated"): MatchRow(None, 50, 50),
+                ("b", "better"): MatchRow(95, 95, 95),
+                ("c", "better"): MatchRow(95, 95, 95),
+            }
+            sources = {"a": source, "b": stale, "c": source}
+            found = state_reachable(rows, root, sources.get)
+        self.assertEqual(found, {("a", "better"): 100.0})
+
+    def test_reachable_rows_join_max_below_hist_targets(self):
+        rows = {
+            ("a", "low"): MatchRow(80, 90, 100),
+            ("a", "reach"): MatchRow(95, 95, 95),
+            ("b", "reach"): MatchRow(95, 95, 95),
+        }
+        self.assertEqual(
+            affected_by_unit(rows, {("a", "reach"): 100.0, ("b", "reach"): 99.0}),
+            {"a": (("a", "low"), ("a", "reach")), "b": (("b", "reach"),)})
+
+    def test_top_placement_precedes_every_include(self):
+        text = '#include "first.h"\nint body;\n'
+        variant = make_variants(1, 1, "test", tuple(f"new{i}.h" for i in range(10)))[0]
+        candidate = insert_variant(text, ((0, 1, 0),), variant)
+        self.assertTrue(candidate.startswith(variant.body + "#line 1\n"))
+        self.assertTrue(candidate.endswith(text))
+
+    def test_best_result_remembers_its_placement(self):
+        includes = SimpleNamespace(unit="u", key="u")
+        top = SimpleNamespace(unit="u", key="u@" + PLACEMENT_TOP)
+        results = {"u": [{"trial": 1, "scores": {"f": 95.0}}],
+                   "u@top": [{"trial": 1, "scores": {"f": 100.0}},
+                             {"trial": 2, "scores": {"f": 96.0}}]}
+        self.assertEqual(_best_results([includes, top], results),
+                         {("u", "f"): (100.0, 1, "u@top")})
 
 
 if __name__ == "__main__":

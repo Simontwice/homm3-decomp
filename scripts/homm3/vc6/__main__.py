@@ -36,7 +36,8 @@ Subcommands
         we have none is a target, not an inliner wall.
   state-sweep [--trials 30] [--jobs 4] [--bank]
         Add 5-10 unused headers once per TU, score every function in TUs with
-        MAX < HIST rows, reproduce gains, and optionally bank MAX.
+        MAX < HIST rows or rows a scored `compile-m --score` prediction shows
+        a better state for, reproduce gains, and optionally bank MAX.
   check [--argv|--il|--inline|--reg|--locator|--all]
         The gates (each ships a negative control).
 
@@ -211,6 +212,8 @@ def _build_parser() -> argparse.ArgumentParser:
     pcm.add_argument("--offsets", type=int, default=64, help="declaration offsets 0..N-1")
     pcm.add_argument("--jobs", type=int, default=6)
     pcm.add_argument("--against", help="object whose copies are checked for membership")
+    pcm.add_argument("--score", action="store_true", help="score each distinct assembly with "
+                     "the build's objdiff; state-sweep targets rows a scored state improves")
     pfz = ss.add_parser("fuzz-verify", help="compile randomly edited copies (unrelated edits "
                         "only) and check every original function lands in its predicted set")
     pfz.add_argument("target", help="unit, or a function selector")
@@ -323,13 +326,16 @@ def _build_parser() -> argparse.ArgumentParser:
     ph.add_argument("--output")
 
     ps = ss.add_parser("state-sweep", help="batch transient TU-state search for "
-                       "all MAX < HIST rows")
+                       "all MAX < HIST rows and state-reachable rows")
     ps.add_argument("--trials", type=int, default=30,
                     help="random include-set trials per TU (default 30)")
     ps.add_argument("--seed", type=int, default=20260906)
     ps.add_argument("--jobs", type=int, default=4,
                     help="parallel VC6 compiles (default 4)")
     ps.add_argument("--unit", help="optional comma-separated affected TU filter")
+    ps.add_argument("--no-state-reachable", dest="state_reachable", action="store_false",
+                    help="target only MAX < HIST rows, not rows a scored compile-m "
+                    "prediction shows a better state for")
     ps.add_argument("--bank", action="store_true",
                     help="write reproduced improvements to MAX/HIST")
 

@@ -6,6 +6,7 @@ import struct
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from homm3.vc6 import _il, unstable_state as us
 from homm3.vc6.test_context_variants import _coff
@@ -96,6 +97,52 @@ class ObjectFunctionsTest(unittest.TestCase):
             self.assertEqual(us.object_functions(path),
                              {"?f@@Y": bytes([0x55, 0xa1, 0, 0, 0, 0, 0xc3]),
                               "?g@@Y": bytes([0x33, 0xc0, 0xc3])})
+
+    def test_scored_compile_m_scores_only_new_assemblies_and_records_its_source(self):
+        with tempfile.TemporaryDirectory() as raw:
+            source = Path(raw) / "u.cpp"
+            source.write_text("int f();\n")
+
+            class FakeUnit:
+                name = "u"
+
+                def __init__(self):
+                    self.source = source
+
+                def plain(self):
+                    return Path(raw) / "plain.obj"
+
+                def replay(self, state, slot, log=False, compiled=None):
+                    directory = Path(raw) / slot
+                    directory.mkdir(exist_ok=True)
+                    obj = directory / "o.obj"
+                    obj.write_text(f"{state.phase}:{state.offset % 2}")
+                    return obj, ""
+
+            def functions(obj):
+                text = Path(obj).read_text() if Path(obj).exists() else "None:0"
+                phase, odd = text.split(":")
+                return {"f": b"\x01" if phase in ("None", "0") else b"\x02",
+                        "g": b"\x03" + odd.encode()}
+
+            scored = []
+
+            def score(unit, obj):
+                scored.append(Path(obj).read_text() if Path(obj).exists() else "plain")
+                return {"f": 90.0 if b"\x01" in functions(obj)["f"] else 100.0, "g": 50.0}
+
+            with patch.object(us, "object_functions", side_effect=functions), \
+                 patch.object(us, "score_object", side_effect=score), \
+                 patch.object(us, "inline_callees", return_value={}), \
+                 patch.object(us, "read_state", return_value=[{"name": "f"}, {"name": "g"}]):
+                result = us.compile_m(FakeUnit(), offsets=range(4), jobs=1, score=True)
+            self.assertEqual(result["source_sha256"], us.source_digest(source))
+        self.assertTrue(result["scored"])
+        # plain, then one object per new (function, assembly): phase 0 odd
+        # offset (new g), phase 1 even offset (new f) -- never a repeat
+        self.assertEqual(len(scored), 3)
+        f = {v["sha"]: v["score"] for v in result["functions"]["f"]["variants"]}
+        self.assertEqual(sorted(f.values()), [90.0, 100.0])
 
 
 if __name__ == "__main__":

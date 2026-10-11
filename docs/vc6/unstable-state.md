@@ -162,7 +162,7 @@ bodies are c1..cm in compile order, F at any position sees exactly a prefix
 
 ```sh
 homm3 vc6 state <unit|VA>       # read: emission order, phase received, handle base
-homm3 vc6 compile-m <unit> [--function VA] [--against OBJ]
+homm3 vc6 compile-m <unit> [--function VA] [--against OBJ] [--score]
 homm3 vc6 fuzz-verify <unit> [--function VA] --edits N [--seed S] [--reuse]
 homm3 vc6 phase-census [units...]
 homm3 vc6 compile-m-walls walls.tsv [--reuse]
@@ -191,7 +191,11 @@ homm3 vc6 state-scan [units...] [--offset-units FILE]  # objdiff-scored 1-to-M, 
   prefix min(j, m).
 
 `build/vc6/unstable-state/<unit>/compile-m.json` lists, for every
-function, its M distinct assemblies. Each variant carries its
+function, its M distinct assemblies. With `--score`, each assembly also
+carries the build's objdiff score (an object is scored only when it brings
+some function a new assembly), and the prediction records `scored` and the
+unit source's `source_sha256`; `homm3 vc6 state-sweep` then targets every
+non-exact row with a better-scoring assembly ([tu-state-sweep.md](tu-state-sweep.md)). Each variant carries its
 relocation-masked bytes (hex), a SHA-1 prefix and the states that give it.
 Each function also lists its inline callees in compile order.
 
@@ -306,6 +310,52 @@ members such as `~basic_string` do carry it in mapcell. "Compiled earlier"
 therefore does not decide the bit. The rounds remain a superset (the fuzz
 runs found no escapes), but a variant reached only through a callee prefix
 needs a real edit to show that it can be reached.
+
+## State reach of the 251 non-exact game functions (2026-10-11)
+
+Every unit with a ledger row below 100 MAX (57 units, `rmg` included) went
+through `compile-m` with scoring: phase {0,1} × offset 0..63, plus the
+callee-prefix rounds up to the longest prefix among the unit's non-exact
+functions. Each distinct assembly of a non-exact function was scored with
+the build's objdiff. Seven rows have no body in our object (six generated
+`__h3cg` helpers and `ExtraInfoUnion::setWagon`) and were not compared.
+
+| class | functions |
+| --- | ---: |
+| exact in some phase × offset state | 2 |
+| better than MAX in some phase × offset state, not exact | 6 |
+| better only under a callee prefix (reachability unconfirmed) | 12 |
+| no state beats MAX (source must change) | 224 |
+| not compared | 7 |
+
+Only 35 of the 244 compared functions respond to phase or offset at all
+(25 to phase, 10 to offset, 2 to both). No non-exact function has an
+assembly above MAX at its current phase under any offset: the offset axis
+only moves CUR between MAX and lower classes (`aiEnterTown`, `doAttack`,
+`transmitSaveGame`, `writeMapHeader`, `oldmain`, ...).
+
+* **Phase 1 needed, ours 0:** `loadSeerHutTextColumn`. Defining its unit's
+  tables above it, as retail's object order shows, gives the phase and 100.
+* **Phase 0 needed, not first in the TU:** `aiEnterTown` (exact at phase 0,
+  k = 4..56), and better-not-exact `type_dialog_icon::set` (99.95 -> 99.97),
+  `doCombat` (97.82 -> 97.83), `hero::initialize` (97.36 -> 97.40),
+  `aiCheckRetreat` (95.24 -> 95.71), `purchaseBuilding` (94.13 -> 94.29)
+  and `openConnectionPath` (79.94 -> 80.52). Every one of them has an
+  earlier optimized function in its TU, so no added declaration, include or
+  reorder short of making it first can give phase 0. The phase-0 assembly
+  keeps a known-outcome compare from an inlined helper with constant
+  arguments; read it as a source lead (that compare is not constant in the
+  original at that point; §7a of [phase-flag.md](phase-flag.md)).
+* **Callee prefix only:** `addObject` (67.86 -> 75.52), `getHeaders`,
+  `loadFromMap`, `placeSeerHutForArtifact`, `aiAttemptMove`,
+  `doProgressDialog`, `TSingleSelectionWindow` ctor, `createRiverToOutlet`,
+  `carveBranchingPaths`, `loadTemplates`, `onMapFileNameMsg`, `loadMap`.
+  The axis over-generates (above), so each needs a real edit to show it.
+
+The extended `state-sweep` (header trials at both placements, 30 each, ten
+units) scored 578 candidate objects and found no trial above MAX for any of
+the 19 state-reachable rows, as expected: header insertion reaches neither
+phase 0 mid-TU nor a callee prefix.
 
 ## Limits
 

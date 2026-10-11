@@ -1,8 +1,14 @@
 """Batch disposable VC6 translation-unit state search.
 
 Discover every configured function whose preserved ``MAX`` is below ``HIST``,
-group the functions by translation unit, then compile deterministic random
-include sets per TU. One candidate object scores every function in that TU.
+and every non-exact function that a scored ``homm3 vc6 compile-m --score``
+prediction of its current unit source shows a better assembly for (a
+phase/declaration-offset/callee-order state that scores above MAX), group the
+functions by translation unit, then compile deterministic random include sets
+per TU. One candidate object scores every function in that TU. Units with
+state-reachable rows also get each trial's block at the top of the file, the
+placement compile-m's declaration offset models (it shifts every handle,
+including those the TU's own headers create).
 
 Each trial adds one shuffled block of five to ten project headers absent from
 that TU's transitive include closure. The block exists only in a source copy under
@@ -37,7 +43,7 @@ from homm3.vc6._unit import compile_text, source_for_unit
 from homm3.core.images import path as _image_path
 
 
-GENERATOR_VERSION = 7
+GENERATOR_VERSION = 8
 DEFAULT_SEED = 20260906
 DEFAULT_TRIALS = 30
 MIN_HEADERS_PER_TRIAL = 5
@@ -86,6 +92,11 @@ class Variant:
         return f"{self.body}#line {logical_line}\n"
 
 
+PREDICTION_ROOT = common.HOMM3_DIR / "build/vc6/unstable-state"
+PLACEMENT_INCLUDES = "includes"
+PLACEMENT_TOP = "top"
+
+
 @dataclass(frozen=True)
 class UnitPlan:
     unit: str
@@ -99,6 +110,11 @@ class UnitPlan:
     context: str
     result_dir: Path
     include_pool: tuple[str, ...]
+    placement: str = PLACEMENT_INCLUDES
+
+    @property
+    def key(self) -> str:
+        return self.unit if self.placement == PLACEMENT_INCLUDES else f"{self.unit}@{self.placement}"
 
 
 def _sha256(payload: bytes) -> str:
@@ -314,7 +330,9 @@ def _project_header_pool(text: str, unit: str = "") -> tuple[str, ...]:
     unit_exclusions = UNSAFE_RANDOM_INCLUDE_HEADERS_BY_UNIT.get(
         unit, frozenset())
     headers = []
-    for path in sorted(header_root.rglob("*.h")):
+    # The game's own headers only: include/editor and include/campaign_editor
+    # are the editors' MFC headers, which no game TU can parse.
+    for path in sorted(header_root.glob("*.h")):
         relative = path.relative_to(header_root).as_posix()
         if (relative.lower() not in included
                 and relative not in UNSAFE_RANDOM_INCLUDE_HEADERS
@@ -468,21 +486,55 @@ def run_trial(plan: UnitPlan, variant: Variant, *, cache: bool = True) -> dict:
     return payload
 
 
-def affected_by_unit(rows: dict) -> dict[str, tuple[tuple[str, str], ...]]:
-    grouped: dict[str, list[tuple[str, str]]] = defaultdict(list)
+def state_reachable(rows: dict, root: Path = PREDICTION_ROOT,
+                    source_of=source_for_unit) -> dict[tuple[str, str], float]:
+    """{row key: best predicted score} for every non-exact row whose unit has
+    a scored compile-m prediction of its current source with an assembly
+    scoring above MAX. A prediction of other source is stale and ignored."""
+    reachable = {}
+    units = {key[0] for key, row in rows.items()
+             if row.cur is not None and row.max < 100 - 1e-9}
+    for unit in sorted(units):
+        path = root / unit / "compile-m.json"
+        source = source_of(unit)
+        if not path.is_file() or source is None or not Path(source).is_file():
+            continue
+        try:
+            prediction = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        if (not prediction.get("scored")
+                or prediction.get("source_sha256") != _sha256(Path(source).read_bytes())):
+            continue
+        for name, data in prediction.get("functions", {}).items():
+            row = rows.get((unit, name))
+            if row is None or row.cur is None or row.max >= 100 - 1e-9:
+                continue
+            scores = [v["score"] for v in data.get("variants", ())
+                      if v.get("score") is not None]
+            if scores and round(max(scores), 4) > row.max + 1e-9:
+                reachable[(unit, name)] = round(max(scores), 4)
+    return reachable
+
+
+def affected_by_unit(rows: dict, reachable=()) -> dict[str, tuple[tuple[str, str], ...]]:
+    grouped: dict[str, set[tuple[str, str]]] = defaultdict(set)
     for key, row in rows.items():
         if row.cur is not None and row.max < row.hist - 1e-9:
-            grouped[key[0]].append(key)
+            grouped[key[0]].add(key)
+    for key in reachable:
+        grouped[key[0]].add(key)
     return {unit: tuple(sorted(keys)) for unit, keys in grouped.items()}
 
 
 def _plans(rows: dict, units: set[str] | None, seed: int, trials: int,
-           inputs_digest: str) -> list[UnitPlan]:
-    affected = affected_by_unit(rows)
+           inputs_digest: str, reachable=()) -> list[UnitPlan]:
+    affected = affected_by_unit(rows, reachable)
+    top_units = {key[0] for key in reachable}
     if units is not None:
         unknown = units - set(affected)
         if unknown:
-            common.die("requested unit(s) have no MAX < HIST rows: "
+            common.die("requested unit(s) have no MAX < HIST or state-reachable rows: "
                        + ", ".join(sorted(unknown)))
         affected = {unit: keys for unit, keys in affected.items() if unit in units}
     plans = []
@@ -498,38 +550,43 @@ def _plans(rows: dict, units: set[str] | None, seed: int, trials: int,
         original = source.read_text()
         source_bytes = source.read_bytes()
         target_bytes = target.read_bytes()
-        insertion_offset, insertion_line = _initial_include_insertion(original)
-        insertions = ((insertion_offset, insertion_line, 0),)
+        target_first = _first_pass(unit, target_bytes)
         include_pool = _project_header_pool(original, unit)
         scored = tuple(sorted(
             key for key, row in rows.items()
             if key[0] == unit and row.cur is not None))
-        identity = hashlib.sha256()
-        for payload in (
-                source_bytes, target_bytes, compgen, symbol_names,
-                inputs_digest.encode(), repr(scored).encode(),
-                f"generator={GENERATOR_VERSION};seed={seed};trials={trials};"
-                f"insertions={insertions};headers={include_pool}".encode()):
-            identity.update(hashlib.sha256(payload).digest())
-        context = identity.hexdigest()[:16]
-        result_dir = (common.HOMM3_DIR / "build/tu-state-sweep/results" /
-                      unit / context)
-        result_dir.mkdir(parents=True, exist_ok=True)
-        plans.append(UnitPlan(
-            unit, source, original, _sha256(source_bytes), insertions,
-            keys, scored, _first_pass(unit, target_bytes), context, result_dir,
-            include_pool))
+        placements = [(PLACEMENT_INCLUDES, _initial_include_insertion(original))]
+        if unit in top_units:
+            placements.append((PLACEMENT_TOP, (0, 1)))
+        for placement, (insertion_offset, insertion_line) in placements:
+            insertions = ((insertion_offset, insertion_line, 0),)
+            identity = hashlib.sha256()
+            for payload in (
+                    source_bytes, target_bytes, compgen, symbol_names,
+                    inputs_digest.encode(), repr(scored).encode(),
+                    f"generator={GENERATOR_VERSION};seed={seed};trials={trials};"
+                    f"insertions={insertions};headers={include_pool}".encode()):
+                identity.update(hashlib.sha256(payload).digest())
+            context = identity.hexdigest()[:16]
+            result_dir = (common.HOMM3_DIR / "build/tu-state-sweep/results" /
+                          unit / context)
+            result_dir.mkdir(parents=True, exist_ok=True)
+            plans.append(UnitPlan(
+                unit, source, original, _sha256(source_bytes), insertions,
+                keys, scored, target_first, context, result_dir,
+                include_pool, placement))
     return plans
 
 
 def _best_results(plans: list[UnitPlan], results: dict) -> dict:
+    """{(unit, symbol): (score, trial, plan key)}, best over every placement."""
     best = {}
     for plan in plans:
-        for variant_result in results[plan.unit]:
+        for variant_result in results.get(plan.key, ()):
             for symbol, score in variant_result["scores"].items():
                 key = (plan.unit, symbol)
                 previous = best.get(key)
-                candidate = (round(score, 4), variant_result["trial"])
+                candidate = (round(score, 4), variant_result["trial"], plan.key)
                 if previous is None or candidate > previous:
                     best[key] = candidate
     return best
@@ -539,7 +596,7 @@ def _observed_score_changes(plans: list[UnitPlan], results: dict, rows: dict) ->
     """Summarize every function whose score moved in any candidate TU."""
     changes = []
     for plan in plans:
-        observations = results.get(plan.unit, ())
+        observations = results.get(plan.key, ())
         for key in plan.scored:
             row = rows[key]
             scored = [
@@ -555,6 +612,7 @@ def _observed_score_changes(plans: list[UnitPlan], results: dict, rows: dict) ->
                 continue
             changes.append({
                 "unit": key[0],
+                "placement": plan.placement,
                 "function": key[1],
                 "cur": row.cur,
                 "max": row.max,
@@ -594,7 +652,8 @@ def run(args) -> int:
     rows = status.load_baseline()
     units = ({part.strip() for part in args.unit.split(",") if part.strip()}
              if args.unit else None)
-    plans = _plans(rows, units, args.seed, args.trials, inputs_digest)
+    reachable = state_reachable(rows) if getattr(args, "state_reachable", True) else {}
+    plans = _plans(rows, units, args.seed, args.trials, inputs_digest, reachable)
     variants_by_unit = {
         plan.unit: make_variants(
             args.trials, args.seed, plan.unit, plan.include_pool)
@@ -602,9 +661,16 @@ def run(args) -> int:
     }
     baseline_digest = _sha256(status.BASELINE.read_bytes())
     source_digests = {plan.source: plan.source_digest for plan in plans}
-    affected_count = sum(len(plan.affected) for plan in plans)
-    print(f"[vc6 state-sweep] {affected_count} MAX < HIST function(s) in "
-          f"{len(plans)} TU(s); {args.trials} trials/TU; {args.jobs} worker(s)")
+    affected = {key for plan in plans for key in plan.affected}
+    selected_reachable = sorted(key for key in reachable if key in affected)
+    print(f"[vc6 state-sweep] {len(affected)} function(s) "
+          f"({len(affected) - len(selected_reachable)} MAX < HIST only, "
+          f"{len(selected_reachable)} state-reachable) in "
+          f"{len({plan.unit for plan in plans})} TU(s), {len(plans)} placement(s); "
+          f"{args.trials} trials/placement; {args.jobs} worker(s)")
+    for key in selected_reachable:
+        print(f"[vc6 state-sweep] state-reachable {key[0]} {key[1]}: MAX "
+              f"{rows[key].max:.4f}, predicted {reachable[key]:.4f}")
 
     results: dict[str, list[dict]] = defaultdict(list)
     counts = Counter()
@@ -618,43 +684,42 @@ def run(args) -> int:
         }
         for future in concurrent.futures.as_completed(futures):
             plan, variant = futures[future]
-            counts[plan.unit] += 1
-            done = counts[plan.unit]
+            counts[plan.key] += 1
+            done = counts[plan.key]
             try:
                 result = future.result()
             except Exception as exc:
                 failures.append({
-                    "unit": plan.unit, "trial": variant.trial,
+                    "unit": plan.unit, "placement": plan.placement, "trial": variant.trial,
                     "headers": _INCLUDE_DIRECTIVE.findall(variant.body),
                     "error": str(exc),
                 })
                 first_error = str(exc).splitlines()[0]
-                print(f"[vc6 state-sweep] SKIP {plan.unit} "
+                print(f"[vc6 state-sweep] SKIP {plan.key} "
                       f"trial {variant.trial}: {first_error}", flush=True)
             else:
-                results[plan.unit].append(result)
+                results[plan.key].append(result)
             if done == args.trials or done % 10 == 0:
-                print(f"[vc6 state-sweep] {plan.unit}: {done}/{args.trials}",
+                print(f"[vc6 state-sweep] {plan.key}: {done}/{args.trials}",
                       flush=True)
 
     best = _best_results(plans, results)
     winners: dict[tuple[str, int], list[tuple[str, str]]] = defaultdict(list)
-    for plan in plans:
-        for key in plan.scored:
-            candidate = best.get(key)
-            if candidate is not None and candidate[0] > rows[key].max + 1e-9:
-                winners[(plan.unit, candidate[1])].append(key)
+    for key in sorted({key for plan in plans for key in plan.scored}):
+        candidate = best.get(key)
+        if candidate is not None and candidate[0] > rows[key].max + 1e-9:
+            winners[(candidate[2], candidate[1])].append(key)
     print(f"[vc6 state-sweep] {len(winners)} winning TU/trial pair(s) require reproduction")
 
-    by_unit = {plan.unit: plan for plan in plans}
+    by_key = {plan.key: plan for plan in plans}
     reproduced = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as executor:
         futures = {
             executor.submit(
-                run_trial, by_unit[unit],
-                variants_by_unit[unit][trial - 1], cache=False):
-                (unit, trial, keys)
-            for (unit, trial), keys in winners.items()
+                run_trial, by_key[plan_key],
+                variants_by_unit[by_key[plan_key].unit][trial - 1], cache=False):
+                (plan_key, trial, keys)
+            for (plan_key, trial), keys in winners.items()
         }
         for future in concurrent.futures.as_completed(futures):
             unit, trial, keys = futures[future]
@@ -692,11 +757,15 @@ def run(args) -> int:
         "generator": "random-project-includes",
         "generator_version": GENERATOR_VERSION,
         "inputs_digest": inputs_digest,
-        "contexts": {plan.unit: plan.context for plan in plans},
+        "contexts": {plan.key: plan.context for plan in plans},
         "seed": args.seed,
         "trials_per_tu": args.trials,
-        "affected_functions": affected_count,
-        "translation_units": len(plans),
+        "affected_functions": len(affected),
+        "state_reachable": [
+            {"unit": key[0], "function": key[1], "max": rows[key].max,
+             "predicted": reachable[key]} for key in selected_reachable],
+        "translation_units": len({plan.unit for plan in plans}),
+        "placements": {plan.key: plan.context for plan in plans},
         "attempted_trials": len(tasks),
         "successful_trials": successful_trials,
         "score_observations": score_observations,
@@ -708,12 +777,13 @@ def run(args) -> int:
                 "unit": key[0], "function": key[1], "old_max": old_max,
                 "new_max": new_max, "old_hist": old_hist,
                 "new_hist": new_hist, "trial": best[key][1],
+                "placement": best[key][2],
             }
             for key, old_max, new_max, old_hist, new_hist in changes
         ],
     }
     scope = hashlib.sha256(
-        ",".join(f"{plan.unit}:{plan.context}" for plan in plans).encode()
+        ",".join(f"{plan.key}:{plan.context}" for plan in plans).encode()
     ).hexdigest()[:8]
     summary_path = (common.HOMM3_DIR / "build/tu-state-sweep" /
                     f"summary-includes-{args.seed}-{args.trials}-{scope}.json")
@@ -722,7 +792,7 @@ def run(args) -> int:
         action = "BANK" if args.bank else "WOULD BANK"
         print(f"[vc6 state-sweep] {action} {item['unit']} {item['function']}: "
               f"MAX {item['old_max']:.4f} -> {item['new_max']:.4f} "
-              f"(trial {item['trial']})")
+              f"(trial {item['trial']}, {item['placement']})")
     print(f"[vc6 state-sweep] captured {len(observed_changes)} function(s) "
           "whose score changed in at least one candidate TU")
     print(f"[vc6 state-sweep] {successful_trials}/{len(tasks)} candidate TU(s) "
