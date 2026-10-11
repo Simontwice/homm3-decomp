@@ -7,6 +7,8 @@
 #include "va.h"
 
 #include <bitset>
+#include <functional>
+#include <iosfwd>
 #include <string>
 #include <vector>
 
@@ -19,6 +21,9 @@
 enum EObjectTypeTextIndex {
     OBJECT_TYPE_TEXT_COUNT = 0
 };
+
+class TRawIStream;
+class TRawOStream;
 
 enum EObjectSlotTraitsConstants {
     OBJECT_SLOT_TRAITS_COUNT = 15
@@ -60,9 +65,16 @@ public:
     // why it has no initializer here either.
     TObjectType();
 
+    // Loki h3maped ObjectType.h befriends its text and map-format streams
+    // and its map key order.
+    friend std::istream& operator>>(std::istream& is, TObjectType& objectType);
+    friend TRawOStream& operator<<(TRawOStream& stream, const TObjectType& objectType);
+    friend TRawIStream& operator>>(TRawIStream& stream, TObjectType& objectType);
+    friend struct std::less<TObjectType>;
+
 private:
     // The image and mask setters own these values and their invariants.
-    int _m_imageNum;
+    unsigned int _m_imageNum;
     std::bitset<OBJECT_MASK_CELLS> m_passableMask;
     std::bitset<OBJECT_MASK_CELLS> m_triggerMask;
 public:
@@ -207,6 +219,19 @@ inline TObjectType::TObjectType()
       m_hasTrigger(0),
       m_triggerCell(kMaxObjWidth, kMaxObjHeight)
 {
+}
+
+std::istream& operator>>(std::istream& is, TObjectType& objectType);
+TRawOStream& operator<<(TRawOStream& stream, const TObjectType& objectType);
+TRawIStream& operator>>(TRawIStream& stream, TObjectType& objectType);
+
+// Object types are ordered member by member so they can key the map
+// editor's object-type map (Loki h3maped's explicit specialization).
+namespace std {
+template <>
+struct less<TObjectType> : public binary_function<TObjectType, TObjectType, bool> {
+    bool operator()(const TObjectType& lhs, const TObjectType& rhs) const;
+};
 }
 
 class TObjectTypeTable {

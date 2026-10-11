@@ -1148,6 +1148,11 @@ def collect(root: Path = ROOT, jobs: int | None = None, fresh: bool = False):
         errors.extend(failures)
         reached.update(paths)
         for d in definitions:
+            # A shared source may include another image's header (the game's
+            # objecttype.cpp includes editor/RawStream.h for the map editor's
+            # stream operators); that image's own scans own its definitions.
+            if images.foreign(root / d.file, root):
+                continue
             unique[(d.file, d.offset, d.name, d.signature)] = d
     definitions = sorted(unique.values(), key=lambda d: (*definition_order(d), d.signature))
     return definitions, errors, sorted(reached)

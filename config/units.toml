@@ -864,11 +864,6 @@ source = "src/objecttype.cpp"
 flags = "game_o2_mt_gr_windows"
 
 [[unit]]
-unit = "string_support"
-source = "src/string_support.cpp"
-flags = "game_o2_mt_gr_windows"
-
-[[unit]]
 unit = "gzfile"
 module = "codec"
 source = "src/gzfile.cpp"

@@ -34,6 +34,7 @@
 
 #include "UniqueSet.h"
 #include "advmgr_objects.h"
+#include "editor/RawStream.h"
 #include "exceptions.h"
 #include "resourcemanager.h"
 #include "textresource.h"
@@ -42,6 +43,10 @@
 // TObjectType::_setTriggerMask's no-trigger path, both in this compiland.
 DATA(0x00640278) extern const unsigned int kMaxObjWidth = 8;
 DATA(0x0064027c) extern const unsigned int kMaxObjHeight = 6;
+
+// The map format's reserved bytes after an object type (Loki
+// ObjectType.cpp's kNumObjectTypeReserved; the name is inferred there).
+const unsigned int kNumObjectTypeReserved = 16;
 
 // --- the object slot traits ----------------------------------------------
 //
@@ -87,12 +92,6 @@ public:
 };
 
 } // namespace
-
-// The per-row parser TObjectTypeTable::load runs over each objects.txt
-// line, retail 0x514b80. Free and therefore __fastcall under /Gr: the
-// stream arrives in ECX and the record in EDX, and it answers the stream
-// so the caller can chain.
-std::istream& operator>>(std::istream& is, TObjectType& objectType);
 
 namespace {
 
@@ -462,6 +461,7 @@ TObjectType::getImageName() const
 }
 
 VA(0x00514a60, 0x11D)
+VA_AT(h3maped, 0x004906fb, 0xce)
 MAC_ADDRESS(0x223f44, 0x134)
 TObjectType& TObjectType::_setTriggerMask(const std::bitset<OBJECT_MASK_CELLS>& mask)
 {
@@ -471,12 +471,14 @@ TObjectType& TObjectType::_setTriggerMask(const std::bitset<OBJECT_MASK_CELLS>& 
         for (int y = 0;; ++y) {
             assert(y < kMaxObjHeight);
             for (unsigned x = 0; x < 8; ++x) {
-                if (getBCellTrigger(x, y)) {
+                if (m_triggerMask[_getBitPos(x, y)]) {
                     m_triggerCell = TTilePoint(x, y);
-                    return *this;
+                    goto found;
                 }
             }
         }
+    found:
+        ;
     } else {
         m_triggerCell = TTilePoint(kMaxObjWidth, kMaxObjHeight);
     }
@@ -538,6 +540,10 @@ TObjectType& TObjectType::setBUnderlay(bool underlay)
     return *this;
 }
 
+// The per-row parser TObjectTypeTable::load runs over each objects.txt
+// line, retail 0x514b80. Free and therefore __fastcall under /Gr: the
+// stream arrives in ECX and the record in EDX, and it answers the stream
+// so the caller can chain.
 // Mac 0x2240d4/0x2240f0/0x22410c/0x224128/0x224144 calls
 // istream::ignore(1, EOF) between the string/bitset extractions. MSL's
 // bitset extractor reads istreambuf_iterator directly without a sentry;
@@ -561,11 +567,133 @@ std::istream& operator>>(std::istream& is, TObjectType& objectType)
         >> typeRead >> subtype >> slotCategory >> underlay;
 
     objectType.setImageName(imageName)._setPassableMask(passable)
-        ._setTriggerMask(trigger).setTerrainMask(std::bitset<kNumTerrainTypes>(terrainRead.to_ulong()))
-        .setRecommendedTerrainMask(std::bitset<kNumTerrainTypes>(recommendedRead.to_ulong()))
+        ._setTriggerMask(trigger).setTerrainMask(terrainRead.to_ulong())
+        .setRecommendedTerrainMask(recommendedRead.to_ulong())
         .setType(TAdventureObjectType(typeRead)).setExtra(subtype)
         .setSlotCategory(slotCategory).setBUnderlay(underlay != 0);
     return is;
+}
+
+// The map format's form of an object type (Loki h3maped ObjectType.cpp,
+// TRawOStream& operator<<(TRawOStream&, const TObjectType&) and its
+// reader): the image name, the two cell masks, the terrain masks in their
+// nine-bit stored form, type, subtype, slot category and underlay, then
+// sixteen reserved bytes. Only the map editor keeps them (h3maped 0x490944,
+// 0x490a11); the game links them unreferenced.
+// The writer's wall (90.58): retail expands the reserved fill_n (four
+// stosd). Here the vetoed calls before it charge 959 of the 1000 budget
+// and leave 41 against fill_n's cb 43 (`vc6 predict-inline --root`);
+// a ternary or const getImageName, `bits[i]` in writeBitset and an
+// out-of-line string writer do not free it. The nine-bit masks as
+// implicit conversions (explicit template argument) give retail's
+// recomputed temporary addresses.
+VA_AT(h3maped, 0x00490944, 0xcd)
+TRawOStream& operator<<(TRawOStream& stream, const TObjectType& objectType)
+{
+    stream << objectType.getImageName();
+    writeBitset(stream, objectType.m_passableMask);
+    writeBitset(stream, objectType.m_triggerMask);
+    writeBitset<kNumTerrainTypes - 1>(stream, objectType._m_terrainMask.to_ulong());
+    writeBitset<kNumTerrainTypes - 1>(stream, objectType.m_recommendedTerrainMask.to_ulong());
+    stream << static_cast<long>(objectType.m_objectType)
+           << static_cast<long>(objectType.m_subtype)
+           << static_cast<signed char>(objectType.m_slotCategory)
+           << static_cast<signed char>(objectType.m_isUnderlay);
+    signed char reserved[kNumObjectTypeReserved];
+    std::fill_n(reserved, sizeof(reserved), 0);
+    stream << reserved;
+    return stream;
+}
+
+VA_AT(h3maped, 0x00490a11, 0x166)
+TRawIStream& operator>>(TRawIStream& stream, TObjectType& objectType)
+{
+    std::string imageName;
+    std::bitset<OBJECT_MASK_CELLS> passableMask;
+    std::bitset<OBJECT_MASK_CELLS> triggerMask;
+    std::bitset<kNumTerrainTypes - 1> terrainMask;
+    std::bitset<kNumTerrainTypes - 1> recommendedTerrainMask;
+    stream >> imageName;
+    readBitset(stream, passableMask);
+    readBitset(stream, triggerMask);
+    readBitset(stream, terrainMask);
+    readBitset(stream, recommendedTerrainMask);
+    long type;
+    long extra;
+    signed char slotCategory;
+    signed char bUnderlay;
+    stream >> type >> extra >> slotCategory >> bUnderlay;
+    signed char reserved[kNumObjectTypeReserved];
+    stream >> reserved;
+    objectType.setImageName(imageName)
+        ._setPassableMask(passableMask)
+        ._setTriggerMask(triggerMask)
+        .setTerrainMask(terrainMask.to_ulong())
+        .setRecommendedTerrainMask(recommendedTerrainMask.to_ulong())
+        .setType(TAdventureObjectType(type))
+        .setExtra(extra)
+        .setSlotCategory(slotCategory)
+        .setBUnderlay(bUnderlay != 0);
+    return stream;
+}
+
+// Bit by bit from the highest (Loki's isLessThan<N>; h3maped keeps the
+// 48-cell and terrain instances out of line, 0x492179 and 0x492203).
+template <size_t N>
+inline bool isLessThan(const std::bitset<N>& lhs, const std::bitset<N>& rhs)
+{
+    size_t bit = N;
+    while (bit > 0) {
+        --bit;
+        if (lhs[bit] < rhs[bit])
+            return true;
+        else if (lhs[bit] != rhs[bit])
+            return false;
+    }
+    return false;
+}
+
+// The map editor's object-type map key order (Loki's explicit
+// less<TObjectType>, h3maped 0x490b77): image, type, subtype, slot
+// category, underlay, then the masks.
+VA_AT(h3maped, 0x00490b77, 0xd5)
+bool std::less<TObjectType>::operator()(const TObjectType& lhs, const TObjectType& rhs) const
+{
+    if (lhs._m_imageNum < rhs._m_imageNum)
+        return true;
+    else if (lhs._m_imageNum != rhs._m_imageNum)
+        return false;
+    if (lhs.m_objectType < rhs.m_objectType)
+        return true;
+    else if (lhs.m_objectType != rhs.m_objectType)
+        return false;
+    if (lhs.m_subtype < rhs.m_subtype)
+        return true;
+    else if (lhs.m_subtype != rhs.m_subtype)
+        return false;
+    if (lhs.m_slotCategory < rhs.m_slotCategory)
+        return true;
+    else if (lhs.m_slotCategory != rhs.m_slotCategory)
+        return false;
+    if (lhs.m_isUnderlay < rhs.m_isUnderlay)
+        return true;
+    else if (lhs.m_isUnderlay != rhs.m_isUnderlay)
+        return false;
+    if (isLessThan(lhs.m_passableMask, rhs.m_passableMask))
+        return true;
+    else if (lhs.m_passableMask != rhs.m_passableMask)
+        return false;
+    if (isLessThan(lhs.m_triggerMask, rhs.m_triggerMask))
+        return true;
+    else if (lhs.m_triggerMask != rhs.m_triggerMask)
+        return false;
+    if (isLessThan(lhs._m_terrainMask, rhs._m_terrainMask))
+        return true;
+    else if (lhs._m_terrainMask != rhs._m_terrainMask)
+        return false;
+    if (isLessThan(lhs.m_recommendedTerrainMask, rhs.m_recommendedTerrainMask))
+        return true;
+    return false;
 }
 
 // Retail 0x514d80, the objects.txt reader NewfullMap::loadObjectTypeTemplates drives.
@@ -608,6 +736,11 @@ void TObjectTypeTable::load(char* filename)
 }
 
 VA_COMPGEN(0x00517780, 0xA3, TREE_CONST_ITERATOR_INC, string)
+
+// The map format's string reader (editor/RawStream.h) resizes its string:
+// retail keeps that one-argument resize right after load, inside this
+// compiland's band, though the game drops the reader itself.
+VA_COMPGEN(0x00515010, 0x198, BASIC_STRING_RESIZE, char)
 
 // This is a library-template enrollment. Do not force its emission with
 // an invented game function; its retained body must come from real use.
