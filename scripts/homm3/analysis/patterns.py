@@ -367,14 +367,61 @@ def sweep_cc(images, *, limit=None) -> dict:
                     if len(row["examples"]) < 4:
                         row["examples"].append(
                             f"{fn.unit}:{short_name(fn.name, demangled)} ours {x} retail {y}")
+    unplaced = unplaced_conventions(images, demangled)
     callees = sorted((r for r in callee_rows.values() if r["differ"]),
                      key=lambda r: (-r["differ"] / (r["differ"] + r["agree"]), -r["differ"]))
     function_rows.sort(key=lambda r: (-r["weight"], -r["gap"]))
     return {"functions": function_rows[:limit] if limit else function_rows,
-            "callees": callees[:limit] if limit else callees}
+            "callees": callees[:limit] if limit else callees,
+            "unplaced": unplaced}
+
+
+@lru_cache(maxsize=None)
+def _retail_image(image: str):
+    from homm3.core.image import Image
+    from homm3.core.tsv import read as read_tsv
+    exe = paths.ROOT / "build/orig" / ("HEROES3.EXE" if image == "game" else f"{image}.exe")
+    sizes = {int(r["rva"], 16): int(r["size"])
+             for r in read_tsv(paths.retail_dir(image) / "functions.tsv")[2]}
+    return Image(str(exe)), sizes
+
+
+def retail_body(image: str, rva: int) -> bytes | None:
+    exe, sizes = _retail_image(image)
+    size = sizes.get(rva)
+    section = exe.section_of(rva)
+    if size is None or section is None:
+        return None
+    start = section.raw_offset + rva - section.rva
+    return exe.data[start:start + size]
+
+
+def unplaced_conventions(images, demangled) -> list[dict]:
+    """Our callees that pair site for site with an unnamed retail body whose
+    entry disagrees with our declared convention: a register convention
+    whose retail body reads neither register and pops nothing, or a stack
+    convention whose retail body pops its arguments or reads ecx/edx."""
+    rows = []
+    for pair in unnamed_pairs([i for i in images if i != "game"], demangled):
+        body = retail_body(pair["image"], int(pair["retail"][3:], 16)) \
+            if pair["retail"].startswith("fn_") else None
+        if body is None:
+            continue
+        pops, live = signature(body)
+        cc = convention(pair["ours"], demangled)
+        register = cc in ("__fastcall",)
+        if (register and not live and pops <= {0}) or (cc == "__cdecl" and (live or pops - {0})):
+            rows.append({**pair, "convention": cc, "retail_pops": sorted(pops),
+                         "retail_live": sorted(live)})
+    return rows
 
 
 def render_cc(result) -> None:
+    rows = result.get("unplaced", [])
+    print(f"== unplaced callees whose retail entry contradicts our convention ({len(rows)})")
+    for r in rows:
+        print(f"  {r['image']:8} {r['retail']:>12} {r['convention'] or '?':10} {r['callee']}"
+              f"  retail pops {r['retail_pops']} live {r['retail_live']} ({r['sites']} sites)")
     rows = result["functions"]
     print(f"== callee signatures that differ ({len(rows)}): pops / live-in argument registers")
     for r in rows:
