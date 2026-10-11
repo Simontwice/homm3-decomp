@@ -987,20 +987,10 @@ void type_random_map::floodConnectionCosts(TRmgMapPosition position, unsigned ch
 // select the same tile. Only the trigger arm observes rejectObstacleFill. The
 // category-zero water rule belongs to the blocked-mask arm, not the whole
 // footprint. Bounds are signed; the two mask loops use unsigned indices.
-// Independently recomputed mask indices and a prototype reference reach
-// 83.0343%; keeping a descending map position alongside ascending mask
-// indices reaches 90.2171%. Both retained mask-range calls agree. The
-// current 0x20 frame still differs from retail's 0x1c frame and reloads.
-// A shared unsigned-grid mask cursor restores the 0x1c frame and 36-block
-// count, but shortens the body to 511 bytes versus retail's 530 (81.2457%).
-// Eight genuine getter/setter read/init/step models leave that result flat;
-// both retained bitset range checks agree. Keep this frame/CFG ownership
-// lead separate from byte recovery. The later consumed per-cell mask point
-// keeps this checker's bytes identical at 90.2171% and shares the domain
-// model that restores addObject's retained insertion boundary below.
-// Map editor lead (2026-10-11): its /O1 copy 0x49a6f9 keeps the cursor as two
-// scalars beside position.m_z (no position copy) and raises h3maped
-// 81.29% -> 96.50%, but the same scalars drop this game body to 78.74%.
+// Mac 0x22e0a0 builds each cell's map position from the anchor
+// (position - x, position - y, the anchor's level) as a temporary for the
+// lookup; that spelling is exact in both the game and the map editor
+// (0x49a6f9), where descending cursors or scalar lookups had split them.
 VA(0x005318B0, 0x212)
 MAC_ADDRESS(0x22dfe0, 0x2a4) // anchor-callee 0x531d29; thiscall, ret 0x18; retail-only
 unsigned char type_random_map::isPlacementBlocked(
@@ -1011,12 +1001,10 @@ unsigned char type_random_map::isPlacementBlocked(
     if (position.m_x < prototype.getWidth() - 1 || position.m_x >= m_mapWidth
         || position.m_y < prototype.getHeight() - 1 || position.m_y >= m_mapHeight)
         return 1;
-    TRmgMapPosition nearby = position;
-    for (unsigned int y = 0; y < prototype.getHeight(); ++y, --nearby.m_y) {
-        nearby.m_x = position.m_x;
-        for (unsigned int x = 0; x < prototype.getWidth(); ++x, --nearby.m_x) {
+    for (unsigned int y = 0; y < prototype.getHeight(); ++y) {
+        for (unsigned int x = 0; x < prototype.getWidth(); ++x) {
             TTilePoint maskPoint(x, y);
-            TRmgMapItem* item = getMapItem(nearby);
+            TRmgMapItem* item = getMapItem(TRmgMapPosition(position.m_x - x, position.m_y - y, position.m_z));
             if (prototype.getBCellTrigger(maskPoint.m_x, maskPoint.m_y)) {
                 if (!item->isPassable()
                     || item->isObjectEntrance() || item->m_zoneState.m_zone != zoneIndex)
@@ -1140,35 +1128,24 @@ unsigned char type_random_map::canPlaceObject(
 // A type_object reference supplies &object prvalues naturally; a pointer
 // parameter binds directly from [ebp+8] instead. This source contract remains
 // a retail-supported inference: there is no Dreamcast RMG declaration.
-// The consumed per-cell unsigned mask coordinate also restores the third
-// retained vector::size. Both footprint walkers use the same mask domain,
-// separate from their signed world position. Canonical constructors/helpers
-// and the live width/height reads remain intact. All fifteen retained calls
-// and both pointer temporaries now agree; six machine callers are unchanged.
-// Current 89.9551%: 753 bytes versus retail 742, with a 0x2c local frame
-// versus 0x28. Eager EBX saving and world-copy allocation remain unresolved.
-// Controls: scalar pointer 85.7977%, per-cell pointer 86.9813%, scalar
-// reference 88.5318%. Earlier mask getter/setter forms retain only two size
-// calls; actual coordinate construction is required. Eighteen joint models,
-// including row/cell world ownership and a mutable by-value position cursor,
-// preserve the current parent as best. A further 32 loop/bounds models
-// separate for/do from positive nesting/continue. Bounds nesting has no
-// selected-byte effect; do retains the shared vector insertion (three calls)
-// instead of retail's fifteen-call expansion. Needed-y/z initialization with
-// do does delay EBX saving until nonempty height, leaving a combined-model
-// lead despite that inlining mismatch. See the source-family evidence.
+// Mac 0x22e96c keeps one position local: its level set once, its row and
+// column recomputed from the anchor in each loop before the bounds tests,
+// then passed by value to the lookup. Exact in both the game and the map
+// editor.
 VA(0x00531EA0, 0x2E6)
 MAC_ADDRESS(0x22e918, 0x1c4) // anchor-callee 0x5465d9/0x535400; thiscall, ret 0x10
 void type_random_map::addObject(type_object& object, TRmgMapPosition position)
 {
     TObjectType& prototype = *object.m_properties->m_prototype;
     object.m_position = position;
-    TRmgMapPosition nearby = position;
-    for (unsigned int y = 0; y < prototype.getHeight(); ++y, --nearby.m_y) {
+    TRmgMapPosition nearby;
+    nearby.m_z = position.m_z;
+    for (unsigned int y = 0; y < prototype.getHeight(); ++y) {
+        nearby.m_y = position.m_y - y;
         if (nearby.m_y < 0 || nearby.m_y >= m_mapHeight)
             continue;
-        nearby.m_x = position.m_x;
-        for (unsigned int x = 0; x < prototype.getWidth(); ++x, --nearby.m_x) {
+        for (unsigned int x = 0; x < prototype.getWidth(); ++x) {
+            nearby.m_x = position.m_x - x;
             if (nearby.m_x < 0 || nearby.m_x >= m_mapWidth)
                 continue;
             TTilePoint maskPoint(x, y);
