@@ -6,9 +6,6 @@
 // blank. Layout from the image: the property sheet, the general page's
 // sheet interface at 0x88, the map, the hero, the edited prototype, the
 // count of pages holding OK off and the six pages (0xcc bytes).
-//
-// Ported so far: the declarations the map specifications' heroes page
-// uses.
 #ifndef HOMM3_EDITOR_HEROPROTOTYPEPROPSSHEET_H
 #define HOMM3_EDITOR_HEROPROTOTYPEPROPSSHEET_H
 
@@ -16,6 +13,7 @@
 
 #include "editor/GameMap.h"
 #include "editor/Hero.h"
+#include "editor/HeroPrototypePropsGeneralPage.h"
 
 class THeroPrototypePropsBiographyPage;
 class THeroPrototypePropsPriSkillsPage;
@@ -23,20 +21,9 @@ class THeroPrototypePropsSecSkillsPage;
 class THeroPrototypePropsArtifactsPage;
 class THeroPrototypePropsSpellsPage;
 
-// Ported so far: the sheet interface.
-class THeroPrototypePropsGeneralPage {
-public:
-    // The sheet, told when its OK button may be pressed.
-    class TParentSheet {
-    public:
-        virtual void onEnableOK() = 0;
-        virtual void onDisableOK() = 0;
-    };
-};
-
 class THeroPrototypePropsSheet : public CPropertySheet, public THeroPrototypePropsGeneralPage::TParentSheet {
 public:
-    THeroPrototypePropsSheet(CWnd* pParentWnd, TGameMap& map, THeroID heroID);
+    THeroPrototypePropsSheet(CWnd* pParentWnd, TGameMap& gameMap, THeroID heroID);
     virtual ~THeroPrototypePropsSheet();
 
     // Stores the edited prototype in the map when OK is pressed on a

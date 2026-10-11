@@ -1073,7 +1073,7 @@ GUIGameObject	?_Xran@?$bitset@$0OI@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x43a
 GUIGameObject	?_getPHero@TGUIHeroPlaceholder@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@EAEPAVTBasicHero@@XZ	100.0000	100.0000	100.0000	0x40175	-
 GUIGameObject	?_getPHero@TGUINonRandomHero@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@EAEPAVTBasicHero@@XZ	100.0000	100.0000	100.0000	0x4066b	-
 GUIGameObject	?_getPHero@TGUIRandomHero@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@EAEPAVTBasicHero@@XZ	100.0000	100.0000	100.0000	0x40e16	-
-GUIGameObject	?_getPSprite@TGUITown@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@ABEPBVCSprite@@XZ	99.5726	100.0000	100.0000	0x41878	tokens1:03a9dd4522f9
+GUIGameObject	?_getPSprite@TGUITown@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@ABEPBVCSprite@@XZ	100.0000	100.0000	100.0000	0x41878	tokens1:03a9dd4522f9
 GUIGameObject	?clone@?$TGUIOwnableSpecializedObject@VTFlaggableObject@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@$4PPPPPPPM@A@BE?AV?$auto_ptr@VTGameObject@@@std@@XZ	100.0000	100.0000	100.0000	0x483f6	-
 GUIGameObject	?clone@?$TGUIOwnableSpecializedObject@VTFlaggableObject@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@UBE?AV?$auto_ptr@VTGameObject@@@std@@XZ	100.0000	100.0000	100.0000	0x483fe	-
 GUIGameObject	?clone@?$TGUIOwnableSpecializedObject@VTGarrison@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@$4PPPPPPPM@A@BE?AV?$auto_ptr@VTGameObject@@@std@@XZ	100.0000	100.0000	100.0000	0x486e3	-
@@ -1313,7 +1313,7 @@ GUIGameObject	?write@TRandomlyAlignedGenerator@@$4PPPPPPPM@M@BEXPAVTRawOStream@@
 GUIGameObject	?write@TRandomlyLeveledGenerator@@$4PPPPPPPM@M@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x48e5c	-
 GUIGameObject	?write@TSeersHut@@$4PPPPPPPM@M@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x46ca7	-
 GUIGameObject	?write@TTown@@$4PPPPPPPM@M@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x460af	-
-GUIGameObject	__h3cg$GUIGameObject$static_dtor$aSprites	99.1667	100.0000	100.0000	0x41a55	-
+GUIGameObject	__h3cg$GUIGameObject$static_dtor$aSprites	100.0000	100.0000	100.0000	0x41a55	-
 GUIGameObject	__h3cg$GUIGameObject$static_dtor$checkMark	0.0000	97.5000	97.5000	0x3fb65	-
 GUIGameObject	__h3cg$GUIGameObject$static_dtor$smallCheckMark	0.0000	97.5000	97.5000	0x3fb5b	-
 GUIGameObject	__h3cg$GUIGameObject$static_dtor$typeFlags	100.0000	100.0000	100.0000	0x42696	-
@@ -2515,7 +2515,65 @@ HeroPropsSpellsPage	?OnCustomizeCheck@THeroPropsSpellsPage@@IAEXXZ	100.0000	100.
 HeroPropsSpellsPage	?OnInitDialog@THeroPropsSpellsPage@@UAEHXZ	100.0000	100.0000	100.0000	0x54fbe	tokens1:67f108897ae4
 HeroPropsSpellsPage	?OnOK@THeroPropsSpellsPage@@UAEXXZ	93.5172	93.5172	93.5172	0x55158	tokens1:0cf86e62086d
 HeroPropsSpellsPage	?setDefaultSpells@THeroPropsSpellsPage@@QAEXABV?$bitset@$0EG@@std@@@Z	100.0000	100.0000	100.0000	0x54f75	tokens1:f70b4bbbd37a
+HeroPrototypePropsArtifactsPage	??0THeroPrototypePropsArtifactsPage@@QAE@ABVTHeroPrototype@@PAV1@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x5544e	tokens1:214333353a0f
+HeroPrototypePropsArtifactsPage	??1THeroPrototypePropsArtifactsPage@@UAE@XZ	100.0000	100.0000	100.0000	0x554ef	tokens1:12c6280f8ab0
+HeroPrototypePropsArtifactsPage	??_GTHeroPrototypePropsArtifactsPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x554d3	-
+HeroPrototypePropsArtifactsPage	?GetMessageMap@THeroPrototypePropsArtifactsPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x5552d	tokens1:d6eb2c459338
+HeroPrototypePropsArtifactsPage	?OnInitDialog@THeroPrototypePropsArtifactsPage@@UAEHXZ	100.0000	100.0000	100.0000	0x55533	tokens1:134c56abfe75
+HeroPrototypePropsArtifactsPage	?OnOK@THeroPrototypePropsArtifactsPage@@UAEXXZ	99.8649	99.8649	99.8649	0x55643	tokens1:402498659454
+HeroPrototypePropsBiographyPage	??0THeroPrototypePropsBiographyPage@@QAE@ABVTHeroPrototype@@PAV1@@Z	100.0000	100.0000	100.0000	0x55891	tokens1:82a05cf4a132
+HeroPrototypePropsBiographyPage	??1THeroPrototypePropsBiographyPage@@UAE@XZ	100.0000	100.0000	100.0000	0x55932	tokens1:8c56b1242f6e
+HeroPrototypePropsBiographyPage	??_GTHeroPrototypePropsBiographyPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x55916	-
+HeroPrototypePropsBiographyPage	?DoDataExchange@THeroPrototypePropsBiographyPage@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x55970	tokens1:a641e3d14a68
+HeroPrototypePropsBiographyPage	?GetMessageMap@THeroPrototypePropsBiographyPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x55988	tokens1:f61bc4c528a1
+HeroPrototypePropsBiographyPage	?OnInitDialog@THeroPrototypePropsBiographyPage@@UAEHXZ	100.0000	100.0000	100.0000	0x5598e	tokens1:c7b9d5b1b759
+HeroPrototypePropsBiographyPage	?OnOK@THeroPrototypePropsBiographyPage@@UAEXXZ	99.9167	99.9167	99.9167	0x55a08	tokens1:5555a9cff7ef
+HeroPrototypePropsGeneralPage	??0THeroPrototypePropsGeneralPage@@QAE@PAVTParentSheet@0@HABVTHeroPrototype@@PAV2@ABV?$bitset@$07@std@@@Z	100.0000	100.0000	100.0000	0x55d2c	tokens1:c1fb2d1e38e0
+HeroPrototypePropsGeneralPage	??1THeroPrototypePropsGeneralPage@@UAE@XZ	100.0000	100.0000	100.0000	0x5603b	tokens1:ae9a854032cb
+HeroPrototypePropsGeneralPage	??_GTHeroPrototypePropsGeneralPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x5601f	-
+HeroPrototypePropsGeneralPage	?DoDataExchange@THeroPrototypePropsGeneralPage@@MAEXPAVCDataExchange@@@Z	80.4694	80.4694	80.4694	0x56321	tokens1:4458a732691e
+HeroPrototypePropsGeneralPage	?GetMessageMap@THeroPrototypePropsGeneralPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x563be	tokens1:743d953c61a8
+HeroPrototypePropsGeneralPage	?OnChangeNameEdit@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x56ae9	tokens1:e011fcff553e
+HeroPrototypePropsGeneralPage	?OnDeltaposPortraitSpin@THeroPrototypePropsGeneralPage@@IAEXPAUtagNMHDR@@PAJ@Z	100.0000	100.0000	100.0000	0x56b68	tokens1:406418c551b6
+HeroPrototypePropsGeneralPage	?OnInitDialog@THeroPrototypePropsGeneralPage@@UAEHXZ	99.7438	99.7438	99.7438	0x563c4	tokens1:73aa28852b5e
+HeroPrototypePropsGeneralPage	?OnOK@THeroPrototypePropsGeneralPage@@UAEXXZ	95.6860	95.6860	95.6860	0x56955	tokens1:2b0606efe501
+HeroPrototypePropsGeneralPage	?OnPlayer1Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b0a	tokens1:e0f5db37182e
+HeroPrototypePropsGeneralPage	?OnPlayer2Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b12	tokens1:e5aaf25c7c30
+HeroPrototypePropsGeneralPage	?OnPlayer3Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b1a	tokens1:d1d6ad606ff0
+HeroPrototypePropsGeneralPage	?OnPlayer4Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b22	tokens1:d5c4778ed0f2
+HeroPrototypePropsGeneralPage	?OnPlayer5Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b2a	tokens1:002cc75ea4ca
+HeroPrototypePropsGeneralPage	?OnPlayer6Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b32	tokens1:a6cb14481c7b
+HeroPrototypePropsGeneralPage	?OnPlayer7Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b3a	tokens1:9c2de31e0551
+HeroPrototypePropsGeneralPage	?OnPlayer8Check@THeroPrototypePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x55b42	tokens1:a9f9f61f02d7
 HeroPrototypePropsGeneralPage	?_isspace@@YA_NABVCString@@@Z	100.0000	100.0000	100.0000	0x55d02	tokens1:d25d22e246fc
+HeroPrototypePropsGeneralPage	?_onPlayerCheck@THeroPrototypePropsGeneralPage@@AAEXW4TPlayer@@@Z	100.0000	100.0000	100.0000	0x56284	tokens1:74f6c61db762
+HeroPrototypePropsGeneralPage	?_setPortrait@THeroPrototypePropsGeneralPage@@AAEXXZ	100.0000	100.0000	100.0000	0x560f9	tokens1:85038f4b65c6
+HeroPrototypePropsPriSkillsPage	??0THeroPrototypePropsPriSkillsPage@@QAE@ABVTHeroPrototype@@PAV1@@Z	100.0000	100.0000	100.0000	0x56d70	tokens1:9a39145bba2c
+HeroPrototypePropsPriSkillsPage	??1THeroPrototypePropsPriSkillsPage@@UAE@XZ	100.0000	100.0000	100.0000	0x56e08	tokens1:14e3b10451cc
+HeroPrototypePropsPriSkillsPage	??_GTHeroPrototypePropsPriSkillsPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x56dec	-
+HeroPrototypePropsPriSkillsPage	?GetMessageMap@THeroPrototypePropsPriSkillsPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x56e46	tokens1:d7180a0804c6
+HeroPrototypePropsPriSkillsPage	?OnInitDialog@THeroPrototypePropsPriSkillsPage@@UAEHXZ	100.0000	100.0000	100.0000	0x56e4c	tokens1:5d1e78dedf06
+HeroPrototypePropsPriSkillsPage	?OnOK@THeroPrototypePropsPriSkillsPage@@UAEXXZ	99.7368	99.7368	99.7368	0x56f53	tokens1:47a8fd648283
+HeroPrototypePropsSecSkillsPage	??0THeroPrototypePropsSecSkillsPage@@QAE@ABVTHeroPrototype@@PAV1@@Z	100.0000	100.0000	100.0000	0x57199	tokens1:7303cfb81bcc
+HeroPrototypePropsSecSkillsPage	??1THeroPrototypePropsSecSkillsPage@@UAE@XZ	100.0000	100.0000	100.0000	0x57231	tokens1:4000b256ae0a
+HeroPrototypePropsSecSkillsPage	??_GTHeroPrototypePropsSecSkillsPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x57215	-
+HeroPrototypePropsSecSkillsPage	?GetMessageMap@THeroPrototypePropsSecSkillsPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x57272	tokens1:bc646c9978fb
+HeroPrototypePropsSecSkillsPage	?OnInitDialog@THeroPrototypePropsSecSkillsPage@@UAEHXZ	100.0000	100.0000	100.0000	0x57278	tokens1:db9163e799e9
+HeroPrototypePropsSecSkillsPage	?OnOK@THeroPrototypePropsSecSkillsPage@@UAEXXZ	99.8611	99.8611	99.8611	0x57382	tokens1:3b88567af89a
+HeroPrototypePropsSheet	??0THeroPrototypePropsSheet@@QAE@PAVCWnd@@AAVTGameMap@@H@Z	98.6531	98.6531	98.6531	0x575cb	tokens1:c482f5c52e01
+HeroPrototypePropsSheet	??1THeroPrototypePropsSheet@@UAE@XZ	100.0000	100.0000	100.0000	0x57a4d	tokens1:8cd66fe1a3da
+HeroPrototypePropsSheet	??_GTHeroPrototypePropsSheet@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x57a31	-
+HeroPrototypePropsSheet	?DoModal@THeroPrototypePropsSheet@@UAEHXZ	100.0000	100.0000	100.0000	0x57be2	tokens1:d79a46f70337
+HeroPrototypePropsSheet	?GetMessageMap@THeroPrototypePropsSheet@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x57bdc	tokens1:28a8eb378d3c
+HeroPrototypePropsSheet	?onDisableOK@THeroPrototypePropsSheet@@UAEXXZ	83.2500	83.2500	83.2500	0x57bb8	tokens1:d501f9e5ba85
+HeroPrototypePropsSheet	?onEnableOK@THeroPrototypePropsSheet@@UAEXXZ	77.7778	77.7778	77.7778	0x57b9c	tokens1:de88d5b61481
+HeroPrototypePropsSheet	?wasModified@THeroPrototypePropsSheet@@QBE_NXZ	100.0000	100.0000	100.0000	0x57b42	tokens1:f2988beccb0c
+HeroPrototypePropsSpellsPage	??0THeroPrototypePropsSpellsPage@@QAE@ABVTHeroPrototype@@PAV1@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x57dee	tokens1:427ddfcea696
+HeroPrototypePropsSpellsPage	??1THeroPrototypePropsSpellsPage@@UAE@XZ	100.0000	100.0000	100.0000	0x57e8f	tokens1:8089ab17ae03
+HeroPrototypePropsSpellsPage	??_GTHeroPrototypePropsSpellsPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x57e73	-
+HeroPrototypePropsSpellsPage	?GetMessageMap@THeroPrototypePropsSpellsPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x57ecd	tokens1:a41fce8a3afb
+HeroPrototypePropsSpellsPage	?OnInitDialog@THeroPrototypePropsSpellsPage@@UAEHXZ	100.0000	100.0000	100.0000	0x57ed3	tokens1:9fa2a7ce0cc3
+HeroPrototypePropsSpellsPage	?OnOK@THeroPrototypePropsSpellsPage@@UAEXXZ	99.8438	99.8438	99.8438	0x57fd9	tokens1:f3fcec26f1ba
 HolyGrailPropsDlg	??0THolyGrailPropsDlg@@QAE@PAVCWnd@@PAVTHolyGrail@@@Z	100.0000	100.0000	100.0000	0x581ff	tokens1:3e689f295df5
 HolyGrailPropsDlg	??1THolyGrailPropsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x5828d	-
 HolyGrailPropsDlg	??_GTHolyGrailPropsDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x58271	-
@@ -2872,7 +2930,7 @@ MapSpecsAvailableHeroesPage	?OnCheckChangeHeroList@TMapSpecsAvailableHeroesPage@
 MapSpecsAvailableHeroesPage	?OnDblClkHeroList@TMapSpecsAvailableHeroesPage@@IAEXXZ	100.0000	100.0000	100.0000	0x70afc	tokens1:d137c47b9bcb
 MapSpecsAvailableHeroesPage	?OnInitDialog@TMapSpecsAvailableHeroesPage@@UAEHXZ	100.0000	100.0000	100.0000	0x7067e	tokens1:d7dc181aad63
 MapSpecsAvailableHeroesPage	?OnOK@TMapSpecsAvailableHeroesPage@@UAEXXZ	99.9231	99.9231	99.9231	0x70873	tokens1:9f402225ff56
-MapSpecsAvailableHeroesPage	?OnPropertiesButton@TMapSpecsAvailableHeroesPage@@IAEXXZ	99.8230	99.8230	99.8230	0x70975	tokens1:ac0b44d662b4
+MapSpecsAvailableHeroesPage	?OnPropertiesButton@TMapSpecsAvailableHeroesPage@@IAEXXZ	100.0000	100.0000	100.0000	0x70975	tokens1:ac0b44d662b4
 MapSpecsAvailableHeroesPage	?OnSelCancelHeroList@TMapSpecsAvailableHeroesPage@@IAEXXZ	100.0000	100.0000	100.0000	0x70953	tokens1:f029dc1539eb
 MapSpecsAvailableHeroesPage	?OnSelChangeHeroList@TMapSpecsAvailableHeroesPage@@IAEXXZ	100.0000	100.0000	100.0000	0x70931	tokens1:8c6e5b4d9b72
 MapSpecsGeneralPage	??0TMapSpecsGeneralPage@@QAE@ABVTGameMap@@AAV1@H@Z	100.0000	100.0000	100.0000	0x70eac	tokens1:6c1026180c2f

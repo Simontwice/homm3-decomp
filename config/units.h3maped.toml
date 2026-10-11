@@ -1121,3 +1121,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "HeroPrototypePropsSpellsPage"
 source = "src/editor/HeroPrototypePropsSpellsPage.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsSheet"
+source = "src/editor/HeroPrototypePropsSheet.cpp"
+flags = "editor_o1_ob2_gr_windows"
