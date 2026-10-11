@@ -1080,3 +1080,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "EditArtifactDlg"
 source = "src/editor/EditArtifactDlg.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "NewMapDlg"
+source = "src/editor/NewMapDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"
