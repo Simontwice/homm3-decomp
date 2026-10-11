@@ -488,3 +488,19 @@ void SText::initialize()
 }
 
 #undef LOAD_TEXT_GROUP
+
+// The group buffers' destructors, in the order initialize() first reaches them.
+VA_COMPGEN(0x00418f10, 0x16, STATIC_DTOR, pGeneralTexts)
+VA_COMPGEN(0x00418f30, 0x16, STATIC_DTOR, pCampaignPropsDlgTexts)
+VA_COMPGEN(0x00418f50, 0x16, STATIC_DTOR, pEditCrossoverScenarioOptionDlgTexts)
+VA_COMPGEN(0x00418f70, 0x16, STATIC_DTOR, pEditStartingBonusDlgTexts)
+VA_COMPGEN(0x00418f90, 0x16, STATIC_DTOR, pEditStartingHeroOptionDlgTexts)
+VA_COMPGEN(0x00418fb0, 0x16, STATIC_DTOR, pNewCampaignDlgTexts)
+VA_COMPGEN(0x00418fd0, 0x16, STATIC_DTOR, pScenarioPropsCrossoverPageTexts)
+VA_COMPGEN(0x00418ff0, 0x16, STATIC_DTOR, pScenarioPropsGeneralPageTexts)
+VA_COMPGEN(0x00419010, 0x16, STATIC_DTOR, pScenarioPropsProloguePageTexts)
+VA_COMPGEN(0x00419030, 0x16, STATIC_DTOR, pScenarioPropsStartingOptionsPageTexts)
+VA_COMPGEN(0x00419050, 0x16, STATIC_DTOR, pMainMenuTexts)
+VA_COMPGEN(0x00419070, 0x16, STATIC_DTOR, pFileMenuTexts)
+VA_COMPGEN(0x00419090, 0x16, STATIC_DTOR, pEditMenuTexts)
+VA_COMPGEN(0x004190b0, 0x16, STATIC_DTOR, pHelpMenuTexts)

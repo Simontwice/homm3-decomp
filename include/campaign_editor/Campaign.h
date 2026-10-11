@@ -232,6 +232,7 @@ public:
         virtual void visit(const TScenarioOptionsStartingHero&) {}
     };
 
+    VA(0x00405850, 0x7)
     virtual ~TScenarioStartingOptions() {}
     virtual void accept(TVisitor& visitor) const = 0;
 
