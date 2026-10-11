@@ -112,6 +112,13 @@ Subcommands
         src/include, plus Dreamcast CodeView and NH3API enumerators.
         --literals ranks bare integer literals that should be tied to one.
 
+  patterns <cc|flags|inline|loops|ctors> [--images KEYS] [--json] [--limit N]
+        Image-wide candidate lists for compiler mechanisms that closed a wall
+        once (homm3.analysis.patterns): calling-convention signatures and
+        caller cleanup, x87 /Op signatures or a flag A/B compile (--try),
+        call/expansion asymmetries in /Ob1 units, loop back-edge shapes,
+        constructor store order.
+
   evidence SELECTOR... [--only|--skip SECTION,...] [--json] [--out DIR]
         The AGENTS.md evidence pass in one process: dreamcast show / lines /
         asm --blocks / inline-clues / audit, sema diff --summary / --structure
@@ -367,6 +374,8 @@ def _dispatch(argv: list[str]) -> int:
         return run_module("homm3.census.placements", *argv[1:])
     if argv and argv[0] == "constants":
         return run_module("homm3.analysis.constants", *argv[1:])
+    if argv and argv[0] == "patterns":
+        return run_module("homm3.analysis.patterns", *argv[1:])
 
     ap = argparse.ArgumentParser(
         prog="homm3", description=__doc__,
@@ -394,6 +403,9 @@ def _dispatch(argv: list[str]) -> int:
                         "(homm3 --image KEY census --help)")
     sub.add_parser("constants", add_help=False,
                    help="value -> named constants index and literal scan (homm3 constants --help)")
+    sub.add_parser("patterns", add_help=False,
+                   help="image-wide sweeps: calling conventions, profile flags, /Ob1 "
+                        "expansion, loop shapes, constructor stores (homm3 patterns --help)")
 
     p = sub.add_parser("init", help="one-time local setup (executables, symbols, toolchain)")
     p.add_argument("--exe", metavar="PATH",
