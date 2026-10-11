@@ -2187,6 +2187,7 @@ GameMapMask	?setTileState@TGameMapMask@@QAEXII_NH@Z	100.0000	100.0000	100.0000	0
 GameObject	??0TGameObject@@QAE@ABUTObjectType@@@Z	100.0000	100.0000	100.0000	0x3d309	tokens1:7e28e795f202
 GameObject	??0TGameObject@@QAE@ABV0@@Z	100.0000	100.0000	100.0000	0x3d2f1	tokens1:b9712accad30
 GameObject	??1TGameObject@@UAE@XZ	100.0000	100.0000	100.0000	0x3d354	tokens1:cd711f6d2d5c
+GameObject	??4TGameObject@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0x3d3c1	tokens1:041d146d4c9b
 GameObject	?exportText@TGameObject@@UBEXPAV?$basic_ostream@DU?$char_traits@D@std@@@std@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x26bc	-
 GameObject	?getTypeName@TGameObject@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ	100.0000	100.0000	100.0000	0x3d37b	tokens1:2fc46ecf66e7
 GameResource	?InitializeGameResourceTypeTraitsTable@@YAXXZ	100.0000	100.0000	100.0000	0x3d43c	tokens1:9186d2104689
@@ -2387,6 +2388,8 @@ Hero	?write@TPlayableObject@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.00
 Hero	?write@TPrimarySkills@THeroPrototype@@QBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x4a51c	tokens1:96ebd301a24b
 Hero	?write@TSecondarySkills@THeroPrototype@@QBEXPAVTRawOStream@@H@Z	99.9474	99.9474	99.9474	0x4a301	tokens1:f7404e233f65
 Hero	?write@TSpells@THeroPrototype@@QBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x4a4e4	tokens1:e04f98b81e4c
+Hero	__h3cg$Hero$static_ctor$aHeroClassTraitsImp	100.0000	100.0000	100.0000	0x4a0db	-
+Hero	__h3cg$Hero$static_ctor$aHeroTraitsImp	99.2857	99.2857	99.2857	0x4a077	-
 HeroPlaceholderPropsDlg	??0?$set@HU?$less@H@std@@V?$allocator@H@2@@std@@QAE@ABU?$less@H@1@ABV?$allocator@H@1@@Z	100.0000	100.0000	100.0000	0x4e20e	-
 HeroPlaceholderPropsDlg	??0THeroPlaceholderPropsDlg@@QAE@PAVCWnd@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x4d2dc	tokens1:3422adf7b7e3
 HeroPlaceholderPropsDlg	??1THeroPlaceholderPropsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x4d523	-
@@ -4380,9 +4383,9 @@ RandomGeneratorPropsDlg	??4?$auto_ptr@U_TDialogs@TRandomGeneratorPropsDlg@@@std@
 RandomGeneratorPropsDlg	??4?$auto_ptr@U_TDialogs@TRandomlyAlignedGeneratorPropsDlg@@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0xb212e	-
 RandomGeneratorPropsDlg	??4?$auto_ptr@U_TDialogs@TRandomlyLeveledGeneratorPropsDlg@@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0xb21e1	-
 RandomGeneratorPropsDlg	??4?$auto_ptr@VTRandomlyLeveledGenerator@@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0xb2196	-
-RandomGeneratorPropsDlg	??4TAbstractRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	99.8077	99.8077	99.8077	0xb1f4c	-
-RandomGeneratorPropsDlg	??4TFlaggableObject@@QAEAAV0@ABV0@@Z	99.7917	99.7917	99.7917	0xb1f13	-
-RandomGeneratorPropsDlg	??4TRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	99.8611	99.8611	99.8611	0xb1ebb	-
+RandomGeneratorPropsDlg	??4TAbstractRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0xb1f4c	-
+RandomGeneratorPropsDlg	??4TFlaggableObject@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0xb1f13	-
+RandomGeneratorPropsDlg	??4TRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0xb1ebb	-
 RandomGeneratorPropsDlg	??RTTownDistanceLess@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@QBE_NABVTMapObjectRef@@0@Z	72.5865	72.5865	72.5865	0xb0483	tokens1:f37a39754ac8
 RandomGeneratorPropsDlg	??_GTRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb07c9	-
 RandomGeneratorPropsDlg	??_GTRandomGeneratorLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xaff69	-
