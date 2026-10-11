@@ -3769,7 +3769,7 @@ void t_abstract_random_generator::decorateMapCell(TRmgMapPosition position, int 
 {
     std::vector<TRmgMapPosition> pending;
     pending.push_back(position);
-    while (pending.size()) {
+    while (pending.size() > 0) {
         position = pending.back();
         pending.pop_back();
         if (m_progress)
@@ -6064,7 +6064,7 @@ void type_random_map_generator::floodWaterZoneDistances(TRmgMapPosition position
     seed->m_movement.m_zonePathCost = 0;
     seed->m_tileData.m_connectionDirection = 0;
     seed->m_zoneState.m_connectionZone = 0;
-    while (positions.size()) {
+    while (positions.size() > 0) {
         position = positions.back();
         costs.pop_back();
         positions.pop_back();
@@ -6969,7 +6969,7 @@ void type_random_map_generator::floodConnectionRegion(TRmgMapPosition position)
     std::vector<TRmgMapPosition> openPositions;
     openPositions.push_back(position);
     m_map.getMapItem(position)->setConnectionVisited();
-    while (openPositions.size()) {
+    while (openPositions.size() > 0) {
         position = openPositions.back();
         openPositions.pop_back();
         for (int direction = 0; direction < 8; direction += 2) {
@@ -8043,8 +8043,8 @@ void type_random_map_generator::carveBranchingPaths()
         std::queue<TRmgPoint, std::list<TRmgPoint> > branches;
         pending.push_back(first);
         pending.push_back(last);
-        while (pending.size()) {
-            while (pending.size()) {
+        while (pending.size() > 0) {
+            while (pending.size() > 0) {
                 last = pending.back();
                 pending.pop_back();
                 first = pending.back();
@@ -9525,7 +9525,7 @@ void type_random_map_generator::buildRoadCostMap(TRmgMapPosition position)
     // the same by-value setter used by the relaxation arms (89.7416 -> 90.91971%).
     mapItem->setMovementCost(0, TRmgMapPosition(-1, -1, -1));
 
-    while (openPositions.size()) {
+    while (openPositions.size() > 0) {
         position = openPositions.back();
         openCosts.pop_back();
         openPositions.pop_back();
@@ -10966,7 +10966,7 @@ void type_random_map_generator::calculateQuestZoneDistances(TRmgZone* origin)
         m_zones[index]->m_questPlacementScore = 20000;
     origin->m_questPlacementScore = 0;
     pending.push_back(origin);
-    while (pending.size()) {
+    while (pending.size() > 0) {
         TRmgZone* current = pending.back();
         pending.pop_back();
         TRmgTemplateZone* slot = current->m_templateZone;
