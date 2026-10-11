@@ -4456,7 +4456,7 @@ towngatewindow	?updateTownLocator@TTownGateWindow@@AAEXH@Z	100.0000	100.0000	100
 towngatewindow	?windowHandler@TTownGateWindow@@UAEHAAVmessage@@@Z	100.0000	100.0000	100.0000	0x1c2840	tokens1:719caf7e66c6
 townmgr	??0TBlacksmithWindow@@QAE@HH@Z	100.0000	100.0000	100.0000	0x1d1360	tokens1:974ff58c8743
 townmgr	??0TBuyBuildWindow@@QAE@HHH@Z	100.0000	100.0000	100.0000	0x1d55c0	tokens1:8935a4fa1df6
-townmgr	??0TCastleWindow@@QAE@XZ	99.6416	99.6416	100.0000	0x1d86f0	tokens1:d497d13dbf45
+townmgr	??0TCastleWindow@@QAE@XZ	99.9657	99.9657	100.0000	0x1d86f0	tokens1:a496509a4081
 townmgr	??0TGarrisonWindow@@QAE@PAVhero@@HAAVarmyGroup@@@Z	100.0000	100.0000	100.0000	0x1d0e00	tokens1:292f6e2d9700
 townmgr	??0THallWindow@@QAE@H@Z	100.0000	100.0000	100.0000	0x1c9be0	tokens1:b7cbd977c61d
 townmgr	??0TMageGuildWindow@@QAE@XZ	100.0000	100.0000	100.0000	0x1cc980	tokens1:a323d216bc58

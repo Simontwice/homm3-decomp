@@ -7077,13 +7077,14 @@ void townManager::moveHero(town* fromTown, town* toTown)
 // final widget traversal does not recover that boundary. Keep push_back.
 // DC 8622..8628, Mac retail and Windows retail all register the widgets in
 // place (retail calls vector begin/end, addWidget and memError here), not
-// through heroWindow::addWidgetsToMessageStream. Restoring the in-place
-// loop expands begin/end where retail keeps calls (95.52%); the budget left
-// at this tail is the open question, so the helper call stays for now.
-// 2026-10-09 replay of the in-place loop: the size cap (35000) is reached
-// two insert-nested begin calls (sites 481/483) too early. A root cb of
-// 15961..16019 instead of 16062 expands exactly those two, as retail does;
-// loop spelling (iterator type, post-increment, unbraced body) is cb-flat.
+// through heroWindow::addWidgetsToMessageStream. Dreamcast's scopes record
+// every single-statement m_use8 else arm unbraced (one scope where a braced
+// arm has two) and no separate summoned-type statement before the strcpy
+// (8311..8314); restoring both lowers the root cb from 16062 to 16017, and
+// the in-place loop then keeps retail's calls (99.6416 -> 99.9657).
+// Residual: one insert-nested begin (trace site 481) still expands; the
+// replayed window is 15917..16003. Loop spelling (iterator type,
+// post-increment, unbraced body) is cb-flat.
 VA(0x005d86f0, 0x445A)
 DC_ADDRESS(0x17b48c, 0x3c68)
 MAC_ADDRESS(0x1d6668, 0xa4e0)
@@ -7138,10 +7139,9 @@ TCastleWindow::TCastleWindow()
                                        0x800));
         m_widgets.push_back(new bitmapBorder(665, 424, 23, 121, -1, "TPCaInfo.pcx",
                                        0x800));
-    } else {
+    } else
         m_widgets.push_back(new bitmapBorder(467, 424, 23, 121, -1, "TPCaInfo.pcx",
                                        0x800));
-    }
 
     int whichTown = g_townManager->m_townToView->m_type;
     strcpy(g_text, g_townCastleDefNames[whichTown + 1]);
@@ -7154,13 +7154,12 @@ TCastleWindow::TCastleWindow()
     m_widgets.push_back(new bitmapBorder(563, 292, 100, 120, -1, g_text, 0x800));
     if (m_use8) {
         m_widgets.push_back(new bitmapBorder(169, 425, 100, 120, -1, g_text, 0x800));
-        int summoned = g_townManager->m_townToView->m_summoningType;
         strcpy(g_text, g_townCastleDefNames[
-                   g_game->getAlignment(summoned) + 1]);
+                   g_game->getAlignment(
+                       g_townManager->m_townToView->m_summoningType) + 1]);
         m_widgets.push_back(new bitmapBorder(563, 425, 100, 120, -1, g_text, 0x800));
-    } else {
+    } else
         m_widgets.push_back(new bitmapBorder(365, 425, 100, 120, -1, g_text, 0x800));
-    }
 
     m_widgets.push_back(new textWidget(14, 115, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x9, 1, 0, 8));
@@ -7179,10 +7178,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0xf, 1, 0, 8));
         m_widgets.push_back(new textWidget(408, 514, 150, 20, getBuildingName(TOWN_DUNGEON, EXTRA_1_ID), "smalfont.fnt",
                                      font::PRIMARY, 0x10, 1, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(210, 514, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0xf, 1, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(14, 133, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x21, 1, 0, 8));
@@ -7201,10 +7199,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x27, 1, 0, 8));
         m_widgets.push_back(new textWidget(408, 532, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x28, 1, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(210, 532, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x27, 1, 0, 8));
-    }
 
     strcpy(g_text, g_townBuildingSpriteNames[whichTown]);
 
@@ -7225,10 +7222,9 @@ TCastleWindow::TCastleWindow()
                                      0x10));
         m_widgets.push_back(new iconWidget(408, 442, 150, 70, 8, g_text, EXTRA_1_ID, 0, 0, 0,
                                      0x10));
-    } else {
+    } else
         m_widgets.push_back(new iconWidget(210, 442, 150, 70, 7, g_text, 0, 0, 0, 0,
                                      0x10));
-    }
 
     m_spriteWidget[0] = new iconWidget(169, 26, 99, 119, -1,
                                      akCreatureTypeTraits[g_dwellingType[whichTown][g_townManager->m_currentDwellingIdOff[0]]].m_sprite_name,
@@ -7257,11 +7253,10 @@ TCastleWindow::TCastleWindow()
                      g_townManager->m_townToView->m_summoningType].m_sprite_name,
                                      0, 2, 0, 0, 0x12);
         m_widgets.push_back(m_spriteWidget[7]);
-    } else {
+    } else
         m_spriteWidget[6] = new iconWidget(365, 425, 99, 119, -1,
                                      akCreatureTypeTraits[g_dwellingType[whichTown][g_townManager->m_currentDwellingIdOff[6]]].m_sprite_name,
                                      0, 2, 0, 0, 0x12);
-    }
 
     for (int i = 0; i < TOWN_DWELLING_COUNT; ++i)
         m_widgets.push_back(m_spriteWidget[i]);
@@ -7283,10 +7278,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x1f, 1, 0, 8));
         m_widgets.push_back(new textWidget(408, 423, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x20, 1, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(210, 423, 150, 20, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x1f, 1, 0, 8));
-    }
 
     m_widgets.push_back(new border(10, 22, 386, 126, 0x11, 1));
     m_widgets.push_back(new border(404, 22, 386, 126, 0x12, 1));
@@ -7297,9 +7291,8 @@ TCastleWindow::TCastleWindow()
     if (m_use8) {
         m_widgets.push_back(new border(10, 421, 386, 126, 0x17, 1));
         m_widgets.push_back(new border(404, 421, 386, 126, 0x18, 1));
-    } else {
+    } else
         m_widgets.push_back(new border(206, 421, 386, 126, 0x17, 1));
-    }
 
     m_widgets.push_back(new textWidget(300, 26, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x29, 2, 0, 8));
@@ -7318,10 +7311,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x2f, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 425, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x30, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 425, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x2f, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 46, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x31, 2, 0, 8));
@@ -7340,10 +7332,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x37, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 445, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x38, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 445, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x37, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 67, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x69, 2, 0, 8));
@@ -7362,10 +7353,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x6f, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 466, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x70, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 466, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x6f, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 87, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x71, 2, 0, 8));
@@ -7384,10 +7374,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x77, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 486, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x78, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 486, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x77, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 108, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x79, 2, 0, 8));
@@ -7406,10 +7395,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x7f, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 507, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x80, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 507, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x7f, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 128, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x81, 2, 0, 8));
@@ -7428,10 +7416,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x87, 2, 0, 8));
         m_widgets.push_back(new textWidget(694, 527, 91, 30, "0", "smalfont.fnt",
                                      font::PRIMARY, 0x88, 2, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 527, 91, 30, 0, "smalfont.fnt",
                                      font::PRIMARY, 0x87, 2, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 26, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_ATTACK_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x39, 0, 0, 8));
@@ -7450,10 +7437,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x3f, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 425, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_ATTACK_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x40, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 425, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_ATTACK_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x3f, 0, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 46, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_DEFENSE_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x41, 0, 0, 8));
@@ -7472,10 +7458,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x47, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 445, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_DEFENSE_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x48, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 445, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_DEFENSE_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x47, 0, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 67, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_DAMAGE), "smalfont.fnt",
                                      font::PRIMARY, 0x49, 0, 0, 8));
@@ -7494,10 +7479,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x4f, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 466, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_DAMAGE), "smalfont.fnt",
                                      font::PRIMARY, 0x50, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 466, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_DAMAGE), "smalfont.fnt",
                                      font::PRIMARY, 0x4f, 0, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 87, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_HEALTH), "smalfont.fnt",
                                      font::PRIMARY, 0x51, 0, 0, 8));
@@ -7516,10 +7500,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x57, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 486, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_HEALTH), "smalfont.fnt",
                                      font::PRIMARY, 0x58, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 486, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_HEALTH), "smalfont.fnt",
                                      font::PRIMARY, 0x57, 0, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 108, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_SPEED), "smalfont.fnt",
                                      font::PRIMARY, 0x59, 0, 0, 8));
@@ -7538,10 +7521,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x5f, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 507, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_SPEED), "smalfont.fnt",
                                      font::PRIMARY, 0x60, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 507, 91, 30, g_generalText->GetText(GENERAL_TEXT_VIEW_ARMY_SPEED), "smalfont.fnt",
                                      font::PRIMARY, 0x5f, 0, 0, 8));
-    }
 
     m_widgets.push_back(new textWidget(300, 128, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_GROWTH_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x61, 0, 0, 8));
@@ -7560,10 +7542,9 @@ TCastleWindow::TCastleWindow()
                                      font::PRIMARY, 0x67, 0, 0, 8));
         m_widgets.push_back(new textWidget(694, 527, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_GROWTH_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x68, 0, 0, 8));
-    } else {
+    } else
         m_widgets.push_back(new textWidget(496, 527, 91, 30, g_generalText->GetText(GENERAL_TEXT_TOWN_GROWTH_LABEL), "smalfont.fnt",
                                      font::PRIMARY, 0x67, 0, 0, 8));
-    }
 
     m_widgets.push_back(new bitmapBorder(3, 555, 741, 18, 0x89, "TStatBar.pcx", 0x800));
     m_widgets.push_back(new textWidget(3, 555, 741, 18, 0, "smalfont.fnt",
@@ -7574,7 +7555,12 @@ TCastleWindow::TCastleWindow()
     exitButton->setHotkey(1);
     m_widgets.push_back(exitButton);
 
-    heroWindow::addWidgetsToMessageStream();
+    for (widget** it = m_widgets.begin(); it != m_widgets.end(); ++it) {
+        if (*it)
+            addWidget(*it, -1);
+        else
+            memError();
+    }
 }
 
 VA_COMPGEN(0x005dcb50, 0x21, SCALAR_DELETING_DTOR, TCastleWindow)
