@@ -970,24 +970,46 @@ def _paired_references(base: canon.CoffObject, target: canon.CoffObject
                        ) -> list[tuple[canon.Relocation, canon.Relocation]]:
     """(candidate, retail) reference pairs of the functions both sides define.
 
-    `homm3 sema diff`'s reference pairing: each function's references align
-    as a sequence of (type, name) keys, a name the other side never spells
-    being a wildcard, and a replaced run pairs position by position. A
-    retail-only call earlier in the body therefore shifts no later site.
-    Only references of one relocation type pair."""
+    A site at the same function offset on both sides pairs first, whatever
+    it names (moveViewRect's two rulers' folded setStartTile; a recursive
+    call retail spells as an unlabelled indirect site would shift an order
+    alignment by one). The rest pair as `homm3 sema diff` pairs references: each function's unpaired
+    references align as a sequence of (type, name) keys, a name the other
+    side never spells being a wildcard, and a replaced run pairs position
+    by position, so a retail-only call earlier in the body shifts no later
+    site. Only references of one relocation type pair."""
     import difflib
 
     def names(coff, relocations):
         return [(row.typ, coff.symbols[row.symbol_index].name) for row in relocations]
 
     target_rows = _function_references(target)
+    base_ranges = canon._function_ranges(base)
+    target_ranges = canon._function_ranges(target)
     pairs = []
     for function, base_refs in _function_references(base).items():
         target_refs = target_rows.get(function)
         if not target_refs:
             continue
-        base_keys = names(base, base_refs)
-        target_keys = names(target, target_refs)
+        base_start = canon._function_owner(base_ranges, base_refs[0].section,
+                                           base_refs[0].site).value
+        target_start = canon._function_owner(target_ranges, target_refs[0].section,
+                                             target_refs[0].site).value
+        by_offset = {row.site - target_start: row for row in target_refs}
+        taken = set()
+        rest = []
+        for row in base_refs:
+            other = by_offset.get(row.site - base_start)
+            if other is not None and other.typ == row.typ:
+                pairs.append((row, other))
+                taken.add(id(other))
+            else:
+                rest.append(row)
+        others = [row for row in target_refs if id(row) not in taken]
+        if not rest or not others:
+            continue
+        base_keys = names(base, rest)
+        target_keys = names(target, others)
         base_set, target_set = set(base_keys), set(target_keys)
         matcher = difflib.SequenceMatcher(
             a=[key if key in target_set else (key[0], None) for key in base_keys],
@@ -996,8 +1018,8 @@ def _paired_references(base: canon.CoffObject, target: canon.CoffObject
         for tag, i1, i2, j1, j2 in matcher.get_opcodes():
             if tag in ("equal", "replace"):
                 for bi, ti in zip(range(i1, i2), range(j1, j2)):
-                    if base_refs[bi].typ == target_refs[ti].typ:
-                        pairs.append((base_refs[bi], target_refs[ti]))
+                    if rest[bi].typ == others[ti].typ:
+                        pairs.append((rest[bi], others[ti]))
     return pairs
 
 
@@ -1026,8 +1048,9 @@ def _canonicalize_icf_aliases(
     when its mates name exactly that one retail function. Each
     candidate twin paired with a label is judged alone, so a differing
     overload at one site leaves the verified twins' sites canonical. Sites
-    pair by each function's reference order (`_paired_references`), so an
-    unrelated length difference earlier in the body does not hide them. When
+    pair at equal offsets, the others by each function's reference order
+    (`_paired_references`), so an unrelated length difference earlier in the
+    body does not hide them. When
     the label's only twin verifies, its undefined target reference is
     renamed to the twin; otherwise the verified twins' candidate
     relocations point at the surviving label, appended to the candidate

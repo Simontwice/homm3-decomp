@@ -106,12 +106,26 @@ class IcfAliasRewriteTest(unittest.TestCase):
         base = canon.CoffObject(coff(CALL * 3, [("?f", 0)],
                                      [(1, "?a"), (7, "?twin"), (13, "?c")],
                                      ["?a", "?twin", "?c"]))
-        target = canon.CoffObject(coff(CALL * 4, [("?f", 0)],
-                                       [(1, "?a"), (7, "?extra"), (13, "?label"),
-                                        (19, "?c")], ["?a", "?extra", "?label", "?c"]))
+        # one byte of retail code after the first call shifts every later site
+        target = canon.CoffObject(coff(CALL + b"\x90" + CALL * 3, [("?f", 0)],
+                                       [(1, "?a"), (8, "?extra"), (14, "?label"),
+                                        (20, "?c")], ["?a", "?extra", "?label", "?c"]))
         pairs = [(base.symbols[b.symbol_index].name, target.symbols[t.symbol_index].name)
                  for b, t in _paired_references(base, target)]
-        self.assertEqual(pairs, [("?a", "?a"), ("?twin", "?extra"), ("?c", "?c")])
+        self.assertEqual(sorted(pairs), [("?a", "?a"), ("?c", "?c"), ("?twin", "?label")])
+
+    def test_sites_at_equal_offsets_pair_before_the_order(self):
+        # h3maped moveViewRect: retail labels both rulers' folded setStartTile
+        # by one name; order alone would pair the candidate's second call
+        # with the first label and leave the first unpaired.
+        base = canon.CoffObject(coff(CALL * 2, [("?f", 0)],
+                                     [(1, "?horizontal"), (7, "?vertical")],
+                                     ["?horizontal", "?vertical"]))
+        target = canon.CoffObject(coff(CALL * 2, [("?f", 0)],
+                                       [(1, "?vertical"), (7, "?vertical")], ["?vertical"]))
+        pairs = [(base.symbols[b.symbol_index].name, target.symbols[t.symbol_index].name)
+                 for b, t in _paired_references(base, target)]
+        self.assertEqual(sorted(pairs), [("?horizontal", "?vertical"), ("?vertical", "?vertical")])
 
     def test_a_twin_with_different_code_stays_visible(self):
         base = coff(CALL, [("??_GA", 0)], [(1, "??1TwinA")], ["??1TwinA"])
