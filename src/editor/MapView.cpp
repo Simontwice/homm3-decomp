@@ -1368,40 +1368,45 @@ void TMapView::_paintBorderedObstacleArea(const CRect& rect)
     const TGameMap* pMap = getPDocument()->getPMap();
     int width = pMap->getWidth();
     int height = pMap->getHeight();
-    int x;
-    int y;
+    CPoint point;
+    int xEnd;
     if (rect.top >= 1) {
-        for (int x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), y = rect.top - 1; x < xEnd; ++x) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileNone)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        for (point.x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), point.y = rect.top - 1;
+             point.x < xEnd; ++point.x) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileNone)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.bottom < height) {
-        for (int x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), y = rect.bottom; x < xEnd; ++x) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileNone)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.y = rect.bottom;
+        for (point.x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width); point.x < xEnd; ++point.x) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileNone)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.left >= 1) {
-        x = rect.left - 1;
-        for (y = rect.top; y < rect.bottom; ++y) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileNone)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.x = rect.left - 1;
+        for (point.y = rect.top; point.y < rect.bottom; ++point.y) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileNone)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.right < width) {
-        x = rect.right;
-        for (y = rect.top; y < rect.bottom; ++y) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileNone)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.x = rect.right;
+        for (point.y = rect.top; point.y < rect.bottom; ++point.y) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileNone)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
-    for (y = rect.top; y < rect.bottom; ++y)
-        for (x = rect.left; x < rect.right; ++x)
-            _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileObstacle);
+    for (point.y = rect.top; point.y < rect.bottom; ++point.y)
+        for (point.x = rect.left; point.x < rect.right; ++point.x)
+            _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileObstacle);
     if (_m_pMapFrameWnd != NULL) {
-        CRect updateRect(max(0, rect.left - 2), max(0, rect.top - 2), min(width, rect.right + 2),
-                         min(height, rect.bottom + 2));
+        CRect updateRect;
+        updateRect.left = max(0, rect.left - 2);
+        updateRect.right = min(width, rect.right + 2);
+        updateRect.top = max(0, rect.top - 2);
+        updateRect.bottom = min(height, rect.bottom + 2);
         _m_pMapFrameWnd->update(updateRect);
         _m_pMiniMapWnd->update(updateRect);
     }
@@ -1410,11 +1415,10 @@ void TMapView::_paintBorderedObstacleArea(const CRect& rect)
 VA(0x00482923, 0x5f)
 void TMapView::_eraseObstacleArea(const CRect& rect)
 {
-    int x;
-    int y;
-    for (y = rect.top; y < rect.bottom; ++y)
-        for (x = rect.left; x < rect.right; ++x)
-            _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileNone);
+    CPoint point;
+    for (point.y = rect.top; point.y < rect.bottom; ++point.y)
+        for (point.x = rect.left; point.x < rect.right; ++point.x)
+            _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileNone);
     if (_m_pMapFrameWnd != NULL) {
         _m_pMapFrameWnd->update(rect);
         _m_pMiniMapWnd->update(rect);
@@ -1427,40 +1431,45 @@ void TMapView::_eraseBorderedObstacleArea(const CRect& rect)
     const TGameMap* pMap = getPDocument()->getPMap();
     int width = pMap->getWidth();
     int height = pMap->getHeight();
-    int x;
-    int y;
+    CPoint point;
+    int xEnd;
     if (rect.top >= 1) {
-        for (int x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), y = rect.top - 1; x < xEnd; ++x) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        for (point.x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), point.y = rect.top - 1;
+             point.x < xEnd; ++point.x) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.bottom < height) {
-        for (int x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width), y = rect.bottom; x < xEnd; ++x) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.y = rect.bottom;
+        for (point.x = max(rect.left - 1, 0), xEnd = min(rect.right + 1, width); point.x < xEnd; ++point.x) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.left >= 1) {
-        x = rect.left - 1;
-        for (y = rect.top; y < rect.bottom; ++y) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.x = rect.left - 1;
+        for (point.y = rect.top; point.y < rect.bottom; ++point.y) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
     if (rect.right < width) {
-        x = rect.right;
-        for (y = rect.top; y < rect.bottom; ++y) {
-            if (_m_pObstacleMask->getTileState(x, y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
-                _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileClear);
+        point.x = rect.right;
+        for (point.y = rect.top; point.y < rect.bottom; ++point.y) {
+            if (_m_pObstacleMask->getTileState(point.x, point.y, _m_bViewUnderground) == TGameMapMask::eTileObstacle)
+                _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileClear);
         }
     }
-    for (y = rect.top; y < rect.bottom; ++y)
-        for (x = rect.left; x < rect.right; ++x)
-            _m_pObstacleMask->setTileState(x, y, _m_bViewUnderground, TGameMapMask::eTileNone);
+    for (point.y = rect.top; point.y < rect.bottom; ++point.y)
+        for (point.x = rect.left; point.x < rect.right; ++point.x)
+            _m_pObstacleMask->setTileState(point.x, point.y, _m_bViewUnderground, TGameMapMask::eTileNone);
     if (_m_pMapFrameWnd != NULL) {
-        CRect updateRect(max(0, rect.left - 2), max(0, rect.top - 2), min(width, rect.right + 2),
-                         min(height, rect.bottom + 2));
+        CRect updateRect;
+        updateRect.left = max(0, rect.left - 2);
+        updateRect.right = min(width, rect.right + 2);
+        updateRect.top = max(0, rect.top - 2);
+        updateRect.bottom = min(height, rect.bottom + 2);
         _m_pMapFrameWnd->update(updateRect);
         _m_pMiniMapWnd->update(updateRect);
     }
