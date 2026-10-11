@@ -784,6 +784,14 @@ enum {
     IDC_EQUIP_WHERE_STATIC = 1668
 };
 
+// The artifacts list of the hero and hero prototype artifacts pages
+// (ArtifactsDlg.cpp).
+enum {
+    IDD_ARTIFACTS = 360,
+    IDC_ARTIFACTS_LIST = 1188,
+    IDC_HAS_SPELLBOOK_CHECK = 1204
+};
+
 // The reward editor and its pages (EditRewardDlg.cpp): a radio per reward
 // kind and the kinds' pages over the frame. The creature and resource
 // pages share the quest pages' type and quantity statics.

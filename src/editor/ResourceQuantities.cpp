@@ -10,7 +10,8 @@
 #include "editor/RawStream.h"
 #include "editor/ResourceQuantities.h"
 
-VA(0x0044a367, 0xe)
+// Folded by /OPT:ICF onto THeroPrototype::TArtifactContainer::setSlot
+// (Hero.cpp, 0x44a367).
 void TResourceQuantities::set(TGameResourceType resourceType, int newQuantity)
 {
     assert(resourceType >= 0 && resourceType < kNumGameResourceTypes);

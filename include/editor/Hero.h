@@ -69,8 +69,9 @@ public:
         void write(TRawOStream* pOStream, int version) const;
 
         TArtifact getSlot(TArtifactSlot slot) const { return _m_aSlot[slot]; }
-        void setSlot(TArtifactSlot slot, TArtifact artifact) { _m_aSlot[slot] = artifact; }
+        void setSlot(TArtifactSlot slot, TArtifact artifact);
         const std::multiset<TArtifact>& getBackpack() const { return _m_backpack; }
+        std::multiset<TArtifact>& getBackpack() { return _m_backpack; }
 
         friend bool operator==(const TArtifactContainer& lhs, const TArtifactContainer& rhs)
         {

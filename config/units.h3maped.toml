@@ -1085,3 +1085,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "NewMapDlg"
 source = "src/editor/NewMapDlg.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "ArtifactsDlg"
+source = "src/editor/ArtifactsDlg.cpp"
+flags = "editor_o1_ob2_gr_windows"

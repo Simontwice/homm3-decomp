@@ -83,6 +83,12 @@ void THeroPrototype::TSecondarySkills::write(TRawOStream* pOStream, int version)
     }
 }
 
+VA(0x0044a367, 0xe)
+void THeroPrototype::TArtifactContainer::setSlot(TArtifactSlot slot, TArtifact artifact)
+{
+    _m_aSlot[slot] = artifact;
+}
+
 VA(0x0044a375, 0xb1)
 void THeroPrototype::TArtifactContainer::read(TRawIStream* pIStream, int version)
 {
