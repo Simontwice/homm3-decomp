@@ -287,7 +287,7 @@ def rebase_in_progress() -> bool:
 
 
 def rebase(log: Log, base: str) -> None:
-    log(f"rebasing onto {base}")
+    log(f"rebasing onto {base[:10]}")
     out = subprocess.run(["git", "rebase", base], cwd=ROOT, capture_output=True, text=True)
     log.raw(out.stdout + out.stderr)
     while out.returncode:
@@ -307,7 +307,7 @@ def rebase(log: Log, base: str) -> None:
             subprocess.run(["git", "rebase", "--abort"], cwd=ROOT, capture_output=True)
             raise GateFailed("rebase", "conflicts in " + (", ".join(unresolved) or
                              "the rebase (see the log)") + "; the rebase was aborted. "
-                             f"Rebase onto {base} by hand, then run `homm3 land` again")
+                             f"Rebase onto {REMOTE}/{BRANCH} by hand, then run `homm3 land` again")
         env = dict(os.environ, GIT_EDITOR="true")
         staged = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT).returncode
         step = ["rebase", "--continue"] if staged else ["rebase", "--skip"]
@@ -354,14 +354,17 @@ def cycle(log: Log, turn, args, timings: list, untracked) -> int:
         turn.phase(name)
         log(f"== {name}")
 
-    base = f"{REMOTE}/{args.branch}"
     phase("fetch")
     run(log, "git", "fetch", REMOTE, args.branch, check="fetch")
+    # Pin the fetched commit: refs/remotes is shared by every worktree, and
+    # another lane's fetch moves origin/<branch> while this turn runs.
+    base = git("rev-parse", "FETCH_HEAD^{commit}").strip()
+    log(f"{REMOTE}/{args.branch} is {base[:10]}")
     phase("rebase")
     rebase(log, base)
     ahead = git("rev-list", "--reverse", f"{base}..HEAD").split()
     if not ahead:
-        log(f"nothing to land: HEAD is {base}")
+        log(f"nothing to land: HEAD is {REMOTE}/{args.branch} {base[:10]}")
         turn.record["result"] = "nothing to land"
         return 0
     log(f"{len(ahead)} commit(s) to land:")
@@ -402,7 +405,7 @@ def cycle(log: Log, turn, args, timings: list, untracked) -> int:
     phase("commit")
     refresh_commit(log, untracked)
     if subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=ROOT).returncode:
-        raise GateFailed("fast-forward check", f"HEAD does not contain {base}")
+        raise GateFailed("fast-forward check", f"HEAD does not contain {base[:10]}")
     if args.dry_run:
         phase("dry run: push skipped")
         log(f"dry run: would push {git('rev-parse', '--short', 'HEAD').strip()} "

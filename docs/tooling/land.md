@@ -23,7 +23,9 @@ editor image staged (the same check a full build makes). Then `homm3 land` takes
 lock. While holding both it:
 
 1. fetches `origin decomp-complete-4.0` and rebases the current branch onto
-   it. Conflicts in generated files are resolved as lanes resolve them by
+   the fetched commit (`FETCH_HEAD`, pinned: `refs/remotes` is shared by all
+   worktrees, so another lane's fetch moves `origin/decomp-complete-4.0`
+   during the turn). Conflicts in generated files are resolved as lanes resolve them by
    hand: score ledgers three ways with `homm3 [--image KEY] status
    merge-baseline`, README score blocks, `config/retail/*/placements.tsv` and
    `build.ninja` from origin (the cycle regenerates them). A README conflict
@@ -49,7 +51,7 @@ lock. While holding both it:
    ledgers, placements tables, the Mac ledger and profiles, cleanliness
    floors) as `Refresh scores [and placements] after the rebase`. Any other
    changed file fails gate `refresh commit`;
-6. checks that HEAD contains `origin/decomp-complete-4.0` and pushes
+6. checks that HEAD contains the fetched origin commit and pushes
    `git push origin HEAD:decomp-complete-4.0`, a plain fast-forward. A
    rejected push means someone pushed without `homm3 land`; run it again.
 
