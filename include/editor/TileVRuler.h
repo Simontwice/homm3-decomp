@@ -15,6 +15,7 @@
 class TTileVRuler : public CWnd {
 public:
     TTileVRuler(CWnd* pParent, unsigned int range, TZoom zoom);
+    ~TTileVRuler();
 
     void move(const CPoint& pos, unsigned int height);
     void setStartTile(unsigned int startTile);

@@ -14,6 +14,7 @@
 class TTileHRuler : public CWnd {
 public:
     TTileHRuler(CWnd* pParent, unsigned int range, TZoom zoom);
+    ~TTileHRuler();
 
     void move(const CPoint& pos, unsigned int width);
     void setStartTile(unsigned int startTile);

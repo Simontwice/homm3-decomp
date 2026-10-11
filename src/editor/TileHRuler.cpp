@@ -38,7 +38,10 @@ TTileHRuler::TTileHRuler(CWnd* pParent, unsigned int range, TZoom zoom)
 }
 
 VA_COMPGEN(0x004beb39, 0x1c, SCALAR_DELETING_DTOR, TTileHRuler)
-VA_COMPGEN(0x004beb55, 0x69, IMPLICIT_DTOR, TTileHRuler)
+VA(0x004beb55, 0x69)
+TTileHRuler::~TTileHRuler()
+{
+}
 
 VA(0x004bebbe, 0x1a)
 void TTileHRuler::move(const CPoint& pos, unsigned int width)
@@ -109,7 +112,7 @@ unsigned int TTileHRuler::_computeHighlightWidth(CDC* pDC)
     TGDIObjectSelector<CFont> fontSelector(pDC, &_m_font);
     unsigned int textWidth = pDC->GetTextExtent(_m_highlightText).cx + 4;
     unsigned int tileWidth = akZoomTraits[_m_zoom].m_tileSize;
-    return tileWidth < textWidth ? textWidth : tileWidth;
+    return max(textWidth, tileWidth);
 }
 
 VA(0x004beda9, 0x6)
