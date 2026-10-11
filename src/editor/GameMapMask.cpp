@@ -52,16 +52,16 @@ void TGameMapMask::setTileState(unsigned int x, unsigned int y, bool bSecondLaye
 VA(0x0043c364, 0x10c)
 void TGameMapMask::clear()
 {
-    _TImpl& impl = *_m_pImpl;
-    const std::vector<TRefCountingPtr<_TLayer> >& layers = impl.m_layers;
-    unsigned int numBlocks = layers[0]->m_blocks.size();
-    if (layers[0]->m_numTiles > 0) {
+    _TImpl& impl = *_m_pImpl.get();
+    const _TImpl& constImpl = impl;
+    unsigned int numBlocks = constImpl.m_layers[0]->m_blocks.size();
+    if (constImpl.m_layers[0]->m_numTiles > 0) {
         _TLayer& layer = *impl.m_layers[0];
         layer.m_numTiles = 0;
         layer.m_blocks.clear();
         layer.m_blocks.resize(numBlocks, TRefCountingPtr<_TBlock>());
     }
-    if (layers.size() > 1 && layers[1]->m_numTiles > 0) {
+    if (constImpl.m_layers.size() > 1 && constImpl.m_layers[1]->m_numTiles > 0) {
         _TLayer& layer = *impl.m_layers[1];
         layer.m_numTiles = 0;
         layer.m_blocks.clear();
