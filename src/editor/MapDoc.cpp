@@ -127,7 +127,8 @@ void TRepaintMapOp::setTile(const TTilePoint& loc, const TRmgTerrainTile& tile)
 // page's adapter (/OPT:ICF).
 void TRepaintMapOp::setFrame(const TTilePoint& loc, int frame)
 {
-    TGameMap::TLayer& layer = _m_pMap->getLayer(_m_bSecondLayer);
+    TGameMap* pMap = _m_pMap;
+    TGameMap::TLayer& layer = pMap->getLayer(_m_bSecondLayer);
     layer.getPCell(loc.x(), loc.y())->setTileNum(frame);
 }
 
