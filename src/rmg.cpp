@@ -8555,6 +8555,11 @@ unsigned char type_random_map_generator::tryPlacePrimaryTown(
 
 // Mac 0x2491b4 precedes mine placement and is called by group assembly.
 // A monster-free zone has no guard; other zones shift the map's strength.
+// The map editor (/O1, whose inliner applies the post-substitution size
+// veto) keeps both calls to its copy 0x4a960a; with the result named the
+// substituted body weighs 16 against the 15 a three-argument call allows,
+// so both sites stay calls as in retail (assembleTreasureGroup 69.05% ->
+// 99.76%, tryPlaceMine 94.04 -> 98.67). The game inlines it either way.
 MAC_ADDRESS(0x2491b4, 0x60)
 int type_random_map_generator::getZoneGuardValue(const TRmgZone* zone, int value) const
 {
@@ -8564,7 +8569,8 @@ int type_random_map_generator::getZoneGuardValue(const TRmgZone* zone, int value
     strength += m_monsterStrength - 3;
     if (strength > 5) strength = 5;
     if (strength < 0) strength = 0;
-    return getRmgGuardValue(value, strength);
+    int guardValue = getRmgGuardValue(value, strength);
+    return guardValue;
 }
 
 // Site selector called at 0x545aee. Complete-only names are provisional.
