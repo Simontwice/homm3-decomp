@@ -123,7 +123,8 @@ void readBitset(TRawIStream& stream, std::bitset<N>& bits)
 template <size_t N>
 void writeBitset(TRawOStream& stream, const std::bitset<N>& bits)
 {
-    unsigned char aByte[(N + 7) / 8] = { 0 };
+    unsigned char aByte[(N + 7) / 8];
+    std::fill_n(aByte, sizeof(aByte), 0);
     for (size_t i = 0; i < N; i++)
         if (bits.test(i))
             aByte[i / 8] |= 1 << (i % 8);

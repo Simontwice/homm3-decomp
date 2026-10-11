@@ -919,6 +919,12 @@ bool TWitchHut::isCustomized() const
 VA(0x0048f8a1, 0x62)
 void TWitchHut::write(TRawOStream* pOStream, int version) const
 {
-    if (version >= 1)
-        writeBitset(*pOStream, _m_abPotentialSkill);
+    if (version >= 1) {
+        unsigned char aByte[(kNumSecSkills + 7) / 8];
+        std::fill_n(aByte, sizeof(aByte), 0);
+        for (unsigned int i = 0; i < kNumSecSkills; i++)
+            if (_m_abPotentialSkill.test(i))
+                aByte[i / 8] |= 1 << (i % 8);
+        *pOStream << aByte;
+    }
 }
