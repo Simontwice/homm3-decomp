@@ -218,7 +218,9 @@ void TScenarioPropsProloguePageBase::OnHasPrologueCheck()
 VA(0x0042d000, 0x465)
 void TScenarioPropsProloguePageBase::OnSelChangeMovieCombo()
 {
-    static std::auto_ptr<T16bppDIBSection> apPreviews[CAMPAIGN_MOVIE_COUNT];
+    DATA_COMPGEN_GUARD(0x004c8738, moviePreviewsGuard, apPreviews)
+    VA_COMPGEN(0x0042d470, 0x14, STATIC_DTOR, apPreviews)
+    DATA(0x004c8410) static std::auto_ptr<T16bppDIBSection> apPreviews[CAMPAIGN_MOVIE_COUNT];
     int movie = _m_movieCombo.GetItemData(_m_movieCombo.GetCurSel());
     std::auto_ptr<T16bppDIBSection>& pPreview = apPreviews[movie];
     if (pPreview.get() == NULL) {

@@ -148,7 +148,8 @@ BOOL TScenarioPropsGeneralPage::OnInitDialog()
     while (_m_regionColorCombo.GetItemData(index) != regionColor)
         index++;
     _m_regionColorCombo.SetCurSel(index);
-    static const char* const akDifficultyNames[TScenario::kNumDifficulties] = {
+    DATA_COMPGEN_GUARD(0x004c83f4, difficultyNamesGuard, akDifficultyNames)
+    DATA(0x004c83f8) static const char* const akDifficultyNames[TScenario::kNumDifficulties] = {
         kEasyStr, kNormalStr, kHardStr, kExpertStr, kImpossibleStr
     };
     for (int difficulty = 0; difficulty < TScenario::kNumDifficulties; difficulty++)

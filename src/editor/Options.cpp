@@ -19,13 +19,13 @@ DATA(0x0058d2a8) unsigned int specialTileFrequencyImp = 4;
 }
 
 namespace SOptions {
-const int& kZoom = zoomImp;
-const bool& kGrid = bGridImp;
-const bool& kPassability = bPassabilityImp;
-const bool& kAnimation = bAnimationImp;
-const bool& kCycling = bCyclingImp;
-const unsigned int& kAutosaveMinutes = autosaveMinutesImp;
-const unsigned int& kSpecialTileFrequency = specialTileFrequencyImp;
+DATA(0x005a23d4) const int& kZoom = zoomImp;
+DATA(0x005a23d0) const bool& kGrid = bGridImp;
+DATA(0x005a23cc) const bool& kPassability = bPassabilityImp;
+DATA(0x005a23c8) const bool& kAnimation = bAnimationImp;
+DATA(0x005a23c4) const bool& kCycling = bCyclingImp;
+DATA(0x005a23c0) const unsigned int& kAutosaveMinutes = autosaveMinutesImp;
+DATA(0x005a23bc) const unsigned int& kSpecialTileFrequency = specialTileFrequencyImp;
 
 VA(0x00492edb, 0x101)
 void load()

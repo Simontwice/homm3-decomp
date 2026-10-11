@@ -7,20 +7,18 @@
 #ifndef HOMM3_EDITOR_OPTIONS_H
 #define HOMM3_EDITOR_OPTIONS_H
 
-#include "va.h"
-
 namespace SOptions {
 // The longest autosave period in minutes; a longer saved one turns
 // autosave off.
 const unsigned int kMaxAutosaveMinutes = 60;
 
-DATA(0x005a23d4) extern const int& kZoom;
-DATA(0x005a23d0) extern const bool& kGrid;
-DATA(0x005a23cc) extern const bool& kPassability;
-DATA(0x005a23c8) extern const bool& kAnimation;
-DATA(0x005a23c4) extern const bool& kCycling;
-DATA(0x005a23c0) extern const unsigned int& kAutosaveMinutes;
-DATA(0x005a23bc) extern const unsigned int& kSpecialTileFrequency;
+extern const int& kZoom;
+extern const bool& kGrid;
+extern const bool& kPassability;
+extern const bool& kAnimation;
+extern const bool& kCycling;
+extern const unsigned int& kAutosaveMinutes;
+extern const unsigned int& kSpecialTileFrequency;
 
 void load();
 void setZoom(int zoom);

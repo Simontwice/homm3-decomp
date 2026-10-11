@@ -87,23 +87,23 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- h3ccmped-match-score:start -->
 
-**GOG Complete campaign editor `h3ccmped.exe`: 85.33% matched (MAX)** — 1,240 / 2,243 functions exact (55.3%), weighted by size over 294,643 bytes of code.
+**GOG Complete campaign editor `h3ccmped.exe`: 85.34% matched (MAX)** — 1,241 / 2,243 functions exact (55.3%), weighted by size over 294,643 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           1,231 |   84.93% | last measured score                            |
-| MAX   |           1,240 |   85.33% | best result for each function's current source |
-| HIST  |           1,240 |   85.33% | all-time peak across source revisions          |
+| CUR   |           1,232 |   84.94% | last measured score                            |
+| MAX   |           1,241 |   85.34% | best result for each function's current source |
+| HIST  |           1,241 |   85.34% | all-time peak across source revisions          |
 
 MAX by module:
 
 | Module        | Units | Functions exact MAX | Fuzzy MAX |
 | :------------ | ----: | ------------------: | --------: |
-| `game`        |    43 | 1131 / 1254 (90.2%) |    96.88% |
+| `game`        |    43 | 1132 / 1255 (90.2%) |    96.88% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
 | `codec`       |     3 |     37 / 40 (92.5%) |    98.94% |
 | `victor`      |     6 |     16 / 17 (94.1%) |    99.99% |
-| `(unmatched)` |     — |      0 / 876 (0.0%) |      0.0% |
+| `(unmatched)` |     — |      0 / 875 (0.0%) |      0.0% |
 
 Library and compiler-generated code (outside the scores; each function verified against what produced it):
 
@@ -114,7 +114,7 @@ Library and compiler-generated code (outside the scores; each function verified 
 | `init/cleanup thunks` |       354 |        4 |    3,977 | compiler-generated, verified             | source-emitted CRT bodies, bytes and named relocations                                                |
 | `import thunks`       |        13 |        0 |       78 | linker-generated, verified               | `FF 25` through a named IAT slot (and the pinned import library where one exists)                     |
 
-**Data:** 3,670 / 9,383 referenced data objects claimed (placements and the image's own `DATA()` claims).
+**Data:** 3,674 / 9,383 referenced data objects claimed (placements and the image's own `DATA()` claims).
 
 <!-- h3ccmped-match-score:end -->
 
