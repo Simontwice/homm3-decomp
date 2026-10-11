@@ -4224,7 +4224,7 @@ rva	size	kind	name	unit	evidence
 0x000c99f8	0x8	data	_randomGenerator6	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x14
 0x000c9a00	0x8	data	_randomGenerator5	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x10
 0x000c9a08	0x10	data	_dungeonGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator4 at +0x2
-0x000c9a18	0x1f0	data	?aConfluxBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aConfluxBuildingTraits at +0xa
+0x000c9a18	0x1ec	data	?aConfluxBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aConfluxBuildingTraits at +0xa
 0x000c9c08	0x10	data	_dungeonGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator3 at +0x2
 0x000c9c18	0x10	data	_fortressGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator5 at +0x2
 0x000c9c28	0x10	data	_dungeonGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator1 at +0x2
