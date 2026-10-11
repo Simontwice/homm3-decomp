@@ -17,7 +17,10 @@
 #   random map generator        /O1 /Ob2 /GR /Gr: flipRmgEdge (0x4cc68e)
 #                               reads its argument from ecx
 #   prebuilt Libraries archive  /O2 /GR, default __cdecl (GetText 0x4dca60
-#                               reads its name from the stack)
+#                               reads its name from the stack), no /Op
+#                               (TPalette24::AdjustHSV 0x4e4b50 inlines
+#                               fabs and keeps its temporaries on the x87
+#                               stack instead of storing and reloading them)
 #   zlib and Victor             the game's prebuilt objects, byte-identical
 #   zlib's callers              /Gr, as the game builds the same files:
 #                               GzBuf.cpp (gzinflatebuf, the map editor
@@ -134,7 +137,6 @@ libraries_o2_gr_windows = [
   "/nologo",
   "/c",
   "/O2",
-  "/Op",
   "/MT",
   "/GX",
   "/GR",
@@ -145,7 +147,6 @@ libraries_fastcall_o2_gr_windows = [
   "/nologo",
   "/c",
   "/O2",
-  "/Op",
   "/MT",
   "/Gr",
   "/GX",

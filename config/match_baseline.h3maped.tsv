@@ -4910,6 +4910,8 @@ artifact	?set@?$bitset@$0BD@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x3b
 artifact	__h3cg$artifact$static_ctor$g_artifactSlotMasks	100.0000	100.0000	100.0000	0x356d	-
 artifact	__h3cg$artifact$static_ctor$g_combinationArtifactTable	100.0000	100.0000	100.0000	0x330a	-
 artifact	__h3cg$artifact$static_dtor$artifactStrings	100.0000	100.0000	100.0000	0x3b15	-
+bitmap24	?HSVToRGB@@YAXMMMPAI00@Z	46.1866	46.1866	46.1866	0xe4ef0	-
+bitmap24	?RGBToHSV@@YAXIIIPAM00@Z	100.0000	100.0000	100.0000	0xe4d90	-
 bitmap816	??0Bitmap816@@QAE@PBD0HHHHHH@Z	100.0000	100.0000	100.0000	0xe35b0	-
 bitmap816	??0Bitmap816@@QAE@PBDHHPAEPAVTPalette16@@H@Z	100.0000	100.0000	100.0000	0xe34d0	-
 bitmap816	??1Bitmap816@@UAE@XZ	96.5484	96.5484	96.5484	0xe36e0	-
@@ -5159,7 +5161,7 @@ palette	??1TPalette24@@UAE@XZ	100.0000	100.0000	100.0000	0xe4b30	-
 palette	??4TPalette24@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0xe4b10	-
 palette	??_GTPalette16@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xe4770	-
 palette	??_GTPalette24@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xe4a50	-
-palette	?AdjustHSV@TPalette24@@QAEXMMMM@Z	91.1889	91.1889	91.1889	0xe4b50	-
+palette	?AdjustHSV@TPalette24@@QAEXMMMM@Z	100.0000	100.0000	100.0000	0xe4b50	-
 palette	?Convert24to16@TPalette16@@AAEXPBEHHHHHH@Z	100.0000	100.0000	100.0000	0xe48d0	-
 palette	?Cycle@TPalette16@@QAEXHHH@Z	100.0000	100.0000	100.0000	0xe4960	-
 palette	?getSize@TPalette16@@UBEIXZ	100.0000	100.0000	100.0000	0xe4a20	-

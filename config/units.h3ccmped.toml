@@ -16,8 +16,9 @@
 #                               ebp, esp`. The game's traits sources
 #                               (herodefs, creaturetype, spelldefs,
 #                               artifact) place by masked body under it.
-#   prebuilt Libraries archive  /O2 /GR, the map editor's archive (the same
-#                               ResourceManager anonymous scope)
+#   prebuilt Libraries archive  /O2 /GR without /Op, the map editor's
+#                               archive (the same ResourceManager anonymous
+#                               scope)
 #   zlib and Victor             the game's prebuilt objects, byte-identical
 #   GzBuf.cpp (gzinflatebuf)    /O2 /Ob2: retail expands _mustGetC and
 #                               zlibBytes in TGzInflateBuf's constructor and
@@ -113,7 +114,6 @@ libraries_o2_gr_windows = [
   "/nologo",
   "/c",
   "/O2",
-  "/Op",
   "/MT",
   "/GX",
   "/GR",
@@ -124,7 +124,6 @@ libraries_fastcall_o2_gr_windows = [
   "/nologo",
   "/c",
   "/O2",
-  "/Op",
   "/MT",
   "/Gr",
   "/GX",

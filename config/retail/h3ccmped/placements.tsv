@@ -661,7 +661,7 @@ rva	size	kind	name	unit	evidence
 0x0004aba0	0x1e	func	??4TPalette24@@QAEAAV0@ABV0@@Z	palette	masked body (30 bytes, 0 relocations) unique at a census start
 0x0004abc0	0xb	func	??1TPalette24@@UAE@XZ	palette	referenced by ?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z at +0x2bc
 0x0004abd0	0x6	func	?getSize@TPalette24@@UBEIXZ	palette	vtable of TPalette24 (RTTI) slot 2
-0x0004abe0	0x235	func	?AdjustHSV@TPalette24@@QAEXMMMM@Z	palette	referenced by ?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z at +0x1fb
+0x0004abe0	0x235	func	?AdjustHSV@TPalette24@@QAEXMMMM@Z	palette	masked body (565 bytes, 20 relocations) unique at a census start
 0x0004b290	0xf0	func	?SetPixelFormat@CSpriteFrame@@SAXIII@Z	cspriteframe	masked body (240 bytes, 2 relocations) unique at a census start
 0x0004b380	0x1e	func	??_GBitmap24Bit@@UAEPAXI@Z	bitmap24	vtable of Bitmap24Bit (RTTI) slot 0
 0x0004b3a0	0xb0	func	??0Bitmap24Bit@@QAE@PBDHHPBEH@Z	bitmap24	masked body (176 bytes, 8 relocations) unique at a census start
@@ -671,7 +671,7 @@ rva	size	kind	name	unit	evidence
 0x0004b670	0x3a	func	?Draw@Bitmap24Bit@@QBEXHHHHPAVBitmap16Bit@@HH@Z	bitmap24	masked body (58 bytes, 1 relocations) unique at a census start
 0x0004b6b0	0x16c	func	?Draw@Bitmap24Bit@@QBEXHHHHPAGHHHHH@Z	bitmap24	masked body (364 bytes, 6 relocations) unique at a census start
 0x0004b820	0x7	func	?getSize@Bitmap24Bit@@UBEIXZ	bitmap24	vtable of Bitmap24Bit (RTTI) slot 2
-0x0004b830	0x284	func	?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z	bitmap24	referenced by ?loadBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z at +0xda
+0x0004b830	0x284	func	?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z	bitmap24	masked body (644 bytes, 20 relocations) unique at a census start
 0x0004bef0	0x1e	func	??_GTTextResource@@UAEPAXI@Z	textresource	vtable of TTextResource (RTTI) slot 0
 0x0004bf10	0x1fb	func	??0TTextResource@@QAE@PBDH0@Z	textresource	masked body (507 bytes, 8 relocations) unique at a census start
 0x0004c110	0x49	func	??1TTextResource@@UAE@XZ	textresource	masked body (73 bytes, 4 relocations) unique at a census start
@@ -709,7 +709,7 @@ rva	size	kind	name	unit	evidence
 0x000881d8	0x54	data	?g_campaignRegionTraits@@3QBQAUTRegionTraits@TCampaignMapTraits@@B	campaignmap	referenced by ?initializeCampaignMapTraitsTable@@YAEXZ at +0x21a
 0x00089b4c	0x14	data	?_s_kMessage@TAllocationFailure@@2QBDB	error	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0x95
 0x00089b60	0x8	data	_g_gzMagic	gzinflatebuf	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0x15c
-0x0008fa88	0x8	data	__real@8@00000000000000000000	bitmap16	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xc8 (retail +0xa9, by operand order)
+0x0008fa88	0x8	data	__real@8@00000000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0xdb
 0x00090220	0x78	data	_configuration_table	deflate	referenced by @deflate@8 at +0x197
 0x00090298	0x400	data	_crc_table	crc32	referenced by @crc32@12 at +0x38
 0x0009069c	0x74	data	_extra_lbits	trees	referenced by @compress_block@12 at +0x19d
@@ -730,13 +730,13 @@ rva	size	kind	name	unit	evidence
 0x00091394	0xc	data	_?fallbackName@?N@??GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z@4QBDB	resourcemanager	referenced by ?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z at +0x134
 0x000913b0	0x10	data	_?fallbackName@?M@??loadBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z@4QBDB	resourcemanager	referenced by ?loadBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z at +0x171
 0x00091430	0x8	data	??_8?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@7B@	resourcemanager	referenced by ?reportMissingTypedResource@@YAXPBDH0@Z at +0x27e
-0x000914c8	0x4	data	__real@4@40018000000000000000	bitmap16	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x1aa (retail +0x199, by operand order)
-0x000914cc	0x4	data	__real@4@00000000000000000000	bitmap24	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x77 (retail +0x72, by operand order)
-0x000914d0	0x4	data	__real@4@3fff8000000000000000	bitmap16	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xd5 (retail +0xb6, by operand order)
-0x000914d8	0x8	data	__real@8@3fff8000000000000000	bitmap24	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xf3 (retail +0xd6, by operand order)
-0x00091500	0x8	data	__real@8@3ffe8000000000000000	bitmap24	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xb4 (retail +0x9c, by operand order)
-0x00091518	0x8	data	__real@8@3ffd8000000000000000	bitmap24	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x18c (retail +0x17a, by operand order)
-0x00091520	0x8	data	__real@8@3ffec000000000000000	bitmap24	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x17b (retail +0x169, by operand order)
+0x000914c8	0x4	data	__real@4@40018000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0x1cb
+0x000914cc	0x4	data	__real@4@00000000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0xa4
+0x000914d0	0x4	data	__real@4@3fff8000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0xe8
+0x000914d8	0x8	data	__real@8@3fff8000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0x108
+0x00091500	0x8	data	__real@8@3ffe8000000000000000	bitmap24	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0xce
+0x00091518	0x8	data	__real@8@3ffd8000000000000000	bitmap24	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0x1ac
+0x00091520	0x8	data	__real@8@3ffec000000000000000	bitmap24	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0x19b
 0x00093050	0x8	data	_g_victorLeadingBits$S29135	victor_bits	referenced by ?victorInsertBits@@YGXPAEPBEHH@Z at +0x23
 0x00093058	0x8	data	_g_victorTrailingBits$S29136	victor_bits	referenced by ?victorExtractBits@@YGXPAEPBEHH@Z at +0x18
 0x00098560	0x1c	data	__CT??_R0?AVexception@@@8??0exception@@QAE@ABV0@@Z12	resourcemanager	referenced by __CTA2?AVbad_cast@std@@ at +0x8
