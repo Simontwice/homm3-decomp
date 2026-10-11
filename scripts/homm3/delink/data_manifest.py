@@ -616,6 +616,88 @@ def paired_comdat_rows(model: Model, base_dir=BASE_DIR):
     return rows, withheld
 
 
+#: MFC's IMPLEMENT_DYNAMIC/IMPLEMENT_DYNCREATE runtime class: a 24-byte
+#: CRuntimeClass in the unit's ordinary `.rdata`; the macro's
+#: `GetRuntimeClass` returns its address.
+_RUNTIME_CLASS = re.compile(r"^\?class(?P<cls>\w+)@(?P<scope>.+)@@2UCRuntimeClass@@B$")
+_GET_RUNTIME_CLASS = re.compile(r"^\?GetRuntimeClass@(?P<scope>.+)@@UBEPAUCRuntimeClass@@XZ$")
+CRUNTIMECLASS_SIZE = 24
+
+
+def runtime_class_rows(model: Model, base_dir=BASE_DIR):
+    """Enrollable MFC runtime classes + the withheld.
+
+    The address is read from the claimed `GetRuntimeClass` at its retail
+    body (`mov eax, imm32; ret`, a RUNTIME_CLASS_GETTER claim) and the
+    extent is the structure's. Retail must hold the candidate's bytes
+    there, relocation fields aside. A runtime class a DATA claim already
+    names (IMPLEMENT_DYNAMIC's first definition) is enrolled by that claim.
+    """
+    import struct
+
+    img = retail()
+    functions = {}
+    from homm3.delink.pdb_synth import UNIT_CHANNELS
+    for b in model.functions:
+        if b.channel in UNIT_CHANNELS and b.name:
+            functions[msvc_names.mask(b.name)] = (b.rva, b.size)
+    rows, withheld = [], []
+    for stem, c in coffx.objects(base_dir):
+        returns = {}
+        for sec in c.section_table:
+            if not sec["characteristics"] & MEM_EXECUTE:
+                continue
+            for _off, name in c.defined_symbols(sec["index"]):
+                if not _GET_RUNTIME_CLASS.match(name):
+                    continue
+                classes = [ref for ref, typ in c.typed_relocations(sec["index"]).values()
+                           if typ == COFF_DIR32 and _RUNTIME_CLASS.match(ref)]
+                if len(classes) == 1:
+                    returns[classes[0]] = name
+        if not returns:
+            continue
+        for sec in c.section_table:
+            if sec["name"] != ".rdata" or sec["characteristics"] & LNK_COMDAT:
+                continue
+            members = sorted((off, name) for off, name, _scl
+                             in c.section_members(sec["index"]))
+            payload = c.section_payload(sec["index"])[:sec["size"]]
+            sites = set(c.relocations(sec["index"]))
+            for k, (offset, name) in enumerate(members):
+                getter = returns.get(name)
+                if getter is None:
+                    continue
+                end = members[k + 1][0] if k + 1 < len(members) else sec["size"]
+                hit = (functions.get(msvc_names.mask(getter))
+                       or functions.get(msvc_names.mask(normalize_anon_ns_name(getter, stem))))
+                body = img.pe.read(hit[0], hit[1]) if hit else None
+                if end - offset != CRUNTIMECLASS_SIZE or body is None or len(body) != 6 \
+                        or body[0] != 0xB8 or body[5] != 0xC3:
+                    withheld.append((hit[0] if hit else 0, name,
+                                     "no claimed `mov eax, imm32; ret` getter or "
+                                     "not a whole runtime class"))
+                    continue
+                rva = struct.unpack_from("<I", body, 1)[0] - img.image_base
+                at = img.off(rva)
+                theirs = bytearray(img.data[at:at + CRUNTIMECLASS_SIZE]) if at is not None else b""
+                mine = bytearray(payload[offset:end])
+                for site in sites:
+                    if offset <= site < end:
+                        mine[site - offset:site - offset + 4] = b"\0\0\0\0"
+                        theirs[site - offset:site - offset + 4] = b"\0\0\0\0"
+                if (theirs != mine or STORAGE.get(_classify(rva)) != "rdata"
+                        or STORAGE.get(_classify(rva + CRUNTIMECLASS_SIZE - 1)) != "rdata"):
+                    withheld.append((rva, name, "retail bytes contradict the "
+                                     "candidate runtime class"))
+                    continue
+                rows.append({"name": normalize_anon_ns_name(name, stem),
+                             "object": f"{stem}.c", "rva": rva,
+                             "size": CRUNTIMECLASS_SIZE, "storage": "rdata",
+                             "alignment": member_alignment(sec["alignment"], offset, rva),
+                             "provenance": "candidate-COFF-runtime-class"})
+    return rows, withheld
+
+
 #: MFC's BEGIN_MESSAGE_MAP statics: `messageMap` (AFX_MSGMAP, the base map
 #: and the entries) and `_messageEntries` (AFX_MSGMAP_ENTRY[], 24 bytes each,
 #: closed by an AfxSig_end entry). `GetMessageMap` returns the map's address.
@@ -1295,6 +1377,9 @@ def candidates(model: Model):
     withheld += w
     message_maps, w = message_map_rows(model)
     rows += message_maps
+    withheld += w
+    runtime_classes, w = runtime_class_rows(model)
+    rows += runtime_classes
     withheld += w
 
     # cl's `$T` FP pool. A slot some OTHER channel already names is left to
