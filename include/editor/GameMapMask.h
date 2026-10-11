@@ -10,8 +10,10 @@
 // Three copy-on-write levels, each held by a TRefCountingPtr (the map
 // view's inline assignment 0x486a37 and the releases 0x43cc59, 0x43cd5a and
 // 0x43ce72): the levels and the width in blocks, each level's tile count
-// and blocks, and each block's twelve rows of three bytes, built zeroed
-// element by element (0x43d06f). The obstacle tool paints state 2 where
+// and blocks, and each block's twelve rows of three bytes, a TArray of
+// TArrays: its constructor (0x43d06f) builds row 0's first quad, places the
+// rest of the row, then places rows 1..11 the same way, and its destructor
+// (0x43d0c1) walks the rows back down. The obstacle tool paints state 2 where
 // obstacles go and keeps state 1 clear around them; the member and state
 // names are not recorded.
 #ifndef HOMM3_EDITOR_GAMEMAPMASK_H
@@ -19,6 +21,7 @@
 
 #include <vector>
 
+#include "editor/Array.h"
 #include "editor/RefCountingPtr.h"
 
 class TGameMapMask {
@@ -60,7 +63,7 @@ private:
         // The state of the block's tile (x, y).
         int getState(unsigned int x, unsigned int y) const { return m_aaQuads[y][x / 4].getState(x % 4); }
 
-        _TQuad m_aaQuads[12][3];
+        TArray<TArray<_TQuad, 3>, 12> m_aaQuads;
     };
 
     struct _TLayer {
