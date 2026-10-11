@@ -980,7 +980,7 @@ rva	size	kind	name	unit	evidence
 0x00041c36	0x8e	func	??0TGUIGenerator@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (142 bytes, 9 relocations) unique at a census start
 0x00041cc4	0xaa	func	??0?$TGUIOwnableSpecializedObject@VTGenerator@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	referenced by 0x00041c36 at +0x59
 0x00041d6e	0x7a	func	??0TGenerator@@QAE@ABV0@@Z	GUIGameObject	referenced by 0x00041cc4 at +0x65
-0x00041de8	0x57	func	??0TFlaggableObject@@QAE@ABV0@@Z	GUIGameObject	referenced by ??0TGarrison@@QAE@ABV0@@Z at +0x4e
+0x00041de8	0x57	func	??0TFlaggableObject@@QAE@ABV0@@Z	GUIGameObject	referenced by ??0TRandomGenerator@@QAE@ABV0@@Z at +0x6c
 0x00042038	0x8e	func	??0TGUIAbandonedMine@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (142 bytes, 9 relocations) unique at a census start
 0x000420c6	0xaa	func	??0?$TGUIStandardSpecializedObject@VTAbandonedMine@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (170 bytes, 10 relocations) unique at a census start
 0x00042170	0x80	func	??0TAbandonedMine@@QAE@ABV0@@Z	GUIGameObject	masked body (128 bytes, 7 relocations) unique at a census start
@@ -2022,9 +2022,11 @@ rva	size	kind	name	unit	evidence
 0x0009cdb1	0x53	func	?generate@type_key_tent_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	rmg	masked body (83 bytes, 6 relocations) unique at a census start
 0x0009ce64	0x59	func	?reset@TRmgTreasureGroup@@QAEXXZ	rmg	masked body (89 bytes, 4 relocations) unique at a census start
 0x0009cebd	0x3e	func	?discard@TRmgTreasureGroup@@QAEXXZ	rmg	masked body (62 bytes, 1 relocations) unique at a census start
+0x0009cefb	0x39	func	?markPlacementOutline@TRmgTreasureGroup@@QAEXXZ	rmg	referenced by ?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z at +0x88
+0x0009cf34	0x393	func	?addGuard@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	rmg	referenced by ?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z at +0x63
 0x0009d2c7	0x19	func	??0TRmgMapPosition@@QAE@HHH@Z	rmg	masked body (25 bytes, 0 relocations) unique at a census start
 0x0009d2e0	0x191	func	?canFitObject@TRmgTreasureGroup@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@@Z	rmg	masked prefix (102 fixed bytes agree, 411 compiled, 401 retail)
-0x0009d471	0x1eb	func	?tryAddObject@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	rmg	masked prefix (91 fixed bytes agree, 491 compiled, 491 retail)
+0x0009d471	0x1eb	func	?tryAddObject@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	rmg	referenced by ?fillTreasureGroup@type_random_map_generator@@QAEHPAUTRmgZone@@PAUTRmgTreasureGroup@@EH@Z at +0x137
 0x0009d65c	0x41	func	?objectsAllowEntrances@TRmgTreasureGroup@@QBEEXZ	rmg	masked body (65 bytes, 1 relocations) unique at a census start
 0x0009d69d	0x43	func	?addObject@TRmgTreasureGroup@@QAEXPAVtype_object@@UTRmgPoint@@@Z	rmg	masked body (67 bytes, 2 relocations) unique at a census start
 0x0009d6e0	0xe3	func	?updateBounds@TRmgTreasureGroup@@QAEXXZ	rmg	masked body (227 bytes, 1 relocations) unique at a census start
@@ -2085,13 +2087,15 @@ rva	size	kind	name	unit	evidence
 0x000a901a	0x388	func	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	rmg	masked prefix (83 fixed bytes agree, 897 compiled, 904 retail)
 0x000a93a2	0x268	func	?tryPlacePrimaryTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHE@Z	rmg	referenced by ?placePrimaryTown@type_random_map_generator@@QAEXPAUTRmgZone@@@Z at +0x2f
 0x000a960a	0x37	func	?getZoneGuardValue@type_random_map_generator@@QBEHPBUTRmgZone@@H@Z	rmg	masked body (55 bytes, 1 relocations) unique at a census start
+0x000a9641	0x2d0	func	?placeMineSite@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@EH@Z	rmg	referenced by ?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z at +0x133
 0x000a9911	0x36b	func	?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z	rmg	referenced by ?placeMines@type_random_map_generator@@QAEXXZ at +0x85
 0x000a9c7c	0xee	func	?placeExtraMines@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	rmg	referenced by ?placeMines@type_random_map_generator@@QAEXXZ at +0xaf
 0x000a9d6a	0xd6	func	?placeMines@type_random_map_generator@@QAEXXZ	rmg	masked body (214 bytes, 2 relocations) unique at a census start
 0x000a9e40	0xdc	func	?selectObjectPrototype@type_random_map_generator@@QAEPAUTRmgObjectPropertiesRef@@HHH@Z	rmg	referenced by ?generate@type_quest_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z at +0x40
 0x000a9f1c	0x279	func	?createTreasureObject@type_random_map_generator@@QAEPAVtype_object@@PAUTRmgZone@@HHPAHEEEUTRmgMapPosition@@@Z	rmg	referenced by ?replaceObjectWithTreasure@type_random_map_generator@@QAEXPAVtype_object@@H@Z at +0x6f
 0x000aa195	0x46	func	?countRmgOccupiedCells@@YAHPBUTObjectType@@@Z	rmg	masked body (70 bytes, 2 relocations) unique at a census start
-0x000aa354	0x95	func	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	rmg	masked prefix (36 fixed bytes agree, 182 compiled, 149 retail)
+0x000aa1db	0x179	func	?fillTreasureGroup@type_random_map_generator@@QAEHPAUTRmgZone@@PAUTRmgTreasureGroup@@EH@Z	rmg	referenced by ?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z at +0x37
+0x000aa354	0x95	func	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	rmg	masked body (149 bytes, 9 relocations) unique at a census start
 0x000aad8e	0x44	func	??1TRmgTreasureGroup@@QAE@XZ	rmg	masked body (68 bytes, 6 relocations) unique at a census start
 0x000aae2f	0x4c	func	?resetMovementCosts@type_random_map_generator@@QAEXXZ	rmg	masked body (76 bytes, 0 relocations) unique at a census start
 0x000aae7b	0x504	func	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	rmg	referenced by ?createRoads@type_random_map_generator@@QAEXXZ at +0x6c
