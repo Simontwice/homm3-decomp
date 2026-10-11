@@ -1012,7 +1012,7 @@ BOOL TMapDoc::OnNewDocument()
 // The new-map parameters' implicit assignment (setNewMapParams).
 VA_COMPGEN(0x0045f52d, 0x29, IMPLICIT_COPY_ASSIGN, TNewMapParams)
 
-VA(0x0045f556, 0x184)
+VA(0x0045f556, 0x168)
 void TMapDoc::Serialize(CArchive& ar)
 {
     assert(_m_pTerrainPlacementOp == NULL);
