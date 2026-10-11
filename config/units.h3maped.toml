@@ -14,8 +14,15 @@
 #                               and the traits files are editor objects
 #                               (h3maped InitializeHeroTraits and
 #                               ResourceManager callers use __cdecl).
-#   random map generator        /O1 /Ob2 /GR /Gr: flipRmgEdge (0x4cc68e)
-#                               reads its argument from ecx
+#   random map generator        the map editor profile, __cdecl:
+#                               isRmgPointInsideCircle (0x4ccc7a) leaves
+#                               its 32 bytes of by-value points to its
+#                               caller, the river/road erase hooks
+#                               (TRiverEraseOp/TRoadEraseOp::
+#                               onTerrainTypeChanged) compile exactly only
+#                               without /Gr, and the two ecx helpers are
+#                               TRmgHalfEdge members (flip 0x4cc68e,
+#                               isPointOnSegment 0x4cc6f2, ret 8)
 #   prebuilt Libraries archive  /O2 /GR, default __cdecl (GetText 0x4dca60
 #                               reads its name from the stack), no /Op
 #                               (TPalette24::AdjustHSV 0x4e4b50 inlines
@@ -59,7 +66,7 @@ includes = [
   "vendor/smacker-3.2h/include",
   "vendor/zlib-1.1.3",
 ]
-analysis_profile = "h3maped_o1_ob2_gr_windows"
+analysis_profile = "editor_o1_ob2_gr_windows"
 
 [flags]
 
@@ -90,20 +97,6 @@ victor_kernels_o2_ogoff_ml_gd_windows = [
   "/Og-",
   "/ML",
   "/Gd",
-  "/D_WINDOWS",
-]
-
-h3maped_o1_ob2_gr_windows = [
-  "/nologo",
-  "/c",
-  "/O1",
-  "/Ob2",
-  "/Op",
-  "/MT",
-  "/Gr",
-  "/GX",
-  "/GR",
-  "/DNDEBUG",
   "/D_WINDOWS",
 ]
 
@@ -363,19 +356,19 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "rmg_river"
 module = "rmg"
 source = "src/rmg_river.cpp"
-flags = "h3maped_o1_ob2_gr_windows"
+flags = "editor_o1_ob2_gr_windows"
 
 [[unit]]
 unit = "rmg_road"
 module = "rmg"
 source = "src/rmg_road.cpp"
-flags = "h3maped_o1_ob2_gr_windows"
+flags = "editor_o1_ob2_gr_windows"
 
 [[unit]]
 unit = "rmg_voronoi"
 module = "rmg"
 source = "src/rmg_voronoi.cpp"
-flags = "h3maped_o1_ob2_gr_windows"
+flags = "editor_o1_ob2_gr_windows"
 
 [[unit]]
 unit = "rmg_support"

@@ -229,8 +229,12 @@ TRmgHalfEdge* TRmgVoronoi::locate(TRmgPoint point)
 // Using the opposite-site/zone and left-face accessors throughout this flip,
 // detach and addSite's closing test lowers addSite from 100% to 93.74%; the
 // other support functions remain exact. Preserve the matched helper boundaries.
+// Explicitly __fastcall: the map editor's __cdecl build still passes the edge
+// in ecx here (0x4cc68e) and in the segment test (0x4cc6f2, ret 8), while its
+// circumcircle test leaves its 32 argument bytes to the caller. As members
+// the game refuses to expand them in addSite (100 -> 54.82%).
 MAC_ADDRESS(0x25c204, 0xb0)
-static void flipRmgEdge(TRmgHalfEdge* edge)
+static void __fastcall flipRmgEdge(TRmgHalfEdge* edge)
 {
     TRmgHalfEdge* previous = edge->m_previous;
     TRmgHalfEdge* twinPrevious = edge->m_twin->m_previous;
@@ -257,7 +261,7 @@ static void flipRmgEdge(TRmgHalfEdge* edge)
 // dx/dy to [ebp-8]/[ebp-0xc] for the four products, which only this binding
 // reproduces; a by-value TRmgPoint copy through the accessor re-reads the
 // field and keeps dx in a register (addSite 90.3482% with the rest exact).
-static b8 isRmgPointOnSegment(TRmgPoint point, TRmgHalfEdge* edge)
+static b8 __fastcall isRmgPointOnSegment(TRmgPoint point, TRmgHalfEdge* edge)
 {
     TRmgPoint opposite = edge->getOppositeSitePosition();
     s32 firstDistance = getRmgSquaredDistance(point, edge->getSitePosition());

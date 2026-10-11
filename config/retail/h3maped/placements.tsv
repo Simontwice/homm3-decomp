@@ -2391,8 +2391,10 @@ rva	size	kind	name	unit	evidence
 0x000cc9cc	0x89	func	?removeEdge@TRmgVoronoi@@QAEXPAUTRmgHalfEdge@@@Z	rmg_voronoi	masked body (137 bytes, 5 relocations) unique at a census start
 0x000cca55	0xca	func	?locate@TRmgVoronoi@@QAEPAUTRmgHalfEdge@@UTRmgPoint@@@Z	rmg_voronoi	masked body (202 bytes, 0 relocations) unique at a census start
 0x000ccb1f	0x45	func	?connectEdges@TRmgVoronoi@@QAEPAUTRmgHalfEdge@@PAU2@0@Z	rmg_voronoi	masked body (69 bytes, 3 relocations) unique at a census start
-0x000ccb64	0x116	func	?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z	rmg_voronoi	masked prefix (38 fixed bytes agree, 275 compiled, 278 retail)
-0x000ccc7a	0xef	func	?isRmgPointInsideCircle@@YIEUTRmgPoint@@000@Z	rmg_voronoi	referenced by ?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z at +0xe6
+0x000ccb64	0x116	func	?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z	rmg_voronoi	masked body (278 bytes, 8 relocations) unique at a census start
+0x000ccc7a	0xef	func	?isRmgPointInsideCircle@@YAEUTRmgPoint@@000@Z	rmg_voronoi	referenced by ?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z at +0xe6
+0x000ccd69	0x93	func	?computeRmgCircumcenter@@YA?AUTRmgPoint@@U1@00@Z	rmg_voronoi	referenced by ?buildVertices@TRmgVoronoi@@QAEXXZ at +0x52
+0x000ccdfc	0x99	func	?buildVertices@TRmgVoronoi@@QAEXXZ	rmg_voronoi	masked prefix (55 fixed bytes agree, 153 compiled, 153 retail)
 0x000cce95	0x36	func	?erase@?$vector@HV?$allocator@H@std@@@std@@QAEPAHPAH@Z	rmg	masked body (54 bytes, 0 relocations) unique at a census start; ICF-folded with 3 identical bodies
 0x000ccecb	0x1d0	func	?insert@?$vector@HV?$allocator@H@std@@@std@@QAEXPAHIABH@Z	rmg	referenced by ?insertRmgWorkItem@@YAXAAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@UTRmgMapPosition@@H@Z at +0x6d; ICF-folded with 9 identical bodies
 0x000ce9c2	0xb	func	??0_TMessage@TQuestLocationPropsDlg@@QAE@XZ	QuestLocationPropsDlg	referenced by ??0TQuestLocationPropsDlg@@QAE@IPAVCWnd@@PAVTGameMap@@_NIH@Z at +0x5c
