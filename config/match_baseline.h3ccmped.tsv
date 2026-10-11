@@ -799,7 +799,7 @@ adler32	@adler32@12	100.0000	100.0000	100.0000	0x402e0	-
 artifact	??0out_of_range@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	100.0000	100.0000	100.0000	0x1df70	-
 artifact	??1?$TResourcePtr@VTSpreadsheetResource@@@@QAE@XZ	100.0000	100.0000	100.0000	0x2f10	-
 artifact	??A?$bitset@$0BD@@std@@QAE?AVreference@01@I@Z	100.0000	100.0000	100.0000	0x249b0	-
-artifact	?InitializeArtifactTraitsTable@@YA_NXZ	78.0723	78.0723	78.0723	0x28d0	-
+artifact	?InitializeArtifactTraitsTable@@YA_NXZ	78.0826	78.0826	78.0826	0x28d0	-
 artifact	?_Tidy@?$bitset@$0BD@@std@@AAEXK@Z	100.0000	100.0000	100.0000	0x2f90	-
 artifact	?_Xran@?$bitset@$0BD@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x3050	-
 artifact	?_Xran@?$bitset@$0JA@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x3170	-
@@ -807,6 +807,8 @@ artifact	?makeArtifactComponentMask@@YA?AV?$bitset@$0JA@@std@@IZZ	100.0000	100.0
 artifact	?makeArtifactSlotMask@@YA?AV?$bitset@$0BD@@std@@IZZ	100.0000	100.0000	100.0000	0x1ee0	-
 artifact	?set@?$bitset@$0BD@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x2f30	-
 artifact	?test@?$bitset@$0JA@@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0x3130	-
+artifact	__h3cg$artifact$static_ctor$g_artifactSlotMasks	100.0000	100.0000	100.0000	0x2780	-
+artifact	__h3cg$artifact$static_ctor$g_combinationArtifactTable	100.0000	100.0000	100.0000	0x24a0	-
 artifact	__h3cg$artifact$static_dtor$artifactStrings	100.0000	100.0000	100.0000	0x2ef0	-
 bitmap16	??0Bitmap16Bit@@QAE@PBDHH@Z	100.0000	100.0000	100.0000	0x49ac0	-
 bitmap16	??1Bitmap16Bit@@UAE@XZ	52.8214	52.8214	52.8214	0x49b60	-

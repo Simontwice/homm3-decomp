@@ -68,6 +68,9 @@ class Definition:
     dc_addresses: tuple[tuple[int, int], ...] = ()
     # VA_AT(image, addr, size): where another pinned image keeps this body.
     va_at: tuple[tuple[str, int, int], ...] = ()
+    # The nearest enclosing class template's parameter names (T for
+    # TResourcePtr<T>::release), which CodeView spells as the instantiation.
+    template_parameters: tuple[str, ...] = ()
 
 
 def claimed_only_elsewhere(definition: Definition) -> bool:
@@ -274,6 +277,38 @@ def procedure_name(name: str) -> str:
 def type_identity(name: str) -> str:
     """Ignore elaborated-type syntax, preserving typedefs and qualifiers."""
     return re.sub(r'\s+', '', re.sub(r'\b(?:class|struct|enum|union)\s+', '', name))
+
+
+def template_arguments(qualified: str) -> list[str]:
+    """The innermost class's template arguments in Owner<A, B>::member."""
+    owner = qualified.rsplit('::', 1)[0] if '::' in qualified else ''
+    if not owner.endswith('>'):
+        return []
+    depth, start = 0, None
+    for index in range(len(owner) - 1, -1, -1):
+        depth += {'>': 1, '<': -1}.get(owner[index], 0)
+        if depth == 0:
+            start = index
+            break
+    if start is None:
+        return []
+    arguments, depth, current = [], 0, ''
+    for char in owner[start + 1:-1]:
+        depth += {'<': 1, '>': -1}.get(char, 0)
+        if char == ',' and depth == 0:
+            arguments.append(current.strip())
+            current = ''
+        else:
+            current += char
+    arguments.append(current.strip())
+    return arguments
+
+
+def instantiate(name: str, arguments: dict[str, str]) -> str:
+    """Substitute class template arguments for their parameter names."""
+    for parameter, argument in arguments.items():
+        name = re.sub(rf'\b{re.escape(parameter)}\b', argument, name)
+    return name
 
 
 class LineIndex:
@@ -848,8 +883,13 @@ def scan_unit(unit: dict, root: Path = ROOT, *, profiles=None, fragment_map=None
             parent = cursor.lexical_parent
             class_offset = None
             template = cursor.kind == k.FUNCTION_TEMPLATE
+            template_parameters = None
             while parent.kind in {k.CLASS_DECL, k.STRUCT_DECL, k.UNION_DECL, k.CLASS_TEMPLATE}:
                 template = template or parent.kind == k.CLASS_TEMPLATE
+                if parent.kind == k.CLASS_TEMPLATE and template_parameters is None:
+                    template_parameters = tuple(
+                        c.spelling for c in parent.get_children()
+                        if c.kind in {k.TEMPLATE_TYPE_PARAMETER, k.TEMPLATE_NON_TYPE_PARAMETER})
                 class_offset = char_offset(parent.extent.start.offset)
                 parent = parent.lexical_parent
             instances, invalid = instance_annotations(
@@ -888,6 +928,7 @@ def scan_unit(unit: dict, root: Path = ROOT, *, profiles=None, fragment_map=None
                 original_name=original_name_hint(
                     line_indexes[relative], char_offset(cursor.location.offset)),
                 template=template,
+                template_parameters=template_parameters or (),
                 source_owner=fragments.get(relative, ('', None))[0],
                 owner_include_offset=fragments.get(relative, ('', None))[1],
                 internal=(cursor.kind == k.FUNCTION_DECL
@@ -1299,18 +1340,22 @@ def compare(definitions: list[Definition], origins: list[Origin], dc_only: dict,
             # An explicitly reviewed coverage gap carries no invented source
             # line. Require the exact declared interface and one in-class
             # header body; it cannot waive a located body or an overload.
-            # A class template's member spells T where CodeView records the
-            # declared instantiation (TResourcePtr<T>& for
-            # TResourcePtr<TTextResource>&), so its types compare by family.
-            def declared(name):
-                return type_identity(family_name(name) if d.template else name)
+            # A class template's member spells its parameters (T) where
+            # CodeView records the declared instantiation's arguments, so
+            # the definition's types are instantiated with the declaration's
+            # class arguments first (TResourcePtr<T>::release's T* against
+            # TResourcePtr<TTextResource>::release's TTextResource*).
+            def declared_by(o):
+                return dict(zip(d.template_parameters, template_arguments(o.name)))
             exact = [o for o in written if o.declaration_only
                      and o.type_index == d.declaration_only_type
                      and o.argument_types is not None
-                     and tuple(declared(t) for t in o.argument_types)
-                     == tuple(declared(t) for t in definition_arguments)
+                     and tuple(type_identity(t) for t in o.argument_types)
+                     == tuple(type_identity(instantiate(t, declared_by(o)))
+                              for t in definition_arguments)
                      and o.const == d.const and o.return_type and d.return_type
-                     and declared(o.return_type) == declared(d.return_type)]
+                     and type_identity(o.return_type)
+                     == type_identity(instantiate(d.return_type, declared_by(o)))]
             if (len(exact) != 1 or len(written) != 1 or not d.inline or not d.member
                     or d.class_offset is None or not d.file.startswith('include/')
                     or d.inline_origin or d.va is not None):
