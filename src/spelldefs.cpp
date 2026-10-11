@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -192,6 +193,8 @@ MAC_ADDRESS(0x18e8f4, 0x3a4)
 static void initializeSpellTraits(
     int id, const std::vector<char*, std::allocator<char*> >& resource)
 {
+    assert(id >= 0 && id < kNumSpellsAndCreatureEffects);
+    assert(resource.size() >= 33);
     TSpellTraits& traits = g_spellTraitsImp[id];
 
     DATA_COMPGEN_GUARD(0x006a3650, spellStringsGuard, spellNames)
@@ -227,18 +230,22 @@ static void initializeSpellTraits(
         ++column;
     }
 
+    assert(column == SPELL_TRAITS_COLUMN_POWER_FACTOR);
     traits.m_power_factor = atoi(resource[column++]);
 
+    assert(column == SPELL_TRAITS_COLUMN_MASTERY_BONUS);
     for (i = 0; i < 4; ++i) {
         traits.m_mastery_bonus[i] = atoi(resource[column]);
         ++column;
     }
 
+    assert(column == SPELL_TRAITS_COLUMN_TOWN_CHANCE);
     for (i = 0; i < 9; ++i) {
         traits.m_townGetsItChance[i] = atoi(resource[column]);
         ++column;
     }
 
+    assert(column == SPELL_TRAITS_COLUMN_AI_VALUE);
     for (i = 0; i < 4; ++i) {
         traits.m_AI_value[i] = atoi(resource[column]);
         ++column;
@@ -246,7 +253,7 @@ static void initializeSpellTraits(
 
     DATA(0x006a3798)
     static TAutoStrPtr spellDescriptions[kNumSpellsAndCreatureEffects][4];
-
+    assert(column == SPELL_TRAITS_COLUMN_DESCRIPTION);
     for (i = 0; i < 4; ++i) {
         spellDescriptions[id][i].set(
             new char[strlen(resource[column]) + 1]);

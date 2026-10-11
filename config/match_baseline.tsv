@@ -1118,7 +1118,7 @@ creature_bank	?initializeCreatureBankTraits@@YIEXZ	100.0000	100.0000	100.0000	0x
 creaturetype	??1TAutoStrPtr@?A0xf10867bd5b3ccba5@@QAE@XZ	100.0000	100.0000	100.0000	0x7b7b0	tokens1:3ee87be2a632
 creaturetype	?InitializeCreatureTypeTraitsTable@@YIEXZ	100.0000	100.0000	100.0000	0x7b290	tokens1:05701ff1ea42
 creaturetype	?downgradedCreatureType@@YI?AW4TCreatureType@@W41@@Z	100.0000	100.0000	100.0000	0x7b220	tokens1:7afb6baed6ad
-creaturetype	?initializeCreatureTypeTraits@@YIXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	100.0000	100.0000	100.0000	0x7b480	tokens1:2d00ad269f70
+creaturetype	?initializeCreatureTypeTraits@@YIXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	100.0000	100.0000	100.0000	0x7b480	tokens1:4e6ef56fae23
 creaturetype	?isBaseCreature@@YIHW4TCreatureType@@@Z	100.0000	100.0000	100.0000	0x7b120	tokens1:1d882ba7c317
 creaturetype	?isSiegeWeapon@@YIEW4TCreatureType@@@Z	100.0000	100.0000	100.0000	0x7b180	tokens1:a65dc70c527e
 creaturetype	?upgradedCreatureType@@YI?AW4TCreatureType@@W41@@Z	100.0000	100.0000	100.0000	0x7b1a0	tokens1:de3df681f3df
@@ -2133,7 +2133,7 @@ game	?test@?$bitset@$07@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0xcfef0	-
 game	?test@?$bitset@$0BM@@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0xd17d0	-
 game	?test@?$bitset@$0IA@@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0xd4e50	-
 game	?test@?$bitset@$0JB@@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0xcfad0	-
-game	?transmitSaveGame@game@@QAEHHH_N0@Z	97.4042	97.4264	97.4264	0xcafd0	tokens1:4a480194c767
+game	?transmitSaveGame@game@@QAEHHH_N0@Z	97.4264	97.4264	97.4264	0xcafd0	tokens1:4a480194c767
 game	?turnOffAIMusic@game@@QAEXXZ	100.0000	100.0000	100.0000	0xc6fd0	tokens1:09ac63bef778
 game	?turnOnAIMusic@game@@QAEXXZ	100.0000	100.0000	100.0000	0xc6f80	tokens1:b9f191ddf209
 game	?updateBonus@generator@@QAEXXZ	100.0000	100.0000	100.0000	0xb87a0	tokens1:9bea0f215987
@@ -2166,7 +2166,7 @@ gzinflatebuf	??1TGzInflateBuf@@UAE@XZ	100.0000	100.0000	100.0000	0xd6820	tokens1
 gzinflatebuf	??_GTGzInflateBuf@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xd67f0	-
 gzinflatebuf	?_getC@TGzInflateBuf@@AAEHXZ	100.0000	100.0000	100.0000	0xd5fd0	tokens1:fee47687ecfd
 gzinflatebuf	?_mustGetC@TGzInflateBuf@@AAEHXZ	100.0000	100.0000	100.0000	0xd6ba0	tokens1:5be6fa880b72
-gzinflatebuf	?underflow@TGzInflateBuf@@UAEHXZ	100.0000	100.0000	100.0000	0xd6920	tokens1:b8bff8a15d87
+gzinflatebuf	?underflow@TGzInflateBuf@@UAEHXZ	100.0000	100.0000	100.0000	0xd6920	tokens1:7423c79708e1
 gzio	@check_header@4	100.0000	100.0000	100.0000	0x206490	-
 gzio	@destroy@4	100.0000	100.0000	100.0000	0x206640	-
 gzio	@do_flush@8	100.0000	100.0000	100.0000	0x2069c0	-
@@ -2447,7 +2447,7 @@ kb	?memError@@YIXXZ	100.0000	100.0000	100.0000	0xf42c0	tokens1:1ba3cc8bae3d
 kb	?normalDialog@@YIXPBDHHHHHHHHHHH@Z	100.0000	100.0000	100.0000	0xf6570	tokens1:3256171b57ce
 kb	?normalDialogHandler@@YIHAAVmessage@@@Z	100.0000	100.0000	100.0000	0xf08d0	tokens1:290ebd6d5d36
 kb	?normalDialogTimeOut@@YIXPBDHHHHHHHHHHH@Z	100.0000	100.0000	100.0000	0xf6530	tokens1:ae15beacb170
-kb	?oldmain@@YIHXZ	88.5904	88.5904	88.6306	0xee3e0	tokens1:40c300a1cb50
+kb	?oldmain@@YIHXZ	88.5882	88.5904	88.6306	0xee3e0	tokens1:40c300a1cb50
 kb	?pickLoadGame@@YIHXZ	100.0000	100.0000	100.0000	0xf0610	tokens1:e6bf0ad066ce
 kb	?playFramedVideo@@YIXHPBD@Z	100.0000	100.0000	100.0000	0xee1b0	tokens1:9fc70bf01c6c
 kb	?playerDead@@YIXH@Z	100.0000	100.0000	100.0000	0xf11a0	tokens1:19e6e75948ac
@@ -2745,8 +2745,8 @@ objecttype	??0?$num_get@DV?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@st
 objecttype	??0?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@ABI@Z	100.0000	100.0000	100.0000	0x117c30	-
 objecttype	??0?$pair@Viterator@?$_Tree@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@2@U_Kfn@?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IU?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@I@2@@2@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@I@2@@std@@_N@std@@QAE@ABViterator@?$_Tree@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@2@U_Kfn@?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IU?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@I@2@@2@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@I@2@@1@AB_N@Z	100.0000	100.0000	100.0000	0x11b150	-
 objecttype	??0TAllTerrainSlotTraits@?A0xc951d64d8fcc975a@@QAE@XZ	100.0000	100.0000	100.0000	0x1144b0	tokens1:cc83f6e75656
-objecttype	??0TCategorySlotTraits@?A0xc951d64d8fcc975a@@QAE@H@Z	100.0000	100.0000	100.0000	0x114510	tokens1:acc50efa1961
-objecttype	??0TTerrainSlotTraits@?A0xc951d64d8fcc975a@@QAE@W4TTerrainType@@@Z	100.0000	100.0000	100.0000	0x1142a0	tokens1:1f811c890655
+objecttype	??0TCategorySlotTraits@?A0xc951d64d8fcc975a@@QAE@H@Z	100.0000	100.0000	100.0000	0x114510	tokens1:a21d68faa931
+objecttype	??0TTerrainSlotTraits@?A0xc951d64d8fcc975a@@QAE@W4TTerrainType@@@Z	100.0000	100.0000	100.0000	0x1142a0	tokens1:1a9f9efd31b7
 objecttype	??0invalid_argument@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x116f30	-
 objecttype	??0logic_error@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x44e0	-
 objecttype	??0runtime_error@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x1bc30	-
@@ -2796,7 +2796,7 @@ objecttype	?_Tidy@?$_Tidyfac@V?$ctype@D@std@@@std@@SAXXZ	100.0000	100.0000	100.0
 objecttype	?_Tidy@?$_Tidyfac@V?$num_get@DV?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@@std@@SAXXZ	100.0000	100.0000	100.0000	0x11b170	-
 objecttype	?_Xinv@?$bitset@$08@std@@ABEXXZ	100.0000	100.0000	100.0000	0x117680	-
 objecttype	?_Xinv@?$bitset@$0DA@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x116e40	-
-objecttype	?_setTriggerMask@TObjectType@@QAEAAU1@ABV?$bitset@$0DA@@std@@@Z	100.0000	100.0000	100.0000	0x114a60	tokens1:e3487da877cc
+objecttype	?_setTriggerMask@TObjectType@@QAEAAU1@ABV?$bitset@$0DA@@std@@@Z	100.0000	100.0000	100.0000	0x114a60	tokens1:b644f87b565b
 objecttype	?clear@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z	100.0000	100.0000	100.0000	0x117af0	-
 objecttype	?compare@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEHABV12@@Z	100.0000	100.0000	100.0000	0x11b8b0	-
 objecttype	?compare@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEHIIPBDI@Z	100.0000	100.0000	100.0000	0x11b910	-
@@ -2830,7 +2830,7 @@ objecttype	?insert@?$vector@UTObjectType@@V?$allocator@UTObjectType@@@std@@@std@
 objecttype	?insert@?$vector@U_TImageInfo@TObjectType@@V?$allocator@U_TImageInfo@TObjectType@@@std@@@std@@QAEPAU_TImageInfo@TObjectType@@PAU34@ABU34@@Z	100.0000	100.0000	100.0000	0x116c10	-
 objecttype	?ipfx@?$basic_istream@DU?$char_traits@D@std@@@std@@QAE_N_N@Z	100.0000	100.0000	100.0000	0x115ca0	-
 objecttype	?is@?$ctype@D@std@@QBE_NFD@Z	100.0000	100.0000	100.0000	0x119500	-
-objecttype	?load@TObjectTypeTable@@QAEXPAD@Z	100.0000	100.0000	100.0000	0x114d80	tokens1:fbff85d76d39
+objecttype	?load@TObjectTypeTable@@QAEXPAD@Z	100.0000	100.0000	100.0000	0x114d80	tokens1:5d7550fac53c
 objecttype	?replace@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@IIPBDI@Z	100.0000	100.0000	100.0000	0x115a80	-
 objecttype	?rfind@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z	100.0000	100.0000	100.0000	0x115c20	-
 objecttype	?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ	100.0000	100.0000	100.0000	0x117b10	-
@@ -3194,7 +3194,7 @@ resourcemanager	??_G?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@
 resourcemanager	??_G?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x15db10	-
 resourcemanager	??_Gt_lod_file_adapter@?A0xd38fcb16638c5270@ResourceManager@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x15a7d0	-
 resourcemanager	??_Gt_stdio_file_adapter@?A0xd38fcb16638c5270@ResourceManager@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x15a7a0	-
-resourcemanager	?AddToCache@ResourceManager@@YIXPAVresource@@@Z	100.0000	100.0000	100.0000	0x1594b0	tokens1:2632b0e2d783
+resourcemanager	?AddToCache@ResourceManager@@YIXPAVresource@@@Z	100.0000	100.0000	100.0000	0x1594b0	tokens1:2d297743ecec
 resourcemanager	?Close@ResourceManager@@YIXXZ	100.0000	100.0000	100.0000	0x15a550	tokens1:d940fa8465e4
 resourcemanager	?GetBackdrop@ResourceManager@@YIXPBDPAVBitmap16Bit@@@Z	100.0000	100.0000	100.0000	0x15cf00	tokens1:2d4152ebaa13
 resourcemanager	?GetBitmap16@ResourceManager@@YIPAVBitmap16Bit@@PBD@Z	100.0000	100.0000	100.0000	0x15afd0	tokens1:ddd97e2c986c
@@ -3386,7 +3386,7 @@ rmg	?generate@type_black_box_spells_def@@UAEPAVtype_object@@PAUTRmgObjectPropert
 rmg	?generate@type_flaggable_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134790	tokens1:4d4c9dfb953e
 rmg	?generate@type_key_tent_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134fd0	tokens1:4b31c008edf2
 rmg	?generate@type_prison_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x1348d0	tokens1:d300ab5e29da
-rmg	?generate@type_quest_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	99.7349	100.0000	100.0000	0x134b90	tokens1:1a99ba52691e
+rmg	?generate@type_quest_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134b90	tokens1:1a99ba52691e
 rmg	?generate@type_quest_experience_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134cc0	tokens1:ac65af518aaa
 rmg	?generate@type_quest_gold_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134db0	tokens1:7f44bc6555ac
 rmg	?generate@type_random_map_generator@@QAEEXZ	100.0000	100.0000	100.0000	0x149930	tokens1:80baf279359a
@@ -4055,9 +4055,9 @@ singleselectionwindow	?onGameHeaderInfoInitMsg@TSingleSelectionWindow@@QAE_NPAVC
 singleselectionwindow	?onGameHeaderInfoInitMsgEx@TSingleSelectionWindow@@QAEXPAVCNetMsg@@@Z	100.0000	100.0000	100.0000	0x18a780	tokens1:b9f9c72a63cb
 singleselectionwindow	?onGameHeaderInfoMsg@TSingleSelectionWindow@@QAE_NPAVCNetMsg@@@Z	100.0000	100.0000	100.0000	0x18aa40	tokens1:c58d1b550f99
 singleselectionwindow	?onGameTransmitInitMsg@TSingleSelectionWindow@@QAE_NPAVCNetMsg@@@Z	100.0000	100.0000	100.0000	0x189b20	tokens1:263a3adaf3eb
-singleselectionwindow	?onKeyPress@CEnterNameEdit@@UAEHPAVmessage@@@Z	99.8868	100.0000	100.0000	0x17cdc0	tokens1:19f51582875a
+singleselectionwindow	?onKeyPress@CEnterNameEdit@@UAEHPAVmessage@@@Z	100.0000	100.0000	100.0000	0x17cdc0	tokens1:19f51582875a
 singleselectionwindow	?onKeyPress@CSaveGameEdit@@UAEHPAVmessage@@@Z	100.0000	100.0000	100.0000	0x17d0b0	tokens1:3e0a02090019
-singleselectionwindow	?onKillFocus@CEnterNameEdit@@UAEXXZ	99.8710	100.0000	100.0000	0x17cee0	tokens1:af1981b52201
+singleselectionwindow	?onKillFocus@CEnterNameEdit@@UAEXXZ	100.0000	100.0000	100.0000	0x17cee0	tokens1:af1981b52201
 singleselectionwindow	?onMapFileNameMsg@TSingleSelectionWindow@@QAE_NPAVCNetMsg@@@Z	91.1860	91.1860	93.0332	0x189710	tokens1:3ac119cf2ca1
 singleselectionwindow	?onNameClick@TSingleSelectionWindow@@QAEXH@Z	100.0000	100.0000	100.0000	0x18b620	tokens1:9ab4056b5b4f
 singleselectionwindow	?onNewHostMsg@TSingleSelectionWindow@@QAEXPAVCNetMsg@@@Z	100.0000	100.0000	100.0000	0x18b510	tokens1:66f526e7e131
@@ -4211,7 +4211,7 @@ spellbookwindow	?open@TSpellbookWindow@@UAEHH_N@Z	100.0000	100.0000	100.0000	0x1
 spellbookwindow	?reset@TSpellbookWindow@@SIXXZ	100.0000	100.0000	100.0000	0x19ba80	tokens1:68c0b2c7fb61
 spellbookwindow	?windowHandler@TSpellbookWindow@@UAEHAAVmessage@@@Z	100.0000	100.0000	100.0000	0x19d040	tokens1:c899193341b8
 spelldefs	?InitializeSpellTraitsTable@@YIEXZ	100.0000	100.0000	100.0000	0x19e090	tokens1:a6c2f2385340
-spelldefs	?initializeSpellTraits@@YIXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	100.0000	100.0000	100.0000	0x19e150	tokens1:85871abe4b07
+spelldefs	?initializeSpellTraits@@YIXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	100.0000	100.0000	100.0000	0x19e150	tokens1:f43a91e7f027
 spelldefs	?spellTargetsASingleArmy@@YIEHH@Z	100.0000	100.0000	100.0000	0x19e060	tokens1:4f42a9e998f9
 spelldefs	__h3cg$spelldefs$static_dtor$abbreviatedSpellNames	100.0000	100.0000	100.0000	0x19e4d0	-
 spelldefs	__h3cg$spelldefs$static_dtor$spellDescriptions	100.0000	100.0000	100.0000	0x19e4b0	-

@@ -6,6 +6,7 @@
 #ifndef HOMM3_UNIQUESET_H
 #define HOMM3_UNIQUESET_H
 
+#include <assert.h>
 #include <map>
 #include <stddef.h>
 #include <vector>
@@ -20,16 +21,21 @@ public:
     {
         std::map<T, size_t>::iterator pItem = _m_map.find(item);
         if (pItem == _m_map.end()) {
-            // Loki asserts insResult.second here.
             std::pair<std::map<T, size_t>::iterator, bool> insResult =
                 _m_map.insert(std::map<T, size_t>::value_type(item, _m_apItem.size()));
+            assert(insResult.second);
             pItem = insResult.first;
             _m_apItem.push_back(pItem);
         }
         return pItem->second;
     }
     size_t numItems() const { return _m_apItem.size(); }
-    const T& get(size_t num) const { return _m_apItem[num]->first; }
+    const T& get(size_t num) const
+    {
+        assert(num < _m_apItem.size());
+        assert(_m_apItem[num]->second == num);
+        return _m_apItem[num]->first;
+    }
 
 private:
     std::map<T, size_t> _m_map;

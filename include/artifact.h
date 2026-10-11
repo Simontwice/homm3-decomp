@@ -3,6 +3,7 @@
 
 #include "va.h"
 
+#include <assert.h>
 #include <bitset>
 
 #include "artifact_type.h"
@@ -161,6 +162,8 @@ extern const TArtifactSlotTraits (&akArtifactSlotTraits)[19];
 DC_ADDRESS(0x037d88, 0x2c)
 inline bool artifactAllowedInSlot(TArtifact artifact, TArtifactSlot slot)
 {
+    assert(artifact >= 0 && artifact < ARTIFACT_COUNT);
+    assert(slot >= 0 && slot < kNumArtifactSlots);
     const std::bitset<kNumArtifactSlots + 1>& allowable =
         g_artifactSlotMasks[akArtifactTraits[artifact].m_allowableSlotMask];
     return allowable[slot];

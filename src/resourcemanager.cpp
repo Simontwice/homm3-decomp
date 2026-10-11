@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <map>
 #include <memory>
 #include <sstream>
@@ -161,6 +162,7 @@ MAC_ADDRESS(0x1521d0, 0x40)
 // hash/pointer array through 0x151ff4; that backend has no Windows tree key.
 void ResourceManager::AddToCache(resource* value)
 {
+    assert(*value->get_Name() != 0);
     g_resourceCache.insert(std::make_pair(value->get_Name(), value));
     value->AddRef();
 }

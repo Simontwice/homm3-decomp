@@ -3,6 +3,7 @@
 
 #include "va.h"
 
+#include <assert.h>
 #include <vector>
 
 #include "resource.h"
@@ -942,18 +943,29 @@ public:
 
     // Original: TSpreadsheetResource::GetNumberOfColumns; TextResource.h:113
     DC_ADDRESS(0x162910, 0x24)
-    int GetNumberOfColumns(int r) const { return Spreadsheet[r]->size(); }
+    int GetNumberOfColumns(int r) const
+    {
+        assert((r >= 0) && (r < Spreadsheet.size()));
+        return Spreadsheet[r]->size();
+    }
 
     // DC TextResource.h:120/124 (text.obj) returns const char* and
     // indexes the row and cell vectors directly. High-score defaults call
     // this accessor; their char* table entries require the explicit cast.
     DC_ADDRESS(0x162934, 0x28)
-    const char* GetSpreadsheet(int r, int c) const {
+    const char* GetSpreadsheet(int r, int c) const
+    {
+        assert((r >= 0) && (r < Spreadsheet.size()));
+        assert((c >= 0) && (c < Spreadsheet[r]->size()));
         return (*Spreadsheet[r])[c];
     }
 
     DC_ADDRESS(0x0508a4, 0x18)
-    const TStringVector& GetRow(int r) const { return *Spreadsheet[r]; }
+    const TStringVector& GetRow(int r) const
+    {
+        assert((r >= 0) && (r < Spreadsheet.size()));
+        return *Spreadsheet[r];
+    }
 
 private:
     TArray Spreadsheet;  // +0x1c (_First +0x20, _Last +0x24)

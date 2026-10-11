@@ -21,6 +21,7 @@
 // an unreferenced operator<< for TObjectType placed before operator>>, may
 // be admitted on this evidence alone. Until then 0x51b830 and its CRT slot
 // stay unverified.
+#include <assert.h>
 #include <iostream>
 #include <map>
 #include <stdlib.h>
@@ -150,6 +151,7 @@ VA(0x005142A0, 0x15)
 TTerrainSlotTraits::TTerrainSlotTraits(TTerrainType terrainType)
     : m_terrainType(terrainType)
 {
+    assert(terrainType >= 0 && terrainType < eTerrainRock);
 }
 
 VA_COMPGEN(0x005142C0, 0x21, SCALAR_DELETING_DTOR, TTerrainSlotTraits)
@@ -165,6 +167,8 @@ VA(0x00514510, 0x15)
 TCategorySlotTraits::TCategorySlotTraits(int category)
     : m_category(category)
 {
+    assert(category > TObjectType::SLOT_CATEGORY_0
+           && category <= TObjectType::SLOT_CATEGORY_5);
 }
 
 } // namespace
@@ -374,6 +378,8 @@ VA_COMPGEN(0x00517b50, 0x14, STD_CONSTRUCT, _TImageInfo)
 // return pItem->second) makes h3maped's retained add 0x491eed exact and
 // scores 94.36 here; the old separate result iterator, which Loki's
 // unoptimized add does not have, scores 99.15.
+// Loki's three asserts (not ported): any two are neutral, all three give
+// 87.98 (docs/vc6/inliner.md).
 VA(0x00514610, 0x317)
 MAC_ADDRESS(0x223aa4, 0x2b8)  // anchor-callee 0x514b80 per-row `>>`; anchor-global 0x6aba80 .msk cache; retail-only
 TObjectType& TObjectType::setImageName(
@@ -463,6 +469,7 @@ TObjectType& TObjectType::_setTriggerMask(const std::bitset<OBJECT_MASK_CELLS>& 
     m_hasTrigger = m_triggerMask.any();
     if (m_hasTrigger) {
         for (int y = 0;; ++y) {
+            assert(y < kMaxObjHeight);
             for (unsigned x = 0; x < 8; ++x) {
                 if (getBCellTrigger(x, y)) {
                     m_triggerCell = TTilePoint(x, y);
@@ -492,6 +499,7 @@ TObjectType& TObjectType::_setPassableMask(const std::bitset<OBJECT_MASK_CELLS>&
 MAC_ADDRESS(0x223e4c, 0x48)
 TObjectType& TObjectType::setTerrainMask(const std::bitset<kNumTerrainTypes>& mask)
 {
+    assert(!mask[eTerrainRock]);
     m_recommendedTerrainMask &= mask;
     _m_terrainMask = mask;
     return *this;
@@ -500,6 +508,8 @@ TObjectType& TObjectType::setTerrainMask(const std::bitset<kNumTerrainTypes>& ma
 MAC_ADDRESS(0x223e94, 0xc)
 TObjectType& TObjectType::setRecommendedTerrainMask(const std::bitset<kNumTerrainTypes>& mask)
 {
+    assert((mask & ~_m_terrainMask).none());
+    assert(!mask[eTerrainRock]);
     m_recommendedTerrainMask = mask;
     return *this;
 }
@@ -517,6 +527,8 @@ TObjectType& TObjectType::setExtra(int subtype)
 MAC_ADDRESS(0x223ea0, 0x8)
 TObjectType& TObjectType::setSlotCategory(int category)
 {
+    assert(category >= TObjectType::SLOT_CATEGORY_0
+           && category <= TObjectType::SLOT_CATEGORY_5);
     m_slotCategory = category;
     return *this;
 }
@@ -574,12 +586,15 @@ VA(0x00514d80, 0x284)
 MAC_ADDRESS(0x224224, 0x244)  // anchor-callee ResourceManager::GetText + anchor-bracket NewfullMap::loadObjectTypeTemplates; retail-only
 void TObjectTypeTable::load(char* filename)
 {
+    assert(filename != 0);
     TTextResource* text = ResourceManager::GetText(filename);
     if (text == 0)
         throw TRuntimeError();
 
     try {
+        assert(text->GetNumberOfStrings() >= 1);
         int count = atoi(text->GetText(OBJECT_TYPE_TEXT_COUNT));
+        assert(text->GetNumberOfStrings() >= count + 1);
         m_objectTypes.resize(count);
         for (int i = 0; i < count; ++i) {
             std::istrstream row(text->GetText(i + 1));

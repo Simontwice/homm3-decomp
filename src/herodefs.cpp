@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -323,6 +324,8 @@ DC_ADDRESS(0x0d5bc0, 0x10c)
 MAC_ADDRESS(0x107a74, 0x134)
 static void InitializeHeroTraits(int id, const TSpreadsheetResource::TStringVector& values)
 {
+    assert(id >= 0 && id < 156);
+    assert(values.size() >= 10);
     THeroTraits& traits = g_heroTraitsStorage[id];
 
     DATA_COMPGEN_GUARD(0x00698b99, heroStringsGuard, heroStrings)
@@ -346,6 +349,8 @@ DC_ADDRESS(0x0d5d28, 0x1a6)
 MAC_ADDRESS(0x107c38, 0x1d8)
 static void InitializeHeroClassTraits(int id, const TSpreadsheetResource::TStringVector& values)
 {
+    assert(id >= 0 && id < kNumHeroClasses);
+    assert(values.size() >= 42 + TOWN_TYPE_COUNT);
     THeroClassTraits& traits = g_heroClassTraits[id];
 
     DATA_COMPGEN_GUARD(0x00698b9a, heroClassStringsGuard,
@@ -381,6 +386,8 @@ DC_ADDRESS(0x0d5ee8, 0x194)
 MAC_ADDRESS(0x107e40, 0x16c)
 static void InitializeSSkillTraits(int id, const TSpreadsheetResource::TStringVector& values)
 {
+    assert(id >= 0 && id < kNumSecSkills);
+    assert(values.size() >= 4);
     TSSkillTraits& traits = g_sSkillTraitsStorage[id];
 
     DATA_COMPGEN_GUARD(0x00698b98, secondarySkillStringsGuard,

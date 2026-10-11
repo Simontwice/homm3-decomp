@@ -38,4 +38,14 @@ unsigned char InitializeSpellTraitsTable();
 // only the public DC array name survives.
 extern TSpellTraits g_spellTraitsImp[kNumSpellsAndCreatureEffects];
 
+// The first sptraits.txt column of each group after the mana costs, as
+// InitializeSpellTraits's asserts check them.
+enum ESpellTraitsColumn {
+    SPELL_TRAITS_COLUMN_POWER_FACTOR = 11,
+    SPELL_TRAITS_COLUMN_MASTERY_BONUS = 12,
+    SPELL_TRAITS_COLUMN_TOWN_CHANCE = 16,
+    SPELL_TRAITS_COLUMN_AI_VALUE = 25,
+    SPELL_TRAITS_COLUMN_DESCRIPTION = 29
+};
+
 #endif  /* HOMM3_SPELLDEFS_H */

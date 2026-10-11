@@ -103,6 +103,7 @@ h3maped_o1_ob2_gr_windows = [
   "/Gr",
   "/GX",
   "/GR",
+  "/DNDEBUG",
   "/D_WINDOWS",
 ]
 
@@ -140,6 +141,7 @@ libraries_o2_gr_windows = [
   "/MT",
   "/GX",
   "/GR",
+  "/DNDEBUG",
   "/D_WINDOWS",
 ]
 
@@ -151,6 +153,7 @@ libraries_fastcall_o2_gr_windows = [
   "/Gr",
   "/GX",
   "/GR",
+  "/DNDEBUG",
   "/D_WINDOWS",
 ]
 

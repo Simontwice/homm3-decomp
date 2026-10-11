@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -340,6 +341,8 @@ MAC_ADDRESS(0x088dec, 0x320)
 void initializeCreatureTypeTraits(int id,
     const std::vector<char*, std::allocator<char*> >& values)
 {
+    assert(id >= 0 && id <= g_creatureTypeLast);
+    assert(values.size() >= 24);
     TCreatureTypeTraits& traits = g_creatureTypeTraitsStorage[id];
 
     DATA_COMPGEN_GUARD(0x00696640, creatureTypeStringsGuard,

@@ -4,6 +4,7 @@
 #include "va.h"
 
 #include <algorithm>
+#include <assert.h>
 #include <bitset>
 #include <functional>
 #include <stdarg.h>
@@ -555,6 +556,8 @@ DC_ADDRESS(0x050058, 0x7ba)
 static void initializeArtifactTraits(int id,
     const TSpreadsheetResource::TStringVector& resource)
 {
+    assert(id >= 0 && id < ARTIFACT_COUNT);
+    assert(resource.size() >= 23);
     TArtifactTraits& traits = g_artifactTraitsStorage[id];
     std::bitset<kNumArtifactSlots + 1> allowableSlots;
     int column;
@@ -579,8 +582,10 @@ static void initializeArtifactTraits(int id,
         traits.m_class = 4;
     else if (classCell[0] == 'T')
         traits.m_class = 2;
-    else
+    else {
+        assert(classCell[0] == 'S');
         traits.m_class = 1;
+    }
 }
 
 VA_COMPGEN(0x0044D380, 0x60, BITSET_SET, Bitset19)

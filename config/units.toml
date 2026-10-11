@@ -60,6 +60,12 @@ victor_kernels_o2_ogoff_ml_gd_windows = [
   "/DNO_STRICT",
 ]
 
+# The game's own objects. NDEBUG (docs/vc6/inliner.md, "Statements the
+# release build compiles out"): the game's sources assert - Dreamcast's line
+# tables leave Loki h3maped's assert lines unrecorded in the same functions
+# (spelldefs InitializeSpellTraits' seven at their exact lines,
+# ResourceManager::AddToCache, TextResource.h's three accessors, the traits
+# initializers) - while retail has no _assert and no assertion text.
 game_o2_mt_gr_windows = [
   "/nologo",
   "/c",
@@ -70,6 +76,7 @@ game_o2_mt_gr_windows = [
   "/MT",
   "/Gr",
   "/GX",
+  "/DNDEBUG",
   "/D_WINDOWS",
 ]
 

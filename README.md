@@ -17,7 +17,7 @@ executables.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           4,530 |   98.92% | last measured score                            |
+| CUR   |           4,533 |   98.92% | last measured score                            |
 | MAX   |           4,534 |   98.92% | best result for each function's current source |
 | HIST  |           4,551 |   99.09% | all-time peak across source revisions          |
 
@@ -45,7 +45,7 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- mac-match-score:start -->
 
-**Mac reference `Heroes_III_raw.pef`: 64.06% matched** — 705 / 1,534 paired functions exact, over 456,496 compared bytes (last `homm3 mac build` checkpoint).
+**Mac reference `Heroes_III_raw.pef`: 64.06% matched** — 704 / 1,534 paired functions exact, over 456,496 compared bytes (last `homm3 mac build` checkpoint).
 
 <!-- mac-match-score:end -->
 

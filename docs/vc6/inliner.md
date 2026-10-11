@@ -398,27 +398,72 @@ increase over the same body without the statement:
 | a never-read local: `unsigned char f = 0;`, each `f = 1;` | 4 each | |
 
 The VERIFY forms evaluate `e`, so they are free only while `e` has no
-side effects (VC6 deletes the dead loads). The game profile does not
-define `NDEBUG`, so a plain `assert` there would emit `_assert` calls;
-the project's carrier is `HOMM3_RELEASE_VERIFY`.
+side effects (VC6 deletes the dead loads). Every image defines `NDEBUG`
+in each profile that compiles project headers (the game, the map
+editor's own, RMG and Libraries objects, the campaign editor's own and
+Libraries objects; zlib and Victor include none), so a plain `assert` is
+`((void)0)` everywhere. `HOMM3_RELEASE_VERIFY` remains the carrier for
+invariants whose evidence is a measured `e + 3` cost rather than an
+original assert.
+
+Evidence for `NDEBUG` in the game (2026-10-11):
+
+* The game's sources assert. Dreamcast's NB11 line tables (an optimized
+  `Release_with_debug` build with no assertion runtime) leave unrecorded
+  exactly the lines Loki h3maped's asserts name, in the game's own copies
+  of the shared files: spelldefs.cpp InitializeSpellTraits's seven
+  asserts at the same line numbers (336, 337, 385, 388, 397, 406, 417;
+  the only alignments of the seven within 600 lines are offsets 0 and 2),
+  resourcemanager.cpp AddToCache (`{` 2397, unrecorded 2398, insert 2399,
+  AddRef 2400), TextResource.h's GetNumberOfColumns, GetSpreadsheet and
+  GetRow (each assert line unrecorded at one common offset of 6, while
+  the assert-free GetNumberOfRows and GetText have no gap), artifact.h
+  artifactAllowedInSlot, CreatureType.h GetArmyName, the three herodefs
+  initializers, InitializeCreatureTypeTraits and InitializeArtifactTraits
+  (two unrecorded lines after each opening brace), and CSpriteFrame's
+  Encode (three asserts in a six-line leading gap).
+* Windows HEROES3.EXE has no `_assert`, no CRT assertion message and no
+  assertion text; its only source paths are an RTTI anonymous namespace
+  (ForceFeedback.cpp), Remote.cpp and WINGRAPH.CPP. The asserts are
+  therefore compiled out: `NDEBUG`, the define MSVC's Release
+  configuration pairs with the profile's `_WINDOWS`.
+* The same argument holds for the editors' RMG and Libraries objects:
+  rmg.cpp and the Libraries sources include TextResource.h, and neither
+  editor has assertion code. The Classic Mac PEF has no assertion text or
+  MSL assertion routine either, so the CodeWarrior profiles define
+  `NDEBUG` too.
+* Adding `/DNDEBUG` alone is byte-neutral: all 413 objects of the three
+  images compare equal except for VC6's per-second anonymous-namespace
+  numbers and the `.bss`/`.data` static order those names hash into,
+  which differ between any two compiles.
+* The Loki game (1.3.1a) keeps `__assert_fail` only for linux.cpp,
+  loki_config.c, loki_paths.c, libstdc++'s bastring.cc and two
+  `screen_width % 2 == 0` checks Loki added to winmgr's fades. It links
+  CSpriteFrame, TTextResource and the traits loaders without any of their
+  asserts' text, so Loki built its NWC-derived objects with their
+  asserts compiled out as well; it is no evidence against them.
 
 Where the original may have had such statements:
 
-* Windows retail has no `_assert` and no assertion text; its only
-  source-path strings are `Remote.cpp` and `WINGRAPH.CPP`. The Dreamcast
-  build has no assertion runtime either (`docs/matching/dc-line-tables.md`).
-* The Loki game (1.3.1a) imports `__assert_fail` and keeps its asserts
-  live (`bastring.cc` checks instantiated in game objects), yet its 13
-  sites are `linux.cpp`, `loki_config.c`, `loki_paths.c`, libstdc++ and
-  two `screen_width % 2 == 0` checks Loki added to winmgr's
-  fadeToBlack/fadeFromBlack (Windows uses the fixed 800-pixel screen).
-  The game sources Loki compiled therefore had no `<assert.h>` asserts.
-* The Loki map editor keeps 1,938 assert sites with file, line, text
-  and function (GameMap.cpp 287, GUIGameObject.cpp 198, MapView.cpp 139,
-  CSpriteFrame.cpp 71, GzBuf.cpp 24, ...). They describe editor objects
-  and the editor's copies of shared files; the Loki game's copies of the
-  same engine files (CSpriteFrame, GzBuf) assert nothing. They are a
-  lever for h3maped (`/DNDEBUG`, 2 tuples each), not for the game.
+* Loki h3maped keeps 1,938 assert sites with file, line, text and
+  function (retail store `editors/loki-1.0/h3maped.asserts.tsv`). Its
+  shared files (CSpriteFrame.cpp 71, GzBuf.cpp 24, ObjectType.cpp 17,
+  SpellDefs.cpp 7, HeroDefs.cpp 6, UniqueSet.h 6, TextResource.h 4,
+  CreatureType.cpp 4, Artifact.cpp/.h 5, ResourceManager.cpp 1, ...) are
+  game source too. Port one where its anchor statement survives in the
+  Complete body; Loki's are RoE-era bodies.
+* Three functions take Loki's full set only at a loss and keep none of
+  it (choosing which proven asserts to keep would steer the inliner):
+  - TObjectType::setImageName: any two of its three asserts are neutral
+    (99.15), all three give 87.98. Its Complete body is a revision of
+    Loki's (it reads the mask through an LODFile handle).
+  - TGzInflateBuf's constructor: Loki's three asserts take the campaign
+    editor's /Ob1 copy from 93.45 to 99.95 (TDataError then expands at
+    retail's _mustGetC sites) but the game's /Ob2 copy from 100 to 94.98;
+    any one alone is neutral in the game. The asserts fit the editor,
+    so the game's copy may differ elsewhere (open lead).
+  - getArmyName (CreatureType.h; DC 296..307 leaves 297..298
+    unrecorded): its assert costs combatMessage (0x492840) 100 -> 98.07.
 * A Dreamcast line gap alone is weak: most gaps are braces, blank lines
   and comments. CodeView scope records are stronger. An empty
   coincident scope pair is a braced block that emitted nothing, and a

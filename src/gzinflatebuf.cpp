@@ -31,6 +31,7 @@
 #include "va.h"
 
 #include <algorithm>
+#include <assert.h>
 #include <stdexcept>
 #include <string>
 
@@ -73,6 +74,8 @@ TGzDeflateBuf::TGzDeflateBuf(std::streambuf* pDestBuf, int level, int strategy)
       _m_pOutBuf(0),
       m_crc(crc32(0, 0, 0))
 {
+    assert(pDestBuf != 0);
+
     _m_pInBuf = new char[2 * GZ_WINDOW_SIZE];
     if (_m_pInBuf == 0)
         throw TAllocationFailure();
@@ -92,6 +95,7 @@ TGzDeflateBuf::TGzDeflateBuf(std::streambuf* pDestBuf, int level, int strategy)
     int result = deflateInit2(&_m_zstream, level, Z_DEFLATED, -MAX_WBITS, 8, strategy);
     if (result == Z_MEM_ERROR)
         throw TAllocationFailure();
+    assert(result == Z_OK);
 
     char header[10];
     std::fill_n(header, sizeof(header), '\0');
@@ -106,16 +110,21 @@ TGzDeflateBuf::TGzDeflateBuf(std::streambuf* pDestBuf, int level, int strategy)
 
 TGzDeflateBuf::~TGzDeflateBuf()
 {
+    assert(pptr() >= _m_pInBuf && pptr() <= _m_pInBuf + GZ_WINDOW_SIZE);
+
     _m_zstream.next_in = zlibBytes(_m_pInBuf);
     _m_zstream.avail_in = pptr() - _m_pInBuf;
     m_crc = crc32(m_crc, _m_zstream.next_in, _m_zstream.avail_in);
 
     int result;
     while ((result = deflate(&_m_zstream, Z_FINISH)) == Z_OK || result == Z_BUF_ERROR) {
+        assert(result == Z_OK
+               || (result == Z_BUF_ERROR && _m_zstream.avail_out == 0));
         _m_pDestBuf->sputn(_m_pOutBuf, GZ_WINDOW_SIZE - _m_zstream.avail_out);
         _m_zstream.next_out = zlibBytes(_m_pOutBuf);
         _m_zstream.avail_out = GZ_WINDOW_SIZE;
     }
+    assert(result == Z_STREAM_END);
     _m_pDestBuf->sputn(_m_pOutBuf, GZ_WINDOW_SIZE - _m_zstream.avail_out);
 
     _putLong(m_crc);
@@ -136,6 +145,8 @@ void TGzDeflateBuf::_putLong(unsigned long x)
 
 int TGzDeflateBuf::sync()
 {
+    assert(pptr() >= _m_pInBuf && pptr() <= _m_pInBuf + GZ_WINDOW_SIZE);
+
     _m_zstream.next_in = zlibBytes(_m_pInBuf);
     _m_zstream.avail_in = pptr() - _m_pInBuf;
     m_crc = crc32(m_crc, _m_zstream.next_in, _m_zstream.avail_in);
@@ -163,6 +174,8 @@ int TGzDeflateBuf::sync()
 
 int TGzDeflateBuf::overflow(int c)
 {
+    assert(pptr() >= _m_pInBuf && pptr() <= _m_pInBuf + GZ_WINDOW_SIZE);
+
     if (c != traits_type::eof()) {
         _m_zstream.next_in = zlibBytes(_m_pInBuf);
         _m_zstream.avail_in = pptr() - _m_pInBuf;
@@ -216,8 +229,10 @@ int TGzInflateBuf::_getC()
 // twice from the constructor's gzip-magic fallback. Its byte argument is
 // passed at both call sites but the helper only rewinds the input cursor.
 MAC_ADDRESS(0x220ac8, 0x1c)
-void TGzInflateBuf::_putBackC(char)
+void TGzInflateBuf::_putBackC(char c)
 {
+    assert(_m_zstream.next_in > zlibBytes(_m_pInBuf));
+    assert(static_cast<char>(*(_m_zstream.next_in - 1)) == c);
     --_m_zstream.next_in;
     ++_m_zstream.avail_in;
 }
@@ -250,6 +265,9 @@ void TGzInflateBuf::_putBackC(char)
 // `if (flags & 0x04)` tests, unnamed method check and named inflateInit2
 // result shrink this body so that only the second FHCRC read expands
 // TDataError, as in retail.
+// Loki's three asserts (pSrcBuf, _m_pSrcBuf, inflateInit2's Z_OK) take the
+// campaign editor's copy 93.45 -> 99.95 but the game's 100 -> 94.98; not
+// ported (docs/vc6/inliner.md).
 VA(0x004d6050, 0x58A)
 MAC_ADDRESS(0x220ae4, 0x82c)  // anchor-vtable ??_7TGzInflateBuf@@6B@ + anchor-import @inflateInit2_@16, retail-only
 TGzInflateBuf::TGzInflateBuf(std::streambuf* pSrcBuf)
@@ -407,6 +425,10 @@ VA(0x004d6920, 0x251)
 MAC_ADDRESS(0x2214c0, 0x4d4)  // anchor-vtable ??_7TGzInflateBuf@@6B@ slot 4 + anchor-import @inflate@8, retail-only
 int TGzInflateBuf::underflow()
 {
+    assert(gptr() == egptr());
+    assert(_m_zstream.next_out == zlibBytes(_m_pOutBuf));
+    assert(_m_zstream.avail_out == GZ_WINDOW_SIZE);
+
     while (_m_zstream.avail_out > 0) {
         if (_m_zstream.avail_in <= 0 && m_sourceEof)
             break;
