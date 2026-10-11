@@ -80,3 +80,31 @@ source shape of the construction differs. Seen so far:
 - Not yet resolved by shape: calculateNormalDialogSize's zero loop (both
   arrays, retail second array first), SCampaign::completeCurrentMap,
   fillZoneArea's flag byte, TObstacleToolkit's constructor locals.
+
+## Game and map-editor disagreements on the same RMG source
+
+When one spelling helps one image and hurts the other, a third factor
+differs. For src/rmg.cpp (2026-10-11, after the editor RMG became `__cdecl`):
+
+- **Wrong shape, not a build difference.** isPlacementBlocked and
+  addObject: descending cursors and scalar lookups split the images
+  (editor +15/+6, game -11.5/-1.25). Mac 0x22e0a0/0x22e96c computes each
+  cell's position from the anchor (a TRmgMapPosition temporary; one local
+  whose level is set once). That spelling is exact in both images.
+- **Inline budget, not source.** createMonolithConnection's second two-way
+  registry: retail h3maped calls push_back there, so push_back is the
+  source; the game's retail expands push_back and calls the one-element
+  insert, while our game build expands that insert too. `insert(end(), x)`
+  in the game (+2) only skips one inline level.
+- **Profiles are per image, not per object.** h3maped's RMG band
+  0x499bda-0x4af28f is one object: a single terrain-mask initializer run
+  opens it, and the next run opens random_object_placer (0x4af2b5). Its
+  controls: /O2 265 worse, /Oy- 79 worse (1 better), /Ob1 88 worse
+  (1 better), no /GX 94 worse. The game's RMG: /O1 252 worse, no /Oy- 236
+  worse, no /Op 6 worse, no /Ob2 142 worse.
+- **Headers differ.** The editor's RMG object includes terrain.h (its
+  mask initializers open the band, as in every editor object); the game's
+  RMG TU does not (no run between quicktownwindow 0x530d30 and the RMG's
+  first body 0x530e20). Forcing terrain.h into our h3maped rmg moves no
+  scored body, so no per-image include is adopted yet; the initializers
+  stay unclaimed.
