@@ -784,6 +784,16 @@ enum {
     IDC_EQUIP_WHERE_STATIC = 1668
 };
 
+// The hero prototype sheet's pages (HeroPrototypeProps*Page.cpp).
+enum {
+    IDD_HERO_PROTOTYPE_PROPS_GENERAL = 354,
+    IDD_HERO_PROTOTYPE_PROPS_BIOGRAPHY = 355,
+    IDD_HERO_PROTOTYPE_PROPS_PRI_SKILLS = 356,
+    IDD_HERO_PROTOTYPE_PROPS_SEC_SKILLS = 359,
+    IDD_HERO_PROTOTYPE_PROPS_ARTIFACTS = 361,
+    IDD_HERO_PROTOTYPE_PROPS_SPELLS = 363
+};
+
 // The artifacts list of the hero and hero prototype artifacts pages
 // (ArtifactsDlg.cpp).
 enum {

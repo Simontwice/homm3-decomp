@@ -88,6 +88,7 @@ public:
     class TSpells : public std::bitset<kNumSpells> {
     public:
         TSpells() {}
+        TSpells(const std::bitset<kNumSpells>& spells) : std::bitset<kNumSpells>(spells) {}
         TSpells(TRawIStream* pIStream, int version) { read(pIStream, version); }
 
         void read(TRawIStream* pIStream, int version);

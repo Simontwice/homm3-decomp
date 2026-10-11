@@ -1096,3 +1096,28 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "HeroPropsArtifactsPage"
 source = "src/editor/HeroPropsArtifactsPage.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsBiographyPage"
+source = "src/editor/HeroPrototypePropsBiographyPage.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsPriSkillsPage"
+source = "src/editor/HeroPrototypePropsPriSkillsPage.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsSecSkillsPage"
+source = "src/editor/HeroPrototypePropsSecSkillsPage.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsArtifactsPage"
+source = "src/editor/HeroPrototypePropsArtifactsPage.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "HeroPrototypePropsSpellsPage"
+source = "src/editor/HeroPrototypePropsSpellsPage.cpp"
+flags = "editor_o1_ob2_gr_windows"
