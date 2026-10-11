@@ -137,6 +137,19 @@ participate. Changing to this scoring policy resets implementation MAX from the
 new comparison and preserves earlier peaks in HIST. This is a measurement-policy
 change, not a source regression.
 
+MFC message maps are enrolled from the candidate objects, as vtables are.
+`BEGIN_MESSAGE_MAP` defines the class's `messageMap` and, directly after it
+in the unit's ordinary `.rdata`, its `_messageEntries`; the class's
+`GetMessageMap` returns the map. The data manifest
+(`candidate-COFF-message-map`) reads the map's address off the claimed
+getter's retail body (`mov eax, imm32; ret`) and takes both extents from
+the candidate section: the entries run to the next member or the section
+end, in whole 24-byte entries. A pair is admitted only where retail holds
+the candidate's bytes, relocation fields aside, and the map's entry pointer
+names the entries; a map whose retail entries differ stays withheld and is
+a source finding (the campaign editor's starting-option lists answer
+`WM_VKEYTOITEM`, not `WM_CHARTOITEM`).
+
 ## Complete byte accounting
 
 `homm3 verify data-coverage --all-bytes` produces:
