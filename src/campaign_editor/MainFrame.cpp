@@ -313,7 +313,12 @@ VA(0x00427840, 0x48)
 BOOL TMainFrame::OnQueryOpen()
 {
     CClientDC dc(NULL);
-    return dc.GetDeviceCaps(BITSPIXEL) * dc.GetDeviceCaps(PLANES) >= 15;
+    BOOL result;
+    if (dc.GetDeviceCaps(BITSPIXEL) * dc.GetDeviceCaps(PLANES) >= 15)
+        result = TRUE;
+    else
+        result = FALSE;
+    return result;
 }
 
 VA(0x00427890, 0xc2)

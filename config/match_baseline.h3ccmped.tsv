@@ -737,7 +737,7 @@ MainFrame	?OnCreate@TMainFrame@@IAEHPAUtagCREATESTRUCTA@@@Z	97.4959	97.4959	97.4
 MainFrame	?OnCreateClient@TMainFrame@@MAEHPAUtagCREATESTRUCTA@@PAUCCreateContext@@@Z	100.0000	100.0000	100.0000	0x275e0	tokens1:ddf6e38d8f71
 MainFrame	?OnDisplayChange@TMainFrame@@IAEJIJ@Z	100.0000	100.0000	100.0000	0x27720	tokens1:151ff4a3db3f
 MainFrame	?OnGetMinMaxInfo@TMainFrame@@IAEXPAUtagMINMAXINFO@@@Z	100.0000	100.0000	100.0000	0x27630	tokens1:5878798a1a0d
-MainFrame	?OnQueryOpen@TMainFrame@@IAEHXZ	59.6429	59.6429	59.6429	0x27840	tokens1:53f905b890e3
+MainFrame	?OnQueryOpen@TMainFrame@@IAEHXZ	99.8214	99.8214	99.8214	0x27840	tokens1:d6039da3a34e
 MainFrame	?OnSysCommand@TMainFrame@@IAEXIJ@Z	99.9219	99.9219	99.9219	0x27760	tokens1:8b26a15dff91
 MainFrame	?OnToolTipText@TMainFrame@@IAEHIPAUtagNMHDR@@PAJ@Z	100.0000	100.0000	100.0000	0x27960	tokens1:94dbf3bd37c6
 MainFrame	?OnWindowPosChanging@TMainFrame@@IAEXPAUtagWINDOWPOS@@@Z	100.0000	100.0000	100.0000	0x276a0	tokens1:38f6ad9ea627
