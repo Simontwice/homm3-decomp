@@ -113,13 +113,14 @@ class TuInlineTraceTests(unittest.TestCase):
     def test_a_veto_judges_the_latest_site_of_its_callee(self):
         records = self.RECORDS.replace(
             "running=456\n",
-            "running=456\nveto root=a callee=c count=14 limit=12 allowance=0 vetoed=1\n"
+            "running=456\nveto root=a callee=c count=14 limit=12 allowance=0 vetoed=1 total=19\n"
             "veto root=a callee=d count=11 limit=12 allowance=1 vetoed=0\n")
         sites = inline_trace.parse_tu_trace(records)["roots"][0]["sites"]
-        self.assertEqual(sites[1]["veto"], dict(count=14, limit=12, allowance=0, vetoed=True))
+        self.assertEqual(sites[1]["veto"], dict(count=14, limit=12, allowance=0, vetoed=True,
+                                                total=19))
         self.assertEqual(sites[0]["veto"], dict(count=11, limit=12, allowance=1, vetoed=False))
         from homm3.vc6.inline_model import _site_line
-        self.assertIn("VETO 14/12 ctor", _site_line(dict(sites[1], running=456)))
+        self.assertIn("VETO 19/12 ctor", _site_line(dict(sites[1], running=456)))
         self.assertIn("kept 11/12 +eh wrapper", _site_line(dict(sites[0], running=400)))
         with self.assertRaises(ValueError):
             inline_trace.parse_tu_trace(self.RECORDS + "\nveto root=b callee=d count=1 "

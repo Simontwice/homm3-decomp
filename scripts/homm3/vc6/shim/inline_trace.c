@@ -646,6 +646,19 @@ static void __cdecl traceVeto(unsigned long *regs, unsigned long vetoed)
     writeString(h, " limit="); writeSignedDecimal(h, *(long *)(sp+0x14));
     writeString(h, " allowance="); writeDecimal(h, *(unsigned long *)(sp+0x1c));
     writeString(h, " vetoed="); writeDecimal(h, vetoed);
+    if (vetoed) {
+        /* The veto stops at the first count above the limit. Finish the
+         * walk over the remaining tuples with the same weights (the
+         * class-0x0c early-accept pattern is not replayed) so a source
+         * change can be measured against the whole body. */
+        long total = *(long *)(sp+0x10);
+        unsigned char **tuple = *(unsigned char ***)(sp+0x18);
+        for (tuple = tuple ? (unsigned char **)*tuple : 0; tuple; tuple = (unsigned char **)*tuple) {
+            unsigned char kind = ((unsigned char *)tuple)[8];
+            total += kind == 0x0c ? 1 : (kind == 0x0e || kind == 0x12) ? 2 : 0;
+        }
+        writeString(h, " total="); writeSignedDecimal(h, total);
+    }
     writeString(h, "\n"); CloseHandle(h);
     SetLastError(lastError);
 }

@@ -250,6 +250,8 @@ def parse_tu_trace(text: str) -> dict:
                     site["veto"] = dict(count=int(fields["count"]), limit=int(fields["limit"]),
                                         allowance=int(fields["allowance"]),
                                         vetoed=fields["vetoed"] == "1")
+                    if "total" in fields:
+                        site["veto"]["total"] = int(fields["total"])
                     break
             else:
                 raise ValueError(f"inline veto of {callee} follows no budget test")

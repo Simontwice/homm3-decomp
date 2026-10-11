@@ -456,7 +456,7 @@ def _site_line(site: dict) -> str:
     veto = site.get("veto")
     if veto:
         verdict = (("VETO" if veto["vetoed"] else "kept")
-                   + f" {veto['count']}/{veto['limit']}"
+                   + f" {veto.get('total', veto['count'])}/{veto['limit']}"
                    + (" +eh" if veto["allowance"] else ""))
     return (f"    d{site['depth']} budget={site['budget']:<5} remain={site['remaining']:<3} "
             f"cb={site['cb']:<4} running={site['running']:<6} {verdict} {site['symbol']}"
