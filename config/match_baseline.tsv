@@ -2834,7 +2834,7 @@ objecttype	?load@TObjectTypeTable@@QAEXPAD@Z	100.0000	100.0000	100.0000	0x114d80
 objecttype	?replace@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@IIPBDI@Z	100.0000	100.0000	100.0000	0x115a80	-
 objecttype	?rfind@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z	100.0000	100.0000	100.0000	0x115c20	-
 objecttype	?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ	100.0000	100.0000	100.0000	0x117b10	-
-objecttype	?setImageName@TObjectType@@QAEAAU1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z	99.1502	99.1502	99.2095	0x114610	tokens1:d1dbeffeff2e
+objecttype	?setImageName@TObjectType@@QAEAAU1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z	99.2095	99.2095	99.2095	0x114610	tokens1:d1dbeffeff2e
 objecttype	?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z	100.0000	100.0000	100.0000	0x115f20	-
 objecttype	?sgetc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ	100.0000	100.0000	100.0000	0x1157b0	-
 objecttype	?size@?$vector@UTObjectType@@V?$allocator@UTObjectType@@@std@@@std@@QBEIXZ	100.0000	100.0000	100.0000	0x14c910	-
