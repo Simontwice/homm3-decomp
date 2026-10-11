@@ -5,8 +5,6 @@
 // original and edited heroes, the map's version, the modified flag, the
 // default and the edited artifacts and the artifacts dialog (0x160 bytes,
 // the sheets' new).
-//
-// Ported so far: the declarations the hero sheets use.
 #ifndef HOMM3_EDITOR_HEROPROPSARTIFACTSPAGE_H
 #define HOMM3_EDITOR_HEROPROPSARTIFACTSPAGE_H
 
