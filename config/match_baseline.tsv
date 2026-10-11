@@ -3252,6 +3252,9 @@ resourcemanager	?str@?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D
 resourcemanager	?str@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ	100.0000	100.0000	100.0000	0x15e570	-
 resourcemanager	?underflow@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAEHXZ	100.0000	100.0000	100.0000	0x15d840	-
 resourcemanager	?write@t_stdio_file_adapter@?A0xd38fcb16638c5270@ResourceManager@@UAEHPBXH@Z	100.0000	100.0000	100.0000	0x159140	tokens1:4270d87f0121
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceArchiveContexts	100.0000	100.0000	100.0000	0x159320	-
+resourcemanager	__h3cg$resourcemanager$static_ctor$g_resourceLodSlots	100.0000	100.0000	100.0000	0x159150	-
+resourcemanager	__h3cg$resourcemanager$static_dtor$g_resourceLodSlots	100.0000	100.0000	100.0000	0x159200	-
 rmg	??0?$vector@PAUTRmgTemplateZone@@V?$allocator@PAUTRmgTemplateZone@@@std@@@std@@QAE@ABV?$allocator@PAUTRmgTemplateZone@@@1@@Z	100.0000	100.0000	100.0000	0x1157d0	-
 rmg	??0TRandomMapRequest@@QAE@HHH@Z	100.0000	100.0000	100.0000	0x14bf00	tokens1:63657dff0d02
 rmg	??0TRmgMapItem@@QAE@XZ	100.0000	100.0000	100.0000	0x130e90	tokens1:01824b537fe6
@@ -3316,7 +3319,7 @@ rmg	?addObject@type_random_map@@QAEXAAVtype_object@@UTRmgMapPosition@@@Z	89.7491
 rmg	?addObject@type_random_map_generator@@UAEXPAVtype_object@@UTRmgMapPosition@@@Z	67.8618	67.8618	71.7054	0x1402a0	tokens1:4b5444ac3aba
 rmg	?appendZonePositions@type_random_map_generator@@QAEXPAUTRmgZone@@0AAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@@Z	91.7143	91.7143	98.1270	0x13ae80	tokens1:7f104e40a967
 rmg	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	97.4236	97.4236	97.4236	0x1466e0	tokens1:0fe4313d0da3
-rmg	?assignRmgTeams@@YIXHHHPBEPAD@Z	100.0000	100.0000	100.0000	0x14ab40	tokens1:dc969b579da8
+rmg	?assignRmgTeams@@YIXHHHPBEPAD@Z	100.0000	100.0000	100.0000	0x14ab40	tokens1:a7a5d853b8ce
 rmg	?buildOutline@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x132c80	tokens1:9632b09a13ae
 rmg	?buildOverlapPriorities@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x132e40	tokens1:218061b3b482
 rmg	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	91.1110	91.1110	91.1110	0x147880	tokens1:ab08e97410a8
@@ -3396,7 +3399,7 @@ rmg	?generate@type_shrine_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PA
 rmg	?generate@type_spell_scroll_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134ed0	tokens1:6e76abdf1566
 rmg	?generate@type_treasure_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x1341a0	tokens1:c5ac6020f08b
 rmg	?generate@type_witch_hut_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x134a90	tokens1:5453dd2980ca
-rmg	?generateRmgIslandMask@@YIXPAEHH@Z	100.0000	100.0000	100.0000	0x13ed00	tokens1:278efd3c7fce
+rmg	?generateRmgIslandMask@@YIXPAEHH@Z	100.0000	100.0000	100.0000	0x13ed00	tokens1:c03ec276f241
 rmg	?generateToFile@TRandomMapRequest@@QAE?AW4ERandomMapResult@@PAVTAbstractFile@@PAVtype_progress_bar@@@Z	100.0000	100.0000	100.0000	0x14bf60	tokens1:6c78bbf32627
 rmg	?getFrame@type_random_map@@UAEHABV?$TPoint@I@@@Z	100.0000	100.0000	100.0000	0x1322f0	tokens1:e0fec7e3de7c
 rmg	?getInitialZoneBounds@type_random_map_generator@@QBEXAAH000@Z	100.0000	100.0000	100.0000	0x13b1f0	tokens1:262fcc6fef88
@@ -3513,7 +3516,7 @@ rmg	?write@type_town@@UAEXPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0x133
 rmg	?write@type_witch_hut@@UAEXPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0x1340c0	tokens1:fbd718bf737d
 rmg	?writeMap@type_random_map_generator@@QAEEPAVTAbstractFile@@@Z	99.4123	99.4123	99.4123	0x14abf0	tokens1:13741c51120f
 rmg	?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z	97.4413	97.4507	97.4507	0x149cb0	tokens1:b288b45815ab
-rmg	?writeRmgObjectPrototype@@YIXPAVTAbstractFile@@PAUTObjectType@@@Z	100.0000	100.0000	100.0000	0x14ae30	tokens1:fb8b58047817
+rmg	?writeRmgObjectPrototype@@YIXPAVTAbstractFile@@PAUTObjectType@@@Z	100.0000	100.0000	100.0000	0x14ae30	tokens1:0079ba1dee35
 rmg	__h3cg$rmg$static_dtor$riverDeltaOffsets	100.0000	100.0000	100.0000	0x149790	-
 rmg_river	??0TRiverPlacementOp@@QAE@PAVTAbstractMap@TRiverOp@@HABV?$TPoint@I@@@Z	100.0000	100.0000	100.0000	0x15ee50	tokens1:c2f191a4cf7f
 rmg_river	??1TRiverPlacementOp@@UAE@XZ	100.0000	100.0000	100.0000	0x15eda0	tokens1:d8aefd94bdb9
