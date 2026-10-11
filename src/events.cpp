@@ -2209,6 +2209,7 @@ static void exchangeSpells(hero* firstHero, hero* secondHero)
         secondHero->getSecondarySkill(eSecSkillMagicScholar));
     std::vector<ESpellId> spellsLearned;
     std::vector<ESpellId> spellsTaught;
+    ESpellId spell;
 
     if (firstHero->getSecondarySkill(eSecSkillMagicScholar)
         < secondHero->getSecondarySkill(eSecSkillMagicScholar))
@@ -2224,7 +2225,6 @@ static void exchangeSpells(hero* firstHero, hero* secondHero)
             magicScholarLevel + 1,
             secondHero->getSecondarySkill(eSecSkillWisdom) + 2);
 
-        ESpellId spell;
         for (spell = SPELL_SUMMON_BOAT; spell < hero::NUM_SPELLS;
              spell = static_cast<ESpellId>(spell + 1)) {
             if (firstHero->isInSpellbook(spell)) {
@@ -6251,13 +6251,13 @@ int advManager::doCombat(type_point point, hero* leftHero, armyGroup* leftArmyGr
             char text[256];  // DC sText[256]
             const char* target;
             if (rightTown) {
-                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_TOWN);
+                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_TOWN];
             } else if (rightHero) {
-                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_HERO);
+                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_HERO];
             } else {
-                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_GARRISON);
+                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_GARRISON];
             }
-            sprintf(text, g_generalText->GetText(GENERAL_TEXT_TOWN_UNDER_ATTACK_FORMAT),
+            sprintf(text, (*g_generalText)[GENERAL_TEXT_TOWN_UNDER_ATTACK_FORMAT],
                     g_game->getPlayerName(rightPlayer), target);
             g_game->waitForPlayer(text, rightPlayer);
         }
@@ -6344,10 +6344,10 @@ combatFinished:
         sprintf(g_text, "pickup%02d.82M", sRandom(1, 7));
         SAMPLE2 sample = loadPlaySample(g_text);
         if (g_combatManager->m_raisedCreatureCount == 1) {
-            sprintf(g_text, g_generalText->GetText(GENERAL_TEXT_NECROMANCY_RAISE_ONE_FORMAT),
+            sprintf(g_text, (*g_generalText)[GENERAL_TEXT_NECROMANCY_RAISE_ONE_FORMAT],
                     getArmyName(g_combatManager->m_raisedCreatureType, 1));
         } else {
-            sprintf(g_text, g_generalText->GetText(GENERAL_TEXT_NECROMANCY_RAISE_MANY_FORMAT),
+            sprintf(g_text, (*g_generalText)[GENERAL_TEXT_NECROMANCY_RAISE_MANY_FORMAT],
                     g_combatManager->m_raisedCreatureCount,
                     getArmyName(g_combatManager->m_raisedCreatureType, 2));
         }
