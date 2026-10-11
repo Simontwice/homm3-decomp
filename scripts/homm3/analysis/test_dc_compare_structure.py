@@ -49,6 +49,7 @@ class NormalizationTest(unittest.TestCase):
         self.assertEqual(compare.callee_token("message::message"), "ctor:message")
         self.assertEqual(compare.callee_token("??1message@@QAE@XZ"), "dtor:message")
         self.assertIsNone(compare.callee_token("_sprintf"))
+        self.assertIsNone(compare.callee_token("`vector constructor iterator'"))
         self.assertIsNone(compare.callee_token(None))
 
     def test_statement_runs(self):
@@ -115,6 +116,9 @@ class RenderTest(unittest.TestCase):
         self.assertEqual(summary["line_mismatches"], 1)
         # 1 statement + 2 scopes + 1 unpaired local + 1 temporary + 1 callee
         self.assertEqual(summary["difference"], 6)
+        self.assertFalse(summary["dreamcast_stub"])
+        self.assertTrue(compare.stub((2, 75)))
+        self.assertFalse(compare.stub((24, 92)))
         text = compare.render_summary({"name": "f", "va": 0x401000, "unit": "u", "score": None,
                                        "module": "m.obj", "dc_offset": 0x10, "source": "src/u.cpp"},
                                       summary)

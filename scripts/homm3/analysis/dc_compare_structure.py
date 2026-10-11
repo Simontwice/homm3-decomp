@@ -83,7 +83,12 @@ def same_type(dreamcast: str, ours: str) -> bool:
 
 
 def callee_token(name: str | None) -> str | None:
-    """Normalized callee spelling; None for runtime/library plumbing."""
+    """Normalized callee spelling; None for runtime/library plumbing.
+
+    CodeView names compiler helpers `` `vector constructor iterator' ``;
+    MSVC decorates them `??_...`, which `dc_callees` already drops."""
+    if name and "`" in name:
+        return None
     identity = dc_callees.callee(name) if name else None
     if identity is None:
         return None
@@ -520,7 +525,16 @@ def summarize(dc: dict[str, Any], ours: dict[str, Any], line_range: tuple[int, i
             "locals_dc_only": locals_dc, "local_type_differences": local_types,
             "parameter_type_differences": parameter_types,
             "signature_differs": not same_type(dc["signature"], ours["signature"]),
-            "temporaries": temporaries, "callees": callees, "difference": score}
+            "temporaries": temporaries, "callees": callees, "difference": score,
+            "dreamcast_stub": stub(counts["statement lines"])}
+
+
+def stub(statement_lines: tuple[int, int]) -> bool:
+    """A Dreamcast body of a few rows against a long one of ours: the port
+    replaced the function (registry, Smacker, DirectX), so its structure is
+    not the Windows source's."""
+    dc, ours = statement_lines
+    return dc <= 5 and ours >= 4 * max(dc, 1)
 
 
 def render_summary(identity: dict[str, Any], summary: dict[str, Any]) -> str:
@@ -535,6 +549,8 @@ def render_summary(identity: dict[str, Any], summary: dict[str, Any]) -> str:
         delta = "" if a is None or b is None else f"{b - a:+d}"
         rows.append(f"{name:<30} {'-' if a is None else a:>6} {'-' if b is None else b:>6} {delta:>6}")
     rows.append(f"{'line class mismatches':<30} {'':>6} {'':>6} {summary['line_mismatches']:>6}")
+    if summary.get("dreamcast_stub"):
+        rows.append("\nDreamcast body is a few rows against a long one of ours: likely a port stub.")
     if summary["signature_differs"]:
         rows.append("\nsignature differs (see SIGNATURE)")
     for title, key in (("parameter types (dc / ours)", "parameter_type_differences"),
@@ -698,7 +714,7 @@ def export(corpus, items: list[dict[str, Any]], output: Path) -> dict[str, Any]:
 
 INDEX_COLUMNS = ("va", "name", "unit", "cur", "max", "difference", "d_statements", "d_scopes",
                  "ours_only_locals", "dc_only_locals", "d_temporaries", "callee_differences",
-                 "line_mismatches", "files")
+                 "line_mismatches", "dc_stub", "files")
 
 
 def _index_rows(functions: list[dict]) -> Iterable[list[str]]:
@@ -713,7 +729,8 @@ def _index_rows(functions: list[dict]) -> Iterable[list[str]]:
                f"{counts['scopes'][1] - counts['scopes'][0]:+d}",
                str(len(s["locals_ours_only"])), str(len(s["locals_dc_only"])),
                str(sum(abs(a - b) for a, b in s["temporaries"].values())),
-               str(len(s["callees"])), str(s["line_mismatches"]), f["stem"]]
+               str(len(s["callees"])), str(s["line_mismatches"]),
+               "yes" if s.get("dreamcast_stub") else "", f["stem"]]
 
 
 def render_index_tsv(functions: list[dict]) -> str:
@@ -741,6 +758,8 @@ def patterns(functions: list[dict]) -> list[str]:
         f"- {count(lambda s: any(b > a for a, b in s['temporaries'].values()))} functions have an extra "
         "destructor-carrying temporary; "
         f"{count(lambda s: any(a > b for a, b in s['temporaries'].values()))} lack one",
+        f"- {count(lambda s: s.get('dreamcast_stub'))} Dreamcast bodies are a few rows against a long one "
+        "of ours (likely port stubs; their differences are not source evidence)",
         f"- {count(lambda s: c(s, 'inline expansions')[0] > 0)} functions show Dreamcast inline expansions; "
         f"{count(lambda s: c(s, 'inline expansions')[1] > 0)} of ours expand a written call",
     ]

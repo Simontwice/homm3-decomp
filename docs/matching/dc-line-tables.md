@@ -482,7 +482,17 @@ unpaired locals, differing parameter and paired local types, temporaries
 and callees whose calls plus inline expansions differ. The `difference`
 column is |Δ statement lines| + |Δ scopes| + |Δ parameters| + unpaired
 locals + temporary and callee count differences; `index.md` sorts by MAX and
-tallies how many functions show each kind of difference.
+tallies how many functions show each kind of difference. A Dreamcast body of
+at most five rows against one of ours at least four times longer is flagged
+as a likely port stub (`ReadPrefsFromRegistry`, `VideoDrawRects`): the port
+replaced the function, so its differences say nothing about the Windows
+source.
+
+Two callee rows need care. A written `operator=` on a trivially copyable
+class is a Clang call expression but never a call in either build, so ours
+counts it as an expansion that Dreamcast cannot show. A virtual call is
+written on our side and indirect on both machines, so it appears on our
+side only.
 
 Everything here is a lead, not a verdict. The Dreamcast build is an older
 revision with a lower-bound local inventory and its own inliner; a
