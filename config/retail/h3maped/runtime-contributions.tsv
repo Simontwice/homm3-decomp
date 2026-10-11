@@ -18,3 +18,14 @@ rva	size	kind	library	member	section	symbol	evidence
 0x104d40	45	code	NAFXCW.LIB	winmenu.obj	19	?Attach@CMenu@@QAEHPAUHMENU__@@@Z	the Attach members share their masked bytes; this copy calls afxMapHMENU (the map edit window's context menu 0x46e3c4 attaches its popup here)
 0x104d6d	42	code	NAFXCW.LIB	winmenu.obj	22	?Detach@CMenu@@QAEPAUHMENU__@@XZ	the Detach members share their masked bytes; this copy calls afxMapHMENU and CMenu::DestroyMenu 0x504da0 reaches it
 0x104d97	22	code	NAFXCW.LIB	winmenu.obj	25	?DestroyMenu@CMenu@@QAEHXZ	CGdiObject::DeleteObject's twin with the DestroyMenu import (the map edit window's CMenu destructor 0x46e572 calls it)
+0xf599c	90	code	LIBCPMT.LIB	string.obj	3	?_Xlen@std@@YAXXZ	throws length_error with "string too long" (0x54cf70); 3 placed call sites pair with it
+0xe7e4f	11	code	LIBCMT.LIB	abs.obj	1	_abs	11-byte body equal to abs.obj; 6 placed call sites pair with it
+0xf666e	21	code	LIBCPMT.LIB	xstod.obj	6	__Stof	xstod.obj's _Stof and _Stold are the same 21 bytes and the image holds one; placed callers of either reach it
+0xf666e	21	code	LIBCPMT.LIB	xstod.obj	8	__Stold	the other name of the same fold
+0x112257	1	code	NAFXCW.LIB	dlgprop.obj	97	?OnOK@CPropertyPage@@UAEXXZ	CPropertyPage::OnOK is an empty release body (a lone ret, too short to tell apart by bytes); the 41 placed property pages' OnOK overrides call it site for site
+0x112627	92	code	NAFXCW.LIB	dlgprop.obj	163	??0CPropertySheet@@QAE@PBDPAVCWnd@@I@Z	92-byte body equal to dlgprop.obj's; 12 placed property-sheet constructors call it site for site
+0x10ab2c	1	code	NAFXCW.LIB	doccore.obj	27	?DeleteContents@CDocument@@UAEXXZ	an empty release body (a lone ret); the placed document's DeleteContents calls it
+0xcdcd3	11	code	NAFXCW.LIB	mtex.obj	64	??1CEvent@@UAE@XZ	11-byte body equal to mtex.obj's; 2 placed call sites pair with it
+0xcdc50	11	code	NAFXCW.LIB	mtex.obj	45	??1CMutex@@UAE@XZ	11-byte body equal to mtex.obj's; its placed caller pairs with it
+0x1062a8	10	code	NAFXCW.LIB	except.obj	11	??0CException@@QAE@XZ	10-byte body equal to except.obj's; 2 placed call sites pair with it
+0xe7989	43	code	LIBCMT.LIB	strdup.obj	1	__strdup	43-byte body equal to strdup.obj's; 3 placed call sites pair with it

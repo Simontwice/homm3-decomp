@@ -249,6 +249,7 @@ rva	name	library	member
 0x4ca14	??0_Lockit@std@@QAE@XZ	LIBCPMT	xlock.obj
 0x4ca92	?_CleanUp@std@@YAXXZ	LIBCPMT	xlock.obj
 0x4cab0	??1_Lockit@std@@QAE@XZ	LIBCPMT	xlock.obj
+0x4cac5	?uncaught_exception@std@@YA_NXZ	LIBCPMT	uncaught.obj
 0x4cac8	?clear@ios_base@std@@QAEXH_N@Z	LIBCPMT	ios.obj
 0x4cbf2	??1ios_base@std@@UAE@XZ	LIBCPMT	ios.obj
 0x4cc42	?_Callfns@ios_base@std@@AAEXW4event@12@@Z	LIBCPMT	ios.obj
@@ -343,6 +344,7 @@ rva	name	library	member
 0x4ffe3	__lockexit	LIBCMT	crt0dat.obj
 0x4ffec	__unlockexit	LIBCMT	crt0dat.obj
 0x4fff5	__initterm	LIBCMT	crt0dat.obj
+0x5000f	__strdup	LIBCMT	strdup.obj
 0x5003a	_free	LIBCMT	free.obj
 0x50082	__fullpath	LIBCMT	fullpath.obj
 0x50127	__purecall	LIBCMT	purevirt.obj
@@ -445,6 +447,7 @@ rva	name	library	member
 0x5302f	_gmtime	LIBCMT	gmtime.obj
 0x5316a	_fopen	LIBCMT	fopen.obj
 0x53180	_memchr	LIBCMT	memchr.obj
+0x53225	_localeconv	LIBCMT	lconv.obj
 0x53230	_atan2	LIBCMT	87ctriga.obj
 0x5323a	__CIfmod	LIBCMT	87fmod.obj
 0x53244	fFMOD	LIBCMT	87fmod.obj
@@ -1012,6 +1015,7 @@ rva	name	library	member
 0x6aee9	?ProcessMessageFilter@CWinThread@@UAEHHPAUtagMSG@@@Z	NAFXCW	thrdcore.obj
 0x6b033	?GetMainWnd@CWinThread@@UAEPAVCWnd@@XZ	NAFXCW	thrdcore.obj
 0x6b04e	?PumpMessage@CWinThread@@UAEHXZ	NAFXCW	thrdcore.obj
+0x6b08e	??0CException@@QAE@XZ	NAFXCW	except.obj
 0x6b098	??0CException@@QAE@H@Z	NAFXCW	except.obj
 0x6b0a4	?Delete@CException@@QAEXXZ	NAFXCW	except.obj
 0x6b0b6	?GetErrorMessage@CException@@UAEHPADIPAI@Z	NAFXCW	except.obj
@@ -1040,6 +1044,8 @@ rva	name	library	member
 0x6b97d	?afxMapHMENU@@YGPAVCHandleMap@@H@Z	NAFXCW	winmenu.obj
 0x6b9ef	?FromHandle@CMenu@@SGPAV1@PAUHMENU__@@@Z	NAFXCW	winmenu.obj
 0x6ba04	?FromHandlePermanent@CMenu@@SGPAV1@PAUHMENU__@@@Z	NAFXCW	winmenu.obj
+0x6ba22	?Attach@CMenu@@QAEHPAUHMENU__@@@Z	NAFXCW	winmenu.obj
+0x6ba79	?DestroyMenu@CMenu@@QAEHXZ	NAFXCW	winmenu.obj
 0x6ba92	??0CDialogTemplate@@QAE@PBUDLGTEMPLATE@@@Z	NAFXCW	dlgtempl.obj
 0x6bac1	?SetTemplate@CDialogTemplate@@IAEHPBUDLGTEMPLATE@@I@Z	NAFXCW	dlgtempl.obj
 0x6bb21	??1CDialogTemplate@@QAE@XZ	NAFXCW	dlgtempl.obj
@@ -1112,6 +1118,7 @@ rva	name	library	member
 0x6da0c	?RestoreDC@CDC@@UAEHH@Z	NAFXCW	wingdi.obj
 0x6da4a	?SelectGdiObject@CDC@@KGPAVCGdiObject@@PAUHDC__@@PAX@Z	NAFXCW	wingdi.obj
 0x6da61	?SelectStockObject@CDC@@UAEPAVCGdiObject@@H@Z	NAFXCW	wingdi.obj
+0x6da9d	?SelectObject@CDC@@QAEPAVCBrush@@PAV2@@Z	NAFXCW	wingdi.obj
 0x6dae3	?SetBkColor@CDC@@UAEKK@Z	NAFXCW	wingdi.obj
 0x6db12	?SetStretchBltMode@CDC@@QAEHH@Z	NAFXCW	wingdi.obj
 0x6db40	?SetTextColor@CDC@@UAEKK@Z	NAFXCW	wingdi.obj
@@ -1122,6 +1129,7 @@ rva	name	library	member
 0x6dc81	?ScaleViewportExt@CDC@@UAE?AVCSize@@HHHH@Z	NAFXCW	wingdi.obj
 0x6dcd9	?SetWindowExt@CDC@@UAE?AVCSize@@HH@Z	NAFXCW	wingdi.obj
 0x6dd25	?ScaleWindowExt@CDC@@UAE?AVCSize@@HHHH@Z	NAFXCW	wingdi.obj
+0x6dd7d	?GetClipBox@CDC@@UBEHPAUtagRECT@@@Z	NAFXCW	wingdi.obj
 0x6dd8d	?SelectClipRgn@CDC@@QAEHPAVCRgn@@@Z	NAFXCW	wingdi.obj
 0x6ddcd	?ExcludeClipRect@CDC@@QAEHPBUtagRECT@@@Z	NAFXCW	wingdi.obj
 0x6de0f	?IntersectClipRect@CDC@@QAEHPBUtagRECT@@@Z	NAFXCW	wingdi.obj
@@ -1131,12 +1139,16 @@ rva	name	library	member
 0x6df09	?ClientToScreen@CWnd@@QBEXPAUtagRECT@@@Z	NAFXCW	wingdi.obj
 0x6df45	?LPtoDP@CDC@@QBEXPAUtagSIZE@@@Z	NAFXCW	wingdi.obj
 0x6dfae	?DPtoLP@CDC@@QBEXPAUtagSIZE@@@Z	NAFXCW	wingdi.obj
+0x6e017	??0CClientDC@@QAE@PAVCWnd@@@Z	NAFXCW	wingdi.obj
 0x6e089	??1CClientDC@@UAE@XZ	NAFXCW	wingdi.obj
 0x6e13d	??1CWindowDC@@UAE@XZ	NAFXCW	wingdi.obj
 0x6e17f	??0CPaintDC@@QAE@PAVCWnd@@@Z	NAFXCW	wingdi.obj
 0x6e1f1	??1CPaintDC@@UAE@XZ	NAFXCW	wingdi.obj
 0x6e238	?afxMapHGDIOBJ@@YGPAVCHandleMap@@H@Z	NAFXCW	wingdi.obj
 0x6e2aa	?FromHandle@CGdiObject@@SGPAV1@PAX@Z	NAFXCW	wingdi.obj
+0x6e2bf	?Attach@CGdiObject@@QAEHPAX@Z	NAFXCW	wingdi.obj
+0x6e2ec	?Detach@CGdiObject@@QAEPAXXZ	NAFXCW	wingdi.obj
+0x6e316	?DeleteObject@CGdiObject@@QAEHXZ	NAFXCW	wingdi.obj
 0x6e32c	??0CBrush@@QAE@K@Z	NAFXCW	wingdi.obj
 0x6e38f	??0CDocTemplate@@IAE@IPAUCRuntimeClass@@00@Z	NAFXCW	doctempl.obj
 0x6e48c	?LoadTemplate@CDocTemplate@@UAEXXZ	NAFXCW	doctempl.obj
@@ -1183,6 +1195,7 @@ rva	name	library	member
 0x6f72e	?OnOpenDocument@CDocument@@UAEHPBD@Z	NAFXCW	doccore.obj
 0x6f8f8	?OnSaveDocument@CDocument@@UAEHPBD@Z	NAFXCW	doccore.obj
 0x6fa9e	?OnCloseDocument@CDocument@@UAEXXZ	NAFXCW	doccore.obj
+0x6faf6	?DeleteContents@CDocument@@UAEXXZ	NAFXCW	doccore.obj
 0x6faf7	?AddView@CDocument@@QAEXPAVCView@@@Z	NAFXCW	doccore.obj
 0x6fb17	?RemoveView@CDocument@@QAEXPAVCView@@@Z	NAFXCW	doccore.obj
 0x6fb4a	?GetNextItem@COleDocument@@UBEPAVCDocItem@@AAPAU__POSITION@@@Z	NAFXCW	oledoc1.obj
@@ -1481,6 +1494,7 @@ rva	name	library	member
 0x781ab	?InitDialogInfo@CPropertyPage@@IAEPBUDLGTEMPLATE@@PBU2@@Z	NAFXCW	dlgprop.obj
 0x781db	?PreProcessPageTemplate@CPropertyPage@@IAEXAAU_PROPSHEETPAGEA@@H@Z	NAFXCW	dlgprop.obj
 0x78262	?OnApply@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
+0x78276	?OnOK@CPropertyPage@@UAEXXZ	NAFXCW	dlgprop.obj
 0x78277	?OnSetActive@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
 0x78291	?OnKillActive@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
 0x782a6	?MapWizardResult@CPropertyPage@@IAEJJ@Z	NAFXCW	dlgprop.obj
@@ -1489,6 +1503,7 @@ rva	name	library	member
 0x784b7	?PreTranslateMessage@CPropertyPage@@MAEHPAUtagMSG@@@Z	NAFXCW	dlgprop.obj
 0x7853c	?GetPropSheetHeader@CPropertySheet@@QAEPAU_AFX_OLDPROPSHEETHEADER@@XZ	NAFXCW	dlgprop.obj
 0x7855c	?OnSetDefID@CPropertySheet@@IAEJIJ@Z	NAFXCW	dlgprop.obj
+0x78646	??0CPropertySheet@@QAE@PBDPAVCWnd@@I@Z	NAFXCW	dlgprop.obj
 0x786a2	?CommonConstruct@CPropertySheet@@QAEXPAVCWnd@@I@Z	NAFXCW	dlgprop.obj
 0x786fa	??1CPropertySheet@@UAE@XZ	NAFXCW	dlgprop.obj
 0x78751	?PreTranslateMessage@CPropertySheet@@UAEHPAUtagMSG@@@Z	NAFXCW	dlgprop.obj

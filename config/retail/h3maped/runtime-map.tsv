@@ -68,7 +68,9 @@ rva	name	library	member
 0xcdb33	??6CArchive@@QAEAAV0@G@Z	NAFXCW	arccore.obj
 0xcdb80	??5CArchive@@QAEAAV0@AAG@Z	NAFXCW	arccore.obj
 0xcdbe5	??0CMutex@@QAE@HPBDPAU_SECURITY_ATTRIBUTES@@@Z	NAFXCW	mtex.obj
+0xcdc50	??1CMutex@@UAE@XZ	NAFXCW	mtex.obj
 0xcdc65	??0CEvent@@QAE@HHPBDPAU_SECURITY_ATTRIBUTES@@@Z	NAFXCW	mtex.obj
+0xcdcd3	??1CEvent@@UAE@XZ	NAFXCW	mtex.obj
 0xcdce2	??0CMultiLock@@QAE@QAPAVCSyncObject@@KH@Z	NAFXCW	mtex.obj
 0xcdd5a	??1CMultiLock@@QAE@XZ	NAFXCW	mtex.obj
 0xcdd7b	?Lock@CMultiLock@@QAEKKHK@Z	NAFXCW	mtex.obj
@@ -354,6 +356,7 @@ rva	name	library	member
 0xe795d	__lockexit	LIBCMT	crt0dat.obj
 0xe7966	__unlockexit	LIBCMT	crt0dat.obj
 0xe796f	__initterm	LIBCMT	crt0dat.obj
+0xe7989	__strdup	LIBCMT	strdup.obj
 0xe79b4	__fullpath	LIBCMT	fullpath.obj
 0xe7a60	_strncpy	LIBCMT	strncpy.obj
 0xe7b5e	_malloc	LIBCMT	malloc.obj
@@ -364,6 +367,7 @@ rva	name	library	member
 0xe7d44	_sqrt	LIBCMT	sqrt.obj
 0xe7dec	__ftol	LIBCMT	ftol.obj
 0xe7e20	__chkstk	LIBCMT	chkstk.obj
+0xe7e4f	_abs	LIBCMT	abs.obj
 0xe7e60	_strcmp	LIBCMT	strcmp.obj
 0xe7ee4	_WinMainCRTStartup	LIBCMT	wincrt0.obj
 0xe7fec	__amsg_exit	LIBCMT	wincrt0.obj
@@ -713,6 +717,7 @@ rva	name	library	member
 0xf583f	_findenv	LIBCMT	setenv.obj
 0xf5897	_copy_environ	LIBCMT	setenv.obj
 0xf58fe	__setmode_lk	LIBCMT	setmode.obj
+0xf599c	?_Xlen@std@@YAXXZ	LIBCPMT	string.obj
 0xf5b20	??0_Lockit@std@@QAE@XZ	LIBCPMT	xlock.obj
 0xf5b9e	?_CleanUp@std@@YAXXZ	LIBCPMT	xlock.obj
 0xf5bbc	??1_Lockit@std@@QAE@XZ	LIBCPMT	xlock.obj
@@ -736,6 +741,7 @@ rva	name	library	member
 0xf64d2	__Toupper	LIBCPMT	_toupper.obj
 0xf6551	__Toupper_lk	LIBCPMT	_toupper.obj
 0xf6632	__Stod	LIBCPMT	xstod.obj
+0xf666e	__Stof	LIBCPMT	xstod.obj
 0xf6683	??2@YAPAXIABUnothrow_t@std@@@Z	LIBCPMT	newop2.obj
 0xf67e9	??0Init@ios_base@std@@QAE@XZ	LIBCPMT	iostream.obj
 0xf6b39	?overflow@?$basic_filebuf@DU?$char_traits@D@std@@@std@@MAEHH@Z	LIBCPMT	iostream.obj
@@ -1135,6 +1141,7 @@ rva	name	library	member
 0x106103	?ProcessMessageFilter@CWinThread@@UAEHHPAUtagMSG@@@Z	NAFXCW	thrdcore.obj
 0x10624d	?GetMainWnd@CWinThread@@UAEPAVCWnd@@XZ	NAFXCW	thrdcore.obj
 0x106268	?PumpMessage@CWinThread@@UAEHXZ	NAFXCW	thrdcore.obj
+0x1062a8	??0CException@@QAE@XZ	NAFXCW	except.obj
 0x1062b2	??0CException@@QAE@H@Z	NAFXCW	except.obj
 0x1062be	?Delete@CException@@QAEXXZ	NAFXCW	except.obj
 0x1062d0	?GetErrorMessage@CException@@UAEHPADIPAI@Z	NAFXCW	except.obj
@@ -1313,6 +1320,7 @@ rva	name	library	member
 0x10aa6e	?OnPrint@CView@@MAEXPAVCDC@@PAUCPrintInfo@@@Z	NAFXCW	viewcore.obj
 0x10aa82	?OnActivateView@CView@@MAEXHPAV1@0@Z	NAFXCW	viewcore.obj
 0x10aaa3	?OnMouseActivate@CView@@IAEHPAVCWnd@@II@Z	NAFXCW	viewcore.obj
+0x10ab2c	?DeleteContents@CDocument@@UAEXXZ	NAFXCW	doccore.obj
 0x10ab2d	?GetParentSplitter@CView@@SGPAVCSplitterWnd@@PBVCWnd@@H@Z	NAFXCW	viewcore.obj
 0x10ab8b	?GetScrollBarCtrl@CView@@UBEPAVCScrollBar@@H@Z	NAFXCW	viewcore.obj
 0x10ac00	?OnUpdateSplitCmd@CView@@IAEXPAVCCmdUI@@@Z	NAFXCW	viewcore.obj
@@ -1549,6 +1557,7 @@ rva	name	library	member
 0x11218c	?InitDialogInfo@CPropertyPage@@IAEPBUDLGTEMPLATE@@PBU2@@Z	NAFXCW	dlgprop.obj
 0x1121bc	?PreProcessPageTemplate@CPropertyPage@@IAEXAAU_PROPSHEETPAGEA@@H@Z	NAFXCW	dlgprop.obj
 0x112243	?OnApply@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
+0x112257	?OnOK@CPropertyPage@@UAEXXZ	NAFXCW	dlgprop.obj
 0x112258	?OnSetActive@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
 0x112272	?OnKillActive@CPropertyPage@@UAEHXZ	NAFXCW	dlgprop.obj
 0x112287	?MapWizardResult@CPropertyPage@@IAEJJ@Z	NAFXCW	dlgprop.obj
@@ -1557,6 +1566,7 @@ rva	name	library	member
 0x112498	?PreTranslateMessage@CPropertyPage@@MAEHPAUtagMSG@@@Z	NAFXCW	dlgprop.obj
 0x11251d	?GetPropSheetHeader@CPropertySheet@@QAEPAU_AFX_OLDPROPSHEETHEADER@@XZ	NAFXCW	dlgprop.obj
 0x11253d	?OnSetDefID@CPropertySheet@@IAEJIJ@Z	NAFXCW	dlgprop.obj
+0x112627	??0CPropertySheet@@QAE@PBDPAVCWnd@@I@Z	NAFXCW	dlgprop.obj
 0x112683	?CommonConstruct@CPropertySheet@@QAEXPAVCWnd@@I@Z	NAFXCW	dlgprop.obj
 0x1126db	??1CPropertySheet@@UAE@XZ	NAFXCW	dlgprop.obj
 0x112732	?PreTranslateMessage@CPropertySheet@@UAEHPAUtagMSG@@@Z	NAFXCW	dlgprop.obj

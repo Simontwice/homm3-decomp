@@ -6,3 +6,18 @@ rva	size	kind	library	member	section	symbol	evidence
 0x4f690	821	code	LIBCMT.LIB	memmove.obj	1	_memmove	memcpy.obj and memmove.obj assemble to the same 821 bytes; placed callers of _memmove reach this copy (runtime_error's copy constructor 0x401020, basic_string::erase 0x401a90)
 0x4c890	90	code	LIBCPMT.LIB	string.obj	3	?_Xlen@std@@YAXXZ	_Xlen and _Xran are the same 90 bytes but for their message; this one throws length_error with "string too long" (0x491590)
 0x4c978	90	code	LIBCPMT.LIB	string.obj	53	?_Xran@std@@YAXXZ	_Xran's copy: it throws out_of_range with "invalid string position" (0x4915a0)
+0x78276	1	code	NAFXCW.LIB	dlgprop.obj	97	?OnOK@CPropertyPage@@UAEXXZ	CPropertyPage::OnOK is an empty release body (a lone ret); the placed property pages' OnOK overrides call it site for site
+0x78646	92	code	NAFXCW.LIB	dlgprop.obj	163	??0CPropertySheet@@QAE@PBDPAVCWnd@@I@Z	92-byte body equal to dlgprop.obj's; the placed property-sheet constructor calls it
+0x6faf6	1	code	NAFXCW.LIB	doccore.obj	27	?DeleteContents@CDocument@@UAEXXZ	an empty release body (a lone ret); the placed document's DeleteContents calls it
+0x6b08e	10	code	NAFXCW.LIB	except.obj	11	??0CException@@QAE@XZ	10-byte body equal to except.obj's; its placed caller pairs with it
+0x5000f	43	code	LIBCMT.LIB	strdup.obj	1	__strdup	43-byte body equal to strdup.obj's; 3 placed call sites pair with it
+0x4cac5	3	code	LIBCPMT.LIB	uncaught.obj	2	?uncaught_exception@std@@YA_NXZ	3-byte body equal to uncaught.obj's; 4 placed call sites pair with it
+0x53225	6	code	LIBCMT.LIB	lconv.obj	3	_localeconv	6-byte body equal to lconv.obj's; 2 placed call sites pair with it
+0x6e2ec	42	code	NAFXCW.LIB	wingdi.obj	298	?Detach@CGdiObject@@QAEPAXXZ	CGdiObject::Detach; its placed caller pairs with it
+0x6e316	22	code	NAFXCW.LIB	wingdi.obj	301	?DeleteObject@CGdiObject@@QAEHXZ	CGdiObject::DeleteObject; the GDI object destructors and 7 placed call sites reach it
+0x6e017	86	code	NAFXCW.LIB	wingdi.obj	231	??0CClientDC@@QAE@PAVCWnd@@@Z	86-byte body equal to wingdi.obj's; 8 placed call sites pair with it
+0x6e2bf	45	code	NAFXCW.LIB	wingdi.obj	295	?Attach@CGdiObject@@QAEHPAX@Z	CGdiObject::Attach; 3 placed call sites pair with it
+0x6da9d	70	code	NAFXCW.LIB	wingdi.obj	99	?SelectObject@CDC@@QAEPAVCBrush@@PAV2@@Z	CDC::SelectObject(CBrush*); 2 placed call sites pair with it
+0x6dd7d	16	code	NAFXCW.LIB	wingdi.obj	148	?GetClipBox@CDC@@UBEHPAUtagRECT@@@Z	16-byte body equal to wingdi.obj's; its placed caller pairs with it
+0x6ba22	45	code	NAFXCW.LIB	winmenu.obj	19	?Attach@CMenu@@QAEHPAUHMENU__@@@Z	CMenu::Attach; 2 placed call sites pair with it
+0x6ba79	22	code	NAFXCW.LIB	winmenu.obj	25	?DestroyMenu@CMenu@@QAEHXZ	CMenu::DestroyMenu; 4 placed call sites pair with it
