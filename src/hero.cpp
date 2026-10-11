@@ -4839,7 +4839,7 @@ DC_ADDRESS(0x0d37c0, 0x70)
 MAC_ADDRESS(0x102ec4, 0x98)
 int hero::giveSS(int whichSS, int numLevelsToGive)
 {
-    HOMM3_RELEASE_VERIFY(whichSS >= 0
+    assert(whichSS >= 0
         && whichSS < sizeof(m_skillLevel) / sizeof(m_skillLevel[0]));
     int oldLevel = m_skillLevel[whichSS];
     if (m_skillLevel[whichSS] > 0) {
@@ -6597,8 +6597,8 @@ DC_ADDRESS(0x0d5710, 0xf0)
 MAC_ADDRESS(0x106f98, 0x108)
 int hero::getHeroSpellBonus(SpellID spellId, int targetLevel, int value) const
 {
-    HOMM3_RELEASE_VERIFY(m_id >= 0);
-    HOMM3_RELEASE_VERIFY(m_id < sizeof(g_heroSpecificAbilities)
+    assert(m_id >= 0);
+    assert(m_id < sizeof(g_heroSpecificAbilities)
         / sizeof(g_heroSpecificAbilities[0]));
     int bonus = 0;
     const THeroSpecificAbility& ability = g_heroSpecificAbilities[m_id];

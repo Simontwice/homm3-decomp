@@ -460,10 +460,30 @@ Where the original may have had such statements:
   - TGzInflateBuf's constructor: Loki's three asserts take the campaign
     editor's /Ob1 copy from 93.45 to 99.95 (TDataError then expands at
     retail's _mustGetC sites) but the game's /Ob2 copy from 100 to 94.98;
-    any one alone is neutral in the game. The asserts fit the editor,
-    so the game's copy may differ elsewhere (open lead).
+    any one alone is neutral in the game; the map editor's /O1 /Ob2 copy
+    stays 99.93 either way. The game's budget trace (`homm3 vc6
+    predict-inline --tu gzinflatebuf --root ??0TGzInflateBuf`, cb 868,
+    budget 1736) puts the wall at the two FHCRC reads: retail calls
+    TDataError at the first (nested budget (B - 56) / 5 must stay below
+    its cb 78) and expands it at the second ((B - 112) / 4 at least 78),
+    where B is the root budget left at the first read, 441 now. That
+    holds for B in 424..445; one assert (+4) gives 445, all three (+12)
+    give 453, and `--cb-window` finds no root cb that fits. The game copy
+    would have to spend 8..29 more budget before that read, or be 4..14
+    tuples smaller, than ours; the Mac copy's call sequence (0x220ae4)
+    is the same as ours and Dreamcast has no copy, so nothing yet
+    identifies that difference (open lead).
   - getArmyName (CreatureType.h; DC 296..307 leaves 297..298
     unrecorded): its assert costs combatMessage (0x492840) 100 -> 98.07.
+* Ported since, all byte-neutral: CSpriteFrame.cpp's 71 (the renderers'
+  only inline callee, Clip, expands under every budget), TTextResource's
+  two scan-loop checks (Dreamcast leaves exactly textresource.cpp 87 and
+  107 unrecorded), Bitmap16Bit(name, w, h)'s two extents, Remap's
+  if/else green-mask checks and font::DrawCharacter's range check.
+  Loki's TTextResource::GetText assert is not ported: Complete's GetText
+  is the TextResource.h inline Dreamcast records without a gap. Loki's
+  `assert(0)` bodies of Bitmap16Bit/Bitmap24Bit::importPCXFile and ftol
+  are the Linux port's stubs for code Complete implements.
 * A Dreamcast line gap alone is weak: most gaps are braces, blank lines
   and comments. CodeView scope records are stronger. An empty
   coincident scope pair is a braced block that emitted nothing, and a
@@ -493,6 +513,21 @@ and one `HOMM3_RELEASE_VERIFY(localPos != lossCondition.m_playerLoser)`
 in each else (+12 each) take the cost from 523 to 575, inside retail's
 568..648: the loss-condition constructor expands at all three sites,
 81.85 -> 100. The check's text is not recovered.
+
+The remaining `HOMM3_RELEASE_VERIFY` carriers were re-examined once
+plain `assert` compiled out (2026-10-11). An assert costs 2 tuples
+whatever its expression, a VERIFY e + 3, so an assert can replace a
+carrier only where the cost the carrier supplies is at most that:
+
+| carrier | Dreamcast | as `assert` | without | verdict |
+|---|---|---|---|---|
+| TCSLock (mousemgr) | 292..293 unrecorded | 41 > 40: exact | 39: checkUpdate 96.73 | assert |
+| hero::giveSS | 4628..4631 | exact | checkLevel 51.95, setSS 3.8, initialize | assert |
+| hero::getHeroSpellBonus (2) | 6429..6430 | exact | modifySpellDamage 32.59 | asserts |
+| CDPlayHeroes::compressMsg | 426 only | exact | exact | removed: neither line table nor codegen needs it |
+| type_AI_creature_purchaser::doPurchase (2) | 2627..2628 | buyCreatures 51.62, valueOfHiring 79.17 | | VERIFY: the cost is expression-dependent |
+| game::saveString | 2532 only | saveSignPool 6.5, saveRumours 27.56 | | VERIFY; nothing proves a statement |
+| displayLCWinLoss (2) | empty else scopes | below 568 | | VERIFY (above) |
 
 ### 4.3 The historical titration (2026-08)
 

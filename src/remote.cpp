@@ -407,7 +407,6 @@ DC_ADDRESS(0x11be94, 0xaa)
 MAC_ADDRESS(0x210d28, 0x100)
 CNetMsg* CDPlayHeroes::compressMsg(CNetMsg* netMsg)
 {
-    HOMM3_RELEASE_VERIFY(netMsg != 0 && netMsg->m_size >= sizeof(CNetMsg));
     unsigned long compressedSize =
         static_cast<unsigned long>(netMsg->m_size * 1.2) + 12;
     void* storage = new char[compressedSize];

@@ -1,4 +1,5 @@
 #include "va.h"
+#include <assert.h>
 
 #include "platform.h"
 #include <ddraw.h>
@@ -108,11 +109,12 @@ public:
     // Retail proves the invariant's IL cost: checkUpdate's nested hidePointer
     // expansion keeps this constructor as a call (0x50d890) at budget 21,
     // which requires cb > 40. The plain store+call body costs 39 (free, so
-    // always expanded; checkUpdate 96.73%); the release VERIFY costs 46.
+    // always expanded; checkUpdate 96.73%); the release-build assert's two
+    // tuples make 41. Its text is not recovered.
     VA(0x0050d890, 0x19)  // byte-identified out-of-line copy
     DC_ADDRESS(0x0ff7e0, 0x20)
     TCSLock(CRITICAL_SECTION* criticalSection) {
-        HOMM3_RELEASE_VERIFY(criticalSection != 0);
+        assert(criticalSection != 0);
         m_section = criticalSection;
         EnterCriticalSection(m_section);
     }
