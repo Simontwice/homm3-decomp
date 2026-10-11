@@ -8052,8 +8052,8 @@ void type_random_map_generator::carveBranchingPaths()
         std::queue<TRmgPoint, std::list<TRmgPoint> > branches;
         pending.push_back(first);
         pending.push_back(last);
-        while (pending.size() > 0) {
-            while (pending.size() > 0) {
+        while (pending.size()) {
+            while (pending.size()) {
                 last = pending.back();
                 pending.pop_back();
                 first = pending.back();
@@ -10982,7 +10982,7 @@ void type_random_map_generator::calculateQuestZoneDistances(TRmgZone* origin)
         m_zones[index]->m_questPlacementScore = 20000;
     origin->m_questPlacementScore = 0;
     pending.push_back(origin);
-    while (pending.size() > 0) {
+    while (pending.size()) {
         TRmgZone* current = pending.back();
         pending.pop_back();
         TRmgTemplateZone* slot = current->m_templateZone;
