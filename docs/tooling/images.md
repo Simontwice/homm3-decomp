@@ -135,7 +135,11 @@ original's `Editor\` directory, `src/editor/` and `include/editor/`;
 `campaign_editor` for h3ccmped, the original's `CampaignEditor\`). The
 game's and every other image's claim, ownership, cleanliness and accounting
 scans skip those trees (`homm3.core.images.foreign`); the image's scans read
-only them.
+only them. The cleanliness board (`homm3.cleanliness.board`) runs once per
+image with the same rules: the game's counts every file outside the editors'
+trees against `config/cleanliness/baseline.tsv`, an editor's counts only its
+own trees against `config/cleanliness/baseline.<KEY>.tsv` (its enum, macro
+and local-class registries still see the game's trees it compiles).
 
 The image's own units take part in placement too. A function or datum an
 own unit places is normally a suggestion for its `VA()`/`DATA()` claim
@@ -176,7 +180,8 @@ game compiles, so a tree without the editors can never pass as green.
 names every skipped image. `homm3 worktree new` stages each image from the
 seed's copy or its `$HOMM3_<KEY>_EXE` override. `homm3 --image h3maped build [--fast TU]`
 builds one image alone: configure, ninja, the placements check, delink,
-report, ledger, the banked-rows and VA-claim gates and its README block.
+report, ledger, the banked-rows and VA-claim gates, its cleanliness board
+and its README block.
 The game's `--fast` loop never builds an image. The steps by hand:
 
 ```sh

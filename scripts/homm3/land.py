@@ -62,7 +62,7 @@ BRANCH = "decomp-complete-4.0"
 REFRESHED = ("README.md", "build.ninja", "config/match_baseline.tsv",
              "config/match_baseline.*.tsv", "config/retail/*/placements.tsv",
              "config/mac/match_baseline.tsv", "config/mac/match_profiles.tsv",
-             "config/cleanliness/baseline.tsv")
+             "config/cleanliness/baseline.tsv", "config/cleanliness/baseline.*.tsv")
 SCORE_BLOCK = re.compile(r"^<!-- ([a-z0-9-]*match-score):(start|end) -->$")
 
 

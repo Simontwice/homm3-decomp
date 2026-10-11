@@ -22,7 +22,8 @@ build first to establish those targets.
 Images (docs/tooling/images.md): a full game build then builds every other
 pinned image, each in its own process (`homm3 --image KEY build`):
 configure -> ninja -> placements check -> delink -> report -> ledger ->
-banked-rows and VA-claim gates -> README block. A pinned image whose
+banked-rows and VA-claim gates -> the image's cleanliness board -> README
+block. A pinned image whose
 executable (staged copy or `$HOMM3_<KEY>_EXE`) or SP3 MFC overlay is missing
 fails the build before anything compiles; `--skip-image KEY` is the only
 opt-out, and the summary names every skipped image. `--fast` and
@@ -227,6 +228,21 @@ def _image_main(fast: bool, ninja_args: list[str]) -> int:
             failures.append(f"{gate.__name__.rsplit('.', 1)[-1]} ({len(fatal)} finding(s))")
             for line in fatal:
                 print(f"[build] {key}: {line}", file=sys.stderr)
+    # The image's own sources answer to the same board as the game's; its
+    # floors live beside the game's and roll down only on a green build.
+    from homm3.cleanliness import board
+    from homm3.match import source_ownership
+    try:
+        origins = source_ownership.read_dc(include_declarations=True)
+        violations = board.check_and_roll(write=not failures, dc_origins=origins, image=key)
+    except (inputs.InputError, OSError) as exc:
+        violations = [f"cleanliness: cannot check without Dreamcast origins ({exc}); "
+                      "floors unchanged"]
+    if violations:
+        ratchets = sum(not line.startswith(" ") for line in violations)
+        failures.append(f"cleanliness board ({ratchets} violation(s))")
+        for line in violations:
+            print(f"[build] {key}: {line}", file=sys.stderr)
     try:
         status.write_readme()
     except Exception as exc:  # the score block must never fail a build

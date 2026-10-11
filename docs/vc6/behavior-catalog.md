@@ -597,12 +597,35 @@ the pointer member → base not kept).
 
 ### B23. `volatile` is not an admissible register-allocation lever
 Earlier sweeps observed percentage gains from volatile locals and pointers,
-but none established a real source qualifier. The source cleanliness gate now
-bans the qualifier at floor zero, and `why-reg` deliberately excludes volatile
-mutations even when they would lower its abstract instruction distance. Recover
-the real helper, type, lifetime, aliasing obligation, or statement order.
-- status: REJECTED as source-false; detection remains fatal in cleanliness
-- negative control: `test_reg_mutations.py` proves `why-reg` cannot offer it
+but none established a real source qualifier. The source cleanliness gate
+bans the qualifier at floor zero in the game and in both editors, and
+`why-reg` deliberately excludes volatile mutations even when they would lower
+its abstract instruction distance. Recover the real helper, type, lifetime,
+aliasing obligation, or statement order.
+
+A qualifier the original really carried is admitted only through a reviewed
+row of `config/cleanliness/volatile_allowlist.tsv` (image, file, declaration,
+evidence), and only when retail proves both:
+- semantics: another thread (a CWinThread or `_beginthread` proc, a watchdog,
+  a timer callback) or a modal loop really shares the object;
+- codegen: retail keeps instructions or an order VC6 does not emit for the
+  non-volatile object, shown by compiling both. VC6 does not schedule
+  instructions across a volatile access and does not fold a volatile load
+  into an ALU operand; it does both for an ordinary member. Other signs are a
+  reload after a store with nothing between, a store a later store kills, a
+  load repeated in a call-free loop, a read-modify-write split into load and
+  store.
+A score gain alone never qualifies. Admitted sites are reported on the
+board's unratcheted `admitted volatile qualifiers` row; a row that admits no
+site fails the gate. Admitted (2026-10-11): h3maped `TMapDoc::_m_bOwnsAutosave`
+(autosave thread; four functions keep the volatile store/load order) and
+`TMapEditorApp::_m_lastIdleTime` (watchdog thread; `_watchdog` loads it
+unfolded, `OnIdle` and `Run` keep the store order).
+- status: REJECTED as a codegen lever; admitted only with retail-proven
+  semantics and codegen through the reviewed allowlist
+- negative control: `test_reg_mutations.py` proves `why-reg` cannot offer it;
+  `cleanliness/test_board.py` proves unreviewed, unused and evidence-less
+  rows fail
 
 ### B24. Separate persistent globals from a deferred local aggregate — `videoPlay`, exact
 Retail stores both centered coordinates in `gSmackX`/`gSmackY`, then copies

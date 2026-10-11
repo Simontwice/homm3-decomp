@@ -57,6 +57,17 @@ class ImagesTest(unittest.TestCase):
         with patch.dict(os.environ, {images.IMAGE_ENV: "h3maped"}):
             self.assertTrue(all(images.foreign(p, self.root) for p in campaign))
 
+    def test_an_explicit_image_overrides_the_selection(self):
+        editor = self.root / "src/editor/GameMap.cpp"
+        campaign = self.root / "src/campaign_editor/CampaignDoc.cpp"
+        with patch.dict(os.environ, {images.IMAGE_ENV: "game"}):
+            self.assertFalse(images.foreign(editor, self.root, "h3maped"))
+            self.assertTrue(images.foreign(campaign, self.root, "h3maped"))
+        root = self.root.resolve()
+        self.assertEqual(images.own_trees("h3maped", self.root),
+                         (root / "src/editor", root / "include/editor"))
+        self.assertEqual(images.own_trees("game", self.root), ())
+
     def test_only_image_pins_are_images(self):
         self.assertEqual(images.images(self.root), ["game", "h3maped", "h3ccmped"])
 

@@ -203,7 +203,8 @@ class RefreshPathTests(unittest.TestCase):
     def test_refresh_commit_takes_only_generated_files(self):
         for path in ("README.md", "build.ninja", "config/match_baseline.tsv",
                      "config/match_baseline.h3ccmped.tsv", "config/retail/h3maped/placements.tsv",
-                     "config/mac/match_baseline.tsv", "config/cleanliness/baseline.tsv"):
+                     "config/mac/match_baseline.tsv", "config/cleanliness/baseline.tsv",
+                     "config/cleanliness/baseline.h3maped.tsv"):
             self.assertTrue(land._generated(path), path)
         for path in ("src/hero.cpp", "config/units.toml", "config/retail/h3maped/census.tsv",
                      "docs/README.md"):

@@ -57,11 +57,21 @@ def source_dir(image: str, root: Path) -> str:
     return pins(root).get(input_key(image), {}).get("sources", image)
 
 
-def foreign_trees(root: Path) -> tuple[Path, ...]:
+def foreign_trees(root: Path, image: str | None = None) -> tuple[Path, ...]:
     """The src/ and include/ subdirectories of every image but the selected
-    one: their VA()/DATA() claims spell another image's addresses, so the
-    selected image's scans never read them."""
-    return _foreign_trees(str(Path(root).resolve()), selected(root))
+    one (or `image`): their VA()/DATA() claims spell another image's
+    addresses, so the selected image's scans never read them."""
+    return _foreign_trees(str(Path(root).resolve()), image or selected(root))
+
+
+def own_trees(image: str, root: Path) -> tuple[Path, ...]:
+    """An editor image's own src/ and include/ subdirectories; the game owns
+    every file outside the other images' trees, so it has none of its own."""
+    if image == DEFAULT_IMAGE:
+        return ()
+    name = source_dir(image, Path(root))
+    root = Path(root).resolve()
+    return (root / "src" / name, root / "include" / name)
 
 
 @lru_cache(maxsize=8)
@@ -74,9 +84,9 @@ def _foreign_trees(root: str, chosen: str) -> tuple[Path, ...]:
     return tuple(out)
 
 
-def foreign(path: Path, root: Path) -> bool:
+def foreign(path: Path, root: Path, image: str | None = None) -> bool:
     """Whether `path` lies in another image's source tree (foreign_trees)."""
-    trees = foreign_trees(root)
+    trees = foreign_trees(root, image)
     if not trees:
         return False
     path = Path(path).resolve()

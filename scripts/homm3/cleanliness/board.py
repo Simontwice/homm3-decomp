@@ -11,6 +11,16 @@ visible instead of being blessed. `board --update` is the one deliberate
 way to move a floor - lower by fixing the tree, higher only as an
 explicit, reviewed act.
 
+Every pinned image has its own board (docs/tooling/images.md). The game's
+counts every file outside the editors' trees (the shared sources the
+editors also compile included); an editor's (`homm3 --image KEY build`,
+`HOMM3_IMAGE=KEY python -m homm3.cleanliness.board`) counts only its own
+src/<sources>/ and include/<sources>/ against
+config/cleanliness/baseline.<KEY>.tsv, while the enum, macro and
+local-class registries see what that image compiles (the game's trees
+plus its own). The rules and the banned rows are the
+same for every image.
+
 The rows (ratcheted unless noted; floors start at the tree's current counts):
 
   C-style casts       BANNED at floor 0 (gruntz cast-metric-policy):
@@ -31,6 +41,16 @@ The rows (ratcheted unless noted; floors start at the tree's current counts):
                       but it must not be retained. A Dreamcast line gap plus
                       a meaningful release-elided invariant may use
                       HOMM3_RELEASE_VERIFY; a gap by itself is not proof.
+                      The one admission is a reviewed row of
+                      config/cleanliness/volatile_allowlist.tsv (image,
+                      file, declaration, evidence) for a qualifier retail
+                      proves twice: semantically (another thread or a
+                      modal loop really shares the object) and in codegen
+                      (retail keeps instructions or an order VC6 does not
+                      emit for the non-volatile object, shown by compiling
+                      both). Admitted sites leave the row and are reported
+                      on `admitted volatile qualifiers`; a row that admits
+                      no site fails the gate. A score gain is not evidence.
   inline-gate         BANNED at floor 0. `INLINE_GATE(...)` is a no-op marker
   artifacts           invented by the decompilation, not original source.
   inline-depth pins   source-false compiler-steering debt. Local experiments
@@ -118,6 +138,7 @@ from __future__ import annotations
 
 import re
 import sys
+from pathlib import Path
 
 from homm3.core import common, images
 
@@ -571,7 +592,13 @@ METRICS = (
      "comment, retail checkpoint, and flattening negative "
      "control. Never replace volatile with self-assignment, dead code, or "
      "synthetic caller mass; accept a non-MAX current dip while recovering "
-     "the true source"),
+     "the true source. volatile stays banned as a codegen lever; a qualifier "
+     "retail really carries is admitted only through a reviewed row of "
+     "config/cleanliness/volatile_allowlist.tsv, with both semantic evidence "
+     "(another thread or a modal loop shares the object) and codegen "
+     "evidence (retail instructions or order VC6 does not emit for the "
+     "non-volatile object, shown by compiling both); a score gain is not "
+     "evidence"),
     ("inline-gate artifacts", _regex_sites(_INLINE_GATE), False,
      "remove INLINE_GATE: it is a source-false no-op wrapper"),
     ("inline-depth pins", _regex_sites(_INLINE_DEPTH_ZERO), False,
@@ -614,22 +641,100 @@ METRICS = (
      "whole-build feature switch; not ratcheted"),
 )
 
+# Reviewed volatile admissions (see the module docstring): reported on their
+# own row, never ratcheted; an unused or malformed row is a finding.
+VOLATILE_ALLOWLIST = "config/cleanliness/volatile_allowlist.tsv"
+_ALLOWLIST_COLUMNS = ("image", "file", "declaration", "evidence")
+ADMITTED_VOLATILE = "admitted volatile qualifiers"
+ALLOWLIST_FINDING = "volatile allowlist"
+
 # Reported, never ratcheted: a reviewed feature's surface may grow with it.
 REPORTED_ONLY = frozenset({"sanctioned feature switches",
-                           "sanctioned feature local classes"})
+                           "sanctioned feature local classes",
+                           ADMITTED_VOLATILE})
 # Every other row ratchets: floors only move down (raises are explicit --update).
 RATCHET = {label for label, _, _, _ in METRICS} - REPORTED_ONLY
 _FIX = {label: fix for label, _, _, fix in METRICS}
 
 
-def count(per_file: bool = False, *, dc_origins=None):
+def _image(image: str | None) -> str:
+    return image or images.selected(REPO)
+
+
+def baseline_path(image: str | None = None) -> Path:
+    """The game's floors in BASELINE; another image's beside it, spelled
+    like the score ledgers (`baseline.<image>.tsv`)."""
+    key = _image(image)
+    if key == images.DEFAULT_IMAGE:
+        return BASELINE
+    return BASELINE.with_name(f"{BASELINE.stem}.{key}{BASELINE.suffix}")
+
+
+def _scored(path: Path, image: str) -> bool:
+    """Whether `path` counts on `image`'s board: an editor's own trees, or
+    for the game everything the scan reads (the foreign trees are skipped)."""
+    own = images.own_trees(image, REPO)
+    if not own:
+        return True
+    path = path.resolve()
+    return any(tree in path.parents for tree in own)
+
+
+
+
+def _normal(text: str) -> str:
+    return " ".join(text.split())
+
+
+def read_volatile_allowlist(image: str) -> tuple[dict, list[str]]:
+    """{(file, declaration): evidence} for `image`, and the malformed rows.
+    The file is tab-separated with a header (win_only.tsv style); every
+    row needs all four columns, evidence included."""
+    rows, errors = {}, []
+    allowlist = REPO / VOLATILE_ALLOWLIST
+    if not allowlist.is_file():
+        return rows, errors
+    header = None
+    for number, line in enumerate(allowlist.read_text().splitlines(), 1):
+        if not line.strip() or line.startswith("#"):
+            continue
+        fields = line.split("\t")
+        if header is None:
+            header = tuple(fields)
+            if header != _ALLOWLIST_COLUMNS:
+                errors.append(f"{VOLATILE_ALLOWLIST}:{number}: header must be "
+                              + "\t".join(_ALLOWLIST_COLUMNS))
+                return {}, errors
+            continue
+        if len(fields) != len(header) or not all(f.strip() for f in fields):
+            errors.append(f"{VOLATILE_ALLOWLIST}:{number}: needs image, file, "
+                          "declaration and evidence")
+            continue
+        key, file, declaration, evidence = fields
+        if key == image:
+            rows[file, _normal(declaration)] = evidence
+    return rows, errors
+
+
+def _line_at(code: str, offset: int) -> str:
+    start = code.rfind("\n", 0, offset) + 1
+    end = code.find("\n", offset)
+    return code[start:end if end >= 0 else len(code)]
+
+
+def count(per_file: bool = False, *, dc_origins=None, image: str | None = None):
+    image = _image(image)
+    admitted_rows, allowlist_errors = read_volatile_allowlist(image)
+    admitted_used = set()
+    admitted = 0
     sources = []
     for root in ROOTS:
         base = REPO / root
         if not base.is_dir():
             continue
         for path in sorted(base.rglob("*")):
-            if path.suffix not in EXTS or not path.is_file() or images.foreign(path, REPO):
+            if (path.suffix not in EXTS or not path.is_file()
+                    or images.foreign(path, REPO, image)):
                 continue
             try:
                 code = _strip(path.read_text(errors="ignore"))
@@ -646,12 +751,25 @@ def count(per_file: bool = False, *, dc_origins=None):
     totals = {label: 0 for label, _, _, _ in METRICS}
     offenders = []
     for path, code in sources:
+        if not _scored(path, image):
+            continue
         ctx["path"] = path
         ctx["dc_local_classes"] = local_classes.get(path, frozenset())
         for label, sites, cpp_only, _fix in METRICS:
             if cpp_only and path.suffix not in _CPP:
                 continue
             found = sites(code, ctx)
+            if label == "volatile qualifiers" and admitted_rows:
+                rel = path.relative_to(REPO).as_posix()
+                kept = []
+                for off in found:
+                    key = (rel, _normal(_line_at(code, off)))
+                    if key in admitted_rows and key not in admitted_used:
+                        admitted_used.add(key)
+                        admitted += 1
+                    else:
+                        kept.append(off)
+                found = kept
             totals[label] += len(found)
             if found and per_file:
                 for off in found:
@@ -661,14 +779,20 @@ def count(per_file: bool = False, *, dc_origins=None):
                                       f"{path.relative_to(REPO)}:{line}: "
                                       f"{snippet}"))
     rows = [(label, totals[label]) for label, _, _, _ in METRICS]
+    rows.append((ADMITTED_VOLATILE, admitted))
+    offenders.extend((ALLOWLIST_FINDING, error) for error in allowlist_errors)
+    offenders.extend((ALLOWLIST_FINDING, f"{VOLATILE_ALLOWLIST}: {file}: "
+                      f"`{declaration}` admits no {image} volatile site")
+                     for file, declaration in sorted(set(admitted_rows) - admitted_used))
     return (rows, offenders) if per_file else rows
 
 
-def load_baseline() -> dict[str, int]:
-    if not BASELINE.is_file():
+def load_baseline(image: str | None = None) -> dict[str, int]:
+    baseline = baseline_path(image)
+    if not baseline.is_file():
         return {}
     out = {}
-    for line in BASELINE.read_text().splitlines():
+    for line in baseline.read_text().splitlines():
         if line.startswith("#") or "\t" not in line:
             continue
         label, n = line.rsplit("\t", 1)
@@ -679,17 +803,17 @@ def load_baseline() -> dict[str, int]:
     return out
 
 
-def save_baseline(rows) -> None:
+def save_baseline(rows, image: str | None = None) -> None:
     head = ("# MANUALLY RATCHETED - homm3.cleanliness.board floors; build\n"
             "# rolls them DOWN-only, `board --update` is the only bless.\n")
-    BASELINE.write_text(
+    baseline_path(image).write_text(
         head + "".join(f"{label}\t{n}\n" for label, n in rows))
 
 
-def merge_downonly(rows) -> list:
+def merge_downonly(rows, image: str | None = None) -> list:
     """min(count, committed floor) for ratcheted rows; a label missing
     from `rows` keeps its floor (unmeasured is not zero)."""
-    base = load_baseline()
+    base = load_baseline(image)
     out = []
     for label, n in rows:
         floor = base.get(label)
@@ -1025,7 +1149,8 @@ def selftest() -> list[str]:
     failures.extend(f"{label}: NO SELFTEST SAMPLES" for label in sorted(missing))
     volatile_fix = _FIX["volatile qualifiers"]
     for required in ("dreamcast show", "predict-inline", "uncommitted",
-                     "HOMM3_RELEASE_VERIFY", "synthetic caller mass"):
+                     "HOMM3_RELEASE_VERIFY", "synthetic caller mass",
+                     "volatile_allowlist.tsv"):
         if required not in volatile_fix:
             failures.append(
                 f"volatile qualifiers: repair diagnostic lost {required!r}")
@@ -1034,30 +1159,38 @@ def selftest() -> list[str]:
 
 # --- entry points -----------------------------------------------------------------
 
-def check_and_roll(write: bool, *, dc_origins=None) -> list[str]:
+def _board(image: str) -> str:
+    return "cleanliness" if image == images.DEFAULT_IMAGE else f"{image} cleanliness"
+
+
+def check_and_roll(write: bool, *, dc_origins=None, image: str | None = None) -> list[str]:
     """The build-tail gate: selftest, count, compare ratcheted rows to
     their floors; on `write` roll the baseline down-only. Returns fatal
-    violation lines (empty = pass); prints the scoreboard line."""
+    violation lines (empty = pass); prints the scoreboard line. A missing
+    baseline has no floors: the first green build writes them."""
+    image = _image(image)
     broken = selftest()
     if broken:
         return [f"cleanliness SELFTEST BROKEN: {b}" for b in broken]
-    rows, offenders = count(per_file=True, dc_origins=dc_origins)
-    base = load_baseline()
+    rows, offenders = count(per_file=True, dc_origins=dc_origins, image=image)
+    base = load_baseline(image)
     violations = []
     for label, n in rows:
         floor = base.get(label)
         if label in RATCHET and floor is not None and n > floor:
             violations.append(
-                f"cleanliness ratchet violated: {label} rose {floor} -> {n}"
+                f"{_board(image)} ratchet violated: {label} rose {floor} -> {n}"
                 f" ({_FIX[label]})")
             hits = [f"  {where}" for lbl, where in offenders if lbl == label]
             violations.extend(hits[:10])
+    violations.extend(f"{_board(image)} {where}" for label, where in offenders
+                      if label == ALLOWLIST_FINDING)
     if violations:
         return violations
     if write:
-        save_baseline(merge_downonly(rows))
+        save_baseline(merge_downonly(rows, image), image)
     cells = ", ".join(f"{label} {n}" for label, n in rows)
-    print(f"[build] cleanliness: {cells} (floors hold)")
+    print(f"[build] {_board(image)}: {cells} (floors hold)")
     return []
 
 
@@ -1072,13 +1205,14 @@ def main(argv=None) -> int:
         total = sum(len(p) + len(n) for p, n in _SAMPLES.values())
         print(f"selftest OK ({len(_SAMPLES)} metrics, {total} samples)")
         return 0
-    rows, offenders = count(per_file=True)
+    image = _image(None)
+    rows, offenders = count(per_file=True, image=image)
     if "--update" in argv:
-        save_baseline(rows)
-        print("cleanliness baseline blessed: "
+        save_baseline(rows, image)
+        print(f"{_board(image)} baseline blessed: "
               + ", ".join(f"{label} {n}" for label, n in rows))
         return 0
-    base = load_baseline()
+    base = load_baseline(image)
     rc = 0
     for label, n in rows:
         floor = base.get(label)
@@ -1089,6 +1223,8 @@ def main(argv=None) -> int:
             rc = 1
             print(f"  fix: {_FIX[label]}")
     for label, where in offenders:
+        if label == ALLOWLIST_FINDING:
+            rc = 1
         print(f"  [{label}] {where}")
     return rc
 

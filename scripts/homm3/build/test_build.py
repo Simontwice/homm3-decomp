@@ -33,6 +33,8 @@ class BuildModeTest(unittest.TestCase):
         self.enterContext(patch.object(build, "ROOT", self.root))
         self.enterContext(patch.object(status, "REPORT", self.root / "build/objdiff/report.json"))
         self.enterContext(patch.object(status, "overall_line", return_value="report"))
+        # The link-diff ceiling reads the staged retail executable.
+        self.enterContext(patch.object(build, "_link_diff", return_value=[]))
         self.enterContext(contextlib.redirect_stdout(io.StringIO()))
         self.stderr = self.enterContext(contextlib.redirect_stderr(io.StringIO()))
 
@@ -80,6 +82,35 @@ class BuildModeTest(unittest.TestCase):
         self.mocks["origins"].assert_called_once_with(include_declarations=True)
         self.mocks["ownership"].assert_called_once_with(origins=[])
         self.mocks["cleanliness"].assert_called_once_with(write=True, dc_origins=[])
+
+    def test_editor_image_build_checks_its_own_cleanliness_board(self):
+        from homm3.census import placements
+        from homm3.core import paths
+        self.enterContext(patch.object(paths, "is_game", return_value=False))
+        self.enterContext(patch.object(paths, "image_key", return_value="h3maped"))
+        self.enterContext(patch.object(placements, "main", return_value=0))
+        self.assertEqual(build.main([]), 0)
+        self.assertEqual(self.events[-3:], ["origins", "cleanliness", "readme"])
+        self.mocks["origins"].assert_called_once_with(include_declarations=True)
+        self.mocks["cleanliness"].assert_called_once_with(
+            write=True, dc_origins=[], image="h3maped")
+
+    def test_editor_image_cleanliness_violation_fails_and_keeps_floors(self):
+        from homm3.census import placements
+        from homm3.core import paths
+        self.enterContext(patch.object(paths, "is_game", return_value=False))
+        self.enterContext(patch.object(paths, "image_key", return_value="h3maped"))
+        self.enterContext(patch.object(placements, "main", return_value=0))
+        self.mocks["cleanliness"].side_effect = lambda **kwargs: [
+            "h3maped cleanliness ratchet violated: volatile qualifiers rose 0 -> 1",
+            "  include/editor/MapDoc.h:1: volatile bool"]
+        self.assertEqual(build.main([]), 1)
+        self.mocks["readme"].assert_called_once()
+        self.assertIn("cleanliness board (1 violation(s))", self.stderr.getvalue())
+        self.mocks["claims"].side_effect = lambda: ["invalid source claim"]
+        self.mocks["cleanliness"].reset_mock()
+        build.main([])
+        self.assertEqual(self.mocks["cleanliness"].call_args.kwargs["write"], False)
 
     def test_data_opt_in_refreshes_byte_accounting_before_readme(self):
         self.assertEqual(build.main(["--data"]), 0)
