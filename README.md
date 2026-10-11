@@ -25,7 +25,7 @@ MAX by module:
 
 | Module       | Units | Functions exact MAX | Fuzzy MAX |
 | :----------- | ----: | ------------------: | --------: |
-| `game`       |   124 | 3815 / 3998 (95.4%) |    99.14% |
+| `game`       |   123 | 3815 / 3998 (95.4%) |    99.14% |
 | `rmg`        |     6 |   311 / 369 (84.3%) |    96.04% |
 | `network`    |     4 |   278 / 280 (99.3%) |    99.68% |
 | `zlib-1.1.3` |    14 |    69 / 69 (100.0%) |   100.00% |
@@ -53,19 +53,19 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- h3maped-match-score:start -->
 
-**GOG Complete map editor `h3maped.exe`: 93.79% matched (MAX)** — 5,553 / 6,847 functions exact (81.1%), weighted by size over 851,190 bytes of code.
+**GOG Complete map editor `h3maped.exe`: 93.98% matched (MAX)** — 5,571 / 6,847 functions exact (81.4%), weighted by size over 851,190 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           5,526 |   93.76% | last measured score                            |
-| MAX   |           5,553 |   93.79% | best result for each function's current source |
-| HIST  |           5,553 |   93.80% | all-time peak across source revisions          |
+| CUR   |           5,545 |   93.96% | last measured score                            |
+| MAX   |           5,571 |   93.98% | best result for each function's current source |
+| HIST  |           5,571 |   94.00% | all-time peak across source revisions          |
 
 MAX by module:
 
 | Module        | Units | Functions exact MAX | Fuzzy MAX |
 | :------------ | ----: | ------------------: | --------: |
-| `game`        |   159 | 5095 / 5373 (94.8%) |    99.01% |
+| `game`        |   159 | 5113 / 5385 (94.9%) |    99.03% |
 | `rmg`         |     6 |   346 / 453 (76.4%) |    93.45% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
 | `codec`       |     3 |     40 / 51 (78.4%) |    91.92% |
