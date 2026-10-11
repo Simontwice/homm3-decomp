@@ -381,10 +381,15 @@ void type_sacrifice_window::createArtifactWidgets(
     long itemCount = 0;
     // Original local: artifact_offering; DC line 446 invokes the generated
     // default constructor, whose base call supplies TArtifact(-1). Line 444
-    // initializes item_count before that constructor.
+    // initializes item_count before that constructor. DC line 455 stores -1
+    // to the offering's id once more after construction; retail keeps only
+    // that later id store, so its payload -1 lands first. j is a
+    // function-scope local in DC's CodeView.
     type_artifact_offering artifactOffering;
+    artifactOffering.m_artifactId = ARTIFACT_NONE;
     textWidget* currentTextWidget;
-    for (long j = 0; j < 5; ++j) {
+    long j;
+    for (j = 0; j < 5; ++j) {
         long itemX = g_rowStart[j][0];
         int itemY = g_rowStart[j][1];
         long textX = itemX - 2;
