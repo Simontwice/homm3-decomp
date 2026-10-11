@@ -424,7 +424,7 @@ def extract_function(documents: list[dict], mangled: str, path: Path,
         if kind == "VarDecl":
             local = {"name": node.get("name", ""),
                 "type": _type(node), "line": _line(source, _loc(node).get("offset", 0)),
-                "aliases": _aliases(source, node)}
+                "offset": _loc(node).get("offset"), "aliases": _aliases(source, node)}
             sole = parent is not None and parent.get("kind") == "DeclStmt" \
                 and len(parent.get("inner", [])) == 1
             initializer = node.get("inner", [])
@@ -494,7 +494,120 @@ def extract_function(documents: list[dict], mangled: str, path: Path,
             visit(child)
     result["calls"].sort(key=lambda row: row["offset"])
     result["gaps"] = sorted(set(result["gaps"]))
+    bodies = [child for child in root.get("inner", []) if child.get("kind") == "CompoundStmt"]
+    result["layout"] = body_layout(bodies[-1], source)
     return result
+
+
+_CALL_KINDS = frozenset({"CallExpr", "CXXMemberCallExpr", "CXXOperatorCallExpr",
+                         "CXXConstructExpr", "CXXTemporaryObjectExpr"})
+_SKIPPED_BODIES = frozenset({"LambdaExpr", "CXXRecordDecl", "FunctionDecl", "CXXMethodDecl"})
+# A label line emits nothing itself; its statement records its own line.
+_LABELS = frozenset({"CaseStmt", "DefaultStmt", "LabelStmt"})
+
+
+def _end_offset(node: dict) -> int | None:
+    end = node.get("range", {}).get("end", {})
+    end = end.get("expansionLoc", end)
+    return end.get("offset")
+
+
+def _line_statements(node: dict) -> list[dict]:
+    """Children of *node* that begin their own source statement.
+
+    A braced child is a lexical block; an unbraced if/else/loop/case body
+    is a statement on its own line. Conditions stay with their statement.
+    """
+    kind = node.get("kind")
+    inner = [child for child in node.get("inner", []) if child]
+    if kind == "CompoundStmt":
+        return inner
+    if not inner:
+        return []
+    if kind == "IfStmt":
+        return inner[-2:] if node.get("hasElse") and len(inner) >= 3 else inner[-1:]
+    if kind in ("WhileStmt", "ForStmt", "SwitchStmt", "CaseStmt", "DefaultStmt", "LabelStmt"):
+        return inner[-1:]
+    if kind == "DoStmt":
+        return inner[:1]
+    return []
+
+
+_CONTROL = frozenset({"IfStmt", "ForStmt", "WhileStmt", "DoStmt", "SwitchStmt"})
+# Dreamcast's S_BLOCK32 records give if/switch substatements their own scope
+# (statement, substatement, block) but loop bodies none (statement, block).
+_SELECTION = frozenset({"IfStmt", "SwitchStmt"})
+
+
+def body_layout(body: dict, source: str) -> dict:
+    """Statement lines, C++ scopes and call/declaration owners of a body.
+
+    Line numbers are physical lines of *source*. `statements` holds the
+    first line of every statement (compound children and unbraced bodies),
+    the opening brace (prolog) and closing brace (epilog). `scopes` follows
+    the scope model of Dreamcast's S_BLOCK32 records in source order: a
+    selection/iteration statement is a scope (`statement`), each if/switch
+    substatement is an implicit scope (`substatement`; loop bodies have
+    none) and every braced block is a scope (`block`). `calls`
+    maps a call's offset to the first line of its enclosing statement, and
+    `declarations` a declaration's offset to its innermost scope (None = the
+    function block).
+    """
+    begin, end = _begin(body).get("offset"), _end_offset(body)
+    layout: dict[str, Any] = {
+        "begin_line": _line(source, begin or 0),
+        "end_line": _line(source, end if end is not None else begin or 0),
+        "statements": [], "scopes": [], "calls": {}, "declarations": {}}
+    statements = {layout["begin_line"]: "prolog", layout["end_line"]: "epilog"}
+
+    def enter(node: dict, parent: int | None, kind: str, owner: str) -> int | None:
+        start, finish = _begin(node).get("offset"), _end_offset(node)
+        if start is None or finish is None:
+            return parent
+        layout["scopes"].append({"begin_line": _line(source, start), "end_line": _line(source, finish),
+                                 "parent": parent, "kind": kind, "owner": owner})
+        return len(layout["scopes"]) - 1
+
+    def visit(node: dict, statement: int, scope: int | None) -> None:
+        kind = node.get("kind")
+        if kind in _SKIPPED_BODIES:
+            return
+        offset = _begin(node).get("offset")
+        if kind in _CALL_KINDS and offset is not None:
+            layout["calls"][offset] = statement
+        if kind in _CONTROL:
+            scope = enter(node, scope, "statement", kind)
+        if kind == "VarDecl":
+            at = _loc(node).get("offset")
+            if at is not None:
+                layout["declarations"][at] = scope
+        heads = {id(child) for child in _line_statements(node)}
+        condition = None
+        if kind == "DoStmt" and len(node.get("inner", [])) > 1:
+            at = _begin(node["inner"][-1]).get("offset")
+            if at is not None:
+                condition = node["inner"][-1]
+                statements.setdefault(_line(source, at), "DoStmt")
+        for child in node.get("inner", []):
+            if not child:
+                continue
+            child_statement, child_scope = statement, scope
+            if child is condition:
+                child_statement = _line(source, _begin(child)["offset"])
+            elif id(child) in heads:
+                if kind in _SELECTION:
+                    child_scope = enter(child, child_scope, "substatement", kind)
+                start = _begin(child).get("offset")
+                if child.get("kind") == "CompoundStmt":
+                    child_scope = enter(child, child_scope, "block", kind)
+                elif start is not None and child.get("kind") not in _LABELS:
+                    child_statement = _line(source, start)
+                    statements.setdefault(child_statement, child.get("kind", ""))
+            visit(child, child_statement, child_scope)
+
+    visit(body, layout["begin_line"], None)
+    layout["statements"] = [{"line": line, "kind": kind} for line, kind in sorted(statements.items())]
+    return layout
 
 
 def parse_candidate(path: Path, mangled: str, root: Path = common.HOMM3_DIR) -> dict:
@@ -510,7 +623,8 @@ class CandidateParser:
         self.dumps = OrderedDict()
         self.sources = {}
 
-    def __call__(self, path: Path, mangled: str) -> dict:
+    def __call__(self, path: Path, mangled: str, translation_unit: Path | None = None) -> dict:
+        """*translation_unit* compiles a definition that lives in a header."""
         display_path = path
         path = path.resolve()
         if self.commands is None:
@@ -521,9 +635,12 @@ class CandidateParser:
             for row in compilation_database.commands(self.project.manifest,
                     self.root, compiler, [includes, *self.project.includes]):
                 self.commands.setdefault(Path(row['file']).resolve(), []).append(row)
-        commands = self.commands.get(path, [])
+        unit = path
+        if translation_unit is not None and path not in self.commands:
+            unit = translation_unit.resolve()
+        commands = self.commands.get(unit, [])
         if len(commands) != 1:
-            raise ValueError(f"expected one compiler profile for {path}, found {len(commands)}")
+            raise ValueError(f"expected one compiler profile for {unit}, found {len(commands)}")
         names = _source.source_names(mangled)
         if not names:
             raise ValueError("compiler-generated or unsupported source identity")
@@ -534,7 +651,7 @@ class CandidateParser:
             # The trailing :: selects members, not an unrestricted class/TU
             # dump. Clang emits independently located declaration documents.
             selector = '::'.join(reversed(decoded.scope)) + '::'
-        key = (path, selector)
+        key = (unit, selector)
         if key not in self.dumps:
             args = [arg for arg in commands[0]['arguments'] if arg != '/c']
             args[-1:-1] = ['-fsyntax-only', '-ferror-limit=0', '-Xclang', '-ast-dump=json',

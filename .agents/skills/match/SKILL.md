@@ -56,6 +56,9 @@ global label self-test/completeness gate is skipped for this focused refresh.
    evidence supports it. `homm3 dreamcast compare-calls <selector>` shows
    which callees Dreamcast and Mac retain differently, with Dreamcast's
    inline trace when it expanded a helper Mac still calls.
+   `homm3 dreamcast compare-structure <selector>` writes aligned
+   `<fn>.dc.cpp`/`<fn>.ours.cpp` structure files (relative source lines,
+   scopes, locals, calls per statement) for `diff -u`.
    Consult original decorated publics for byte-valued interfaces: Dreamcast's
    `T_UCHAR` / `0x20` record can be a lowered `bool` (`_N` in the public), so
    the primitive record or an x86 AL return alone does not prove unsigned char.

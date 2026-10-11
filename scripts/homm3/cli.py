@@ -99,11 +99,12 @@ Subcommands
         retail function, address dossiers, literal evidence. Every
         invocation logs one line to build/homm3_sema.log.
 
-  dreamcast <show|lines|asm|find|gaps|inline-clues|stats|structure|audit|diff-locals|compare-calls> ...
+  dreamcast <show|lines|asm|find|gaps|inline-clues|stats|structure|audit|diff-locals|compare-calls|compare-structure> ...
         Source-shape navigation over the older WinCE/SH4 pressing:
         joined CodeView names/signatures/locals/scopes, breakpoint-labelled SH4
         assembly and CFG blocks, explicitly qualified retail correlations,
-        and generated C++/JSON reference trees (structure).
+        and generated C++/JSON reference trees (structure), and aligned
+        Dreamcast/ours structure files per paired function (compare-structure).
 
   constants [VALUE ...] [--name TEXT] [--literals [--file F]] [--json]
         Named-constant index (homm3.analysis.constants): value -> every

@@ -393,7 +393,100 @@ optimized variable live range. Line spans may include frame code or literal
 pools; source gaps do not identify particular missing statements. Inline clues
 are positive/probable evidence, and absence of a clue says nothing about whether
 a helper was inlined. Neither the C++ output nor the `homm3.dreamcast-structure.v1`
-JSON schema is an x86 matching target or an automated source-shape comparator.
+JSON schema is an x86 matching target or an automated source-shape comparator;
+`compare-structure` below is the comparator.
+
+### Side-by-side structure: `compare-structure`
+
+`homm3 dreamcast compare-structure` puts our definition next to the Dreamcast
+structure. For every selected retail function with a Dreamcast pairing it
+writes two files with one section layout, so `diff -u` or any side-by-side
+viewer lines them up, and a summary:
+
+```sh
+homm3 dreamcast compare-structure --all --non-exact
+homm3 dreamcast compare-structure 0x005503a0 --output /tmp/dc-update
+homm3 dreamcast compare-structure --unit recruit
+diff -u build/dreamcast/compare/recruit/005503a0_recruitUnit_Update.{dc,ours}.cpp
+```
+
+Selection is `diff-locals`'s (selectors, `--unit`, `--module` or `--all`);
+`--non-exact` keeps functions whose ledger MAX is below 100. The default
+output is `build/dreamcast/compare/<unit>/<va>_<name>.{dc.cpp,ours.cpp,summary}`
+with `index.md`, `index.tsv` and `index.json` at the top, sorted by MAX
+descending. A rerun replaces the previous selection in that directory.
+
+* `.dc.cpp` is built from `dc_structure.function_payload` (the `structure`
+  exporter) and ends with that exporter's full stub.
+* `.ours.cpp` is built from the Clang AST of our definition
+  (`source_facts.CandidateParser`, as `diff-locals` uses; a definition in a
+  header is parsed through its unit's TU) and from our compiled candidate
+  object `build/objdiff/base/<unit>.obj` as last built. It ends with our
+  numbered source text, each line classified as `stmt`, `cont`
+  (continuation, `else`, case label), `blank`, `comment`, `brace` or
+  `preprocessor`, and the x86 block skeleton.
+
+The aligned sections, in order:
+
+| Section | Dreamcast | Ours |
+|---|---|---|
+| SIGNATURE, PARAMETERS | function type record | Clang declaration |
+| LOCALS | NB11 locals with owning scope | `VarDecl`s with innermost scope |
+| TEMPORARIES WITH DESTRUCTORS | class constructed and destroyed on one row | Clang `CXXBindTemporaryExpr` |
+| SCOPES | `S_BLOCK32` tree | modelled scope tree (below) |
+| LINES | recorded rows of the owning file | first line of each statement |
+| CALLS BY LINE | named calls per row, inline evidence | written calls per statement |
+| STATEMENT SEQUENCE | statements in order with their calls | the same |
+| CALLS BY CALLEE | emitted calls / inline groups | x86 direct calls / written calls without one |
+| CONTROL FLOW | SH4 block counts | x86 block counts |
+
+Normalization: line numbers are relative to the body's opening brace. The
+Dreamcast procedure boundary row is that brace (`recruitUnit::Update`:
+boundary 511, `message msg;` on 512). Names fold case, underscores and the
+documented Hungarian/scope prefixes; paired locals share the Dreamcast
+spelling's key, so a pair is one aligned line. Types drop `class`/`struct`
+keywords and spacing. Callees use the `diff-locals` keys (`ctor:`/`dtor:` for
+constructors and destructors; runtime and library plumbing excluded).
+Destructor calls are counted per callee but not placed on lines, since Clang
+has no destructor call sites. Dreamcast cannot record trivially destructible
+temporaries, so ours are listed separately.
+
+`inline:` marks a Dreamcast inline-evidence group or, on our side, a written
+call with no direct x86 call to that callee in the compiled body. Ours can
+be an expanded helper or a virtual call; the indirect-call count in CONTROL
+FLOW separates the totals, not the sites.
+
+Scope model. The `S_BLOCK32` trees follow the C++ scope rules for
+selection statements: an `if` or `switch` is a scope, each of its
+substatements is another, and a braced substatement adds a block that
+coincides with it. Loop bodies get no substatement scope: a braced `for` or
+`while` is a statement scope plus its block. `recruitUnit::Update`'s first
+`if`, with a braced body in the Dreamcast source, is three nested records;
+`advManager::VWDrawRoad`'s unbraced early returns are two each, as in ours;
+the braced loops in `type_sacrifice_window::create_artifact_widgets` are two
+each. Our side builds the same tree from the AST, so SCOPES compares like
+with like. Dreamcast scope line spans come from the rows inside each address
+range and can include the next statement where code was moved.
+
+Line numbers drift where the older source was laid out differently: the
+Dreamcast source puts braces on their own lines, so `if (x)` / `{` / body /
+`}` takes two more lines than our `if (x)` / body. LINES therefore
+misaligns after the first such brace; STATEMENT SEQUENCE drops line numbers
+and inline marks so `diff` aligns statements by their written calls.
+
+Each `.summary` lists both sides' counts and deltas: statement lines,
+parameters, locals, scopes, non-statement runs and lines inside the
+statement span, destructor temporaries, inline expansions, emitted calls,
+block/branch/back-edge counts and line class mismatches, followed by the
+unpaired locals, differing parameter and paired local types, temporaries
+and callees whose calls plus inline expansions differ. The `difference`
+column is |Δ statement lines| + |Δ scopes| + |Δ parameters| + unpaired
+locals + temporary and callee count differences; `index.md` sorts by MAX and
+tallies how many functions show each kind of difference.
+
+Everything here is a lead, not a verdict. The Dreamcast build is an older
+revision with a lower-bound local inventory and its own inliner; a
+difference earns a VC6 experiment, and only retail bytes decide.
 
 ### Vostok-style empty source-line gaps
 

@@ -86,6 +86,15 @@ Subcommands
         lexical scope trees, source rows, inline evidence and SH4 control flow.
         Defaults to all modules under build/dreamcast/structure/.
 
+  compare-structure [SELECTOR ... | --unit U | --module M | --all]
+                    [--non-exact] [--limit N] [--output PATH]
+        For each Dreamcast-paired retail function, write <fn>.dc.cpp and
+        <fn>.ours.cpp with one normalized section layout (signature,
+        parameters, locals, temporaries, scopes, relative source lines,
+        calls per line and per callee, control-flow counts) so `diff -u`
+        lines them up, plus <fn>.summary and an index sorted by MAX.
+        --non-exact keeps ledger MAX < 100. Default build/dreamcast/compare/.
+
 All results are ANALYSIS OUTPUT about another pressing.  A Dreamcast address,
 line or call is never retail address/byte evidence; retail promotion still
 requires corroboration from the pinned Complete executable.
@@ -1383,6 +1392,8 @@ def _build_parser() -> argparse.ArgumentParser:
     dc_diff_locals.add_parser(sub)
     from homm3.analysis import dc_compare_calls
     dc_compare_calls.add_parser(sub)
+    from homm3.analysis import dc_compare_structure
+    dc_compare_structure.add_parser(sub)
     structure = sub.add_parser("structure", help="export annotated C++ stubs and debug records")
     structure.add_argument("--module", action="append", dest="modules", metavar="MODULE",
                            help="module[.obj] to export; repeatable (default all)")
@@ -1455,7 +1466,7 @@ def _match_banner(index: int, rows: list[dict[str, str]]) -> None:
 
 
 COMMANDS = ("show", "lines", "asm", "find", "gaps", "inline-clues", "stats", "structure",
-            "audit", "diff-locals", "compare-calls")
+            "audit", "diff-locals", "compare-calls", "compare-structure")
 
 # Wrong-namespace guesses the usage log recorded under `homm3 dreamcast`,
 # each with its real home.
@@ -1508,6 +1519,12 @@ def _dispatch(argv: list[str]) -> int:
         elif args.command == "diff-locals":
             from homm3.analysis import dc_diff_locals
             rc = dc_diff_locals.run(corpus, args)
+        elif args.command == "compare-structure":
+            from homm3.analysis import dc_compare_structure
+            try:
+                rc = dc_compare_structure.run(corpus, args)
+            except (OSError, dc_asm.AsmError) as exc:
+                raise DreamcastError(str(exc)) from exc
         elif args.command == "compare-calls":
             from homm3.analysis import dc_compare_calls
             if args.limit < 0:
