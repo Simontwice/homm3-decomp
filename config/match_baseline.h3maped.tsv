@@ -120,7 +120,7 @@ ArtifactsDlg	?_disableControls@TArtifactsDlg@@AAEXXZ	100.0000	100.0000	100.0000	
 ArtifactsDlg	?_enableControls@TArtifactsDlg@@AAEXXZ	100.0000	100.0000	100.0000	0x4dac	tokens1:e19e25926e87
 ArtifactsDlg	?_insertItem@TArtifactsDlg@@AAEHHW4TArtifact@@W4TArtifactSlot@@@Z	90.0159	90.0159	90.0159	0x4e90	tokens1:78c98dbbb709
 ArtifactsDlg	?_removeItem@TArtifactsDlg@@AAEXH@Z	99.9070	99.9070	99.9070	0x510b	tokens1:9214d6506116
-ArtifactsDlg	?_updateUnusedSlots@TArtifactsDlg@@AAEXXZ	91.5571	91.5571	91.5571	0x521e	tokens1:2103997c44dc
+ArtifactsDlg	?_updateUnusedSlots@TArtifactsDlg@@AAEXXZ	91.7714	91.7714	91.7714	0x521e	tokens1:2103997c44dc
 ArtifactsDlg	?compareItems@?A0x4051c901dc4dfd06@@YGHJJJ@Z	100.0000	100.0000	100.0000	0x4936	tokens1:f17817362097
 ArtifactsDlg	?find@?$_Tree@W4TArtifact@@W41@U_Kfn@?$multiset@W4TArtifact@@U?$less@W4TArtifact@@@std@@V?$allocator@W4TArtifact@@@3@@std@@U?$less@W4TArtifact@@@4@V?$allocator@W4TArtifact@@@4@@std@@QAE?AViterator@12@ABW4TArtifact@@@Z	100.0000	100.0000	100.0000	0x5f34	-
 ArtifactsDlg	?getListedSlots@?A0x4051c901dc4dfd06@@YAABV?$bitset@$0BD@@std@@XZ	99.6154	99.6154	99.6154	0x4d80	tokens1:ba042b41e5e7
@@ -129,7 +129,7 @@ BlackBox	??0?$TArray@H$06@@QAE@ABH@Z	100.0000	100.0000	100.0000	0x74e1	-
 BlackBox	??0?$TArray@I$03@@QAE@ABI@Z	100.0000	100.0000	100.0000	0x74b7	-
 BlackBox	??0?$TRefCountingPtr@VTContents@TBlackBox@@@@QAE@XZ	100.0000	100.0000	100.0000	0x750b	-
 BlackBox	??0TBlackBox@@QAE@ABUTObjectType@@@Z	100.0000	100.0000	100.0000	0x69f3	tokens1:e89ceaae9d40
-BlackBox	??0TBlackBox@@QAE@ABUTObjectType@@PAVTRawIStream@@H@Z	99.2160	99.2160	99.2160	0x6a80	tokens1:1d4ec64ccbef
+BlackBox	??0TBlackBox@@QAE@ABUTObjectType@@PAVTRawIStream@@H@Z	99.3241	99.3241	99.3241	0x6a80	tokens1:1d4ec64ccbef
 BlackBox	??0TContents@TBlackBox@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x77cb	-
 BlackBox	??0TContents@TBlackBox@@QAE@XZ	100.0000	100.0000	100.0000	0x680e	tokens1:fe0ce57ce38f
 BlackBox	??0TSecondarySkillRecord@@QAE@W4TSecondarySkill@@W4TSkillMastery@@@Z	100.0000	100.0000	100.0000	0x679e	tokens1:6cd58860fe0a
@@ -251,7 +251,7 @@ BlackBoxPropsContentsPage	?OnInitDialog@TManaBonusDlg@?%C:\Dev\Heroes 3 Exp 2\Ed
 BlackBoxPropsContentsPage	?OnInitDialog@TMoraleBonusDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	100.0000	100.0000	100.0000	0x80d7	tokens1:f0edbd5fea4f
 BlackBoxPropsContentsPage	?OnInitDialog@TPrimarySkillBonusesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	100.0000	100.0000	100.0000	0x867f	tokens1:b45e1fec58d7
 BlackBoxPropsContentsPage	?OnInitDialog@TResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	100.0000	100.0000	100.0000	0x8486	tokens1:671b3872c76c
-BlackBoxPropsContentsPage	?OnInitDialog@TSecondarySkillsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	97.5630	97.5630	97.5630	0x8e9d	tokens1:ddb001446ce3
+BlackBoxPropsContentsPage	?OnInitDialog@TSecondarySkillsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	97.6000	97.6000	97.6000	0x8e9d	tokens1:ddb001446ce3
 BlackBoxPropsContentsPage	?OnInitDialog@TSelectSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	100.0000	100.0000	100.0000	0x9e06	tokens1:68f85252b80a
 BlackBoxPropsContentsPage	?OnInitDialog@TSpellsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@MAEHXZ	98.0065	98.0065	98.0065	0xa179	tokens1:535813fec825
 BlackBoxPropsContentsPage	?OnOK@TArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\BlackBoxPropsContentsPage.cpp544924908@@UAEXXZ	99.2333	99.2333	99.2333	0x983c	tokens1:c7bbb419bfb2
@@ -356,7 +356,7 @@ EditArtifactDlg	?OnCreate@TEditArtifactDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000
 EditArtifactDlg	?OnInitDialog@TEditArtifactDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xdb31	tokens1:7091fc710c6a
 EditArtifactDlg	?OnSelChangeArtifactCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdd12	tokens1:57ce982aa9f4
 EditArtifactDlg	?OnSelChangeWhereCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdcd7	tokens1:32cc2a045a1a
-EditArtifactDlg	?_isAllowed@TEditArtifactDlg@@ABE_NW4TArtifact@@W4TArtifactSlot@@@Z	80.6483	80.6483	80.6483	0xd9ae	tokens1:3cd8137db0ac
+EditArtifactDlg	?_isAllowed@TEditArtifactDlg@@ABE_NW4TArtifact@@W4TArtifactSlot@@@Z	80.7033	80.7033	80.7033	0xd9ae	tokens1:3cd8137db0ac
 EditArtifactDlg	?_setArtifacts@TEditArtifactDlg@@AAEXXZ	100.0000	100.0000	100.0000	0xd87d	tokens1:122a9c59da4a
 EditArtifactDlg	?find_if@std@@YA?AV?$TBitsetIterator@$0BD@@@V2@0V?$binder2nd@U?$not_equal_to@_N@std@@@1@@Z	42.6191	42.6191	42.6191	0xdd78	-
 EditCreatureStackDlg	??0TEditCreatureStackDlg@@QAE@PAVCWnd@@ABVTCreatureStack@@W4EGameVersion@@ABV?$bitset@$0JB@@std@@@Z	100.0000	100.0000	100.0000	0xdfe7	tokens1:e6c750065e7d
@@ -775,7 +775,7 @@ FindDlg	??0TGenerator1Pattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp31551532
 FindDlg	??0TGenerator4Pattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@H@Z	100.0000	100.0000	100.0000	0x1d5c9	tokens1:f37b27e3084c
 FindDlg	??0THeroClassPattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@H@Z	100.0000	100.0000	100.0000	0x1d61b	tokens1:7507fe9e21cc
 FindDlg	??0TMinePattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@H@Z	100.0000	100.0000	100.0000	0x1d648	tokens1:ebdcd11523f9
-FindDlg	??0TPatterns@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@XZ	99.2681	99.4132	99.4132	0x1a858	tokens1:07d2907d1294
+FindDlg	??0TPatterns@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@XZ	99.2720	99.4132	99.4132	0x1a858	tokens1:07d2907d1294
 FindDlg	??0TResourcePattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@H@Z	100.0000	100.0000	100.0000	0x1d6a1	tokens1:5613808e14c6
 FindDlg	??0TSingleTypePattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@PBDH@Z	100.0000	100.0000	100.0000	0x1d4af	tokens1:d26ba9ef2b5a
 FindDlg	??0TSingleTypeSingleExtraPattern@?%C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326@@QAE@PBDHH@Z	100.0000	100.0000	100.0000	0x1d4e5	tokens1:73f89eb73f75
@@ -1408,7 +1408,7 @@ GameMap	??0TTimedEvent@@QAE@ABV0@@Z	100.0000	100.0000	100.0000	0x17008	-
 GameMap	??0_TBookkeeping@_TImpl@TGameMap@@QAE@ABU012@@Z	100.0000	100.0000	100.0000	0x37707	-
 GameMap	??0_TBookkeeping@_TImpl@TGameMap@@QAE@XZ	100.0000	100.0000	100.0000	0x338c8	tokens1:caa948806702
 GameMap	??0_TImpl@TGameMap@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x3757f	-
-GameMap	??0_TImpl@TGameMap@@QAE@PAVTClient@1@W4EGameVersion@@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@H@Z	92.4989	92.4989	92.7215	0x1f350	tokens1:3a3b123c5a48
+GameMap	??0_TImpl@TGameMap@@QAE@PAVTClient@1@W4EGameVersion@@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@H@Z	92.5445	92.5445	92.7215	0x1f350	tokens1:3a3b123c5a48
 GameMap	??0_TImpl@TGameMap@@QAE@PAVTClient@1@W4EGameVersion@@W4TSize@1@_N@Z	85.1212	85.1212	85.1212	0x1f21d	tokens1:aafc568260cc
 GameMap	??0_TImpl@TLayer@TGameMap@@QAE@ABV012@@Z	100.0000	100.0000	100.0000	0x2a51c	tokens1:24283eca8797
 GameMap	??0_TImpl@TLayer@TGameMap@@QAE@W4TSize@2@@Z	100.0000	100.0000	100.0000	0x2a545	tokens1:21a57e3f5e5a
@@ -1486,7 +1486,7 @@ GameMap	??1?$vector@VTTimedEvent@@V?$allocator@VTTimedEvent@@@std@@@std@@QAE@XZ	
 GameMap	??1?$vector@V_TObjectLink@_TImpl@TLayer@TGameMap@@V?$allocator@V_TObjectLink@_TImpl@TLayer@TGameMap@@@std@@@std@@QAE@XZ	100.0000	100.0000	100.0000	0x37082	-
 GameMap	??1TArtifactContainer@THeroPrototype@@QAE@XZ	100.0000	100.0000	100.0000	0x4b4e	-
 GameMap	??1TCappedObjectTypeInfoMap@?A0xaab635a5f3ca1b91@@QAE@XZ	100.0000	100.0000	100.0000	0x2270d	-
-GameMap	??1TCell@TLayer@TGameMap@@QAE@XZ	42.9412	100.0000	100.0000	0x3971d	-
+GameMap	??1TCell@TLayer@TGameMap@@QAE@XZ	43.2353	100.0000	100.0000	0x3971d	-
 GameMap	??1TGameMap@@QAE@XZ	100.0000	100.0000	100.0000	0x29aae	tokens1:fafb5ff16149
 GameMap	??1TGameMapHeader@@QAE@XZ	100.0000	100.0000	100.0000	0x1fe38	-
 GameMap	??1THeroIdentity@TGameMapHeader@@QAE@XZ	100.0000	100.0000	100.0000	0x248a4	-
@@ -1755,15 +1755,15 @@ GameMap	?_onRemovingObject@_TImpl@TGameMap@@QAEXABVTGameObject@@PAU?$TObjectType
 GameMap	?_onRemovingObject@_TImpl@TGameMap@@QAEXABVTGameObject@@PAU?$TObjectTypeList@VTQuestLocation@@UTNoObjectTypes@@@@@Z	100.0000	100.0000	100.0000	0x39e19	-
 GameMap	?_onRemovingObject@_TImpl@TGameMap@@QAEXABVTGameObject@@PAU?$TObjectTypeList@VTRandomHero@@U?$TObjectTypeList@VTNonRandomHero@@U?$TObjectTypeList@VTPrison@@U?$TObjectTypeList@VTTown@@U?$TObjectTypeList@VTHolyGrail@@U?$TObjectTypeList@VTAbstractRandomlyAlignedGenerator@@U?$TObjectTypeList@VTLinkableObject@@U?$TObjectTypeList@VTQuestLocation@@UTNoObjectTypes@@@@@@@@@@@@@@@@@@@Z	100.0000	100.0000	100.0000	0x38dee	-
 GameMap	?_onRemovingObject@_TImpl@TGameMap@@QAEXABVTGameObject@@PAU?$TObjectTypeList@VTTown@@U?$TObjectTypeList@VTHolyGrail@@U?$TObjectTypeList@VTAbstractRandomlyAlignedGenerator@@U?$TObjectTypeList@VTLinkableObject@@U?$TObjectTypeList@VTQuestLocation@@UTNoObjectTypes@@@@@@@@@@@@@Z	100.0000	100.0000	100.0000	0x28817	tokens1:67c9c731f44b
-GameMap	?_onRemovingPlayable@_TImpl@TGameMap@@QAEXPBVTPlayableObject@@@Z	97.2296	97.2296	97.2296	0x27b17	tokens1:6a570e66d205
+GameMap	?_onRemovingPlayable@_TImpl@TGameMap@@QAEXPBVTPlayableObject@@@Z	97.2749	97.2749	97.2749	0x27b17	tokens1:6a570e66d205
 GameMap	?_onRemovingRandomHero@_TImpl@TGameMap@@QAEXPBVTRandomHero@@@Z	100.0000	100.0000	100.0000	0x2848a	tokens1:f9d590152025
 GameMap	?_onRemovingTown@_TImpl@TGameMap@@QAEXPBVTTown@@@Z	99.9688	99.9688	99.9688	0x27fbe	tokens1:8bd0f54166cf
 GameMap	?_onTownAdded@_TImpl@TGameMap@@QAEXPBVTTown@@_NI@Z	100.0000	100.0000	100.0000	0x27f0e	tokens1:34150615c3bf
 GameMap	?_pickAvailableTeam@_TImpl@TGameMap@@QBEIXZ	99.8929	99.8929	99.8929	0x29072	tokens1:f70dae748351
-GameMap	?_pickRandomHero@_TImpl@TGameMap@@QBEHW4THeroClass@@@Z	55.1868	55.1868	55.1868	0x28e86	tokens1:5767358f1b44
+GameMap	?_pickRandomHero@_TImpl@TGameMap@@QBEHW4THeroClass@@@Z	55.2169	55.2169	55.2169	0x28e86	tokens1:5767358f1b44
 GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTAbstractRandomlyAlignedGenerator@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	100.0000	100.0000	100.0000	0x274f7	tokens1:56d1ba9e451c
 GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTBasicHero@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	99.8113	99.8113	99.8113	0x27025	tokens1:71a52d4e2510
-GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTGameObject@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	93.5806	93.6210	93.6210	0x26ded	tokens1:298ed91827b5
+GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTGameObject@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	93.6210	93.6210	93.6210	0x26ded	tokens1:298ed91827b5
 GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTHeroPlaceholder@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	99.8276	99.8276	99.8276	0x2710f	tokens1:46fc78af7b5b
 GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTHolyGrail@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	99.8039	99.8039	99.8039	0x27444	tokens1:89c5aa2b7558
 GameMap	?_placeNewObject@_TImpl@TGameMap@@QAEI_NPAVTNonRandomHero@@ABV?$TPoint@I@@PAV?$TExtent@II@@@Z	99.9039	99.9039	99.9039	0x27156	tokens1:9aef206f5e2f
@@ -1820,7 +1820,7 @@ GameMap	?_unregisterLinkable@_TImpl@TGameMap@@QAEXABVTLinkableObject@@@Z	99.9459
 GameMap	?_unstampObject@_TImpl@TLayer@TGameMap@@AAEXI@Z	100.0000	100.0000	100.0000	0x2b127	tokens1:4a943208cc2a
 GameMap	?_writeHeroSettings@_TImpl@TGameMap@@QBEXPAVTRawOStream@@H@Z	99.5971	99.5971	99.5971	0x28892	tokens1:afc4c9b80e1b
 GameMap	?_writeLossCondition@TGameMapHeader@@CAXABUTLossConditionData@@AAVTRawOStream@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x3b0b3	tokens1:bb478bc5e304
-GameMap	?_writeVictoryCondition@TGameMapHeader@@CAXABUTVictoryConditionData@@AAVTRawOStream@@W4EGameVersion@@@Z	92.9350	92.9350	92.9350	0x3af11	tokens1:f726d13bf700
+GameMap	?_writeVictoryCondition@TGameMapHeader@@CAXABUTVictoryConditionData@@AAVTRawOStream@@W4EGameVersion@@@Z	92.9756	92.9756	92.9756	0x3af11	tokens1:f726d13bf700
 GameMap	?accept@TLCLoseHero@@UBEXPAVTVisitor@TLossCondition@@@Z	100.0000	100.0000	100.0000	0x2981a	-
 GameMap	?accept@TLCLoseTown@@UBEXPAVTVisitor@TLossCondition@@@Z	100.0000	100.0000	100.0000	0x29699	-
 GameMap	?accept@TLCTimeExpires@@UBEXPAVTVisitor@TLossCondition@@@Z	100.0000	100.0000	100.0000	0x29845	-
@@ -1998,7 +1998,7 @@ GameMap	?insert@?$_Tree@IU?$pair@$$CBIVTMapObjectRef@@@std@@U_Kfn@?$map@IVTMapOb
 GameMap	?insert@?$_Tree@UTObjectType@@U?$pair@$$CBUTObjectType@@I@std@@U_Kfn@?$map@UTObjectType@@IU?$less@UTObjectType@@@std@@V?$allocator@I@3@@3@U?$less@UTObjectType@@@3@V?$allocator@I@3@@std@@QAE?AU?$pair@Viterator@?$_Tree@UTObjectType@@U?$pair@$$CBUTObjectType@@I@std@@U_Kfn@?$map@UTObjectType@@IU?$less@UTObjectType@@@std@@V?$allocator@I@3@@3@U?$less@UTObjectType@@@3@V?$allocator@I@3@@std@@_N@2@ABU?$pair@$$CBUTObjectType@@I@2@@Z	92.8333	92.8333	92.8333	0x37751	-
 GameMap	?insert@?$_Tree@VTMapObjectRef@@V1@U_Kfn@?$set@VTMapObjectRef@@U?$less@VTMapObjectRef@@@std@@V?$allocator@VTMapObjectRef@@@3@@std@@U?$less@VTMapObjectRef@@@4@V?$allocator@VTMapObjectRef@@@4@@std@@QAE?AU?$pair@Viterator@?$_Tree@VTMapObjectRef@@V1@U_Kfn@?$set@VTMapObjectRef@@U?$less@VTMapObjectRef@@@std@@V?$allocator@VTMapObjectRef@@@3@@std@@U?$less@VTMapObjectRef@@@4@V?$allocator@VTMapObjectRef@@@4@@std@@_N@2@ABVTMapObjectRef@@@Z	100.0000	100.0000	100.0000	0x2dd7f	-
 GameMap	?insert@?$vector@UTHeroIdentity@TGameMapHeader@@V?$allocator@UTHeroIdentity@TGameMapHeader@@@std@@@std@@QAEXPAUTHeroIdentity@TGameMapHeader@@IABU34@@Z	100.0000	100.0000	100.0000	0x2d523	-
-GameMap	?insert@?$vector@V?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@V?$allocator@V?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@@std@@@std@@QAEXPAV?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@IABV3@@Z	77.3879	77.4112	77.4112	0x2ed20	-
+GameMap	?insert@?$vector@V?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@V?$allocator@V?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@@std@@@std@@QAEXPAV?$TRefCountingPtr@V?$TArray@V?$TArray@VTCell@TLayer@TGameMap@@$05@@$05@@@@IABV3@@Z	77.4112	77.4112	77.4112	0x2ed20	-
 GameMap	?insert@?$vector@VTLayer@TGameMap@@V?$allocator@VTLayer@TGameMap@@@std@@@std@@QAEXPAVTLayer@TGameMap@@IABV34@@Z	100.0000	100.0000	100.0000	0x2dfaf	-
 GameMap	?insert@?$vector@VTRumor@@V?$allocator@VTRumor@@@std@@@std@@QAEXPAVTRumor@@IABV3@@Z	100.0000	100.0000	100.0000	0x2e2b5	-
 GameMap	?insert@?$vector@VTTimedEvent@@V?$allocator@VTTimedEvent@@@std@@@std@@QAEXPAVTTimedEvent@@IABV3@@Z	100.0000	100.0000	100.0000	0x2e52e	-
@@ -2021,7 +2021,7 @@ GameMap	?merge@std@@YA?AV?$_Temp_iterator@PAVTTimedEvent@@@1@PAPAVTTimedEvent@@0
 GameMap	?merge@std@@YA?AV?$_Temp_iterator@PBVTTimedEvent@@@1@PAPBVTTimedEvent@@000V21@UTFirstOccurenceLess@?A0xaab635a5f3ca1b91@@@Z	100.0000	100.0000	100.0000	0x3a73e	-
 GameMap	?merge@std@@YAPAPAVTTimedEvent@@PAPAV2@0000UTFirstOccurenceLess@?A0xaab635a5f3ca1b91@@@Z	100.0000	100.0000	100.0000	0x3a14d	-
 GameMap	?mismatch@std@@YA?AU?$pair@Vconst_iterator@?$_Tree@W4TSecondarySkill@@U?$pair@$$CBW4TSecondarySkill@@W4TSkillMastery@@@std@@U_Kfn@?$map@W4TSecondarySkill@@W4TSkillMastery@@U?$less@W4TSecondarySkill@@@std@@V?$allocator@W4TSkillMastery@@@4@@3@U?$less@W4TSecondarySkill@@@3@V?$allocator@W4TSkillMastery@@@3@@std@@V123@@1@Vconst_iterator@?$_Tree@W4TSecondarySkill@@U?$pair@$$CBW4TSecondarySkill@@W4TSkillMastery@@@std@@U_Kfn@?$map@W4TSecondarySkill@@W4TSkillMastery@@U?$less@W4TSecondarySkill@@@std@@V?$allocator@W4TSkillMastery@@@4@@3@U?$less@W4TSecondarySkill@@@3@V?$allocator@W4TSkillMastery@@@3@@1@00@Z	100.0000	100.0000	100.0000	0x39e56	-
-GameMap	?onObjectRemoved@_TImpl@TGameMap@@QAEXXZ	67.1818	67.1818	67.1818	0x27661	tokens1:10c13225b583
+GameMap	?onObjectRemoved@_TImpl@TGameMap@@QAEXXZ	67.2955	67.2955	67.2955	0x27661	tokens1:10c13225b583
 GameMap	?onTerrainTypeChanged@TGameMap@@QAE_N_NIIW4TTerrainType@@PAV?$TExtent@II@@@Z	100.0000	100.0000	100.0000	0x29f3f	tokens1:75795a71f790
 GameMap	?onTerrainTypeChanged@_TImpl@TGameMap@@QAE_N_NIIW4TTerrainType@@PAV?$TExtent@II@@@Z	91.4228	91.4228	92.7537	0x205b9	tokens1:33ed25a0d647
 GameMap	?opfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE_NXZ	100.0000	100.0000	100.0000	0x2f2bc	-
@@ -2065,7 +2065,7 @@ GameMap	?resize@?$vector@V_TObjectLink@_TImpl@TLayer@TGameMap@@V?$allocator@V_TO
 GameMap	?resize@_TCellGrid@_TImpl@TLayer@TGameMap@@QAEXII@Z	100.0000	100.0000	100.0000	0x2a626	-
 GameMap	?s_map@?1??getCappedObjectTypeInfoMap@?A0xaab635a5f3ca1b91@@YAABVTCappedObjectTypeInfoMap@1@XZ@$AV21@B	97.5000	97.5000	97.5000	0x22703	-
 GameMap	?save@TGameMap@@QBEXPAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@@Z	100.0000	100.0000	100.0000	0x2a1c4	tokens1:d22bf0ba8cc5
-GameMap	?save@_TImpl@TGameMap@@QBEXPAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@@Z	89.9605	89.9605	89.9605	0x23b20	tokens1:0b32ffde6bcf
+GameMap	?save@_TImpl@TGameMap@@QBEXPAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@@Z	90.0099	90.0099	90.0099	0x23b20	tokens1:0b32ffde6bcf
 GameMap	?set@?$bitset@$07@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x16b35	-
 GameMap	?set@?$bitset@$0BM@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0xbb3e	-
 GameMap	?set@?$bitset@$0EG@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0xbb88	-
@@ -2078,7 +2078,7 @@ GameMap	?setDisabledHeroes@TGameMap@@QAEXABV?$bitset@$0JM@@std@@@Z	100.0000	100.
 GameMap	?setDisabledSkills@TGameMap@@QAEXABV?$bitset@$0BM@@std@@@Z	100.0000	100.0000	100.0000	0x29d71	tokens1:1790d5ffb637
 GameMap	?setDisabledSpells@TGameMap@@QAEXABV?$bitset@$0EG@@std@@@Z	100.0000	100.0000	100.0000	0x29d3d	tokens1:37de03f55ab2
 GameMap	?setHeroID@TGameMap@@QAEX_NIH@Z	100.0000	100.0000	100.0000	0x29fe6	tokens1:09f1805c2095
-GameMap	?setHeroID@_TImpl@TGameMap@@QAEX_NIH@Z	85.1272	85.1272	85.1272	0x20bce	tokens1:19680bc8a8c7
+GameMap	?setHeroID@_TImpl@TGameMap@@QAEX_NIH@Z	85.1850	85.1850	85.1850	0x20bce	tokens1:19680bc8a8c7
 GameMap	?setHeroOwner@TGameMap@@QAEX_NIW4TPlayer@@@Z	100.0000	100.0000	100.0000	0x2a00f	tokens1:21eeaa7c8d8a
 GameMap	?setHeroOwner@_TImpl@TGameMap@@QAEX_NIW4TPlayer@@@Z	100.0000	100.0000	100.0000	0x20dca	tokens1:880befbba73e
 GameMap	?setHeroPrototype@TGameMap@@QAEXHABVTHeroPrototype@@@Z	100.0000	100.0000	100.0000	0x29da2	tokens1:07db7a4771b3
@@ -2144,7 +2144,7 @@ GameMap	?visit@_TVictoryConditionValidater@_TImpl@TGameMap@@UAEXABVTVCDefeatHero
 GameMap	?visit@_TVictoryConditionValidater@_TImpl@TGameMap@@UAEXABVTVCDefeatMonster@@@Z	100.0000	100.0000	100.0000	0x1f075	tokens1:5f578d1775cd
 GameMap	?visit@_TVictoryConditionValidater@_TImpl@TGameMap@@UAEXABVTVCTransportArtifact@@@Z	100.0000	100.0000	100.0000	0x1f0c8	tokens1:acfba1fd315b
 GameMap	?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDD@Z	100.0000	100.0000	100.0000	0x36ec2	-
-GameMap	?write@TGameMapHeader@@QBEXAAVTRawOStream@@W4EGameVersion@@@Z	90.9865	90.9865	90.9865	0x3b6c8	tokens1:94c995d0d9a5
+GameMap	?write@TGameMapHeader@@QBEXAAVTRawOStream@@W4EGameVersion@@@Z	91.0270	91.0270	91.0270	0x3b6c8	tokens1:94c995d0d9a5
 GameMap	?write@TRawOStream@@QAEAAV1@PBDI@Z	100.0000	100.0000	100.0000	0x32db6	-
 GameMap	?writeBitset@@YAXAAVTRawOStream@@ABV?$bitset@$07@std@@@Z	100.0000	100.0000	100.0000	0x3bd52	-
 GameMap	?writeBitset@@YAXAAVTRawOStream@@ABV?$bitset@$08@std@@@Z	100.0000	100.0000	100.0000	0x3bcb3	-
@@ -2191,7 +2191,7 @@ GameMapMask	?erase@?$vector@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@V?$alloc
 GameMapMask	?get@?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@QAEPAU_TLayer@TGameMapMask@@XZ	100.0000	100.0000	100.0000	0x3c6ec	-
 GameMapMask	?getTileState@TGameMapMask@@QBEHII_N@Z	51.1277	51.1277	51.1277	0x3c5c4	tokens1:4ad0c24fae2d
 GameMapMask	?insert@?$vector@V?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@V?$allocator@V?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@@std@@@std@@QAEXPAV?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@IABV3@@Z	77.4112	77.4112	77.4112	0x3c702	-
-GameMapMask	?insert@?$vector@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@V?$allocator@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@@std@@@std@@QAEXPAV?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@IABV3@@Z	77.3879	77.3879	77.3879	0x3c97f	-
+GameMapMask	?insert@?$vector@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@V?$allocator@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@@std@@@std@@QAEXPAV?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@IABV3@@Z	77.4112	77.4112	77.4112	0x3c97f	-
 GameMapMask	?removeSecondLayer@TGameMapMask@@QAEXXZ	100.0000	100.0000	100.0000	0x3c572	tokens1:6e2bfa21b6bc
 GameMapMask	?resize@?$vector@V?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@V?$allocator@V?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@@std@@@std@@QAEXIABV?$TRefCountingPtr@U_TBlock@TGameMapMask@@@@@Z	100.0000	100.0000	100.0000	0x3c62e	-
 GameMapMask	?resize@?$vector@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@V?$allocator@V?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@@std@@@std@@QAEXIABV?$TRefCountingPtr@U_TLayer@TGameMapMask@@@@@Z	100.0000	100.0000	100.0000	0x3c68d	-
@@ -2351,7 +2351,7 @@ Hero	?importText@THero@@$4PPPPPPPM@3AEXPAV?$basic_istream@DU?$char_traits@D@std@
 Hero	?importText@THero@@$4PPPPPPPM@A@AEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x45fa9	-
 Hero	?importText@THero@@UAEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@W4EGameVersion@@@Z	99.9440	99.9440	99.9440	0x4b5e5	tokens1:4c5e5aa6f7d7
 Hero	?initialize@THero@@SAXXZ	100.0000	100.0000	100.0000	0x4af11	tokens1:96d54bee4576
-Hero	?initializeTraitsTable@?A0x29381d67a05c3f4f@@YAXXZ	65.6926	65.6926	75.9117	0x4a8b5	tokens1:7cd397a088d0
+Hero	?initializeTraitsTable@?A0x29381d67a05c3f4f@@YAXXZ	65.7279	65.7279	75.9117	0x4a8b5	tokens1:7cd397a088d0
 Hero	?insert@?$_Tree@W4TArtifact@@W41@U_Kfn@?$multiset@W4TArtifact@@U?$less@W4TArtifact@@@std@@V?$allocator@W4TArtifact@@@3@@std@@U?$less@W4TArtifact@@@4@V?$allocator@W4TArtifact@@@4@@std@@QAE?AU?$pair@Viterator@?$_Tree@W4TArtifact@@W41@U_Kfn@?$multiset@W4TArtifact@@U?$less@W4TArtifact@@@std@@V?$allocator@W4TArtifact@@@3@@std@@U?$less@W4TArtifact@@@4@V?$allocator@W4TArtifact@@@4@@std@@_N@2@ABW4TArtifact@@@Z	100.0000	100.0000	100.0000	0x5ada	-
 Hero	?insert@?$_Tree@W4TSecondarySkill@@U?$pair@$$CBW4TSecondarySkill@@W4TSkillMastery@@@std@@U_Kfn@?$map@W4TSecondarySkill@@W4TSkillMastery@@U?$less@W4TSecondarySkill@@@std@@V?$allocator@W4TSkillMastery@@@4@@3@U?$less@W4TSecondarySkill@@@3@V?$allocator@W4TSkillMastery@@@3@@std@@QAE?AU?$pair@Viterator@?$_Tree@W4TSecondarySkill@@U?$pair@$$CBW4TSecondarySkill@@W4TSkillMastery@@@std@@U_Kfn@?$map@W4TSecondarySkill@@W4TSkillMastery@@U?$less@W4TSecondarySkill@@@std@@V?$allocator@W4TSkillMastery@@@4@@3@U?$less@W4TSecondarySkill@@@3@V?$allocator@W4TSkillMastery@@@3@@std@@_N@2@ABU?$pair@$$CBW4TSecondarySkill@@W4TSkillMastery@@@2@@Z	100.0000	100.0000	100.0000	0x4c468	-
 Hero	?isCustomized@THero@@$4PPPPPPPM@3BE_NXZ	100.0000	100.0000	100.0000	0x461c7	-
@@ -2393,7 +2393,7 @@ Hero	?setStoredHeroID@TRandomHero@@UAEXE@Z	100.0000	100.0000	100.0000	0x5726f	-
 Hero	?write@TArtifactContainer@THeroPrototype@@QBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x4a426	tokens1:ba9a76711924
 Hero	?write@THero@@$4PPPPPPPM@3BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x461b4	-
 Hero	?write@THero@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x45fb1	-
-Hero	?write@THero@@UBEXPAVTRawOStream@@H@Z	96.2786	96.2786	96.2786	0x4b9a1	tokens1:eee17916dc0f
+Hero	?write@THero@@UBEXPAVTRawOStream@@H@Z	96.2977	96.2977	96.2977	0x4b9a1	tokens1:eee17916dc0f
 Hero	?write@THeroPlaceholder@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x48390	-
 Hero	?write@THeroPlaceholder@@UBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x4aec4	tokens1:a796e7820ac7
 Hero	?write@TPlayableObject@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x47d69	-
@@ -2413,7 +2413,7 @@ HeroPlaceholderPropsDlg	?DoModal@THeroPlaceholderPropsDlg@@UAEHXZ	100.0000	100.0
 HeroPlaceholderPropsDlg	?GetMessageMap@THeroPlaceholderPropsDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x4d6fb	tokens1:34af6af5940d
 HeroPlaceholderPropsDlg	?OnCreate@THeroPlaceholderPropsDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x4d730	tokens1:4e8b6605e5cb
 HeroPlaceholderPropsDlg	?OnHeroRadio@THeroPlaceholderPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x4dea4	tokens1:302b967e16bc
-HeroPlaceholderPropsDlg	?OnInitDialog@THeroPlaceholderPropsDlg@@MAEHXZ	98.2436	98.2436	98.2436	0x4d7cc	tokens1:e2716ab1fe93
+HeroPlaceholderPropsDlg	?OnInitDialog@THeroPlaceholderPropsDlg@@MAEHXZ	98.2578	98.2578	98.2578	0x4d7cc	tokens1:e2716ab1fe93
 HeroPlaceholderPropsDlg	?OnKillFocusPowerRatingEdit@THeroPlaceholderPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x4e0a9	tokens1:af6a9e179a3c
 HeroPlaceholderPropsDlg	?OnOK@THeroPlaceholderPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x4dc72	tokens1:190c9e3113ac
 HeroPlaceholderPropsDlg	?OnSelChangeClassCombo@THeroPlaceholderPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x4e14f	tokens1:4f123213973f
@@ -2518,7 +2518,7 @@ HeroPropsPriSkillsPage	??1THeroPropsPriSkillsPage@@UAE@XZ	100.0000	100.0000	100.
 HeroPropsPriSkillsPage	??_GTHeroPropsPriSkillsPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x52dd9	-
 HeroPropsPriSkillsPage	?GetMessageMap@THeroPropsPriSkillsPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x52e9b	tokens1:e110f7af7b74
 HeroPropsPriSkillsPage	?OnCustomizeCheck@THeroPropsPriSkillsPage@@IAEXXZ	100.0000	100.0000	100.0000	0x5310d	tokens1:c77885d99430
-HeroPropsPriSkillsPage	?OnInitDialog@THeroPropsPriSkillsPage@@UAEHXZ	89.5403	89.5403	89.5403	0x52ea1	tokens1:9275a02c1e44
+HeroPropsPriSkillsPage	?OnInitDialog@THeroPropsPriSkillsPage@@UAEHXZ	89.5806	89.5806	89.5806	0x52ea1	tokens1:9275a02c1e44
 HeroPropsPriSkillsPage	?OnOK@THeroPropsPriSkillsPage@@UAEXXZ	100.0000	100.0000	100.0000	0x53044	tokens1:5c291182c5f2
 HeroPropsPriSkillsPage	?setDefaultPrimarySkills@THeroPropsPriSkillsPage@@QAEXABV?$TArray@H$03@@@Z	100.0000	100.0000	100.0000	0x52e58	tokens1:84a03527d6d5
 HeroPropsSecSkillsPage	??0THeroPropsSecSkillsPage@@QAE@PBVTHero@@PAV1@@Z	100.0000	100.0000	100.0000	0x53388	tokens1:fd21ed107b99
@@ -3884,7 +3884,7 @@ Monster	?isCustomized@TMonster@@UBE_NXZ	100.0000	100.0000	100.0000	0x88b6e	token
 Monster	?mismatch@std@@YA?AU?$pair@PBIPBI@1@PBI00@Z	100.0000	100.0000	100.0000	0x88ee5	-
 Monster	?setResourceQuantity@TMonster@@QAEXW4TGameResourceType@@I@Z	100.0000	100.0000	100.0000	0x889eb	tokens1:6e5dcefad498
 Monster	?write@TMonster@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x46f91	-
-Monster	?write@TMonster@@UBEXPAVTRawOStream@@H@Z	78.4276	78.4276	78.4276	0x88be8	tokens1:aa544936c635
+Monster	?write@TMonster@@UBEXPAVTRawOStream@@H@Z	78.4621	78.4621	78.4621	0x88be8	tokens1:aa544936c635
 MonsterPropsGeneralPage	??0TMonsterPropsGeneralPage@@QAE@PAVTMonster@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x890e2	tokens1:519204ce5f2e
 MonsterPropsGeneralPage	??1TMonsterPropsGeneralPage@@UAE@XZ	100.0000	100.0000	100.0000	0x891f9	tokens1:796d9c9a06bb
 MonsterPropsGeneralPage	??_GTMonsterPropsGeneralPage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x891dd	-
@@ -4910,7 +4910,7 @@ Town	?setObligatorySpellsMask@TTown@@QAEXABV?$bitset@$0EG@@std@@@Z	100.0000	100.
 Town	?setVisitingHero@TTown@@QAEXPBVTHero@@@Z	100.0000	100.0000	100.0000	0xc242d	tokens1:3a163256eb51
 Town	?write@TTimedEvent@TTown@@QBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0xc19e0	tokens1:794b81abb171
 Town	?write@TTown@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0xc3703	-
-Town	?write@TTown@@UBEXPAVTRawOStream@@H@Z	98.8210	98.8210	98.8210	0xc2ad9	tokens1:09456a14cd0c
+Town	?write@TTown@@UBEXPAVTRawOStream@@H@Z	98.8428	98.8428	98.8428	0xc2ad9	tokens1:09456a14cd0c
 TownPropsBuildingsPage	??0TTownPropsBuildingsPage@@QAE@ABVTGameMap@@AAV1@_NI@Z	100.0000	100.0000	100.0000	0xc3920	tokens1:ddee3c8e32b2
 TownPropsBuildingsPage	??1TTownPropsBuildingsPage@@UAE@XZ	100.0000	100.0000	100.0000	0xc3a97	tokens1:5c3e1489c6da
 TownPropsBuildingsPage	??8TBuildingState@TTown@@QBE_NABV01@@Z	100.0000	100.0000	100.0000	0xc49da	-
@@ -5201,8 +5201,6 @@ artifact	?set@?$bitset@$0BD@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x3b
 artifact	__h3cg$artifact$static_ctor$g_artifactSlotMasks	100.0000	100.0000	100.0000	0x356d	-
 artifact	__h3cg$artifact$static_ctor$g_combinationArtifactTable	100.0000	100.0000	100.0000	0x330a	-
 artifact	__h3cg$artifact$static_dtor$artifactStrings	100.0000	100.0000	100.0000	0x3b15	-
-bitmap24	?HSVToRGB@@YAXMMMPAI00@Z	100.0000	100.0000	100.0000	0xe4ef0	-
-bitmap24	?RGBToHSV@@YAXIIIPAM00@Z	100.0000	100.0000	100.0000	0xe4d90	-
 bitmap816	??0Bitmap816@@QAE@PBD0HHHHHH@Z	100.0000	100.0000	100.0000	0xe35b0	-
 bitmap816	??0Bitmap816@@QAE@PBDHHPAEPAVTPalette16@@H@Z	100.0000	100.0000	100.0000	0xe34d0	-
 bitmap816	??1Bitmap816@@UAE@XZ	100.0000	100.0000	100.0000	0xe36e0	-
@@ -5476,9 +5474,11 @@ palette	??_GTPalette24@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xe4a50	-
 palette	?AdjustHSV@TPalette24@@QAEXMMMM@Z	100.0000	100.0000	100.0000	0xe4b50	-
 palette	?Convert24to16@TPalette16@@AAEXPBEHHHHHH@Z	100.0000	100.0000	100.0000	0xe48d0	-
 palette	?Cycle@TPalette16@@QAEXHHH@Z	100.0000	100.0000	100.0000	0xe4960	-
+palette	?HSVToRGB@@YAXMMMPAI00@Z	100.0000	100.0000	100.0000	0xe4ef0	-
+palette	?RGBToHSV@@YAXIIIPAM00@Z	100.0000	100.0000	100.0000	0xe4d90	-
 palette	?getSize@TPalette16@@UBEIXZ	100.0000	100.0000	100.0000	0xe4a20	-
 palette	?getSize@TPalette24@@UBEIXZ	100.0000	100.0000	100.0000	0xe4b40	-
-random_object_placer	??0t_random_object_placer@?%C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752@@QAE@PAVt_random_object_map@@PAVtype_progress_bar@@H@Z	91.3567	91.3567	91.3567	0xaf463	tokens1:acb9f5898690
+random_object_placer	??0t_random_object_placer@?%C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752@@QAE@PAVt_random_object_map@@PAVtype_progress_bar@@H@Z	91.3860	91.3860	91.3860	0xaf463	tokens1:acb9f5898690
 random_object_placer	??1t_random_object_placer@?%C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752@@UAE@XZ	100.0000	100.0000	100.0000	0xaf65e	tokens1:aac447f3aba7
 random_object_placer	??_Gt_random_object_placer@?%C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xaf642	-
 random_object_placer	?_getProperties@t_random_object_placer@?%C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752@@AAEPAUTRmgObjectPropertiesRef@@ABUTObjectType@@@Z	100.0000	100.0000	100.0000	0xaf785	tokens1:05be6fc4dc0e
@@ -5639,16 +5639,16 @@ rmg	?addGuard@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	85.6273	85.6273	85.6273	
 rmg	?addObject@TRmgTreasureGroup@@QAEXPAVtype_object@@UTRmgPoint@@@Z	100.0000	100.0000	100.0000	0x9d69d	-
 rmg	?addObject@t_abstract_random_generator@@UAEXPAVtype_object@@UTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0x9e6cd	-
 rmg	?addObject@type_random_map@@QAEXAAVtype_object@@UTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0x9abd6	-
-rmg	?addObject@type_random_map_generator@@UAEXPAVtype_object@@UTRmgMapPosition@@@Z	66.9038	66.9038	66.9038	0xa54a7	-
+rmg	?addObject@type_random_map_generator@@UAEXPAVtype_object@@UTRmgMapPosition@@@Z	66.9247	66.9247	66.9247	0xa54a7	-
 rmg	?appendZonePositions@type_random_map_generator@@QAEXPAUTRmgZone@@0AAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@@Z	83.5682	83.5682	83.5682	0xa17f5	-
 rmg	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	100.0000	100.0000	100.0000	0xaa354	-
 rmg	?assignRmgTeams@@YAXHHHPBEPAD@Z	100.0000	100.0000	100.0000	0xad140	-
 rmg	?buildOutline@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x9b76d	-
 rmg	?buildOverlapPriorities@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x9b89c	-
-rmg	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	89.3959	89.3959	89.3959	0xaae7b	-
-rmg	?buildZoneBoundaries@type_random_map_generator@@QAEXPAUTRmgTemplate@@H@Z	96.0984	96.0984	96.0984	0xa3a03	-
+rmg	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	89.4073	89.4073	89.4073	0xaae7b	-
+rmg	?buildZoneBoundaries@type_random_map_generator@@QAEXPAUTRmgTemplate@@H@Z	96.1335	96.1335	96.1335	0xa3a03	-
 rmg	?buildZoneConnectionPaths@type_random_map_generator@@QAEXXZ	74.7212	74.7212	74.7212	0xa5767	-
-rmg	?calculateQuestZoneDistances@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	63.3913	63.3913	63.3913	0xad6a8	-
+rmg	?calculateQuestZoneDistances@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	63.4783	63.4783	63.4783	0xad6a8	-
 rmg	?calculateZoneBounds@type_random_map_generator@@QAEXXZ	0.0000	0.0000	0.0000	0xa2105	-
 rmg	?canConnect@TRmgZone@@QBEEPBU1@@Z	99.4444	99.4444	99.4444	0x9b6e2	-
 rmg	?canFitObject@TRmgTreasureGroup@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@@Z	96.5517	96.5517	96.5517	0x9d2e0	-
@@ -5656,7 +5656,7 @@ rmg	?canPlaceObject@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPos
 rmg	?canPlaceShipyard@type_random_map_generator@@QAEEUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xa6795	-
 rmg	?canPlaceTreasureGroup@type_random_map_generator@@QAEEPAUTRmgTreasureGroup@@UTRmgMapPosition@@PAUTRmgZone@@@Z	91.4150	91.4150	91.4150	0xaa603	-
 rmg	?canPlaceZone@type_random_map_generator@@QAEEPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa1701	-
-rmg	?carveBranchingPaths@type_random_map_generator@@QAEXXZ	96.1948	96.1948	96.1948	0xa8260	-
+rmg	?carveBranchingPaths@type_random_map_generator@@QAEXXZ	96.2066	96.2066	96.2066	0xa8260	-
 rmg	?chooseCreatureTownType@TRmgZone@@QAEXE@Z	100.0000	100.0000	100.0000	0x9b4e1	-
 rmg	?chooseTerrain@TRmgZone@@QAEXXZ	100.0000	100.0000	100.0000	0x9b53d	-
 rmg	?clear@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXXZ	100.0000	100.0000	100.0000	0xae27c	-
@@ -5673,19 +5673,19 @@ rmg	?connectJunctionEntrance@type_random_map_generator@@QAEXUTRmgPoint@@0PAUTRmg
 rmg	?connectZones@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xa79a3	-
 rmg	?countPlacedZoneConnections@type_random_map_generator@@QBEHPAUTRmgZone@@@Z	85.0000	85.0000	85.0000	0xa1967	-
 rmg	?countRmgOccupiedCells@@YAHPBUTObjectType@@@Z	100.0000	100.0000	100.0000	0xaa195	-
-rmg	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@PAV?$vector@PAUTRmgMapItem@@V?$allocator@PAUTRmgMapItem@@@std@@@std@@PAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@5@@Z	99.0685	99.0685	99.0685	0xa61bc	-
+rmg	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@PAV?$vector@PAUTRmgMapItem@@V?$allocator@PAUTRmgMapItem@@@std@@@std@@PAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@5@@Z	99.0822	99.0822	99.0822	0xa61bc	-
 rmg	?createGuard@type_random_map_generator@@QAEPAVtype_object@@HPAUTRmgZone@@@Z	99.1751	99.1751	99.1751	0xa5c07	-
-rmg	?createMonolithConnection@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgZoneConnection@@H@Z	96.2915	96.2915	96.2915	0xa7605	-
+rmg	?createMonolithConnection@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgZoneConnection@@H@Z	96.3386	96.3386	96.3386	0xa7605	-
 rmg	?createRiverToJoin@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	98.3755	98.3755	98.3755	0xab6ac	-
-rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3709	84.3805	84.3805	0xabd5f	-
+rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3805	84.3805	84.3805	0xabd5f	-
 rmg	?createRivers@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xac4ae	-
 rmg	?createRoads@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xab52a	-
-rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	89.1568	89.5710	89.5710	0xa696b	-
-rmg	?createSubterraneanGate@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	90.2806	90.2806	90.2806	0xa6cf2	-
-rmg	?createTreasureObject@type_random_map_generator@@QAEPAVtype_object@@PAUTRmgZone@@HHPAHEEEUTRmgMapPosition@@@Z	89.3779	89.3779	89.3779	0xa9f1c	-
+rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	89.1716	89.5710	89.5710	0xa696b	-
+rmg	?createSubterraneanGate@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	90.2895	90.2895	90.2895	0xa6cf2	-
+rmg	?createTreasureObject@type_random_map_generator@@QAEPAVtype_object@@PAUTRmgZone@@HHPAHEEEUTRmgMapPosition@@@Z	89.5161	89.5161	89.5161	0xa9f1c	-
 rmg	?createWaterZoneIsland@type_random_map_generator@@QAEXABUTRmgZoneBounds@@H@Z	99.8915	99.8915	99.8915	0xa4522	-
 rmg	?decorateMap@t_abstract_random_generator@@QAEXXZ	100.0000	100.0000	100.0000	0x9eb8d	-
-rmg	?decorateMapCell@t_abstract_random_generator@@QAEXUTRmgMapPosition@@H@Z	79.5568	79.5568	79.5568	0x9e700	-
+rmg	?decorateMapCell@t_abstract_random_generator@@QAEXUTRmgMapPosition@@H@Z	79.6108	79.6108	79.6108	0x9e700	-
 rmg	?decorateUnderground@type_random_map_generator@@QAEXXZ	99.1055	99.1055	99.1055	0xa7ecc	-
 rmg	?discard@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x9cebd	-
 rmg	?drawIrregularZoneBoundary@type_random_map_generator@@QAEXUTRmgPoint@@0HHH@Z	100.0000	100.0000	100.0000	0xa2413	-
@@ -5703,16 +5703,16 @@ rmg	?erase@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@
 rmg	?erase@?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@QAEPAUTRmgNoiseRegion@@PAU3@@Z	100.0000	100.0000	100.0000	0xae561	-
 rmg	?erase@?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAEPAUTRmgPoint@@PAU3@0@Z	100.0000	100.0000	100.0000	0xae2d0	-
 rmg	?erase@?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAEPAUTRmgPoint@@PAU3@@Z	100.0000	100.0000	100.0000	0xafaea	-
-rmg	?fillIslandInterior@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	86.6071	86.6071	86.6071	0xa2ec3	-
+rmg	?fillIslandInterior@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	86.6518	86.6518	86.6518	0xa2ec3	-
 rmg	?fillTreasureGroup@type_random_map_generator@@QAEHPAUTRmgZone@@PAUTRmgTreasureGroup@@EH@Z	97.8378	97.8378	97.8378	0xaa1db	-
 rmg	?fillZoneArea@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgHalfEdge@@@Z	93.3333	93.3333	93.3333	0xa325d	-
 rmg	?filterZonePositions@type_random_map_generator@@QAEXPAUTRmgZone@@AAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@H@Z	100.0000	100.0000	100.0000	0xa1ad8	-
 rmg	?findConnection@TRmgTemplateZone@@QAEPAUTRmgZoneConnection@@H@Z	100.0000	100.0000	100.0000	0x9b3fb	-
 rmg	?findZone@TRmgTemplate@@QAEPAUTRmgTemplateZone@@H@Z	100.0000	100.0000	100.0000	0x9b9e6	-
-rmg	?floodConnectionCosts@type_random_map@@QAEXUTRmgMapPosition@@E@Z	85.3404	85.3404	85.3404	0x9a318	-
+rmg	?floodConnectionCosts@type_random_map@@QAEXUTRmgMapPosition@@E@Z	85.3556	85.3556	85.3556	0x9a318	-
 rmg	?floodConnectionRegion@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xa6601	-
 rmg	?floodShipyardWater@type_random_map_generator@@QAEXPAVtype_object@@@Z	100.0000	100.0000	100.0000	0xa68e0	-
-rmg	?floodWaterZoneDistances@type_random_map_generator@@QAEXUTRmgMapPosition@@H@Z	98.6784	98.6784	98.6784	0xa4694	-
+rmg	?floodWaterZoneDistances@type_random_map_generator@@QAEXUTRmgMapPosition@@H@Z	98.7076	98.7076	98.7076	0xa4694	-
 rmg	?generate@type_artifact_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c58a	-
 rmg	?generate@type_black_box_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c69b	-
 rmg	?generate@type_black_box_experience_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c6e2	-
@@ -5759,7 +5759,7 @@ rmg	?getValue@type_treasure_def@@UAEHPAUTRmgZone@@PAVtype_random_map_generator@@
 rmg	?getZoneGuardValue@type_random_map_generator@@QBEHPBUTRmgZone@@H@Z	100.0000	100.0000	100.0000	0xa960a	-
 rmg	?hasConnectedOutline@type_random_map@@QAEEABV?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@UTRmgMapPosition@@EPAUTRmgZone@@E@Z	100.0000	100.0000	100.0000	0x9a09c	-
 rmg	?hasPlayerSlots@TRmgTemplate@@QBE_NHH@Z	100.0000	100.0000	100.0000	0x9ba1b	-
-rmg	?initializeObjectGenerators@type_random_map_generator@@QAEXXZ	90.0157	90.0178	90.0178	0x9f95a	-
+rmg	?initializeObjectGenerators@type_random_map_generator@@QAEXXZ	90.2391	90.2515	90.2515	0x9f95a	-
 rmg	?initializeZones@type_random_map_generator@@QAEXPAUTRmgTemplate@@@Z	99.7210	99.7210	99.7210	0xa218c	-
 rmg	?insert@?$list@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAE?AViterator@12@V312@ABUTRmgPoint@@@Z	100.0000	100.0000	100.0000	0xae5a8	-
 rmg	?insert@?$vector@EV?$allocator@E@std@@@std@@QAEXPAEIABE@Z	100.0000	100.0000	100.0000	0x8d27c	-
@@ -5798,27 +5798,27 @@ rmg	?placeBorderGuard@type_random_map_generator@@QAEHUTRmgMapPosition@@HPAUTRmgZ
 rmg	?placeExtraMines@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa9c7c	-
 rmg	?placeGuard@type_random_map_generator@@QAEXHUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xa5e03	-
 rmg	?placeKeyTentGuard@type_random_map_generator@@QAEEPAVtype_object@@H@Z	97.2262	97.2262	97.2262	0xadb72	-
-rmg	?placeMineSite@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@EH@Z	93.2857	93.2857	93.2857	0xa9641	-
+rmg	?placeMineSite@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@EH@Z	93.3056	93.3056	93.3056	0xa9641	-
 rmg	?placeMines@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xa9d6a	-
 rmg	?placeMonolithBorderGuard@type_random_map_generator@@QAEEUTRmgMapPosition@@PAUTRmgZone@@@Z	99.4771	99.4771	99.4771	0xa746b	-
-rmg	?placeObjectInZone@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@@Z	98.2985	98.2985	98.2985	0xa7312	-
+rmg	?placeObjectInZone@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@@Z	98.3358	98.3358	98.3358	0xa7312	-
 rmg	?placePrimaryTown@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa8d2c	-
 rmg	?placeQuestGroup@type_random_map_generator@@QAEEPAUTRmgTreasureGroup@@PAUTRmgZone@@@Z	97.6378	97.6378	97.6378	0xad7f7	-
-rmg	?placeSeerHutForArtifact@type_random_map_generator@@QAEEPAVt_quest_artifact@@@Z	94.2928	94.2928	94.2928	0xad947	-
-rmg	?placeTreasureGroup@type_random_map_generator@@QAEEPAUTRmgTreasureGroup@@PAUTRmgZone@@H@Z	85.9143	85.9143	85.9143	0xaa9b7	-
+rmg	?placeSeerHutForArtifact@type_random_map_generator@@QAEEPAVt_quest_artifact@@@Z	94.3204	94.3204	94.3204	0xad947	-
+rmg	?placeTreasureGroup@type_random_map_generator@@QAEEPAUTRmgTreasureGroup@@PAUTRmgZone@@H@Z	85.9429	85.9429	85.9429	0xaa9b7	-
 rmg	?placeZoneTreasures@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	89.3684	89.3684	89.3684	0xaab7e	-
-rmg	?populateWaterZoneIslands@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	97.1815	97.1815	97.1815	0xa4913	-
-rmg	?positionZone@type_random_map_generator@@QAEXPAUTRmgZone@@H@Z	99.0119	99.0119	99.0119	0xa1f3b	-
+rmg	?populateWaterZoneIslands@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	97.2123	97.2123	97.2123	0xa4913	-
+rmg	?positionZone@type_random_map_generator@@QAEXPAUTRmgZone@@H@Z	99.0417	99.0417	99.0417	0xa1f3b	-
 rmg	?prepareJunctionZone@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	74.5487	74.5487	74.5487	0xa89da	-
 rmg	?prepareZoneConnections@type_random_map_generator@@QAEXXZ	97.9500	97.9500	97.9500	0xa8c15	-
-rmg	?propagateZoneDistances@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	60.9932	60.9932	60.9932	0xa3554	-
+rmg	?propagateZoneDistances@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	61.0270	61.0270	61.0270	0xa3554	-
 rmg	?push_back@?$vector@HV?$allocator@H@std@@@std@@QAEXABH@Z	100.0000	100.0000	100.0000	0xbb26	-
 rmg	?push_back@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXABUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xae1fd	-
 rmg	?push_back@?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@QAEXABUTRmgNoiseRegion@@@Z	100.0000	100.0000	100.0000	0xae294	-
 rmg	?push_back@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXABUTRmgObjectPlacementRule@@@Z	100.0000	100.0000	100.0000	0xae155	-
 rmg	?push_back@?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAEXABUTRmgPoint@@@Z	100.0000	100.0000	100.0000	0xbb15	-
 rmg	?push_back@?$vector@UTRmgZoneConnection@@V?$allocator@UTRmgZoneConnection@@@std@@@std@@QAEXABUTRmgZoneConnection@@@Z	100.0000	100.0000	100.0000	0xae166	-
-rmg	?readObjectPlacementRules@t_abstract_random_generator@@QAEXXZ	93.1910	93.1910	93.1910	0x9dc9e	-
+rmg	?readObjectPlacementRules@t_abstract_random_generator@@QAEXXZ	93.2308	93.2308	93.2308	0x9dc9e	-
 rmg	?readRmgTemplateConnections@@YAXPBVTSpreadsheetResource@@PAUTRmgTemplate@@HHHH@Z	96.9600	96.9600	96.9600	0x9f7c4	-
 rmg	?readRmgTemplateZones@@YAXPBVTSpreadsheetResource@@PAUTRmgTemplate@@HHHHH@Z	99.9754	99.9754	99.9754	0x9f2f5	-
 rmg	?recenterZone@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	86.9398	86.9398	86.9398	0xa2ffa	-
@@ -5826,14 +5826,14 @@ rmg	?releaseReservation@type_hero@@UAEXXZ	100.0000	100.0000	100.0000	0x9c264	-
 rmg	?releaseReservation@type_object@@UAEXXZ	100.0000	100.0000	100.0000	0xed06	-
 rmg	?removeObject@TRmgMapItem@@QAEXPAVtype_object@@@Z	100.0000	100.0000	100.0000	0x99ee8	-
 rmg	?removeObject@type_random_map_generator@@QAEXPAVtype_object@@@Z	100.0000	100.0000	100.0000	0xadd76	-
-rmg	?repairWaterZoneBorders@type_random_map_generator@@QAEXXZ	97.6642	97.6642	97.6642	0xa4fc5	-
+rmg	?repairWaterZoneBorders@type_random_map_generator@@QAEXXZ	97.6764	97.6764	97.6764	0xa4fc5	-
 rmg	?replaceObjectWithTreasure@type_random_map_generator@@QAEXPAVtype_object@@H@Z	100.0000	100.0000	100.0000	0xadef7	-
 rmg	?requiresLinkedPlacement@type_treasure_def@@UAEEXZ	100.0000	100.0000	100.0000	0x9c54a	-
 rmg	?reset@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x9ce64	-
 rmg	?resetMovementCosts@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xaae2f	-
-rmg	?scoreObjectPlacement@t_abstract_random_generator@@QAEHPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@@Z	87.5690	87.5690	87.5690	0x9e1bf	-
+rmg	?scoreObjectPlacement@t_abstract_random_generator@@QAEHPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@@Z	87.5932	87.5932	87.5932	0x9e1bf	-
 rmg	?selectAllowedTown@TRmgTemplateZone@@QAEHXZ	100.0000	100.0000	100.0000	0x9b3c1	-
-rmg	?selectObjectPrototype@type_random_map_generator@@QAEPAUTRmgObjectPropertiesRef@@HHH@Z	73.6988	73.6988	73.6988	0xa9e40	-
+rmg	?selectObjectPrototype@type_random_map_generator@@QAEPAUTRmgObjectPropertiesRef@@HHH@Z	73.8193	73.8193	73.8193	0xa9e40	-
 rmg	?selectPrisonHero@type_random_map_generator@@QAEHXZ	100.0000	100.0000	100.0000	0xad640	-
 rmg	?set@?$bitset@$0IA@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x3bee8	-
 rmg	?set@?$bitset@$0IB@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x378ab	-
@@ -5857,9 +5857,9 @@ rmg	?traceZoneBoundary@type_random_map_generator@@QAEXPAUTRmgHalfEdge@@E@Z	90.00
 rmg	?transform@std@@YA?AV?$bitset_iterator@$0IA@@@PAE0V2@U?$logical_not@E@1@@Z	100.0000	100.0000	100.0000	0xaedf9	-
 rmg	?transform@std@@YA?AV?$bitset_iterator@$0JM@@@PAE0V2@U?$logical_not@E@1@@Z	100.0000	100.0000	100.0000	0xaed50	-
 rmg	?tryAddObject@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	94.2216	94.2216	94.2216	0x9d471	-
-rmg	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	92.8558	92.8558	92.8558	0xa901a	-
-rmg	?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z	98.6879	98.6879	98.6879	0xa9911	-
-rmg	?tryPlacePrimaryTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHE@Z	89.3364	89.3364	89.3364	0xa93a2	-
+rmg	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	92.8715	92.8715	92.8715	0xa901a	-
+rmg	?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z	98.7038	98.7038	98.7038	0xa9911	-
+rmg	?tryPlacePrimaryTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHE@Z	89.3594	89.3594	89.3594	0xa93a2	-
 rmg	?updateBounds@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x9d6e0	-
 rmg	?write@TRmgMapItem@@QAEXPAVTAbstractFile@@@Z	100.0000	100.0000	100.0000	0x9b2b6	-
 rmg	?write@type_black_box@@UAEXPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0x9be93	-

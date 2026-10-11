@@ -11,29 +11,19 @@
 #endif
 #include "platform.h"
 
-union TFloatLongBits {
-    unsigned long m_bits;
-    float m_value;
-};
-
-union TDoubleLongBits {
-    double m_value;
-    long m_words[2];
-};
-
-// Dreamcast exposes this original helper boundary and its sole named local.
-// Retail has no out-of-line copy because VC6 /Ob2 expands it into HSVToRGB.
+// Dreamcast exposes this original helper boundary and its sole named local,
+// const unsigned long magic. Retail has no out-of-line copy because VC6
+// expands it into HSVToRGB. The editors' /Ob1 Libraries build expands it too,
+// and h3ccmped's palette copy at 0x44af80 is the 720-byte body of bitmap24's
+// at 0x44bc20 (its 8-byte aligned frame is d's qword home), so it is declared
+// inline with bitmap24.cpp's body.
 // Original: ftol; palette.cpp:45
 DC_ADDRESS(0x10a244, 0x62)
-static long ftol(double d)
+static inline long ftol(double d)
 {
     const unsigned long magic = 0x59c00000;
-    TFloatLongBits magicValue;
-    TDoubleLongBits result;
-    result.m_value = d;
-    magicValue.m_bits = magic;
-    result.m_value += magicValue.m_value;
-    return result.m_words[0];
+    d += *static_cast<const float*>(static_cast<const void*>(&magic));
+    return *static_cast<long*>(static_cast<void*>(&d));
 }
 
 VA(0x00522650, 0x16)
