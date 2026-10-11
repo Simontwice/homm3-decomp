@@ -616,6 +616,109 @@ def paired_comdat_rows(model: Model, base_dir=BASE_DIR):
     return rows, withheld
 
 
+#: MFC's BEGIN_MESSAGE_MAP statics: `messageMap` (AFX_MSGMAP, the base map
+#: and the entries) and `_messageEntries` (AFX_MSGMAP_ENTRY[], 24 bytes each,
+#: closed by an AfxSig_end entry). `GetMessageMap` returns the map's address.
+_MESSAGE_MAP = re.compile(r"^\?messageMap@(?P<scope>.+)@@1UAFX_MSGMAP@@B$")
+_GET_MESSAGE_MAP = re.compile(r"^\?GetMessageMap@(?P<scope>.+)@@[MU]BEPBUAFX_MSGMAP@@XZ$")
+AFX_MSGMAP_SIZE = 8
+AFX_MSGMAP_ENTRY_SIZE = 24
+
+
+def message_map_rows(model: Model, base_dir=BASE_DIR):
+    """Enrollable MFC message maps and their entry arrays + the withheld.
+
+    BEGIN_MESSAGE_MAP defines a class's `messageMap` and `_messageEntries`
+    in the unit's ordinary `.rdata`, the entries directly after the map, and
+    its `GetMessageMap` returns the map's address. The address is read from
+    the claimed `GetMessageMap` at its retail body (`mov eax, imm32; ret`);
+    the extents are the candidate section's (the entries run to the next
+    member or the section end, a whole number of entries). Retail must hold
+    the candidate's bytes there, relocation fields aside, with the map's
+    entry pointer naming the entries.
+    """
+    import struct
+
+    img = retail()
+    functions = {}
+    from homm3.delink.pdb_synth import UNIT_CHANNELS
+    for b in model.functions:
+        if b.channel in UNIT_CHANNELS and b.name:
+            functions[msvc_names.mask(b.name)] = (b.rva, b.size)
+    rows, withheld = [], []
+    for stem, c in coffx.objects(base_dir):
+        # each claimed GetMessageMap names its class's map symbol
+        returns = {}
+        for sec in c.section_table:
+            if not sec["characteristics"] & MEM_EXECUTE:
+                continue
+            for _off, name in c.defined_symbols(sec["index"]):
+                if not _GET_MESSAGE_MAP.match(name):
+                    continue
+                maps = [ref for ref, typ in c.typed_relocations(sec["index"]).values()
+                        if typ == COFF_DIR32 and _MESSAGE_MAP.match(ref)]
+                if len(maps) == 1:
+                    returns[maps[0]] = name
+        if not returns:
+            continue
+        for sec in c.section_table:
+            if sec["name"] != ".rdata" or sec["characteristics"] & LNK_COMDAT:
+                continue
+            members = sorted((off, name) for off, name, _scl
+                             in c.section_members(sec["index"]))
+            payload = c.section_payload(sec["index"])[:sec["size"]]
+            sites = set(c.relocations(sec["index"]))
+            for k, (offset, name) in enumerate(members):
+                getter = returns.get(name)
+                if getter is None:
+                    continue
+                scope = _MESSAGE_MAP.match(name).group("scope")
+                entries = f"?_messageEntries@{scope}@@0QBUAFX_MSGMAP_ENTRY@@B"
+                follower = members[k + 1] if k + 1 < len(members) else None
+                if follower != (offset + AFX_MSGMAP_SIZE, entries):
+                    withheld.append((0, name, "the entries do not follow the map"))
+                    continue
+                end = members[k + 2][0] if k + 2 < len(members) else sec["size"]
+                count, rest = divmod(end - offset - AFX_MSGMAP_SIZE,
+                                     AFX_MSGMAP_ENTRY_SIZE)
+                hit = (functions.get(msvc_names.mask(getter))
+                       or functions.get(msvc_names.mask(normalize_anon_ns_name(getter, stem))))
+                body = img.pe.read(hit[0], hit[1]) if hit else None
+                if rest or not count or body is None or len(body) != 6 \
+                        or body[0] != 0xB8 or body[5] != 0xC3:
+                    withheld.append((hit[0] if hit else 0, name,
+                                     "no claimed `mov eax, imm32; ret` getter or "
+                                     "no whole entry array"))
+                    continue
+                rva = struct.unpack_from("<I", body, 1)[0] - img.image_base
+                size = end - offset
+                at = img.off(rva)
+                theirs = bytearray(img.data[at:at + size]) if at is not None else b""
+                mine = bytearray(payload[offset:end])
+                for site in sites:
+                    if offset <= site < end:
+                        mine[site - offset:site - offset + 4] = b"\0\0\0\0"
+                        theirs[site - offset:site - offset + 4] = b"\0\0\0\0"
+                if (len(theirs) != size or theirs != mine
+                        or img.u32(rva + 4) != img.image_base + rva + AFX_MSGMAP_SIZE
+                        or STORAGE.get(_classify(rva)) != "rdata"
+                        or STORAGE.get(_classify(rva + size - 1)) != "rdata"):
+                    withheld.append((rva, name, "retail bytes contradict the "
+                                     "candidate message map"))
+                    continue
+                for symbol, at_rva, off, extent in (
+                        (name, rva, offset, AFX_MSGMAP_SIZE),
+                        (entries, rva + AFX_MSGMAP_SIZE, offset + AFX_MSGMAP_SIZE,
+                         size - AFX_MSGMAP_SIZE)):
+                    rows.append({"name": normalize_anon_ns_name(symbol, stem),
+                                 "object": f"{stem}.c", "rva": at_rva,
+                                 "size": extent, "storage": "rdata",
+                                 "alignment": member_alignment(sec["alignment"],
+                                                               off, at_rva),
+                                 "provenance": "candidate-COFF-message-map"})
+    return rows, withheld
+
+
 def paired_data_votes(rows, wanted, base_dir=BASE_DIR):
     """{symbol: {rva}} from pointer words inside enrolled source data.
 
@@ -1189,6 +1292,9 @@ def candidates(model: Model):
     withheld += w
     comdat, w = paired_comdat_rows(model)
     rows += comdat
+    withheld += w
+    message_maps, w = message_map_rows(model)
+    rows += message_maps
     withheld += w
 
     # cl's `$T` FP pool. A slot some OTHER channel already names is left to

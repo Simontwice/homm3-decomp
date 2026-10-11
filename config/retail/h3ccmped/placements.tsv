@@ -930,6 +930,7 @@ rva	size	kind	name	unit	evidence
 0x000a6858	0x7	data	??_C@_06ELCD@?$HM?$CK?4?$CK?$HM?$HM?$AA@	CampaignDoc	referenced by ?promptMapFileName@@YA_NPBDHKAAVCString@@@Z at +0x151
 0x000a6860	0x2	data	??_C@_01KALE@?$HM?$AA@	CampaignDoc	referenced by ?promptMapFileName@@YA_NPBDHKAAVCString@@@Z at +0x11f
 0x000a6864	0x3	data	??_C@_02KJNG@?$HM?$CK?$AA@	CampaignDoc	referenced by ?promptMapFileName@@YA_NPBDHKAAVCString@@@Z at +0xd6
+0x000a6d54	0x2	data	??_C@_01ELEL@?$IF?$AA@	CampaignEditorText	referenced by 0x00016ea0 at +0x7
 0x000a6d58	0xd	data	??_C@_0N@LOPG@CmpEditr?4txt?$AA@	CampaignEditorText	referenced by ?initialize@SText@@YAXXZ at +0x1d
 0x000a6d68	0x148	data	_g_good1RegionTraits	campaignmap	referenced by ?g_campaignMapTraitsImp@@3PAUTCampaignMapTraits@@A at +0x1c
 0x000a6eb0	0x1b0	data	_g_good2RegionTraits	campaignmap	referenced by ?g_campaignMapTraitsImp@@3PAUTCampaignMapTraits@@A at +0x2c
