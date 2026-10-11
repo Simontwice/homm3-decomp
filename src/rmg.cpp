@@ -4172,6 +4172,10 @@ bool TRmgTemplate::isUsable(s32 humanPlayers, s32 computerPlayers) const
 // the push_back insert unless the cb also falls. Separate size-reject and
 // slot-reject deletes (Mac's order) keep two destructor calls (81.00); a
 // nested accept with one fall-through delete gives 79.81.
+// The map editor's /O1 copy (0x49f0cd) scans the block with the row cursor
+// itself, after saving its first row (mov edi,[row]; inc [row]): game
+// 83.21% -> 87.14%, editor 93.01 -> 99.96 (only the connection reader's
+// unplaced label differs there).
 VA(0x00537FF0, 0x482)
 MAC_ADDRESS(0x2372ec, 0x304)
 void type_random_map_generator::loadTemplates()
@@ -4197,16 +4201,16 @@ void type_random_map_generator::loadTemplates()
         mapTemplate->m_minimumSize = atoi(values[1]);
         mapTemplate->m_maximumSize = atoi(values[2]);
         mapTemplate->m_name = values[0];
-        int endRow = row + 1;
-        while (endRow < sheet->GetNumberOfRows()
-            && (!sheet->GetRow(endRow)[0][0] || sheet->GetRow(endRow)[0][0] == ' '))
-            ++endRow;
+        int firstRow = row++;
+        while (row < sheet->GetNumberOfRows()
+            && (!sheet->GetRow(row)[0][0] || sheet->GetRow(row)[0][0] == ' '))
+            ++row;
         bool accepted = mapSize >= mapTemplate->m_minimumSize
             && mapSize <= mapTemplate->m_maximumSize;
         if (accepted) {
-            readRmgTemplateZones(sheet, mapTemplate, row, endRow,
+            readRmgTemplateZones(sheet, mapTemplate, firstRow, row,
                 m_humanPlayerCount, m_computerPlayerCount, m_mapVersion);
-            readRmgTemplateConnections(sheet, mapTemplate, row, endRow,
+            readRmgTemplateConnections(sheet, mapTemplate, firstRow, row,
                 m_humanPlayerCount, m_computerPlayerCount);
 #if defined(HOMM3_RMG_HOTFIX)
             accepted = mapTemplate->isUsable(m_humanPlayerCount, m_computerPlayerCount);
@@ -4222,7 +4226,6 @@ void type_random_map_generator::loadTemplates()
                 mapTemplate->m_zones[zone]->m_zoneIndex = zone;
             m_templates.push_back(mapTemplate);
         }
-        row = endRow;
     }
     sheet->dispose();
 }
