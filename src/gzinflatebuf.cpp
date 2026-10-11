@@ -130,7 +130,8 @@ TGzDeflateBuf::~TGzDeflateBuf()
     _putLong(m_crc);
     _putLong(_m_zstream.total_in);
 
-    deflateEnd(&_m_zstream);
+    result = deflateEnd(&_m_zstream);
+    assert(result == Z_OK);
 
     delete[] _m_pInBuf;
 }
@@ -151,15 +152,19 @@ int TGzDeflateBuf::sync()
     _m_zstream.avail_in = pptr() - _m_pInBuf;
     m_crc = crc32(m_crc, _m_zstream.next_in, _m_zstream.avail_in);
 
-    deflate(&_m_zstream, Z_SYNC_FLUSH);
+    int result = deflate(&_m_zstream, Z_SYNC_FLUSH);
     while (_m_zstream.avail_in > 0) {
+        assert(result == Z_OK
+               || (result == Z_BUF_ERROR && _m_zstream.avail_out == 0));
         if (_m_pDestBuf->sputn(_m_pOutBuf, GZ_WINDOW_SIZE - _m_zstream.avail_out)
                 < GZ_WINDOW_SIZE - _m_zstream.avail_out)
             return traits_type::eof();
         _m_zstream.next_out = zlibBytes(_m_pOutBuf);
         _m_zstream.avail_out = GZ_WINDOW_SIZE;
-        deflate(&_m_zstream, Z_SYNC_FLUSH);
+        result = deflate(&_m_zstream, Z_SYNC_FLUSH);
     }
+    assert(result == Z_OK
+           || (result == Z_BUF_ERROR && _m_zstream.avail_out == 0));
     if (_m_pDestBuf->sputn(_m_pOutBuf, GZ_WINDOW_SIZE - _m_zstream.avail_out)
             < GZ_WINDOW_SIZE - _m_zstream.avail_out)
         return traits_type::eof();
@@ -181,15 +186,19 @@ int TGzDeflateBuf::overflow(int c)
         _m_zstream.avail_in = pptr() - _m_pInBuf;
         m_crc = crc32(m_crc, _m_zstream.next_in, _m_zstream.avail_in);
 
-        deflate(&_m_zstream, Z_NO_FLUSH);
+        int result = deflate(&_m_zstream, Z_NO_FLUSH);
         while (_m_zstream.avail_in > 0) {
+            assert(result == Z_OK
+                   || (result == Z_BUF_ERROR && _m_zstream.avail_out == 0));
             if (_m_pDestBuf->sputn(_m_pOutBuf, GZ_WINDOW_SIZE - _m_zstream.avail_out)
                     < GZ_WINDOW_SIZE - _m_zstream.avail_out)
                 return traits_type::eof();
             _m_zstream.next_out = zlibBytes(_m_pOutBuf);
             _m_zstream.avail_out = GZ_WINDOW_SIZE;
-            deflate(&_m_zstream, Z_NO_FLUSH);
+            result = deflate(&_m_zstream, Z_NO_FLUSH);
         }
+        assert(result == Z_OK
+               || (result == Z_BUF_ERROR && _m_zstream.avail_out == 0));
 
         setp(_m_pInBuf, _m_pInBuf + GZ_WINDOW_SIZE);
         *_m_pInBuf = static_cast<char>(c);
@@ -382,8 +391,10 @@ TGzInflateBuf::~TGzInflateBuf()
             std::ios_base::cur, std::ios_base::in);
     }
     if (m_ok) {
-        if (m_inflating)
-            inflateEnd(&_m_zstream);
+        if (m_inflating) {
+            int result = inflateEnd(&_m_zstream);
+            assert(result == Z_OK);
+        }
     } else if (egptr() > gptr()) {
         _m_pSrcBuf->pubseekoff(
             gptr() - egptr(), std::ios_base::cur, std::ios_base::in);
@@ -443,8 +454,8 @@ int TGzInflateBuf::underflow()
         if (_m_zstream.avail_in > 0) {
             if (m_ok) {
                 if (m_inflating) {
-                    int status = inflate(&_m_zstream, Z_SYNC_FLUSH);
-                    switch (status) {
+                    int result = inflate(&_m_zstream, Z_SYNC_FLUSH);
+                    switch (result) {
                     case Z_MEM_ERROR:
                         throw TAllocationFailure();
                     case Z_DATA_ERROR:
@@ -460,12 +471,15 @@ int TGzInflateBuf::underflow()
                     m_crc = crc32(m_crc,
                                 _m_zstream.next_out + _m_zstream.avail_out - GZ_WINDOW_SIZE,
                                 GZ_WINDOW_SIZE - _m_zstream.avail_out);
-                    if (status == Z_STREAM_END) {
-                        inflateEnd(&_m_zstream);
+                    if (result == Z_STREAM_END) {
+                        result = inflateEnd(&_m_zstream);
+                        assert(result == Z_OK);
                         m_inflating = false;
                         _mustGetLong();
                         _mustGetLong();
                         break;
+                    } else {
+                        assert(result == Z_OK);
                     }
                 }
             } else {
@@ -477,6 +491,8 @@ int TGzInflateBuf::underflow()
                 _m_zstream.next_out += count;
                 _m_zstream.avail_out -= count;
             }
+        } else {
+            assert(_m_pSrcBuf == 0);
         }
     }
     setg(_m_pOutBuf,

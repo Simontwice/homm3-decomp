@@ -479,7 +479,10 @@ Where the original may have had such statements:
   only inline callee, Clip, expands under every budget), TTextResource's
   two scan-loop checks (Dreamcast leaves exactly textresource.cpp 87 and
   107 unrecorded), Bitmap16Bit(name, w, h)'s two extents, Remap's
-  if/else green-mask checks and font::DrawCharacter's range check.
+  if/else green-mask checks, font::DrawCharacter's range check and the
+  rest of GzBuf.cpp outside the inflate constructor (TGzDeflateBuf's
+  sync and overflow deflate results, both destructors' End results,
+  underflow's inflateEnd/Z_OK pair and its no-input branch).
   Loki's TTextResource::GetText assert is not ported: Complete's GetText
   is the TextResource.h inline Dreamcast records without a gap. Loki's
   `assert(0)` bodies of Bitmap16Bit/Bitmap24Bit::importPCXFile and ftol
