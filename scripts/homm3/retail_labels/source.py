@@ -175,6 +175,9 @@ SPECIAL_RE = re.compile(r"([\w:]+)::`([^'`]+)'\s*\(")
 # defines first; its working label names that member (the IR channel
 # binds the exact symbol, see ir_message_map_names).
 MESSAGE_MAP_RE = re.compile(r"^\s*BEGIN_MESSAGE_MAP\s*\(\s*([A-Za-z_]\w*)\s*,")
+# ...and one on IMPLEMENT_DYNCREATE claims the CreateObject it defines
+# first (its GetRuntimeClass is a RUNTIME_CLASS_GETTER VA_COMPGEN claim).
+DYNCREATE_RE = re.compile(r"^\s*IMPLEMENT_DYNCREATE\s*\(\s*([A-Za-z_]\w*)\s*,")
 # Template argument list in a source declarator: `vector<int>::begin` ->
 # `vector::begin`. Applied to a fixed point so nested lists collapse.
 # Template arguments never take part in the join key (the mangled side
@@ -502,7 +505,8 @@ COMPGEN_KINDS = {"STATIC_INIT_DISPATCH", "STATIC_ATEXIT", "STATIC_DTOR",
                  "CLASS_CTOR",
                  "CLASS_NONCOPY_CTOR",
                  "IMPLICIT_COPY_CTOR", "IMPLICIT_COPY_ASSIGN",
-                 "IMPLICIT_DTOR"}
+                 "IMPLICIT_DTOR",
+                 "RUNTIME_CLASS_GETTER"}
 COMPGEN_KINDS |= {member.upper() for member in CHAR_STREAM_MEMBER_KINDS}
 #: The kinds that name NO pre-existing COFF symbol - MSVC's anonymous
 #: static-initialization thunks, which the canonicalizer RENAMES rather
@@ -859,6 +863,7 @@ def scan_file(path, functions: set[int],
                            "declaration follows")
             sm = SPECIAL_RE.search(follower)
             mm = MESSAGE_MAP_RE.match(follower)
+            dm = DYNCREATE_RE.match(follower)
             om = OPERATOR_EQUAL_RE.search(follower)
             nom = OPERATOR_NOT_EQUAL_RE.search(follower)
             call_operator = CALL_OPERATOR_RE.search(follower)
@@ -867,6 +872,8 @@ def scan_file(path, functions: set[int],
                 raw = f"{sm.group(1)}__{sm.group(2)}"
             elif mm:
                 raw = f"{mm.group(1)}::GetMessageMap"
+            elif dm:
+                raw = f"{dm.group(1)}::CreateObject"
             elif om:
                 raw = f"{om.group(1)}::operator_equal"
             elif nom:
@@ -2595,6 +2602,14 @@ def join_unit(unit: str, rows: list[dict], taken: set | None = None) -> None:
                 owner = scope[-1].lower()
             claim_keys.setdefault(f"{owner}_{owner}@gdtor",
                                   []).append(row)
+            continue
+        if "$runtime_class_getter$" in row["name"]:
+            # MFC's IMPLEMENT_DYNAMIC/IMPLEMENT_DYNCREATE define the class's
+            # GetRuntimeClass inside the macro, after the runtime class
+            # (DYNAMIC) or CreateObject (DYNCREATE) a VA or DATA above the
+            # macro already claims; it keys like a written member
+            owner = row["name"].rsplit("$", 1)[1].lower()
+            claim_keys.setdefault(f"{owner}_getruntimeclass", []).append(row)
             continue
         if "$vector_deleting_dtor$" in row["name"]:
             owner = row["name"].rsplit("$", 1)[1].lower()

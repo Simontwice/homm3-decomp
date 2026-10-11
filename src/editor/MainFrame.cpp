@@ -413,6 +413,7 @@ inline const TCommandTextMap& getCommandTexts()
 
 VA(0x0045a7e6, 0x35)
 IMPLEMENT_DYNCREATE(TMainFrame, CFrameWnd)
+VA_COMPGEN(0x0045a81b, 0x6, RUNTIME_CLASS_GETTER, TMainFrame)
 
 VA(0x0045a821, 0x6)
 BEGIN_MESSAGE_MAP(TMainFrame, CFrameWnd)

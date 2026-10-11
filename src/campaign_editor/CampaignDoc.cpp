@@ -562,9 +562,11 @@ enum { kDefaultNewCampaignType = 1 };
 
 DATA(0x00487ee0)
 IMPLEMENT_DYNAMIC(TCampaignDocLoadFailure, CException)
+VA_COMPGEN(0x00412de0, 0x6, RUNTIME_CLASS_GETTER, TCampaignDocLoadFailure)
 
 DATA(0x00487ef8)
 IMPLEMENT_DYNAMIC(TCampaignDocInvalidFileVersion, TCampaignDocLoadFailure)
+VA_COMPGEN(0x00412df0, 0x6, RUNTIME_CLASS_GETTER, TCampaignDocInvalidFileVersion)
 
 namespace {
 
@@ -719,6 +721,7 @@ pair<auto_ptr<TCampaign>, int> loadCampaign(CFile* pFile)
 
 VA(0x00414020, 0x57)
 IMPLEMENT_DYNCREATE(TCampaignDoc, CDocument)
+VA_COMPGEN(0x00414080, 0x6, RUNTIME_CLASS_GETTER, TCampaignDoc)
 
 VA(0x00414090, 0x6)
 BEGIN_MESSAGE_MAP(TCampaignDoc, CDocument)

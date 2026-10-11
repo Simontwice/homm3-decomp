@@ -342,8 +342,12 @@ CampaignDoc	??_GTGzDeflatedScenarioMap@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\Ca
 CampaignDoc	??_GTStrGzInflateBuf@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x10eb0	-
 CampaignDoc	??_GTStrGzInflateBufBase@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x10e90	-
 CampaignDoc	??_Gstrstreambuf@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x10e60	-
+CampaignDoc	?CreateObject@TCampaignDoc@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x14020	tokens1:4d5f6227ff3a
 CampaignDoc	?DeleteContents@TCampaignDoc@@UAEXXZ	100.0000	100.0000	100.0000	0x14a60	tokens1:0a2f69d78660
 CampaignDoc	?GetMessageMap@TCampaignDoc@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x14090	tokens1:ff599d9991e0
+CampaignDoc	?GetRuntimeClass@TCampaignDoc@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x14080	-
+CampaignDoc	?GetRuntimeClass@TCampaignDocInvalidFileVersion@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x12df0	-
+CampaignDoc	?GetRuntimeClass@TCampaignDocLoadFailure@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x12de0	-
 CampaignDoc	?IsModified@CDocument@@UAEHXZ	100.0000	100.0000	100.0000	0x15b90	-
 CampaignDoc	?OnExportScenarioMaps@TCampaignDoc@@IAEXXZ	99.9922	99.9922	99.9922	0x14d90	tokens1:9856f9fabd02
 CampaignDoc	?OnExportText@TCampaignDoc@@IAEXXZ	92.7286	92.7286	92.7286	0x150f0	tokens1:033c01bf1a41
@@ -404,7 +408,6 @@ CampaignDoc	?write@TRawOStream@@QAEAAV1@PBDI@Z	100.0000	100.0000	100.0000	0x167b
 CampaignDoc	?write@TScenarioRecord@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@QBEXAAVTRawOStream@@H@Z	88.3176	88.3605	88.3605	0x129f0	tokens1:6e1e6f55cc2e
 CampaignDoc	?write@TScenarioStartingBonusWriter@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@QAEXABVTScenarioStartingBonus@@AAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x10f30	tokens1:6ffee2429f90
 CampaignDoc	?write@TScenarioStartingOptionsWriter@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@QAEXPBVTScenarioStartingOptions@@AAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x11b20	tokens1:6cca98f267f0
-CampaignDoc	IMPLEMENT_DYNCREATE	0.0000	100.0000	100.0000	0x14020	tokens1:99cecd69f848
 CampaignEditor	??0CAboutDlg@@QAE@XZ	100.0000	100.0000	100.0000	0x46c0	tokens1:ba57c3e8e4f8
 CampaignEditor	??0TCampaignDocTemplate@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\Campaign Editor.cpp2351922671@@QAE@XZ	100.0000	100.0000	100.0000	0x3c80	tokens1:9fe1542b11c0
 CampaignEditor	??0TCampaignEditorApp@@QAE@XZ	100.0000	100.0000	100.0000	0x3da0	tokens1:9b3789086abc
@@ -506,9 +509,10 @@ CampaignPropsDlg	?OnOK@TCampaignPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x1c
 CampaignView	??0TCampaignView@@IAE@XZ	100.0000	100.0000	100.0000	0x1c4a0	tokens1:dfa5bb586215
 CampaignView	??1TCampaignView@@UAE@XZ	100.0000	100.0000	100.0000	0x1c4f0	tokens1:5b95d1f0910c
 CampaignView	??_GTCampaignView@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x1c4d0	-
-CampaignView	?CreateObject@TCampaignView@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x1c420	tokens1:590ea9554dad
+CampaignView	?CreateObject@TCampaignView@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x1c420	tokens1:cac0dc608f37
 CampaignView	?GetDocument@TCampaignView@@QAEPAVTCampaignDoc@@XZ	100.0000	100.0000	100.0000	0x1c5c0	tokens1:65086196475c
 CampaignView	?GetMessageMap@TCampaignView@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x1c490	tokens1:04a2d8a05074
+CampaignView	?GetRuntimeClass@TCampaignView@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x1c480	-
 CampaignView	?OnCampaignProperties@TCampaignView@@IAEXXZ	100.0000	100.0000	100.0000	0x1c8f0	tokens1:3d56f63cb781
 CampaignView	?OnCmdMsg@TCampaignView@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z	100.0000	100.0000	100.0000	0x1c8a0	tokens1:0e9b1371c1e5
 CampaignView	?OnCreate@TCampaignView@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x1c760	tokens1:1c9f4ca82db0
@@ -739,9 +743,10 @@ MainFrame	??1?$pair@$$CBVCString@@$$CBV1@@std@@QAE@XZ	100.0000	100.0000	100.0000
 MainFrame	??1?$pair@VCString@@V1@@std@@QAE@XZ	100.0000	100.0000	100.0000	0x26ec0	-
 MainFrame	??1TMainFrame@@UAE@XZ	100.0000	100.0000	100.0000	0x27180	tokens1:ccf07beb5cd3
 MainFrame	??_GTMainFrame@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x27160	-
-MainFrame	?CreateObject@TMainFrame@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x26fb0	tokens1:3c937378dd81
+MainFrame	?CreateObject@TMainFrame@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x26fb0	tokens1:b6402f8c69cd
 MainFrame	?GetMessageMap@TMainFrame@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x27020	tokens1:d06a6f4a3454
 MainFrame	?GetMessageString@TMainFrame@@UBEXIAAVCString@@@Z	100.0000	100.0000	100.0000	0x27890	tokens1:580211871270
+MainFrame	?GetRuntimeClass@TMainFrame@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x27010	-
 MainFrame	?OnCommandHelp@TMainFrame@@IAEJIJ@Z	100.0000	100.0000	100.0000	0x27700	tokens1:bb9d927081c0
 MainFrame	?OnCreate@TMainFrame@@IAEHPAUtagCREATESTRUCTA@@@Z	97.5164	97.5164	97.5164	0x27290	tokens1:bd9ba23a21f3
 MainFrame	?OnCreateClient@TMainFrame@@MAEHPAUtagCREATESTRUCTA@@PAUCCreateContext@@@Z	100.0000	100.0000	100.0000	0x275e0	tokens1:ddf6e38d8f71

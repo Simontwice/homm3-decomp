@@ -38,7 +38,10 @@
  *                                  INSERTION_SORT_1 /
  *                                  BITSET_AND_ASSIGN / BITSET_OR /
  *                                  IMPLICIT_COPY_CTOR /
- *                                  IMPLICIT_COPY_ASSIGN / IMPLICIT_DTOR;
+ *                                  IMPLICIT_COPY_ASSIGN / IMPLICIT_DTOR /
+ *                                  RUNTIME_CLASS_GETTER (the GetRuntimeClass
+ *                                  that MFC's IMPLEMENT_DYNAMIC and
+ *                                  IMPLEMENT_DYNCREATE define);
  *                                  owner names the
  *                                  global, class, vector element, or
  *                                  specialization token that causes it;

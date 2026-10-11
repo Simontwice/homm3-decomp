@@ -531,9 +531,11 @@ TMapDoc::TNewMapParams::TNewMapParams(const TNewMapParams& other)
 
 DATA(0x00539280)
 IMPLEMENT_DYNAMIC(TMapDocLoadFailure, CException)
+VA_COMPGEN(0x0045e31a, 0x6, RUNTIME_CLASS_GETTER, TMapDocLoadFailure)
 
 DATA(0x00539298)
 IMPLEMENT_DYNAMIC(TMapDocInvalidFileVersion, TMapDocLoadFailure)
+VA_COMPGEN(0x0045e320, 0x6, RUNTIME_CLASS_GETTER, TMapDocInvalidFileVersion)
 
 // The terrain placement operation on one map layer: the operation paints
 // through the document's map and reports the changed cells in an update.
@@ -840,6 +842,7 @@ DATA(0x0059fe50) const TMapDoc::TNewMapParams TMapDoc::s_kDefaultNewMapParams(
 
 VA(0x0045ed86, 0x35)
 IMPLEMENT_DYNCREATE(TMapDoc, CDocument)
+VA_COMPGEN(0x0045edbb, 0x6, RUNTIME_CLASS_GETTER, TMapDoc)
 
 VA(0x0045edc1, 0x6)
 BEGIN_MESSAGE_MAP(TMapDoc, CDocument)

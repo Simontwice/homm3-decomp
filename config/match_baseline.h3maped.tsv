@@ -2688,10 +2688,11 @@ MainFrame	??1TMainFrame@@UAE@XZ	100.0000	100.0000	100.0000	0x5a8f9	tokens1:ccf07
 MainFrame	??_G?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@QAEPAXI@Z	100.0000	100.0000	100.0000	0x5be9d	-
 MainFrame	??_GTMainFrame@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x5a8dd	-
 MainFrame	?ActivateFrame@TMainFrame@@UAEXH@Z	100.0000	100.0000	100.0000	0x5ad5f	tokens1:5d072800123b
-MainFrame	?CreateObject@TMainFrame@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x5a7e6	tokens1:65871fafa80b
+MainFrame	?CreateObject@TMainFrame@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x5a7e6	tokens1:c7921fb8ca7b
 MainFrame	?DestroyWindow@TMainFrame@@UAEHXZ	100.0000	100.0000	100.0000	0x5aed4	tokens1:92726e5cc374
 MainFrame	?GetMessageMap@TMainFrame@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x5a821	tokens1:2c50d4b2c622
 MainFrame	?GetMessageString@TMainFrame@@UBEXIAAVCString@@@Z	100.0000	100.0000	100.0000	0x5b28f	tokens1:5945c23649a5
+MainFrame	?GetRuntimeClass@TMainFrame@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x5a81b	-
 MainFrame	?OnCommandHelp@TMainFrame@@IAEJIJ@Z	100.0000	100.0000	100.0000	0x5b172	tokens1:bb9d927081c0
 MainFrame	?OnCreate@TMainFrame@@IAEHPAUtagCREATESTRUCTA@@@Z	99.9941	99.9941	99.9941	0x5a962	tokens1:d72f8b353c8e
 MainFrame	?OnCreateClient@TMainFrame@@MAEHPAUtagCREATESTRUCTA@@PAUCCreateContext@@@Z	100.0000	100.0000	100.0000	0x5b126	tokens1:2b07736c26fd
@@ -2804,6 +2805,9 @@ MapDoc	?DeleteContents@TMapDoc@@UAEXXZ	100.0000	100.0000	100.0000	0x5f6db	tokens
 MapDoc	?DoDataExchange@TMapGenerationProgressDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapDoc.cpp166062000@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x5e1f2	tokens1:53474d40dbf3
 MapDoc	?GetMessageMap@TMapDoc@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x5edc1	-
 MapDoc	?GetMessageMap@TMapGenerationProgressDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapDoc.cpp166062000@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x5dfa2	tokens1:53804c18b1e6
+MapDoc	?GetRuntimeClass@TMapDoc@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x5edbb	-
+MapDoc	?GetRuntimeClass@TMapDocInvalidFileVersion@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x5e320	-
+MapDoc	?GetRuntimeClass@TMapDocLoadFailure@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x5e31a	-
 MapDoc	?IsModified@TMapDoc@@UAEHXZ	100.0000	100.0000	100.0000	0x5f07c	-
 MapDoc	?OnDestroy@TMapGenerationProgressDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapDoc.cpp166062000@@IAEXXZ	100.0000	100.0000	100.0000	0x5e25d	tokens1:3b5b42ebb49a
 MapDoc	?OnFileExportText@TMapDoc@@IAEXXZ	99.9912	99.9912	99.9912	0x608d5	tokens1:588895976df5
@@ -3522,11 +3526,12 @@ MapView	??4?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@QAEAA
 MapView	??_GTGameMapMask@@QAEPAXI@Z	100.0000	100.0000	100.0000	0x85500	-
 MapView	??_GTMapValidationDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x844c2	-
 MapView	??_GTMapView@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x805fb	-
-MapView	?CreateObject@TMapView@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x8048f	tokens1:057b17baa802
+MapView	?CreateObject@TMapView@@SGPAVCObject@@XZ	100.0000	100.0000	100.0000	0x8048f	tokens1:004f2ee42b55
 MapView	?DoDataExchange@TMapValidationDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x8022a	tokens1:b497ea3107c1
 MapView	?GetMessageMap@TMapValidationDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x801ff	tokens1:8f0b8e17e793
 MapView	?GetMessageMap@TMapView@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x804ca	tokens1:b865d4ed5644
 MapView	?GetMessageMap@TObjectPropsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x80112	tokens1:e163ae3feed3
+MapView	?GetRuntimeClass@TMapView@@UBEPAUCRuntimeClass@@XZ	100.0000	100.0000	100.0000	0x804c4	-
 MapView	?OnCmdMsg@TMapView@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z	100.0000	100.0000	100.0000	0x82b96	tokens1:4ffc57f43c34
 MapView	?OnCreate@TMapValidationDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x80205	tokens1:4df23a81f97a
 MapView	?OnCreate@TObjectPropsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x80170	tokens1:6080f42822e6
