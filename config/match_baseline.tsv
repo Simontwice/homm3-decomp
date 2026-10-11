@@ -2066,7 +2066,7 @@ game	?processRandomObjects@game@@QAEXXZ	100.0000	100.0000	100.0000	0xc9dd0	token
 game	?randomizeEvents@game@@QAEXXZ	90.7780	90.7780	90.7780	0xc0cc0	tokens1:4e39b7692d92
 game	?randomizeHolyGrail@game@@QAEXXZ	100.0000	100.0000	100.0000	0xc0870	tokens1:2e45d059a363
 game	?randomizeUniversity@game@@AAEXPAVNewmapCell@@@Z	100.0000	100.0000	100.0000	0xc06f0	tokens1:e49b5c41603c
-game	?read@NewSMapHeader@@QAEHPAVTAbstractFile@@H@Z	99.9881	99.9881	99.9881	0xc4390	tokens1:08832138aad5
+game	?read@NewSMapHeader@@QAEHPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0xc4390	tokens1:08832138aad5
 game	?readHeroId@@YIHPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0xba1c0	tokens1:7de0f752df5f
 game	?readLossCondition@NewSMapHeader@@QAEHDPAVTAbstractFile@@@Z	100.0000	100.0000	100.0000	0xc3c80	tokens1:4d30dbbcaa21
 game	?readMapHeroSetups@game@@QAEXPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0xc2ce0	tokens1:d29c9bed44e2
