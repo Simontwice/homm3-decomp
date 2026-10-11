@@ -34,7 +34,9 @@
 
 #include "UniqueSet.h"
 #include "advmgr_objects.h"
+#if !defined(HOMM3_TARGET_MAC)
 #include "editor/RawStream.h"
+#endif
 #include "exceptions.h"
 #include "resourcemanager.h"
 #include "textresource.h"
@@ -574,6 +576,10 @@ std::istream& operator>>(std::istream& is, TObjectType& objectType)
     return is;
 }
 
+// CodeWarrior rejects the explicit template argument with a converted
+// argument and the array extraction below; these map editor streams have
+// no Mac caller.
+#if !defined(HOMM3_TARGET_MAC)
 // The map format's form of an object type (Loki h3maped ObjectType.cpp,
 // TRawOStream& operator<<(TRawOStream&, const TObjectType&) and its
 // reader): the image name, the two cell masks, the terrain masks in their
@@ -636,6 +642,7 @@ TRawIStream& operator>>(TRawIStream& stream, TObjectType& objectType)
         .setBUnderlay(bUnderlay != 0);
     return stream;
 }
+#endif
 
 // Bit by bit from the highest (Loki's isLessThan<N>; h3maped keeps the
 // 48-cell and terrain instances out of line, 0x492179 and 0x492203).
