@@ -1,10 +1,10 @@
 // 17 functions in link order.
-// <new> for its `void __cdecl operator delete(void*) _THROW0();` - the
-// nothrow declaration is what retail's ~Bitmap816 unwind map proves this TU
-// had (see the destructor's note below). NEW.H does NOT declare it.
+// The game's ~Bitmap816 unwind map proves its compile saw <new>'s
+// `operator delete(void*) _THROW0()` (see the destructor's note below);
+// the editors' copy did not. The game profile force-includes <new>
+// (config/units.toml), so this file includes no <new> itself.
 #include "va.h"
 
-#include <new>
 #include <string.h>
 
 #include "bitmap816.h"
@@ -94,6 +94,9 @@ Bitmap816::~Bitmap816()
 // declaration - and (b) the ~TPalette24 call CAN, which is why that
 // destructor carries no exception specification. Measured: empty body -> 1
 // entry; <new> alone -> 1; <new> plus a throwing ~TPalette24 -> 2, retail.
+// The map editor's and campaign editor's copies (h3maped 0x4e36e0,
+// h3ccmped 0x449610) keep a third state around the delete: their Libraries
+// compile had no <new>, so the delete itself can throw.
 
 // Original: Bitmap816::import; bitmap816.cpp:163
 DC_ADDRESS(0x053c5c, 0x104)

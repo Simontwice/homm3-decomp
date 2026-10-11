@@ -13,7 +13,11 @@ def arguments(flags, includes, *, root=None):
             '-fms-compatibility', '-fms-extensions',
             f'-fms-compatibility-version={clang.MSC_VER}', '-Wno-everything']
     for flag in flags:
-        if root is not None and flag.startswith(('/I', '/FI')):
+        if root is not None and flag.startswith('/FI') \
+                and not (root / flag[3:]).exists():
+            # A forced standard header (`/FInew`) resolves on the include path.
+            args.append(flag)
+        elif root is not None and flag.startswith(('/I', '/FI')):
             prefix = '/FI' if flag.startswith('/FI') else '/I'
             args.append(prefix + str(root / flag[len(prefix):]))
         elif flag == '/GX':

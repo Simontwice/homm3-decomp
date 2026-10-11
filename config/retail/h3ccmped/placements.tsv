@@ -630,7 +630,7 @@ rva	size	kind	name	unit	evidence
 0x000493e0	0x1e	func	??_GBitmap816@@UAEPAXI@Z	bitmap816	vtable of Bitmap816 (RTTI) slot 0
 0x00049400	0xd3	func	??0Bitmap816@@QAE@PBDHHPAEPAVTPalette16@@H@Z	bitmap816	masked body (211 bytes, 10 relocations) unique at a census start
 0x000494e0	0x124	func	??0Bitmap816@@QAE@PBD0HHHHHH@Z	bitmap816	masked body (292 bytes, 9 relocations) unique at a census start
-0x00049610	0x77	func	??1Bitmap816@@UAE@XZ	bitmap816	referenced by ??_GBitmap816@@UAEPAXI@Z at +0x4
+0x00049610	0x77	func	??1Bitmap816@@UAE@XZ	bitmap816	masked body (119 bytes, 9 relocations) unique at a census start
 0x00049690	0x166	func	?importPCXFile@Bitmap816@@AAEHPBDHHHHHH@Z	bitmap816	masked body (358 bytes, 6 relocations) unique at a census start
 0x00049800	0xdd	func	?zBufferDraw@Bitmap816@@QBEXHHHHPAGHHHHHH@Z	bitmap816	masked body (221 bytes, 0 relocations) unique at a census start
 0x000498e0	0x142	func	?Draw@Bitmap816@@QBEXHHHHPAGHHHHH_N@Z	bitmap816	masked body (322 bytes, 0 relocations) unique at a census start
@@ -639,7 +639,7 @@ rva	size	kind	name	unit	evidence
 0x00049a80	0x13	func	?SetPalette@Bitmap816@@QAEXPAVTPalette24@@@Z	bitmap816	masked body (19 bytes, 1 relocations) unique at a census start
 0x00049aa0	0x1e	func	??_GBitmap16Bit@@UAEPAXI@Z	bitmap16	vtable of Bitmap16Bit (RTTI) slot 0
 0x00049ac0	0x96	func	??0Bitmap16Bit@@QAE@PBDHH@Z	bitmap16	masked body (150 bytes, 7 relocations) unique at a census start
-0x00049b60	0x61	func	??1Bitmap16Bit@@UAE@XZ	bitmap16	referenced by ??_GBitmap16Bit@@UAEPAXI@Z at +0x4
+0x00049b60	0x61	func	??1Bitmap16Bit@@UAE@XZ	bitmap16	masked body (97 bytes, 7 relocations) unique at a census start
 0x00049bd0	0x7	func	?getSize@Bitmap16Bit@@UBEIXZ	bitmap16	vtable of Bitmap16Bit (RTTI) slot 2
 0x00049be0	0x13a	func	?Draw@Bitmap16Bit@@QBEXHHHHPAGHHHHH_N@Z	bitmap16	masked body (314 bytes, 0 relocations) unique at a census start
 0x00049d20	0x70	func	?clear@LODFile@@QAEXXZ	lodfile	masked body (112 bytes, 2 relocations) unique at a census start
@@ -672,7 +672,7 @@ rva	size	kind	name	unit	evidence
 0x0004b380	0x1e	func	??_GBitmap24Bit@@UAEPAXI@Z	bitmap24	vtable of Bitmap24Bit (RTTI) slot 0
 0x0004b3a0	0xb0	func	??0Bitmap24Bit@@QAE@PBDHHPBEH@Z	bitmap24	masked body (176 bytes, 8 relocations) unique at a census start
 0x0004b450	0xcc	func	??0Bitmap24Bit@@QAE@PBD0@Z	bitmap24	masked body (204 bytes, 7 relocations) unique at a census start
-0x0004b520	0x5a	func	??1Bitmap24Bit@@UAE@XZ	bitmap24	referenced by ??_GBitmap24Bit@@UAEPAXI@Z at +0x4
+0x0004b520	0x5a	func	??1Bitmap24Bit@@UAE@XZ	bitmap24	masked body (90 bytes, 7 relocations) unique at a census start
 0x0004b580	0xe7	func	?importPCXFile@Bitmap24Bit@@AAEHPBD@Z	bitmap24	masked body (231 bytes, 6 relocations) unique at a census start
 0x0004b670	0x3a	func	?Draw@Bitmap24Bit@@QBEXHHHHPAVBitmap16Bit@@HH@Z	bitmap24	masked body (58 bytes, 1 relocations) unique at a census start
 0x0004b6b0	0x16c	func	?Draw@Bitmap24Bit@@QBEXHHHHPAGHHHHH@Z	bitmap24	masked body (364 bytes, 6 relocations) unique at a census start

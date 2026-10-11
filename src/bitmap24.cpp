@@ -3,7 +3,6 @@
 
 #include <limits>
 #include <math.h>
-#include <new>
 #include <string.h>
 
 #include "bitmap24.h"

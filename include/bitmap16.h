@@ -44,6 +44,12 @@ enum EBitmapGreenBits {
     BITMAP_GREEN_BITS_565 = 6
 };
 
+// green_mask of a 565 surface (retail immediate 0x7e0 in wingraph's mode
+// change; Loki's Remap asserts spell it as the literal).
+enum {
+    GREEN_MASK_565 = 0x7e0
+};
+
 class Bitmap16Bit : public resource {
 public:
     // Original class statics red_mask/green_mask/blue_mask. Complete's

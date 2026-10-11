@@ -3,7 +3,6 @@
 #include <assert.h>
 #include <limits>
 #include <math.h>
-#include <new>
 #include <string.h>
 
 #include "bitmap16.h"
@@ -145,9 +144,9 @@ DC_ADDRESS(0x050fd4, 0xa4)
 void Bitmap16Bit::Remap(int oldGreenBits)
 {
     if (oldGreenBits == BITMAP_GREEN_BITS_565)
-        assert(green_mask != 0x7e0);
+        assert(green_mask != GREEN_MASK_565);
     else
-        assert(green_mask == 0x7e0);
+        assert(green_mask == GREEN_MASK_565);
 
     for (int col = 0; col < Width; col++) {
         for (int row = 0; row < Height; row++) {

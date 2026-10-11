@@ -33,6 +33,13 @@ class ProjectFlowTest(unittest.TestCase):
             '[inputs.dreamcast]\n' + entry)
         return Project(root)
 
+    def test_forced_include_keeps_project_paths_and_standard_headers(self):
+        (self.root / 'include').mkdir()
+        (self.root / 'include/prefix.h').write_text('')
+        args = arguments(['/FIinclude/prefix.h', '/FInew'], [], root=self.root)
+        self.assertIn('/FI' + str(self.root / 'include/prefix.h'), args)
+        self.assertIn('/FInew', args)
+
     def test_context_selects_its_executable_and_layout_without_global_input(self):
         first = self.executable(self.root, fixture(), 0x10000)
         second_root = self.root / 'second'

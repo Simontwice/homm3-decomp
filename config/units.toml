@@ -66,6 +66,16 @@ victor_kernels_o2_ogoff_ml_gd_windows = [
 # (spelldefs InitializeSpellTraits' seven at their exact lines,
 # ResourceManager::AddToCache, TextResource.h's three accessors, the traits
 # initializers) - while retail has no _assert and no assertion text.
+# /FInew: every game compile sees <new>'s nothrow `operator delete(void*)
+# _THROW0()`. CSpriteFrame.cpp, Bitmap16.cpp, Bitmap24.cpp and Bitmap816.cpp
+# include no standard-library header, yet the game's destructors 0x47c430,
+# 0x44e100, 0x44eec0 and 0x44f9d0 keep no unwind state around their delete
+# (~Bitmap816 has two states, not three). The editors' Libraries copies of the same
+# four files do (h3maped ~CSpriteFrame/~Bitmap816, h3ccmped ~Bitmap16Bit/
+# ~Bitmap24Bit/~Bitmap816), so the <new> came from the game's build, not
+# from the files. Control: 133 of the 140 game objects already reach <new>
+# through STL headers, and the other seven (basemgr, winfile, binkmanager,
+# palette, csequence, gzfile, log) compile byte-identically with it.
 game_o2_mt_gr_windows = [
   "/nologo",
   "/c",
@@ -78,6 +88,7 @@ game_o2_mt_gr_windows = [
   "/GX",
   "/DNDEBUG",
   "/D_WINDOWS",
+  "/FInew",
 ]
 
 [[unit]]

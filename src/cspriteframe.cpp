@@ -1,7 +1,6 @@
 #include "va.h"
 
 #include <assert.h>
-#include <new>
 #include <limits>
 #include <string.h>
 
