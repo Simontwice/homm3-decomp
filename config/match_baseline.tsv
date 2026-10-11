@@ -3348,8 +3348,8 @@ rmg	?copy_backward@std@@YIPAUTRmgObjectPlacementRule@@PAU2@00@Z	100.0000	100.000
 rmg	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@PAV?$vector@PAUTRmgMapItem@@V?$allocator@PAUTRmgMapItem@@@std@@@std@@PAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@5@@Z	91.9553	91.9553	91.9803	0x141140	tokens1:3004e01fa554
 rmg	?createGuard@type_random_map_generator@@QAEPAVtype_object@@HPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x140b20	tokens1:cb305935dfd6
 rmg	?createMonolithConnection@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgZoneConnection@@H@Z	89.2495	89.2495	91.9027	0x142ce0	tokens1:4f2c96e7ff6d
-rmg	?createRiverToJoin@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	77.9835	77.9835	89.6141	0x148500	tokens1:427da85cf211
-rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	77.0193	77.0193	85.9575	0x148df0	tokens1:7ccd65561f26
+rmg	?createRiverToJoin@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	85.4518	85.4518	89.6141	0x148500	tokens1:774e3040f1cf
+rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	77.0193	77.0193	85.9575	0x148df0	tokens1:b424a0ce1ddb
 rmg	?createRivers@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0x149870	tokens1:7a4b16022713
 rmg	?createRoads@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0x148290	tokens1:e082e01795c2
 rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	95.4884	95.4884	95.4884	0x141ad0	tokens1:1e3d9f048b30

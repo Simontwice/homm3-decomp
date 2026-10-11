@@ -9767,6 +9767,9 @@ void type_random_map_generator::createRoads()
 // flattened fields, but omitted this complete native helper model. Current
 // frame 0xa8 differs from retail 0xb4; reset/cleanup expansions and the
 // duplicate exit remain unresolved. Keep the canonical helper calls.
+// The open-list test is size() > 0: the map editor's /O1 copies of both
+// river searches branch on it with an unsigned jbe, where empty() emits je
+// (game 77.98% -> 85.45%; the /O2 game folds both spellings to je).
 VA(0x00548500, 0x533)
 MAC_ADDRESS(0x24c8ac, 0x588)
 void type_random_map_generator::createRiverToJoin(TRmgMapPosition source)
@@ -9789,7 +9792,7 @@ void type_random_map_generator::createRiverToJoin(TRmgMapPosition source)
     }
     TRmgMapPosition position;
     TRmgMapPosition nextPosition;
-    while (!openPositions.empty()) {
+    while (openPositions.size() > 0) {
         position = openPositions.back();
         openCosts.pop_back();
         openPositions.pop_back();
@@ -9986,7 +9989,7 @@ void type_random_map_generator::createRiverToOutlet(TRmgMapPosition source)
     TRmgMapPosition nextPosition;
     int direction;
 
-    while (!openPositions.empty()) {
+    while (openPositions.size() > 0) {
         position = openPositions.back();
         openCosts.pop_back();
         openPositions.pop_back();
