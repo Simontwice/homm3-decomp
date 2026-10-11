@@ -198,6 +198,6 @@ void TTileHRuler::OnSize(UINT nType, int cx, int cy)
         if (hOldBackBuffer != NULL)
             ::DeleteObject(hOldBackBuffer);
         CClientDC dc(this);
-        _m_backBuffer.Attach(::CreateCompatibleBitmap(dc.m_hDC, cx, cy));
+        _m_backBuffer.CreateCompatibleBitmap(&dc, cx, cy);
     }
 }

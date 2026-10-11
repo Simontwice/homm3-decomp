@@ -279,7 +279,7 @@ void TObjectPaletteWnd::OnPaint()
     unsigned int firstRow = (rect.top + scrollPos) / s_kObjFrameSize.cy;
     unsigned int lastRow = (rect.bottom + scrollPos + s_kObjFrameSize.cy - 1) / s_kObjFrameSize.cy;
     CDC imageDC;
-    imageDC.Attach(::CreateCompatibleDC(dc.GetSafeHdc()));
+    imageDC.CreateCompatibleDC(&dc);
     T16bppDIBSection image(256, 192);
     TGDIObjectSelector<CBitmap> imageSelector(&imageDC, &image);
     CBrush enabledBrush(::GetSysColor(COLOR_WINDOW));

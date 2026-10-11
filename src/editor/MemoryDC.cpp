@@ -5,6 +5,7 @@
 #include "editor/stdafx.h"
 
 #include "va.h"
+#include "editor/DCAttributeSelector.h"
 #include "editor/GDIObjectSelector.h"
 #include "editor/MemoryDC.h"
 
@@ -12,7 +13,7 @@ VA(0x00486fb4, 0x6a)
 COLORREF getTransparentColor(CBitmap* pBitmap)
 {
     CDC dc;
-    dc.Attach(::CreateCompatibleDC(NULL));
+    dc.CreateCompatibleDC(NULL);
     TGDIObjectSelector<CBitmap> selector(&dc, pBitmap);
     return ::GetPixel(dc.m_hDC, 0, 0);
 }
@@ -43,32 +44,29 @@ void drawTransparentBitmap(CDC* pDC, CBitmap* pBitmap, int x, int y, COLORREF tr
     CBitmap backgroundBitmap;
     CBitmap foregroundBitmap;
     try {
-        if (!imageDC.Attach(::CreateCompatibleDC(pDC->GetSafeHdc())))
+        if (!imageDC.CreateCompatibleDC(pDC))
             return;
         TGDIObjectSelector<CBitmap> imageSelector(&imageDC, pBitmap);
-        if (!inverseMaskDC.Attach(::CreateCompatibleDC(pDC->GetSafeHdc())))
-            return;
-        if (!maskBitmap.Attach(::CreateBitmap(size.cx, size.cy, 1, 1, NULL)))
+        if (!inverseMaskDC.CreateCompatibleDC(pDC)
+            || !maskBitmap.CreateBitmap(size.cx, size.cy, 1, 1, NULL))
             return;
         TGDIObjectSelector<CBitmap> inverseMaskSelector(&inverseMaskDC, &maskBitmap);
-        if (!maskDC.Attach(::CreateCompatibleDC(pDC->GetSafeHdc())))
-            return;
-        if (!inverseMaskBitmap.Attach(::CreateBitmap(size.cx, size.cy, 1, 1, NULL)))
+        if (!maskDC.CreateCompatibleDC(pDC)
+            || !inverseMaskBitmap.CreateBitmap(size.cx, size.cy, 1, 1, NULL))
             return;
         TGDIObjectSelector<CBitmap> maskSelector(&maskDC, &inverseMaskBitmap);
-        if (!backgroundDC.Attach(::CreateCompatibleDC(pDC->GetSafeHdc())))
-            return;
-        if (!backgroundBitmap.Attach(::CreateCompatibleBitmap(pDC->m_hDC, size.cx, size.cy)))
+        if (!backgroundDC.CreateCompatibleDC(pDC)
+            || !backgroundBitmap.CreateCompatibleBitmap(pDC, size.cx, size.cy))
             return;
         TGDIObjectSelector<CBitmap> backgroundSelector(&backgroundDC, &backgroundBitmap);
-        if (!foregroundDC.Attach(::CreateCompatibleDC(pDC->GetSafeHdc())))
-            return;
-        if (!foregroundBitmap.Attach(::CreateCompatibleBitmap(pDC->m_hDC, size.cx, size.cy)))
+        if (!foregroundDC.CreateCompatibleDC(pDC)
+            || !foregroundBitmap.CreateCompatibleBitmap(pDC, size.cx, size.cy))
             return;
         TGDIObjectSelector<CBitmap> foregroundSelector(&foregroundDC, &foregroundBitmap);
-        COLORREF oldBkColor = imageDC.SetBkColor(transparentColor);
-        maskDC.BitBlt(0, 0, size.cx, size.cy, &imageDC, 0, 0, SRCCOPY);
-        imageDC.SetBkColor(oldBkColor);
+        {
+            TBkColorSelector bkColorSelector(&imageDC, transparentColor);
+            maskDC.BitBlt(0, 0, size.cx, size.cy, &imageDC, 0, 0, SRCCOPY);
+        }
         inverseMaskDC.BitBlt(0, 0, size.cx, size.cy, &maskDC, 0, 0, NOTSRCCOPY);
         backgroundDC.BitBlt(0, 0, size.cx, size.cy, pDC, x, y, SRCCOPY);
         backgroundDC.BitBlt(0, 0, size.cx, size.cy, &maskDC, 0, 0, SRCAND);
@@ -90,7 +88,7 @@ VA(0x00487543, 0x72)
 bool isPixelColor(CBitmap* pBitmap, int x, int y, COLORREF color)
 {
     CDC dc;
-    dc.Attach(::CreateCompatibleDC(NULL));
+    dc.CreateCompatibleDC(NULL);
     TGDIObjectSelector<CBitmap> selector(&dc, pBitmap);
     return ::GetPixel(dc.m_hDC, x, y) == color;
 }
