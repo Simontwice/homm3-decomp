@@ -28,7 +28,11 @@ executable (staged copy or `$HOMM3_<KEY>_EXE`) or SP3 MFC overlay is missing
 fails the build before anything compiles; `--skip-image KEY` is the only
 opt-out, and the summary names every skipped image. `--fast` and
 `--image KEY build` build only the selected image, so the game's inner loop
-never waits for an editor.
+never waits for an editor. `--write-placements` (what `homm3 land` runs)
+replaces each image's placements check with `placements --write` between its
+compile and its delink, so one build both refreshes a stale table and builds
+the image from it: the same result as the failed check, the write and a
+second build, without that build.
 """
 from __future__ import annotations
 
@@ -154,7 +158,8 @@ def _skipped_images(argv: list[str]) -> tuple[set[str], list[str]]:
     return skipped, rest
 
 
-def _build_images(ninja_args: list[str], skipped: set[str]) -> list[str]:
+def _build_images(ninja_args: list[str], skipped: set[str],
+                  write_placements: bool = False) -> list[str]:
     """Build every other pinned image in its own process; the failed ones.
     The preflight (_image_problems) already refused a missing input."""
     import os
@@ -170,12 +175,13 @@ def _build_images(ninja_args: list[str], skipped: set[str]) -> list[str]:
                   f"{mfc_sp3.stage(os.environ['HOMM3_MFC_SP3'])}")
         print(f"[build] image {key}: building", flush=True)
         if _run(sys.executable, "-m", "homm3", "--image", key, "build",
+                *(["--write-placements"] if write_placements else []),
                 *(["--", *_jobs(ninja_args)] if _jobs(ninja_args) else [])):
             failures.append(f"image {key}")
     return failures
 
 
-def _image_main(fast: bool, ninja_args: list[str]) -> int:
+def _image_main(fast: bool, ninja_args: list[str], write_placements: bool = False) -> int:
     """`homm3 --image KEY build`: one non-game image, its ledger and block."""
     from homm3.build import configure, normalize_objs
     from homm3.core import paths
@@ -200,7 +206,13 @@ def _image_main(fast: bool, ninja_args: list[str]) -> int:
         normalize_objs.normalize_all(selected or None)
     else:
         from homm3.census import placements
-        if placements.main(["--check"]):
+        if write_placements:
+            # the image's objects are compiled: refresh the table the delink
+            # below reads (`homm3 land`); a failed derivation is a gate
+            if placements.main(["--write"]):
+                failures.append(f"placements (`homm3 --image {key} placements --write` "
+                                "failed)")
+        elif placements.main(["--check"]):
             # the delink below reads the committed table: after `--write`,
             # build the image again so its labels carry the new names
             failures.append("placements (`homm3 --image "
@@ -257,19 +269,20 @@ def _image_main(fast: bool, ninja_args: list[str]) -> int:
 def _main(argv: list[str]) -> int:
     fast = "--fast" in argv
     data = "--data" in argv
+    write_placements = "--write-placements" in argv
     try:
         skipped, argv = _skipped_images(argv)
     except ValueError as exc:
         print(f"[build] {exc}", file=sys.stderr)
         return 1
-    ninja_args = [a for a in argv if a not in ("--fast", "--data")]
+    ninja_args = [a for a in argv if a not in ("--fast", "--data", "--write-placements")]
     started = time.monotonic()
     from homm3.core import paths
     if not paths.is_game():
         if skipped:
             print("[build] --skip-image applies to the full game build only", file=sys.stderr)
             return 1
-        return _image_main(fast, ninja_args)
+        return _image_main(fast, ninja_args, write_placements)
     if not fast:
         # A full build certifies every pinned image; one that cannot build
         # fails here, before the game compiles, never silently later.
@@ -438,7 +451,7 @@ def _main(argv: list[str]) -> int:
     except Exception as exc:  # the score block must never fail a build
         print(f"[build] README block skipped: {exc}")
 
-    failures += _build_images(ninja_args, skipped)
+    failures += _build_images(ninja_args, skipped, write_placements)
     phase("finished")
     print("[build] Mac pairs are not part of `homm3 build`; run `homm3 mac build` "
           "for the Classic Mac preservation checkpoint")

@@ -14,12 +14,12 @@ order) and, while holding it:
    `homm3 [--image KEY] status merge-baseline`, README score blocks,
    placements tables and build.ninja from origin (the gate cycle regenerates
    them). Any other conflict aborts the rebase and releases the lock;
-2. runs the full `homm3 build` (game, h3maped and h3ccmped), checking the
-   summary built every pinned image. Its only acceptable failure is an
-   editor image's stale placements;
-3. runs `homm3 --image KEY placements --write` for every editor image whose
-   objects that build compiled, then the full build again when a table
-   changed or the first build was not green; that build must be green;
+2. runs the full `homm3 build --write-placements` (game, h3maped and
+   h3ccmped), which writes each editor image's placements table between its
+   compile and its delink, so one build both refreshes a stale table and
+   builds the image from it. The summary must show every pinned image built
+   and every gate passed;
+3. logs which placements tables the build rewrote;
 4. runs `homm3 mac build` only with --mac (the Mac build is evidence for
    Windows, not a landing gate); without it the log names the own commits'
    Mac inputs (`mac_paths`: game unit sources, the game include roots
@@ -183,30 +183,6 @@ def build_problems(output: str, images: list[str]) -> list[str]:
     return problems
 
 
-def placements_only(output: str, images: list[str]) -> bool:
-    """Whether a full build failed only on editor images' placements tables,
-    after compiling and delinking each of them: `placements --write` then
-    has real objects to place (never a game-only compile's empty set)."""
-    failed = re.search(r"^\[build\] FAILED gates \(details above\): (.*?)"
-                       r"(?: \(images NOT built.*)?$", output, re.M)
-    if not failed:
-        return False
-    for item in failed.group(1).split("; "):
-        key = item.removeprefix("image ")
-        if not item.startswith("image ") or key not in images:
-            return False                         # a game gate failed
-        gates = re.search(rf"^\[build\] {re.escape(key)}: FAILED gates: (.*)$", output, re.M)
-        if not gates or not _image_line(key, output):
-            return False                         # the image did not compile/delink
-        if any(not gate.startswith("placements") for gate in gates.group(1).split("; ")):
-            return False
-    return True
-
-
-def compiled_images(output: str, images: list[str]) -> list[str]:
-    return [key for key in images if _image_line(key, output)]
-
-
 # ------------------------------------------------------------------ Mac relevance
 
 def mac_paths(paths: list[str], root: Path = ROOT) -> list[str]:
@@ -345,7 +321,9 @@ def refresh_commit(log: Log, untracked) -> str | None:
 
 
 def full_build(log: Log, jobs: int) -> str:
-    _, output = run(log, *homm3("build", "--", f"-j{jobs}"))
+    """The full build with each editor image's placements table written
+    after its compile (`homm3 build --write-placements`)."""
+    _, output = run(log, *homm3("build", "--write-placements", "--", f"-j{jobs}"))
     return output
 
 
@@ -373,27 +351,17 @@ def cycle(log: Log, turn, args, timings: list, untracked) -> int:
     own_paths = git("diff", "--name-only", f"{base}..HEAD").split()
 
     images = editor_images()
+    tables = {key: ROOT / "config/retail" / key / "placements.tsv" for key in images}
+    before = {key: table.read_bytes() if table.is_file() else None
+              for key, table in tables.items()}
     phase("build")
     output = full_build(log, args.jobs)
-    green = not build_problems(output, images)
-    if not green and not placements_only(output, images):
-        raise GateFailed("build", "; ".join(build_problems(output, images)))
-    phase("placements")
-    rewritten = []
-    for key in compiled_images(output, images):
-        table = ROOT / "config/retail" / key / "placements.tsv"
-        before = table.read_bytes() if table.is_file() else None
-        run(log, *homm3("--image", key, "placements", "--write"),
-            check=f"{key} placements --write")
-        if (table.read_bytes() if table.is_file() else None) != before:
-            rewritten.append(key)
+    problems = build_problems(output, images)
+    if problems:
+        raise GateFailed("build", "; ".join(problems))
+    rewritten = [key for key, table in tables.items()
+                 if (table.read_bytes() if table.is_file() else None) != before[key]]
     log("placements rewritten: " + (", ".join(rewritten) or "none"))
-    if rewritten or not green:
-        phase("build (after placements)")
-        output = full_build(log, args.jobs)
-        problems = build_problems(output, images)
-        if problems:
-            raise GateFailed("build (after placements)", "; ".join(problems))
     relevant = mac_paths(own_paths)
     touched = (f"own commits touch {len(relevant)} Mac input(s): " + ", ".join(relevant[:8])
                + (" ..." if len(relevant) > 8 else "")) if relevant else \

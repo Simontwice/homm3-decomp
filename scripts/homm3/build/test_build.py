@@ -95,6 +95,38 @@ class BuildModeTest(unittest.TestCase):
         self.mocks["cleanliness"].assert_called_once_with(
             write=True, dc_origins=[], image="h3maped")
 
+    def test_editor_image_writes_placements_between_compile_and_delink(self):
+        from homm3.census import placements
+        from homm3.core import paths
+        self.enterContext(patch.object(paths, "is_game", return_value=False))
+        self.enterContext(patch.object(paths, "image_key", return_value="h3maped"))
+        calls = []
+
+        def derive(argv):
+            calls.append(argv)
+            self.events.append("placements")
+            return 0
+        self.enterContext(patch.object(placements, "main", side_effect=derive))
+        self.assertEqual(build.main(["--write-placements"]), 0)
+        self.assertEqual(calls, [["--write"]])
+        self.assertEqual(self.events[:4], ["configure", "compile", "placements", "delink"])
+        calls.clear()
+        self.assertEqual(build.main([]), 0)
+        self.assertEqual(calls, [["--check"]])
+
+    def test_full_build_forwards_write_placements_to_each_image(self):
+        from homm3.core import images
+        self.enterContext(patch.object(images, "images", return_value=["game", "h3maped"]))
+        self.enterContext(patch.object(build, "_image_problems", return_value=[]))
+        from homm3.init import mfc_sp3
+        self.enterContext(patch.object(mfc_sp3, "staged", return_value=True))
+        self.assertEqual(build.main(["--write-placements", "-j4"]), 0)
+        image_runs = [call.args for call in self.mocks["compile"].call_args_list
+                      if "--image" in call.args]
+        self.assertEqual(len(image_runs), 1)
+        self.assertIn("--write-placements", image_runs[0])
+        self.assertEqual(image_runs[0][-2:], ("--", "-j4"))
+
     def test_editor_image_cleanliness_violation_fails_and_keeps_floors(self):
         from homm3.census import placements
         from homm3.core import paths

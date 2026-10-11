@@ -38,7 +38,7 @@ Subcommands
         config/units.toml (homm3.build.configure; ninja also re-runs it as a
         generator rule).
 
-  build [--fast|--data] [--skip-image KEY] [TU ...] [-- <ninja args>]
+  build [--fast|--data] [--write-placements] [--skip-image KEY] [TU ...] [-- <ninja args>]
         The final checkpoint (homm3.build.build): configure -> ninja (base objs via
         the pinned `wine cl`) -> delink and normalize comparison copies -> objdiff
         report -> overall %% line -> checkpoint-ledger refresh + observational
@@ -247,7 +247,8 @@ def cmd_build(args) -> int:
     ninja_args = args.ninja_args
     if ninja_args and ninja_args[0] == "--":
         ninja_args = ninja_args[1:]
-    extra = [flag for flag, on in (("--fast", args.fast), ("--data", args.data)) if on]
+    extra = [flag for flag, on in (("--fast", args.fast), ("--data", args.data),
+                                   ("--write-placements", args.write_placements)) if on]
     for key in args.skip_image or []:
         extra += ["--skip-image", key]
     return run_module("homm3.build.build", *extra, *(ninja_args or []))
@@ -438,6 +439,9 @@ def _dispatch(argv: list[str]) -> int:
                    help="inner loop: normally supply a TU; stop after the objdiff %% line")
     p.add_argument("--data", action="store_true",
                    help="full build: also refresh the complete byte accounting")
+    p.add_argument("--write-placements", action="store_true",
+                   help="full build: write each editor image's placements table after "
+                        "its compile instead of failing a stale one (homm3 land)")
     p.add_argument("--skip-image", action="append", metavar="KEY",
                    help="full build: do not build this pinned editor image (repeatable; "
                         "the summary names it). Without it a missing image input fails")

@@ -42,15 +42,10 @@ def build_output(game="all gates passed", **images):
     return "\n".join(lines) + "\n"
 
 
-STALE = ("placements (`homm3 --image h3maped placements --write` after a shared-source "
-         "change, then `homm3 --image h3maped build` again)")
-
-
 class BuildVerdictTests(unittest.TestCase):
     def test_green_build_of_every_image(self):
         output = build_output()
         self.assertEqual(land.build_problems(output, IMAGES), [])
-        self.assertEqual(land.compiled_images(output, IMAGES), IMAGES)
 
     def test_a_skipped_or_missing_image_is_not_green(self):
         problems = land.build_problems(build_output(h3ccmped="skip"), IMAGES)
@@ -59,22 +54,10 @@ class BuildVerdictTests(unittest.TestCase):
         self.assertTrue(any("h3maped was not built" in p for p in
                             land.build_problems(output, IMAGES)))
 
-    def test_stale_placements_alone_continue_the_cycle(self):
-        output = build_output(h3maped=STALE, h3ccmped=STALE.replace("h3maped", "h3ccmped"))
-        self.assertTrue(land.build_problems(output, IMAGES))
-        self.assertTrue(land.placements_only(output, IMAGES))
-        self.assertEqual(land.compiled_images(output, IMAGES), IMAGES)
-
-    def test_other_failures_stop_the_cycle(self):
-        self.assertFalse(land.placements_only(
-            build_output(h3maped=STALE + "; banked_rows (2 finding(s))"), IMAGES))
-        self.assertFalse(land.placements_only(
-            build_output(game="cleanliness board (1 violation(s))", h3maped=STALE), IMAGES))
-        # An image that did not compile has no objects to place.
-        output = build_output(h3maped=None)
-        self.assertFalse(land.placements_only(output, IMAGES))
-        self.assertEqual(land.compiled_images(output, IMAGES), ["h3ccmped"])
-        self.assertFalse(land.placements_only("[build] boom\n", IMAGES))
+    def test_a_failed_image_gate_is_not_green(self):
+        problems = land.build_problems(
+            build_output(h3maped="banked_rows (2 finding(s))"), IMAGES)
+        self.assertIn("image h3maped did not pass its gates", problems)
 
 
 class MacRelevanceTests(unittest.TestCase):
@@ -141,6 +124,12 @@ class CycleMacTests(unittest.TestCase):
     def test_game_source_commits_skip_the_mac_build_without_the_flag(self):
         mac, phases = self.cycle(mac=False)
         self.assertEqual((mac, "mac build" in phases), ([], False))
+
+    def test_one_build_writes_and_uses_the_placements_tables(self):
+        with patch.object(land, "full_build", return_value=build_output()) as build:
+            mac, phases = self.cycle(mac=False)
+        self.assertEqual(phases.count("build"), 1)
+        self.assertNotIn("placements", phases)
 
     def test_the_flag_runs_it(self):
         mac, phases = self.cycle(mac=True)
