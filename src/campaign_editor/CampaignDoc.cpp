@@ -6,7 +6,7 @@
 #include "va.h"
 #include "gzinflatebuf.h"
 #include "editor/MFCFileBuf.h"
-#include "editor/RawStream.h"
+#include "campaign_editor/RawStream.h"
 #include "campaign_editor/Campaign.h"
 #include "campaign_editor/CampaignDoc.h"
 #include "campaign_editor/CampaignEditorText.h"

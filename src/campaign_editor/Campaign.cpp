@@ -12,8 +12,8 @@
 #include "bitset_iterator.h"
 #include "campaignmap.h"
 #include "herotraits.h"
+#include "campaign_editor/RawStream.h"
 #include "editor/GameMapHeader.h"
-#include "editor/RawStream.h"
 #include "campaign_editor/Campaign.h"
 #include "campaign_editor/CampaignEditorText.h"
 
@@ -219,27 +219,6 @@ private:
     const bitset<N>* m_bits;
     size_t m_position;
 };
-
-template<size_t N>
-inline void readCrossoverBits(TRawIStream& stream, bitset<N>& bits)
-{
-    unsigned char bytes[(N + 7) / 8];
-    stream >> bytes;
-    for (unsigned int i = 0; i < N; i++)
-        bits[i] = (bytes[i / 8] & (1 << (i % 8))) != 0;
-}
-
-template<size_t N>
-inline void writeCrossoverBits(TRawOStream& stream, const bitset<N>& bits)
-{
-    unsigned char bytes[(N + 7) / 8];
-    memset(bytes, 0, sizeof(bytes));
-    for (unsigned int i = 0; i < N; i++) {
-        if (bits[i])
-            bytes[i / 8] |= 1 << (i % 8);
-    }
-    stream << bytes;
-}
 
 }
 
@@ -935,27 +914,27 @@ TScenarioCrossover::TScenarioCrossover()
 VA(0x00407ee0, 0x36b)
 void TScenarioCrossover::read(TRawIStream& stream, int version)
 {
-    readCrossoverBits(stream, m_retained);
+    readBitset(stream, m_retained);
     if (version >= 4) {
-        readCrossoverBits(stream, m_creatures);
+        readBitset(stream, m_creatures);
     } else {
         bitset<kNumOldCreatures> oldCreatures;
-        readCrossoverBits(stream, oldCreatures);
+        readBitset(stream, oldCreatures);
         copy(bitset_iterator<kNumOldCreatures>(oldCreatures),
              bitset_iterator<kNumOldCreatures>(oldCreatures, kNumOldCreatures),
              bitset_iterator<kNumCreatures>(m_creatures));
     }
     if (version >= 6) {
-        readCrossoverBits(stream, m_artifacts);
+        readBitset(stream, m_artifacts);
     } else if (version >= 3) {
         bitset<kNumOldArtifacts> oldArtifacts;
-        readCrossoverBits(stream, oldArtifacts);
+        readBitset(stream, oldArtifacts);
         copy(bitset_iterator<kNumOldArtifacts>(oldArtifacts),
              bitset_iterator<kNumOldArtifacts>(oldArtifacts, kNumOldArtifacts),
              bitset_iterator<kNumArtifacts>(m_artifacts));
     } else {
         bitset<kNumOriginalArtifacts> originalArtifacts;
-        readCrossoverBits(stream, originalArtifacts);
+        readBitset(stream, originalArtifacts);
         copy(bitset_iterator<kNumOriginalArtifacts>(originalArtifacts),
              bitset_iterator<kNumOriginalArtifacts>(originalArtifacts, kNumOriginalArtifacts),
              bitset_iterator<kNumArtifacts>(m_artifacts));
@@ -965,16 +944,16 @@ void TScenarioCrossover::read(TRawIStream& stream, int version)
 VA(0x00408250, 0x1f0)
 void TScenarioCrossover::write(TRawOStream& stream, int version) const
 {
-    writeCrossoverBits(stream, m_retained);
-    writeCrossoverBits(stream, m_creatures);
+    writeBitset(stream, m_retained);
+    writeBitset(stream, m_creatures);
     if (version >= 2) {
-        writeCrossoverBits(stream, m_artifacts);
+        writeBitset(stream, m_artifacts);
     } else {
         bitset<kNumOldArtifacts> oldArtifacts;
         copy(const_bitset_iterator<kNumArtifacts>(m_artifacts),
              const_bitset_iterator<kNumArtifacts>(m_artifacts, kNumOldArtifacts),
              bitset_iterator<kNumOldArtifacts>(oldArtifacts));
-        writeCrossoverBits(stream, oldArtifacts);
+        writeBitset(stream, oldArtifacts);
     }
 }
 
