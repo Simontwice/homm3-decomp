@@ -998,6 +998,9 @@ void type_random_map::floodConnectionCosts(TRmgMapPosition position, unsigned ch
 // lead separate from byte recovery. The later consumed per-cell mask point
 // keeps this checker's bytes identical at 90.2171% and shares the domain
 // model that restores addObject's retained insertion boundary below.
+// Map editor lead (2026-10-11): its /O1 copy 0x49a6f9 keeps the cursor as two
+// scalars beside position.m_z (no position copy) and raises h3maped
+// 81.29% -> 96.50%, but the same scalars drop this game body to 78.74%.
 VA(0x005318B0, 0x212)
 MAC_ADDRESS(0x22dfe0, 0x2a4) // anchor-callee 0x531d29; thiscall, ret 0x18; retail-only
 unsigned char type_random_map::isPlacementBlocked(
@@ -7546,6 +7549,10 @@ unsigned char type_random_map_generator::placeMonolithBorderGuard(
 // Named entrance points and end insertion in the second two-way registry
 // preserve the placement order and raise matching to 91.9028%. The other
 // registry paths retain push_back; all position and guard helpers stay shared.
+// The map editor's copy 0x4a7605 clears the guard value after either border
+// guard succeeds and then tests it separately (je over the clear, no else
+// jump). Game bytes are unchanged by that spelling. Its second two-way
+// push_back stays a call there, so end insertion (game 91.33%) is not used.
 VA(0x00542CE0, 0x554)
 MAC_ADDRESS(0x245bd4, 0x6e8) // anchor-caller 0x543240; Complete-only, thiscall ret 0xc
 void type_random_map_generator::createMonolithConnection(
@@ -7579,11 +7586,10 @@ void type_random_map_generator::createMonolithConnection(
         entrance.m_y = object->m_position.m_y;
         source->m_entrances.push_back(entrance);
         if (connection->m_placeBorderObjects
-            && placeMonolithBorderGuard(object->getPosition(), destination)) {
+            && placeMonolithBorderGuard(object->getPosition(), destination))
             guardValue = 0;
-        } else if (guardValue > 0) {
+        if (guardValue > 0)
             placeGuard(guardValue, object->getPosition() + TRmgPoint(0, 1));
-        }
     }
     object = new type_object(properties);
     if (!placeObjectInZone(object, destination)) {
@@ -7597,11 +7603,11 @@ void type_random_map_generator::createMonolithConnection(
         entrance.m_x = object->m_position.m_x;
         entrance.m_y = object->m_position.m_y;
         destination->m_entrances.push_back(entrance);
-        if (!connection->m_placeBorderObjects
-            || !placeMonolithBorderGuard(object->getPosition(), source)) {
-            if (guardValue > 0)
-                placeGuard(guardValue, object->getPosition() + TRmgPoint(0, 1));
-        }
+        if (connection->m_placeBorderObjects
+            && placeMonolithBorderGuard(object->getPosition(), source))
+            guardValue = 0;
+        if (guardValue > 0)
+            placeGuard(guardValue, object->getPosition() + TRmgPoint(0, 1));
     }
     if (exitProperties) {
         object = new type_object(exitProperties);
