@@ -162,9 +162,9 @@ rva	size	kind	name	unit	evidence
 0x0000cdfe	0x13	func	?GetNumberOfRows@TSpreadsheetResource@@QBEHXZ	creaturetype	masked body (19 bytes, 0 relocations) unique at a census start
 0x0000ce11	0x277	func	?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	creaturetype	masked body (631 bytes, 58 relocations) unique at a census start
 0x0000d0e9	0x1c	func	??_GCBitmap@@UAEPAXI@Z	HeroPrototypePropsGeneralPage	vtable of CBitmap (RTTI) slot 1
-0x0000d105	0x29	func	??1CBitmap@@UAE@XZ	HeroPrototypePropsGeneralPage	referenced by ??_GCBitmap@@UAEPAXI@Z at +0x4
+0x0000d105	0x29	func	??1CBitmap@@UAE@XZ	HeroPrototypePropsGeneralPage	referenced by ?drawTransparentBitmap@@YAXPAVCDC@@PAVCBitmap@@HHK@Z at +0x467
 0x0000d12e	0x1c	func	??_GCGdiObject@@UAEPAXI@Z	HeroPrototypePropsGeneralPage	vtable of CGdiObject (RTTI) slot 1
-0x0000d14a	0x29	func	??1CGdiObject@@UAE@XZ	HeroPrototypePropsGeneralPage	referenced by ??_GCGdiObject@@UAEPAXI@Z at +0x4
+0x0000d14a	0x29	func	??1CGdiObject@@UAE@XZ	HeroPrototypePropsGeneralPage	referenced by ?drawTransparentBitmap@@YAXPAVCDC@@PAVCBitmap@@HHK@Z at +0x421
 0x0000d18f	0x33	func	??1?$T16bppBitmapBase@K@@UAE@XZ	DIBSection	masked body (51 bytes, 6 relocations) at 2 census starts; its referents agree with retail's at this one only
 0x0000d396	0x1d	func	??_G?$TBitmapBase@G@@UAEPAXI@Z	DIBSection	vtable of ?$TBitmapBase@G (RTTI) slot 0
 0x0000d3b3	0x1c	func	??_G?$TBitmap@GK@@UAEPAXI@Z	DIBSection	vtable of ?$TBitmap@GK (RTTI) slot 0
@@ -1793,7 +1793,7 @@ rva	size	kind	name	unit	evidence
 0x00086b2b	0x38	func	?_Construct@std@@YAXPAU?$pair@$$CBIV?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@@1@ABU21@@Z	MapView	referenced by ?_Insert@?$_Tree@IU?$pair@$$CBIV?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@@std@@U_Kfn@?$map@IV?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@U?$less@I@2@V?$allocator@V?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@@2@@2@U?$less@I@2@V?$allocator@V?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@@2@@std@@IAE?AViterator@12@PAU_Node@12@0ABU?$pair@$$CBIV?$vector@VTGameMapMask@@V?$allocator@VTGameMapMask@@@std@@@std@@@2@@Z at +0x46
 0x000876ce	0x17	func	?SelectObject@CDC@@QAEPAVCBitmap@@PAV2@@Z	MemoryDC	masked body (23 bytes, 1 relocations) unique at a census start
 0x000876e5	0x30	func	?BitBlt@CDC@@QAEHHHHHPAV1@HHK@Z	MemoryDC	masked body (48 bytes, 1 relocations) unique at a census start
-0x00087731	0x5	func	??_9@$BCM@AE	TileHRuler	referenced by ??1?$TDCAttributeSelector@K$1??_9@$BCM@AE@@QAE@XZ at +0x6
+0x00087731	0x5	func	??_9@$BCM@AE	MemoryDC	referenced by ?drawTransparentBitmap@@YAXPAVCDC@@PAVCBitmap@@HHK@Z at +0x278
 0x00088ead	0x38	func	??6TRawOStream@@QAEAAV0@AAY01$$CBC@Z	SeersHut	referenced by ?write@TSeersHut@@UBEXPAVTRawOStream@@H@Z at +0x71
 0x00088ee5	0x29	func	?mismatch@std@@YA?AU?$pair@PBIPBI@1@PBI00@Z	Monster	masked body (41 bytes, 0 relocations) unique at a census start
 0x0008d21c	0x55	func	?resize@?$vector@_NV?$allocator@_N@std@@@std@@QAEXIAB_N@Z	ObjectPaletteWnd	referenced by ?_setupTools@TObjectPaletteWnd@@AAEXH@Z at +0x1df
