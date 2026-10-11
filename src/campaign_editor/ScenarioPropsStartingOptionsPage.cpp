@@ -98,7 +98,7 @@ protected:
     afx_msg void OnSelChangePlayerCombo();
     afx_msg void OnSelChangeBonusList();
     afx_msg void OnDblClkBonusList();
-    afx_msg int OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex);
+    afx_msg int OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex);
     DECLARE_MESSAGE_MAP()
 
 private:
@@ -142,7 +142,7 @@ protected:
     afx_msg void OnEnable(BOOL bEnable);
     afx_msg void OnSelChangeChoiceList();
     afx_msg void OnDblClkChoiceList();
-    afx_msg int OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex);
+    afx_msg int OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex);
     DECLARE_MESSAGE_MAP()
 
 private:
@@ -188,7 +188,7 @@ protected:
     afx_msg void OnRemoveButton();
     afx_msg void OnSelChangeChoiceList();
     afx_msg void OnDblClkChoiceList();
-    afx_msg int OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex);
+    afx_msg int OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex);
     DECLARE_MESSAGE_MAP()
 
 private:
@@ -353,7 +353,7 @@ BEGIN_MESSAGE_MAP(TScenarioOptionsBonusDlg, TScenarioStartingOptionsTypeDlg)
     ON_CBN_SELCHANGE(IDC_PLAYER_COMBO, OnSelChangePlayerCombo)
     ON_LBN_SELCHANGE(IDC_BONUS_LIST, OnSelChangeBonusList)
     ON_LBN_DBLCLK(IDC_BONUS_LIST, OnDblClkBonusList)
-    ON_WM_CHARTOITEM()
+    ON_WM_VKEYTOITEM()
 END_MESSAGE_MAP()
 
 VA(0x0042e9c0, 0xdd)
@@ -579,13 +579,13 @@ void TScenarioOptionsBonusDlg::OnDblClkBonusList()
 }
 
 VA(0x0042f8e0, 0x50)
-int TScenarioOptionsBonusDlg::OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex)
+int TScenarioOptionsBonusDlg::OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex)
 {
-    if (nChar == VK_DELETE && _m_bonusList.GetCurSel() != LB_ERR) {
+    if (nKey == VK_DELETE && _m_bonusList.GetCurSel() != LB_ERR) {
         OnRemoveButton();
         return -2;
     }
-    return TScenarioStartingOptionsTypeDlg::OnCharToItem(nChar, pListBox, nIndex);
+    return TScenarioStartingOptionsTypeDlg::OnVKeyToItem(nKey, pListBox, nIndex);
 }
 
 VA(0x0042f930, 0x6)
@@ -595,7 +595,7 @@ BEGIN_MESSAGE_MAP(TScenarioOptionsCrossoverScenarioDlg, TScenarioStartingOptions
     ON_BN_CLICKED(IDC_DELETE_BUTTON, OnRemoveButton)
     ON_LBN_SELCHANGE(IDC_CROSSOVER_SCENARIO_LIST, OnSelChangeChoiceList)
     ON_LBN_DBLCLK(IDC_CROSSOVER_SCENARIO_LIST, OnDblClkChoiceList)
-    ON_WM_CHARTOITEM()
+    ON_WM_VKEYTOITEM()
 END_MESSAGE_MAP()
 
 VA(0x0042f940, 0x11d)
@@ -823,13 +823,13 @@ void TScenarioOptionsCrossoverScenarioDlg::OnDblClkChoiceList()
 }
 
 VA(0x004306c0, 0x50)
-int TScenarioOptionsCrossoverScenarioDlg::OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex)
+int TScenarioOptionsCrossoverScenarioDlg::OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex)
 {
-    if (nChar == VK_DELETE && _m_choiceList.GetCurSel() != LB_ERR) {
+    if (nKey == VK_DELETE && _m_choiceList.GetCurSel() != LB_ERR) {
         OnRemoveButton();
         return -2;
     }
-    return TScenarioStartingOptionsTypeDlg::OnCharToItem(nChar, pListBox, nIndex);
+    return TScenarioStartingOptionsTypeDlg::OnVKeyToItem(nKey, pListBox, nIndex);
 }
 
 VA(0x00430710, 0x6)
@@ -840,7 +840,7 @@ BEGIN_MESSAGE_MAP(TScenarioOptionsStartingHeroDlg, TScenarioStartingOptionsTypeD
     ON_BN_CLICKED(IDC_DELETE_BUTTON, OnRemoveButton)
     ON_LBN_SELCHANGE(IDC_STARTING_HERO_LIST, OnSelChangeChoiceList)
     ON_LBN_DBLCLK(IDC_STARTING_HERO_LIST, OnDblClkChoiceList)
-    ON_WM_CHARTOITEM()
+    ON_WM_VKEYTOITEM()
 END_MESSAGE_MAP()
 
 VA(0x00430720, 0xd4)
@@ -1057,13 +1057,13 @@ void TScenarioOptionsStartingHeroDlg::OnDblClkChoiceList()
 }
 
 VA(0x00431420, 0x50)
-int TScenarioOptionsStartingHeroDlg::OnCharToItem(UINT nChar, CListBox* pListBox, UINT nIndex)
+int TScenarioOptionsStartingHeroDlg::OnVKeyToItem(UINT nKey, CListBox* pListBox, UINT nIndex)
 {
-    if (nChar == VK_DELETE && _m_choiceList.GetCurSel() != LB_ERR) {
+    if (nKey == VK_DELETE && _m_choiceList.GetCurSel() != LB_ERR) {
         OnRemoveButton();
         return -2;
     }
-    return TScenarioStartingOptionsTypeDlg::OnCharToItem(nChar, pListBox, nIndex);
+    return TScenarioStartingOptionsTypeDlg::OnVKeyToItem(nKey, pListBox, nIndex);
 }
 
 VA(0x00431470, 0x98)
