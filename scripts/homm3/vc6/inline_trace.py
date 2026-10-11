@@ -237,6 +237,22 @@ def parse_tu_trace(text: str) -> dict:
                 owner=names.get(fields["owner"], fields["owner"]),
                 running=int(fields["running"]),
                 budget_allows=cb <= 40 or budget >= cb))
+        elif line.startswith("veto "):
+            # The post-substitution veto follows the callee's own nested
+            # sites: it belongs to the latest unjudged site of that callee.
+            fields = dict(word.split("=", 1) for word in line.split()[1:])
+            root = current.get(fields["root"])
+            if root is None or fields["callee"] not in names:
+                raise ValueError("inline veto has no traced root or callee symbol")
+            callee = names[fields["callee"]]
+            for site in reversed(root["sites"]):
+                if site["symbol"] == callee and "veto" not in site:
+                    site["veto"] = dict(count=int(fields["count"]), limit=int(fields["limit"]),
+                                        allowance=int(fields["allowance"]),
+                                        vetoed=fields["vetoed"] == "1")
+                    break
+            else:
+                raise ValueError(f"inline veto of {callee} follows no budget test")
     return dict(roots=roots)
 
 

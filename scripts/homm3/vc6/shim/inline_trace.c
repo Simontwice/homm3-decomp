@@ -620,6 +620,77 @@ static void __declspec(naked) siteHook(void)
     }
 }
 
+/* Post-substitution size veto (inliner.md section 6). checkInlineSizeVeto
+ * 0x94964 runs after a callee's body was substituted; its two exits are
+ * hooked. The frame then holds the saved caller registers (EDI = the callee
+ * symbol at the call 0x93f05), +0x10 the weighted tuple count, +0x14 the
+ * limit, +0x1c the unconsumed EH allowance. The pass exit saw every tuple;
+ * the veto exit stops at the first count above the limit. */
+static void *g_vetoPassReturn;
+static void *g_vetoFailReturn;
+
+static void __cdecl traceVeto(unsigned long *regs, unsigned long vetoed)
+{
+    HANDLE h;
+    DWORD lastError;
+    unsigned char *sp = (unsigned char *)(regs[3]+4); /* before pushfd */
+    unsigned char *sym = *(unsigned char **)sp;
+    if (!g_selected) return;
+    lastError = GetLastError();
+    h = logOpen();
+    if (h == INVALID_HANDLE_VALUE) { SetLastError(lastError); return; }
+    traceSymbol(h, sym);
+    writeString(h, "veto root="); writeHex(h, g_root);
+    writeString(h, " callee="); writeHex(h, (unsigned long)sym);
+    writeString(h, " count="); writeSignedDecimal(h, *(long *)(sp+0x10));
+    writeString(h, " limit="); writeSignedDecimal(h, *(long *)(sp+0x14));
+    writeString(h, " allowance="); writeDecimal(h, *(unsigned long *)(sp+0x1c));
+    writeString(h, " vetoed="); writeDecimal(h, vetoed);
+    writeString(h, "\n"); CloseHandle(h);
+    SetLastError(lastError);
+}
+
+static void __declspec(naked) vetoPassHook(void)
+{
+    __asm {
+        pushfd
+        pushad
+        mov eax, esp
+        push 0
+        push eax
+        call traceVeto
+        add esp, 8
+        popad
+        popfd
+        pop edi
+        pop esi
+        pop ebp
+        xor eax, eax
+        pop ebx
+        jmp dword ptr [g_vetoPassReturn]
+    }
+}
+
+static void __declspec(naked) vetoFailHook(void)
+{
+    __asm {
+        pushfd
+        pushad
+        mov eax, esp
+        push 1
+        push eax
+        call traceVeto
+        add esp, 8
+        popad
+        popfd
+        pop edi
+        pop esi
+        pop ebp
+        mov eax, 1
+        jmp dword ptr [g_vetoFailReturn]
+    }
+}
+
 /* Tail merging (decision-forcing.md, stage D). Both C2 tail mergers count
  * matching trailing instructions of two blocks and merge when the count is
  * nonzero: 0x36aa0 tests [esp+0x10] at 0x36afa, 0x3e30b tests [esp+0x18]
@@ -1249,6 +1320,14 @@ static int installInlineTrace(void)
         if (!patchHook(0x232ee, lookupHook, lookupBytes, 5)) return 0;
         if (!patchHook(0x21267, insertHook, insertBytes, 5)) return 0;
         if (!patchHook(0x213dc, unlinkHook, unlinkBytes, 6)) return 0;
+    }
+    {
+        static const unsigned char vetoPassBytes[] = {0x5f,0x5e,0x5d,0x33,0xc0,0x5b};
+        static const unsigned char vetoFailBytes[] = {0x5f,0x5e,0x5d,0xb8,0x01,0x00,0x00,0x00};
+        g_vetoPassReturn = (char *)g_real+0x94a25;
+        g_vetoFailReturn = (char *)g_real+0x94b98;
+        if (!patchHook(0x94a1f, vetoPassHook, vetoPassBytes, sizeof vetoPassBytes)) return 0;
+        if (!patchHook(0x94b90, vetoFailHook, vetoFailBytes, sizeof vetoFailBytes)) return 0;
     }
     g_mergeReturnA = (char *)g_real+0x36b00;
     g_mergeReturnB = (char *)g_real+0x3e3e6;

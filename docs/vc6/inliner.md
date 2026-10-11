@@ -759,6 +759,18 @@ always counts `call` + tail `jmp`.
   no experiment required it (E7's straight-line rejections are explained by
   candidacy), so `predict()` omits it; if a divergence ever needs it, the
   charge-without-refund asymmetry is the fingerprint to look for.
+  `predict-inline --tu UNIT --root NAME` now observes it: the trace shim
+  hooks both exits of `0x94964` and prints `VETO count/limit` or
+  `kept count/limit` (`+eh` while the caller's EH allowance is unspent) in
+  place of `ok` for every site that reached it. The count is the weighted
+  statement-tuple sum of the substituted body (class `0x0c` +1, `0x0e` and
+  `0x12` +2); the veto exit stops at the first count above the limit
+  `(nargs+2)*3`, where nargs counts the call's qualifying arguments. With
+  a caller whose body flags carry `0x18000` (EH state) the limit starts 6
+  higher until the first class-`0x0e` tuple. Measured in h3maped's
+  `TWitchHut::write`: `writeBitset<28>` passes the budget (cb 98 of 1000)
+  and is vetoed 14/12, after its own `operator<<` (14/12) stayed a call and
+  `bitset::test` (11/12) expanded; retail expands writeBitset there.
 * `predict()` still takes `cb` and `candidate` as inputs. They are no
   longer unknowns: §4 reads both from the front end (`homm3 vc6 cb`), and
   `predict-inline --trace` reads them from C2.
