@@ -788,6 +788,7 @@ NewCampaignDlg	?OnDblclkMapList@TNewCampaignDlg@@IAEXXZ	100.0000	100.0000	100.00
 NewCampaignDlg	?OnInitDialog@TNewCampaignDlg@@MAEHXZ	100.0000	100.0000	100.0000	0x29580	tokens1:ddefb35fdc96
 NewCampaignDlg	?OnOK@TNewCampaignDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x29710	tokens1:185a1efacf71
 NewCampaignDlg	?OnVersionRadio@TNewCampaignDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x29770	tokens1:aefc99075986
+Player	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	100.0000	100.0000	100.0000	0x18da0	-
 Player	??_F?$TAutoArrayPtr@D@@QAEXXZ	100.0000	100.0000	100.0000	0x29c00	-
 Player	?InitializePlayerTraitsTable@@YA_NXZ	100.0000	100.0000	100.0000	0x29890	-
 Player	__h3cg$Player$static_dtor$aColorNames	100.0000	100.0000	100.0000	0x29bc0	-
@@ -1129,7 +1130,6 @@ gzinflatebuf	??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@
 gzinflatebuf	??0TGzInflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@@Z	93.4491	93.4491	93.4491	0x25700	-
 gzinflatebuf	??0TRuntimeError@@QAE@ABV0@@Z	100.0000	100.0000	100.0000	0x1bb0	-
 gzinflatebuf	??0runtime_error@std@@QAE@ABV01@@Z	100.0000	100.0000	100.0000	0x1020	-
-gzinflatebuf	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	91.8750	99.9219	99.9219	0x18da0	-
 gzinflatebuf	??1TAllocationFailure@@UAE@XZ	100.0000	100.0000	100.0000	0x25d70	-
 gzinflatebuf	??1TGzDeflateBuf@@UAE@XZ	100.0000	100.0000	100.0000	0x25250	-
 gzinflatebuf	??1TGzInflateBuf@@UAE@XZ	100.0000	100.0000	100.0000	0x25f40	-

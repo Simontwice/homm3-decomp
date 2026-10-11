@@ -68,7 +68,7 @@ MAX by module:
 | `game`        |   160 | 5038 / 5375 (93.7%) |    98.27% |
 | `rmg`         |     6 |   340 / 447 (76.1%) |    93.41% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
-| `codec`       |     3 |     39 / 50 (78.0%) |    91.92% |
+| `codec`       |     3 |     40 / 51 (78.4%) |    91.92% |
 | `victor`      |     6 |     16 / 17 (94.1%) |    99.99% |
 | `(unmatched)` |     — |      0 / 902 (0.0%) |      0.0% |
 
@@ -87,21 +87,21 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- h3ccmped-match-score:start -->
 
-**GOG Complete campaign editor `h3ccmped.exe`: 85.76% matched (MAX)** — 1,250 / 2,243 functions exact (55.7%), weighted by size over 294,643 bytes of code.
+**GOG Complete campaign editor `h3ccmped.exe`: 85.76% matched (MAX)** — 1,251 / 2,243 functions exact (55.8%), weighted by size over 294,643 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           1,241 |   85.36% | last measured score                            |
-| MAX   |           1,250 |   85.76% | best result for each function's current source |
-| HIST  |           1,250 |   85.76% | all-time peak across source revisions          |
+| CUR   |           1,242 |   85.37% | last measured score                            |
+| MAX   |           1,251 |   85.76% | best result for each function's current source |
+| HIST  |           1,251 |   85.76% | all-time peak across source revisions          |
 
 MAX by module:
 
 | Module        | Units | Functions exact MAX | Fuzzy MAX |
 | :------------ | ----: | ------------------: | --------: |
-| `game`        |    43 | 1141 / 1266 (90.1%) |    96.88% |
+| `game`        |    43 | 1142 / 1267 (90.1%) |    96.89% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
-| `codec`       |     3 |     37 / 40 (92.5%) |    98.94% |
+| `codec`       |     3 |     37 / 39 (94.9%) |    98.90% |
 | `victor`      |     6 |     16 / 17 (94.1%) |    99.99% |
 | `(unmatched)` |     — |      0 / 864 (0.0%) |      0.0% |
 

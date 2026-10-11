@@ -40,7 +40,10 @@ and 6 never name an address that an earlier step claimed. Functions the image's 
 address that receives two names, is dropped and reported, except an /OPT:ICF
 fold: the names that reach only that address, when their compiled bodies
 agree byte for byte with the same relocation sites, place the first of them
-there, and the comparison pairs the others' references with it. The result is
+there, and the comparison pairs the others' references with it. A name
+several units compile (a library template) is owned by the first unit whose
+body equals retail at its address, masked, else by the first definer: the
+linker kept that unit's copy. The result is
 config/retail/<image>/placements.tsv; the label model reads it as the image's
 claims for shared units (channel `placement`). A derivation refuses to run
 while any of the image's unit objects is missing (a game-only `ninja objects`
@@ -413,6 +416,26 @@ def fold_label(at, names, bodies, definers, owned, rowable=lambda name: True):
     return group[0] if len(shapes) == 1 else None
 
 
+def home_unit(name, units, unit_bodies, size, retail):
+    """The unit whose copy of `name` sits at an address of census `size`
+    whose bytes `retail(n)` returns: the first of `units` (the definers, in
+    manifest order) whose compiled body equals retail there with relocation
+    fields masked, else the first definer. A template that a shared library
+    unit and an own unit both emit under different options keeps the copy
+    the linker met first, so the address names the unit that compiled those
+    bytes (MapDoc's /O1 basic_stringbuf members, not resourcemanager's /O2)."""
+    for unit in units:
+        body, relocs = unit_bodies[(unit, name)]
+        if size != len(body):
+            continue
+        mask = bytearray(len(body))
+        for site in relocs:
+            mask[site:site + 4] = b"\1\1\1\1"
+        if all(m or a == b for a, b, m in zip(retail(len(body)), body, mask)):
+            return unit
+    return units[0]
+
+
 def derive(log=print, want_suggestions=False):
     from homm3 import manifest
     from homm3.core.image import Image
@@ -526,9 +549,15 @@ def derive(log=print, want_suggestions=False):
         return True
 
     relocs_of = {}                        # id(body) -> its relocation sites
+    unit_bodies = {}                      # (unit, name) -> (body, relocs)
     for unit, name, body, relocs in compiled:
         bodies.setdefault(name, (body, relocs))
+        unit_bodies.setdefault((unit, name), (body, relocs))
         relocs_of[id(body)] = tuple(relocs)
+
+    def copy_unit(name, rva):
+        return home_unit(name, definers[name], unit_bodies, functions.get(rva),
+                         lambda size: blob(rva, size))
 
     # the image's own VA() claims: a claimed body that equals retail at its
     # claimed address (relocation fields masked) names its referents (the
@@ -984,7 +1013,7 @@ def derive(log=print, want_suggestions=False):
         (rva,) = rvas
         if len(by_rva[rva]) != 1:
             if folded(rva) == name:
-                unit = definers[name][0]
+                unit = copy_unit(name, rva)
                 why = (f"{evidence[(name, rva)]}; ICF-folded with "
                        f"{len(by_rva[rva]) - 1} identical bodies")
                 rows.append((rva, functions[rva], "func", portable(name, unit), unit,
@@ -992,7 +1021,7 @@ def derive(log=print, want_suggestions=False):
             else:
                 conflicts += 1
             continue
-        unit = definers[name][0]
+        unit = copy_unit(name, rva)
         rows.append((rva, functions[rva], "func", portable(name, unit), unit,
                      portable(evidence[(name, rva)], unit)))
     placed_functions = len(rows)
