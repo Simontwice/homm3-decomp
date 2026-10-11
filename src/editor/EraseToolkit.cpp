@@ -25,15 +25,15 @@ TEraseToolkit::TEraseToolkit(CWnd* pParent) : TToolkitBase(IDD_ERASE_TOOLKIT, pP
     _m_brushStatic.GetWindowRect(&rect);
     ScreenToClient(&rect);
     int left = rect.left;
-    int width = rect.Width();
     int top = rect.top;
-    margin += rect.bottom;
+    int width = rect.Width();
+    int y = rect.bottom + margin;
     CSize toolBarSize = _m_pToolBar->getSize();
-    _m_pToolBar->MoveWindow(left, margin, toolBarSize.cx, toolBarSize.cy, FALSE);
+    _m_pToolBar->MoveWindow(left, y, toolBarSize.cx, toolBarSize.cy, FALSE);
     if (toolBarSize.cx > width)
         width = toolBarSize.cx;
     _m_minSize.cx = width + left * 2;
-    _m_minSize.cy = toolBarSize.cy + margin + top;
+    _m_minSize.cy = toolBarSize.cy + y + top;
     GetWindowRect(&rect);
     pParent->ScreenToClient(&rect);
     rect.right = rect.left + _m_minSize.cx;

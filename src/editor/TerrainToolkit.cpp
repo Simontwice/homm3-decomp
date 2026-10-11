@@ -36,8 +36,8 @@ TTerrainToolkit::TTerrainToolkit(CWnd* pParent)
     _m_brushStatic.GetWindowRect(&rect);
     ScreenToClient(&rect);
     int left = rect.left;
-    int width = rect.Width();
     int top = rect.top;
+    int width = rect.Width();
     int y = rect.bottom + margin;
     CSize toolBarSize = _m_pBrushToolBar->getSize();
     _m_pBrushToolBar->MoveWindow(left, y, toolBarSize.cx, toolBarSize.cy, FALSE);

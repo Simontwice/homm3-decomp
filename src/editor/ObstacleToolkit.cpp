@@ -31,8 +31,8 @@ TObstacleToolkit::TObstacleToolkit(CWnd* pParent) : TToolkitBase(IDD_OBSTACLE_TO
     int y = top;
     CSize toolBarSize = _m_pToolBar->getSize();
     _m_pToolBar->MoveWindow(left, y, toolBarSize.cx, toolBarSize.cy, FALSE);
-    y += toolBarSize.cy + margin;
     int width = rect.Width();
+    y += toolBarSize.cy + margin;
     _m_brushStatic.MoveWindow(left, y, rect.Width(), rect.Height(), FALSE);
     if (rect.Width() > width)
         width = rect.Width();
