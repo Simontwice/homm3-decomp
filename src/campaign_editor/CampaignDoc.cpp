@@ -276,88 +276,73 @@ void TScenarioStartingBonusWriter::visit(const TScenarioBonusResource& bonus)
     *m_pOStream << static_cast<long>(bonus.m_amount);
 }
 
+// A value of the file's width, widened as the bonus constructors take it.
+template <class T>
+inline T readValue(TRawIStream& stream)
+{
+    T value;
+    stream >> value;
+    return value;
+}
+
 VA(0x004115a0, 0x540)
 auto_ptr<TScenarioStartingBonus> readStartingBonus(TRawIStream& iStream, int version)
 {
-    signed char type;
-    iStream >> type;
+    int type = readValue<signed char>(iStream);
     auto_ptr<TScenarioStartingBonus> pBonus;
     switch (type) {
     case eBonusSpell: {
-        short hero;
-        iStream >> hero;
-        signed char spell;
-        iStream >> spell;
+        int hero = readValue<short>(iStream);
+        int spell = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusSpell(hero, spell));
         break;
     }
     case eBonusCreature: {
-        short hero;
-        iStream >> hero;
-        short creature;
-        iStream >> creature;
-        short count;
-        iStream >> count;
+        int hero = readValue<short>(iStream);
+        int creature = readValue<short>(iStream);
+        int count = readValue<short>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusCreature(hero, TCreatureStack(TCreatureType(creature), count)));
         break;
     }
     case eBonusBuilding: {
-        signed char building;
-        iStream >> building;
+        int building = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusBuilding(building));
         break;
     }
     case eBonusArtifact: {
-        short hero;
-        iStream >> hero;
+        int hero = readValue<short>(iStream);
         int artifact;
-        if (version >= 3) {
-            short wideArtifact;
-            iStream >> wideArtifact;
-            artifact = wideArtifact;
-        } else {
-            signed char narrowArtifact;
-            iStream >> narrowArtifact;
-            artifact = narrowArtifact;
-        }
+        if (version >= 3)
+            artifact = readValue<short>(iStream);
+        else
+            artifact = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusArtifact(hero, artifact));
         break;
     }
     case eBonusSpellScroll: {
-        short hero;
-        iStream >> hero;
-        signed char spell;
-        iStream >> spell;
+        int hero = readValue<short>(iStream);
+        int spell = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusSpellScroll(hero, spell));
         break;
     }
     case eBonusPrimarySkill: {
-        short hero;
-        iStream >> hero;
+        int hero = readValue<short>(iStream);
         TArray<unsigned int, kNumPrimarySkills> skills;
-        for (int i = 0; i < kNumPrimarySkills; i++) {
-            signed char skill;
-            iStream >> skill;
-            skills[i] = skill;
-        }
+        for (int i = 0; i < kNumPrimarySkills; i++)
+            skills[i] = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusPrimarySkill(hero, skills));
         break;
     }
     case eBonusSecondarySkill: {
-        short hero;
-        iStream >> hero;
-        signed char skill;
-        iStream >> skill;
-        signed char level;
-        iStream >> level;
+        int hero = readValue<short>(iStream);
+        int skill = readValue<signed char>(iStream);
+        int level = readValue<signed char>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusSecondarySkill(hero, skill, level));
         break;
     }
     default: {
-        signed char resource;
-        iStream >> resource;
-        long amount;
-        iStream >> amount;
+        int resource = readValue<signed char>(iStream);
+        int amount = readValue<long>(iStream);
         pBonus = auto_ptr<TScenarioStartingBonus>(new TScenarioBonusResource(resource, amount));
         break;
     }
@@ -418,17 +403,13 @@ void TScenarioStartingOptionsWriter::visit(const TScenarioOptionsStartingHero& o
 VA(0x00411ee0, 0x518)
 auto_ptr<TScenarioStartingOptions> readStartingOptions(TRawIStream& iStream, int version)
 {
-    signed char type;
-    iStream >> type;
+    int type = readValue<signed char>(iStream);
     auto_ptr<TScenarioStartingOptions> pOptions;
     if (type != eOptionsNone) {
         switch (type) {
         case eOptionsBonus: {
-            signed char player;
-            iStream >> player;
-            signed char bonusCount;
-            iStream >> bonusCount;
-            unsigned int numBonuses = bonusCount;
+            int player = readValue<signed char>(iStream);
+            unsigned int numBonuses = readValue<signed char>(iStream);
             vector<auto_ptr<TScenarioStartingBonus> > bonuses;
             bonuses.reserve(numBonuses);
             for (unsigned int i = 0; i < numBonuses; i++)
@@ -437,16 +418,12 @@ auto_ptr<TScenarioStartingOptions> readStartingOptions(TRawIStream& iStream, int
             break;
         }
         case eOptionsCrossoverScenario: {
-            signed char choiceCount;
-            iStream >> choiceCount;
-            unsigned int numChoices = choiceCount;
+            unsigned int numChoices = readValue<signed char>(iStream);
             vector<TScenarioOptionsCrossoverScenario::TChoice> choices;
             choices.reserve(numChoices);
             for (unsigned int i = 0; i < numChoices; i++) {
-                signed char player;
-                iStream >> player;
-                signed char scenario;
-                iStream >> scenario;
+                int player = readValue<signed char>(iStream);
+                int scenario = readValue<signed char>(iStream);
                 TScenarioOptionsCrossoverScenario::TChoice choice;
                 choice.m_scenario = scenario;
                 choice.m_player = player;
@@ -456,16 +433,12 @@ auto_ptr<TScenarioStartingOptions> readStartingOptions(TRawIStream& iStream, int
             break;
         }
         default: {
-            signed char choiceCount;
-            iStream >> choiceCount;
-            unsigned int numChoices = choiceCount;
+            unsigned int numChoices = readValue<signed char>(iStream);
             vector<TScenarioOptionsStartingHero::TChoice> choices;
             choices.reserve(numChoices);
             for (unsigned int i = 0; i < numChoices; i++) {
-                signed char player;
-                iStream >> player;
-                short hero;
-                iStream >> hero;
+                int player = readValue<signed char>(iStream);
+                int hero = readValue<short>(iStream);
                 TScenarioOptionsStartingHero::TChoice choice;
                 choice.m_hero = hero;
                 choice.m_player = player;
@@ -485,9 +458,7 @@ VA(0x00412400, 0x5e3)
 void TScenarioRecord::read(TRawIStream& iStream, int version)
 {
     iStream >> m_mapFileName;
-    long mapSize;
-    iStream >> mapSize;
-    m_mapSize = mapSize;
+    m_mapSize = readValue<long>(iStream);
     vector<unsigned char> prerequisiteBytes((m_prerequisites.size() + 7) / 8, 0);
     for (vector<unsigned char>::iterator it = prerequisiteBytes.begin(); it != prerequisiteBytes.end(); ++it)
         iStream >> *it;
@@ -498,24 +469,16 @@ void TScenarioRecord::read(TRawIStream& iStream, int version)
         fill(m_prerequisites.begin(), m_prerequisites.end(), false);
     }
     if (version >= 2) {
-        signed char regionColor;
-        iStream >> regionColor;
-        m_regionColor = regionColor;
-        signed char difficulty;
-        iStream >> difficulty;
-        m_difficulty = difficulty;
+        m_regionColor = readValue<signed char>(iStream);
+        m_difficulty = readValue<signed char>(iStream);
         iStream >> m_regionDesc;
-        signed char bHasPrologue;
-        iStream >> bHasPrologue;
-        if (bHasPrologue != 0) {
+        if (readValue<signed char>(iStream) != 0) {
             m_pPrologue = auto_ptr<TScenarioPrologue>(new TScenarioPrologue);
             if (m_pPrologue.get() == NULL)
                 throw TAllocationFailure();
             iStream >> *m_pPrologue;
         }
-        signed char bHasEpilogue;
-        iStream >> bHasEpilogue;
-        if (bHasEpilogue != 0) {
+        if (readValue<signed char>(iStream) != 0) {
             m_pEpilogue = auto_ptr<TScenarioPrologue>(new TScenarioPrologue);
             if (m_pEpilogue.get() == NULL)
                 throw TAllocationFailure();
@@ -623,6 +586,7 @@ void saveCampaign(const TCampaign& campaign, int version, CFile* pFile)
             TScenarioRecord record(campaign.getMapTraits().m_numRegions);
             const TScenario& rScenario = campaign.getScenario(scenario);
             const TCampaignScenarioMap* pMap = rScenario.getMap();
+            record.m_regionColor = rScenario.getRegionColor();
             if (pMap != NULL) {
                 record.m_mapFileName = pMap->m_fileName;
                 record.m_mapSize = static_cast<const TGzDeflatedScenarioMap*>(pMap)->getSize();
@@ -631,7 +595,6 @@ void saveCampaign(const TCampaign& campaign, int version, CFile* pFile)
                         && campaign.getBDirectPrerequisite(scenario, other))
                         record.m_prerequisites[other] = true;
                 }
-                record.m_regionColor = rScenario.getRegionColor();
                 record.m_difficulty = rScenario.getDifficulty();
                 record.m_regionDesc = rScenario.getRegionDesc();
                 if (rScenario.getPrologue() != NULL) {
@@ -681,8 +644,7 @@ pair<auto_ptr<TCampaign>, int> loadCampaign(CFile* pFile)
                 if (fileVersion == kFileVersions[campaignVersion])
                     break;
             }
-            signed char type;
-            iStream >> type;
+            int type = readValue<signed char>(iStream);
             pCampaign = auto_ptr<TCampaign>(new TCampaign(type));
             if (pCampaign.get() == NULL)
                 throw TAllocationFailure();
