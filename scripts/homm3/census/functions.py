@@ -354,6 +354,15 @@ def padded_call_ends(c, ends, limit=16):
     return found
 
 
+def padded_data_seeds(c, lone_targets, covered, ends):
+    """The isolated data pointers to the first byte after the alignment
+    padding that follows a call inside a decoded function: the call never
+    returns, so the pointer starts the next function (h3ccmped's message
+    map handler 0x404ad0 after ProcessWndProcException's `throw e`)."""
+    padded = padded_call_ends(c, ends)
+    return [(t, s) for t, s in lone_targets if t in padded and t in covered]
+
+
 def table_seeds_after_calls(run_targets, covered, ends, sites, min_run=8):
     """The code pointers in vtable-sized runs of code pointers that point to
     the code right after a call inside the same decoded function: the call
@@ -507,6 +516,11 @@ def run(image, log=print, catch_bodies=False):
     # descent ran into past the rethrow (a message map's handler)
     for t, s in rethrow_seeds(c, lone_targets, covered, ends):
         take(t, f"data-after-rethrow@0x{s:x}", check=False)
+    # or after the padding that follows a call that never returns (a
+    # message map's handler after a function that ends in a throw)
+    for t, s in padded_data_seeds(c, lone_targets, covered, ends):
+        if c.in_text(t):
+            take(t, f"data-after-padding@0x{s:x}", check=False)
     drain(True)
     index()
     rounds = 0

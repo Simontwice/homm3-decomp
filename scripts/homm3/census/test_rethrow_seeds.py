@@ -64,5 +64,17 @@ class PaddedCallEndsTest(unittest.TestCase):
         self.assertEqual(functions.padded_call_ends(self.census(20), {0x1005: 0x1000}), {})
 
 
+    def test_data_pointer_after_padding_seeds_the_next_function(self):
+        ends = {0x1005: 0x1000}
+        covered = {0x1010: 0x1000}
+        self.assertEqual(functions.padded_data_seeds(self.census(11), [(0x1010, 0x3000)], covered, ends),
+                         [(0x1010, 0x3000)])
+
+    def test_data_pointer_into_the_padding_is_not(self):
+        ends = {0x1005: 0x1000}
+        covered = {0x1008: 0x1000}
+        self.assertEqual(functions.padded_data_seeds(self.census(11), [(0x1008, 0x3000)], covered, ends), [])
+
+
 if __name__ == '__main__':
     unittest.main()
