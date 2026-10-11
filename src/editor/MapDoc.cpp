@@ -911,7 +911,8 @@ UINT TMapDoc::_autosaveThreadProc(LPVOID pParam)
     TMapDoc* pDoc = static_cast<TMapDoc*>(pParam);
     CSyncObject* apObjects[2] = { &pDoc->_m_autosaveMutex, &pDoc->_m_closeEvent };
     CMultiLock lock(apObjects, 2, FALSE);
-    if (lock.Lock(INFINITE, FALSE, 0) != WAIT_OBJECT_0 + 1) {
+    DWORD result = lock.Lock(INFINITE, FALSE, 0);
+    if (result != WAIT_OBJECT_0 + 1) {
         pDoc->_m_bOwnsAutosave = true;
         pDoc->_m_closeEvent.Lock(INFINITE);
         pDoc->_m_bOwnsAutosave = false;
