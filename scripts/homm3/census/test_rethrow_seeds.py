@@ -30,6 +30,38 @@ class RethrowSeedsTest(unittest.TestCase):
         self.assertEqual(functions.rethrow_seeds(c, [(0x110a, 0x2000)], covered, {}), [])
 
 
+class ThrowSeedsTest(unittest.TestCase):
+    """A data pointer to the code after a call of the throw helper (the
+    callee a catch funclet's rethrow names) starts a function."""
+    def census(self, target):
+        call = SimpleNamespace(mnemonic="call", operands=[
+            SimpleNamespace(type=functions.x86.X86_OP_IMM, imm=0x400000 + target)])
+        return SimpleNamespace(insn=lambda rva: call, image=SimpleNamespace(image_base=0x400000))
+
+    def test_pointer_after_a_throw_call_is_a_seed(self):
+        c = self.census(0x5000)
+        covered = {0x1005: 0x1000, 0x100a: 0x1000}
+        ends = {0x100a: 0x1005}
+        self.assertEqual(functions.throw_seeds(c, [(0x100a, 0x2000)], covered, ends, {0x5000}),
+                         [(0x100a, 0x2000)])
+
+    def test_pointer_after_another_call_is_not(self):
+        c = self.census(0x6000)
+        covered = {0x1005: 0x1000, 0x100a: 0x1000}
+        ends = {0x100a: 0x1005}
+        self.assertEqual(functions.throw_seeds(c, [(0x100a, 0x2000)], covered, ends, {0x5000}), [])
+
+    def test_the_helper_is_a_catch_funclet_s_last_call(self):
+        call = SimpleNamespace(mnemonic="call", operands=[
+            SimpleNamespace(type=functions.x86.X86_OP_IMM, imm=0x405000)])
+        ret = SimpleNamespace(mnemonic="ret", operands=[])
+        insns = {0x1100: ret, 0x1105: call, 0x1200: call, 0x1205: ret}
+        c = SimpleNamespace(starts={0x1100: "funclet:catch", 0x1200: "call"},
+                            reached={0x1100: {0x1100, 0x1105}, 0x1200: {0x1200, 0x1205}},
+                            insn=insns.get, image=SimpleNamespace(image_base=0x400000))
+        self.assertEqual(functions.throw_helpers(c), {0x5000})
+
+
 class TableSeedsAfterCallsTest(unittest.TestCase):
     def test_vtable_slot_after_a_call_is_a_seed(self):
         covered = {0x1005: 0x1000, 0x100a: 0x1000}
