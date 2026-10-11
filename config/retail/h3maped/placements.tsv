@@ -2642,7 +2642,7 @@ rva	size	kind	name	unit	linkage	evidence
 0x000e4b40	0x6	func	?getSize@TPalette24@@UBEIXZ	palette	external	vtable of TPalette24 (RTTI) slot 2
 0x000e4b50	0x235	func	?AdjustHSV@TPalette24@@QAEXMMMM@Z	palette	external	masked body (565 bytes, 20 relocations) unique at a census start
 0x000e4d90	0x159	func	?RGBToHSV@@YAXIIIPAM00@Z	palette	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x68
-0x000e4ef0	0x2d0	func	?HSVToRGB@@YAXMMMPAI00@Z	palette	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x1d6; the linker shares it with 1 same-named static(s)
+0x000e4ef0	0x2d0	func	?HSVToRGB@@YAXMMMPAI00@Z	palette	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x1d6
 0x000e51c0	0x1e	func	??_GTTextResource@@UAEPAXI@Z	textresource	external	vtable of TTextResource (RTTI) slot 0
 0x000e51e0	0x1fb	func	??0TTextResource@@QAE@PBDH0@Z	textresource	external	masked body (507 bytes, 8 relocations) unique at a census start
 0x000e53e0	0x49	func	??1TTextResource@@UAE@XZ	textresource	external	masked body (73 bytes, 4 relocations) unique at a census start
@@ -2873,9 +2873,9 @@ rva	size	kind	name	unit	linkage	evidence
 0x0014b828	0xc	data	_?fallbackName@?9??loadPalette@ResourceManager@@YAPAVTPalette16@@PBD@Z@4QBDB	resourcemanager	internal	referenced by ?loadPalette@ResourceManager@@YAPAVTPalette16@@PBD@Z at +0xed
 0x0014b860	0x8	data	??_8?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@7B@	resourcemanager	external	referenced by ?reportMissingTypedResource@@YAXPBDH0@Z at +0x27e
 0x0014b8c4	0x4	data	__real@4@40018000000000000000	bitmap16	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x199
-0x0014b8c8	0x4	data	__real@4@00000000000000000000	bitmap16	external	referenced by ?HSVToRGB@@YAXMMMPAI00@Z at +0xe
-0x0014b8cc	0x4	data	__real@4@3fff8000000000000000	bitmap16	external	referenced by ?HSVToRGB@@YAXMMMPAI00@Z at +0x43
-0x0014b8d0	0x8	data	__real@8@3fff8000000000000000	bitmap16	external	referenced by ?HSVToRGB@@YAXMMMPAI00@Z at +0x2c
+0x0014b8c8	0x4	data	__real@4@00000000000000000000	bitmap16	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0x72
+0x0014b8cc	0x4	data	__real@4@3fff8000000000000000	bitmap16	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xb6
+0x0014b8d0	0x8	data	__real@8@3fff8000000000000000	bitmap16	external	referenced by ?AdjustHSV@TPalette24@@QAEXMMMM@Z at +0xd6
 0x0014b8d8	0x4	data	__real@4@4001c000000000000000	bitmap16	external	referenced by ?HSVToRGB@@YAXMMMPAI00@Z at +0x22
 0x0014b8dc	0x4	data	_?redHue@?1??RGBToHSV@@YAXIIIPAM00@Z@4MB	palette	internal	referenced by ?RGBToHSV@@YAXIIIPAM00@Z at +0xea
 0x0014b8e0	0x4	data	__real@4@3ffdaaaaab0000000000	bitmap24	external	referenced by ?RGBToHSV@@YAXIIIPAM00@Z at +0x106
