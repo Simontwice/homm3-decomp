@@ -7263,6 +7263,11 @@ unsigned char type_random_map_generator::createShipyardConnection(
 // coordinate from its used components raises the current match to 85.8212%.
 // The independent scan oracle checks ordered queries, live level reads and
 // both later coordinate projections; the ordinary placement helpers remain.
+// The map editor's /O1 copy (0x4a6cf2) clears the guard value in the second
+// border arm too (and [ebp+0xc],0 before the column step) and falls into
+// the shared guard test; only its non-empty cell path, where the cleared
+// value is still known, jumps straight to the return. h3maped
+// 88.33% -> 90.28%; the game body moves 85.81 -> 85.68 (scheduling).
 VA(0x00542080, 0x8AA)
 MAC_ADDRESS(0x244c08, 0xa1c)
 unsigned char type_random_map_generator::createSubterraneanGate(
@@ -7401,6 +7406,7 @@ unsigned char type_random_map_generator::createSubterraneanGate(
         color = placeBorderGuard(otherPosition, 1, source);
         if (color >= 0) {
             --otherPosition.m_x;
+            guardValue = 0;
             TRmgMapItem* item = m_map.getMapItem(otherPosition);
             if (item->m_objects.size() == 0) {
                 if (!item->m_connection.m_present) {
@@ -7421,7 +7427,6 @@ unsigned char type_random_map_generator::createSubterraneanGate(
                 item->m_connection.m_guardColor = color;
                 item->m_connection.m_present = 1;
             }
-            return 1;
         }
     }
 
