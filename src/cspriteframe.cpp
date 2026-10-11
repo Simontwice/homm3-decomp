@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <new>
 #include <limits>
 #include <string.h>
@@ -28,6 +29,10 @@ DATA(0x006968a6) static const unsigned char kGeneralRLEOpaqueRunCode =
 DATA(0x006968b0) static const unsigned int kGeneralRLEMaxRunLength =
     std::numeric_limits<unsigned char>::max() + 1;
 
+// Original: kCellWidth (Loki h3maped's CSpriteFrame.cpp asserts); the pixel
+// width of an adventure-object cell.
+static const int kCellWidth = 32;
+
 // Original: CSpriteFrame::CSpriteFrame; cspriteframe.cpp:67
 DC_ADDRESS(0x074600, 0x64)
 CSpriteFrame::CSpriteFrame()
@@ -48,6 +53,8 @@ CSpriteFrame::CSpriteFrame(const char* name, int w, int h,
       ImageSize(w * h), EncodingMethod(encoding), Width(w), Height(h),
       CroppedWidth(w), CroppedHeight(h), CroppedX(0), CroppedY(0), Pitch(w)
 {
+    assert(csize >= 0);
+    assert(encoding == eEncodeRaw || csize > 0);
     DataSize = csize ? csize : ImageSize;
     map = new unsigned char[DataSize];
     if (map)
@@ -66,6 +73,8 @@ CSpriteFrame::CSpriteFrame(const char* name, int w, int h,
       CroppedWidth(cw), CroppedHeight(ch), CroppedX(cx), CroppedY(cy),
       Pitch(cw)
 {
+    assert(csize >= 0);
+    assert(encoding == eEncodeRaw || csize > 0);
     DataSize = csize ? csize : ImageSize;
     map = new unsigned char[DataSize];
     if (map)
@@ -352,6 +361,7 @@ unsigned char CSpriteFrame::GetPixel(int x, int y) const
         break;
     }
     case eEncodeAdvObjRLE: {
+        assert(CroppedWidth % kCellWidth == 0);
         unsigned int cellsPerRow = static_cast<unsigned int>(CroppedWidth) >> 5;
         const unsigned short* cellOffsets =
             static_cast<const unsigned short*>(static_cast<const void*>(map));
@@ -464,6 +474,9 @@ int CSpriteFrame::Crop()
 DC_ADDRESS(0x075094, 0x44)
 void CSpriteFrame::Encode(TEncodingMethod method)
 {
+    assert(EncodingMethod == eEncodeRaw);
+    assert(method > eEncodeRaw && method < kNumEncodingMethods);
+    assert(CroppedWidth > 0 && CroppedHeight > 0);
     switch (method) {
     case eEncodeGeneralRLE: EncodeGeneral(); break;
     case eEncodeTilesetRLE: EncodeTileset(); break;
@@ -513,27 +526,27 @@ void CSpriteFrame::EncodeGeneral()
     unsigned char* newMap = new unsigned char[newDataSize];
     unsigned int* lineOffset = static_cast<unsigned int*>(static_cast<void*>(newMap));
     linesToGo = CroppedHeight;
-    unsigned int offset = CroppedHeight * sizeof(unsigned int);
+    unsigned int curOffset = CroppedHeight * sizeof(unsigned int);
     source = map;
     do {
-        *lineOffset++ = offset;
+        *lineOffset++ = curOffset;
         unsigned char code = source[0] < 10 ? source[0] : kOpaqueRunCode;
-        newMap[offset++] = code;
-        unsigned char* runLength = newMap + offset++;
+        newMap[curOffset++] = code;
+        unsigned char* runLength = newMap + curOffset++;
         unsigned int run = 0;
         int x = 1;
         while (1) {
             ++run;
             if (code == kOpaqueRunCode)
-                newMap[offset++] = source[x - 1];
+                newMap[curOffset++] = source[x - 1];
             if (x >= CroppedWidth)
                 break;
             unsigned char nextCode = source[x] < 10 ? source[x] : kOpaqueRunCode;
             if (nextCode != code || run == kMaxRunLength) {
                 *runLength = static_cast<unsigned char>(run - 1);
                 code = nextCode;
-                newMap[offset++] = code;
-                runLength = newMap + offset++;
+                newMap[curOffset++] = code;
+                runLength = newMap + curOffset++;
                 run = 0;
             }
             ++x;
@@ -541,6 +554,7 @@ void CSpriteFrame::EncodeGeneral()
         *runLength = static_cast<unsigned char>(run - 1);
         source += CroppedWidth;
     } while (--linesToGo);
+    assert(curOffset == newDataSize);
     delete[] map;
     map = newMap;
     DataSize = newDataSize;
@@ -589,30 +603,30 @@ void CSpriteFrame::EncodeTileset()
         unsigned char* newMap = new unsigned char[newDataSize];
         unsigned short* lineOffset = static_cast<unsigned short*>(static_cast<void*>(newMap));
         linesToGo = CroppedHeight;
-        unsigned short offset = static_cast<unsigned short>(CroppedHeight * sizeof(unsigned short));
+        unsigned short curOffset = static_cast<unsigned short>(CroppedHeight * sizeof(unsigned short));
         source = map;
         do {
-            *lineOffset++ = offset;
+            *lineOffset++ = curOffset;
             unsigned char code = source[0] < 5 ? source[0] : ePackedRleLiteral;
             bool opaque = code == ePackedRleLiteral;
-            unsigned char* control = newMap + offset;
+            unsigned char* control = newMap + curOffset;
             *control = static_cast<unsigned char>(code << 5);
-            ++offset;
+            ++curOffset;
             unsigned int run = 0;
             int x = 1;
             while (1) {
                 ++run;
                 if (opaque)
-                    newMap[offset++] = source[x - 1];
+                    newMap[curOffset++] = source[x - 1];
                 if (x >= CroppedWidth)
                     break;
                 unsigned char nextCode = source[x] < 5 ? source[x] : ePackedRleLiteral;
                 if (nextCode != code || run == ePackedRleMaxRunLength) {
                     *control |= static_cast<unsigned char>(run - 1);
                     code = nextCode;
-                    control = newMap + offset;
+                    control = newMap + curOffset;
                     *control = static_cast<unsigned char>(code << 5);
-                    ++offset;
+                    ++curOffset;
                     run = 0;
                     opaque = code == ePackedRleLiteral;
                 }
@@ -621,6 +635,7 @@ void CSpriteFrame::EncodeTileset()
             *control |= static_cast<unsigned char>(run - 1);
             source += CroppedWidth;
         } while (--linesToGo);
+        assert(curOffset == newDataSize);
         delete[] map;
         map = newMap;
         DataSize = newDataSize;
@@ -697,44 +712,44 @@ void CSpriteFrame::EncodeAdvObj()
 
     unsigned char* newMap = new unsigned char[newDataSize];
     unsigned short* cellOffset = static_cast<unsigned short*>(static_cast<void*>(newMap));
-    unsigned short offset = static_cast<unsigned short>(2 * cellsPerLine * CroppedHeight);
+    unsigned short curOffset = static_cast<unsigned short>(2 * cellsPerLine * CroppedHeight);
     source = map;
     linesToGo = CroppedHeight;
     do {
         unsigned char* sourceCell = source;
-        int pixelsDone = 0;
+        int srcLineX = 0;
         unsigned int cellsToGo = cellsPerLine;
         unsigned char code;
         unsigned char* control;
         unsigned int run;
         if (addLeft) {
-            *cellOffset++ = offset;
+            *cellOffset++ = curOffset;
             code = source[0] < 6 ? source[0] : ePackedRleLiteral;
             run = 0;
             if (code != 0) {
-                newMap[offset] = 0;
-                newMap[offset++] |= static_cast<unsigned char>(addLeft - 1);
+                newMap[curOffset] = 0;
+                newMap[curOffset++] |= static_cast<unsigned char>(addLeft - 1);
             } else {
                 run += addLeft;
             }
-            control = newMap + offset;
+            control = newMap + curOffset;
             *control = static_cast<unsigned char>(code << 5);
-            ++offset;
+            ++curOffset;
             unsigned int x = 1;
             while (1) {
-                ++pixelsDone;
+                ++srcLineX;
                 ++run;
                 if (code == ePackedRleLiteral)
-                    newMap[offset++] = source[x - 1];
-                if (x >= 32 - addLeft || pixelsDone >= oldWidth)
+                    newMap[curOffset++] = source[x - 1];
+                if (x >= 32 - addLeft || srcLineX >= oldWidth)
                     break;
                 unsigned char nextCode = source[x] < 6 ? source[x] : ePackedRleLiteral;
                 if (nextCode != code) {
                     *control |= static_cast<unsigned char>(run - 1);
                     code = nextCode;
-                    control = newMap + offset;
+                    control = newMap + curOffset;
                     *control = static_cast<unsigned char>(code << 5);
-                    ++offset;
+                    ++curOffset;
                     run = 0;
                 }
                 ++x;
@@ -744,27 +759,27 @@ void CSpriteFrame::EncodeAdvObj()
                 *control |= static_cast<unsigned char>(run - 1);
         }
         while (cellsToGo) {
-            *cellOffset++ = offset;
+            *cellOffset++ = curOffset;
             code = sourceCell[0] < 6 ? sourceCell[0] : ePackedRleLiteral;
-            control = newMap + offset;
+            control = newMap + curOffset;
             *control = static_cast<unsigned char>(code << 5);
-            ++offset;
+            ++curOffset;
             run = 0;
             unsigned int x = 1;
             while (1) {
-                ++pixelsDone;
+                ++srcLineX;
                 ++run;
                 if (code == ePackedRleLiteral)
-                    newMap[offset++] = sourceCell[x - 1];
-                if (x >= 32 || pixelsDone >= oldWidth)
+                    newMap[curOffset++] = sourceCell[x - 1];
+                if (x >= 32 || srcLineX >= oldWidth)
                     break;
                 unsigned char nextCode = sourceCell[x] < 6 ? sourceCell[x] : ePackedRleLiteral;
                 if (nextCode != code) {
                     *control |= static_cast<unsigned char>(run - 1);
                     code = nextCode;
-                    control = newMap + offset;
+                    control = newMap + curOffset;
                     *control = static_cast<unsigned char>(code << 5);
-                    ++offset;
+                    ++curOffset;
                     run = 0;
                 }
                 ++x;
@@ -774,12 +789,13 @@ void CSpriteFrame::EncodeAdvObj()
                 break;
             *control |= static_cast<unsigned char>(run - 1);
         }
+        assert(srcLineX == CroppedWidth);
         if (addRight) {
             if (code != 0) {
                 *control |= static_cast<unsigned char>(run - 1);
-                control = newMap + offset;
+                control = newMap + curOffset;
                 *control = 0;
-                ++offset;
+                ++curOffset;
                 run = addRight;
             } else {
                 run += addRight;
@@ -788,6 +804,7 @@ void CSpriteFrame::EncodeAdvObj()
         *control |= static_cast<unsigned char>(run - 1);
         source += oldWidth;
     } while (--linesToGo);
+    assert(curOffset == newDataSize);
     // Unlike the other two encoders, DC 1256 replaces the map without deleting it.
     map = newMap;
     DataSize = newDataSize;
@@ -902,6 +919,7 @@ void CSpriteFrame::Draw(int sx, int sy, int sw, int sh,
         return;
     }
 
+    assert(EncodingMethod == eEncodeGeneralRLE);
     const unsigned int* lineOffset;
     // Retail construction guard 0x6968b7; the copied run code at 0x69689c.
     DATA_COMPGEN_GUARD(0x006968b7, drawOpaqueRunCodeGuard, kOpaqueRunCode)
@@ -922,43 +940,45 @@ void CSpriteFrame::Draw(int sx, int sy, int sw, int sh,
                 unsigned int skipped = 0;
                 const unsigned char* src = map + lineOffset[y];
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             *out++ = pal.Palette[*src++];
                         } while (--count);
                     } else if (tblit) {
-                        out += run;
+                        out += runLength;
                     } else {
                         unsigned short color = pal.Palette[code];
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             *out++ = color;
                         } while (--count);
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -975,43 +995,45 @@ void CSpriteFrame::Draw(int sx, int sy, int sw, int sh,
                 unsigned int skipped = 0;
                 const unsigned char* src = map + lineOffset[y];
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             *--out = pal.Palette[*src++];
                         } while (--count);
                     } else if (tblit) {
-                        out -= run;
+                        out -= runLength;
                     } else {
                         unsigned short color = pal.Palette[code];
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             *--out = color;
                         } while (--count);
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -1065,6 +1087,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
         }
     }
 
+    assert(EncodingMethod == eEncodeGeneralRLE);
     const TOffset* lineOffset;
     const unsigned short* palette;
     // Retail construction guard 0x6968b4; the copied run code at 0x6968b5.
@@ -1088,26 +1111,28 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                 const unsigned char* src = map + lineOffset[y];
                 unsigned int skipped = 0;
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         if (!alpha) {
                             do {
                                 *out++ = palette[*src++];
@@ -1124,7 +1149,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         switch (code) {
                         case eRleControlShadow75:
                         case eRleControlOutline7: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = ((*out >> 1) & div2mask)
                                      + ((*out >> 2) & div4mask);
@@ -1134,7 +1159,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         }
                         case eRleControlShadow50:
                         case eRleControlOutline6: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = (*out >> 1) & div2mask;
                                 ++out;
@@ -1142,13 +1167,13 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                             break;
                         }
                         default:
-                            out += run;
+                            out += runLength;
                             break;
                         }
                     } else {
                         switch (code) {
                         case eRleControlShadow75: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = ((*out >> 1) & div2mask)
                                      + ((*out >> 2) & div4mask);
@@ -1157,7 +1182,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                             break;
                         }
                         case eRleControlShadow50: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = (*out >> 1) & div2mask;
                                 ++out;
@@ -1167,22 +1192,22 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         case eRleControlOutline5:
                         case eRleControlOutline6:
                         case eRleControlOutline7: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out++ = outcolor;
                             } while (--count);
                             break;
                         }
                         default:
-                            out += run;
+                            out += runLength;
                             break;
                         }
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -1199,26 +1224,28 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                 const unsigned char* src = map + lineOffset[y];
                 unsigned int skipped = 0;
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         if (!alpha) {
                             do {
                                 *--out = palette[*src++];
@@ -1235,7 +1262,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         switch (code) {
                         case eRleControlShadow75:
                         case eRleControlOutline7: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = ((*out >> 1) & div2mask)
@@ -1245,7 +1272,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         }
                         case eRleControlShadow50:
                         case eRleControlOutline6: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = (*out >> 1) & div2mask;
@@ -1253,13 +1280,13 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                             break;
                         }
                         default:
-                            out -= run;
+                            out -= runLength;
                             break;
                         }
                     } else {
                         switch (code) {
                         case eRleControlShadow75: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = ((*out >> 1) & div2mask)
@@ -1268,7 +1295,7 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                             break;
                         }
                         case eRleControlShadow50: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = (*out >> 1) & div2mask;
@@ -1278,22 +1305,22 @@ void CSpriteFrame::DrawCreatureImpl(int sx, int sy, int sw, int sh,
                         case eRleControlOutline5:
                         case eRleControlOutline6:
                         case eRleControlOutline7: {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *--out = outcolor;
                             } while (--count);
                             break;
                         }
                         default:
-                            out -= run;
+                            out -= runLength;
                             break;
                         }
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -1336,10 +1363,12 @@ void CSpriteFrame::DrawAdvObjImpl(int sx, int sy, int sw, int sh,
         return;
     }
 
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     Clip(sx, sy, sw, sh, dx, dy, dw, dh, hflip, 0);
     if (sw > 0) {
         if (sh > 0) {
 
+            assert(CroppedWidth % kCellWidth == 0);
             cellsPerLine = static_cast<unsigned int>(CroppedWidth) >> 5;
             cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
             palette = pal.Palette;
@@ -1358,46 +1387,47 @@ void CSpriteFrame::DrawAdvObjImpl(int sx, int sy, int sw, int sh,
                                           (static_cast<unsigned int>(sx) >> 5)];
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out++ = palette[*src++];
                             } while (--count);
                         } else if (code == eRleControlOutline5 && flagcolor) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out++ = flagcolor;
                             } while (--count);
                         } else {
-                            out += run;
+                            out += runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1421,46 +1451,47 @@ void CSpriteFrame::DrawAdvObjImpl(int sx, int sy, int sw, int sh,
                                           (static_cast<unsigned int>(sx) >> 5)];
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *--out = palette[*src++];
                             } while (--count);
                         } else if (code == eRleControlOutline5 && flagcolor) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *--out = flagcolor;
                             } while (--count);
                         } else {
-                            out -= run;
+                            out -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1511,10 +1542,12 @@ void CSpriteFrame::DrawAdvObjWithFlagAlpha(int sx, int sy, int sw, int sh,
     unsigned int cellsPerLine;
     const unsigned short* cellOffset;
 
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     Clip(sx, sy, sw, sh, dx, dy, dw, dh, hflip, 0);
     if (sw > 0) {
         if (sh > 0) {
 
+            assert(CroppedWidth % kCellWidth == 0);
             cellsPerLine = static_cast<unsigned int>(CroppedWidth) >> 5;
             cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
 
@@ -1534,29 +1567,30 @@ void CSpriteFrame::DrawAdvObjWithFlagAlpha(int sx, int sy, int sw, int sh,
                     unsigned int skipped = static_cast<unsigned int>(sx) & ~31U;
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = (div2mask
                                         & (palette[*src++] >> 1))
@@ -1564,21 +1598,21 @@ void CSpriteFrame::DrawAdvObjWithFlagAlpha(int sx, int sy, int sw, int sh,
                                 ++out;
                             } while (--count);
                         } else if (code == eRleControlOutline5 && flagcolor) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 *out = (div2mask & (flagcolor >> 1))
                                      + (div2mask & (*out >> 1));
                                 ++out;
                             } while (--count);
                         } else {
-                            out += run;
+                            out += runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1599,29 +1633,30 @@ void CSpriteFrame::DrawAdvObjWithFlagAlpha(int sx, int sy, int sw, int sh,
                     unsigned int skipped = static_cast<unsigned int>(sx) & ~31U;
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = (div2mask
@@ -1629,21 +1664,21 @@ void CSpriteFrame::DrawAdvObjWithFlagAlpha(int sx, int sy, int sw, int sh,
                                      + (div2mask & (*out >> 1));
                             } while (--count);
                         } else if (code == eRleControlOutline5 && flagcolor) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             do {
                                 --out;
                                 *out = (div2mask & (flagcolor >> 1))
                                      + (div2mask & (*out >> 1));
                             } while (--count);
                         } else {
-                            out -= run;
+                            out -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1695,10 +1730,12 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
     unsigned int cellsPerLine;
     const unsigned short* cellOffset;
 
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     Clip(sx, sy, sw, sh, dx, dy, dw, dh, hflip, 0);
     if (sw > 0) {
         if (sh > 0) {
 
+            assert(CroppedWidth % kCellWidth == 0);
             cellsPerLine = static_cast<unsigned int>(CroppedWidth) >> 5;
             cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
 
@@ -1716,34 +1753,35 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                     unsigned int skipped = static_cast<unsigned int>(sx) & ~31U;
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            out += run;
-                            src += run;
+                            out += runLength;
+                            src += runLength;
                         } else {
                             switch (code) {
                             case eRleControlShadow75: {
-                                unsigned int count = run;
+                                unsigned int count = runLength;
                                 do {
                                     *out = ((*out >> 1) & div2mask)
                                          + ((*out >> 2) & div4mask);
@@ -1752,7 +1790,7 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                                 break;
                             }
                             case eRleControlShadow50: {
-                                unsigned int count = run;
+                                unsigned int count = runLength;
                                 do {
                                     unsigned int color = *out;
                                     *out = (color >> 1) & div2mask;
@@ -1761,16 +1799,16 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                                 break;
                             }
                             default:
-                                out += run;
+                                out += runLength;
                                 break;
                             }
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1791,34 +1829,35 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                     unsigned int skipped = static_cast<unsigned int>(sx) & ~31U;
                     unsigned char packet = *src;
                     unsigned char code = packet >> 5;
-                    unsigned int run = (packet & 31) + 1;
+                    unsigned int runLength = (packet & 31) + 1;
                     ++src;
 
-                    while (skipped + run <= static_cast<unsigned int>(sx)) {
-                        skipped += run;
+                    while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                        skipped += runLength;
                         if (code == eRleControlOutline7)
-                            src += run;
+                            src += runLength;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     }
 
-                    run += skipped - sx;
+                    runLength += skipped - sx;
                     if (code == eRleControlOutline7)
                         src += sx - skipped;
 
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == eRleControlOutline7) {
-                            out -= run;
-                            src += run;
+                            out -= runLength;
+                            src += runLength;
                         } else {
                             switch (code) {
                             case eRleControlShadow75: {
-                                unsigned int count = run;
+                                unsigned int count = runLength;
                                 do {
                                     --out;
                                     *out = ((*out >> 1) & div2mask)
@@ -1827,7 +1866,7 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                                 break;
                             }
                             case eRleControlShadow50: {
-                                unsigned int count = run;
+                                unsigned int count = runLength;
                                 do {
                                     --out;
                                     *out = (*out >> 1) & div2mask;
@@ -1835,16 +1874,16 @@ void CSpriteFrame::DrawAdvObjShadowImpl(int sx, int sy, int sw, int sh,
                                 break;
                             }
                             default:
-                                out -= run;
+                                out -= runLength;
                                 break;
                             }
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         packet = *src;
                         code = packet >> 5;
-                        run = (packet & 31) + 1;
+                        runLength = (packet & 31) + 1;
                         ++src;
                     } while (remaining);
 
@@ -1889,6 +1928,7 @@ void CSpriteFrame::DrawTile(int sx, int sy, int sw, int sh, unsigned short* dst,
         return;
     }
 
+    assert(EncodingMethod == eEncodeTilesetRLE || EncodingMethod == eEncodeRaw);
     Clip(sx, sy, sw, sh, dx, dy, dw, dh, hflip, vflip);
     if (sw > 0) {
         if (sh > 0) {
@@ -1947,41 +1987,42 @@ void CSpriteFrame::DrawTile(int sx, int sy, int sw, int sh, unsigned short* dst,
                             unsigned int skipped = 0;
                             unsigned char packet = *src;
                             unsigned char code = packet >> 5;
-                            unsigned int run = (packet & 31) + 1;
+                            unsigned int runLength = (packet & 31) + 1;
                             ++src;
 
-                            while (skipped + run <=
+                            while (skipped + runLength <=
                                    static_cast<unsigned int>(sx)) {
-                                skipped += run;
+                                skipped += runLength;
                                 if (code == kOpaqueRunCode)
-                                    src += run;
+                                    src += runLength;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             }
-                            run += skipped - sx;
+                            runLength += skipped - sx;
                             if (code == kOpaqueRunCode)
                                 src += sx - skipped;
 
                             unsigned int remaining = sw;
                             do {
-                                if (run > remaining)
-                                    run = remaining;
+                                assert(runLength > 0);
+                                if (runLength > remaining)
+                                    runLength = remaining;
                                 if (code == kOpaqueRunCode) {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *out++ = palette[*src++];
                                     } while (--count);
                                 } else {
-                                    out += run;
+                                    out += runLength;
                                 }
-                                remaining -= run;
+                                remaining -= runLength;
                                 if (!remaining)
                                     break;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             } while (remaining);
                             lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2039,41 +2080,42 @@ void CSpriteFrame::DrawTile(int sx, int sy, int sw, int sh, unsigned short* dst,
                             unsigned int skipped = 0;
                             unsigned char packet = *src;
                             unsigned char code = packet >> 5;
-                            unsigned int run = (packet & 31) + 1;
+                            unsigned int runLength = (packet & 31) + 1;
                             ++src;
 
-                            while (skipped + run <=
+                            while (skipped + runLength <=
                                    static_cast<unsigned int>(sx)) {
-                                skipped += run;
+                                skipped += runLength;
                                 if (code == kOpaqueRunCode)
-                                    src += run;
+                                    src += runLength;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             }
-                            run += skipped - sx;
+                            runLength += skipped - sx;
                             if (code == kOpaqueRunCode)
                                 src += sx - skipped;
 
                             unsigned int remaining = sw;
                             do {
-                                if (run > remaining)
-                                    run = remaining;
+                                assert(runLength > 0);
+                                if (runLength > remaining)
+                                    runLength = remaining;
                                 if (code == kOpaqueRunCode) {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *--out = palette[*src++];
                                     } while (--count);
                                 } else {
-                                    out -= run;
+                                    out -= runLength;
                                 }
-                                remaining -= run;
+                                remaining -= runLength;
                                 if (!remaining)
                                     break;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             } while (remaining);
                             lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2133,41 +2175,42 @@ void CSpriteFrame::DrawTile(int sx, int sy, int sw, int sh, unsigned short* dst,
                             unsigned int skipped = 0;
                             unsigned char packet = *src;
                             unsigned char code = packet >> 5;
-                            unsigned int run = (packet & 31) + 1;
+                            unsigned int runLength = (packet & 31) + 1;
                             ++src;
 
-                            while (skipped + run <=
+                            while (skipped + runLength <=
                                    static_cast<unsigned int>(sx)) {
-                                skipped += run;
+                                skipped += runLength;
                                 if (code == kOpaqueRunCode)
-                                    src += run;
+                                    src += runLength;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             }
-                            run += skipped - sx;
+                            runLength += skipped - sx;
                             if (code == kOpaqueRunCode)
                                 src += sx - skipped;
 
                             unsigned int remaining = sw;
                             do {
-                                if (run > remaining)
-                                    run = remaining;
+                                assert(runLength > 0);
+                                if (runLength > remaining)
+                                    runLength = remaining;
                                 if (code == kOpaqueRunCode) {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *out++ = palette[*src++];
                                     } while (--count);
                                 } else {
-                                    out += run;
+                                    out += runLength;
                                 }
-                                remaining -= run;
+                                remaining -= runLength;
                                 if (!remaining)
                                     break;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             } while (remaining);
                             lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2225,41 +2268,42 @@ void CSpriteFrame::DrawTile(int sx, int sy, int sw, int sh, unsigned short* dst,
                             unsigned int skipped = 0;
                             unsigned char packet = *src;
                             unsigned char code = packet >> 5;
-                            unsigned int run = (packet & 31) + 1;
+                            unsigned int runLength = (packet & 31) + 1;
                             ++src;
 
-                            while (skipped + run <=
+                            while (skipped + runLength <=
                                    static_cast<unsigned int>(sx)) {
-                                skipped += run;
+                                skipped += runLength;
                                 if (code == kOpaqueRunCode)
-                                    src += run;
+                                    src += runLength;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             }
-                            run += skipped - sx;
+                            runLength += skipped - sx;
                             if (code == kOpaqueRunCode)
                                 src += sx - skipped;
 
                             unsigned int remaining = sw;
                             do {
-                                if (run > remaining)
-                                    run = remaining;
+                                assert(runLength > 0);
+                                if (runLength > remaining)
+                                    runLength = remaining;
                                 if (code == kOpaqueRunCode) {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *--out = palette[*src++];
                                     } while (--count);
                                 } else {
-                                    out -= run;
+                                    out -= runLength;
                                 }
-                                remaining -= run;
+                                remaining -= runLength;
                                 if (!remaining)
                                     break;
                                 packet = *src;
                                 code = packet >> 5;
-                                run = (packet & 31) + 1;
+                                runLength = (packet & 31) + 1;
                                 ++src;
                             } while (remaining);
                             lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2321,6 +2365,7 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
     if (EncodingMethod == eEncodeRaw)
         return;
 
+    assert(EncodingMethod == eEncodeTilesetRLE);
     Clip(sx, sy, sw, sh, dx, dy, dw, dh, hflip, vflip);
     if (sw > 0) {
         if (sh > 0) {
@@ -2340,35 +2385,36 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                         unsigned int skipped = 0;
                         unsigned char packet = *src;
                         unsigned char code = packet >> 5;
-                        unsigned int run = (packet & 31) + 1;
+                        unsigned int runLength = (packet & 31) + 1;
                         ++src;
 
-                        while (skipped + run <=
+                        while (skipped + runLength <=
                                static_cast<unsigned int>(sx)) {
-                            skipped += run;
+                            skipped += runLength;
                             if (code == kOpaqueRunCode)
-                                src += run;
+                                src += runLength;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         }
-                        run += skipped - sx;
+                        runLength += skipped - sx;
                         if (code == kOpaqueRunCode)
                             src += sx - skipped;
 
                         unsigned int remaining = sw;
                         do {
-                            if (run > remaining)
-                                run = remaining;
+                            assert(runLength > 0);
+                            if (runLength > remaining)
+                                runLength = remaining;
                             if (code == kOpaqueRunCode) {
-                                out += run;
-                                src += run;
+                                out += runLength;
+                                src += runLength;
                             } else {
                                 switch (code) {
                                 case eRleControlShadow75:
                                 case eRleControlShadow2: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *out = ((*out >> 1) & div2mask)
                                              + ((*out >> 2) & div4mask);
@@ -2378,7 +2424,7 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                 }
                                 case eRleControlShadow3:
                                 case eRleControlShadow50: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         unsigned int color = *out;
                                         *out = (color >> 1) & div2mask;
@@ -2387,16 +2433,16 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                     break;
                                 }
                                 default:
-                                    out += run;
+                                    out += runLength;
                                     break;
                                 }
                             }
-                            remaining -= run;
+                            remaining -= runLength;
                             if (!remaining)
                                 break;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         } while (remaining);
 
@@ -2415,35 +2461,36 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                         unsigned int skipped = 0;
                         unsigned char packet = *src;
                         unsigned char code = packet >> 5;
-                        unsigned int run = (packet & 31) + 1;
+                        unsigned int runLength = (packet & 31) + 1;
                         ++src;
 
-                        while (skipped + run <=
+                        while (skipped + runLength <=
                                static_cast<unsigned int>(sx)) {
-                            skipped += run;
+                            skipped += runLength;
                             if (code == kOpaqueRunCode)
-                                src += run;
+                                src += runLength;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         }
-                        run += skipped - sx;
+                        runLength += skipped - sx;
                         if (code == kOpaqueRunCode)
                             src += sx - skipped;
 
                         unsigned int remaining = sw;
                         do {
-                            if (run > remaining)
-                                run = remaining;
+                            assert(runLength > 0);
+                            if (runLength > remaining)
+                                runLength = remaining;
                             if (code == kOpaqueRunCode) {
-                                out -= run;
-                                src += run;
+                                out -= runLength;
+                                src += runLength;
                             } else {
                                 switch (code) {
                                 case eRleControlShadow75:
                                 case eRleControlShadow2: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         --out;
                                         *out = ((*out >> 1) & div2mask)
@@ -2453,7 +2500,7 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                 }
                                 case eRleControlShadow3:
                                 case eRleControlShadow50: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         --out;
                                         *out = (*out >> 1) & div2mask;
@@ -2461,16 +2508,16 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                     break;
                                 }
                                 default:
-                                    out -= run;
+                                    out -= runLength;
                                     break;
                                 }
                             }
-                            remaining -= run;
+                            remaining -= runLength;
                             if (!remaining)
                                 break;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         } while (remaining);
 
@@ -2491,35 +2538,36 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                         unsigned int skipped = 0;
                         unsigned char packet = *src;
                         unsigned char code = packet >> 5;
-                        unsigned int run = (packet & 31) + 1;
+                        unsigned int runLength = (packet & 31) + 1;
                         ++src;
 
-                        while (skipped + run <=
+                        while (skipped + runLength <=
                                static_cast<unsigned int>(sx)) {
-                            skipped += run;
+                            skipped += runLength;
                             if (code == kOpaqueRunCode)
-                                src += run;
+                                src += runLength;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         }
-                        run += skipped - sx;
+                        runLength += skipped - sx;
                         if (code == kOpaqueRunCode)
                             src += sx - skipped;
 
                         unsigned int remaining = sw;
                         do {
-                            if (run > remaining)
-                                run = remaining;
+                            assert(runLength > 0);
+                            if (runLength > remaining)
+                                runLength = remaining;
                             if (code == kOpaqueRunCode) {
-                                out += run;
-                                src += run;
+                                out += runLength;
+                                src += runLength;
                             } else {
                                 switch (code) {
                                 case eRleControlShadow75:
                                 case eRleControlShadow2: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         *out = ((*out >> 1) & div2mask)
                                              + ((*out >> 2) & div4mask);
@@ -2529,7 +2577,7 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                 }
                                 case eRleControlShadow3:
                                 case eRleControlShadow50: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         unsigned int color = *out;
                                         *out = (color >> 1) & div2mask;
@@ -2538,16 +2586,16 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                     break;
                                 }
                                 default:
-                                    out += run;
+                                    out += runLength;
                                     break;
                                 }
                             }
-                            remaining -= run;
+                            remaining -= runLength;
                             if (!remaining)
                                 break;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         } while (remaining);
 
@@ -2566,35 +2614,36 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                         unsigned int skipped = 0;
                         unsigned char packet = *src;
                         unsigned char code = packet >> 5;
-                        unsigned int run = (packet & 31) + 1;
+                        unsigned int runLength = (packet & 31) + 1;
                         ++src;
 
-                        while (skipped + run <=
+                        while (skipped + runLength <=
                                static_cast<unsigned int>(sx)) {
-                            skipped += run;
+                            skipped += runLength;
                             if (code == kOpaqueRunCode)
-                                src += run;
+                                src += runLength;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         }
-                        run += skipped - sx;
+                        runLength += skipped - sx;
                         if (code == kOpaqueRunCode)
                             src += sx - skipped;
 
                         unsigned int remaining = sw;
                         do {
-                            if (run > remaining)
-                                run = remaining;
+                            assert(runLength > 0);
+                            if (runLength > remaining)
+                                runLength = remaining;
                             if (code == kOpaqueRunCode) {
-                                out -= run;
-                                src += run;
+                                out -= runLength;
+                                src += runLength;
                             } else {
                                 switch (code) {
                                 case eRleControlShadow75:
                                 case eRleControlShadow2: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         --out;
                                         *out = ((*out >> 1) & div2mask)
@@ -2604,7 +2653,7 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                 }
                                 case eRleControlShadow3:
                                 case eRleControlShadow50: {
-                                    unsigned int count = run;
+                                    unsigned int count = runLength;
                                     do {
                                         --out;
                                         *out = (*out >> 1) & div2mask;
@@ -2612,16 +2661,16 @@ void CSpriteFrame::DrawTileShadow(int sx, int sy, int sw, int sh,
                                     break;
                                 }
                                 default:
-                                    out -= run;
+                                    out -= runLength;
                                     break;
                                 }
                             }
-                            remaining -= run;
+                            remaining -= runLength;
                             if (!remaining)
                                 break;
                             packet = *src;
                             code = packet >> 5;
-                            run = (packet & 31) + 1;
+                            runLength = (packet & 31) + 1;
                             ++src;
                         } while (remaining);
 
@@ -2679,6 +2728,7 @@ void CSpriteFrame::DrawSpellEffect(int sx, int sy, int sw, int sh,
         return;
     }
 
+    assert(EncodingMethod == eEncodeGeneralRLE);
     const unsigned int* lineOffset;
     // DC 0x77664 local palette, bound after the line table at line 3811.
     const unsigned short* palette;
@@ -2703,26 +2753,28 @@ void CSpriteFrame::DrawSpellEffect(int sx, int sy, int sw, int sh,
                 unsigned int skipped = 0;
                 const unsigned char* src = map + lineOffset[y];
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             *out = (div2mask
                                     & (palette[*src++] >> 1))
@@ -2730,13 +2782,13 @@ void CSpriteFrame::DrawSpellEffect(int sx, int sy, int sw, int sh,
                             ++out;
                         } while (--count);
                     } else {
-                        out += run;
+                        out += runLength;
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2753,26 +2805,28 @@ void CSpriteFrame::DrawSpellEffect(int sx, int sy, int sw, int sh,
                 unsigned int skipped = 0;
                 const unsigned char* src = map + lineOffset[y];
                 unsigned char code = *src++;
-                unsigned int run = *src++ + 1;
+                unsigned int runLength = *src++ + 1;
+                assert(runLength > 0);
 
-                while (skipped + run <= static_cast<unsigned int>(sx)) {
-                    skipped += run;
+                while (skipped + runLength <= static_cast<unsigned int>(sx)) {
+                    skipped += runLength;
                     if (code == kOpaqueRunCode)
-                        src += run;
+                        src += runLength;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 }
 
-                run += skipped - sx;
+                runLength += skipped - sx;
                 if (code == kOpaqueRunCode)
                     src += sx - skipped;
 
                 unsigned int remaining = sw;
                 do {
-                    if (run > remaining)
-                        run = remaining;
+                    assert(runLength > 0);
+                    if (runLength > remaining)
+                        runLength = remaining;
                     if (code == kOpaqueRunCode) {
-                        unsigned int count = run;
+                        unsigned int count = runLength;
                         do {
                             --out;
                             *out = (div2mask
@@ -2780,13 +2834,13 @@ void CSpriteFrame::DrawSpellEffect(int sx, int sy, int sw, int sh,
                                  + (div2mask & (*out >> 1));
                         } while (--count);
                     } else {
-                        out -= run;
+                        out -= runLength;
                     }
-                    remaining -= run;
+                    remaining -= runLength;
                     if (!remaining)
                         break;
                     code = *src++;
-                    run = *src++ + 1;
+                    runLength = *src++ + 1;
                 } while (remaining);
 
                 lineDst = static_cast<unsigned short*>(static_cast<void*>(
@@ -2874,9 +2928,11 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled50(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal, unsigned short flagcolor) const
 {
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     ClipScaled50(sx, sy, sw, sh, dx, dy, dw, dh, 0, 0);
     if (sw <= 0 || sh <= 0)
         return;
+    assert(CroppedWidth % kCellWidth == 0);
     unsigned int cellsPerLine = CroppedWidth >> 5;
     const unsigned short* const cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
     const unsigned short* const palette = pal.Palette;
@@ -2886,28 +2942,29 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled50(int sx, int sy, int sw, int sh,
         const unsigned char* source = map + cellOffset[y * cellsPerLine + (sx >> 5)];
         unsigned int x = sx & ~31;
         unsigned char code;
-        unsigned int run;
+        unsigned int runLength;
         while (1) {
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
-            if (x + run > static_cast<unsigned int>(sx)) {
-                run -= sx - x;
+            runLength = (control & 31) + 1;
+            if (x + runLength > static_cast<unsigned int>(sx)) {
+                runLength -= sx - x;
                 if (code == ePackedRleLiteral)
                     source += sx - x;
                 break;
             }
-            x += run;
+            x += runLength;
             if (code == ePackedRleLiteral)
-                source += run;
+                source += runLength;
         }
         unsigned int skip = 0;
         unsigned int remaining = sw;
         do {
-            if (run > remaining)
-                run = remaining;
+            assert(runLength > 0);
+            if (runLength > remaining)
+                runLength = remaining;
             if (code == ePackedRleLiteral) {
-                unsigned int count = run;
+                unsigned int count = runLength;
                 if (skip) {
                     ++source;
                     --count;
@@ -2922,7 +2979,7 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled50(int sx, int sy, int sw, int sh,
                 if (skip)
                     *out++ = palette[*source++];
             } else if (code == eRleControlOutline5 && flagcolor) {
-                unsigned int count = run;
+                unsigned int count = runLength;
                 if (skip)
                     --count;
                 while (count > 1) {
@@ -2933,18 +2990,18 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled50(int sx, int sy, int sw, int sh,
                 if (skip)
                     *out++ = flagcolor;
             } else {
-                unsigned int count = run;
+                unsigned int count = runLength;
                 if (skip)
                     --count;
                 out += (count + 1) >> 1;
                 skip = count & 1;
             }
-            remaining -= run;
+            remaining -= runLength;
             if (!remaining)
                 break;
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
+            runLength = (control & 31) + 1;
         } while (remaining);
         lineDst += dpitch;
     }
@@ -2956,9 +3013,11 @@ void CSpriteFrame::DrawAdvObjShadowScaled50(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal) const
 {
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     ClipScaled50(sx, sy, sw, sh, dx, dy, dw, dh, 0, 0);
     if (sw <= 0 || sh <= 0)
         return;
+    assert(CroppedWidth % kCellWidth == 0);
     unsigned int cellsPerLine = CroppedWidth >> 5;
     const unsigned short* const cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
     unsigned char* lineDst = static_cast<unsigned char*>(static_cast<void*>(dst)) + dy * dpitch + dx * 2;
@@ -2967,37 +3026,38 @@ void CSpriteFrame::DrawAdvObjShadowScaled50(int sx, int sy, int sw, int sh,
         const unsigned char* source = map + cellOffset[y * cellsPerLine + (sx >> 5)];
         unsigned int x = sx & ~31;
         unsigned char code;
-        unsigned int run;
+        unsigned int runLength;
         while (1) {
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
-            if (x + run > static_cast<unsigned int>(sx)) {
-                run -= sx - x;
+            runLength = (control & 31) + 1;
+            if (x + runLength > static_cast<unsigned int>(sx)) {
+                runLength -= sx - x;
                 if (code == ePackedRleLiteral)
                     source += sx - x;
                 break;
             }
-            x += run;
+            x += runLength;
             if (code == ePackedRleLiteral)
-                source += run;
+                source += runLength;
         }
         unsigned int skip = 0;
         unsigned int remaining = sw;
         do {
-            if (run > remaining)
-                run = remaining;
+            assert(runLength > 0);
+            if (runLength > remaining)
+                runLength = remaining;
             if (code == ePackedRleLiteral) {
-                unsigned int count = run;
+                unsigned int count = runLength;
                 if (skip)
                     --count;
                 out += (count + 1) >> 1;
                 skip = count & 1;
-                source += run;
+                source += runLength;
             } else {
                 switch (code) {
                 case eRleControlShadow75: {
-                    unsigned int count = run;
+                    unsigned int count = runLength;
                     if (skip)
                         --count;
                     while (count > 1) {
@@ -3013,7 +3073,7 @@ void CSpriteFrame::DrawAdvObjShadowScaled50(int sx, int sy, int sw, int sh,
                     break;
                 }
                 case eRleControlShadow50: {
-                    unsigned int count = run;
+                    unsigned int count = runLength;
                     if (skip)
                         --count;
                     while (count > 1) {
@@ -3029,7 +3089,7 @@ void CSpriteFrame::DrawAdvObjShadowScaled50(int sx, int sy, int sw, int sh,
                     break;
                 }
                 default: {
-                    unsigned int count = run;
+                    unsigned int count = runLength;
                     if (skip)
                         --count;
                     out += (count + 1) >> 1;
@@ -3038,12 +3098,12 @@ void CSpriteFrame::DrawAdvObjShadowScaled50(int sx, int sy, int sw, int sh,
                 }
                 }
             }
-            remaining -= run;
+            remaining -= runLength;
             if (!remaining)
                 break;
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
+            runLength = (control & 31) + 1;
         } while (remaining);
         lineDst += dpitch;
     }
@@ -3055,6 +3115,7 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal, bool hflip, bool vflip) const
 {
+    assert(EncodingMethod == eEncodeTilesetRLE || EncodingMethod == eEncodeRaw);
     ClipScaled50(sx, sy, sw, sh, dx, dy, dw, dh, hflip, vflip);
     if (sw <= 0 || sh <= 0)
         return;
@@ -3085,28 +3146,29 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip) {
                                 ++source;
                                 --count;
@@ -3120,18 +3182,18 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                             if (skip)
                                 *out++ = palette[*source++];
                         } else {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip)
                                 --count;
                             out += (count + 1) >> 1;
                             skip = count & 1;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst += dpitch;
                 }
@@ -3160,28 +3222,29 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip) {
                                 ++source;
                                 --count;
@@ -3195,18 +3258,18 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                             if (skip)
                                 *--out = palette[*source++];
                         } else {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip)
                                 --count;
                             out -= (count + 1) >> 1;
                             skip = count & 1;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst += dpitch;
                 }
@@ -3237,28 +3300,29 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip) {
                                 ++source;
                                 --count;
@@ -3272,18 +3336,18 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                             if (skip)
                                 *out++ = palette[*source++];
                         } else {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip)
                                 --count;
                             out += (count + 1) >> 1;
                             skip = count & 1;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst -= dpitch;
                 }
@@ -3312,28 +3376,29 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip) {
                                 ++source;
                                 --count;
@@ -3347,18 +3412,18 @@ void CSpriteFrame::DrawTileScaled50(int sx, int sy, int sw, int sh,
                             if (skip)
                                 *--out = palette[*source++];
                         } else {
-                            unsigned int count = run;
+                            unsigned int count = runLength;
                             if (skip)
                                 --count;
                             out -= (count + 1) >> 1;
                             skip = count & 1;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst -= dpitch;
                 }
@@ -3445,9 +3510,11 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled25(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal, unsigned short flagcolor) const
 {
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     ClipScaled25(sx, sy, sw, sh, dx, dy, dw, dh, 0, 0);
     if (sw <= 0 || sh <= 0)
         return;
+    assert(CroppedWidth % kCellWidth == 0);
     unsigned int cellsPerLine = CroppedWidth >> 5;
     const unsigned short* const cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
     const unsigned short* const palette = pal.Palette;
@@ -3457,29 +3524,30 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled25(int sx, int sy, int sw, int sh,
         const unsigned char* source = map + cellOffset[y * cellsPerLine + (sx >> 5)];
         unsigned int x = sx & ~31;
         unsigned char code;
-        unsigned int run;
+        unsigned int runLength;
         while (1) {
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
-            if (x + run > static_cast<unsigned int>(sx)) {
-                run -= sx - x;
+            runLength = (control & 31) + 1;
+            if (x + runLength > static_cast<unsigned int>(sx)) {
+                runLength -= sx - x;
                 if (code == ePackedRleLiteral)
                     source += sx - x;
                 break;
             }
-            x += run;
+            x += runLength;
             if (code == ePackedRleLiteral)
-                source += run;
+                source += runLength;
         }
         unsigned int skip = 0;
         unsigned int remaining = sw;
         do {
-            if (run > remaining)
-                run = remaining;
+            assert(runLength > 0);
+            if (runLength > remaining)
+                runLength = remaining;
             if (code == ePackedRleLiteral) {
-                if (run > skip) {
-                    unsigned int count = run - skip;
+                if (runLength > skip) {
+                    unsigned int count = runLength - skip;
                     source += skip;
                     while (count > 3) {
                         *out = palette[*source];
@@ -3496,12 +3564,12 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled25(int sx, int sy, int sw, int sh,
                         skip = 0;
                     }
                 } else {
-                    source += run;
-                    skip -= run;
+                    source += runLength;
+                    skip -= runLength;
                 }
-            } else if (run > skip) {
+            } else if (runLength > skip) {
                 if (code == eRleControlOutline5 && flagcolor) {
-                    unsigned int count = run - skip;
+                    unsigned int count = runLength - skip;
                     while (count > 3) {
                         *out++ = flagcolor;
                         // DC 5012 subtracts two even in this quarter-size path.
@@ -3514,20 +3582,20 @@ void CSpriteFrame::DrawAdvObjWithFlagScaled25(int sx, int sy, int sw, int sh,
                         skip = 0;
                     }
                 } else {
-                    unsigned int count = run - skip;
+                    unsigned int count = runLength - skip;
                     out += (count + 3) >> 2;
                     skip = count & 3;
                     skip = skip ? 4 - skip : 0;
                 }
             } else {
-                skip -= run;
+                skip -= runLength;
             }
-            remaining -= run;
+            remaining -= runLength;
             if (!remaining)
                 break;
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
+            runLength = (control & 31) + 1;
         } while (remaining);
         lineDst += dpitch;
     }
@@ -3539,9 +3607,11 @@ void CSpriteFrame::DrawAdvObjShadowScaled25(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal) const
 {
+    assert(EncodingMethod == eEncodeAdvObjRLE);
     ClipScaled25(sx, sy, sw, sh, dx, dy, dw, dh, 0, 0);
     if (sw <= 0 || sh <= 0)
         return;
+    assert(CroppedWidth % kCellWidth == 0);
     unsigned int cellsPerLine = CroppedWidth >> 5;
     const unsigned short* const cellOffset = static_cast<const unsigned short*>(static_cast<const void*>(map));
     unsigned char* lineDst = static_cast<unsigned char*>(static_cast<void*>(dst)) + dy * dpitch + dx * 2;
@@ -3550,40 +3620,41 @@ void CSpriteFrame::DrawAdvObjShadowScaled25(int sx, int sy, int sw, int sh,
         const unsigned char* source = map + cellOffset[y * cellsPerLine + (sx >> 5)];
         unsigned int x = sx & ~31;
         unsigned char code;
-        unsigned int run;
+        unsigned int runLength;
         while (1) {
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
-            if (x + run > static_cast<unsigned int>(sx)) {
-                run -= sx - x;
+            runLength = (control & 31) + 1;
+            if (x + runLength > static_cast<unsigned int>(sx)) {
+                runLength -= sx - x;
                 if (code == ePackedRleLiteral)
                     source += sx - x;
                 break;
             }
-            x += run;
+            x += runLength;
             if (code == ePackedRleLiteral)
-                source += run;
+                source += runLength;
         }
         unsigned int skip = 0;
         unsigned int remaining = sw;
         do {
-            if (run > remaining)
-                run = remaining;
+            assert(runLength > 0);
+            if (runLength > remaining)
+                runLength = remaining;
             if (code == ePackedRleLiteral) {
-                if (run > skip) {
-                    unsigned int count = run - skip;
+                if (runLength > skip) {
+                    unsigned int count = runLength - skip;
                     out += (count + 3) >> 2;
                     skip = count & 3;
                     skip = skip ? 4 - skip : 0;
                 } else {
-                    skip -= run;
+                    skip -= runLength;
                 }
-                source += run;
-            } else if (run > skip) {
+                source += runLength;
+            } else if (runLength > skip) {
                 switch (code) {
                 case eRleControlShadow75: {
-                    unsigned int count = run - skip;
+                    unsigned int count = runLength - skip;
                     while (count > 3) {
                         *out = ((*out >> 1) & div2mask) + ((*out >> 2) & div4mask);
                         ++out;
@@ -3599,7 +3670,7 @@ void CSpriteFrame::DrawAdvObjShadowScaled25(int sx, int sy, int sw, int sh,
                     break;
                 }
                 case eRleControlShadow50: {
-                    unsigned int count = run - skip;
+                    unsigned int count = runLength - skip;
                     while (count > 3) {
                         *out = (*out >> 1) & div2mask;
                         ++out;
@@ -3615,7 +3686,7 @@ void CSpriteFrame::DrawAdvObjShadowScaled25(int sx, int sy, int sw, int sh,
                     break;
                 }
                 default: {
-                    unsigned int count = run - skip;
+                    unsigned int count = runLength - skip;
                     out += (count + 3) >> 2;
                     skip = count & 3;
                     skip = skip ? 4 - skip : 0;
@@ -3623,14 +3694,14 @@ void CSpriteFrame::DrawAdvObjShadowScaled25(int sx, int sy, int sw, int sh,
                 }
                 }
             } else {
-                skip -= run;
+                skip -= runLength;
             }
-            remaining -= run;
+            remaining -= runLength;
             if (!remaining)
                 break;
             unsigned char control = *source++;
             code = control >> 5;
-            run = (control & 31) + 1;
+            runLength = (control & 31) + 1;
         } while (remaining);
         lineDst += dpitch;
     }
@@ -3642,6 +3713,7 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
     unsigned short* dst, int dx, int dy, int dw, int dh, int dpitch,
     TPalette16& pal, bool hflip, bool vflip) const
 {
+    assert(EncodingMethod == eEncodeTilesetRLE || EncodingMethod == eEncodeRaw);
     ClipScaled25(sx, sy, sw, sh, dx, dy, dw, dh, hflip, vflip);
     if (sw <= 0 || sh <= 0)
         return;
@@ -3672,29 +3744,30 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            if (run > skip) {
-                                unsigned int count = run - skip;
+                            if (runLength > skip) {
+                                unsigned int count = runLength - skip;
                                 source += skip;
                                 while (count > 3) {
                                     *out++ = palette[*source];
@@ -3709,23 +3782,23 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                                     skip = 0;
                                 }
                             } else {
-                                source += run;
-                                skip -= run;
+                                source += runLength;
+                                skip -= runLength;
                             }
-                        } else if (run > skip) {
-                            unsigned int count = run - skip;
+                        } else if (runLength > skip) {
+                            unsigned int count = runLength - skip;
                             out += (count + 3) >> 2;
                             skip = count & 3;
                             skip = skip ? 4 - skip : 0;
                         } else {
-                            skip -= run;
+                            skip -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst += dpitch;
                 }
@@ -3754,29 +3827,30 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            if (run > skip) {
-                                unsigned int count = run - skip;
+                            if (runLength > skip) {
+                                unsigned int count = runLength - skip;
                                 source += skip;
                                 while (count > 3) {
                                     *--out = palette[*source];
@@ -3791,23 +3865,23 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                                     skip = 0;
                                 }
                             } else {
-                                source += run;
-                                skip -= run;
+                                source += runLength;
+                                skip -= runLength;
                             }
-                        } else if (run > skip) {
-                            unsigned int count = run - skip;
+                        } else if (runLength > skip) {
+                            unsigned int count = runLength - skip;
                             out -= (count + 3) >> 2;
                             skip = count & 3;
                             skip = skip ? 4 - skip : 0;
                         } else {
-                            skip -= run;
+                            skip -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst += dpitch;
                 }
@@ -3838,29 +3912,30 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            if (run > skip) {
-                                unsigned int count = run - skip;
+                            if (runLength > skip) {
+                                unsigned int count = runLength - skip;
                                 source += skip;
                                 while (count > 3) {
                                     *out++ = palette[*source];
@@ -3875,23 +3950,23 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                                     skip = 0;
                                 }
                             } else {
-                                source += run;
-                                skip -= run;
+                                source += runLength;
+                                skip -= runLength;
                             }
-                        } else if (run > skip) {
-                            unsigned int count = run - skip;
+                        } else if (runLength > skip) {
+                            unsigned int count = runLength - skip;
                             out += (count + 3) >> 2;
                             skip = count & 3;
                             skip = skip ? 4 - skip : 0;
                         } else {
-                            skip -= run;
+                            skip -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst -= dpitch;
                 }
@@ -3920,29 +3995,30 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                     unsigned short* out = static_cast<unsigned short*>(static_cast<void*>(lineDst));
                     unsigned int x = 0;
                     unsigned char code;
-                    unsigned int run;
+                    unsigned int runLength;
                     while (1) {
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
-                        if (x + run > static_cast<unsigned int>(sx)) {
-                            run -= sx - x;
+                        runLength = (control & 31) + 1;
+                        if (x + runLength > static_cast<unsigned int>(sx)) {
+                            runLength -= sx - x;
                             if (code == ePackedRleLiteral)
                                 source += sx - x;
                             break;
                         }
-                        x += run;
+                        x += runLength;
                         if (code == ePackedRleLiteral)
-                            source += run;
+                            source += runLength;
                     }
                     unsigned int skip = 0;
                     unsigned int remaining = sw;
                     do {
-                        if (run > remaining)
-                            run = remaining;
+                        assert(runLength > 0);
+                        if (runLength > remaining)
+                            runLength = remaining;
                         if (code == ePackedRleLiteral) {
-                            if (run > skip) {
-                                unsigned int count = run - skip;
+                            if (runLength > skip) {
+                                unsigned int count = runLength - skip;
                                 source += skip;
                                 while (count > 3) {
                                     *--out = palette[*source];
@@ -3957,23 +4033,23 @@ void CSpriteFrame::DrawTileScaled25(int sx, int sy, int sw, int sh,
                                     skip = 0;
                                 }
                             } else {
-                                source += run;
-                                skip -= run;
+                                source += runLength;
+                                skip -= runLength;
                             }
-                        } else if (run > skip) {
-                            unsigned int count = run - skip;
+                        } else if (runLength > skip) {
+                            unsigned int count = runLength - skip;
                             out -= (count + 3) >> 2;
                             skip = count & 3;
                             skip = skip ? 4 - skip : 0;
                         } else {
-                            skip -= run;
+                            skip -= runLength;
                         }
-                        remaining -= run;
+                        remaining -= runLength;
                         if (!remaining)
                             break;
                         unsigned char control = *source++;
                         code = control >> 5;
-                        run = (control & 31) + 1;
+                        runLength = (control & 31) + 1;
                     } while (remaining);
                     lineDst -= dpitch;
                 }
