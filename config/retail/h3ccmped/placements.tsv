@@ -325,7 +325,7 @@ rva	size	kind	name	unit	evidence
 0x00016e10	0x3b	func	??6TRawOStream@@QAEAAV0@ABH@Z	CampaignDoc	masked body (59 bytes, 3 relocations) unique at a census start
 0x00016e80	0x8	func	??_ETStrGzInflateBuf@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@WFE@AEPAXI@Z	CampaignDoc	vtable ??_7TStrGzInflateBuf@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@6BTGzInflateBuf@@@ stored by 0x00010d70 slot 0
 0x00016e90	0x8	func	??_ETGzDeflatedScenarioMap@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@WBA@AEPAXI@Z	CampaignDoc	vtable ??_7TGzDeflatedScenarioMap@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@6BTCampaignScenarioMap@@@ stored by 0x00010c30 slot 0
-0x00018da0	0x167	func	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	gzinflatebuf	referenced by ??0TCampaignMapWnd@@QAE@PAVCWnd@@PAVTCampaignMapWndClient@@@Z at +0x12c
+0x00018da0	0x167	func	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	gzinflatebuf	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0xa0
 0x00019100	0x31d	func	?initializeCampaignMapTraitsTable@@YAEXZ	campaignmap	masked body (797 bytes, 28 relocations) unique at a census start
 0x00019420	0x16	func	__h3cg$campaignmap$static_dtor$campaignNames	campaignmap	referenced by ?initializeCampaignMapTraitsTable@@YAEXZ at +0x24
 0x0001af10	0x1e	func	??_GCMenu@@UAEPAXI@Z	CampaignMapWnd	vtable of CMenu (RTTI) slot 1
@@ -400,6 +400,8 @@ rva	size	kind	name	unit	evidence
 0x00024bf0	0xe0	func	?_Xran@?$bitset@$08@std@@ABEXXZ	Campaign	referenced by ??4reference@?$bitset@$08@std@@QAEAAV012@_N@Z at +0x12
 0x00024db0	0x3b	func	??5TRawIStream@@QAEAAV0@AAF@Z	Campaign	masked body (59 bytes, 3 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x00024df0	0x3b	func	??5TRawIStream@@QAEAAV0@AAY0BE@E@Z	Campaign	masked body (59 bytes, 3 relocations) unique at a census start
+0x00024e60	0x1cf	func	?InitializeGameResourceTypeTraitsTable@@YAXXZ	GameResource	masked body (463 bytes, 32 relocations) unique at a census start
+0x00025030	0x16	func	__h3cg$GameResource$static_dtor$pNames	GameResource	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0x24
 0x00025080	0x1ab	func	??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z	gzinflatebuf	masked body (427 bytes, 28 relocations) unique at a census start
 0x00025230	0x1e	func	??_GTGzDeflateBuf@@UAEPAXI@Z	gzinflatebuf	vtable of TGzDeflateBuf (RTTI) slot 0
 0x00025250	0x123	func	??1TGzDeflateBuf@@UAE@XZ	gzinflatebuf	masked body (291 bytes, 14 relocations) unique at a census start
@@ -462,6 +464,8 @@ rva	size	kind	name	unit	evidence
 0x00029bc0	0x14	func	__h3cg$Player$static_dtor$aColorNames	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x7d
 0x00029be0	0x14	func	__h3cg$Player$static_dtor$aNames	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x44
 0x00029c00	0xb	func	??_F?$TAutoArrayPtr@D@@QAEXXZ	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x2a
+0x00029c40	0x1cf	func	?InitializePrimarySkillTraitsTable@@YAXXZ	PrimarySkillTraits	masked body (463 bytes, 32 relocations) unique at a census start
+0x00029e10	0x16	func	__h3cg$PrimarySkillTraits$static_dtor$pNames	PrimarySkillTraits	referenced by ?InitializePrimarySkillTraitsTable@@YAXXZ at +0x24
 0x0002a9d0	0x25	func	?_Tidy@?$bitset@$0JB@@std@@AAEXK@Z	ScenarioPropsCrossoverPage	masked body (37 bytes, 0 relocations) unique at a census start
 0x0002aa00	0x1e	func	??_GCCheckListBox@@UAEPAXI@Z	ScenarioPropsCrossoverPage	vtable of CCheckListBox (RTTI) slot 1
 0x0002aa20	0x5	func	??1CCheckListBox@@UAE@XZ	ScenarioPropsCrossoverPage	referenced by ??_GCCheckListBox@@UAEPAXI@Z at +0x4
@@ -478,13 +482,101 @@ rva	size	kind	name	unit	evidence
 0x0002fa60	0x12	func	?create@TScenarioOptionsCrossoverScenarioDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400@@UAEHPAVCWnd@@@Z	ScenarioPropsStartingOptionsPage	masked body (18 bytes, 1 relocations) unique at a census start
 0x00030800	0x12	func	?create@TScenarioOptionsStartingHeroDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400@@UAEHPAVCWnd@@@Z	ScenarioPropsStartingOptionsPage	masked body (18 bytes, 1 relocations) unique at a census start
 0x00032210	0x243	func	?insert@?$vector@UTChoice@TScenarioOptionsCrossoverScenario@@V?$allocator@UTChoice@TScenarioOptionsCrossoverScenario@@@std@@@std@@QAEXPAUTChoice@TScenarioOptionsCrossoverScenario@@IABU34@@Z	ScenarioPropsStartingOptionsPage	masked body (579 bytes, 2 relocations) unique at a census start; ICF-folded with 1 identical bodies
+0x00032490	0x1cf	func	?InitializeSkillMasteryTraitsTable@@YAXXZ	SkillMasteryTraits	masked body (463 bytes, 32 relocations) unique at a census start
+0x00032660	0x16	func	__h3cg$SkillMasteryTraits$static_dtor$pNames	SkillMasteryTraits	referenced by ?InitializeSkillMasteryTraitsTable@@YAXXZ at +0x24
 0x000326b0	0xa8	func	?InitializeSpellTraitsTable@@YAEXZ	spelldefs	masked body (168 bytes, 5 relocations) unique at a census start
 0x00032760	0x343	func	?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	spelldefs	masked body (835 bytes, 37 relocations) unique at a census start
 0x00032ab0	0x17	func	__h3cg$spelldefs$static_dtor$spellDescriptions	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x29a
 0x00032ad0	0x14	func	__h3cg$spelldefs$static_dtor$abbreviatedSpellNames	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0xd6
 0x00032af0	0x14	func	__h3cg$spelldefs$static_dtor$spellNames	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x48
+0x00032b40	0x203	func	?initialize@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@SAXXZ	TownTypeTraits	masked body (515 bytes, 34 relocations) unique at a census start
+0x00032d50	0x16	func	__h3cg$TownTypeTraits$static_dtor$pNames	TownTypeTraits	referenced by 0x00032b40 at +0x24
+0x00032d80	0x436	func	__h3cg$TownTypeTraits$static_ctor$aCastleBuildingTraits	TownTypeTraits	masked body (1078 bytes, 137 relocations) unique at a census start
+0x000331c0	0x19	func	??0TBuildingTraits@TTown@@QAE@W4TBuilding@@@Z	TownTypeTraits	masked body (25 bytes, 0 relocations) unique at a census start
+0x000331f0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033210	0x19	func	?getBaseCreatureName@TAbsoluteGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@UBEPBDXZ	TownTypeTraits	masked body (25 bytes, 1 relocations) unique at a census start
+0x00033230	0x19	func	?getUpgradeCreatureName@TAbsoluteGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@UBEPBDXZ	TownTypeTraits	masked body (25 bytes, 1 relocations) unique at a census start
+0x00033260	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033290	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000332c0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000332f0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033320	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033350	0x1f	func	__h3cg$TownTypeTraits$static_ctor$castleGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033380	0x435	func	__h3cg$TownTypeTraits$static_ctor$aRampartBuildingTraits	TownTypeTraits	masked body (1077 bytes, 137 relocations) unique at a census start
+0x000337d0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033800	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033830	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033860	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033890	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000338c0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000338f0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$rampartGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033920	0x42f	func	__h3cg$TownTypeTraits$static_ctor$aTowerBuildingTraits	TownTypeTraits	masked body (1071 bytes, 137 relocations) unique at a census start
+0x00033d60	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033d90	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033dc0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033df0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033e20	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033e50	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033e80	0x1f	func	__h3cg$TownTypeTraits$static_ctor$towerGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00033eb0	0x430	func	__h3cg$TownTypeTraits$static_ctor$aInfernoBuildingTraits	TownTypeTraits	masked body (1072 bytes, 137 relocations) unique at a census start
+0x000342f0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034320	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034350	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034380	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000343b0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000343e0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034410	0x1f	func	__h3cg$TownTypeTraits$static_ctor$infernoGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034440	0x432	func	__h3cg$TownTypeTraits$static_ctor$aNecropolisBuildingTraits	TownTypeTraits	masked body (1074 bytes, 137 relocations) unique at a census start
+0x00034890	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000348c0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000348f0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034920	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034950	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034980	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000349b0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$necropolisGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000349e0	0x42e	func	__h3cg$TownTypeTraits$static_ctor$aDungeonBuildingTraits	TownTypeTraits	masked body (1070 bytes, 137 relocations) unique at a census start
+0x00034e20	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034e50	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034e80	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034eb0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034ee0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034f10	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034f40	0x1f	func	__h3cg$TownTypeTraits$static_ctor$dungeonGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00034f70	0x42e	func	__h3cg$TownTypeTraits$static_ctor$aStrongholdBuildingTraits	TownTypeTraits	masked body (1070 bytes, 137 relocations) unique at a census start
+0x000353b0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000353e0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035410	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035440	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035470	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000354a0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000354d0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$strongholdGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035500	0x42a	func	__h3cg$TownTypeTraits$static_ctor$aFortressBuildingTraits	TownTypeTraits	masked body (1066 bytes, 137 relocations) unique at a census start
+0x00035940	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035970	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000359a0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x000359d0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035a00	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035a30	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035a60	0x1f	func	__h3cg$TownTypeTraits$static_ctor$fortressGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035a90	0x42c	func	__h3cg$TownTypeTraits$static_ctor$aConfluxBuildingTraits	TownTypeTraits	masked body (1068 bytes, 137 relocations) unique at a census start
+0x00035ed0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator1	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035f00	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator2	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035f30	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator3	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035f60	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator4	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035f90	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator5	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035fc0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator6	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00035ff0	0x1f	func	__h3cg$TownTypeTraits$static_ctor$confluxGenerator7	TownTypeTraits	masked body (31 bytes, 4 relocations) unique at a census start
+0x00036020	0x42b	func	__h3cg$TownTypeTraits$static_ctor$aRandomBuildingTraits	TownTypeTraits	masked body (1067 bytes, 137 relocations) unique at a census start
+0x00036480	0xb	func	?getBaseCreatureName@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@UBEPBDXZ	TownTypeTraits	vtable of TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698 (RTTI) slot 0
+0x00036490	0xb	func	?getUpgradeCreatureName@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@UBEPBDXZ	TownTypeTraits	vtable of TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698 (RTTI) slot 1
+0x000365d0	0x13d	func	__h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp	TownTypeTraits	masked body (317 bytes, 50 relocations) unique at a census start
+0x00036710	0x710	func	?InitializeTownTypeTraitsTable@@YAXXZ	TownTypeTraits	referenced by ?InitInstance@TCampaignEditorApp@@UAEHXZ at +0x447
+0x00036e20	0x14	func	__h3cg$TownTypeTraits$static_dtor$apTextTable	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x2d9
+0x00036e40	0x16	func	__h3cg$TownTypeTraits$static_dtor$pRandomName	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x21e
+0x00036e60	0x16	func	__h3cg$TownTypeTraits$static_dtor$pTypeNames	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x27
+0x00036e80	0x14	func	??_F?$vector@PADV?$allocator@PAD@std@@@std@@QAEXXZ	TownTypeTraits	masked body (20 bytes, 0 relocations) unique at a census start
 0x00036ea0	0x22	func	??1?$vector@HV?$allocator@H@std@@@std@@QAE@XZ	resourcemanager	masked body (34 bytes, 1 relocations) unique at a census start; ICF-folded with 2 identical bodies
-0x00036ed0	0x11	func	?_Construct@std@@YAXPAHABH@Z	resourcemanager	masked body (17 bytes, 0 relocations) unique at a census start
+0x00036ed0	0x11	func	?_Construct@std@@YAXPAHABH@Z	resourcemanager	masked body (17 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x0003e8e0	0x1f9	func	@deflateInit2_@32	deflate	masked body (505 bytes, 6 relocations) unique at a census start
 0x0003eae0	0x6e	func	@deflateReset@4	deflate	masked body (110 bytes, 2 relocations) unique at a census start
 0x0003eb50	0x2a7	func	@deflate@8	deflate	masked body (679 bytes, 15 relocations) unique at a census start
@@ -591,7 +683,7 @@ rva	size	kind	name	unit	evidence
 0x00047290	0x20	func	?setg@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXPAD00@Z	resourcemanager	masked body (32 bytes, 0 relocations) unique at a census start
 0x000472b0	0x1e1	func	?str@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ	resourcemanager	masked body (481 bytes, 21 relocations) unique at a census start
 0x000474a0	0x28	func	?_Tidy@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEXXZ	resourcemanager	masked body (40 bytes, 1 relocations) unique at a census start
-0x000474d0	0x13	func	?size@?$vector@HV?$allocator@H@std@@@std@@QBEIXZ	resourcemanager	masked body (19 bytes, 0 relocations) unique at a census start
+0x000474d0	0x13	func	?size@?$vector@HV?$allocator@H@std@@@std@@QBEIXZ	resourcemanager	masked body (19 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x000474f0	0x81	func	?_Erase@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@IAEXPAU_Node@12@@Z	resourcemanager	masked body (129 bytes, 10 relocations) unique at a census start
 0x00047580	0x305	func	?_Insert@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@IAE?AViterator@12@PAU_Node@12@0ABU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@2@@Z	resourcemanager	masked body (773 bytes, 23 relocations) unique at a census start
 0x00047890	0xd9	func	?_Init@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEXPBDIH@Z	resourcemanager	masked body (217 bytes, 1 relocations) unique at a census start
@@ -715,6 +807,18 @@ rva	size	kind	name	unit	evidence
 0x000881d8	0x54	data	?g_campaignRegionTraits@@3QBQAUTRegionTraits@TCampaignMapTraits@@B	campaignmap	referenced by ?initializeCampaignMapTraitsTable@@YAEXZ at +0x21a
 0x00089b4c	0x14	data	?_s_kMessage@TAllocationFailure@@2QBDB	error	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0x95
 0x00089b60	0x8	data	_g_gzMagic	gzinflatebuf	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0x15c
+0x0008b518	0x1c	data	_apCastleGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0xd
+0x0008b534	0x1c	data	_apRampartGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x2c
+0x0008b550	0x1c	data	_apTowerGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x4b
+0x0008b56c	0x1c	data	_apInfernoGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x6a
+0x0008b588	0x1c	data	_apNecropolisGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x89
+0x0008b5a4	0x1c	data	_apDungeonGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0xa8
+0x0008b5c0	0x1c	data	_apStrongholdGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0xc7
+0x0008b5dc	0x1c	data	_apFortressGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0xe6
+0x0008b5f8	0x1c	data	_apConfluxGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x105
+0x0008b614	0x1c	data	_apRandomGeneratorTraits	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x124
+0x0008b648	0xcd0	data	_?akBuildingTextRef@?BK@??InitializeTownTypeTraitsTable@@YAXXZ@4QAY0CJ@$$CBUTBuildingTextRef@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x5ea
+0x0008c318	0x28	data	_?apBuildingTraits@?BK@??InitializeTownTypeTraitsTable@@YAXXZ@4QBQAY0CJ@UTBuildingTraits@TTown@@B	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x5e5
 0x0008fa88	0x8	data	__real@8@00000000000000000000	bitmap16	referenced by ?AdjustHSV@Bitmap24Bit@@QAEXHHHHMMMM@Z at +0xdb
 0x00090220	0x78	data	_configuration_table	deflate	referenced by @deflate@8 at +0x197
 0x00090298	0x400	data	_crc_table	crc32	referenced by @crc32@12 at +0x38
@@ -764,7 +868,7 @@ rva	size	kind	name	unit	evidence
 0x000988d8	0xc	data	__CTA2?AVlogic_error@std@@	resource	referenced by __TI2?AVlogic_error@std@@ at +0xc
 0x000988e8	0x10	data	__TI2?AVlogic_error@std@@	resource	referenced by ?_Doraise@logic_error@std@@MBEXXZ at +0x12
 0x00098a80	0x14	data	__CTA4?AVTRuntimeError@@	DIBSection	referenced by __TI4?AVTRuntimeError@@ at +0xc
-0x00098a98	0x10	data	__TI4?AVTRuntimeError@@	DIBSection	referenced by 0x0002f190 at +0xde
+0x00098a98	0x10	data	__TI4?AVTRuntimeError@@	DIBSection	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0xb9
 0x00098b68	0x1c	data	__CT??_R0?AVTGDIObjectSelectorError@@@8??0TGDIObjectSelectorError@@QAE@ABV0@@Z32	MemoryDC	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0x8
 0x00098b88	0x1c	data	__CT??_R0?AVTError@?$TGDIObjectSelector@VCBitmap@@@@@8??0TError@?$TGDIObjectSelector@VCBitmap@@@@QAE@ABV01@@Z32	MemoryDC	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0x4
 0x00098ba8	0x1c	data	__CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@	MemoryDC	referenced by __TI6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0xc
@@ -3211,7 +3315,7 @@ rva	size	kind	name	unit	evidence
 0x000b2388	0xd	data	??_C@_0N@DAPP@CmpMusic?4txt?$AA@	campaignmusic	referenced by ?initializeCampaignMusicTable@@YAEXZ at +0x1d
 0x000b2418	0xe	data	??_C@_0O@JFIL@TCampaignView?$AA@	CampaignView	referenced by ?classTCampaignView@TCampaignView@@2UCRuntimeClass@@B at +0x0
 0x000b2488	0x43f8	data	?g_creatureTypeTraitsStorage@?A0xf10867bd5b3ccba5@@3PAUTCreatureTypeTraits@@A	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x19
-0x000b6880	0x4	data	?akCreatureTypeTraits@@3AAY0JG@$$CBUTCreatureTypeTraits@@A	creaturetype	referenced by 0x0001eb90 at +0x49
+0x000b6880	0x4	data	?akCreatureTypeTraits@@3AAY0JG@$$CBUTCreatureTypeTraits@@A	creaturetype	referenced by 0x00033210 at +0x10
 0x000b6a7c	0xb	data	??_C@_0L@CABM@smcart?4def?$AA@	creaturetype	referenced by 0x000b2488 at +0x431c
 0x000b6a88	0x5	data	??_C@_04MIFP@cart?$AA@	creaturetype	referenced by 0x000b2488 at +0x4318
 0x000b6a90	0xb	data	??_C@_0L@EBOJ@smtent?4def?$AA@	creaturetype	referenced by 0x000b2488 at +0x42a8
@@ -3510,6 +3614,8 @@ rva	size	kind	name	unit	evidence
 0x000b785c	0x2	data	??_C@_01FBAH@1?$AA@	EditStartingBonusDlg	referenced by 0x0001eb90 at +0x8a
 0x000b7b2c	0x11	data	??_C@_0BB@PHAF@?$CFs?0?5?$CFs?0?5?$CFs?5?$CFs?5?$CFs?$AA@	EditStartingBonusDlg	referenced by 0x000207d0 at +0x10c
 0x000b7b40	0x9	data	??_C@_08KOBO@?$CFs?5?$CFs?5?$CFs?$AA@	EditStartingBonusDlg	referenced by 0x000207d0 at +0xad
+0x000b7bd4	0x4	data	?akGameResourceTypeTraits@@3PBUTGameResourceTypeTraits@@B	GameResource	referenced by 0x000207d0 at +0x65
+0x000b7bd8	0xd	data	??_C@_0N@KMPO@restypes?4txt?$AA@	GameResource	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0x4f
 0x000b7c04	0x6	data	??_C@_05NLJN@1?41?43?$AA@	compress	referenced by @inflateInit2_@16 at +0x19
 0x000b7c38	0x3a98	data	?g_heroTraitsStorage@@3PAUTHeroTraits@@A	herodefs	referenced by ?InitializeHeroTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x19
 0x000bb6d0	0x480	data	?g_heroClassTraits@@3PAUTHeroClassTraits@@A	herodefs	referenced by ?InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x17
@@ -3848,6 +3954,7 @@ rva	size	kind	name	unit	evidence
 0x000bd120	0xd	data	??_C@_0N@OFON@CmpEdCmd?4txt?$AA@	MainFrame	referenced by ??0TCommandTexts@@QAE@XZ at +0x39
 0x000bd240	0x4	data	?akPlayerTraits@@3PBUTPlayerTraits@@B	Player	referenced by 0x0002ed80 at +0x2d
 0x000bd244	0xd	data	??_C@_0N@EJOF@plcolors?4txt?$AA@	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x8e
+0x000bd258	0xd	data	??_C@_0N@GCMA@priskill?4txt?$AA@	PrimarySkillTraits	referenced by ?InitializePrimarySkillTraitsTable@@YAXXZ at +0x4f
 0x000bd300	0x2	data	??_C@_01BJG@?6?$AA@	ScenarioPropsGeneralPage	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x120
 0x000bd304	0x3	data	??_C@_02PIMC@?$AN?6?$AA@	ScenarioPropsGeneralPage	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x11b
 0x000bd4d8	0x6	data	??_C@_05DFPL@?$CFd?5?$CFs?$AA@	ScenarioPropsStartingOptionsPage	referenced by 0x0002e4d0 at +0x69
@@ -3856,6 +3963,8 @@ rva	size	kind	name	unit	evidence
 0x000bd4f4	0x7	data	??_C@_06JCBO@?$CL?$CFd?5?$CFs?$AA@	ScenarioPropsStartingOptionsPage	string literal referenced by 0x0002e6d0
 0x000bd694	0xb	data	??_C@_0L@GIMI@?$CFs?5?9?5?$CFs?7?$CFs?$AA@	ScenarioPropsStartingOptionsPage	referenced by 0x0002ffb0 at +0x78
 0x000bd724	0x6	data	??_C@_05BKBC@?$CFs?7?$CFs?$AA@	ScenarioPropsStartingOptionsPage	string literal referenced by 0x00030cc0
+0x000bd760	0x4	data	?akHeroSkillMasteryTraits@@3PAUTSkillMasteryTraits@THero@@A	SkillMasteryTraits	referenced by 0x00020360 at +0x9d
+0x000bd764	0xd	data	??_C@_0N@KMFH@skilllev?4txt?$AA@	SkillMasteryTraits	referenced by ?InitializeSkillMasteryTraitsTable@@YAXXZ at +0x4f
 0x000bdfc8	0x2b08	data	?g_spellTraitsImp@@3PAUTSpellTraits@@A	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x13
 0x000c0ad0	0x4	data	?akSpellTraits@@3AAY0FB@$$CBUTSpellTraits@@A	spelldefs	referenced by 0x0001f790 at +0x39
 0x000c0ad4	0x9	data	??_C@_08OBBL@Acid?4wav?$AA@	spelldefs	referenced by ?g_spellTraitsImp@@3PAUTSpellTraits@@A at +0x2a84
@@ -3928,6 +4037,12 @@ rva	size	kind	name	unit	evidence
 0x000c0e90	0xd	data	??_C@_0N@DFPD@ScutBoat?4wav?$AA@	spelldefs	referenced by ?g_spellTraitsImp@@3PAUTSpellTraits@@A at +0x8c
 0x000c0ea0	0xd	data	??_C@_0N@JEJC@SummBoat?4wav?$AA@	spelldefs	referenced by ?g_spellTraitsImp@@3PAUTSpellTraits@@A at +0x4
 0x000c0eb0	0xd	data	??_C@_0N@LEPK@sptraits?4txt?$AA@	spelldefs	referenced by ?InitializeSpellTraitsTable@@YAEXZ at +0x2
+0x000c0ec0	0x4	data	?akTownTypeTraits@@3PBUTTypeTraits@TTown@@B	TownTypeTraits	referenced by 0x0001f090 at +0x4b
+0x000c0ec4	0xd	data	??_C@_0N@LAIG@crgenerc?4txt?$AA@	TownTypeTraits	referenced by 0x00032b40 at +0x4f
+0x000c0fe0	0xd	data	??_C@_0N@EBJO@dwelling?4txt?$AA@	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x28a
+0x000c0ff0	0xd	data	??_C@_0N@COOK@bldgspec?4txt?$AA@	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x278
+0x000c1000	0xd	data	??_C@_0N@MANH@bldgneut?4txt?$AA@	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x270
+0x000c1010	0xd	data	??_C@_0N@OEMK@towntype?4txt?$AA@	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x52
 0x000c1e20	0x4	data	_?my_version@?1??deflateInit2_@@9@9	deflate	referenced by @deflateInit2_@32 at +0x1d
 0x000c1e24	0x10	data	??_C@_0BA@FKCH@need?5dictionary?$AA@	inflate	referenced by @inflate@8 at +0x3bf
 0x000c1e34	0x15	data	??_C@_0BF@OBFI@incorrect?5data?5check?$AA@	inflate	referenced by @inflate@8 at +0x297
@@ -4026,6 +4141,9 @@ rva	size	kind	name	unit	evidence
 0x000c77dc	0x258	data	_?creatureTypePluralNames@?1??initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0xf10867bd5b3ccba5@@A	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0xd0
 0x000c7a34	0x258	data	_?creatureTypeAbilities@?1??initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0xf10867bd5b3ccba5@@A	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x2a2
 0x000c7c8c	0x1	data	_?$S27@?1??initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4EA	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x1f
+0x000c7c90	0x8	data	_?pNames@?1??InitializeGameResourceTypeTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	GameResource	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0x2d
+0x000c7c98	0x1c	data	?aGameResourceTypeTraitsImp@?A0xc148638cd7b7ed3f@@3PAUTGameResourceTypeTraits@@A	GameResource	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0x198
+0x000c7cb4	0x1	data	_?$S251@?1??InitializeGameResourceTypeTraitsTable@@YAXXZ@4EA	GameResource	referenced by ?InitializeGameResourceTypeTraitsTable@@YAXXZ at +0xf
 0x000c7cb8	0x70	data	_?secondarySkillNames@?1??InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0x4cd5b899c34a865a@@A	herodefs	referenced by ?InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x36
 0x000c7d28	0x1	data	_?$S29@?1??InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4EA	herodefs	referenced by ?InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x3
 0x000c7d2c	0x48	data	_?heroClassStrings@?1??InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0x4cd5b899c34a865a@@A	herodefs	referenced by ?InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x32
@@ -4040,10 +4158,105 @@ rva	size	kind	name	unit	evidence
 0x000c8350	0x40	data	_?aColorNames@?1??InitializePlayerTraitsTable@@YA_NXZ@4PAV?$TAutoArrayPtr@D@@A	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x6d
 0x000c8390	0x40	data	?aPlayerTraitsImp@?A0x0e809e6c890d5ee5@@3PAUTPlayerTraits@@A	Player	referenced by ?akPlayerTraits@@3PBUTPlayerTraits@@B at +0x0
 0x000c83d0	0x1	data	_?$S251@?1??InitializePlayerTraitsTable@@YA_NXZ@4EA	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0xf
+0x000c83d8	0x8	data	_?pNames@?1??InitializePrimarySkillTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	PrimarySkillTraits	referenced by ?InitializePrimarySkillTraitsTable@@YAXXZ at +0x2d
+0x000c83e0	0x10	data	?aHeroPrimarySkillTraitsImp@?A0xa9f2831508e54a8a@@3PAUTPrimarySkillTraits@THero@@A	PrimarySkillTraits	referenced by ?InitializePrimarySkillTraitsTable@@YAXXZ at +0x198
+0x000c83f0	0x1	data	_?$S273@?1??InitializePrimarySkillTraitsTable@@YAXXZ@4EA	PrimarySkillTraits	referenced by ?InitializePrimarySkillTraitsTable@@YAXXZ at +0xf
+0x000c8740	0x10	data	?aHeroSkillMasteryTraitsImp@?A0x4645b7a5ec4771bc@@3PAUTSkillMasteryTraits@THero@@A	SkillMasteryTraits	referenced by ?InitializeSkillMasteryTraitsTable@@YAXXZ at +0x198
+0x000c8750	0x8	data	_?pNames@?1??InitializeSkillMasteryTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	SkillMasteryTraits	referenced by ?InitializeSkillMasteryTraitsTable@@YAXXZ at +0x2d
+0x000c8758	0x1	data	_?$S273@?1??InitializeSkillMasteryTraitsTable@@YAXXZ@4EA	SkillMasteryTraits	referenced by ?InitializeSkillMasteryTraitsTable@@YAXXZ at +0xf
 0x000c875c	0x1	data	_?$S10@?1??initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4EA	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x18
 0x000c8760	0x144	data	_?abbreviatedSpellNames@?1??initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0xb0b78fb9ab01eae7@@A	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0xc6
 0x000c88a4	0x510	data	_?spellDescriptions@?BC@??initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAY03VTAutoStrPtr@?A0xb0b78fb9ab01eae7@@A	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x28a
 0x000c8db4	0x144	data	_?spellNames@?1??initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAVTAutoStrPtr@?A0xb0b78fb9ab01eae7@@A	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x38
+0x000c8ef8	0x8	data	_?pTypeNames@?2??InitializeTownTypeTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x30
+0x000c8f00	0x18	data	_?apTextTable@?M@??InitializeTownTypeTraitsTable@@YAXXZ@4PAV?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x2c9
+0x000c8f18	0x8	data	_?pNames@?1??initialize@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@SAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by 0x00032b40 at +0x2d
+0x000c8f20	0x8	data	_?pRandomName@?9??InitializeTownTypeTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x224
+0x000c8f28	0x1	data	_?$S515@?2??InitializeTownTypeTraitsTable@@YAXXZ@4EA	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0xf
+0x000c8f30	0x10	data	_rampartGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator1 at +0x2
+0x000c8f40	0x8	data	_randomGenerator3	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x8
+0x000c8f48	0x8	data	_randomGenerator4	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0xc
+0x000c8f50	0x1f0	data	?aInfernoBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aInfernoBuildingTraits at +0x8
+0x000c9140	0x8	data	_randomGenerator2	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x4
+0x000c9148	0x1ec	data	?aCastleBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aCastleBuildingTraits at +0x8
+0x000c9334	0x1c	data	?_s_akBaseName@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@0PAPBDA	TownTypeTraits	referenced by 0x00032b40 at +0x1c7
+0x000c9350	0x8	data	_randomGenerator1	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x0
+0x000c9358	0x10	data	_towerGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator7 at +0x2
+0x000c9368	0x1ec	data	?aRandomBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aRandomBuildingTraits at +0xa
+0x000c9558	0x10	data	_infernoGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator6 at +0x2
+0x000c9568	0x1f0	data	?aTowerBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTowerBuildingTraits at +0x8
+0x000c9758	0x10	data	_infernoGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator5 at +0x2
+0x000c9768	0x10	data	_infernoGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator4 at +0x2
+0x000c9778	0x10	data	_confluxGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator7 at +0x2
+0x000c9788	0x10	data	_castleGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator1 at +0x2
+0x000c9798	0x10	data	_confluxGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator5 at +0x2
+0x000c97a8	0xc	data	_infernoGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator3 at +0x2
+0x000c97b8	0x10	data	_confluxGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator6 at +0x2
+0x000c97c8	0x10	data	_strongholdGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator2 at +0x2
+0x000c97d8	0x10	data	_fortressGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator7 at +0x2
+0x000c97e8	0x1f0	data	?aStrongholdBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aStrongholdBuildingTraits at +0x8
+0x000c99d8	0x10	data	_infernoGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator7 at +0x2
+0x000c99e8	0x10	data	_strongholdGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator1 at +0x2
+0x000c99f8	0x8	data	_randomGenerator6	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x14
+0x000c9a00	0x8	data	_randomGenerator5	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x10
+0x000c9a08	0x10	data	_dungeonGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator4 at +0x2
+0x000c9a18	0x1f0	data	?aConfluxBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aConfluxBuildingTraits at +0xa
+0x000c9c08	0x10	data	_dungeonGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator3 at +0x2
+0x000c9c18	0x10	data	_fortressGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator5 at +0x2
+0x000c9c28	0x10	data	_dungeonGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator1 at +0x2
+0x000c9c38	0x1f0	data	?aFortressBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aFortressBuildingTraits at +0x8
+0x000c9e28	0x10	data	_dungeonGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator2 at +0x2
+0x000c9e38	0x10	data	_necropolisGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator6 at +0x2
+0x000c9e48	0x10	data	_fortressGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator6 at +0x2
+0x000c9e58	0x10	data	_necropolisGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator7 at +0x2
+0x000c9e68	0x10	data	_castleGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator2 at +0x2
+0x000c9e78	0x10	data	_castleGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator4 at +0x2
+0x000c9e88	0x10	data	_fortressGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator1 at +0x2
+0x000c9e98	0x10	data	_infernoGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator2 at +0x2
+0x000c9ea8	0x10	data	_castleGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator3 at +0x2
+0x000c9eb8	0x10	data	_confluxGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator4 at +0x2
+0x000c9ec8	0x10	data	_rampartGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator7 at +0x2
+0x000c9ed8	0x1f0	data	?aDungeonBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aDungeonBuildingTraits at +0xa
+0x000ca0c8	0x10	data	_castleGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator5 at +0x2
+0x000ca0d8	0x10	data	_confluxGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator3 at +0x2
+0x000ca0e8	0x10	data	_dungeonGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator7 at +0x2
+0x000ca0f8	0x10	data	_infernoGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator1 at +0x2
+0x000ca108	0x10	data	_dungeonGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator6 at +0x2
+0x000ca118	0x10	data	_fortressGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator4 at +0x2
+0x000ca128	0x10	data	_confluxGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator1 at +0x2
+0x000ca138	0x10	data	_strongholdGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator7 at +0x2
+0x000ca148	0x10	data	_dungeonGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator5 at +0x2
+0x000ca158	0x10	data	_confluxGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator2 at +0x2
+0x000ca168	0x10	data	_fortressGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator2 at +0x2
+0x000ca178	0x10	data	_castleGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator6 at +0x2
+0x000ca188	0x10	data	_fortressGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator3 at +0x2
+0x000ca198	0x10	data	_necropolisGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator1 at +0x2
+0x000ca1a8	0x10	data	_strongholdGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator6 at +0x2
+0x000ca1b8	0x10	data	_strongholdGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator5 at +0x2
+0x000ca1c8	0x10	data	_necropolisGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator2 at +0x2
+0x000ca1d8	0x10	data	_towerGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator2 at +0x2
+0x000ca1e8	0xc	data	_strongholdGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator3 at +0x2
+0x000ca1f4	0x1c	data	?_s_akUpgradeName@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@0PAPBDA	TownTypeTraits	referenced by 0x00032b40 at +0x1de
+0x000ca210	0x10	data	_castleGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$castleGenerator7 at +0x2
+0x000ca220	0x10	data	_rampartGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator6 at +0x2
+0x000ca230	0x10	data	_necropolisGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator3 at +0x2
+0x000ca240	0x10	data	_towerGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator1 at +0x2
+0x000ca250	0x10	data	_strongholdGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator4 at +0x2
+0x000ca260	0x10	data	_towerGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator5 at +0x2
+0x000ca270	0x78	data	?aTownTypeTraitsImp@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTTypeTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aTownTypeTraitsImp at +0x13
+0x000ca2e8	0x10	data	_rampartGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator3 at +0x2
+0x000ca2f8	0x1f0	data	?aNecropolisBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aNecropolisBuildingTraits at +0x8
+0x000ca4e8	0x10	data	_towerGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator4 at +0x2
+0x000ca4f8	0x10	data	_rampartGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator2 at +0x2
+0x000ca508	0x10	data	_necropolisGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator4 at +0x2
+0x000ca518	0x10	data	_towerGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator6 at +0x2
+0x000ca528	0x10	data	_necropolisGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator5 at +0x2
+0x000ca538	0x1f0	data	?aRampartBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aRampartBuildingTraits at +0x8
+0x000ca728	0x8	data	_randomGenerator7	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x18
+0x000ca730	0x10	data	_towerGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator3 at +0x2
+0x000ca740	0x10	data	_rampartGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator5 at +0x2
+0x000ca750	0xc	data	_rampartGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator4 at +0x2
+0x000ca75c	0x1	data	_?$S270@?1??initialize@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@SAXXZ@4EA	TownTypeTraits	referenced by 0x00032b40 at +0xf
 0x000cc7f4	0x4	data	?GreenBits@ResourceManager@@3HA	resourcemanager	referenced by ?SetPixelFormat@ResourceManager@@YAXKKK@Z at +0xad
 0x000cc7f8	0x4	data	?BlueMask@ResourceManager@@3KA	resourcemanager	referenced by ?SetPixelFormat@ResourceManager@@YAXKKK@Z at +0x54
 0x000cc7fc	0x4	data	?BlueShift@ResourceManager@@3HA	resourcemanager	referenced by ?SetPixelFormat@ResourceManager@@YAXKKK@Z at +0xc4

@@ -394,6 +394,26 @@ unit = "Player"
 source = "src/editor/Player.cpp"
 flags = "ccmped_o2_gr_windows"
 
+[[unit]]
+unit = "GameResource"
+source = "src/editor/GameResource.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "PrimarySkillTraits"
+source = "src/editor/PrimarySkillTraits.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "SkillMasteryTraits"
+source = "src/editor/SkillMasteryTraits.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "TownTypeTraits"
+source = "src/editor/TownTypeTraits.cpp"
+flags = "ccmped_o2_gr_windows"
+
 # The campaign editor's own objects (src/campaign_editor/, the original's
 # CampaignEditor\)
 [[unit]]
