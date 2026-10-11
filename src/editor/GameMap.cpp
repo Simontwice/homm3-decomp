@@ -2051,7 +2051,9 @@ bool TGameMap::_TImpl::canCreate(const TObjectType& objType, TPlayer player) con
             const THero::TClassTraits& classTraits = THero::s_akClassTraits[objType.getExtra()];
             for (set<int>::const_iterator pHeroID = classTraits.m_heroes.begin(); pHeroID != classTraits.m_heroes.end();
                  ++pHeroID)
-                if (_isHeroAvailable(*pHeroID))
+                if (THero::s_akTraits[*pHeroID].m_gameVersions.test(_m_version)
+                    && !_m_pBookkeeping->m_heroesOnMap.test(*pHeroID)
+                    && !_m_pProperties->m_disabledHeroes.test(*pHeroID))
                     return true;
             return false;
         }
@@ -2079,7 +2081,8 @@ set<THeroID> TGameMap::_TImpl::getAvailableHeroesInClass(THeroClass heroClass) c
     set<THeroID> result;
     for (set<int>::const_iterator pHeroID = classTraits.m_heroes.begin(); pHeroID != classTraits.m_heroes.end();
          ++pHeroID)
-        if (_isHeroAvailable(*pHeroID))
+        if (THero::s_akTraits[*pHeroID].m_gameVersions.test(_m_version) && !_m_pBookkeeping->m_heroesOnMap.test(*pHeroID)
+            && !_m_pProperties->m_disabledHeroes.test(*pHeroID))
             result.insert(*pHeroID);
     return result;
 }
