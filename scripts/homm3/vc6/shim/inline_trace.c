@@ -645,6 +645,11 @@ static void __cdecl traceVeto(unsigned long *regs, unsigned long vetoed)
     writeString(h, " count="); writeSignedDecimal(h, *(long *)(sp+0x10));
     writeString(h, " limit="); writeSignedDecimal(h, *(long *)(sp+0x14));
     writeString(h, " allowance="); writeDecimal(h, *(unsigned long *)(sp+0x1c));
+    /* The grant itself (0x949b9..0x949c6): the current root body carries
+     * EH state (flags34 & 0x18000) and DAT_107ac06c is set. */
+    writeString(h, " granted=");
+    writeDecimal(h, (*(unsigned long *)(*g_currentBodySlot+0x34) & 0x18000)
+                    && *(unsigned long *)((char *)g_real+0xac06c) ? 1 : 0);
     writeString(h, " vetoed="); writeDecimal(h, vetoed);
     if (vetoed) {
         /* The veto stops at the first count above the limit. Finish the
