@@ -544,6 +544,18 @@ def derive(log=print, want_suggestions=False):
     for claim in own_function_claims:
         own_named[claim.rva].add(claim.name)
 
+    # Bodies that agree once relocation fields are masked but reference
+    # different symbols are no identity: /OPT:ICF folds only equal referents,
+    # so the retail body is at most one of them and the masked bytes cannot
+    # say which (GetPalette24 and loadPalette differ only in their callee).
+    referents_of_shape = defaultdict(set)
+    shared_shape = []                     # (name, rva, body, relocs) settled by referents
+    for unit, name, body, relocs in compiled:
+        shape = bytearray(body)
+        for site in relocs:
+            shape[site:site + 4] = b"\0\0\0\0"
+        referents_of_shape[(bytes(shape), tuple(sorted(relocs)))].add(
+            tuple(sorted((site, ref) for site, (ref, _kind) in relocs.items())))
     for unit, name, body, relocs in compiled:
         mask = bytearray(len(body))
         for site in relocs:
@@ -551,9 +563,16 @@ def derive(log=print, want_suggestions=False):
         fixed = len(body) - sum(mask)
         if fixed < MIN_FIXED:
             continue
+        shape = bytearray(body)
+        for site in relocs:
+            shape[site:site + 4] = b"\0\0\0\0"
+        ambiguous_shape = len(referents_of_shape[(bytes(shape), tuple(sorted(relocs)))]) > 1
         hits = [rva for rva in by_size.get(len(body), ())
                 if all(m or a == b for a, b, m in zip(blob(rva, len(body)), body, mask))]
         if len(hits) == 1 and not foreign_to_claim(name, own_named[hits[0]], bodies):
+            if ambiguous_shape:
+                shared_shape.append((name, hits[0], body, relocs))
+                continue
             propose(name, hits[0], f"masked body ({len(body)} bytes, "
                                    f"{len(relocs)} relocations) unique at a census start")
 
@@ -749,6 +768,42 @@ def derive(log=print, want_suggestions=False):
             if not moved and not follow_data():
                 break
 
+    propagate()
+
+    def referents_agree(body, relocs, rva):
+        """Whether a body whose masked bytes another name shares references
+        what retail references: at least one referent placed at retail's
+        target and none placed elsewhere or displaced by another name."""
+        agree = 0
+        for site, (ref, kind) in relocs.items():
+            value = word(rva + site)
+            if value is None:
+                continue
+            if kind == REL32:
+                target = (rva + site + 4 + value) & 0xFFFFFFFF
+                placed, there = names.get(ref, set()), named_at[target]
+            elif kind == DIR32:
+                target = value - base - struct.unpack_from("<i", body, site)[0]
+                placed = names.get(ref, set()) or data_names.get(ref, set())
+                there = named_at[target] | {n for n, r in data_names.items() if target in r}
+            else:
+                continue
+            if placed == {target}:
+                agree += 1
+            elif placed or (there and ref not in there):
+                return False
+        return agree > 0
+
+    settled = defaultdict(list)
+    for name, rva, body, relocs in shared_shape:
+        if referents_agree(body, relocs, rva):
+            settled[rva].append(name)
+    for rva, group in settled.items():
+        if len(group) == 1:
+            name = group[0]
+            body, relocs = bodies[name]
+            propose(name, rva, f"masked body ({len(body)} bytes, {len(relocs)} relocations) "
+                               f"unique at a census start; its referents agree with retail's")
     propagate()
 
     def claimed():

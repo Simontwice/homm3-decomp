@@ -105,21 +105,22 @@ resource* GetFromCache(const char* name);
 }
 
 // Role-based name for Complete's common missing-resource reporter at
-// retail 0x559510. Its fastcall ABI is proven by all thirteen getter call
-// sites and its body is reconstructed; no PC symbol source survives, so the
-// source name remains explicitly provisional. Use ordinary C++ linkage:
+// retail 0x559510. No explicit calling convention: the game's thirteen
+// getter call sites pass registers (/Gr), the editor's push the arguments
+// (h3maped 0x4dc3d6). Its body is reconstructed; no PC symbol source
+// survives, so the source name remains explicitly provisional. Use ordinary C++ linkage:
 // the bootstrap extern "C" suppressed VC6's exception cleanup in both
 // reporters; removing it restores the retail fs:[0] registration and unwind
-// states without changing their proven fastcall argument ABI.
-void __fastcall reportMissingTypedResource(const char* caller,
-                                          int resourceType,
-                                          const char* resourceName);
+// states.
+void reportMissingTypedResource(const char* caller,
+                                int resourceType,
+                                const char* resourceName);
 
-// Complete's sprite-family counterpart. GetSprite's two
-// retail call sites prove the same fastcall surface; the PC symbol name is
-// provisional because this helper has no Dreamcast identity.
-void __fastcall reportMissingSpriteResource(const char* caller,
-                                           int resourceType,
-                                           const char* resourceName);
+// Complete's sprite-family counterpart, with the same calling convention;
+// the PC symbol name is provisional because this helper has no Dreamcast
+// identity.
+void reportMissingSpriteResource(const char* caller,
+                                 int resourceType,
+                                 const char* resourceName);
 
 #endif  /* HOMM3_RESOURCEMANAGER_H */

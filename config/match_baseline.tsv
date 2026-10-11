@@ -3182,7 +3182,7 @@ resourcemanager	??0?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2
 resourcemanager	??0?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@H@Z	100.0000	100.0000	100.0000	0x15e440	-
 resourcemanager	??0?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@std@@QAE@ABU?$less@VTCacheMapKey@ResourceManager@@@1@ABV?$allocator@PAVresource@@@1@@Z	100.0000	100.0000	100.0000	0x15d2c0	-
 resourcemanager	??0?$pair@PBDPAVresource@@@std@@QAE@ABQBDABQAVresource@@@Z	100.0000	100.0000	100.0000	0x15ecf0	-
-resourcemanager	??0TCacheMapKey@ResourceManager@@QAE@PBD@Z	100.0000	100.0000	100.0000	0x15ac20	tokens1:72cd32b428ad
+resourcemanager	??0TCacheMapKey@ResourceManager@@QAE@PBD@Z	100.0000	100.0000	100.0000	0x15ac20	tokens1:83ddbfc24d99
 resourcemanager	??0TResourceLODSlot@@QAE@PBD@Z	100.0000	100.0000	100.0000	0x1591e0	tokens1:77124f72008d
 resourcemanager	??1?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UAE@XZ	100.0000	100.0000	100.0000	0x15d530	-
 resourcemanager	??1?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UAE@XZ	100.0000	100.0000	100.0000	0x15db40	-
@@ -3243,8 +3243,8 @@ resourcemanager	?overflow@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@
 resourcemanager	?pbackfail@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAEHH@Z	100.0000	100.0000	100.0000	0x15d7e0	-
 resourcemanager	?read@t_lod_file_adapter@?A0xd38fcb16638c5270@ResourceManager@@UAEHPAXH@Z	100.0000	100.0000	100.0000	0x159110	tokens1:b2aae8ba2f88
 resourcemanager	?read@t_stdio_file_adapter@?A0xd38fcb16638c5270@ResourceManager@@UAEHPAXH@Z	100.0000	100.0000	100.0000	0x1590f0	tokens1:12f49cab0faf
-resourcemanager	?reportMissingSpriteResource@@YIXPBDH0@Z	100.0000	100.0000	100.0000	0x1599e0	tokens1:8d6e3e065292
-resourcemanager	?reportMissingTypedResource@@YIXPBDH0@Z	100.0000	100.0000	100.0000	0x159510	tokens1:5364e85796f5
+resourcemanager	?reportMissingSpriteResource@@YIXPBDH0@Z	100.0000	100.0000	100.0000	0x1599e0	tokens1:1e1d42738d44
+resourcemanager	?reportMissingTypedResource@@YIXPBDH0@Z	100.0000	100.0000	100.0000	0x159510	tokens1:05f6b89a31ad
 resourcemanager	?seekoff@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAE?AV?$fpos@H@2@JW4seekdir@ios_base@2@H@Z	100.0000	100.0000	100.0000	0x15d8a0	-
 resourcemanager	?seekpos@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAE?AV?$fpos@H@2@V32@H@Z	100.0000	100.0000	100.0000	0x15da00	-
 resourcemanager	?setg@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXPAD00@Z	100.0000	100.0000	100.0000	0x15e540	-

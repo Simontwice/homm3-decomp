@@ -127,6 +127,7 @@ Campaign	?_Construct@std@@YAXPAVTScenario@@ABV2@@Z	100.0000	100.0000	100.0000	0x
 Campaign	?_Copy@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEPAU_Node@12@PAU312@0@Z	100.0000	100.0000	100.0000	0xd150	-
 Campaign	?_Copy@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXABV12@@Z	100.0000	100.0000	100.0000	0xc4b0	-
 Campaign	?_Dec@const_iterator@?$_Tree@HU?$pair@$$CBHUTCustomHero@TGameMapHeader@@@std@@U_Kfn@?$map@HUTCustomHero@TGameMapHeader@@U?$less@H@std@@V?$allocator@UTCustomHero@TGameMapHeader@@@4@@2@U?$less@H@2@V?$allocator@UTCustomHero@TGameMapHeader@@@2@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x245b0	-
+Campaign	?_Dec@const_iterator@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEXXZ	100.0000	100.0000	100.0000	0xd2b0	-
 Campaign	?_Destroy@?$vector@VTScenario@@V?$allocator@VTScenario@@@std@@@std@@IAEXPAVTScenario@@0@Z	100.0000	100.0000	100.0000	0xbb10	-
 Campaign	?_Erase@?$_Tree@HU?$pair@$$CBHUTCustomHero@TGameMapHeader@@@std@@U_Kfn@?$map@HUTCustomHero@TGameMapHeader@@U?$less@H@std@@V?$allocator@UTCustomHero@TGameMapHeader@@@4@@2@U?$less@H@2@V?$allocator@UTCustomHero@TGameMapHeader@@@2@@std@@IAEXPAU_Node@12@@Z	100.0000	100.0000	100.0000	0xd0a0	-
 Campaign	?_Erase@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXPAU_Node@12@@Z	100.0000	100.0000	100.0000	0xc630	-
@@ -1044,6 +1045,7 @@ palette	??1TPalette24@@UAE@XZ	100.0000	100.0000	100.0000	0x4abc0	-
 palette	??4TPalette24@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0x4aba0	-
 palette	??_GTPalette16@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x4a9e0	-
 palette	??_GTPalette24@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x4ab80	-
+palette	?AdjustHSV@TPalette24@@QAEXMMMM@Z	91.1889	91.1889	91.1889	0x4abe0	-
 palette	?Convert24to16@TPalette16@@AAEXPBEHHHHHH@Z	100.0000	100.0000	100.0000	0x4aac0	-
 palette	?getSize@TPalette16@@UBEIXZ	100.0000	100.0000	100.0000	0x4ab50	-
 palette	?getSize@TPalette24@@UBEIXZ	100.0000	100.0000	100.0000	0x4abd0	-
@@ -1083,6 +1085,7 @@ resourcemanager	??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@H@Z	99.
 resourcemanager	??6std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@PBD@Z	99.9787	99.9787	99.9787	0xe380	-
 resourcemanager	??Bid@locale@std@@QAEIXZ	99.4444	99.4444	99.4444	0x10500	-
 resourcemanager	??Hstd@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@ABV10@PBD@Z	100.0000	100.0000	100.0000	0xe250	-
+resourcemanager	??MTCacheMapKey@ResourceManager@@QBA_NABV01@@Z	100.0000	100.0000	100.0000	0x444c0	-
 resourcemanager	??_D?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x449d0	-
 resourcemanager	??_G?$basic_ios@DU?$char_traits@D@std@@@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x15cf0	-
 resourcemanager	??_G?$basic_ostream@DU?$char_traits@D@std@@@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x15cc0	-
@@ -1096,12 +1099,12 @@ resourcemanager	??_Gbad_cast@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xf160	-
 resourcemanager	??_Gfacet@locale@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xf360	-
 resourcemanager	??_Gios_base@std@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x152f0	-
 resourcemanager	??_Gt_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x452e0	-
-resourcemanager	?AddToCache@ResourceManager@@YAXPAVresource@@@Z	81.5833	81.5833	81.5833	0x44620	-
+resourcemanager	?AddToCache@ResourceManager@@YAXPAVresource@@@Z	100.0000	100.0000	100.0000	0x44620	-
 resourcemanager	?Close@ResourceManager@@YAXXZ	100.0000	100.0000	100.0000	0x450c0	-
 resourcemanager	?Expunge@ResourceManager@@YAXXZ	100.0000	100.0000	100.0000	0x45dc0	-
 resourcemanager	?GetBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z	100.0000	100.0000	100.0000	0x45900	-
-resourcemanager	?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z	96.8416	96.8416	96.8416	0x45310	-
-resourcemanager	?GetFromCache@ResourceManager@@YAPAVresource@@PBD@Z	79.3415	79.3415	79.3415	0x445a0	-
+resourcemanager	?GetBitmap816@ResourceManager@@YAPAVBitmap816@@PBD@Z	100.0000	100.0000	100.0000	0x45310	-
+resourcemanager	?GetFromCache@ResourceManager@@YAPAVresource@@PBD@Z	100.0000	100.0000	100.0000	0x445a0	-
 resourcemanager	?GetSpreadsheet@ResourceManager@@YAPAVTSpreadsheetResource@@PBD@Z	100.0000	100.0000	100.0000	0x45d90	-
 resourcemanager	?GetText@ResourceManager@@YAPAVTTextResource@@PBD@Z	100.0000	100.0000	100.0000	0x45b30	-
 resourcemanager	?Open@ResourceManager@@YA_N_N0PAH@Z	99.9474	99.9474	99.9474	0x44ea0	-
@@ -1110,6 +1113,7 @@ resourcemanager	?SetPixelFormat@ResourceManager@@YAXKKK@Z	100.0000	100.0000	100.
 resourcemanager	?_Construct@std@@YAXPAHABH@Z	100.0000	100.0000	100.0000	0x36ed0	-
 resourcemanager	?_Construct@std@@YAXPAU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@1@ABU21@@Z	100.0000	100.0000	100.0000	0x47ab0	-
 resourcemanager	?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXI@Z	99.9495	99.9495	99.9495	0x1800	-
+resourcemanager	?_Dec@const_iterator@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x479f0	-
 resourcemanager	?_Decref@facet@locale@std@@QAEPAV123@XZ	100.0000	100.0000	100.0000	0xf1f0	-
 resourcemanager	?_Doraise@bad_cast@std@@MBEXXZ	100.0000	100.0000	100.0000	0xf140	-
 resourcemanager	?_Eos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXI@Z	100.0000	100.0000	100.0000	0x15e0	-
@@ -1118,8 +1122,9 @@ resourcemanager	?_Fput@?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@
 resourcemanager	?_Grow@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAE_NI_N@Z	100.0000	100.0000	100.0000	0x1600	-
 resourcemanager	?_Inc@const_iterator@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x470d0	-
 resourcemanager	?_Init@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEXPBDIH@Z	100.0000	100.0000	100.0000	0x47890	-
-resourcemanager	?_Insert@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@IAE?AViterator@12@PAU_Node@12@0ABU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@2@@Z	99.3360	99.3360	99.3360	0x47580	-
+resourcemanager	?_Insert@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@IAE?AViterator@12@PAU_Node@12@0ABU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@2@@Z	100.0000	100.0000	100.0000	0x47580	-
 resourcemanager	?_Iput@?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@KA?AV?$ostreambuf_iterator@DU?$char_traits@D@std@@@2@V32@AAVios_base@2@DPADI@Z	99.9575	99.9575	99.9575	0x48790	-
+resourcemanager	?_Lbound@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@IBEPAU_Node@12@ABVTCacheMapKey@ResourceManager@@@Z	100.0000	100.0000	100.0000	0x47990	-
 resourcemanager	?_Mode@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEHH@Z	100.0000	100.0000	100.0000	0x47970	-
 resourcemanager	?_Rep@?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@KA?AV?$ostreambuf_iterator@DU?$char_traits@D@std@@@2@V32@DI@Z	100.0000	100.0000	100.0000	0x48be0	-
 resourcemanager	?_Save@?$_Tidyfac@V?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@@std@@SAPAV?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@2@PAV32@@Z	100.0000	100.0000	100.0000	0x49120	-
@@ -1131,7 +1136,7 @@ resourcemanager	?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@s
 resourcemanager	?_Tidy@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEXXZ	100.0000	100.0000	100.0000	0x474a0	-
 resourcemanager	?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ABV12@II@Z	100.0000	100.0000	100.0000	0x1390	-
 resourcemanager	?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBDI@Z	100.0000	100.0000	100.0000	0x2fb0	-
-resourcemanager	?dispose@resource@@UAEXXZ	80.7241	80.7241	80.7241	0x45e10	-
+resourcemanager	?dispose@resource@@UAEXXZ	100.0000	100.0000	100.0000	0x45e10	-
 resourcemanager	?do_decimal_point@?$numpunct@D@std@@MBEDXZ	100.0000	100.0000	100.0000	0x48e40	-
 resourcemanager	?do_falsename@?$numpunct@D@std@@MBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ	100.0000	100.0000	100.0000	0x48f30	-
 resourcemanager	?do_grouping@?$numpunct@D@std@@MBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ	100.0000	100.0000	100.0000	0x48e60	-
@@ -1149,11 +1154,11 @@ resourcemanager	?falsename@?$numpunct@D@std@@QBE?AV?$basic_string@DU?$char_trait
 resourcemanager	?findBitmapResource@@YAPAVLODFile@@PBD@Z	99.5652	99.5652	99.5652	0x44730	-
 resourcemanager	?getloc@ios_base@std@@QBE?AVlocale@2@XZ	100.0000	100.0000	100.0000	0xf4a0	-
 resourcemanager	?grouping@?$numpunct@D@std@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ	100.0000	100.0000	100.0000	0x48d00	-
-resourcemanager	?insert@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@QAE?AU?$pair@Viterator@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@_N@2@ABU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@2@@Z	93.0000	93.0000	93.0000	0x46940	-
-resourcemanager	?loadBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z	96.7333	96.7333	96.7333	0x45610	-
-resourcemanager	?loadSpreadsheet@ResourceManager@@YAPAVTSpreadsheetResource@@PBD@Z	98.2677	98.2677	98.2677	0x45c00	-
+resourcemanager	?insert@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@QAE?AU?$pair@Viterator@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@_N@2@ABU?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@2@@Z	100.0000	100.0000	100.0000	0x46940	-
+resourcemanager	?loadBitmap16@ResourceManager@@YAPAVBitmap16Bit@@PBD@Z	100.0000	100.0000	100.0000	0x45610	-
+resourcemanager	?loadSpreadsheet@ResourceManager@@YAPAVTSpreadsheetResource@@PBD@Z	100.0000	100.0000	100.0000	0x45c00	-
 resourcemanager	?loadSpreadsheetData@ResourceManager@@YAPAVTSpreadsheetResource@@PBDPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0x45b60	-
-resourcemanager	?loadText@ResourceManager@@YAPAVTTextResource@@PBD@Z	98.2677	98.2677	98.2677	0x459d0	-
+resourcemanager	?loadText@ResourceManager@@YAPAVTTextResource@@PBD@Z	100.0000	100.0000	100.0000	0x459d0	-
 resourcemanager	?loadTextData@ResourceManager@@YAPAVTTextResource@@PBDPAVTAbstractFile@@H@Z	100.0000	100.0000	100.0000	0x45930	-
 resourcemanager	?max_size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIXZ	100.0000	100.0000	100.0000	0x17f0	-
 resourcemanager	?openArchiveResource@@YA_NH@Z	100.0000	100.0000	100.0000	0x44670	-
@@ -1164,7 +1169,7 @@ resourcemanager	?pbackfail@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator
 resourcemanager	?read@t_lod_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEHPAXH@Z	100.0000	100.0000	100.0000	0x44190	-
 resourcemanager	?read@t_stdio_file_adapter@?%C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485@ResourceManager@@UAEHPAXH@Z	100.0000	100.0000	100.0000	0x44170	-
 resourcemanager	?reportMissingResource@@YAXPBD00@Z	100.0000	100.0000	100.0000	0x447b0	-
-resourcemanager	?reportMissingTypedResource@@YIXPBDH0@Z	96.4471	96.4471	96.4471	0x449f0	-
+resourcemanager	?reportMissingTypedResource@@YAXPBDH0@Z	100.0000	100.0000	100.0000	0x449f0	-
 resourcemanager	?seekoff@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE?AV?$fpos@H@2@JW4seekdir@ios_base@2@H@Z	100.0000	100.0000	100.0000	0x15b20	-
 resourcemanager	?seekoff@?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MAE?AV?$fpos@H@2@JW4seekdir@ios_base@2@H@Z	100.0000	100.0000	100.0000	0x465c0	-
 resourcemanager	?seekpos@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE?AV?$fpos@H@2@V32@H@Z	100.0000	100.0000	100.0000	0x15b50	-

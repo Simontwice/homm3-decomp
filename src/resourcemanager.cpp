@@ -71,14 +71,24 @@ public:
 }  // namespace
 
 // Dreamcast resourcemanager.cpp:121/126 proves the class, constructor and
-// ordinary const operator< (original field: name). Retail 0x55ac20 copies
-// twelve bytes and terminates byte 12; 0x55ebd0 compares these keys with
-// _stricmp. Complete's map node has its key at +0xc and resource* at +0x1c.
+// const operator< (original field: name). Retail 0x55ac20 copies twelve
+// bytes and terminates byte 12; 0x55ebd0 compares these keys with _stricmp.
+// Complete's map node has its key at +0xc and resource* at +0x1c. The
+// editor's /Ob1 build expands the constructor at every use (h3maped
+// 0x4db0a4), so it is an inline member, and calls operator< out of line with
+// both keys on the stack and caller cleanup (0x4dafb0 from 0x4de3d9), a
+// __cdecl member.
 class TCacheMapKey {
 public:
     char name[13];
-    TCacheMapKey(const char* n);
-    bool operator<(const TCacheMapKey& y) const;
+    VA(0x0055ac20, 0x20)
+    DC_ADDRESS(0x122bd0, 0x28)
+    TCacheMapKey(const char* n)
+    {
+        strncpy(name, n, 12);
+        name[12] = 0;
+    }
+    bool __cdecl operator<(const TCacheMapKey& y) const;
 };
 
 typedef std::map<TCacheMapKey, resource*> TCacheMap;
@@ -220,18 +230,19 @@ static void reportMissingResource(const char* caller, const char* typeName,
         0);
 }
 
-// Complete's common missing-resource reporter has no Dreamcast identity, but
-// its thirteen retail callers prove the fastcall surface. The dense 0..96
-// dispatch maps the admitted resource values to names and renders every gap
+// Complete's common missing-resource reporter has no Dreamcast identity. Its
+// thirteen game callers pass registers under the game's /Gr; the editor's
+// /Gr-less build pushes all three arguments (h3maped 0x4dc3d6). The dense
+// 0..96 dispatch maps the admitted resource values to names and renders every gap
 // as `0x` plus a hexadecimal value before building the diagnostic shown by
 // the callers.
 // 100%: ordinary string assignments plus reportMissingResource recover all
 // retail calls and lifetimes without inline-depth pins. The former bootstrap
 // C linkage suppressed EH cleanup; keep the ordinary C++ declaration.
 VA(0x00559510, 0x4C1)  // caller ABI + retail type-name jump table/message graph
-void __fastcall reportMissingTypedResource(const char* caller,
-                                          int resourceType,
-                                          const char* resourceName)
+void reportMissingTypedResource(const char* caller,
+                                int resourceType,
+                                const char* resourceName)
 {
     std::string typeName;
     switch (resourceType) {
@@ -286,14 +297,14 @@ void __fastcall reportMissingTypedResource(const char* caller,
 }
 
 // Complete splits sprite-family diagnostics from the common resource
-// reporter above. GetSprite's two calls prove the fastcall ABI and the retail
-// jump table proves the complete 64..79 type-name mapping. Like the common
+// reporter above, with the same calling convention. The retail jump table
+// proves the complete 64..79 type-name mapping. Like the common
 // reporter, this is 100% with ordinary assignments and reportMissingResource;
 // no artificial message scope or inline-depth control is needed.
 VA(0x005599e0, 0x448)  // anchor-caller + retail type-name jump table
-void __fastcall reportMissingSpriteResource(const char* caller,
-                                           int resourceType,
-                                           const char* resourceName)
+void reportMissingSpriteResource(const char* caller,
+                                 int resourceType,
+                                 const char* resourceName)
 {
     std::string typeName;
     switch (resourceType) {
@@ -779,16 +790,8 @@ Bitmap816* ResourceManager::GetBitmap816(const char* name)
     return result;
 }
 
-VA(0x0055ac20, 0x20)
-DC_ADDRESS(0x122bd0, 0x28)
-ResourceManager::TCacheMapKey::TCacheMapKey(const char* n)
-{
-    strncpy(name, n, 12);
-    name[12] = 0;
-}
-
 DC_ADDRESS(0x122bf8, 0x1c)
-bool ResourceManager::TCacheMapKey::operator<(const TCacheMapKey& y) const
+bool __cdecl ResourceManager::TCacheMapKey::operator<(const TCacheMapKey& y) const
 {
     return stricmp(name, y.name) < 0;
 }
