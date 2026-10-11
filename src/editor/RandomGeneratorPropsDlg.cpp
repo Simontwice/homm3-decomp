@@ -409,7 +409,7 @@ VA_COMPGEN(0x004b07e5, 0x6f, IMPLICIT_DTOR, TRandomGeneratorAlignmentDlg)
 VA(0x004b0854, 0x7a)
 void TRandomGeneratorAlignmentDlg::_onAlignmentCheck(int townType)
 {
-    _m_alignments.set(townType, _m_aAlignmentCheck[townType].GetCheck() != 0);
+    _m_alignments[townType] = _m_aAlignmentCheck[townType].GetCheck() != 0;
     if (_m_alignments.count() == 0) {
         townType = (townType + 1) % kNumTownTypes;
         _m_aAlignmentCheck[townType].SetCheck(1);
