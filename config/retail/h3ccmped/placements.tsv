@@ -50,6 +50,17 @@ rva	size	kind	name	unit	evidence
 0x000036b0	0x3c	func	??1CBitmap@@UAE@XZ	DIBSection	referenced by ??_GCBitmap@@UAEPAXI@Z at +0x4
 0x000036f0	0x1e	func	??_GCGdiObject@@UAEPAXI@Z	DIBSection	vtable of CGdiObject (RTTI) slot 1
 0x00003710	0x3c	func	??1CGdiObject@@UAE@XZ	DIBSection	referenced by ??_GCGdiObject@@UAEPAXI@Z at +0x4
+0x00003940	0x1e	func	??_GTMemoryDC@@UAEPAXI@Z	CampaignMapWnd	vtable of TMemoryDC (RTTI) slot 1
+0x00003960	0x173	func	??0TError@TMemoryDC@@QAE@ABV01@@Z	CampaignMapWnd	referenced by __CT??_R0?AVTError@TMemoryDC@@@8??0TError@TMemoryDC@@QAE@ABV01@@Z32 at +0x18
+0x00003ae0	0x5	func	??1TMemoryDC@@UAE@XZ	CampaignMapWnd	referenced by ??_GTMemoryDC@@UAEPAXI@Z at +0x4
+0x00003af0	0x17	func	?PtVisible@CDC@@UBEHHH@Z	CampaignMapWnd	masked body (23 bytes, 1 relocations) unique at a census start
+0x00003b10	0x12	func	?RectVisible@CDC@@UBEHPBUtagRECT@@@Z	CampaignMapWnd	masked body (18 bytes, 1 relocations) unique at a census start
+0x00003b30	0x21	func	?TextOutA@CDC@@UAEHHHPBDH@Z	CampaignMapWnd	vtable of TMemoryDC (RTTI) slot 23
+0x00003b60	0x30	func	?ExtTextOutA@CDC@@UAEHHHIPBUtagRECT@@PBDIPAH@Z	CampaignMapWnd	masked body (48 bytes, 1 relocations) unique at a census start
+0x00003b90	0x44	func	?TabbedTextOutA@CDC@@UAE?AVCSize@@HHPBDHHPAHH@Z	CampaignMapWnd	masked body (68 bytes, 1 relocations) unique at a census start
+0x00003be0	0x21	func	?DrawTextA@CDC@@UAEHPBDHPAUtagRECT@@I@Z	CampaignMapWnd	vtable of TMemoryDC (RTTI) slot 26
+0x00003c10	0x3c	func	?GrayStringA@CDC@@UAEHPAVCBrush@@P6GHPAUHDC__@@JH@ZJHHHHH@Z	CampaignMapWnd	masked body (60 bytes, 1 relocations) unique at a census start
+0x00003c50	0x21	func	?Escape@CDC@@UAEHHHPBDPAX@Z	CampaignMapWnd	vtable of TMemoryDC (RTTI) slot 28
 0x00004520	0xe	func	?free@?$TBitmap@GK@@UAEXPAG@Z	DIBSection	vtable of ?$TBitmap@GK (RTTI) slot 3
 0x00004540	0x173	func	??0TAllocationFailure@@QAE@ABV0@@Z	gzinflatebuf	referenced by __CT??_R0?AVTAllocationFailure@@@8??0TAllocationFailure@@QAE@ABV0@@Z32 at +0x18
 0x00004860	0x4c	func	??0TFormattedString@@QAA@PBDZZ	EditCrossoverScenarioOptionDlg	masked body (76 bytes, 6 relocations) unique at a census start
@@ -78,7 +89,7 @@ rva	size	kind	name	unit	evidence
 0x00006c00	0x19	func	??0TImportTextFailure@TCampaign@@QAE@ABV01@@Z	Campaign	referenced by __CT??_R0?AVTImportTextFailure@TCampaign@@@8??0TImportTextFailure@TCampaign@@QAE@ABV01@@Z12 at +0x18
 0x00006c20	0x1e	func	??_GTCreateFailure@TCampaignScenarioMap@@UAEPAXI@Z	Campaign	vtable of TCreateFailure@TCampaignScenarioMap (RTTI) slot 0; ICF-folded with 4 identical bodies
 0x00007970	0xd5	func	??1_TImpl@TCampaign@@QAE@XZ	Campaign	masked body (213 bytes, 8 relocations) unique at a census start
-0x000087c0	0xc2	func	??0TRuntimeError@@QAE@XZ	Campaign	referenced by ??5@YAAAVTRawIStream@@AAV0@AAVTScenarioPrologue@@@Z at +0x5d
+0x000087c0	0xc2	func	??0TRuntimeError@@QAE@XZ	Campaign	masked prefix (146 fixed bytes agree, 194 compiled, 194 retail)
 0x00008890	0x3e	func	??1?$pair@$$CBHUTCustomHero@TGameMapHeader@@@std@@QAE@XZ	Campaign	masked body (62 bytes, 1 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x00009730	0x115	func	??1_TImpl@TScenario@@QAE@XZ	Campaign	masked body (277 bytes, 11 relocations) unique at a census start
 0x00009a60	0xcf	func	?setPrologue@_TImpl@TScenario@@QAEXV?$auto_ptr@VTScenarioPrologue@@@std@@@Z	Campaign	masked body (207 bytes, 4 relocations) unique at a census start
@@ -108,7 +119,7 @@ rva	size	kind	name	unit	evidence
 0x0000b2c0	0x31	func	?test@?$bitset@$04@std@@QBE_NI@Z	Campaign	masked body (49 bytes, 1 relocations) unique at a census start
 0x0000b300	0x30	func	?_Ucopy@?$vector@V?$auto_ptr@VTScenarioStartingBonus@@@std@@V?$allocator@V?$auto_ptr@VTScenarioStartingBonus@@@std@@@2@@std@@IAEPAV?$auto_ptr@VTScenarioStartingBonus@@@2@PBV32@0PAV32@@Z	Campaign	masked body (48 bytes, 0 relocations) unique at a census start
 0x0000b330	0x28	func	??0?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE@ABU?$less@H@1@_NABV?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@1@@Z	Campaign	referenced by ??0TCampaignScenarioMap@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV?$basic_streambuf@DU?$char_traits@D@std@@@2@H_N@Z at +0xa4
-0x0000b360	0xc	func	?end@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QBE?AVconst_iterator@12@XZ	Campaign	masked body (12 bytes, 0 relocations) unique at a census start
+0x0000b360	0xc	func	?end@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QBE?AVconst_iterator@12@XZ	Campaign	masked body (12 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x0000b4a0	0x139	func	?erase@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE?AViterator@12@V312@0@Z	Campaign	masked body (313 bytes, 17 relocations) unique at a census start
 0x0000b5e0	0x4b	func	?find@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QBE?AVconst_iterator@12@ABH@Z	Campaign	masked body (75 bytes, 1 relocations) unique at a census start
 0x0000b630	0x25	func	?_Tidy@?$bitset@$0JM@@std@@AAEXK@Z	Campaign	masked body (37 bytes, 0 relocations) unique at a census start
@@ -307,9 +318,18 @@ rva	size	kind	name	unit	evidence
 0x00016e10	0x3b	func	??6TRawOStream@@QAEAAV0@ABH@Z	CampaignDoc	masked body (59 bytes, 3 relocations) unique at a census start
 0x00016e80	0x8	func	??_ETStrGzInflateBuf@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@WFE@AEPAXI@Z	CampaignDoc	vtable ??_7TStrGzInflateBuf@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@6BTGzInflateBuf@@@ stored by 0x00010d70 slot 0
 0x00016e90	0x8	func	??_ETGzDeflatedScenarioMap@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@WBA@AEPAXI@Z	CampaignDoc	vtable ??_7TGzDeflatedScenarioMap@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197@@6BTCampaignScenarioMap@@@ stored by 0x00010c30 slot 0
-0x00018da0	0x167	func	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	gzinflatebuf	referenced by ?initialize@SText@@YAXXZ at +0x6c
+0x00018da0	0x167	func	??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z	gzinflatebuf	referenced by ??0TCampaignMapWnd@@QAE@PAVCWnd@@PAVTCampaignMapWndClient@@@Z at +0x12c
 0x00019100	0x31d	func	?initializeCampaignMapTraitsTable@@YAEXZ	campaignmap	masked body (797 bytes, 28 relocations) unique at a census start
 0x00019420	0x16	func	__h3cg$campaignmap$static_dtor$campaignNames	campaignmap	referenced by ?initializeCampaignMapTraitsTable@@YAEXZ at +0x24
+0x0001af10	0x1e	func	??_GCMenu@@UAEPAXI@Z	CampaignMapWnd	vtable of CMenu (RTTI) slot 1
+0x0001af30	0x3c	func	??1CMenu@@UAE@XZ	CampaignMapWnd	referenced by ??_GCMenu@@UAEPAXI@Z at +0x4
+0x0001af90	0x50	func	??4?$TResourcePtr@VBitmap816@@@@QAEAAV0@ABV0@@Z	CampaignMapWnd	masked body (80 bytes, 0 relocations) unique at a census start
+0x0001afe0	0x3b	func	??1?$vector@UTRegionImages@TCampaignMapWnd@@V?$allocator@UTRegionImages@TCampaignMapWnd@@@std@@@std@@QAE@XZ	CampaignMapWnd	masked body (59 bytes, 2 relocations) unique at a census start
+0x0001b020	0x21	func	?size@?$vector@UTRegionImages@TCampaignMapWnd@@V?$allocator@UTRegionImages@TCampaignMapWnd@@@std@@@std@@QBEIXZ	CampaignMapWnd	masked body (33 bytes, 0 relocations) unique at a census start
+0x0001b050	0x365	func	?insert@?$vector@UTRegionImages@TCampaignMapWnd@@V?$allocator@UTRegionImages@TCampaignMapWnd@@@std@@@std@@QAEXPAUTRegionImages@TCampaignMapWnd@@IABU34@@Z	CampaignMapWnd	masked body (869 bytes, 14 relocations) unique at a census start
+0x0001b3c0	0x11a	func	?erase@?$vector@UTRegionImages@TCampaignMapWnd@@V?$allocator@UTRegionImages@TCampaignMapWnd@@@std@@@std@@QAEPAUTRegionImages@TCampaignMapWnd@@PAU34@0@Z	CampaignMapWnd	masked body (282 bytes, 3 relocations) unique at a census start
+0x0001b4e0	0x7f	func	?_Construct@std@@YAXPAUTRegionImages@TCampaignMapWnd@@ABU23@@Z	CampaignMapWnd	masked body (127 bytes, 0 relocations) unique at a census start
+0x0001b560	0x128	func	??4TRegionImages@TCampaignMapWnd@@QAEAAU01@ABU01@@Z	CampaignMapWnd	masked body (296 bytes, 0 relocations) unique at a census start
 0x0001b6c0	0x16e	func	?initializeCampaignMovieTraitsTable@@YAEXZ	campaignmovie	masked body (366 bytes, 18 relocations) unique at a census start
 0x0001b880	0x16e	func	?initializeCampaignMusicTable@@YAEXZ	campaignmusic	masked body (366 bytes, 18 relocations) unique at a census start
 0x0001b9f0	0x16	func	__h3cg$campaignmusic$static_dtor$campaignMusicTracks	campaignmusic	referenced by ?initializeCampaignMusicTable@@YAEXZ at +0x9a
@@ -398,6 +418,23 @@ rva	size	kind	name	unit	evidence
 0x000265d0	0xa	func	??1TAutoStrPtr@?A0xf10867bd5b3ccba5@@QAE@XZ	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x28; ICF-folded with 2 identical bodies
 0x00026600	0x166	func	?InitializeHeroClassTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	herodefs	masked body (358 bytes, 18 relocations) unique at a census start
 0x00026790	0x149	func	?InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z	herodefs	masked body (329 bytes, 22 relocations) unique at a census start
+0x00026ec0	0x4c	func	??1?$pair@VCString@@V1@@std@@QAE@XZ	MainFrame	masked prefix (52 fixed bytes agree, 76 compiled, 76 retail)
+0x00026f10	0x4c	func	??1?$pair@$$CBVCString@@$$CBV1@@std@@QAE@XZ	MainFrame	referenced by ?erase@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AViterator@12@V312@0@Z at +0x84
+0x00026f60	0x4d	func	??1?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@QAE@XZ	MainFrame	masked body (77 bytes, 6 relocations) unique at a census start
+0x00027a50	0xe	func	??1?$TGDIObjectSelector@VCFont@@@@QAE@XZ	MainFrame	masked body (14 bytes, 0 relocations) unique at a census start
+0x00027a60	0x173	func	??0TError@?$TGDIObjectSelector@VCFont@@@@QAE@ABV01@@Z	MainFrame	referenced by __CT??_R0?AVTError@?$TGDIObjectSelector@VCFont@@@@@8??0TError@?$TGDIObjectSelector@VCFont@@@@QAE@ABV01@@Z32 at +0x18
+0x00027be0	0x127	func	?insert@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AU?$pair@Viterator@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@_N@2@ABU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@2@@Z	MainFrame	masked body (295 bytes, 7 relocations) unique at a census start
+0x00027d10	0x137	func	?erase@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AViterator@12@V312@0@Z	MainFrame	masked body (311 bytes, 17 relocations) unique at a census start
+0x00027e50	0x544	func	?erase@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AViterator@12@V312@@Z	MainFrame	masked body (1348 bytes, 39 relocations) unique at a census start
+0x000283a0	0x15	func	?lower_bound@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QBE?AVconst_iterator@12@ABI@Z	MainFrame	masked body (21 bytes, 1 relocations) unique at a census start
+0x000283c0	0xa3	func	?_Erase@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@IAEXPAU_Node@12@@Z	MainFrame	masked body (163 bytes, 12 relocations) unique at a census start
+0x00028470	0xaa	func	?_Init@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@IAEXXZ	MainFrame	masked body (170 bytes, 14 relocations) unique at a census start
+0x00028520	0x2fd	func	?_Insert@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@IAE?AViterator@12@PAU_Node@12@0ABU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@2@@Z	MainFrame	masked body (765 bytes, 22 relocations) unique at a census start
+0x00028820	0x47	func	?_Lbound@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@IBEPAU_Node@12@ABI@Z	MainFrame	masked body (71 bytes, 3 relocations) unique at a census start
+0x00028870	0xb7	func	?_Dec@const_iterator@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAEXXZ	MainFrame	masked body (183 bytes, 10 relocations) unique at a census start
+0x00028930	0xa7	func	?_Inc@const_iterator@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAEXXZ	MainFrame	referenced by ?erase@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AViterator@12@V312@0@Z at +0x104
+0x000289e0	0x56	func	?make_pair@std@@YA?AU?$pair@VCString@@V1@@1@ABVCString@@0@Z	MainFrame	masked body (86 bytes, 6 relocations) unique at a census start
+0x00028a40	0x68	func	?_Construct@std@@YAXPAU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@1@ABU21@@Z	MainFrame	masked body (104 bytes, 6 relocations) unique at a census start
 0x00028ae0	0x10a	func	??0TMFCFileBuf@@QAE@PAVCFile@@@Z	MFCFileBuf	referenced by 0x00012e00 at +0x2f
 0x00028bf0	0x1e	func	??_GTMFCFileBuf@@UAEPAXI@Z	MFCFileBuf	vtable of TMFCFileBuf (RTTI) slot 0
 0x00028c10	0xc0	func	??1TMFCFileBuf@@UAE@XZ	MFCFileBuf	masked body (192 bytes, 10 relocations) unique at a census start
@@ -406,7 +443,10 @@ rva	size	kind	name	unit	evidence
 0x00028e60	0xa2	func	?sync@TMFCFileBuf@@MAEHXZ	MFCFileBuf	masked body (162 bytes, 7 relocations) unique at a census start
 0x00028f10	0x9f	func	?underflow@TMFCFileBuf@@MAEHXZ	MFCFileBuf	masked body (159 bytes, 7 relocations) unique at a census start
 0x00028fb0	0xd4	func	?overflow@TMFCFileBuf@@MAEHH@Z	MFCFileBuf	masked body (212 bytes, 8 relocations) unique at a census start
+0x000290c0	0xc2	func	??0TError@TMemoryDC@@QAE@XZ	MemoryDC	referenced by ?OnPaint@TCampaignMapWnd@@IAEXXZ at +0x2ad
 0x00029190	0xc2	func	??0TGDIObjectSelectorError@@QAE@XZ	MemoryDC	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x225
+0x00029260	0x51	func	?getFirstMenuItem@@YAIPAVCMenu@@@Z	MemoryDC	referenced by ?OnContextMenu@TCampaignMapWnd@@IAEXPAVCWnd@@VCPoint@@@Z at +0x15d
+0x000292c0	0x11a	func	?setMenuItemText@@YA_NPAVCMenu@@AAIVCString@@@Z	MemoryDC	referenced by ?OnContextMenu@TCampaignMapWnd@@IAEXPAVCWnd@@VCPoint@@@Z at +0x184
 0x000293e0	0x10	func	??0CGdiObject@@QAE@XZ	MemoryDC	masked body (16 bytes, 1 relocations) unique at a census start
 0x000293f0	0x22	func	??1?$TGDIObjectSelector@VCBitmap@@@@QAE@XZ	MemoryDC	masked body (34 bytes, 2 relocations) unique at a census start
 0x000294f0	0x1e	func	??_GTNewCampaignDlg@@UAEPAXI@Z	NewCampaignDlg	vtable of TNewCampaignDlg (RTTI) slot 1
@@ -419,11 +459,12 @@ rva	size	kind	name	unit	evidence
 0x0002aa00	0x1e	func	??_GCCheckListBox@@UAEPAXI@Z	ScenarioPropsCrossoverPage	vtable of CCheckListBox (RTTI) slot 1
 0x0002aa20	0x5	func	??1CCheckListBox@@UAE@XZ	ScenarioPropsCrossoverPage	referenced by ??_GCCheckListBox@@UAEPAXI@Z at +0x4
 0x0002c200	0x1e	func	??_GTScenarioPropsProloguePageBase@@UAEPAXI@Z	ScenarioPropsProloguePage	vtable of TScenarioPropsProloguePageBase (RTTI) slot 1
+0x0002c6e0	0x3c	func	??1CBrush@@UAE@XZ	ScenarioPropsProloguePage	masked prefix (36 fixed bytes agree, 60 compiled, 60 retail)
 0x0002d510	0x1e	func	??_GTScenarioPropsEpiloguePage@@UAEPAXI@Z	ScenarioPropsProloguePage	vtable of TScenarioPropsEpiloguePage (RTTI) slot 1; ICF-folded with 1 identical bodies
 0x0002d650	0x5	func	??1TScenarioPropsEpiloguePage@@UAE@XZ	ScenarioPropsProloguePage	referenced by ??_GTScenarioPropsEpiloguePage@@UAEPAXI@Z at +0x4; ICF-folded with 1 identical bodies
 0x0002d700	0x173	func	??0TError@?$TGDIObjectSelector@VCBrush@@@@QAE@ABV01@@Z	ScenarioPropsProloguePage	referenced by __CT??_R0?AVTError@?$TGDIObjectSelector@VCBrush@@@@@8??0TError@?$TGDIObjectSelector@VCBrush@@@@QAE@ABV01@@Z32 at +0x18
 0x0002d880	0x1e	func	??_GTAllocationFailure@@UAEPAXI@Z	gzinflatebuf	vtable of TAllocationFailure (RTTI) slot 0; ICF-folded with 8 identical bodies
-0x0002e260	0x14	func	??1?$auto_ptr@VTScenarioPropsCrossoverPage@@@std@@QAE@XZ	ScenarioPropsSheet	masked body (20 bytes, 0 relocations) unique at a census start; ICF-folded with 4 identical bodies
+0x0002e260	0x14	func	??1?$auto_ptr@VCToolTipCtrl@@@std@@QAE@XZ	CampaignMapWnd	masked body (20 bytes, 0 relocations) unique at a census start; ICF-folded with 5 identical bodies
 0x0002eaa0	0x3	func	?isAvailable@TScenarioStartingOptionsTypeDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400@@UBE_NXZ	ScenarioPropsStartingOptionsPage	vtable of TScenarioOptionsBonusDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400 (RTTI) slot 58; ICF-folded with 1 identical bodies
 0x0002eab0	0x12	func	?create@TScenarioOptionsBonusDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400@@UAEHPAVCWnd@@@Z	ScenarioPropsStartingOptionsPage	masked body (18 bytes, 1 relocations) unique at a census start
 0x0002ebc0	0x1e	func	??_GTScenarioStartingOptionsTypeDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400@@UAEPAXI@Z	ScenarioPropsStartingOptionsPage	vtable of TScenarioStartingOptionsTypeDlg@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\ScenarioPropsStartingOptionsPage.cpp1754421400 (RTTI) slot 1; ICF-folded with 1 identical bodies
@@ -714,7 +755,10 @@ rva	size	kind	name	unit	evidence
 0x00098b68	0x1c	data	__CT??_R0?AVTGDIObjectSelectorError@@@8??0TGDIObjectSelectorError@@QAE@ABV0@@Z32	MemoryDC	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0x8
 0x00098b88	0x1c	data	__CT??_R0?AVTError@?$TGDIObjectSelector@VCBitmap@@@@@8??0TError@?$TGDIObjectSelector@VCBitmap@@@@QAE@ABV01@@Z32	MemoryDC	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0x4
 0x00098ba8	0x1c	data	__CTA6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@	MemoryDC	referenced by __TI6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@ at +0xc
+0x00098bc8	0x1c	data	__CT??_R0?AVTError@TMemoryDC@@@8??0TError@TMemoryDC@@QAE@ABV01@@Z32	CampaignMapWnd	referenced by __CTA5?AVTError@TMemoryDC@@ at +0x4
+0x00098be8	0x18	data	__CTA5?AVTError@TMemoryDC@@	CampaignMapWnd	referenced by __TI5?AVTError@TMemoryDC@@ at +0xc
 0x00098c00	0x10	data	__TI6?AVTError@?$TGDIObjectSelector@VCBitmap@@@@	MemoryDC	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x22e
+0x00098c10	0x10	data	__TI5?AVTError@TMemoryDC@@	CampaignMapWnd	referenced by ?OnPaint@TCampaignMapWnd@@IAEXXZ at +0x2b6
 0x00098ca8	0x1c	data	__CT??_R0?AVTAllocationFailure@@@8??0TAllocationFailure@@QAE@ABV0@@Z32	gzinflatebuf	referenced by __CTA5?AVTAllocationFailure@@ at +0x4
 0x00098cc8	0x18	data	__CTA5?AVTAllocationFailure@@	gzinflatebuf	referenced by __TI5?AVTAllocationFailure@@ at +0xc
 0x00098d08	0x10	data	__TI5?AVTAllocationFailure@@	gzinflatebuf	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0xa7
@@ -734,6 +778,9 @@ rva	size	kind	name	unit	evidence
 0x0009c5e0	0x1c	data	__CT??_R0?AVTDataError@TGzInflateBuf@@@8??0TDataError@TGzInflateBuf@@QAE@ABV01@@Z28	gzinflatebuf	referenced by __CTA3?AVTDataError@TGzInflateBuf@@ at +0x4
 0x0009c600	0x10	data	__CTA3?AVTDataError@TGzInflateBuf@@	gzinflatebuf	referenced by __TI3?AVTDataError@TGzInflateBuf@@ at +0xc
 0x0009c610	0x10	data	__TI3?AVTDataError@TGzInflateBuf@@	gzinflatebuf	referenced by ?underflow@TGzInflateBuf@@UAEHXZ at +0x189
+0x0009c9b0	0x1c	data	__CT??_R0?AVTError@?$TGDIObjectSelector@VCFont@@@@@8??0TError@?$TGDIObjectSelector@VCFont@@@@QAE@ABV01@@Z32	MainFrame	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCFont@@@@ at +0x4
+0x0009c9d0	0x1c	data	__CTA6?AVTError@?$TGDIObjectSelector@VCFont@@@@	MainFrame	referenced by __TI6?AVTError@?$TGDIObjectSelector@VCFont@@@@ at +0xc
+0x0009c9f0	0x10	data	__TI6?AVTError@?$TGDIObjectSelector@VCFont@@@@	MainFrame	referenced by ?OnCreate@TMainFrame@@IAEHPAUtagCREATESTRUCTA@@@Z at +0x23b
 0x0009d2f8	0x1c	data	__CT??_R0?AVTError@?$TGDIObjectSelector@VCBrush@@@@@8??0TError@?$TGDIObjectSelector@VCBrush@@@@QAE@ABV01@@Z32	ScenarioPropsProloguePage	referenced by __CTA6?AVTError@?$TGDIObjectSelector@VCBrush@@@@ at +0x4
 0x0009d318	0x1c	data	__CTA6?AVTError@?$TGDIObjectSelector@VCBrush@@@@	ScenarioPropsProloguePage	referenced by __TI6?AVTError@?$TGDIObjectSelector@VCBrush@@@@ at +0xc
 0x0009d338	0x10	data	__TI6?AVTError@?$TGDIObjectSelector@VCBrush@@@@	ScenarioPropsProloguePage	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x280
@@ -3136,6 +3183,7 @@ rva	size	kind	name	unit	evidence
 0x000b2368	0xf	data	??_C@_0P@LGAD@CampainMusic02?$AA@	campaignmusic	referenced by ?g_campaignMusicCues@@3PAUSCampaignMusicCue@@A at +0x8
 0x000b2378	0xf	data	??_C@_0P@EJLK@CampainMusic01?$AA@	campaignmusic	referenced by ?g_campaignMusicCues@@3PAUSCampaignMusicCue@@A at +0x0
 0x000b2388	0xd	data	??_C@_0N@DAPP@CmpMusic?4txt?$AA@	campaignmusic	referenced by ?initializeCampaignMusicTable@@YAEXZ at +0x1d
+0x000b2418	0xe	data	??_C@_0O@JFIL@TCampaignView?$AA@	CampaignView	referenced by ?classTCampaignView@TCampaignView@@2UCRuntimeClass@@B at +0x0
 0x000b2488	0x43f8	data	?g_creatureTypeTraitsStorage@?A0xf10867bd5b3ccba5@@3PAUTCreatureTypeTraits@@A	creaturetype	referenced by ?initializeCreatureTypeTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x19
 0x000b6880	0x4	data	?akCreatureTypeTraits@@3AAY0JG@$$CBUTCreatureTypeTraits@@A	creaturetype	referenced by 0x0001eb90 at +0x49
 0x000b6a7c	0xb	data	??_C@_0L@CABM@smcart?4def?$AA@	creaturetype	referenced by 0x000b2488 at +0x431c
@@ -3770,6 +3818,8 @@ rva	size	kind	name	unit	evidence
 0x000bcfbc	0xd	data	??_C@_0N@NKBE@hotraits?4txt?$AA@	herodefs	referenced by ?InitializeHeroTraitsTable@@YAEXZ at +0x2
 0x000bcfcc	0xd	data	??_C@_0N@CEFF@hctraits?4txt?$AA@	herodefs	referenced by ?InitializeHeroClassTraitsTable@@YA_NXZ at +0x2
 0x000bcfdc	0xd	data	??_C@_0N@ILGK@sstraits?4txt?$AA@	herodefs	referenced by ?InitializeSSkillTraitsTable@@YA_NXZ at +0x2
+0x000bcfec	0xb	data	??_C@_0L@NDAE@TMainFrame?$AA@	MainFrame	referenced by ?classTMainFrame@TMainFrame@@2UCRuntimeClass@@B at +0x0
+0x000bd120	0xd	data	??_C@_0N@OFON@CmpEdCmd?4txt?$AA@	MainFrame	referenced by ??0TCommandTexts@@QAE@XZ at +0x39
 0x000bd240	0x4	data	?akPlayerTraits@@3PBUTPlayerTraits@@B	Player	referenced by 0x0002ed80 at +0x2d
 0x000bd244	0xd	data	??_C@_0N@EJOF@plcolors?4txt?$AA@	Player	string literal referenced by ?InitializePlayerTraitsTable@@YA_NXZ
 0x000bd300	0x2	data	??_C@_01BJG@?6?$AA@	ScenarioPropsGeneralPage	referenced by ?_showPrologue@TScenarioPropsProloguePageBase@@AAEXPBVTScenarioPrologue@@@Z at +0x120
@@ -3957,6 +4007,8 @@ rva	size	kind	name	unit	evidence
 0x000c7fe8	0x1c0	data	?g_sSkillTraitsStorage@@3PAUTSSkillTraits@@A	herodefs	referenced by ?InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x15
 0x000c81a8	0x150	data	_?secondarySkillLevelNames@?1??InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4PAY02VTAutoStrPtr@?A0x4cd5b899c34a865a@@A	herodefs	referenced by ?InitializeSSkillTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0xbe
 0x000c82f8	0x1	data	_?$S27@?1??InitializeHeroTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4EA	herodefs	referenced by ?InitializeHeroTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x9
+0x000c8304	0x4	data	?_Nil@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@1PAU_Node@12@A	MainFrame	referenced by ?insert@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@QAE?AU?$pair@Viterator@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@_N@2@ABU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@2@@Z at +0x1c
+0x000c8308	0x4	data	?_Nilrefs@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@1IA	MainFrame	referenced by ?_Init@?$_Tree@IU?$pair@$$CBIU?$pair@$$CBVCString@@$$CBV1@@std@@@std@@U_Kfn@?$map@IU?$pair@$$CBVCString@@$$CBV1@@std@@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@2@U?$less@I@2@V?$allocator@U?$pair@$$CBVCString@@$$CBV1@@std@@@2@@std@@IAEXXZ at +0x58
 0x000c8310	0x40	data	_?aNames@?1??InitializePlayerTraitsTable@@YA_NXZ@4PAV?$TAutoArrayPtr@D@@A	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x35
 0x000c8350	0x40	data	_?aColorNames@?1??InitializePlayerTraitsTable@@YA_NXZ@4PAV?$TAutoArrayPtr@D@@A	Player	referenced by ?InitializePlayerTraitsTable@@YA_NXZ at +0x6d
 0x000c8390	0x40	data	?aPlayerTraitsImp@?A0x0e809e6c890d5ee5@@3PAUTPlayerTraits@@A	Player	referenced by ?akPlayerTraits@@3PBUTPlayerTraits@@B at +0x0

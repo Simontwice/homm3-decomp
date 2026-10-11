@@ -460,3 +460,18 @@ flags = "ccmped_o2_gr_windows"
 unit = "ScenarioPropsStartingOptionsPage"
 source = "src/campaign_editor/ScenarioPropsStartingOptionsPage.cpp"
 flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "CampaignMapWnd"
+source = "src/campaign_editor/CampaignMapWnd.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "CampaignView"
+source = "src/campaign_editor/CampaignView.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "MainFrame"
+source = "src/campaign_editor/MainFrame.cpp"
+flags = "ccmped_o2_gr_windows"

@@ -13,11 +13,13 @@ public:
 
     DC_ADDRESS(0x05b284, 0xe)
     TResourcePtr(T* ptr = 0) : m_owns(ptr != 0), m_ptr(ptr) {}
-    // CodeView 0x57a9 declares this ordinary copy constructor, but has no
-    // procedure/source location for its body. Current consumers construct
-    // directly from pointers; retain the declaration without guessing a
-    // transfer implementation from the other ownership operations.
-    TResourcePtr(const TResourcePtr& rhs);
+    // auto_ptr's transfer. The campaign editor expands it in its region
+    // image vector (h3ccmped 0x41b4e0, under /O2 which expands only inline
+    // functions).
+    // The DC declaration survives, but no body source location does.
+    // Header ownership is provisional; no source order is claimed.
+    // @dc-declaration-only: 0x57a9
+    TResourcePtr(const TResourcePtr& rhs) : m_owns(rhs.m_owns), m_ptr(rhs.release()) {}
 
     // CodeView ResourcePtr.h:44: ownership byte +0, pointer +4.
     // Retail 0x41bd90 keeps those tests and dispatches virtual dispose;
