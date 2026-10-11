@@ -7572,7 +7572,7 @@ void type_random_map_generator::createMonolithConnection(
 {
     TRmgObjectPropertiesRef* exitProperties = 0;
     TRmgZone* destination = m_zones[connection->m_destination->m_zoneIndex];
-    if (source->m_terrain == eTerrainWater || destination->m_terrain == eTerrainWater)
+    if (source->getTerrain() == eTerrainWater || destination->m_terrain == eTerrainWater)
         return;
     TRmgObjectPropertiesRef* properties;
     if (prototypeIndex < m_objectPrototypes[LITH_TWOWAY].size()) {
