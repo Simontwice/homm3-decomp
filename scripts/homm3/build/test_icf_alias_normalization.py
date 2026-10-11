@@ -5,7 +5,8 @@ import unittest
 from homm3.build import canonicalize_data_symbols as canon
 from homm3.build.normalize_objs import (FunctionBody, _canonicalize_icf_aliases,
                                         _canonicalize_proven_fold_calls,
-                                        _icf_identical, _linker_fold_mates)
+                                        _icf_identical, _linker_fold_mates,
+                                        _paired_references)
 
 TEXT = 0x60500020
 REL32 = 0x14
@@ -84,6 +85,32 @@ class IcfAliasRewriteTest(unittest.TestCase):
         parsed = canon.CoffObject(new_base)
         self.assertEqual({parsed.symbols[r.symbol_index].name
                           for r in parsed.relocations}, {"??1Folded"})
+
+    def test_a_twin_after_a_retail_only_call_is_paired_by_order(self):
+        # TOverviewWindow's ctor: retail's body is longer before the calls,
+        # so the twin's site sits at another offset than the label's.
+        base = coff(CALL * 2, [("??_GA", 0)], [(1, "?f"), (7, "??1TwinA")],
+                    ["?f", "??1TwinA"])
+        target = coff(CALL + b"\x90\x90" + CALL, [("??_GA", 0)],
+                      [(1, "?f"), (9, "??1Folded")], ["?f", "??1Folded"])
+        index = ({"??1TwinA": JUMP_ONLY}, {"??1Folded": FOLDED})
+        _new_base, new_target, count = _canonicalize_icf_aliases(
+            base, target, self.rvas, index)
+        parsed = canon.CoffObject(new_target)
+        self.assertEqual((count, [parsed.symbols[r.symbol_index].name
+                                  for r in parsed.relocations]),
+                         (1, ["?f", "??1TwinA"]))
+
+    def test_references_pair_by_order_with_unshared_names_as_wildcards(self):
+        base = canon.CoffObject(coff(CALL * 3, [("?f", 0)],
+                                     [(1, "?a"), (7, "?twin"), (13, "?c")],
+                                     ["?a", "?twin", "?c"]))
+        target = canon.CoffObject(coff(CALL * 4, [("?f", 0)],
+                                       [(1, "?a"), (7, "?extra"), (13, "?label"),
+                                        (19, "?c")], ["?a", "?extra", "?label", "?c"]))
+        pairs = [(base.symbols[b.symbol_index].name, target.symbols[t.symbol_index].name)
+                 for b, t in _paired_references(base, target)]
+        self.assertEqual(pairs, [("?a", "?a"), ("?twin", "?extra"), ("?c", "?c")])
 
     def test_a_twin_with_different_code_stays_visible(self):
         base = coff(CALL, [("??_GA", 0)], [(1, "??1TwinA")], ["??1TwinA"])

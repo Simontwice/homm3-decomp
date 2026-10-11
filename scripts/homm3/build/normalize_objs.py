@@ -770,6 +770,17 @@ def _icf_code_key() -> str:
     return _content_key(Path(__file__), Path(canon.__file__))
 
 
+def _archived_units() -> frozenset[str]:
+    """Units the link takes from a `library` archive instead of as objects.
+
+    The pinned LINK folds no archive member's COMDAT with an object's: the
+    candidate image keeps victor.lib's victorReleaseNothing (`ret`) at its
+    own address beside the game's folded `ret` group, as retail does
+    (0x603b10 beside 0x5bc690), and no candidate fold group mixes the two."""
+    from homm3 import manifest
+    return frozenset(unit["unit"] for unit in manifest.units() if unit.get("library"))
+
+
 _ICF_INDEX: tuple[dict[str, FunctionBody], dict[str, FunctionBody]] | None = None
 
 
@@ -779,9 +790,11 @@ def _icf_index() -> tuple[dict[str, FunctionBody], dict[str, FunctionBody]]:
     A body defined differently by two objects is ambiguous and omitted.
     Each object's bodies are cached by its content hash, so an unchanged
     object is never reparsed; the merge itself always reads every object.
+    An archived unit's bodies (`_archived_units`) are never foldable.
     """
     global _ICF_INDEX
     if _ICF_INDEX is None:
+        archived = _archived_units()
         code = _icf_code_key()
         cached = _load_cache("icf-bodies.pickle")
         previous = cached.get("objects", {}) if cached.get("code") == code else {}
@@ -807,6 +820,8 @@ def _icf_index() -> tuple[dict[str, FunctionBody], dict[str, FunctionBody]]:
                 if rows is None:
                     continue
                 bodies = {name: FunctionBody(*row) for name, row in rows.items()}
+                if side == "base" and obj.name[:-len(".obj")] in archived:
+                    bodies = {name: replace(body, fold=None) for name, body in bodies.items()}
                 for name, body in bodies.items():
                     if name in merged and merged[name] != body:
                         merged[name] = None
@@ -888,6 +903,54 @@ def _linker_fold_mates(candidates: dict[str, FunctionBody], name: str) -> set[st
     return set(_FOLD_GROUPS[1].get(key, {name})) if key is not None else {name}
 
 
+def _function_references(coff: canon.CoffObject) -> dict[str, list[canon.Relocation]]:
+    """Each function's REL32/DIR32 relocations in site order."""
+    ranges = canon._function_ranges(coff)
+    rows: dict[str, list[canon.Relocation]] = {}
+    for relocation in sorted(coff.relocations, key=lambda row: (row.section, row.site)):
+        if relocation.typ not in (REL32, DIR32):
+            continue
+        owner = canon._function_owner(ranges, relocation.section, relocation.site)
+        if owner is not None:
+            rows.setdefault(owner.name, []).append(relocation)
+    return rows
+
+
+def _paired_references(base: canon.CoffObject, target: canon.CoffObject
+                       ) -> list[tuple[canon.Relocation, canon.Relocation]]:
+    """(candidate, retail) reference pairs of the functions both sides define.
+
+    `homm3 sema diff`'s reference pairing: each function's references align
+    as a sequence of (type, name) keys, a name the other side never spells
+    being a wildcard, and a replaced run pairs position by position. A
+    retail-only call earlier in the body therefore shifts no later site.
+    Only references of one relocation type pair."""
+    import difflib
+
+    def names(coff, relocations):
+        return [(row.typ, coff.symbols[row.symbol_index].name) for row in relocations]
+
+    target_rows = _function_references(target)
+    pairs = []
+    for function, base_refs in _function_references(base).items():
+        target_refs = target_rows.get(function)
+        if not target_refs:
+            continue
+        base_keys = names(base, base_refs)
+        target_keys = names(target, target_refs)
+        base_set, target_set = set(base_keys), set(target_keys)
+        matcher = difflib.SequenceMatcher(
+            a=[key if key in target_set else (key[0], None) for key in base_keys],
+            b=[key if key in base_set else (key[0], None) for key in target_keys],
+            autojunk=False)
+        for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+            if tag in ("equal", "replace"):
+                for bi, ti in zip(range(i1, i2), range(j1, j2)):
+                    if base_refs[bi].typ == target_refs[ti].typ:
+                        pairs.append((base_refs[bi], target_refs[ti]))
+    return pairs
+
+
 def _canonicalize_icf_aliases(
         base_payload: bytes, target_payload: bytes,
         symbol_rvas: dict[str, tuple[int, str]],
@@ -912,7 +975,9 @@ def _canonicalize_icf_aliases(
     group the linker forms from the candidate objects (`_linker_fold_mates`)
     when its mates name exactly that one retail function. Each
     candidate twin paired with a label is judged alone, so a differing
-    overload at one site leaves the verified twins' sites canonical. When
+    overload at one site leaves the verified twins' sites canonical. Sites
+    pair by each function's reference order (`_paired_references`), so an
+    unrelated length difference earlier in the body does not hide them. When
     the label's only twin verifies, its undefined target reference is
     renamed to the twin; otherwise the verified twins' candidate
     relocations point at the surviving label, appended to the candidate
@@ -921,21 +986,6 @@ def _canonicalize_icf_aliases(
     """
     base = canon.CoffObject(base_payload)
     target = canon.CoffObject(target_payload)
-    base_ranges = canon._function_ranges(base)
-    target_ranges = canon._function_ranges(target)
-
-    def paired(coff, ranges):
-        rows = {}
-        for relocation in coff.relocations:
-            if relocation.typ not in (REL32, DIR32):
-                continue
-            owner = canon._function_owner(ranges, relocation.section, relocation.site)
-            if owner is not None:
-                rows[(owner.name, relocation.site - owner.value)] = relocation
-        return rows
-
-    base_rows = paired(base, base_ranges)
-    target_rows = paired(target, target_ranges)
     target_names = {symbol.name for symbol in target.symbols.values()}
     base_by_name: dict[str, int] = {}
     for symbol in sorted(base.symbols.values(), key=lambda row: row.index):
@@ -950,10 +1000,7 @@ def _canonicalize_icf_aliases(
 
     sites: dict[tuple[str, str], list[canon.Relocation]] = {}
     aliases: dict[str, set[str]] = {}
-    for key, target_relocation in target_rows.items():
-        base_relocation = base_rows.get(key)
-        if base_relocation is None or base_relocation.typ != target_relocation.typ:
-            continue
+    for base_relocation, target_relocation in _paired_references(base, target):
         twin = base.symbols[base_relocation.symbol_index].name
         label = target.symbols[target_relocation.symbol_index].name
         if twin == label:

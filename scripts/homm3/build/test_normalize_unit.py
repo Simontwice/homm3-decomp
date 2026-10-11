@@ -121,6 +121,20 @@ class NormalizeUnitTest(unittest.TestCase):
             normalize_objs._icf_index()
             parsed.assert_called_once()
 
+    def test_archived_unit_bodies_are_not_foldable(self):
+        # victor.lib's `ret` keeps its own address beside the game's group,
+        # also when the object's bodies come from the cache.
+        normalize_objs.normalize_unit("probe")
+        ret = normalize_objs.FunctionBody(b"\xc3", (), (1, ()))
+        with patch.object(normalize_objs, "_function_bodies", return_value={"?ret": ret}), \
+                patch.object(normalize_objs, "_icf_code_key", return_value="fixture"):
+            normalize_objs._ICF_INDEX = None
+            self.assertEqual(normalize_objs._icf_index()[0]["?ret"].fold, (1, ()))
+            normalize_objs._ICF_INDEX = None
+            with patch.object(normalize_objs, "_archived_units",
+                              return_value=frozenset({"probe"})):
+                self.assertIsNone(normalize_objs._icf_index()[0]["?ret"].fold)
+
     def test_retail_twin_index_cache_is_keyed_by_the_census(self):
         from types import SimpleNamespace
         image = SimpleNamespace(pe=SimpleNamespace(read=lambda rva, size: b"\xc3" * size))
