@@ -2100,13 +2100,13 @@ inline void advManager::doEventFaerieRing(hero* currentHero,
 {
     if (currentHero->m_flags & 0x2000) {
         if (humanPlayer)
-            normalDialog((*g_adventureEventText)[
-                             ADV_EVENT_TEXT_FAERIE_RING_VISITED],
+            normalDialog(g_adventureEventText->GetText(
+                             ADV_EVENT_TEXT_FAERIE_RING_VISITED),
                          1, -1, -1, -1, 0, -1, 0, -1, 0, -1, 0);
     } else {
         if (humanPlayer)
-            normalDialog((*g_adventureEventText)[
-                             ADV_EVENT_TEXT_FAERIE_RING],
+            normalDialog(g_adventureEventText->GetText(
+                             ADV_EVENT_TEXT_FAERIE_RING),
                          1, -1, -1, 11, 0, -1, 0, -1, 0, -1, 0);
         currentHero->m_flags |= 0x2000;
         g_game->setInfoFlag(FaerieRingInfo, g_netLocalGamePos);
@@ -6251,13 +6251,13 @@ int advManager::doCombat(type_point point, hero* leftHero, armyGroup* leftArmyGr
             char text[256];  // DC sText[256]
             const char* target;
             if (rightTown) {
-                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_TOWN];
+                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_TOWN);
             } else if (rightHero) {
-                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_HERO];
+                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_HERO);
             } else {
-                target = (*g_generalText)[GENERAL_TEXT_ATTACK_TARGET_GARRISON];
+                target = g_generalText->GetText(GENERAL_TEXT_ATTACK_TARGET_GARRISON);
             }
-            sprintf(text, (*g_generalText)[GENERAL_TEXT_TOWN_UNDER_ATTACK_FORMAT],
+            sprintf(text, g_generalText->GetText(GENERAL_TEXT_TOWN_UNDER_ATTACK_FORMAT),
                     g_game->getPlayerName(rightPlayer), target);
             g_game->waitForPlayer(text, rightPlayer);
         }
@@ -6344,10 +6344,10 @@ combatFinished:
         sprintf(g_text, "pickup%02d.82M", sRandom(1, 7));
         SAMPLE2 sample = loadPlaySample(g_text);
         if (g_combatManager->m_raisedCreatureCount == 1) {
-            sprintf(g_text, (*g_generalText)[GENERAL_TEXT_NECROMANCY_RAISE_ONE_FORMAT],
+            sprintf(g_text, g_generalText->GetText(GENERAL_TEXT_NECROMANCY_RAISE_ONE_FORMAT),
                     getArmyName(g_combatManager->m_raisedCreatureType, 1));
         } else {
-            sprintf(g_text, (*g_generalText)[GENERAL_TEXT_NECROMANCY_RAISE_MANY_FORMAT],
+            sprintf(g_text, g_generalText->GetText(GENERAL_TEXT_NECROMANCY_RAISE_MANY_FORMAT),
                     g_combatManager->m_raisedCreatureCount,
                     getArmyName(g_combatManager->m_raisedCreatureType, 2));
         }
