@@ -8208,7 +8208,7 @@ void type_random_map_generator::prepareJunctionZone(TRmgZone* zone)
             }
         }
     }
-    if (!zone->m_entrances.size())
+    if (!zone->getEntranceCount())
         return;
     TRmgMapPosition first;
     first.m_x = zone->m_entrances[0].m_x;
@@ -8217,7 +8217,7 @@ void type_random_map_generator::prepareJunctionZone(TRmgZone* zone)
     TRmgMapItem* item = m_map.getMapItem(first.m_x, first.m_y, first.m_z);
     item->setMovementCost(0, TRmgMapPosition(-1, -1, -1));
     m_map.floodConnectionCosts(first, 0);
-    for (int entrance = 1; entrance < static_cast<int>(zone->m_entrances.size()); ++entrance) {
+    for (int entrance = 1; entrance < zone->getEntranceCount(); ++entrance) {
         TRmgPoint from = zone->m_entrances[entrance];
         item = m_map.getMapItem(from.m_x, from.m_y, level);
         unsigned int cost = item->m_movement.m_cost;
@@ -8238,6 +8238,14 @@ void type_random_map_generator::prepareJunctionZone(TRmgZone* zone)
         next.m_z = level;
         m_map.floodConnectionCosts(next, 0);
     }
+}
+
+// The map editor keeps this accessor out of line right after the junction
+// pass (0x4a8bfc, this in ECX); its only callers are that pass's entry test
+// and loop bound. The game expands every use and drops the body.
+int TRmgZone::getEntranceCount() const
+{
+    return m_entrances.size();
 }
 
 VA(0x00544920, 0x124)
