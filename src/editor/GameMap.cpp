@@ -3792,6 +3792,11 @@ void TGameMap::streamObject(streambuf* pStreamBuf, const TGameObject& obj)
     _TImpl::streamObject(pStreamBuf, obj);
 }
 
+VA(0x00429a03, 0xf)
+TGameMap::TGameMap(const TGameMap& other) : _m_pImpl(other._m_pImpl)
+{
+}
+
 VA(0x00429a12, 0x4e)
 TGameMap::TGameMap(TClient* pClient, EGameVersion version, TSize size, bool bTwoLayer)
     : _m_pImpl(_TImpl(pClient, version, size, bTwoLayer))

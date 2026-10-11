@@ -162,9 +162,9 @@ void TGetQuestDescFunc::visit(const TQuestDefeatHero& quest)
     if (pHero == NULL) {
         const TTown* pTown = dynamic_cast<const TTown*>(pObject);
         pHero = pTown->getPVisitingHero();
-        loc = loc - pTown->getTriggerLoc();
+        loc -= pTown->getTriggerLoc();
     } else
-        loc = loc - pHero->getTriggerLoc();
+        loc -= pHero->getTriggerLoc();
     CString heroName;
     const TIdentifiedHero* pIdentifiedHero = dynamic_cast<const TIdentifiedHero*>(pHero);
     if (pIdentifiedHero != NULL) {
@@ -387,10 +387,9 @@ void TGetDefaultQuestMessageFunc::visit(const TQuestBringArtifacts& quest)
 {
     std::multiset<TArtifact>::const_iterator pArtifact = quest.getArtifacts().begin();
     CString artifacts(akArtifactTraits[*pArtifact++].m_name);
-    for (; pArtifact != quest.getArtifacts().end();) {
+    while (pArtifact != quest.getArtifacts().end()) {
         TArtifact artifact = *pArtifact;
-        ++pArtifact;
-        if (pArtifact == quest.getArtifacts().end()) {
+        if (++pArtifact == quest.getArtifacts().end()) {
             artifacts += ' ';
             artifacts += kAndStr;
             artifacts += ' ';
@@ -410,8 +409,7 @@ void TGetDefaultQuestMessageFunc::visit(const TQuestBringCreatures& quest)
     while (pCreature != quest.getCreatures().end()) {
         TCreatureType type = pCreature->first;
         int quantity = pCreature->second;
-        ++pCreature;
-        if (pCreature == quest.getCreatures().end()) {
+        if (++pCreature == quest.getCreatures().end()) {
             creatures += ' ';
             creatures += kAndStr;
             creatures += ' ';

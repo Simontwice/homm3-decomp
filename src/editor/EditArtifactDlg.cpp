@@ -56,7 +56,7 @@ TEditArtifactDlg::TEditArtifactDlg(CWnd* pParent, const TSlots& unusedSlots,
 VA(0x0040d87d, 0x131)
 void TEditArtifactDlg::_setArtifacts()
 {
-    for (int index = _m_artifactCombo.GetCount() - 1; index >= 0; index--)
+    for (int count = _m_artifactCombo.GetCount(); count-- > 0;)
         _m_artifactCombo.DeleteString(0);
     int numArtifacts;
     if (_m_mapVersion >= GAME_VERSION_SOD)
