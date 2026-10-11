@@ -4,6 +4,7 @@
 // message, resources and one artifact. The release drops Loki's asserts.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -26,6 +27,8 @@ VA(0x00418ec2, 0x209)
 TEvent::TEvent(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TBlackBox(objType, pIStream, version)
 {
+    assert(objType.getType() == EVENT);
+    assert(pIStream != NULL);
     if (version < 6) {
         std::string message;
         *pIStream >> message;
@@ -63,12 +66,14 @@ TEvent::TEvent(const TObjectType& objType, TRawIStream* pIStream, int version)
 VA(0x00419182, 0x13)
 void TEvent::setBAllowPlayer(TPlayer player, bool bAllow)
 {
+    assert(player >= 0 && player < kNumPlayers);
     _m_bAllowPlayer[player] = bAllow;
 }
 
 VA(0x00419195, 0x30)
 bool TEvent::getBAllowPlayer(TPlayer player) const
 {
+    assert(player >= 0 && player < kNumPlayers);
     return _m_bAllowPlayer.test(player);
 }
 
@@ -82,6 +87,7 @@ bool TEvent::isCustomized() const
 VA(0x0041921d, 0xa3)
 void TEvent::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     TBlackBox::write(pOStream, version);
     unsigned char players = 0;
     for (unsigned int player = 0; player < kNumPlayers; ++player)

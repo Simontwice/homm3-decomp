@@ -8,6 +8,7 @@
 // format registered per editor window id.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -214,6 +215,8 @@ TMapEditWnd::TMapEditWnd(CWnd* pParent, TMapEditingWnd::TController* pController
       _m_pen(PS_SOLID, 1, RGB(255, 255, 255)),
       _m_hClipboardData(NULL)
 {
+    assert(_m_pMap != NULL);
+    assert(!_m_bSecondLayer || _m_pMap->isTwoLayer());
     if (objectClipboardFormat == 0) {
         CString formatName;
         formatName.Format("Heroes of Might and Magic III Map Editor Object Clipboard Format %d", _m_id);
@@ -222,6 +225,8 @@ TMapEditWnd::TMapEditWnd(CWnd* pParent, TMapEditingWnd::TController* pController
             throw TRuntimeError();
     }
     if (hPointingHandCursor == NULL) {
+        assert(hClosedHandCursor == NULL);
+        assert(khArrowCursor == NULL);
         hPointingHandCursor = AfxGetApp()->LoadCursor(IDC_POINTING_HAND);
         hClosedHandCursor = AfxGetApp()->LoadCursor(IDC_CLOSED_HAND);
     }
@@ -277,6 +282,7 @@ void TMapEditWnd::setMapLayer(const TGameMap* pNewMap, const TGameMapMask* pNewO
     _m_pMap = pNewMap;
     _m_pObstacleMask = pNewObstacleMask;
     _m_bSecondLayer = bNewSecondLayer;
+    assert(!_m_bDragging);
     _m_viewPos = CPoint(0, 0);
     SetScrollPos(SB_HORZ, 0);
     SetScrollPos(SB_VERT, 0);
@@ -345,6 +351,7 @@ void TMapEditWnd::update(const CRect& rect)
 VA(0x00469d54, 0x19c)
 void TMapEditWnd::setZoom(TZoom newZoom)
 {
+    assert(newZoom >= 0 && newZoom < kNumZooms);
     if (newZoom != _m_zoom) {
         CRect clientRect;
         GetClientRect(&clientRect);
@@ -447,6 +454,7 @@ void TMapEditWnd::onUndo()
 {
     if (_m_mode == _eModeSel && _m_selectedObjID != TGameMap::TLayer::s_kInvalidObjID) {
         _m_selectedObjID = TGameMap::TLayer::s_kInvalidObjID;
+        assert(_m_pController != NULL);
         _m_pController->onEditObjectSelected(this, _m_selectedObjID);
     }
     if (_m_toolTipObjID != TGameMap::TLayer::s_kInvalidObjID)
@@ -458,8 +466,10 @@ void TMapEditWnd::onUndo()
 VA(0x0046a1f3, 0x3d)
 void TMapEditWnd::onObjectRemoved(unsigned int removedObjID)
 {
+    assert(removedObjID != TGameMap::TLayer::s_kInvalidObjID);
     if (_m_selectedObjID == removedObjID) {
         _m_selectedObjID = TGameMap::TLayer::s_kInvalidObjID;
+        assert(_m_pController != NULL);
         _m_pController->onEditObjectSelected(this, _m_selectedObjID);
     }
     if (_m_toolTipObjID == removedObjID)
@@ -490,6 +500,7 @@ void TMapEditWnd::animate(unsigned int frameNum, bool bForce)
                   && extent.bottom() > cells.top))
                 continue;
             const TGUIGameObject* pObject = dynamic_cast<const TGUIGameObject*>(layer.getPObject(*iter));
+            assert(pObject != NULL);
             if (!pObject->isAnimated())
                 continue;
             CRect objRect((extent.left() - _m_viewPos.x) * tileSize, (extent.top() - _m_viewPos.y) * tileSize,
@@ -571,6 +582,7 @@ void TMapEditWnd::resetAnimation()
 VA(0x0046a5da, 0x140)
 void TMapEditWnd::makeVisible(unsigned int objID)
 {
+    assert(objID != TGameMap::TLayer::s_kInvalidObjID);
     CRect clientRect;
     GetClientRect(&clientRect);
     CSize viewSize = _computeViewRectSize(clientRect.Width(), clientRect.Height());
@@ -611,6 +623,7 @@ void TMapEditWnd::fillMode()
 VA(0x0046a743, 0x52)
 void TMapEditWnd::_turnAutoScrollOn()
 {
+    assert(!_m_bAutoScrollOn);
     if (SetTimer(kAutoScrollTimer, kAutoScrollPeriod, NULL)) {
         GetCursorPos(&_m_autoScrollPoint);
         ScreenToClient(&_m_autoScrollPoint);
@@ -623,6 +636,7 @@ void TMapEditWnd::_turnAutoScrollOn()
 
 inline void TMapEditWnd::_turnAutoScrollOff()
 {
+    assert(_m_bAutoScrollOn);
     KillTimer(kAutoScrollTimer);
     _m_bAutoScrollOn = false;
 }
@@ -630,6 +644,7 @@ inline void TMapEditWnd::_turnAutoScrollOff()
 VA(0x0046a795, 0x247)
 void TMapEditWnd::_handleAutoScroll(const CPoint& point)
 {
+    assert(_m_bAutoScrollOn);
     if (point == _m_autoScrollPoint)
         return;
     _m_autoScrollPoint = point;
@@ -689,6 +704,7 @@ void TMapEditWnd::_handleAutoScroll(const CPoint& point)
 VA(0x0046a9dc, 0x91)
 void TMapEditWnd::_setMode(_TMode newMode)
 {
+    assert(newMode >= 0 && newMode < _s_kNumModes);
     if (newMode == _m_mode)
         return;
     switch (_m_mode) {
@@ -703,6 +719,7 @@ void TMapEditWnd::_setMode(_TMode newMode)
             _turnBrushOff();
         break;
     case _eModeFill:
+        assert(!_m_bDragging);
         if (_m_bBrushOn)
             _turnFillRectOff();
         break;
@@ -742,6 +759,7 @@ void TMapEditWnd::_clearToolTipObj()
 VA(0x0046ab4c, 0x5b)
 void TMapEditWnd::_turnBrushOn()
 {
+    assert(_m_mode == _eModeBrush);
     if (SetTimer(kBrushTimer, kBrushPeriod, NULL)) {
         _m_bBrushOn = true;
         CClientDC dc(this);
@@ -752,6 +770,7 @@ void TMapEditWnd::_turnBrushOn()
 VA(0x0046aba7, 0x53)
 void TMapEditWnd::_turnBrushOff()
 {
+    assert(_m_mode == _eModeBrush);
     KillTimer(kBrushTimer);
     CClientDC dc(this);
     _drawBrush(&dc);
@@ -761,6 +780,7 @@ void TMapEditWnd::_turnBrushOff()
 VA(0x0046abfa, 0x81)
 void TMapEditWnd::_setBrushPos(const CPoint& pos)
 {
+    assert(_m_mode == _eModeBrush);
     if (_m_bBrushOn) {
         CClientDC dc(this);
         _drawBrush(&dc);
@@ -773,6 +793,8 @@ void TMapEditWnd::_setBrushPos(const CPoint& pos)
 VA(0x0046ac7b, 0x81)
 void TMapEditWnd::_setBrushSize(const CSize& brushSize)
 {
+    assert(_m_mode == _eModeBrush);
+    assert(brushSize.cx > 0 && brushSize.cy > 0);
     if (_m_bBrushOn) {
         CClientDC dc(this);
         _drawBrush(&dc);
@@ -785,6 +807,8 @@ void TMapEditWnd::_setBrushSize(const CSize& brushSize)
 VA(0x0046acfc, 0x48)
 void TMapEditWnd::_turnFillRectOff()
 {
+    assert(_m_mode == _eModeFill);
+    assert(_m_bBrushOn);
     CClientDC dc(this);
     _drawBrush(&dc);
     _m_bBrushOn = false;
@@ -793,6 +817,8 @@ void TMapEditWnd::_turnFillRectOff()
 VA(0x0046ad44, 0x6f)
 void TMapEditWnd::_setFillRectAnchor(const CPoint& pos)
 {
+    assert(_m_mode == _eModeFill);
+    assert(!_m_bBrushOn);
     _m_bBrushOn = true;
     _m_fillRectAnchor = pos;
     _m_fillRectDragPos = pos;
@@ -803,6 +829,7 @@ void TMapEditWnd::_setFillRectAnchor(const CPoint& pos)
 VA(0x0046adb3, 0x76)
 void TMapEditWnd::_setFillRectDragPos(const CPoint& pos)
 {
+    assert(_m_mode == _eModeFill);
     CClientDC dc(this);
     if (_m_bBrushOn)
         _drawBrush(&dc);
@@ -814,6 +841,10 @@ void TMapEditWnd::_setFillRectDragPos(const CPoint& pos)
 VA(0x0046ae29, 0x127)
 void TMapEditWnd::_drawSelectionFrame(CDC* pDC)
 {
+    assert(pDC != NULL);
+    assert(_m_mode == _eModeSel);
+    assert(_m_selectedObjID != TGameMap::TLayer::s_kInvalidObjID);
+    assert(_getMapLayer().getFloatingObjID() != _m_selectedObjID);
     const TGameMap::TLayer& layer = _getMapLayer();
     const TGameObject& obj = layer.getObject(_m_selectedObjID);
     TTilePoint loc = layer.getObjectLoc(_m_selectedObjID);
@@ -836,6 +867,7 @@ void TMapEditWnd::_drawSelectionFrame(CDC* pDC)
 VA(0x0046af50, 0x1d2)
 void TMapEditWnd::_drawBrush(CDC* pDC)
 {
+    assert(_m_bBrushOn);
     unsigned int tileSize = akZoomTraits[_m_zoom].m_tileSize;
     if (_m_mode == _eModeBrush) {
         CRect rect;
@@ -851,6 +883,7 @@ void TMapEditWnd::_drawBrush(CDC* pDC)
         pDC->LineTo(rect.left, rect.bottom - 1);
         pDC->LineTo(rect.left, rect.top);
     } else {
+        assert(_m_mode == _eModeFill);
         CRect rect = _computeFillRect();
         rect.left = (rect.left - _m_viewPos.x) * tileSize;
         rect.top = (rect.top - _m_viewPos.y) * tileSize;
@@ -1261,6 +1294,7 @@ TMapLayerObjectID TMapEditWnd::_pickObject(const CPoint& point) const
 VA(0x0046c71e, 0x63)
 CPoint TMapEditWnd::_computeFloatingObjPos(const CPoint& point) const
 {
+    assert(_m_pFloatingObj != NULL);
     unsigned int tileSize = akZoomTraits[_m_zoom].m_tileSize;
     return CPoint((point.x + ((_m_pFloatingObj->getWidth() - 1) * tileSize >> 1)) / tileSize + _m_viewPos.x,
                   (point.y + ((_m_pFloatingObj->getHeight() - 1) * tileSize >> 1)) / tileSize + _m_viewPos.y);
@@ -1269,6 +1303,7 @@ CPoint TMapEditWnd::_computeFloatingObjPos(const CPoint& point) const
 VA(0x0046c781, 0x4e)
 CRect TMapEditWnd::_computeFloatingObjRect(const CPoint& point) const
 {
+    assert(_m_pFloatingObj != NULL);
     return CRect(CPoint(point.x + 1 - _m_pFloatingObj->getWidth(), point.y + 1 - _m_pFloatingObj->getHeight()),
                  CSize(_m_pFloatingObj->getWidth(), _m_pFloatingObj->getHeight()));
 }
@@ -1276,6 +1311,7 @@ CRect TMapEditWnd::_computeFloatingObjRect(const CPoint& point) const
 VA(0x0046c7cf, 0x90)
 CSize TMapEditWnd::_computeViewRectSize(int cx, int cy) const
 {
+    assert(_m_pMap != NULL);
     unsigned int tileSize = akZoomTraits[_m_zoom].m_tileSize;
     return CSize(clamp(1, int(cx / tileSize), int(_m_pMap->getWidth())),
                  clamp(1, int(cy / tileSize), int(_m_pMap->getHeight())));
@@ -1335,6 +1371,7 @@ CPoint TMapEditWnd::_computeFillRectDragPos(const CPoint& point) const
 {
     int tileSize = akZoomTraits[_m_zoom].m_tileSize;
     CPoint pos(point.x / tileSize + _m_viewPos.x, point.y / tileSize + _m_viewPos.y);
+    assert(_m_pMap != NULL);
     CRect clientRect;
     GetClientRect(&clientRect);
     CRect viewRect;
@@ -1454,6 +1491,8 @@ void TMapEditWnd::OnSize(UINT nType, int cx, int cy)
 VA(0x0046cda6, 0xb6)
 void TMapEditWnd::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_hAdjust != NULL);
     SCROLLINFO scrollInfo;
     scrollInfo.cbSize = sizeof(scrollInfo);
     GetScrollInfo(SB_HORZ, &scrollInfo, SIF_PAGE);
@@ -1495,6 +1534,8 @@ void TMapEditWnd::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 VA(0x0046ce5c, 0xb6)
 void TMapEditWnd::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_vAdjust != NULL);
     SCROLLINFO scrollInfo;
     scrollInfo.cbSize = sizeof(scrollInfo);
     GetScrollInfo(SB_VERT, &scrollInfo, SIF_PAGE);
@@ -1583,6 +1624,7 @@ void TMapEditWnd::OnMouseMove(UINT nFlags, CPoint point)
     switch (_m_mode) {
     case _eModeSel:
         if (_m_pFloatingObj != NULL) {
+            assert(GetCapture() == this);
             CPoint newPos = _computeFloatingObjPos(point);
             if (newPos != _m_floatingObjPos) {
                 CSize viewSize = _computeViewRectSize(clientRect.Width(), clientRect.Height());
@@ -1735,6 +1777,9 @@ void TMapEditWnd::OnMouseMove(UINT nFlags, CPoint point)
         break;
     case _eModeFill:
         if (_m_bDragging) {
+            assert(GetCapture() == this);
+            assert(_m_pController != NULL);
+            assert(GetCapture() == this);
             CPoint dragPos = _computeFillRectDragPos(point);
             if (dragPos != _m_fillRectDragPos) {
                 _setFillRectDragPos(dragPos);
@@ -1774,6 +1819,7 @@ void TMapEditWnd::OnLButtonDown(UINT nFlags, CPoint point)
         _m_pController->onEditBrushBeginDrag(this, CRect(_m_brushPos, _m_brushSize));
         break;
     case _eModeFill: {
+        assert(_m_pMap != NULL);
         unsigned int tileSize = akZoomTraits[_m_zoom].m_tileSize;
         CPoint cell(point.x / tileSize + _m_viewPos.x, point.y / tileSize + _m_viewPos.y);
         if (!(cell.x < _m_pMap->getWidth() && cell.y < _m_pMap->getHeight()))
@@ -2118,6 +2164,7 @@ void TMapEditWnd::OnCaptureChanged(CWnd* pWnd)
             GetClientRect(&clientRect);
             CRect viewRect(_m_viewPos, _computeViewRectSize(clientRect.Width(), clientRect.Height()));
             CRect floatingObjRect = _computeFloatingObjRect(_m_floatingObjPos);
+            assert(_m_pController != NULL);
             if (floatingObjRect.left < viewRect.right && floatingObjRect.top < viewRect.bottom
                 && floatingObjRect.right > viewRect.left && floatingObjRect.bottom > viewRect.top)
                 _m_pController->onEditPlaceObject(this, *_m_pFloatingObj, _m_floatingObjPos.x, _m_floatingObjPos.y);
@@ -2157,6 +2204,7 @@ void TMapEditWnd::OnCaptureChanged(CWnd* pWnd)
             GetCursorPos(&point);
             ScreenToClient(&point);
             _setFillRectDragPos(_computeFillRectDragPos(point));
+            assert(_m_pController != NULL);
             _m_pController->onEditFillRectEndDrag(this, _computeFillRect());
             _turnFillRectOff();
         }

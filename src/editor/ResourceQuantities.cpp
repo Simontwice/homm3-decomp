@@ -4,6 +4,8 @@
 // accessors onto identical bodies in earlier objects.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/RawStream.h"
 #include "editor/ResourceQuantities.h"
@@ -11,6 +13,8 @@
 VA(0x0044a367, 0xe)
 void TResourceQuantities::set(TGameResourceType resourceType, int newQuantity)
 {
+    assert(resourceType >= 0 && resourceType < kNumGameResourceTypes);
+    assert(newQuantity >= s_kMin && newQuantity <= s_kMax);
     _m_quantities[resourceType] = newQuantity;
 }
 
@@ -36,5 +40,6 @@ TRawIStream& operator>>(TRawIStream& stream, TResourceQuantities& quantities)
 VA(0x004c1904, 0xa)
 int TResourceQuantities::get(TGameResourceType resourceType) const
 {
+    assert(resourceType >= 0 && resourceType < kNumGameResourceTypes);
     return _m_quantities[resourceType];
 }

@@ -3,6 +3,8 @@
 // folds with the hero definition sheet's (0x457b9c, 0x457bb8).
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/Hero.h"
 #include "editor/MapEditorText.h"
@@ -26,6 +28,7 @@ TMapSpecsSheet::TMapSpecsSheet(CWnd* pParentWnd, TGameMap* pMap, int terrainStre
       _m_pMap(pMap),
       _m_numOKDisablers(0)
 {
+    assert(_m_pMap != NULL);
     m_psh.dwFlags |= PSH_NOAPPLYNOW;
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())

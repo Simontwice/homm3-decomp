@@ -5,6 +5,7 @@
 // characters of the message. The release drops Loki's asserts.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <ctype.h>
 #include <algorithm>
 #include <functional>
@@ -28,18 +29,21 @@ TTimedEvent::TTimedEvent()
 VA(0x004c0235, 0x13)
 void TTimedEvent::setBApplyToPlayer(TPlayer player, bool bApply)
 {
+    assert(player >= 0 && player < kNumPlayers);
     _m_bApplyToPlayer.set(player, bApply);
 }
 
 VA(0x004c0248, 0xa)
 void TTimedEvent::setFirstOccurence(unsigned int newDay)
 {
+    assert(newDay < kNumDaysPerYear * 2);
     _m_firstOccurence = newDay;
 }
 
 VA(0x004c0252, 0xa)
 void TTimedEvent::setSubsequentInterval(unsigned int newInterval)
 {
+    assert(newInterval <= kNumDaysPerYear);
     _m_subsequentInterval = newInterval;
 }
 
@@ -81,6 +85,7 @@ void TTimedEvent::read(TRawIStream* pIStream, int version)
 VA(0x004c03ac, 0x303)
 void TTimedEvent::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     getline(*pIStream, line);
     if (line != std::string(kNameStr) + ':')
@@ -103,6 +108,7 @@ void TTimedEvent::importText(std::istream* pIStream, EGameVersion version)
 VA(0x004c06c7, 0x30)
 bool TTimedEvent::getBApplyToPlayer(TPlayer player) const
 {
+    assert(player >= 0 && player < kNumPlayers);
     return _m_bApplyToPlayer.test(player);
 }
 
@@ -129,6 +135,8 @@ void TTimedEvent::write(TRawOStream* pOStream, int version) const
 VA(0x004c07d1, 0x113)
 void TTimedEvent::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
+    assert(std::find_if(_m_name.begin(), _m_name.end(), std::not1(std::ptr_fun(::isspace))) != _m_name.end());
     *pOStream << kNameStr << ':' << '\n' << _m_name << '\n';
     std::string message = _m_message;
     replace(message.begin(), message.end(), '\n', '\t');

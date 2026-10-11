@@ -10,6 +10,7 @@
 // asserts. The creature generators moved to their own object.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <ctype.h>
 #include <string.h>
 #include <algorithm>
@@ -157,10 +158,12 @@ VA(0x0048db13, 0x41)
 TGenericObject::TGenericObject(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType)
 {
+    assert(pIStream != NULL);
 }
 
 void TGenericObject::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
 }
 
 VA(0x0048db54, 0x60)
@@ -175,12 +178,14 @@ VA(0x0048dbb4, 0x47)
 TFlaggableObject::TFlaggableObject(const TObjectType& objType, TPlayer owner)
     : TGameObject(objType), _m_owner(owner)
 {
+    assert(_m_owner >= ePlayerNone && _m_owner < kNumPlayers);
 }
 
 VA(0x0048dbfb, 0xa2)
 TFlaggableObject::TFlaggableObject(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType)
 {
+    assert(pIStream != NULL);
     if ((objType.getType() == GARRISON && version < 4) || (objType.getType() == SHIPYARD && version < 10)) {
         _m_owner = ePlayerNone;
         return;
@@ -190,11 +195,13 @@ TFlaggableObject::TFlaggableObject(const TObjectType& objType, TRawIStream* pISt
     signed char aReserved[kNumFlaggableObjectReserved];
     *pIStream >> aReserved;
     _m_owner = TPlayer(owner);
+    assert(_m_owner >= ePlayerNone && _m_owner < kNumPlayers);
 }
 
 VA(0x0048dc9d, 0x30)
 void TFlaggableObject::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     *pOStream << static_cast<signed char>(_m_owner);
     signed char aReserved[kNumFlaggableObjectReserved];
     fill_n(aReserved, sizeof(aReserved), 0);
@@ -232,12 +239,14 @@ void TMine::initializeTypeTraitsTable()
 VA(0x0048de19, 0x70)
 TMine::TMine(const TObjectType& objType, TPlayer owner) : TGameObject(objType), TFlaggableObject(objType, owner)
 {
+    assert(objType.getType() == MINE || objType.getType() == LIGHTHOUSE);
 }
 
 VA(0x0048de89, 0x73)
 TMine::TMine(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TFlaggableObject(objType, pIStream, version)
 {
+    assert(objType.getType() == MINE || objType.getType() == LIGHTHOUSE);
 }
 
 VA(0x0048defc, 0x6a)
@@ -255,12 +264,14 @@ VA(0x0048df90, 0x77)
 TAbandonedMine::TAbandonedMine(const TObjectType& objType)
     : TGameObject(objType), TMine(objType, ePlayerNone), _m_abPotentialResource(_s_kabDefaultPotentialResource)
 {
+    assert(objType.getType() == MINE && objType.getExtra() == kNumGameResourceTypes);
 }
 
 VA(0x0048e007, 0xd1)
 TAbandonedMine::TAbandonedMine(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TMine(objType, ePlayerNone)
 {
+    assert(objType.getType() == MINE && objType.getExtra() == kNumGameResourceTypes);
     if (version < 12) {
         _m_abPotentialResource = _s_kabDefaultPotentialResource;
         signed char aReserved[kNumOldAbandonedMineReserved];
@@ -278,18 +289,22 @@ TAbandonedMine::TAbandonedMine(const TObjectType& objType, TRawIStream* pIStream
 VA(0x0048e0d8, 0x13)
 void TAbandonedMine::setBIsPotentialResource(TGameResourceType type, bool bIsPotential)
 {
+    assert(type >= 0 && type < kNumGameResourceTypes && type != eResourceWood);
     _m_abPotentialResource[type] = bIsPotential;
+    assert(_m_abPotentialResource.count() > 0);
 }
 
 VA(0x0048e0eb, 0x30)
 bool TAbandonedMine::getBIsPotentialResource(TGameResourceType type) const
 {
+    assert(type >= 0 && type < kNumGameResourceTypes && type != eResourceWood);
     return _m_abPotentialResource[type];
 }
 
 VA(0x0048e11b, 0x64)
 void TAbandonedMine::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     unsigned char potentialResources = 0;
     for (unsigned int type = 0; type < kNumGameResourceTypes; ++type)
         if (_m_abPotentialResource[type])
@@ -338,6 +353,7 @@ VA(0x0048e34a, 0xe7)
 TGarrison::TGarrison(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TFlaggableObject(objType, pIStream, version)
 {
+    assert(objType.getType() == GARRISON);
     if (version < 4)
         return;
     setArmy(TArmy(pIStream, version));
@@ -388,20 +404,24 @@ VA(0x0048e526, 0x47)
 TPlayableObject::TPlayableObject(const TObjectType& objType, TPlayer owner)
     : TGameObject(objType), _m_owner(owner)
 {
+    assert(_m_owner >= ePlayerNone && _m_owner < kNumPlayers);
 }
 
 VA(0x0048e56d, 0x74)
 TPlayableObject::TPlayableObject(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType)
 {
+    assert(pIStream != NULL);
     signed char owner;
     *pIStream >> owner;
     _m_owner = TPlayer(owner);
+    assert(_m_owner >= ePlayerNone && _m_owner < kNumPlayers);
 }
 
 VA(0x0048e5e1, 0x1a)
 void TPlayableObject::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     *pOStream << static_cast<signed char>(_m_owner);
 }
 
@@ -428,6 +448,7 @@ TTreasure::TTreasure(const TObjectType& objType, TRawIStream* pIStream, int vers
 VA(0x0048e728, 0xf8)
 void TTreasure::read(TRawIStream* pIStream, int version)
 {
+    assert(pIStream != NULL);
     if (version < 5)
         return;
     signed char flag;
@@ -452,6 +473,7 @@ void TTreasure::read(TRawIStream* pIStream, int version)
 // unit's call reaches.
 void TTreasure::setMessage(const std::string& newMessage)
 {
+    assert(newMessage.size() <= s_kMaxMessageLen);
     _m_message = newMessage;
 }
 
@@ -464,6 +486,7 @@ void TTreasure::setGuardians(const TArmy& newGuardians)
 VA(0x0048e84c, 0x174)
 void TTreasure::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     getline(*pIStream, line);
     if (line != std::string(kMessageStr) + ':')
@@ -484,6 +507,7 @@ bool TTreasure::isCustomized() const
 VA(0x0048e9d0, 0x80)
 void TTreasure::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     if (!getMessage().empty() || getBCustomGuardians()) {
         *pOStream << static_cast<signed char>(1) << _m_message << static_cast<signed char>(_m_bCustomGuardians);
         if (_m_bCustomGuardians)
@@ -499,6 +523,7 @@ void TTreasure::write(TRawOStream* pOStream, int version) const
 VA(0x0048ea50, 0xca)
 void TTreasure::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
     std::string message = getMessage();
     replace(message.begin(), message.end(), '\n', '\t');
     *pOStream << kMessageStr << ':' << '\n' << message << '\n';
@@ -507,12 +532,15 @@ void TTreasure::exportText(std::ostream* pOStream, EGameVersion version) const
 VA(0x0048eb1a, 0x6d)
 TGameArtifact::TGameArtifact(const TObjectType& objType) : TGameObject(objType), TTreasure(objType)
 {
+    assert(objType.getType() == ARTIFACT || objType.getType() == RANDOM_ARTIFACT || objType.getType() == RANDOM_ARTIFACT_1 || objType.getType() == RANDOM_ARTIFACT_2 || objType.getType() == RANDOM_ARTIFACT_3 || objType.getType() == RANDOM_ARTIFACT_4);
 }
 
 VA(0x0048eb87, 0x73)
 TGameArtifact::TGameArtifact(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TTreasure(objType, pIStream, version)
 {
+    assert(pIStream != NULL);
+    assert(objType.getType() == ARTIFACT || objType.getType() == RANDOM_ARTIFACT || objType.getType() == RANDOM_ARTIFACT_1 || objType.getType() == RANDOM_ARTIFACT_2 || objType.getType() == RANDOM_ARTIFACT_3 || objType.getType() == RANDOM_ARTIFACT_4);
 }
 
 VA(0x0048ebfa, 0x6d)
@@ -533,6 +561,8 @@ VA(0x0048ecdb, 0x97)
 TSpellScroll::TSpellScroll(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TTreasure(objType, pIStream, version)
 {
+    assert(objType.getType() == SPELL_SCROLL);
+    assert(pIStream != NULL);
     signed char spell;
     *pIStream >> spell;
     setSpell(ESpellId(spell));
@@ -555,6 +585,7 @@ bool TSpellScroll::isCustomized() const
 VA(0x0048ed9a, 0x42)
 void TSpellScroll::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     TTreasure::write(pOStream, version);
     *pOStream << static_cast<signed char>(_m_spell);
     signed char aReserved[kNumSpellScrollReserved];
@@ -566,12 +597,15 @@ VA(0x0048eddc, 0x70)
 TGameResource::TGameResource(const TObjectType& objType)
     : TGameObject(objType), TTreasure(objType), _m_quantity(0)
 {
+    assert(objType.getType() == RESOURCE || objType.getType() == RANDOM_RESOURCE);
 }
 
 VA(0x0048ee4c, 0xa0)
 TGameResource::TGameResource(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TTreasure(objType, pIStream, version)
 {
+    assert(pIStream != NULL);
+    assert(objType.getType() == RESOURCE || objType.getType() == RANDOM_RESOURCE);
     if (version >= 5) {
         long quantity;
         *pIStream >> quantity;
@@ -585,6 +619,7 @@ TGameResource::TGameResource(const TObjectType& objType, TRawIStream* pIStream, 
 
 void TGameResource::setQuantity(unsigned int newQuantity)
 {
+    assert(newQuantity <= s_kMaxQuantity);
     _m_quantity = newQuantity;
 }
 
@@ -597,6 +632,7 @@ bool TGameResource::isCustomized() const
 VA(0x0048ef07, 0x40)
 void TGameResource::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     TTreasure::write(pOStream, version);
     *pOStream << static_cast<long>(_m_quantity);
     signed char aReserved[kNumGameResourceReserved];
@@ -615,11 +651,14 @@ std::string TGameResource::getTypeName() const
 VA(0x0048efb1, 0x70)
 TSign::TSign(const TObjectType& objType) : TGameObject(objType)
 {
+    assert(objType.getType() == SIGN || objType.getType() == OCEAN_BOTTLE);
 }
 
 VA(0x0048f021, 0xa6)
 TSign::TSign(const TObjectType& objType, TRawIStream* pIStream, int version) : TGameObject(objType)
 {
+    assert(objType.getType() == SIGN || objType.getType() == OCEAN_BOTTLE);
+    assert(pIStream != NULL);
     *pIStream >> _m_text;
     if (_m_text.size() > s_kMaxTextLen)
         _m_text.erase(s_kMaxTextLen);
@@ -630,12 +669,14 @@ TSign::TSign(const TObjectType& objType, TRawIStream* pIStream, int version) : T
 VA(0x0048f0c7, 0x17)
 void TSign::setText(const std::string& newText)
 {
+    assert(newText.size() <= s_kMaxTextLen);
     _m_text = newText;
 }
 
 VA(0x0048f0de, 0x16f)
 void TSign::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     getline(*pIStream, line);
     if (line != std::string(kMessageStr) + ':')
@@ -650,6 +691,7 @@ void TSign::importText(std::istream* pIStream, EGameVersion version)
 VA(0x0048f24d, 0x2a)
 void TSign::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     *pOStream << _m_text;
     signed char aReserved[kNumSignReserved];
     fill_n(aReserved, sizeof(aReserved), 0);
@@ -659,6 +701,7 @@ void TSign::write(TRawOStream* pOStream, int version) const
 VA(0x0048f277, 0xca)
 void TSign::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
     std::string text = getText();
     replace(text.begin(), text.end(), '\n', '\t');
     *pOStream << kMessageStr << ':' << '\n' << text << '\n';
@@ -697,17 +740,20 @@ TScholar::TScholar(const TObjectType& objType, TRawIStream* pIStream, int versio
 
 void TScholar::setRewardType(TRewardType newRewardType)
 {
+    assert((newRewardType >= 0 && newRewardType < s_kNumRewardTypes) || newRewardType == eRewardRandom);
     _m_rewardType = newRewardType;
 }
 
 VA(0x0048f452, 0xa)
 void TScholar::setPrimarySkill(TPrimarySkill newPrimarySkill)
 {
+    assert(newPrimarySkill >= 0 && newPrimarySkill < kNumPrimarySkills);
     _m_primarySkill = newPrimarySkill;
 }
 
 void TScholar::setSecondarySkill(TSecondarySkill newSecondarySkill)
 {
+    assert(newSecondarySkill >= 0 && newSecondarySkill < kNumSecSkills);
     _m_secondarySkill = newSecondarySkill;
 }
 
@@ -720,6 +766,7 @@ void TScholar::setSpell(ESpellId newSpell)
 VA(0x0048f466, 0x5e)
 void TScholar::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     signed char reward = 0;
     switch (_m_rewardType) {
     case eRewardPrimarySkill:
@@ -741,16 +788,20 @@ void TScholar::write(TRawOStream* pOStream, int version) const
 VA(0x0048f4c4, 0x45)
 THolyGrail::THolyGrail(const TObjectType& objType) : TGameObject(objType), _m_radius(0)
 {
+    assert(objType.getType() == HOLY_GRAIL);
 }
 
 void THolyGrail::setRadius(unsigned int newRadius)
 {
+    assert(newRadius <= s_kMaxRadius);
     _m_radius = newRadius;
 }
 
 VA(0x0048f509, 0x8c)
 THolyGrail::THolyGrail(const TObjectType& objType, TRawIStream* pIStream, int version) : TGameObject(objType)
 {
+    assert(objType.getType() == HOLY_GRAIL);
+    assert(pIStream != NULL);
     if (version < 3) {
         _m_radius = 0;
     } else {
@@ -765,6 +816,7 @@ THolyGrail::THolyGrail(const TObjectType& objType, TRawIStream* pIStream, int ve
 VA(0x0048f595, 0x30)
 void THolyGrail::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     *pOStream << static_cast<signed char>(_m_radius);
     signed char aReserved[kNumHolyGrailReserved];
     fill_n(aReserved, sizeof(aReserved), 0);
@@ -778,17 +830,21 @@ TShrine::TShrine(const TObjectType& objType) : TGameObject(objType), _m_spell(SP
 
 void TShrine::setSpell(ESpellId newSpell)
 {
+    assert(newSpell >= eSpellNone && newSpell < kNumSpells);
     _m_spell = newSpell;
 }
 
 VA(0x0048f60a, 0xdc)
 TShrine::TShrine(const TObjectType& objType, TRawIStream* pIStream, int version) : TGameObject(objType)
 {
+    assert(objType.getType() == SHRINE1 || objType.getType() == SHRINE2 || objType.getType() == SHRINE3);
+    assert(pIStream != NULL);
     if (version < 11) {
         _m_spell = SPELL_NONE;
     } else {
         signed char spell;
         *pIStream >> spell;
+        assert(spell >= eSpellNone && spell < kNumSpells);
         int newSpell = spell;
         if (newSpell != SPELL_NONE
             && (akSpellTraits[newSpell].m_level != getSpellLevel() || (akSpellTraits[newSpell].m_flags & 0x2000)
@@ -823,6 +879,7 @@ bool TShrine::isCustomized() const
 VA(0x0048f716, 0x30)
 void TShrine::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     *pOStream << static_cast<signed char>(_m_spell);
     signed char aReserved[kNumShrineReserved];
     fill_n(aReserved, sizeof(aReserved), 0);

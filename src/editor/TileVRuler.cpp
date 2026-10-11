@@ -4,6 +4,7 @@
 // identical bodies, and that ruler's setStartTile onto this one's.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -101,6 +102,8 @@ void TTileVRuler::setHighlight(unsigned int tile)
 VA(0x004bf99a, 0x5c)
 unsigned int TTileVRuler::_computeHighlightHeight(CDC* pDC)
 {
+    assert(_m_highlight < _m_range);
+    assert(_m_highlight >= _m_startTileY);
     TGDIObjectSelector<CFont> fontSelector(pDC, &_m_font);
     unsigned int textHeight = pDC->GetTextExtent(_m_highlightText).cx + 4;
     unsigned int tileHeight = akZoomTraits[_m_zoom].m_tileSize;

@@ -4,6 +4,8 @@
 // changing their number deals the present players out evenly in order.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/FormattedString.h"
 #include "editor/MapEditorText.h"
@@ -98,6 +100,8 @@ TMapSpecsTeamsPage::~TMapSpecsTeamsPage()
 VA(0x00477131, 0x10d)
 void TMapSpecsTeamsPage::_onPlayerTeamRadio(unsigned int player)
 {
+    assert(player >= 0 && player < kNumPlayers);
+    assert(_m_map.getPlayers()[player].getBPresent());
     int oldTeam = this->*_s_apPlayerTeam[player];
     UpdateData(TRUE);
     if (this->*_s_apPlayerTeam[player] == oldTeam)
@@ -467,6 +471,7 @@ void TMapSpecsTeamsPage::OnEnableTeamsCheck()
             numTeamsLeft--;
             while (numInTeam > 0) {
                 if (players[player].getBPresent()) {
+                    assert(this->*_s_apPlayerTeam[player] < TTeamInfo::s_kMinTeams);
                     this->*_s_apPlayerTeam[player] = team;
                     numInTeam--;
                 }

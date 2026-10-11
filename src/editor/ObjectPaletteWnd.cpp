@@ -9,6 +9,7 @@
 // palette leaves out the Conflux hero classes and town.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <algorithm>
 #include <functional>
@@ -65,6 +66,7 @@ TObjectPaletteWnd::TObjectPaletteWnd(CWnd* pParent, TObjectPaletteWndClient* pCl
       _m_slot(eSlotDirt),
       _m_player(ePlayerNone)
 {
+    assert(_m_vAdjust != NULL);
     if (hOpenHandCursor == NULL)
         hOpenHandCursor = AfxGetApp()->LoadCursor(IDC_OPEN_HAND);
     DATA_COMPGEN_GUARD(0x005a20d4, objectPaletteWndClassNameGuard, className)
@@ -107,6 +109,7 @@ TObjectPaletteWnd::~TObjectPaletteWnd()
 VA(0x0048c0a5, 0xdf)
 void TObjectPaletteWnd::setSlot(TObjectSlot newSlot)
 {
+    assert(newSlot >= 0 && newSlot < kNumObjectSlots);
     if (newSlot == _m_slot)
         return;
     _removeAllTools();
@@ -130,6 +133,7 @@ void TObjectPaletteWnd::setSlot(TObjectSlot newSlot)
 VA(0x0048c1b2, 0x73)
 void TObjectPaletteWnd::setPlayer(TPlayer newPlayer)
 {
+    assert(newPlayer >= ePlayerNone && newPlayer < kNumPlayers);
     if (_m_player == newPlayer)
         return;
     _m_player = newPlayer;
@@ -152,6 +156,7 @@ CSize TObjectPaletteWnd::getMinSize() const
 VA(0x0048c261, 0x226)
 void TObjectPaletteWnd::_setupTools(int height)
 {
+    assert(height > 0);
     unsigned int scrollPos = _m_aSlotInfo[_m_slot].m_scrollPos;
     unsigned int firstRow = scrollPos / s_kObjFrameSize.cy;
     unsigned int numRows = _computeRows();
@@ -257,6 +262,9 @@ void TObjectPaletteWnd::OnWindowPosChanging(WINDOWPOS* lpwndpos)
 VA(0x0048c5ea, 0x6d3)
 void TObjectPaletteWnd::OnPaint()
 {
+    assert(_m_vAdjust != NULL);
+    assert(_m_hWnd != NULL);
+    assert(_m_hWnd->window != NULL);
     CPaintDC dc(this);
     TMemoryDC memDC(&dc);
     TGDIObjectSelector<CBitmap> bitmapSelector(&memDC, &_m_backBuffer);
@@ -308,6 +316,8 @@ void TObjectPaletteWnd::OnPaint()
                     TObjectSpritePtr pObjSprite(objType);
                     srcWidth = pObjSprite->GetWidth();
                     srcHeight = pObjSprite->GetHeight();
+                    assert(srcWidth > 0);
+                    assert(srcHeight > 0);
                     {
                         TGDIObjectSelector<CBrush> brushSelector(
                             &imageDC, _m_abToolEnabled[tool - _m_firstTool] ? &enabledBrush : &disabledBrush);
@@ -358,6 +368,7 @@ void TObjectPaletteWnd::OnPaint()
 VA(0x0048ccbd, 0x141)
 void TObjectPaletteWnd::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
+    assert(_m_vAdjust != NULL);
     SCROLLINFO info;
     info.cbSize = sizeof(info);
     GetScrollInfo(SB_VERT, &info, SIF_PAGE | SIF_POS);
@@ -405,6 +416,8 @@ void TObjectPaletteWnd::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBa
 VA(0x0048cdfe, 0x75)
 void TObjectPaletteWnd::OnLButtonDown(UINT nFlags, CPoint point)
 {
+    assert(_m_pClient != NULL);
+    assert(_m_vAdjust != NULL);
     CPoint pos = point;
     pos.y += GetScrollPos(SB_VERT);
     unsigned int tool = pos.y / s_kObjFrameSize.cy * 3 + pos.x / s_kObjFrameSize.cx;
@@ -436,31 +449,40 @@ BOOL TObjectPaletteWnd::OnToolTipNeedText(UINT id, NMHDR* pNMHDR, LRESULT* pResu
     TOOLTIPTEXT* pTTT = (TOOLTIPTEXT*)pNMHDR;
     unsigned int tool = pNMHDR->idFrom - 1;
     const TObjectType* pObjType = _m_aSlotInfo[_m_slot].m_objTypes[tool];
+    assert(pObjType->getType() >= 0 && pObjType->getType() < ELEMENTS(akAdvObjectTypeTraits));
     string text;
     switch (pObjType->getType()) {
     case ARTIFACT:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumArtifacts);
         text = akArtifactTraits[pObjType->getExtra()].m_name;
         break;
     case HERO:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumHeroClasses);
         text = THero::s_akClassTraits[pObjType->getExtra()].m_name;
         break;
     case TOWN:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumTownTypes);
         text = TTown::s_akTypeTraits[pObjType->getExtra()].m_pName;
         break;
     case MONSTER:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumCreatureTypes);
         text = akCreatureTypeTraits[pObjType->getExtra()].m_name;
         break;
     case MINE:
     case ABANDONED_MINE:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < TMine::s_kNumMineTypes);
         text = TMine::s_akMineTypeTraits[pObjType->getExtra()].m_name;
         break;
     case CREATURE_BANK:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumCreatureBankTypes);
         text = akCreatureBankTypeTraits[pObjType->getExtra()].m_name;
         break;
     case CREATURE_GENERATOR_1:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < TGenerator::s_kNumGenerator1Types);
         text = TGenerator::s_akGenerator1TypeTraits[pObjType->getExtra()].m_name;
         break;
     case CREATURE_GENERATOR_4:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < TGenerator::s_kNumGenerator4Types);
         text = TGenerator::s_akGenerator4TypeTraits[pObjType->getExtra()].m_name;
         break;
     case RANDOM_DWELLING_LVL:
@@ -470,10 +492,12 @@ BOOL TObjectPaletteWnd::OnToolTipNeedText(UINT id, NMHDR* pNMHDR, LRESULT* pResu
         text = TRandomlyLeveledGenerator::s_akTypeTraits[pObjType->getExtra()].m_name;
         break;
     case RESOURCE:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < kNumGameResourceTypes);
         text = akGameResourceTypeTraits[pObjType->getExtra()].m_name;
         break;
     case GARRISON:
     case GARRISON2:
+        assert(pObjType->getExtra() >= 0 && pObjType->getExtra() < TGarrison::s_kNumTypes);
         text = TGarrison::s_akTypeTraits[pObjType->getExtra()].m_name;
         break;
     default:

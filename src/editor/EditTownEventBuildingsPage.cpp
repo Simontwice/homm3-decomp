@@ -4,6 +4,8 @@
 // those under it.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/EditTownEventBuildingsPage.h"
 #include "editor/MapEditorText.h"
@@ -15,6 +17,7 @@ TEditTownEventBuildingsPage::TEditTownEventBuildingsPage(const TTown::TTimedEven
       _m_townType(townType),
       _m_bModified(false)
 {
+    assert(townType >= 0 && townType <= kNumTownTypes);
     m_psp.pszTitle = m_strCaption = kBuildingsPageCaptionStr;
     m_psp.dwFlags |= PSP_USETITLE;
 }
@@ -29,10 +32,12 @@ TEditTownEventBuildingsPage::~TEditTownEventBuildingsPage()
 VA(0x0041764a, 0xec)
 void TEditTownEventBuildingsPage::_createTree(TBuilding parentBuilding, HTREEITEM hParent)
 {
+    assert(parentBuilding >= eBuildingNone && parentBuilding < kNumBuildings);
     const TTown::TBuildingTraits (&akBuildingTraits)[kNumBuildings] =
         TTown::s_akTypeTraits[_m_townType].m_akBuildingTraits;
     for (unsigned int building = 0; building < kNumBuildings; building++) {
         if (!akBuildingTraits[building].isDisallowed() && akBuildingTraits[building].m_building == parentBuilding) {
+            assert(parentBuilding != building);
             HTREEITEM hItem = _m_buildingTree.InsertItem(TVIF_TEXT, akBuildingTraits[building].m_pName, 0, 0, 0, 0, 0,
                                                          hParent, TVI_LAST);
             if (hItem != NULL) {

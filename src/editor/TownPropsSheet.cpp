@@ -2,6 +2,8 @@
 // Loki h3maped object 90).
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "adventureobjecttype.h"
 #include "exceptions.h"
 #include "objnames.h"
@@ -20,6 +22,8 @@ TTownPropsSheet::TTownPropsSheet(CWnd* pParentWnd, TGameMap* pMap, bool bSecondL
                      pParentWnd),
       _m_pMap(pMap)
 {
+    assert(pMap != NULL);
+    assert(objID != TGameMap::TLayer::s_kInvalidObjID);
     m_psh.dwFlags |= PSH_NOAPPLYNOW;
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())

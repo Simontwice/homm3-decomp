@@ -5,6 +5,8 @@
 // frame. Dragging inside the window moves the view through the controller.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/Clamp.h"
 #include "editor/Colors.h"
@@ -30,6 +32,9 @@ TMiniMapWnd::TMiniMapWnd(CWnd* pParent, TMapViewingWnd::TController* pController
       _m_viewSize(0, 0),
       _m_bDragging(false)
 {
+    assert(_m_pController != NULL);
+    assert(_m_pMap != NULL);
+    assert(!_m_bSecondLayer || _m_pMap->isTwoLayer());
     DATA_COMPGEN_GUARD(0x005a1edc, miniMapWndClassNameGuard, className)
     VA_COMPGEN(0x00487a1c, 0xa, STATIC_DTOR, className)
     static CString className;
@@ -61,6 +66,8 @@ void TMiniMapWnd::clearMap()
 VA(0x00487ab7, 0x33)
 void TMiniMapWnd::setMapLayer(const TGameMap* pMap, const TGameMapMask* pObstacleMask, bool bSecondLayer)
 {
+    assert(pMap != NULL);
+    assert(!bSecondLayer || pMap->isTwoLayer());
     _m_pMap = pMap;
     _m_pObstacleMask = pObstacleMask;
     _m_bSecondLayer = bSecondLayer;
@@ -72,6 +79,7 @@ void TMiniMapWnd::setMapLayer(const TGameMap* pMap, const TGameMapMask* pObstacl
 VA(0x00487aea, 0x198)
 void TMiniMapWnd::moveViewRect(const CPoint& pos)
 {
+    assert(_m_pMap != NULL);
     unsigned int width = _m_pMap->getWidth();
     unsigned int height = _m_pMap->getHeight();
     CRect oldRect(_m_viewPos, _m_viewSize);
@@ -103,6 +111,7 @@ void TMiniMapWnd::moveViewRect(const CPoint& pos)
 VA(0x00487c82, 0xdb)
 void TMiniMapWnd::sizeViewRect(const CSize& size)
 {
+    assert(_m_pMap != NULL);
     unsigned int width = _m_pMap->getWidth();
     unsigned int height = _m_pMap->getHeight();
     CRect oldRect(_m_viewPos, _m_viewSize);
@@ -132,6 +141,7 @@ void TMiniMapWnd::update(const CRect& rect)
 VA(0x00487de3, 0xc8)
 void TMiniMapWnd::_processDrag(const CPoint& point)
 {
+    assert(_m_pMap != NULL);
     unsigned int width = _m_pMap->getWidth();
     unsigned int height = _m_pMap->getHeight();
     CPoint pos(point.x * int(width) / s_kClientSize.cx, point.y * int(height) / s_kClientSize.cy);
@@ -200,6 +210,7 @@ void TMiniMapWnd::OnPaint()
                 const TGameObject& obj = layer.getObject(objID);
                 if (!obj.getBCellPassable(objLoc.x() - tile.x, objLoc.y() - tile.y)) {
                     const TGUIGameObject* pThisObj = dynamic_cast<const TGUIGameObject*>(&obj);
+                    assert(pThisObj != NULL);
                     bool bOwnable = pThisObj->isOwnable();
                     if (!bTopOwnable || bOwnable) {
                         pTopObj = pThisObj;

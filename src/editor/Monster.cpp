@@ -6,6 +6,7 @@
 // Blade on). The release drops Loki's asserts.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -75,33 +76,40 @@ TMonster::TMonster(const TObjectType& objType, TRawIStream* pIStream, int versio
 
 void TMonster::setQuantity(unsigned int newQuantity)
 {
+    assert(newQuantity <= s_kMaxQuantity);
     _m_quantity = newQuantity;
 }
 
 void TMonster::setDisposition(TDisposition newDisposition)
 {
+    assert(newDisposition >= 0 && newDisposition < s_kNumDispositions);
     _m_disposition = newDisposition;
 }
 
 void TMonster::setMessage(const std::string& newMessage)
 {
+    assert(newMessage.size() <= s_kMaxMessageLen);
     _m_message = newMessage;
 }
 
 void TMonster::setArtifact(TArtifact newArtifact)
 {
+    assert(newArtifact >= eArtifactNone && newArtifact < kNumArtifacts);
     _m_artifact = newArtifact;
 }
 
 VA(0x004889eb, 0xf)
 void TMonster::setResourceQuantity(TGameResourceType type, unsigned int newQuantity)
 {
+    assert(type >= 0 && type < kNumGameResourceTypes);
+    assert(newQuantity <= s_kMaxResourceQuantity);
     _m_resourceQuantities[type] = newQuantity;
 }
 
 VA(0x004889fa, 0x174)
 void TMonster::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     getline(*pIStream, line);
     if (line != std::string(kMessageStr) + ':')
@@ -124,12 +132,14 @@ bool TMonster::isCustomized() const
 VA(0x00488bdd, 0xb)
 unsigned int TMonster::getResourceQuantity(TGameResourceType type) const
 {
+    assert(type >= 0 && type < kNumGameResourceTypes);
     return _m_resourceQuantities[type];
 }
 
 VA(0x00488be8, 0x18d)
 void TMonster::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     TLinkableObject::write(pOStream, version);
     *pOStream << static_cast<short>(_m_quantity) << static_cast<signed char>(_m_disposition);
     if (_m_message == std::string() && _m_resourceQuantities == TArray<unsigned int, kNumGameResourceTypes>(0)
@@ -161,6 +171,7 @@ std::string TMonster::getTypeName() const
 VA(0x00488de3, 0xca)
 void TMonster::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
     std::string message = getMessage();
     replace(message.begin(), message.end(), '\n', '\t');
     *pOStream << kMessageStr << ':' << '\n' << message << '\n';

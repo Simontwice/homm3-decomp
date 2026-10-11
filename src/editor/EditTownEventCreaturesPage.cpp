@@ -4,6 +4,7 @@
 // format for the generator's base and upgraded creature names.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdio.h>
 
 #include "va.h"
@@ -29,6 +30,7 @@ TEditTownEventCreaturesPage::TEditTownEventCreaturesPage(const TTown::TTimedEven
       _m_townType(townType),
       _m_bModified(false)
 {
+    assert(townType >= 0 && townType <= kNumTownTypes);
     m_psp.pszTitle = m_strCaption = kCreaturesPageCaptionStr;
     m_psp.dwFlags |= PSP_USETITLE;
 }

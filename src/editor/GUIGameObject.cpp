@@ -12,6 +12,7 @@
 // quest guard and the witch hut.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdlib.h>
 #include <bitset>
 #include <memory>
@@ -118,6 +119,11 @@ VA(0x0043f45f, 0x9c)
 void drawSpriteShadow(const CSprite* pSprite, unsigned int frameNum, T16bppDIBSection* pDestBmp, int x, int y,
                       const CRect& destClipRect, TZoom zoom)
 {
+    assert(pSprite != NULL);
+    assert(pDestBmp != NULL);
+    assert(destClipRect.right >= destClipRect.left && destClipRect.bottom >= destClipRect.top);
+    assert(destClipRect.Width() <= pDestBmp->width && destClipRect.Height() <= pDestBmp->height);
+    assert(zoom >= 0 && zoom < kNumZooms);
     unsigned int frame = frameNum % pSprite->GetNumFrames(0);
     const TZoomTraits& zoomTraits = akZoomTraits[zoom];
     int width = pSprite->GetWidth() >> zoomTraits.m_scaleShift;
@@ -157,6 +163,11 @@ VA(0x0043f5af, 0xae)
 void drawSpriteCellShadow(const CSprite* pSprite, unsigned int frameNum, unsigned int cellX, unsigned int cellY,
                           T16bppDIBSection* pDestBmp, int x, int y, const CRect& destClipRect, TZoom zoom)
 {
+    assert(pSprite != NULL);
+    assert(pDestBmp != NULL);
+    assert(destClipRect.right >= destClipRect.left && destClipRect.bottom >= destClipRect.top);
+    assert(destClipRect.Width() <= pDestBmp->width && destClipRect.Height() <= pDestBmp->height);
+    assert(zoom >= 0 && zoom < kNumZooms);
     unsigned int frame = frameNum % pSprite->GetNumFrames(0);
     const TZoomTraits& zoomTraits = akZoomTraits[zoom];
     int width = pSprite->GetWidth() >> zoomTraits.m_scaleShift;
@@ -200,11 +211,14 @@ void drawSpriteCell(const CSprite* pSprite, unsigned int frameNum, unsigned int 
 VA(0x0043f717, 0x64)
 bool hitTestSprite(const CSprite* pSprite, unsigned int frameNum, int x, int y, TZoom zoom)
 {
+    assert(pSprite != NULL);
+    assert(zoom >= 0 && zoom < kNumZooms);
     unsigned int frame = frameNum % pSprite->GetNumFrames(0);
     const TZoomTraits& zoomTraits = akZoomTraits[zoom];
     int width = pSprite->GetWidth() >> zoomTraits.m_scaleShift;
     int height = pSprite->GetHeight() >> zoomTraits.m_scaleShift;
     const CSpriteFrame* pSpriteFrame = ((CSprite*)pSprite)->GetFrame(0, frame);
+    assert(pSpriteFrame != NULL);
     unsigned char pixel = pSpriteFrame->GetPixel((width - x - 1) << zoomTraits.m_scaleShift,
                                                  (height - y - 1) << zoomTraits.m_scaleShift);
     return pixel > 4;
@@ -267,6 +281,7 @@ VA(0x0043fa93, 0x6e)
 void TGUISpecializedObject::draw(unsigned int frameNum, CDC* pDC, T16bppDIBSection* pDestBmp, int x, int y,
                                  TZoom zoom) const
 {
+    assert(zoom >= 0 && zoom < kNumZooms);
     drawSpriteImpl(frameNum, pDC, pDestBmp, x, y, zoom);
     if (isCustomized()) {
         TCheckMarkBmp& checkMark = TCheckMarkBmp::get(zoom);
@@ -278,6 +293,7 @@ VA(0x0043fb6f, 0x80)
 void TGUISpecializedObject::drawCell(unsigned int frameNum, unsigned int cellX, unsigned int cellY, CDC* pDC,
                                      T16bppDIBSection* pDestBmp, int x, int y, TZoom zoom) const
 {
+    assert(zoom >= 0 && zoom < kNumZooms);
     drawSpriteCellImpl(frameNum, cellX, cellY, pDC, pDestBmp, x, y, zoom);
     if (cellX == 0 && cellY == 0 && isCustomized()) {
         TCheckMarkBmp& checkMark = TCheckMarkBmp::get(zoom);
@@ -491,6 +507,7 @@ TGUINonRandomHero::TGUINonRandomHero(const TObjectType& objType, TRawIStream* pI
 VA(0x004407a1, 0x20)
 bool TGUINonRandomHero::edit(TEditContext* pEditContext, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
+    assert(pEditContext != NULL);
     return pEditContext->onEditProperties(this, pMap, bSecondLayer, objID);
 }
 
@@ -529,6 +546,7 @@ TGUIRandomHero::TGUIRandomHero(const TObjectType& objType, TRawIStream* pIStream
 VA(0x00440ee3, 0x20)
 bool TGUIRandomHero::edit(TEditContext* pEditContext, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
+    assert(pEditContext != NULL);
     return pEditContext->onEditProperties(this, pMap, bSecondLayer, objID);
 }
 
@@ -564,6 +582,7 @@ TGUIPrison::TGUIPrison(const TObjectType& objType, TRawIStream* pIStream, int ve
 VA(0x00441231, 0x20)
 bool TGUIPrison::edit(TEditContext* pEditContext, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
+    assert(pEditContext != NULL);
     return pEditContext->onEditProperties(this, pMap, bSecondLayer, objID);
 }
 
@@ -618,6 +637,7 @@ TGUITown::TGUITown(const TObjectType& objType, TRawIStream* pIStream, int versio
 VA(0x00441571, 0x20)
 bool TGUITown::edit(TEditContext* pEditContext, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
+    assert(pEditContext != NULL);
     return pEditContext->onEditProperties(this, pMap, bSecondLayer, objID);
 }
 
@@ -631,7 +651,10 @@ VA(0x004416ba, 0x53)
 void TGUITown::drawShadow(unsigned int frameNum, CDC* pDC, T16bppDIBSection* pDestBmp, int x, int y,
                           TZoom zoom) const
 {
+    assert(pDC != NULL);
+    assert(pDestBmp != NULL);
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -642,7 +665,10 @@ VA(0x0044170d, 0x59)
 void TGUITown::drawCellShadow(unsigned int frameNum, unsigned int cellX, unsigned int cellY, CDC* pDC,
                               T16bppDIBSection* pDestBmp, int x, int y, TZoom zoom) const
 {
+    assert(pDestBmp != NULL);
+    assert(pDC != NULL);
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -652,6 +678,7 @@ void TGUITown::drawCellShadow(unsigned int frameNum, unsigned int cellX, unsigne
 VA(0x00441766, 0x14)
 TColor TGUITown::miniMapColor(TTerrainType terrainType) const
 {
+    assert(terrainType >= 0 && terrainType < kNumTerrainTypes);
     return akPlayerColor[getOwner() + 1];
 }
 
@@ -659,6 +686,7 @@ VA(0x0044177a, 0x1f)
 bool TGUITown::isAnimated() const
 {
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     return pSprite->GetNumFrames(0) > 1;
 }
 
@@ -666,7 +694,10 @@ VA(0x00441799, 0x59)
 void TGUITown::drawSpriteImpl(unsigned int frameNum, CDC* pDC, T16bppDIBSection* pDestBmp, int x, int y,
                               TZoom zoom) const
 {
+    assert(pDestBmp != NULL);
+    assert(pDC != NULL);
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -677,7 +708,10 @@ VA(0x004417f2, 0x5f)
 void TGUITown::drawSpriteCellImpl(unsigned int frameNum, unsigned int cellX, unsigned int cellY, CDC* pDC,
                                   T16bppDIBSection* pDestBmp, int x, int y, TZoom zoom) const
 {
+    assert(pDestBmp != NULL);
+    assert(pDC != NULL);
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -689,6 +723,7 @@ VA(0x00441851, 0x27)
 bool TGUITown::hitTestSpriteImpl(unsigned int frameNum, int x, int y, TZoom zoom) const
 {
     const CSprite* pSprite = _getPSprite();
+    assert(pSprite != NULL);
     return hitTestSprite(pSprite, frameNum, x, y, zoom);
 }
 
@@ -921,6 +956,7 @@ std::auto_ptr<TGameObject> TGUIAbandonedMine::clone() const
 VA(0x0044226a, 0xb)
 TColor TGUIAbandonedMine::miniMapColor(TTerrainType terrainType) const
 {
+    assert(terrainType >= 0 && terrainType < kNumTerrainTypes);
     return akPlayerColor[0];
 }
 
@@ -970,6 +1006,7 @@ TGUIGameObject::TGUIGameObject(const TGUIGameObject& other) : TGameObject(other)
 VA(0x0044235a, 0x2b)
 bool TGUIGameObject::edit(TEditContext* pEditContext, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
+    assert(pEditContext != NULL);
     return pEditContext->onEditProperties(this, pMap, bSecondLayer, objID);
 }
 
@@ -977,7 +1014,10 @@ VA(0x00442385, 0x88)
 void TGUIGameObject::draw(unsigned int frameNum, CDC* pDC, T16bppDIBSection* pDestBmp, int x, int y,
                           TZoom zoom) const
 {
+    assert(pDC != NULL);
+    assert(pDestBmp != NULL);
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -988,7 +1028,10 @@ VA(0x0044240d, 0x88)
 void TGUIGameObject::drawShadow(unsigned int frameNum, CDC* pDC, T16bppDIBSection* pDestBmp, int x, int y,
                                 TZoom zoom) const
 {
+    assert(pDC != NULL);
+    assert(pDestBmp != NULL);
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -999,7 +1042,10 @@ VA(0x00442495, 0x8e)
 void TGUIGameObject::drawCell(unsigned int frameNum, unsigned int cellX, unsigned int cellY, CDC* pDC,
                               T16bppDIBSection* pDestBmp, int x, int y, TZoom zoom) const
 {
+    assert(pDC != NULL);
+    assert(pDestBmp != NULL);
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -1010,7 +1056,10 @@ VA(0x00442523, 0x8e)
 void TGUIGameObject::drawCellShadow(unsigned int frameNum, unsigned int cellX, unsigned int cellY, CDC* pDC,
                                     T16bppDIBSection* pDestBmp, int x, int y, TZoom zoom) const
 {
+    assert(pDC != NULL);
+    assert(pDestBmp != NULL);
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     CRect clipRect;
     int region = pDC->GetClipBox(&clipRect);
     if (region != ERROR && region != NULLREGION)
@@ -1022,12 +1071,14 @@ VA(0x004425b1, 0x6e)
 bool TGUIGameObject::hitTest(unsigned int frameNum, int x, int y, TZoom zoom) const
 {
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     return hitTestSprite(pSprite.get(), getAnimOffset() + frameNum, x, y, zoom);
 }
 
 VA(0x0044261f, 0x77)
 TColor TGUIGameObject::miniMapColor(TTerrainType terrainType) const
 {
+    assert(terrainType >= 0 && terrainType < kNumTerrainTypes);
     DATA_COMPGEN_GUARD(0x0059e540, miniMapTypeFlagsGuard, typeFlags)
     VA_COMPGEN(0x00442696, 0x1, STATIC_DTOR, typeFlags)
     DATA(0x0059e520) static const TMiniMapTypeFlags typeFlags;
@@ -1040,6 +1091,7 @@ VA(0x00442697, 0x45)
 bool TGUIGameObject::isAnimated() const
 {
     TObjectSpritePtr pSprite(getObjectType());
+    assert(pSprite.get() != NULL);
     return pSprite.get()->GetNumFrames(0) > 1;
 }
 

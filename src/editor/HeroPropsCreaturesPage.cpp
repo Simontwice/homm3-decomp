@@ -4,6 +4,8 @@
 // it.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/Hero.h"
 #include "editor/HeroPropsCreaturesPage.h"
@@ -19,6 +21,7 @@ THeroPropsCreaturesPage::THeroPropsCreaturesPage(THeroPropsCreaturesPageParentSh
       _m_bModified(false),
       _m_pArmyDlg(NULL)
 {
+    assert(_m_pParentSheet != NULL);
     _m_formation = -1;
     m_psp.pszTitle = m_strCaption = kCreaturesPageCaptionStr;
     m_psp.dwFlags |= PSP_USETITLE;

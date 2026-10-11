@@ -2,6 +2,8 @@
 // 0x4041ba..0x404739; Loki h3maped object 100).
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "objnames.h"
 #include "va.h"
 #include "editor/ArtifactPropsSheet.h"
@@ -15,6 +17,7 @@ TArtifactPropsSheet::TArtifactPropsSheet(CWnd* pParentWnd, TGameArtifact* pArtif
                      pParentWnd),
       _m_pArtifact(pArtifact)
 {
+    assert(pArtifact != NULL);
     m_psh.dwFlags |= PSH_NOAPPLYNOW;
     _m_pGeneralPage =
         std::auto_ptr<TArtifactPropsGeneralPage>(new TArtifactPropsGeneralPage(_m_pArtifact, mapVersion));

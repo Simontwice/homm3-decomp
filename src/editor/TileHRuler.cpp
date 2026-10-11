@@ -4,6 +4,7 @@
 // onto this ruler's.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -103,6 +104,8 @@ void TTileHRuler::setHighlight(unsigned int tile)
 VA(0x004bed4d, 0x5c)
 unsigned int TTileHRuler::_computeHighlightWidth(CDC* pDC)
 {
+    assert(_m_highlight < _m_range);
+    assert(_m_highlight >= _m_startTileX);
     TGDIObjectSelector<CFont> fontSelector(pDC, &_m_font);
     unsigned int textWidth = pDC->GetTextExtent(_m_highlightText).cx + 4;
     unsigned int tileWidth = akZoomTraits[_m_zoom].m_tileSize;

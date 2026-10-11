@@ -8,6 +8,7 @@
 // cannot be the main town.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 #include <iterator>
 
@@ -79,6 +80,7 @@ static const int g_akTownTypeCheckIDs[kNumTownTypes] = { IDC_CASTLE_CHECK, IDC_R
 VA(0x00472fb2, 0x4c)
 static const char* getBehaviorTypeName(TPlayerInfo::TBehaviorType behaviorType)
 {
+    assert(behaviorType >= 0 && behaviorType < TPlayerInfo::s_kNumBehaviorTypes);
     static const char* const akBehaviorTypeName[TPlayerInfo::s_kNumBehaviorTypes] = {
         kRandomStr, kWarriorStr, kBuilderStr, kExplorerStr
     };
@@ -108,6 +110,8 @@ TMapSpecsPlayerSpecsPage::~TMapSpecsPlayerSpecsPage()
 VA(0x004732df, 0x4f5)
 void TMapSpecsPlayerSpecsPage::_setPlayerInfo()
 {
+    assert(_m_curPlayer != ePlayerNone);
+    assert(_m_intPlayers[_m_curPlayer].getBPresent());
     _m_mainTownCombo.ResetContent();
     _m_aTownRef.clear();
     const set<TMapObjectRef>& townRefs = _m_newMap.getPlayerTownRefs(_m_curPlayer);
@@ -177,6 +181,8 @@ void TMapSpecsPlayerSpecsPage::_setPlayerInfo()
 VA(0x004737d4, 0x131)
 void TMapSpecsPlayerSpecsPage::_retrievePlayerInfo()
 {
+    assert(_m_curPlayer != ePlayerNone);
+    assert(_m_intPlayers[_m_curPlayer].getBPresent());
     TPlayerInfo& playerInfo = _m_players[_m_curPlayer];
     playerInfo.setBHumanPlayable(_m_humanPlayableCheck.GetCheck() != 0);
     if (playerInfo.getBComputerPlayable())
@@ -367,6 +373,8 @@ void TMapSpecsPlayerSpecsPage::OnSelChangePlayerCombo()
 
 void TMapSpecsPlayerSpecsPage::OnGenerateHeroCheck()
 {
+    assert(_m_curPlayer != ePlayerNone);
+    assert(_m_abCanGenerateHero[_m_curPlayer]);
 }
 
 VA(0x00474051, 0xc4)

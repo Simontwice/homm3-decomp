@@ -3,6 +3,8 @@
 // breaks; OnOK stores it back with the map's bare newlines.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/EditRumorDlg.h"
 #include "editor/MapEditorText.h"
@@ -34,6 +36,8 @@ void TEditRumorDlg::DoDataExchange(CDataExchange* pDX)
 VA(0x00415b85, 0xbc)
 void TEditRumorDlg::OnOK()
 {
+    assert(!_isspace(_m_rumorName));
+    assert(!_isspace(_m_rumorText));
     CDialog::OnOK();
     _m_rumorText.Replace("\r\n", "\n");
     _m_rumor.setNameAndText(string(_m_rumorName), string(_m_rumorText));

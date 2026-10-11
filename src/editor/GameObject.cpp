@@ -3,6 +3,8 @@
 // object 13). Release drops Loki's range assert.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "objnames.h"
 #include "editor/GameObject.h"
@@ -33,6 +35,7 @@ TGameObject::~TGameObject()
 VA(0x0043d37b, 0x46)
 std::string TGameObject::getTypeName() const
 {
+    assert(getType() >= 0 && getType() < MAX_EVENT_TYPE);
     return std::string(akAdvObjectTypeTraits[getType()].m_name);
 }
 

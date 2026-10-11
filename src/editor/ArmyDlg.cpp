@@ -5,6 +5,7 @@
 // becomes empty.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdio.h>
 
 #include "town_type.h"
@@ -114,6 +115,7 @@ void TArmyDlg::_retrieveStackQuantities()
 VA(0x00402973, 0xce)
 void TArmyDlg::_onSelChangeTypeCombo(unsigned int stackNum)
 {
+    assert(stackNum < _s_kNumCreatureStacks);
     TCreatureType newType = TCreatureType(
         _m_aStackData[stackNum].m_typeCombo.GetItemData(_m_aStackData[stackNum].m_typeCombo.GetCurSel()));
     TCreatureType oldType = _m_aStackData[stackNum].m_creatureType;
@@ -142,6 +144,7 @@ void TArmyDlg::_onSelChangeTypeCombo(unsigned int stackNum)
 VA(0x00402a41, 0xcb)
 void TArmyDlg::_onKillFocusQtyEdit(unsigned int stackNum)
 {
+    assert(stackNum < _s_kNumCreatureStacks);
     if (_m_aStackData[stackNum].m_creatureType != CREATURE_NONE) {
         int quantity = 0;
         CString text;
@@ -235,6 +238,7 @@ void TArmyDlg::OnOK()
     if (IsWindowEnabled())
         _retrieveStackQuantities();
     for (unsigned int stackNum = 0; stackNum < _s_kNumCreatureStacks; stackNum++) {
+        assert((_m_aStackData[stackNum].m_creatureType == eCreatureNone && _m_aStackData[stackNum].m_quantity == 0) || (_m_aStackData[stackNum].m_creatureType != eCreatureNone && _m_aStackData[stackNum].m_quantity > 0));
         _m_army[stackNum].setCreatureType(_m_aStackData[stackNum].m_creatureType);
         _m_army[stackNum].setQuantity(_m_aStackData[stackNum].m_quantity);
     }
@@ -264,6 +268,8 @@ void TArmyDlg::OnEnable(BOOL bEnable)
             }
         }
     } else {
+        assert(_m_aStackData[stackNum].m_quantity == 0);
+        assert(_m_aStackData[stackNum].m_quantity == 0);
         _retrieveStackQuantities();
         for (stackNum = 0; stackNum < _s_kNumCreatureStacks; stackNum++) {
             _TStackData& stack = _m_aStackData[stackNum];

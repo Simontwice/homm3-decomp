@@ -5,6 +5,7 @@
 // map shows two other portraits in place of 128 and 129.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdio.h>
 
 #include <set>
@@ -56,6 +57,7 @@ THeroPropsGeneralPage::THeroPropsGeneralPage(UINT nIDTemplate, const TGameMap& o
       _m_pNewHero(_getNewHero()),
       _m_bModified(false)
 {
+    assert(_m_pParentSheet != NULL);
     m_psp.pszTitle = m_strCaption = kGeneralPageCaptionStr;
     m_psp.dwFlags |= PSP_USETITLE;
 }
@@ -155,6 +157,7 @@ BOOL THeroPropsGeneralPage::OnInitDialog()
 VA(0x0044fd54, 0x110)
 void THeroPropsGeneralPage::OnOK()
 {
+    assert(!_m_bCustomName || !_m_bNameIsSpace);
     CPropertyPage::OnOK();
     _m_experience = 0;
     if (_m_bCustomExperience) {
@@ -615,6 +618,8 @@ TNonRandomHeroPropsGeneralPage::TNonRandomHeroPropsGeneralPage(TIdentifiedHeroPr
       _m_pNewHero(_getNewHero()),
       _m_bModified(false)
 {
+    assert(_m_pParentSheet != NULL);
+    assert(_m_availableProtoNums.find(_m_hero.getProtoNum()) == _m_availableProtoNums.end());
 }
 
 VA_COMPGEN(0x00451834, 0x1c, SCALAR_DELETING_DTOR, TNonRandomHeroPropsGeneralPage)
@@ -703,6 +708,8 @@ TPrisonPropsGeneralPage::TPrisonPropsGeneralPage(TIdentifiedHeroPropsGeneralPage
       _m_pNewPrison(_getNewPrison()),
       _m_bModified(false)
 {
+    assert(_m_pParentSheet != NULL);
+    assert(_m_aAvailableProtoNums[_m_prison.getClass()].find(_m_prison.getProtoNum()) == _m_aAvailableProtoNums[_m_prison.getClass()].end());
 }
 
 VA_COMPGEN(0x00451c3a, 0x1c, SCALAR_DELETING_DTOR, TPrisonPropsGeneralPage)

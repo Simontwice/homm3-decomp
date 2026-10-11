@@ -2,6 +2,8 @@
 // 0x4181c2..0x418960; Loki h3maped object 97).
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/EditTownEventSheet.h"
 #include "editor/MapEditorText.h"
@@ -13,6 +15,7 @@ TEditTownEventSheet::TEditTownEventSheet(CWnd* pParentWnd, const TPlayerMask& pl
     : CPropertySheet(kEditTimedEventSheetCaptionStr, pParentWnd),
       _m_event(event)
 {
+    assert(townType >= 0 && townType <= kNumTownTypes);
     m_psh.dwFlags |= PSH_NOAPPLYNOW;
     _m_pGeneralPage = std::auto_ptr<TEditTimedEventGeneralPage>(
         new TEditTimedEventGeneralPage(this, _m_event, playersPresent, mapVersion));

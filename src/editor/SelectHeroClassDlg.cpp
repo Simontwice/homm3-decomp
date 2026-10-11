@@ -3,6 +3,8 @@
 // are not offered; OK needs a selection.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/Hero.h"
 #include "editor/MapEditorText.h"
@@ -70,6 +72,7 @@ BOOL TSelectHeroClassDlg::OnInitDialog()
 VA(0x004b84b6, 0x39)
 void TSelectHeroClassDlg::OnOK()
 {
+    assert(getCurrentSelection(_m_heroClassListBox) != -1);
     CDialog::OnOK();
     _m_heroClass = THeroClass(_m_heroClassList.GetItemData(_m_heroClassList.GetCurSel()));
 }

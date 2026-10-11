@@ -5,6 +5,8 @@
 // bold.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/GameMap.h"
 #include "editor/MapEditorText.h"
@@ -24,6 +26,8 @@ void demolishDependentBuildings(const TTown::TBuildingTraits (&akBuildingTraits)
                                 TBuilding baseBuilding,
                                 TArray<TTown::TBuildingState, kNumBuildings>* pBuildingStates)
 {
+    assert(baseBuilding >= 0 && baseBuilding < kNumBuildings);
+    assert(pBuildingStates != NULL);
     for (unsigned int building = 0; building < kNumBuildings; building++) {
         if (akBuildingTraits[building].m_building == baseBuilding && (*pBuildingStates)[building].getBBuilt()) {
             demolishDependentBuildings(akBuildingTraits, TBuilding(building), pBuildingStates);
@@ -58,10 +62,12 @@ TTownPropsBuildingsPage::~TTownPropsBuildingsPage()
 VA(0x004c3b5a, 0x9b)
 void TTownPropsBuildingsPage::_createTree(TBuilding parentBuilding, HTREEITEM hParent)
 {
+    assert(parentBuilding >= eBuildingNone && parentBuilding < kNumBuildings);
     const TTown::TBuildingTraits (&akBuildingTraits)[kNumBuildings] =
         _getNewTown()->getTownTypeTraits().m_akBuildingTraits;
     for (unsigned int building = 0; building < kNumBuildings; building++) {
         if (!akBuildingTraits[building].isDisallowed() && akBuildingTraits[building].m_building == parentBuilding) {
+            assert(parentBuilding != building);
             HTREEITEM hItem = _m_buildingTree.InsertItem(TVIF_TEXT, akBuildingTraits[building].m_pName, 0, 0, 0, 0, 0,
                                                          hParent, TVI_LAST);
             if (hItem != NULL) {
@@ -210,6 +216,7 @@ void TTownPropsBuildingsPage::_setCheckStates(BYTE stateFlags)
     bool bBuilt = (stateFlags & kBuiltFlag) != 0;
     bool bDisabled = (stateFlags & kDisabledFlag) != 0;
     bool bGrayed = (stateFlags & kGrayedFlag) != 0;
+    assert(!bBuilt || (!bDisabled && !bGrayed));
     _m_builtCheck.SetCheck(bBuilt);
     _m_builtCheck.EnableWindow(!bDisabled && !bGrayed);
     _m_enabledCheck.SetCheck(!bDisabled);

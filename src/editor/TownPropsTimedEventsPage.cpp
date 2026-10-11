@@ -4,6 +4,7 @@
 // sheet; its selection-cancel handler folds with that page's.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -132,6 +133,8 @@ void TTownPropsTimedEventsPage::OnOK()
 VA(0x004c7e3a, 0x140)
 void TTownPropsTimedEventsPage::OnAddEventButton()
 {
+    assert(_m_events.size() < TTown::s_kMaxTimedEvents);
+    assert(g_list_length(_m_eventList->children) == _m_events.size());
     TEditTownEventSheet sheet(this, _m_playersPresent, _getNewTown()->getTownType(), _m_newMap.getVersion(),
                               TTown::TTimedEvent());
     if (sheet.DoModal() == IDOK) {
@@ -148,6 +151,7 @@ void TTownPropsTimedEventsPage::OnAddEventButton()
 VA(0x004c7f98, 0x115)
 void TTownPropsTimedEventsPage::OnEditEventButton()
 {
+    assert(g_list_length(_m_eventList->children) == _m_events.size());
     int curSel = _m_eventsList.GetCurSel();
     unsigned int eventNum = _m_eventsList.GetItemData(curSel);
     TEditTownEventSheet sheet(this, _m_playersPresent, _getNewTown()->getTownType(), _m_newMap.getVersion(),
@@ -163,6 +167,7 @@ void TTownPropsTimedEventsPage::OnEditEventButton()
 VA(0x004c80ad, 0x156)
 void TTownPropsTimedEventsPage::OnRemoveEventButton()
 {
+    assert(g_list_length(_m_eventList->children) == _m_events.size());
     int curSel = _m_eventsList.GetCurSel();
     unsigned int eventNum = _m_eventsList.GetItemData(curSel);
     _m_events.erase(_m_events.begin() + eventNum);
@@ -192,6 +197,7 @@ void TTownPropsTimedEventsPage::OnRemoveEventButton()
 VA(0x004c8203, 0x55)
 void TTownPropsTimedEventsPage::OnRemoveAllEventButton()
 {
+    assert(_m_events.size() > 0);
     int count = _m_eventsList.GetCount();
     if (_m_eventsList.GetCurSel() == -1)
         _m_eventsList.SetCurSel(0);

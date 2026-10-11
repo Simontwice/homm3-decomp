@@ -10,6 +10,7 @@
 // menu repaint is editor-only code of the game's terrain source.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 #include <functional>
 #include <istream>
@@ -859,6 +860,7 @@ void TMapDoc::setAutosaveInterval(unsigned int interval)
 VA(0x0045ee00, 0xa)
 void TMapDoc::setSpecialTileFrequency(unsigned int newFrequency)
 {
+    assert(newFrequency <= s_kMaxSpecialTileFrequency);
     _s_specialTileFrequency = newFrequency;
 }
 
@@ -947,6 +949,12 @@ TMapDoc::TMapDoc(CDocTemplate* pTemplate)
 VA(0x0045f21c, 0x10d)
 TMapDoc::~TMapDoc()
 {
+    assert(_m_pMap == NULL);
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     allMapDocs.erase(this);
     if (_m_bOwnsAutosave) {
         try {
@@ -965,6 +973,11 @@ VA_COMPGEN(0x0045f52d, 0x29, IMPLICIT_COPY_ASSIGN, TNewMapParams)
 VA(0x0045f556, 0x184)
 void TMapDoc::Serialize(CArchive& ar)
 {
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     TMFCFileBuf buf(ar.GetFile());
     try {
         if (ar.IsStoring()) {
@@ -974,6 +987,7 @@ void TMapDoc::Serialize(CArchive& ar)
             stream << version;
             _m_pMap->save(&deflateBuf);
         } else {
+            assert(_m_pMap == NULL);
             {
                 TGzInflateBuf inflateBuf(&buf);
                 _m_pMap = _readMap(&inflateBuf).release();
@@ -991,6 +1005,11 @@ void TMapDoc::Serialize(CArchive& ar)
 VA(0x0045f6db, 0x7d)
 void TMapDoc::DeleteContents()
 {
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     if (_m_pMap != NULL) {
         TNotification notification;
         notification.m_type = TNotification::eClear;
@@ -1007,6 +1026,11 @@ void TMapDoc::DeleteContents()
 VA(0x0045f758, 0x23)
 BOOL TMapDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     if (!CDocument::OnOpenDocument(lpszPathName))
         return FALSE;
     _m_lastSaveTime = GetTickCount();
@@ -1025,6 +1049,15 @@ BOOL TMapDoc::OnSaveDocument(LPCTSTR lpszPathName)
 VA(0x0045f79e, 0xc0)
 void TMapDoc::undo()
 {
+    assert(canUndo());
+    assert(_m_pMap != NULL);
+    assert(_m_undoQueue.size() <= kMaxUndoQueueSize);
+    assert(_m_currentIndex <= _m_undoQueue.size());
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     --_m_currentIndex;
     std::swap(*_m_pMap, _m_undoQueue[_m_currentIndex].second);
     std::swap(_m_revision, _m_undoQueue[_m_currentIndex].first);
@@ -1044,6 +1077,14 @@ void TMapDoc::undo()
 VA(0x0045f85e, 0xbf)
 void TMapDoc::redo()
 {
+    assert(canRedo());
+    assert(_m_pMap != NULL);
+    assert(_m_undoQueue.size() <= kMaxUndoQueueSize);
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     std::swap(*_m_pMap, _m_undoQueue[_m_currentIndex].second);
     std::swap(_m_revision, _m_undoQueue[_m_currentIndex].first);
     if (!IsModified()) {
@@ -1066,6 +1107,14 @@ void TMapDoc::redo()
 VA(0x0045f91d, 0x14b)
 void TMapDoc::backupMap()
 {
+    assert(_m_pMap != NULL);
+    assert(_m_undoQueue.size() <= kMaxUndoQueueSize);
+    assert(_m_currentIndex <= _m_undoQueue.size());
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
     while (_m_undoQueue.size() > _m_currentIndex) {
         TNotification notification;
         notification.m_type = TNotification::eDiscardBackup;
@@ -1101,6 +1150,8 @@ void TMapDoc::backupMap()
 VA(0x0045fa70, 0x75)
 TMapLayerObjectID TMapDoc::placeObject(bool bSecondLayer, std::auto_ptr<TGameObject> pObj, const TTilePoint& loc)
 {
+    assert(_m_pMap != NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TTileExtent extent;
     TMapLayerObjectID objID = _m_pMap->placeObject(bSecondLayer, pObj, loc, &extent);
     if (objID != TGameMap::TLayer::s_kInvalidObjID)
@@ -1111,6 +1162,8 @@ TMapLayerObjectID TMapDoc::placeObject(bool bSecondLayer, std::auto_ptr<TGameObj
 VA(0x0045fae5, 0x36)
 void TMapDoc::removeObject(bool bSecondLayer, unsigned int objID)
 {
+    assert(_m_pMap != NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TTileExtent extent;
     _m_pMap->removeObject(bSecondLayer, objID, &extent);
     _sendUpdate(bSecondLayer, extent.left(), extent.top(), extent.width(), extent.height());
@@ -1119,6 +1172,8 @@ void TMapDoc::removeObject(bool bSecondLayer, unsigned int objID)
 VA(0x0045fb1b, 0x36)
 void TMapDoc::floatObject(bool bSecondLayer, unsigned int objID)
 {
+    assert(_m_pMap != NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TTileExtent extent;
     _m_pMap->floatObject(bSecondLayer, objID, &extent);
     _sendUpdate(bSecondLayer, extent.left(), extent.top(), extent.width(), extent.height());
@@ -1127,6 +1182,8 @@ void TMapDoc::floatObject(bool bSecondLayer, unsigned int objID)
 VA(0x0045fb51, 0x39)
 void TMapDoc::unfloatObject(bool bSecondLayer, unsigned int x, unsigned int y)
 {
+    assert(_m_pMap != NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TTileExtent extent;
     _m_pMap->unfloatObject(bSecondLayer, x, y, &extent);
     _sendUpdate(bSecondLayer, extent.left(), extent.top(), extent.width(), extent.height());
@@ -1135,6 +1192,8 @@ void TMapDoc::unfloatObject(bool bSecondLayer, unsigned int x, unsigned int y)
 VA(0x0045fb8a, 0x50)
 void TMapDoc::onObjectPropertiesChanged(bool bSecondLayer, unsigned int objID)
 {
+    assert(_m_pMap != NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TGameMap::TLayer& layer = _m_pMap->getLayer(bSecondLayer);
     TTileExtent extent = layer.getObjectExtent(objID);
     _sendUpdate(bSecondLayer, extent.left(), extent.top(), extent.width(), extent.height());
@@ -1143,6 +1202,9 @@ void TMapDoc::onObjectPropertiesChanged(bool bSecondLayer, unsigned int objID)
 VA(0x0045fbda, 0x7f)
 void TMapDoc::startTerrainPlacementOp(bool bSecondLayer, TTerrainType terrainType)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pTerrainPlacementOp == NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     backupMap();
     _m_pTerrainPlacementOp = new _TTerrainPlacementOp(this, bSecondLayer, terrainType,
                                                       _s_specialTileFrequency);
@@ -1153,6 +1215,8 @@ void TMapDoc::startTerrainPlacementOp(bool bSecondLayer, TTerrainType terrainTyp
 VA(0x0045fc59, 0x1c)
 void TMapDoc::endTerrainPlacementOp()
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pTerrainPlacementOp != NULL);
     delete _m_pTerrainPlacementOp;
     _m_pTerrainPlacementOp = NULL;
 }
@@ -1160,12 +1224,17 @@ void TMapDoc::endTerrainPlacementOp()
 VA(0x0045fc75, 0x1e)
 void TMapDoc::terrainFill(unsigned int left, unsigned int top, unsigned int width, unsigned int height)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pTerrainPlacementOp != NULL);
     (*_m_pTerrainPlacementOp)(left, top, width, height);
 }
 
 VA(0x0045fc93, 0x89)
 void TMapDoc::startRiverPlacementOp(bool bSecondLayer, int riverType, unsigned int x, unsigned int y)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverPlacementOp == NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     backupMap();
     _m_pRiverPlacementOp = new _TRiverPlacementOp(this, bSecondLayer, riverType, TTilePoint(x, y));
     if (_m_pRiverPlacementOp == NULL)
@@ -1175,6 +1244,8 @@ void TMapDoc::startRiverPlacementOp(bool bSecondLayer, int riverType, unsigned i
 VA(0x0045fd1c, 0x1c)
 void TMapDoc::endRiverPlacementOp()
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverPlacementOp != NULL);
     delete _m_pRiverPlacementOp;
     _m_pRiverPlacementOp = NULL;
 }
@@ -1182,12 +1253,17 @@ void TMapDoc::endRiverPlacementOp()
 VA(0x0045fd38, 0x24)
 void TMapDoc::placeRiver(unsigned int x, unsigned int y)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverPlacementOp != NULL);
     (*_m_pRiverPlacementOp)(TTilePoint(x, y));
 }
 
 VA(0x0045fd5c, 0x89)
 void TMapDoc::startRoadPlacementOp(bool bSecondLayer, int roadType, unsigned int x, unsigned int y)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRoadPlacementOp == NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     backupMap();
     _m_pRoadPlacementOp = new _TRoadPlacementOp(this, bSecondLayer, roadType, TTilePoint(x, y));
     if (_m_pRoadPlacementOp == NULL)
@@ -1197,6 +1273,8 @@ void TMapDoc::startRoadPlacementOp(bool bSecondLayer, int roadType, unsigned int
 VA(0x0045fde5, 0x1c)
 void TMapDoc::endRoadPlacementOp()
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRoadPlacementOp != NULL);
     delete _m_pRoadPlacementOp;
     _m_pRoadPlacementOp = NULL;
 }
@@ -1204,6 +1282,8 @@ void TMapDoc::endRoadPlacementOp()
 VA(0x0045fe01, 0x24)
 void TMapDoc::placeRoad(unsigned int x, unsigned int y)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRoadPlacementOp != NULL);
     (*_m_pRoadPlacementOp)(TTilePoint(x, y));
 }
 
@@ -1211,6 +1291,10 @@ void TMapDoc::placeRoad(unsigned int x, unsigned int y)
 VA(0x0045fe25, 0x103)
 void TMapDoc::startEraseOp(bool bSecondLayer)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverEraseOp == NULL);
+    assert(_m_pRoadEraseOp == NULL);
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     backupMap();
     _m_bEraseUnderground = bSecondLayer;
     _m_pRiverEraseOp = new _TRiverEraseOp(this, bSecondLayer);
@@ -1230,6 +1314,9 @@ void TMapDoc::startEraseOp(bool bSecondLayer)
 VA(0x0045ff28, 0x39)
 void TMapDoc::endEraseOp()
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverEraseOp != NULL);
+    assert(_m_pRoadEraseOp != NULL);
     delete _m_pRoadEraseOp;
     _m_pRoadEraseOp = NULL;
     delete _m_pRiverEraseOp;
@@ -1239,6 +1326,9 @@ void TMapDoc::endEraseOp()
 VA(0x0045ff61, 0xae)
 void TMapDoc::erase(unsigned int left, unsigned int top, unsigned int width, unsigned int height)
 {
+    assert(_m_pMap != NULL);
+    assert(_m_pRiverEraseOp != NULL);
+    assert(_m_pRoadEraseOp != NULL);
     (*_m_pRiverEraseOp)(left, top, width, height);
     (*_m_pRoadEraseOp)(left, top, width, height);
     TGameMap::TLayer& layer = _m_pMap->getLayer(_m_bEraseUnderground);
@@ -1297,6 +1387,7 @@ void TMapDoc::eraseRoad(unsigned int x, unsigned int y)
 VA(0x00460167, 0x33)
 void TMapDoc::onMapObjectRemoved(bool bSecondLayer, TMapLayerObjectID objID)
 {
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     TObjectRemovedParams params;
     params.m_bSecondLayer = bSecondLayer;
     params.m_objID = objID;
@@ -1402,6 +1493,7 @@ VA(0x004606b5, 0x5d)
 void TMapDoc::_sendUpdate(bool bSecondLayer, unsigned int left, unsigned int top, unsigned int width,
                           unsigned int height)
 {
+    assert(!bSecondLayer || _m_pMap->isTwoLayer());
     SetModifiedFlag(TRUE);
     CPoint topLeft(left, top);
     CSize size(width, height);

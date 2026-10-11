@@ -4,6 +4,8 @@
 // shows one of them at a time, sized to its client area.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/EraseToolkit.h"
 #include "editor/ObjectPaletteWnd.h"
@@ -18,6 +20,7 @@ TToolkitWnd::TToolkitWnd(CWnd* pParent, TToolkitWndClient* pClient)
     : _m_pClient(pClient),
       _m_pShownPane(NULL)
 {
+    assert(pClient != NULL);
     DATA_COMPGEN_GUARD(0x005a50a0, toolkitWndClassNameGuard, className)
     VA_COMPGEN(0x004c154c, 0xa, STATIC_DTOR, className)
     DATA(0x005a509c) static CString className;
@@ -102,6 +105,7 @@ void TToolkitWnd::showObstacleToolkit()
 VA(0x004c1620, 0x1d)
 void TToolkitWnd::showObjectPalette(TObjectSlot slot)
 {
+    assert(_m_pObjectPaletteWnd != NULL);
     _m_pObjectPaletteWnd->setSlot(slot);
     _showPane(_m_pObjectPaletteWnd.get());
 }
@@ -109,6 +113,7 @@ void TToolkitWnd::showObjectPalette(TObjectSlot slot)
 VA(0x004c163d, 0xf)
 void TToolkitWnd::setPlayer(TPlayer player)
 {
+    assert(_m_pObjectPaletteWnd != NULL);
     _m_pObjectPaletteWnd->setPlayer(player);
 }
 
@@ -117,11 +122,15 @@ void TToolkitWnd::setPlayer(TPlayer player)
 VA(0x004c164c, 0x14)
 bool TToolkitWnd::onPaletteCanCreateObject(TObjectPaletteWnd* pPaletteWnd, const TObjectType& objType)
 {
+    assert(pPaletteWnd == _m_pObjectPaletteWnd);
+    assert(_m_pClient != NULL);
     return _m_pClient->onToolkitCanCreateObject(this, objType);
 }
 
 void TToolkitWnd::onPaletteGrabObject(TObjectPaletteWnd* pPaletteWnd, const TObjectType& objType)
 {
+    assert(pPaletteWnd == _m_pObjectPaletteWnd);
+    assert(_m_pClient != NULL);
     _m_pClient->onToolkitGrabObject(this, objType);
 }
 

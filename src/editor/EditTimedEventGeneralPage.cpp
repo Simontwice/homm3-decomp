@@ -5,6 +5,7 @@
 // to 300 characters; before Shadow of Death the human check is disabled.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <stdio.h>
 
 #include "va.h"
@@ -57,6 +58,7 @@ TEditTimedEventGeneralPage::~TEditTimedEventGeneralPage()
 VA(0x00415ffe, 0x33)
 bool TEditTimedEventGeneralPage::getBApplyToPlayer(TPlayer player) const
 {
+    assert(player >= 0 && player < kNumPlayers);
     return _m_bApplyToPlayer.test(player);
 }
 

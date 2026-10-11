@@ -7,6 +7,8 @@
 // quest, and edition 0 still writes one.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/RawStream.h"
 #include "editor/SeersHut.h"
@@ -465,6 +467,7 @@ bool TSeersHut::isCustomized() const
 VA(0x004b6ccb, 0x7b)
 void TSeersHut::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     if (version < 1) {
         const TQuestBringArtifacts* pQuest = static_cast<const TQuestBringArtifacts*>(getPQuest());
         if (pQuest != NULL)

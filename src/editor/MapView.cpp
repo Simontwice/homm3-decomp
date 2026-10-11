@@ -12,6 +12,7 @@
 // mem_fun1.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 #include <functional>
 #include <set>
@@ -466,6 +467,9 @@ VA_COMPGEN(0x004805fb, 0x1c, SCALAR_DELETING_DTOR, TMapView)
 VA(0x0048061c, 0x90)
 TMapView::~TMapView()
 {
+    assert(_m_pToolkitWnd == NULL);
+    assert(_m_pMiniMapWnd == NULL);
+    assert(_m_pMapFrameWnd == NULL);
     allMapViews.erase(this);
 }
 
@@ -521,18 +525,22 @@ void TMapView::setViewPassability(bool bViewPassability)
 VA(0x0048086e, 0xa)
 void TMapView::setStatusUI(TStatusUI* pStatusUI)
 {
+    assert(_m_pStatusUI == NULL && pStatusUI != NULL);
     _m_pStatusUI = pStatusUI;
 }
 
 VA(0x00480878, 0x4)
 TMapDoc* TMapView::getPDocument()
 {
+    assert(dynamic_cast<TMapDoc *>(m_pDocument) != NULL);
+    assert(dynamic_cast<const TMapDoc*>(m_pDocument) != NULL);
     return (TMapDoc*)m_pDocument;
 }
 
 VA(0x0048087c, 0x5a)
 bool TMapView::onToolkitCanCreateObject(TToolkitWnd* pToolkitWnd, const TObjectType& objType)
 {
+    assert(pToolkitWnd == _m_pToolkitWnd);
     if (!g_gameContextFeatures[g_videoGameState].test(GAME_VERSION_AB)
         && (objType.getType() == HERO && THero::s_akClassTraits[objType.getExtra()].m_townType == TOWN_CONFLUX
             || objType.getType() == TOWN && objType.getExtra() == TOWN_CONFLUX))
@@ -543,6 +551,7 @@ bool TMapView::onToolkitCanCreateObject(TToolkitWnd* pToolkitWnd, const TObjectT
 VA(0x004808d6, 0x244)
 void TMapView::onToolkitGrabObject(TToolkitWnd* pToolkitWnd, const TObjectType& objType)
 {
+    assert(pToolkitWnd == _m_pToolkitWnd);
     if (!g_gameContextFeatures[g_videoGameState].test(GAME_VERSION_AB)
         && (objType.getType() == HERO && THero::s_akClassTraits[objType.getExtra()].m_townType == TOWN_CONFLUX
             || objType.getType() == TOWN && objType.getExtra() == TOWN_CONFLUX)) {
@@ -619,6 +628,7 @@ void TMapView::onEditObjectSelected(TMapEditingWnd* pWnd, unsigned int objID)
     if (objID != TGameMap::TLayer::s_kInvalidObjID) {
         const TGameMap* pMap = getPDocument()->getPMap();
         const TGameObject& object = pMap->getLayer(_m_bViewUnderground).getObject(objID);
+        assert(_m_pStatusUI != NULL);
         _m_pStatusUI->setObjectName(object.getTypeName().c_str());
     } else
         _m_pStatusUI->setObjectName("");
@@ -672,6 +682,7 @@ void TMapView::onEditCopyObject(TMapEditingWnd* pWnd, unsigned int objID)
 VA(0x00480df3, 0x1f5)
 void TMapView::onEditPlaceObject(TMapEditingWnd* pWnd, const TGUIGameObject& obj, unsigned int x, unsigned int y)
 {
+    assert(&obj == _m_pFloatingObj);
     if (_m_pNewFloatingObj.get() == NULL) {
         try {
             getPDocument()->unfloatObject(_m_bViewUnderground, x, y);
@@ -712,6 +723,7 @@ void TMapView::onEditPlaceObject(TMapEditingWnd* pWnd, const TGUIGameObject& obj
 VA(0x00480fe8, 0x4a)
 void TMapView::onEditDiscardObject(TMapEditingWnd* pWnd, const TGUIGameObject& obj)
 {
+    assert(&obj == _m_pFloatingObj);
     if (_m_pNewFloatingObj.get() == NULL)
         getPDocument()->getPMap()->removeFloatingObject(_m_bViewUnderground);
     else
@@ -800,6 +812,7 @@ void TMapView::onEditBrushBeginDrag(TMapEditingWnd* pWnd, const CRect& rect)
 VA(0x004812ac, 0x8d)
 void TMapView::onEditBrushEndDrag(TMapEditingWnd* pWnd)
 {
+    assert(_m_pMiniMapWnd != NULL);
     switch (_m_mode) {
     case _eModeTerrain: {
         CWaitCursor wait;
@@ -827,6 +840,7 @@ void TMapView::onEditBrushEndDrag(TMapEditingWnd* pWnd)
 VA(0x00481339, 0x129)
 void TMapView::onEditBrushDrag(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pMiniMapWnd != NULL);
     switch (_m_mode) {
     case _eModeTerrain:
         getPDocument()->terrainFill(rect.left, rect.top, rect.Width(), rect.Height());
@@ -1188,6 +1202,7 @@ void TMapView::_layout(int cx, int cy)
 VA(0x00482311, 0xb)
 int TMapView::_resetAnimation()
 {
+    assert(_m_pMapFrameWnd != NULL);
     _m_pMapFrameWnd->resetAnimation();
     return 0;
 }
@@ -1195,6 +1210,7 @@ int TMapView::_resetAnimation()
 VA(0x0048231c, 0x11)
 int TMapView::_setZoom(TZoom zoom)
 {
+    assert(_m_pMapFrameWnd != NULL);
     _m_pMapFrameWnd->setZoom(zoom);
     return 0;
 }
@@ -1202,6 +1218,7 @@ int TMapView::_setZoom(TZoom zoom)
 VA(0x0048232d, 0x11)
 int TMapView::_setViewGrid(bool bViewGrid)
 {
+    assert(_m_pMapFrameWnd != NULL);
     _m_pMapFrameWnd->showGrid(bViewGrid);
     return 0;
 }
@@ -1209,6 +1226,7 @@ int TMapView::_setViewGrid(bool bViewGrid)
 VA(0x0048233e, 0x11)
 int TMapView::_setViewPassability(bool bViewPassability)
 {
+    assert(_m_pMapFrameWnd != NULL);
     _m_pMapFrameWnd->showPassability(bViewPassability);
     return 0;
 }
@@ -1217,10 +1235,12 @@ VA(0x0048234f, 0x99)
 void TMapView::_setViewUnderground(bool bViewUnderground)
 {
     const TGameMap* pMap = getPDocument()->getPMap();
+    assert(pMap != NULL);
     _m_bViewUnderground = bViewUnderground;
     _m_pMapFrameWnd->MoveWindow(0, 0, 0, 0);
     _m_pMapFrameWnd->setMapLayer(pMap, _m_pObstacleMask.get(), _m_bViewUnderground);
     _m_pMapFrameWnd->moveViewRect(_m_viewPos);
+    assert(_m_pMiniMapWnd != NULL);
     _m_pMiniMapWnd->setMapLayer(pMap, _m_pObstacleMask.get(), _m_bViewUnderground);
     _m_pMiniMapWnd->moveViewRect(_m_viewPos);
     CRect rect;
@@ -1232,6 +1252,9 @@ void TMapView::_setViewUnderground(bool bViewUnderground)
 VA(0x004823e8, 0x184)
 void TMapView::_setMode(_TMode newMode)
 {
+    assert(newMode != _eModeStartup);
+    assert(_m_pToolkitWnd != NULL);
+    assert(_m_pMapFrameWnd != NULL);
     if (newMode == _m_mode)
         return;
     switch (_m_mode) {
@@ -1286,13 +1309,17 @@ VA(0x0048256c, 0x28)
 void TMapView::_setCurrentPlayer(TPlayer player)
 {
     _m_currentPlayer = player;
+    assert(_m_pToolkitWnd != NULL);
     _m_pToolkitWnd->setPlayer(_m_currentPlayer);
+    assert(_m_pStatusUI != NULL);
     _m_pStatusUI->setCurPlayer(_m_currentPlayer);
 }
 
 VA(0x00482594, 0x56)
 void TMapView::_realizeBrush(_TBrush brush)
 {
+    assert(_m_mode == _eModeTerrain || _m_mode == _eModeErase);
+    assert(_m_pMapFrameWnd != NULL);
     switch (brush) {
     case _eBrush1x1:
         _m_pMapFrameWnd->brushMode(CSize(1, 1));
@@ -1487,7 +1514,9 @@ VA(0x00482bd5, 0x2e5)
 void TMapView::OnInitialUpdate()
 {
     _m_bViewUnderground = false;
+    assert(getPDocument() != NULL);
     const TGameMap* pMap = getPDocument()->getPMap();
+    assert(_m_pStatusUI != NULL);
     _m_pStatusUI->setCurPlayer(_m_currentPlayer);
     _m_pStatusUI->setMapSize(pMap->getWidth(), pMap->getHeight(), pMap->isTwoLayer());
     _m_pObstacleMask = std::auto_ptr<TGameMapMask>(
@@ -1496,6 +1525,8 @@ void TMapView::OnInitialUpdate()
         throw TAllocationFailure();
     _m_revision = getPDocument()->getRevision();
     if (_m_pMapFrameWnd == NULL) {
+        assert(_m_pMiniMapWnd == NULL);
+        assert(_m_pToolkitWnd == NULL);
         if ((_m_pMapFrameWnd = new TMapFrameWnd(this, this, 28, pMap, _m_pObstacleMask.get(), false, _s_zoom,
                                                 _s_bViewGrid, _s_bViewPassability)) == NULL)
             throw TAllocationFailure();
@@ -1512,6 +1543,9 @@ void TMapView::OnInitialUpdate()
         }
         _setMode(_eModeTerrain);
     } else {
+        assert(_m_pMapFrameWnd != NULL);
+        assert(_m_pMiniMapWnd != NULL);
+        assert(_m_pToolkitWnd != NULL);
         _m_pMapFrameWnd->MoveWindow(0, 0, 0, 0);
         _m_pMapFrameWnd->setMapLayer(pMap, _m_pObstacleMask.get(), false);
         _m_pMiniMapWnd->setMapLayer(pMap, _m_pObstacleMask.get(), false);
@@ -1533,6 +1567,7 @@ void TMapView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
     if (pNotification == NULL || pNotification->m_type == TMapDoc::TNotification::eUpdate) {
         CRect rect;
         if (pNotification != NULL) {
+            assert(pNotification->m_pUpdateParams != NULL);
             if (pNotification->m_pUpdateParams->m_bSecondLayer != _m_bViewUnderground)
                 return;
             rect = pNotification->m_pUpdateParams->m_rect;
@@ -1541,6 +1576,7 @@ void TMapView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
             rect = CRect(0, 0, pMap->getWidth(), pMap->getHeight());
         }
         _m_pMapFrameWnd->update(rect);
+        assert(_m_pMiniMapWnd != NULL);
         _m_pMiniMapWnd->update(rect);
     } else if (pNotification->m_type == TMapDoc::TNotification::eUndo
                || pNotification->m_type == TMapDoc::TNotification::eRedo) {
@@ -1593,7 +1629,9 @@ void TMapView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
         if (pNotification->m_pObjectRemovedParams->m_bSecondLayer == _m_bViewUnderground)
             _m_pMapFrameWnd->onObjectRemoved(pNotification->m_pObjectRemovedParams->m_objID);
     } else if (pNotification->m_type == TMapDoc::TNotification::eClear) {
+        assert(_m_pMapFrameWnd != NULL);
         _m_pMapFrameWnd->clearMap();
+        assert(_m_pMiniMapWnd != NULL);
         _m_pMiniMapWnd->clearMap();
         _m_pObstacleMask = std::auto_ptr<TGameMapMask>();
         _m_obstacleMaskHistory.clear();

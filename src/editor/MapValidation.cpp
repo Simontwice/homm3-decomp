@@ -13,6 +13,7 @@
 // covers every quest location's artifacts, not only a seer's hut's.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <ctype.h>
 #include <algorithm>
 #include <functional>
@@ -127,12 +128,15 @@ CString TMapValidationFunc::operator()()
                 ++aNumGates[i];
                 break;
             case LITH_TWOWAY:
+                assert(obj.getExtra() >= 0 && obj.getExtra() < kNumMonolithTypes);
                 ++aNumMonoliths[obj.getExtra()];
                 break;
             case LITH_ONEWAY_ENTRANCE:
+                assert(obj.getExtra() >= 0 && obj.getExtra() < kNumOneWayMonolithTypes);
                 ++aNumEntrances[obj.getExtra()];
                 break;
             case LITH_ONEWAY_EXIT:
+                assert(obj.getExtra() >= 0 && obj.getExtra() < kNumOneWayMonolithTypes);
                 ++aNumExits[obj.getExtra()];
                 break;
             case WHIRLPOOL:
@@ -179,10 +183,13 @@ CString TMapValidationFunc::operator()()
     if (numLayers == 1) {
         if (aNumGates[0] > 0)
             _addNote(kSubterraneanGatesOnOneLayerMapStr);
-    } else if (aNumGates[0] > aNumGates[1])
-        _addNote(kMoreSubterraneanGatesAboveThanBelowStr);
-    else if (aNumGates[0] < aNumGates[1])
-        _addNote(kMoreSubterraneanGatesBelowThanAboveStr);
+    } else {
+        assert(numLayers == 2);
+        if (aNumGates[0] > aNumGates[1])
+            _addNote(kMoreSubterraneanGatesAboveThanBelowStr);
+        else if (aNumGates[0] < aNumGates[1])
+            _addNote(kMoreSubterraneanGatesBelowThanAboveStr);
+    }
     if (numWhirlpools == 1)
         _addNote(kOneWhirlpoolStr);
     for (type = 0; type < kNumKeymasterTentTypes; ++type) {
@@ -311,6 +318,7 @@ CString TMapValidationFunc::_createHeroStr(const TBasicHero& hero, const TTilePo
 VA(0x0047d7e7, 0x62)
 CString TMapValidationFunc::_createTeamStr(unsigned int teamNum)
 {
+    assert(teamNum < TTeamInfo::s_kMaxTeams);
     CString result;
     result.Format(kTeamFmtStr, teamNum + 1);
     return result;
@@ -327,6 +335,8 @@ void TMapValidationFunc::_addNote(const CString& note)
 VA(0x0047d86f, 0x1cf)
 bool TMapValidationFunc::_isArtifactOnMap(TArtifact whichArtifact, const TSeersHut* pExcludedHut) const
 {
+    assert(whichArtifact >= 0 && whichArtifact < kNumArtifacts);
+    assert(whichArtifact == eArtifactHolyGrail || (akArtifactTraits[whichArtifact].m_class & ArtifactClassSpecial) == 0);
     if (whichArtifact == ARTIFACT_HOLY_GRAIL && (_m_map.isGrailOnMap() || _m_map.getNumObelisksOnMap() > 0))
         return true;
     unsigned int numLayers = _m_map.isTwoLayer() ? 2 : 1;
@@ -371,6 +381,8 @@ bool TMapValidationFunc::_isArtifactOnMap(TArtifact whichArtifact, const TSeersH
 VA(0x0047da3e, 0x86)
 bool TMapValidationFunc::_playerMayBeHuman(TPlayer whichPlayer) const
 {
+    assert(whichPlayer >= 0 && whichPlayer < kNumPlayers);
+    assert(_m_map.isPlayerPresent(whichPlayer));
     const TTeamInfo& teamInfo = _m_map.getTeamInfo();
     if (teamInfo.getBHasTeams()) {
         unsigned int team = teamInfo.getPlayerTeam(whichPlayer);
@@ -405,6 +417,8 @@ void TMapValidationFunc::_checkForUnreachableObjects()
                     if (!obj.getBCellTrigger(objX, objY))
                         continue;
                     TTilePoint triggerMapLoc = objMapLoc - TTilePoint(objX, objY);
+                    assert(triggerMapLoc.x() < _m_map.getWidth());
+                    assert(triggerMapLoc.y() < _m_map.getHeight());
                     bool bTriggerOnWater = layer.getCell(triggerMapLoc).getTerrainType() == eTerrainWater;
                     bool abAdjDir[8];
                     computeAdjacentDirs(_m_map.getWidth(), _m_map.getWidth(), triggerMapLoc.x(), triggerMapLoc.y(),
@@ -427,7 +441,9 @@ void TMapValidationFunc::_checkForUnreachableObjects()
                             TTilePoint adjObjLoc = layer.getObjectLoc(adjObjID);
                             unsigned int adjObjX = adjObjLoc.x() - adjMapLoc.x();
                             unsigned int adjObjY = adjObjLoc.y() - adjMapLoc.y();
+                            assert(adjObj.getBCellPlaced(adjObjX, adjObjY));
                             if (adjObj.getBCellTrigger(adjObjX, adjObjY)) {
+                                assert(!adjObj.getBCellPassable(adjObjX, adjObjY));
                                 int adjObjType = adjObj.getType();
                                 if (akAdvObjectTypeTraits[adjObjType].m_blocksLanding
                                     || (!akAdvObjectTypeTraits[adjObjType].m_enterableFromNorth
@@ -573,6 +589,7 @@ void TMapValidationFunc::visit(const TVCUpgradeTown& vc)
     TBuilding castleBuilding = akCastleBuildings[vc.getCastleLevel()];
     const TMapObjectRef& townRef = vc.getTownRef();
     const TTown* pTown = dynamic_cast<const TTown*>(_m_map.getPObject(townRef));
+    assert(pTown != NULL);
     const TArray<TTown::TBuildingState, TTown::s_kNumBuildings>& aBuildingStates = pTown->getBuildingStates();
     if (aBuildingStates[hallBuilding].getBBuilt() && aBuildingStates[castleBuilding].getBBuilt()) {
         CString townStr = _createTownStr(*pTown, _m_map.getObjectLoc(townRef) - pTown->getTriggerLoc(),
@@ -601,6 +618,7 @@ void TMapValidationFunc::visit(const TVCBuildHolyGrailStruct& vc)
     const TMapObjectRef& townRef = vc.getTownRef();
     if (townRef != TMapObjectRef()) {
         const TTown* pTown = dynamic_cast<const TTown*>(_m_map.getPObject(townRef));
+        assert(pTown != NULL);
         if (pTown->getBuildingStates()[eBuildingGrail].getBBuilt()) {
             CString townStr = _createTownStr(*pTown, _m_map.getObjectLoc(townRef) - pTown->getTriggerLoc(),
                                              townRef.getBSecondLayer());
@@ -654,6 +672,7 @@ void TMapValidationFunc::visit(const TVCCaptureTown& vc)
 {
     const TMapObjectRef& townRef = vc.getTownRef();
     const TTown* pTown = dynamic_cast<const TTown*>(_m_map.getPObject(townRef));
+    assert(pTown != NULL);
     if (pTown->getOwner() != ePlayerNone) {
         if (vc.getBAppliesToComputer()) {
             CString townStr = _createTownStr(*pTown, _m_map.getObjectLoc(townRef) - pTown->getTriggerLoc(),
@@ -802,6 +821,7 @@ void TMapValidationFunc::visit(const TLCLoseTown& lc)
 {
     const TMapObjectRef& townRef = lc.getTownRef();
     const TTown* pTown = dynamic_cast<const TTown*>(_m_map.getPObject(townRef));
+    assert(pTown != NULL);
     if (pTown->getOwner() == ePlayerNone) {
         CString townStr = _createTownStr(*pTown, _m_map.getObjectLoc(townRef) - pTown->getTriggerLoc(),
                                          townRef.getBSecondLayer());
@@ -843,8 +863,10 @@ void TMapValidationFunc::visit(const TLCLoseTown& lc)
         } else {
             const TArray<TPlayerInfo, kNumPlayers>& aPlayers = _m_map.getPlayers();
             unsigned int playerNum = 0;
-            while (!aPlayers[playerNum].getBHumanPlayable())
+            while (!aPlayers[playerNum].getBHumanPlayable()) {
                 ++playerNum;
+                assert(playerNum < kNumPlayers);
+            }
             for (++playerNum; playerNum < kNumPlayers; ++playerNum) {
                 if (aPlayers[playerNum].getBHumanPlayable()) {
                     CString townStr = _createTownStr(*pTown, _m_map.getObjectLoc(townRef) - pTown->getTriggerLoc(),
@@ -907,8 +929,10 @@ void TMapValidationFunc::visit(const TLCLoseHero& lc)
         } else {
             const TArray<TPlayerInfo, kNumPlayers>& aPlayers = _m_map.getPlayers();
             unsigned int playerNum = 0;
-            while (!aPlayers[playerNum].getBHumanPlayable())
+            while (!aPlayers[playerNum].getBHumanPlayable()) {
                 ++playerNum;
+                assert(playerNum < kNumPlayers);
+            }
             for (++playerNum; playerNum < kNumPlayers; ++playerNum) {
                 if (aPlayers[playerNum].getBHumanPlayable()) {
                     CString heroStr = _createHeroStr(*pHero, _m_map.getObjectLoc(heroRef) - _m_map.getPObject(heroRef)->getTriggerLoc(),

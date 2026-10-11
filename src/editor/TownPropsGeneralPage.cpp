@@ -5,6 +5,7 @@
 // A random town takes its alignment from the Shadow of Death map format on.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <memory>
 #include <string>
 
@@ -33,6 +34,7 @@ TTownPropsGeneralPage::TTownPropsGeneralPage(TTownPropsGeneralPageParentSheet* p
       _m_bModified(false),
       _m_bVisitingHeroModified(false)
 {
+    assert(_m_pTown != NULL);
     _m_townType = _T("");
     _m_visitingHeroClass = _T("");
     _m_visitingHeroName = _T("");
@@ -199,6 +201,7 @@ BOOL TTownPropsGeneralPage::OnInitDialog()
 VA(0x004c5d59, 0x122)
 void TTownPropsGeneralPage::OnOK()
 {
+    assert(!_m_bCustomName || !_m_bNameIsSpace);
     CPropertyPage::OnOK();
     TTown* pNewTown = _getNewTown();
     pNewTown->setBCustomName(_m_bCustomName != FALSE);
@@ -281,6 +284,7 @@ void TTownPropsGeneralPage::OnRemoveHeroButton()
 VA(0x004c61e5, 0x5a)
 void TTownPropsGeneralPage::OnChangeNameEdit()
 {
+    assert(_m_bCustomName);
     UpdateData(TRUE);
     _m_customName = _m_name;
     if (_isspace(_m_customName)) {

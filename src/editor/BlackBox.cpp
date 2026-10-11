@@ -7,6 +7,7 @@
 // drops Loki's asserts.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 
 #include "va.h"
@@ -21,11 +22,14 @@ const unsigned int kNumBlackBoxReserved = 8;
 
 void TPrimarySkillBonuses::set(TPrimarySkill primarySkill, unsigned int newBonus)
 {
+    assert(primarySkill >= 0 && primarySkill < kNumPrimarySkills);
+    assert(newBonus <= s_kMax);
     _m_bonuses[primarySkill] = newBonus;
 }
 
 unsigned int TPrimarySkillBonuses::get(TPrimarySkill primarySkill) const
 {
+    assert(primarySkill >= 0 && primarySkill < kNumPrimarySkills);
     return _m_bonuses[primarySkill];
 }
 
@@ -51,15 +55,19 @@ VA(0x0040679e, 0x12)
 TSecondarySkillRecord::TSecondarySkillRecord(TSecondarySkill type, TSkillMastery mastery)
     : _m_type(type), _m_mastery(mastery)
 {
+    assert(type >= 0 && type < kNumSecSkills);
+    assert(mastery >= eMasteryBasic && mastery < eMasteryBasic + kNumMasteries);
 }
 
 void TSecondarySkillRecord::setType(TSecondarySkill newType)
 {
+    assert(newType >= 0 && newType < kNumSecSkills);
     _m_type = newType;
 }
 
 void TSecondarySkillRecord::setMastery(TSkillMastery newMastery)
 {
+    assert(newMastery >= eMasteryBasic && newMastery < eMasteryBasic + kNumMasteries);
     _m_mastery = newMastery;
 }
 
@@ -88,34 +96,40 @@ TBlackBox::TContents::TContents() : _m_experienceBonus(0), _m_manaBonus(0), _m_m
 VA(0x00406891, 0x9)
 void TBlackBox::TContents::setExperienceBonus(int newExperienceBonus)
 {
+    assert(newExperienceBonus >= 0 && newExperienceBonus <= s_kMaxExperienceBonus);
     _m_experienceBonus = newExperienceBonus;
 }
 
 void TBlackBox::TContents::setManaBonus(int newManaBonus)
 {
+    assert(newManaBonus >= s_kMinManaBonus && newManaBonus <= s_kMaxManaBonus);
     _m_manaBonus = newManaBonus;
 }
 
 void TBlackBox::TContents::setMoraleBonus(int newMoraleBonus)
 {
+    assert(newMoraleBonus >= s_kMinMoraleBonus && newMoraleBonus <= s_kMaxMoraleBonus);
     _m_moraleBonus = newMoraleBonus;
 }
 
 VA(0x0040689a, 0xa)
 void TBlackBox::TContents::setLuckBonus(int newLuckBonus)
 {
+    assert(newLuckBonus >= s_kMinLuckBonus && newLuckBonus <= s_kMaxLuckBonus);
     _m_luckBonus = newLuckBonus;
 }
 
 VA(0x004068a4, 0xf)
 void TBlackBox::TContents::setSecondarySkills(const std::vector<TSecondarySkillRecord>& aNewSecondarySkill)
 {
+    assert(aNewSecondarySkill.size() <= s_kMaxSecSkills);
     _m_aSecondarySkill = aNewSecondarySkill;
 }
 
 VA(0x004068b3, 0xf)
 void TBlackBox::TContents::setArtifacts(const std::vector<TArtifact>& aNewArtifact)
 {
+    assert(aNewArtifact.size() < s_kMaxArtifacts);
     _m_aArtifact = aNewArtifact;
 }
 
@@ -128,6 +142,7 @@ void TBlackBox::TContents::setSpells(const std::vector<SpellID>& aNewSpell)
 VA(0x004068d1, 0xf)
 void TBlackBox::TContents::setCreatureStacks(const std::vector<TCreatureStack>& aNewCreatureStack)
 {
+    assert(aNewCreatureStack.size() <= s_kMaxCreatureStacks);
     _m_aCreatureStack = aNewCreatureStack;
 }
 
@@ -143,12 +158,15 @@ bool TBlackBox::TContents::isCustomized() const
 VA(0x004069f3, 0x79)
 TBlackBox::TBlackBox(const TObjectType& objType) : TGameObject(objType), TTreasure(objType)
 {
+    assert(objType.getType() == EVENT || objType.getType() == BLACK_BOX);
 }
 
 VA(0x00406a80, 0x410)
 TBlackBox::TBlackBox(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TTreasure(objType)
 {
+    assert(pIStream != NULL);
+    assert(objType.getType() == EVENT || objType.getType() == BLACK_BOX);
     if (version >= 6) {
         read(pIStream, version);
         long experienceBonus;
@@ -239,6 +257,7 @@ TBlackBox::TBlackBox(const TObjectType& objType, TRawIStream* pIStream, int vers
 VA(0x00406e90, 0x1e5)
 void TBlackBox::write(TRawOStream* pOStream, int version) const
 {
+    assert(pOStream != NULL);
     TTreasure::write(pOStream, version);
     *pOStream << static_cast<long>(_m_pContents->getExperienceBonus())
               << static_cast<long>(_m_pContents->getManaBonus())

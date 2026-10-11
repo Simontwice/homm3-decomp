@@ -6,6 +6,8 @@
 // twin of another window's (0x4c164c) and so carries no claim.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/MapEditWnd.h"
 #include "editor/MapFrameWnd.h"
@@ -21,6 +23,8 @@ TMapFrameWnd::TMapFrameWnd(CWnd* pParent, TMapEditingWnd::TController* pControll
       _m_pHRuler(NULL),
       _m_pVRuler(NULL)
 {
+    assert(pMap != NULL);
+    assert(!bSecondLayer || pMap->isTwoLayer());
     DATA_COMPGEN_GUARD(0x005a1c30, mapFrameWndClassNameGuard, className)
     VA_COMPGEN(0x0046f900, 0xa, STATIC_DTOR, className)
     static CString className;
@@ -60,163 +64,199 @@ TMapFrameWnd::~TMapFrameWnd()
 VA(0x0046f965, 0x8)
 void TMapFrameWnd::clearMap()
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->clearMap();
 }
 
 VA(0x0046f96d, 0x3e)
 void TMapFrameWnd::setMapLayer(const TGameMap* pMap, const TGameMapMask* pObstacleMask, bool bSecondLayer)
 {
+    assert(pMap != NULL);
+    assert(!bSecondLayer || pMap->isTwoLayer());
+    assert(_m_pHRuler != NULL);
     _m_pHRuler->setRange(pMap->getWidth());
+    assert(_m_pVRuler != NULL);
     _m_pVRuler->setRange(pMap->getHeight());
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->setMapLayer(pMap, pObstacleMask, bSecondLayer);
 }
 
 VA(0x0046f9ab, 0x2b)
 void TMapFrameWnd::moveViewRect(const CPoint& pos)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->moveViewRect(pos);
+    assert(_m_pHRuler != NULL);
     _m_pHRuler->setStartTile(pos.x);
+    assert(_m_pVRuler != NULL);
     _m_pVRuler->setStartTile(pos.y);
 }
 
 VA(0x0046f9d6, 0xf)
 void TMapFrameWnd::update(const CRect& rect)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->update(rect);
 }
 
 VA(0x0046f9e5, 0x28)
 void TMapFrameWnd::setZoom(TZoom zoom)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->setZoom(zoom);
+    assert(_m_pHRuler != NULL);
     _m_pHRuler->setZoom(zoom);
+    assert(_m_pVRuler != NULL);
     _m_pVRuler->setZoom(zoom);
 }
 
 VA(0x0046fa0d, 0xf)
 void TMapFrameWnd::showGrid(bool bShow)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->showGrid(bShow);
 }
 
 VA(0x0046fa1c, 0xf)
 void TMapFrameWnd::showPassability(bool bShow)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->showPassability(bShow);
 }
 
 VA(0x0046fa2b, 0xf)
 void TMapFrameWnd::selectObject(unsigned int objID)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->selectObject(objID);
 }
 
 VA(0x0046fa3a, 0xf)
 void TMapFrameWnd::grabObject(const TGUIGameObject* pObj)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->grabObject(pObj);
 }
 
 VA(0x0046fa49, 0x8)
 void TMapFrameWnd::onUndo()
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->onUndo();
 }
 
 VA(0x0046fa51, 0xf)
 void TMapFrameWnd::onObjectRemoved(unsigned int objID)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->onObjectRemoved(objID);
 }
 
 VA(0x0046fa60, 0x13)
 void TMapFrameWnd::animate(unsigned int frameNum, bool bForce)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->animate(frameNum, bForce);
 }
 
 VA(0x0046fa73, 0x8)
 void TMapFrameWnd::resetAnimation()
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->resetAnimation();
 }
 
 VA(0x0046fa7b, 0xf)
 void TMapFrameWnd::makeVisible(unsigned int objID)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->makeVisible(objID);
 }
 
 VA(0x0046fa8a, 0x8)
 void TMapFrameWnd::selectionMode()
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->selectionMode();
 }
 
 VA(0x0046fa92, 0xf)
 void TMapFrameWnd::brushMode(const CSize& size)
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->brushMode(size);
 }
 
 VA(0x0046faa1, 0x8)
 void TMapFrameWnd::fillMode()
 {
+    assert(_m_pEditWnd != NULL);
     _m_pEditWnd->fillMode();
 }
 
 VA(0x0046faa9, 0xa)
 TMapLayerObjectID TMapFrameWnd::getSelectedObjectID() const
 {
+    assert(_m_pEditWnd != NULL);
     return _m_pEditWnd->getSelectedObjectID();
 }
 
 void TMapFrameWnd::onMoveMapViewRect(TMapViewingWnd* pWnd, const CPoint& pos)
 {
+    assert(_m_pController != NULL);
     _m_pController->onMoveMapViewRect(this, pos);
 }
 
 VA(0x0046fab3, 0x15)
 void TMapFrameWnd::onSizeMapViewRect(TMapViewingWnd* pWnd, const CSize& size)
 {
+    assert(_m_pController != NULL);
     _m_pController->onSizeMapViewRect(this, size);
 }
 
 VA(0x0046fac8, 0x2f)
 void TMapFrameWnd::onEditCursorTilePosChanged(TMapEditingWnd* pWnd, const CPoint& pos)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditCursorTilePosChanged(this, pos);
+    assert(_m_pHRuler != NULL);
     _m_pHRuler->setHighlight(pos.x);
+    assert(_m_pVRuler != NULL);
     _m_pVRuler->setHighlight(pos.y);
 }
 
 VA(0x0046faf7, 0x15)
 void TMapFrameWnd::onEditObjectSelected(TMapEditingWnd* pWnd, unsigned int objID)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditObjectSelected(this, objID);
 }
 
 VA(0x0046fb0c, 0x15)
 void TMapFrameWnd::onEditEditObject(TMapEditingWnd* pWnd, unsigned int objID)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditEditObject(this, objID);
 }
 
 VA(0x0046fb21, 0x15)
 void TMapFrameWnd::onEditDeleteObject(TMapEditingWnd* pWnd, unsigned int objID)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditDeleteObject(this, objID);
 }
 
 VA(0x0046fb36, 0x15)
 void TMapFrameWnd::onEditGrabObject(TMapEditingWnd* pWnd, unsigned int objID)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditGrabObject(this, objID);
 }
 
 VA(0x0046fb4b, 0x15)
 void TMapFrameWnd::onEditCopyObject(TMapEditingWnd* pWnd, unsigned int objID)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditCopyObject(this, objID);
 }
 
@@ -224,54 +264,63 @@ VA(0x0046fb60, 0x1d)
 void TMapFrameWnd::onEditPlaceObject(TMapEditingWnd* pWnd, const TGUIGameObject& obj, unsigned int x,
                                      unsigned int y)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditPlaceObject(this, obj, x, y);
 }
 
 VA(0x0046fb7d, 0x15)
 void TMapFrameWnd::onEditDiscardObject(TMapEditingWnd* pWnd, const TGUIGameObject& obj)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditDiscardObject(this, obj);
 }
 
 VA(0x0046fb92, 0x19)
 void TMapFrameWnd::onEditPasteObject(TMapEditingWnd* pWnd, const TGameObject& obj, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditPasteObject(this, obj, rect);
 }
 
 VA(0x0046fbab, 0x15)
 void TMapFrameWnd::onEditBrushBeginDrag(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditBrushBeginDrag(this, rect);
 }
 
 VA(0x0046fbc0, 0x11)
 void TMapFrameWnd::onEditBrushEndDrag(TMapEditingWnd* pWnd)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditBrushEndDrag(this);
 }
 
 VA(0x0046fbd1, 0x15)
 void TMapFrameWnd::onEditBrushDrag(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditBrushDrag(this, rect);
 }
 
 VA(0x0046fbe6, 0x15)
 void TMapFrameWnd::onEditFillRectAnchor(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditFillRectAnchor(this, rect);
 }
 
 VA(0x0046fbfb, 0x15)
 void TMapFrameWnd::onEditFillRectDrag(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditFillRectDrag(this, rect);
 }
 
 VA(0x0046fc10, 0x15)
 void TMapFrameWnd::onEditFillRectEndDrag(TMapEditingWnd* pWnd, const CRect& rect)
 {
+    assert(_m_pController != NULL);
     _m_pController->onEditFillRectEndDrag(this, rect);
 }
 

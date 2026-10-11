@@ -1005,6 +1005,7 @@ void TGameMap::_TImpl::_TLossConditionValidater::visit(const TLCLoseHero& lc)
 VA(0x0041f1ee, 0x2f)
 void TGameMap::_TImpl::streamObject(streambuf* pStreamBuf, const TGameObject& obj)
 {
+    assert(pStreamBuf != NULL);
     TRawOStream stream(pStreamBuf);
     stream << obj.getObjectType();
     obj.write(&stream, 2);
@@ -1016,6 +1017,8 @@ VA(0x0041f21d, 0x133)
 TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, TSize size, bool bTwoLayer)
     : _m_pClient(pClient), _m_version(version), _m_size(size), _m_bTwoLayer(bTwoLayer)
 {
+    assert(_m_pClient != NULL);
+    assert((int)_m_size >= (int)0 && (int)_m_size < (int)s_kNumSizes);
     _m_aLayer.resize(_m_bTwoLayer ? 2 : 1, TLayer(_m_size));
     int edition = _m_version >= GAME_VERSION_AB;
     for (THeroID heroID = 0; heroID < kNumHeroes; heroID++) {
@@ -1033,11 +1036,14 @@ VA(0x0041f350, 0xa6e)
 TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, streambuf* pStreamBuf, int fileVersion)
     : _m_pClient(pClient), _m_version(version)
 {
+    assert(_m_pClient != NULL);
+    assert(pStreamBuf != NULL);
     TRawIStream stream(pStreamBuf);
     TGameMapHeader header(stream, fileVersion);
     signed char aReserved[31];
     stream >> aReserved;
     _m_size = TSize(find(_s_akDimension, _s_akDimension + s_kNumSizes, header.m_dimension) - _s_akDimension);
+    assert((int)_m_size >= (int)0 && (int)_m_size < (int)s_kNumSizes);
     _m_bTwoLayer = header.m_bTwoLayer;
     _m_pProperties->m_name = header.m_name;
     if (_m_pProperties->m_name.size() > s_kMaxNameLen)
@@ -1099,7 +1105,10 @@ TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, streambuf* pStr
         signed char aObjReserved[5];
         stream >> x >> y >> layerNum >> typeID >> aObjReserved;
         for (;;) {
+            assert(layerNum == 0 || (_m_bTwoLayer && layerNum == 1));
+            assert(typeID < tempObjTypeTable.size());
             auto_ptr<TGameObject> pObj(_createObject(tempObjTypeTable[typeID], &stream, fileVersion));
+            assert(pObj.get() != NULL);
             if (!_isOnMap(*pObj, x, y)) {
                 if (--numObjs <= 0)
                     break;
@@ -1107,6 +1116,7 @@ TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, streambuf* pStr
                 continue;
             }
             TMapLayerObjectID placedObjID = _m_aLayer[layerNum]._placeObject(pObj, x, y);
+            assert(placedObjID != TLayer::s_kInvalidObjID);
             TGameObject* pPlacedObj = _m_aLayer[layerNum].getPObject(placedObjID);
             _onObjectAdded(*pPlacedObj, layerNum != 0, placedObjID, static_cast<TBookkeptObjectTypes*>(NULL));
             if (--numObjs <= 0)
@@ -1121,7 +1131,9 @@ TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, streambuf* pStr
                     && (tempObjTypeTable[nextTypeID].getType() == HERO
                         || tempObjTypeTable[nextTypeID].getType() == RANDOM_HERO)) {
                     auto_ptr<TGameObject> pHeroObj(_createObject(tempObjTypeTable[nextTypeID], &stream, fileVersion));
+                    assert(pHeroObj.get() != NULL);
                     THero* pHero = dynamic_cast<THero*>(pHeroObj.get());
+                    assert(pHero != NULL);
                     setVisitingHero(pHero, layerNum != 0, placedObjID);
                     if (--numObjs <= 0)
                         break;
@@ -1195,17 +1207,23 @@ TGameMap::_TImpl::_TImpl(TClient* pClient, EGameVersion version, streambuf* pStr
 VA(0x0041fee1, 0x5d)
 TGameMap::_TImpl::~_TImpl()
 {
+    assert(_m_aLayer.size() == (_m_bTwoLayer ? 2 : 1));
 }
 
 VA(0x0041ff3e, 0x2d)
 void TGameMap::_TImpl::setName(const string& newName)
 {
+    assert(newName.size() <= s_kMaxNameLen);
+    assert(newName.find('\n') == std::string::npos);
+    assert(newName.find('\t') == std::string::npos);
     _m_pProperties->m_name = newName;
 }
 
 VA(0x0041ff6b, 0x2d)
 void TGameMap::_TImpl::setDesc(const string& newDesc)
 {
+    assert(newDesc.size() <= s_kMaxDescLen);
+    assert(newDesc.find('\t') == std::string::npos);
     _m_pProperties->m_desc = newDesc;
 }
 
@@ -1224,12 +1242,14 @@ void TGameMap::_TImpl::setTeamInfo(const TTeamInfo& newTeamInfo)
 VA(0x00420062, 0x38)
 void TGameMap::_TImpl::setRumors(const vector<TRumor>& newRumors)
 {
+    assert(newRumors.size() <= s_kMaxRumors);
     *_m_pProperties->m_paRumor = newRumors;
 }
 
 VA(0x0042009a, 0x38)
 void TGameMap::_TImpl::setTimedEvents(const vector<TTimedEvent>& newTimedEvents)
 {
+    assert(newTimedEvents.size() <= s_kMaxTimedEvents);
     *_m_pProperties->m_paTimedEvent = newTimedEvents;
 }
 
@@ -1265,6 +1285,8 @@ TMapLayerObjectID TGameMap::_TImpl::placeObject(bool bSecondLayer, auto_ptr<TGam
 VA(0x0042029b, 0x45)
 void TGameMap::_TImpl::removeObject(bool bSecondLayer, unsigned int objID, TTileExtent* pUpdatedExtent)
 {
+    assert(pUpdatedExtent != NULL);
+    assert(!bSecondLayer || _m_bTwoLayer);
     TLayer* pLayer = getPLayer(bSecondLayer);
     *pUpdatedExtent = pLayer->getObjectExtent(objID);
     _removeObjectHelper(bSecondLayer, objID);
@@ -1279,6 +1301,8 @@ TMapLayerObjectID TGameMap::_TImpl::insertObject(bool bSecondLayer, auto_ptr<TGa
 VA(0x00420338, 0x12)
 TGameMap::TLayer* TGameMap::_TImpl::getPLayer(bool bSecondLayer)
 {
+    assert(!bSecondLayer || _m_bTwoLayer);
+    assert(_m_aLayer.size() == (_m_bTwoLayer ? 2 : 1));
     return &_m_aLayer[bSecondLayer ? 1U : 0U];
 }
 
@@ -1291,6 +1315,8 @@ void TGameMap::_TImpl::eraseObject(bool bSecondLayer, unsigned int objID)
 VA(0x0042037b, 0x53)
 void TGameMap::_TImpl::floatObject(bool bSecondLayer, unsigned int objID, TTileExtent* pUpdatedExtent)
 {
+    assert(pUpdatedExtent != NULL);
+    assert(!bSecondLayer || _m_bTwoLayer);
     TLayer* pLayer = getPLayer(bSecondLayer);
     *pUpdatedExtent = pLayer->getObjectExtent(objID);
     pLayer->_floatObject(objID);
@@ -1299,8 +1325,11 @@ void TGameMap::_TImpl::floatObject(bool bSecondLayer, unsigned int objID, TTileE
 VA(0x004203ce, 0x11b)
 void TGameMap::_TImpl::unfloatObject(bool bSecondLayer, unsigned int x, unsigned int y, TTileExtent* pUpdatedExtent)
 {
+    assert(pUpdatedExtent != NULL);
+    assert(!bSecondLayer || _m_bTwoLayer);
     TLayer* pLayer = getPLayer(bSecondLayer);
     TMapLayerObjectID objID = pLayer->getFloatingObjID();
+    assert(objID != TLayer::s_kInvalidObjID);
     const TGameObject& obj = pLayer->getObject(objID);
     if (!_isOnMap(obj, x, y))
         throw TPlaceObjFailurePlacementNotOnMap();
@@ -1318,6 +1347,7 @@ void TGameMap::_TImpl::unfloatObject(bool bSecondLayer, unsigned int x, unsigned
 VA(0x0042059b, 0x1e)
 void TGameMap::_TImpl::removeFloatingObject(bool bSecondLayer)
 {
+    assert(!bSecondLayer || _m_bTwoLayer);
     _removeObjectHelper(bSecondLayer, getPLayer(bSecondLayer)->getFloatingObjID());
 }
 
@@ -1327,9 +1357,15 @@ VA(0x004205b9, 0x34e)
 bool TGameMap::_TImpl::onTerrainTypeChanged(bool bSecondLayer, unsigned int x, unsigned int y,
                                             TTerrainType oldTerrainType, TTileExtent* pUpdatedExtent)
 {
+    assert(!bSecondLayer || _m_bTwoLayer);
+    assert(x < getWidth());
+    assert(y < getHeight());
+    assert(oldTerrainType >= 0 && oldTerrainType < kNumTerrainTypes);
+    assert(pUpdatedExtent != NULL);
     bool bObjectsRemoved = false;
     const TLayer& layer = getLayer(bSecondLayer);
     TTerrainType newTerrainType = layer.getCell(x, y).getTerrainType();
+    assert(newTerrainType != oldTerrainType);
     unsigned int numObjs = layer.getNumObjectIDsAtCell(x, y);
     static vector<int> aObjID;
     aObjID.clear();
@@ -1567,6 +1603,7 @@ void TGameMap::_TImpl::clearQuest(const TMapObjectRef& questLocationRef)
 VA(0x00421259, 0x64)
 void TGameMap::_TImpl::removeSecondLayer()
 {
+    assert(isTwoLayer());
     TLayer* pLayer = getPLayer(true);
     TLayer::TObjectIDIter iter = pLayer->objectIDBegin();
     while (iter != pLayer->objectIDEnd()) {
@@ -1580,6 +1617,7 @@ void TGameMap::_TImpl::removeSecondLayer()
 VA(0x004212d6, 0x43)
 void TGameMap::_TImpl::addSecondLayer()
 {
+    assert(!isTwoLayer());
     _m_bTwoLayer = true;
     _m_aLayer.push_back(TLayer(_m_size));
 }
@@ -1631,6 +1669,7 @@ void TGameMap::_TImpl::setVersion(EGameVersion newVersion)
 VA(0x004214ea, 0x39)
 const TGameObject* TGameMap::_TImpl::getPObject(bool bSecondLayer, unsigned int objID) const
 {
+    assert(!bSecondLayer || _m_bTwoLayer);
     const TLayer& layer = getLayer(bSecondLayer);
     if (!layer.isObjectIDValid(objID))
         return NULL;
@@ -1656,12 +1695,16 @@ const TLinkableObject* TGameMap::_TImpl::getPLinkableObject(int linkID) const
 VA(0x0042158c, 0x1118)
 auto_ptr<TGameObject> TGameMap::_TImpl::createObject(const TObjectType& objType, TPlayer owner) const
 {
+    assert(owner >= ePlayerNone && owner < kNumPlayers);
+    assert(_m_pBookkeeping->m_numHeroes <= s_kMaxHeroesOnMap);
+    assert(_m_pBookkeeping->m_numTowns <= s_kMaxTownsOnMap);
     EGameVersion requiredVersion = getRequiredVersion(objType);
     if (_m_version < requiredVersion)
         throw TCreateObjFailureNotSupportedByReleaseVersion(requiredVersion);
     TCappedObjectTypeInfoMap::const_iterator pCappedObjTypeInfo = getCappedObjectTypeInfoMap().find(objType.getType());
     if (pCappedObjTypeInfo != getCappedObjectTypeInfoMap().end()) {
         unsigned int typeOrdinal = pCappedObjTypeInfo->second->m_ordinal;
+        assert(typeOrdinal < _m_pBookkeeping->m_aNumObjsOfCappedType.size());
         if (_m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal] >= pCappedObjTypeInfo->second->m_cap)
             throw TCreateObjFailureTooManyInstancesOfTypeOnMap(pCappedObjTypeInfo->second->m_type,
                                                                pCappedObjTypeInfo->second->m_cap);
@@ -1736,6 +1779,7 @@ auto_ptr<TGameObject> TGameMap::_TImpl::createObject(const TObjectType& objType,
         break;
     case RANDOM_TOWN:
     case TOWN:
+        assert(objType.getType() == RANDOM_TOWN || (objType.getExtra() >= 0 && objType.getExtra() < kNumTownTypes));
         if (_m_pBookkeeping->m_numTowns == s_kMaxTownsOnMap)
             throw TCreateObjFailureTooManyTownsOnMap();
         pObj = auto_ptr<TGameObject>(_s_pObjectFactory->createTown(objType, owner).release());
@@ -1767,8 +1811,10 @@ auto_ptr<TGameObject> TGameMap::_TImpl::createObject(const TObjectType& objType,
         if ((objType.getType() != MINE && objType.getType() != ABANDONED_MINE)
             || objType.getExtra() < kNumGameResourceTypes)
             pObj = auto_ptr<TGameObject>(_s_pObjectFactory->createMine(objType, owner).release());
-        else
+        else {
+            assert(objType.getExtra() == kNumGameResourceTypes);
             pObj = auto_ptr<TGameObject>(_s_pObjectFactory->createAbandonedMine(objType).release());
+        }
         break;
     case CREATURE_GENERATOR_1:
     case CREATURE_GENERATOR_4:
@@ -1842,6 +1888,7 @@ VA(0x00422868, 0xd7a)
 auto_ptr<TGameObject> TGameMap::_TImpl::_createObject(const TObjectType& objType, TRawIStream* pIStream,
                                                      int version) const
 {
+    assert(pIStream != NULL);
     auto_ptr<TGameObject> pObj;
     switch (objType.getType()) {
     case HERO_PLACEHOLDER:
@@ -1962,17 +2009,20 @@ auto_ptr<TGameObject> TGameMap::_TImpl::_createObject(const TObjectType& objType
 VA(0x004235e2, 0x216)
 bool TGameMap::_TImpl::canCreate(const TObjectType& objType, TPlayer player) const
 {
+    assert(player >= ePlayerNone && player < kNumPlayers);
     if (_m_version < getRequiredVersion(objType))
         return false;
     TCappedObjectTypeInfoMap::const_iterator pCappedObjTypeInfo = getCappedObjectTypeInfoMap().find(objType.getType());
     if (pCappedObjTypeInfo != getCappedObjectTypeInfoMap().end()) {
         unsigned int typeOrdinal = pCappedObjTypeInfo->second->m_ordinal;
+        assert(typeOrdinal < _m_pBookkeeping->m_aNumObjsOfCappedType.size());
         if (_m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal] >= pCappedObjTypeInfo->second->m_cap)
             return false;
     }
     switch (objType.getType()) {
     case TOWN:
     case RANDOM_TOWN:
+        assert(objType.getType() == RANDOM_TOWN || (objType.getExtra() >= 0 && objType.getExtra() < kNumTownTypes));
         return _m_pBookkeeping->m_numTowns < s_kMaxTownsOnMap;
     case RANDOM_HERO:
     case HERO_PLACEHOLDER:
@@ -1990,6 +2040,7 @@ bool TGameMap::_TImpl::canCreate(const TObjectType& objType, TPlayer player) con
         return !_m_pBookkeeping->m_bGrailPlaced;
     case HERO:
         {
+            assert(objType.getExtra() >= 0 && objType.getExtra() < kNumHeroClasses);
             if (player == ePlayerNone || _m_pBookkeeping->m_numHeroes >= s_kMaxHeroesOnMap)
                 return false;
             unsigned int numHeroes = _m_apPlayerBookkeeping[player]->m_numHeroes;
@@ -2013,6 +2064,7 @@ bool TGameMap::_TImpl::canCreate(const TObjectType& objType, TPlayer player) con
 VA(0x004237f8, 0x47)
 auto_ptr<TGameObject> TGameMap::_TImpl::reconstructObject(streambuf* pStreamBuf, int version) const
 {
+    assert(pStreamBuf != NULL);
     TRawIStream iStream(pStreamBuf);
     TObjectType objType;
     iStream >> objType;
@@ -2050,6 +2102,8 @@ VA(0x004239f7, 0x37)
 unsigned int TGameMap::_TImpl::getNumObelisksOnMap() const
 {
     TCappedObjectTypeInfoMap::const_iterator pObeliskInfo = getCappedObjectTypeInfoMap().find(OBELISK);
+    assert(pObeliskInfo != getCappedObjectTypeInfoMap().end());
+    assert(pObeliskInfo->second->m_ordinal < _m_pBookkeeping->m_aNumObjsOfCappedType.size());
     return _m_pBookkeeping->m_aNumObjsOfCappedType[pObeliskInfo->second->m_ordinal];
 }
 
@@ -2128,6 +2182,7 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
         slot.m_bRandomHero = playerBookkeeping.m_numRandomHeroes > 0;
         if (playerBookkeeping.m_paHeroID->size() > 0) {
             const TNonRandomHero* pHero = _findPlayersNonRandomHero(TPlayer(player));
+            assert(pHero != NULL);
             slot.m_heroID = pHero->getHeroID();
             slot.m_heroPortrait = pHero->getBCustomPortrait() ? pHero->getPortrait() : -1;
             if (pHero->getBCustomName())
@@ -2244,6 +2299,7 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
                 aObjTypeID[objNum++] = objTypes.add(pTown->getPVisitingHero()->getObjectType());
         }
     }
+    assert(objNum == numObjs);
     stream << static_cast<long>(objTypes.numItems());
     for (unsigned int typeID = 0; typeID < objTypes.numItems(); typeID++)
         stream << objTypes.get(typeID);
@@ -2267,6 +2323,7 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
             }
         }
     }
+    assert(objNum == numObjs);
     stream << static_cast<long>(_m_pProperties->m_paTimedEvent->size());
     for (unsigned int event = 0; event < _m_pProperties->m_paTimedEvent->size(); event++)
         (*_m_pProperties->m_paTimedEvent)[event].write(&stream, _m_version);
@@ -2299,6 +2356,7 @@ struct TIsNotSpace {
 VA(0x00424926, 0x124a)
 void TGameMap::_TImpl::importText(istream* pIStream)
 {
+    assert(pIStream != NULL);
     static const string kSectionStart("===== ");
     static const string kSectionEnd(" =====");
     string line;
@@ -2479,6 +2537,7 @@ void TGameMap::_TImpl::importText(istream* pIStream)
 VA(0x00425bbe, 0x936)
 void TGameMap::_TImpl::exportText(ostream* pOStream) const
 {
+    assert(pOStream != NULL);
     static const string kSectionStart("===== ");
     static const string kSectionEnd(" =====");
     *pOStream << kSectionStart + kMapNameStr + kSectionEnd << '\n' << getName() << "\n\n";
@@ -2586,9 +2645,11 @@ bool TGameMap::_TImpl::_isValidPlacement(const TLayer& layer, const TGameObject&
                 while (pObjInfo != aObjInfo.end()) {
                     if (pObjInfo->m_height > height)
                         break;
+                    assert(pObjInfo->m_height == height);
                     ++pObjInfo;
                 }
                 while (pObjInfo != aObjInfo.end()) {
+                    assert(pObjInfo->m_height > height);
                     if (find(aHigherObjIDs.begin(), aHigherObjIDs.end(), pObjInfo->m_objID) == aHigherObjIDs.end())
                         aHigherObjIDs.push_back(pObjInfo->m_objID);
                     ++pObjInfo;
@@ -2634,6 +2695,7 @@ VA(0x0042693b, 0x129)
 bool TGameMap::_TImpl::_isValidShipyardPlacement(const TLayer& layer, const TGameObject& shipyard, unsigned int x,
                                                  unsigned int y)
 {
+    assert(shipyard.getType() == SHIPYARD);
     static const TPoint<int> akWaterOffset[] = {
         TPoint<int>(1, 1), TPoint<int>(1, 0), TPoint<int>(1, -1), TPoint<int>(0, 1), TPoint<int>(0, -1),
         TPoint<int>(-1, 1), TPoint<int>(-1, -1), TPoint<int>(-2, 1), TPoint<int>(-2, -1), TPoint<int>(-3, 1),
@@ -2946,6 +3008,8 @@ void TGameMap::_TImpl::_onGeneralObjectAdded(const TGameObject& obj, bool bSecon
     TCappedObjectTypeInfoMap::const_iterator pCappedObjTypeInfo = getCappedObjectTypeInfoMap().find(obj.getType());
     if (pCappedObjTypeInfo != getCappedObjectTypeInfoMap().end()) {
         unsigned int typeOrdinal = pCappedObjTypeInfo->second->m_ordinal;
+        assert(typeOrdinal < _m_pBookkeeping->m_aNumObjsOfCappedType.size());
+        assert(_m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal] < pCappedObjTypeInfo->second->m_cap);
         _m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal]++;
     }
 }
@@ -2956,6 +3020,8 @@ void TGameMap::_TImpl::_onRemovingGeneralObject(const TGameObject& obj)
     TCappedObjectTypeInfoMap::const_iterator pCappedObjTypeInfo = getCappedObjectTypeInfoMap().find(obj.getType());
     if (pCappedObjTypeInfo != getCappedObjectTypeInfoMap().end()) {
         unsigned int typeOrdinal = pCappedObjTypeInfo->second->m_ordinal;
+        assert(typeOrdinal < _m_pBookkeeping->m_aNumObjsOfCappedType.size());
+        assert(_m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal] > 0);
         _m_pBookkeeping->m_aNumObjsOfCappedType[typeOrdinal]--;
     }
 }
@@ -3010,15 +3076,20 @@ void TGameMap::_TImpl::_onPlayableAdded(const TPlayableObject* pPlayable, bool b
 {
     _onGeneralObjectAdded(*pPlayable, bSecondLayer, objID);
     TPlayer owner = pPlayable->getOwner();
+    assert(owner >= ePlayerNone && owner < kNumPlayers);
     if (owner != ePlayerNone && _m_apPlayerBookkeeping[owner]->m_numUnits++ == 0) {
         TPlayerInfo& player = (*_m_pProperties->m_paPlayer)[owner];
+        assert(!player.getBPresent());
         if (_m_pBookkeeping->m_numPlayableSlots == 0) {
+            assert(!_m_pProperties->m_pTeamInfo->getBHasTeams());
             player.setBHumanPlayable(true);
             player.setBComputerPlayable(true);
         } else {
             const TRefCountingPtr<_TProperties>& pConstProperties = _m_pProperties;
-            if (pConstProperties->m_pTeamInfo->getBHasTeams())
+            if (pConstProperties->m_pTeamInfo->getBHasTeams()) {
+                assert(_m_pBookkeeping->m_numPlayableSlots >= TTeamInfo::s_kMinTeams);
                 _m_pProperties->m_pTeamInfo->setPlayerTeam(owner, _pickAvailableTeam());
+            }
             player.setBComputerPlayable(true);
         }
         _m_pBookkeeping->m_numPlayableSlots++;
@@ -3032,8 +3103,10 @@ VA(0x00427b17, 0x3d1)
 void TGameMap::_TImpl::_onRemovingPlayable(const TPlayableObject* pPlayable)
 {
     TPlayer owner = pPlayable->getOwner();
+    assert(owner >= ePlayerNone && owner < kNumPlayers);
     if (owner != ePlayerNone && --_m_apPlayerBookkeeping[owner]->m_numUnits == 0) {
         TPlayerInfo& player = (*_m_pProperties->m_paPlayer)[owner];
+        assert(player.getBPresent());
         player = TPlayerInfo();
         if (--_m_pBookkeeping->m_numPlayableSlots != 0) {
             TPlayerInfo* pFirstPlayable = NULL;
@@ -3044,12 +3117,15 @@ void TGameMap::_TImpl::_onRemovingPlayable(const TPlayableObject* pPlayable)
                 if (pFirstPlayable == NULL && (*_m_pProperties->m_paPlayer)[i].getBComputerPlayable())
                     pFirstPlayable = &(*_m_pProperties->m_paPlayer)[i];
             }
-            if (i == kNumPlayers)
+            if (i == kNumPlayers) {
+                assert(pFirstPlayable != NULL);
                 pFirstPlayable->setBHumanPlayable(true);
+            }
         }
         const TRefCountingPtr<_TProperties>& pConstProperties = _m_pProperties;
         if (pConstProperties->m_pTeamInfo->getBHasTeams()) {
             TTeamInfo& teamInfo = *_m_pProperties->m_pTeamInfo;
+            assert(_m_pBookkeeping->m_numPlayableSlots >= teamInfo.getNumTeams());
             if (_m_pBookkeeping->m_numPlayableSlots == TTeamInfo::s_kMinTeams) {
                 teamInfo.setBHasTeams(false);
             } else {
@@ -3080,6 +3156,7 @@ void TGameMap::_TImpl::_onRemovingPlayable(const TPlayableObject* pPlayable)
                 } else if (_m_pBookkeeping->m_numPlayableSlots == teamInfo.getNumTeams()) {
                     unsigned int lastTeam = teamInfo.getNumTeams() - 1;
                     for (unsigned int player = 0;; player++) {
+                        assert(player < kNumPlayers);
                         if ((*_m_pProperties->m_paPlayer)[player].getBPresent()
                             && teamInfo.getPlayerTeam(TPlayer(player)) == lastTeam) {
                             teamInfo.setPlayerTeam(TPlayer(player), 0);
@@ -3117,6 +3194,9 @@ void TGameMap::_TImpl::_onRemovingPlayable(const TPlayableObject* pPlayable)
 VA(0x00427f0e, 0xb0)
 void TGameMap::_TImpl::_onTownAdded(const TTown* pTown, bool bSecondLayer, unsigned int objID)
 {
+    assert(objID != TLayer::s_kInvalidObjID);
+    assert(&getLayer(bSecondLayer).getObject(objID) == pTown);
+    assert(static_cast<const _TPBookkeeping&>(_m_pBookkeeping)->m_numTowns < s_kMaxTownsOnMap);
     _registerLinkable(*pTown, bSecondLayer, objID);
     _onPlayableAdded(pTown, bSecondLayer, objID);
     _m_pBookkeeping->m_numTowns++;
@@ -3483,6 +3563,7 @@ VA(0x00429072, 0x89)
 unsigned int TGameMap::_TImpl::_pickAvailableTeam() const
 {
     const TTeamInfo& teamInfo = *_m_pProperties->m_pTeamInfo;
+    assert(teamInfo.getBHasTeams());
     unsigned int aTeamSize[kNumPlayers];
     fill_n(aTeamSize, teamInfo.getNumTeams(), 0U);
     for (unsigned int player = 0; player < kNumPlayers; player++) {
@@ -3659,6 +3740,7 @@ auto_ptr<TLossCondition> TGameMap::_TImpl::_reconstructLossCondition(const TLoss
 VA(0x00429854, 0x112)
 const TNonRandomHero* TGameMap::_TImpl::_findPlayersNonRandomHero(TPlayer player) const
 {
+    assert(player >= 0 && player < kNumPlayers);
     unsigned int numLayers = _m_bTwoLayer ? 2 : 1;
     for (unsigned int layerNum = 0; layerNum < numLayers; layerNum++) {
         const TLayer* pLayer = getPLayer(layerNum);
@@ -4299,12 +4381,14 @@ private:
         // Loki's setObject(NULL) is its own function here (0x42abe8).
         void setObject(auto_ptr<TGameObject> pObj)
         {
+            assert(_m_pWrapper == NULL);
             _m_pWrapper = new _TWrapper(pObj);
             if (_m_pWrapper == NULL)
                 _fail();
         }
         void clearObject()
         {
+            assert(_m_pWrapper != NULL);
             if (--_m_pWrapper->m_refCnt == 0)
                 delete _m_pWrapper;
             _m_pWrapper = NULL;
@@ -4342,6 +4426,7 @@ private:
         }
         void _split()
         {
+            assert(_m_pWrapper != NULL && _m_pWrapper->m_refCnt > 1);
             auto_ptr<TGameObject> pClone = _m_pWrapper->m_pObject->clone();
             if (pClone.get() == NULL)
                 _fail();
@@ -4364,6 +4449,8 @@ private:
 
         void resize(unsigned int width, unsigned int height)
         {
+            assert(width % s_kSegmentDim == 0);
+            assert(height % s_kSegmentDim == 0);
             _m_widthInSegments = width / s_kSegmentDim;
             _m_aSegment.resize(height / s_kSegmentDim * _m_widthInSegments);
         }
@@ -4420,6 +4507,7 @@ VA(0x0042a545, 0xbb)
 TGameMap::TLayer::_TImpl::_TImpl(TGameMap::TSize size)
     : _m_size(size), _m_nextAvail(0), _m_floatingObjID(0)
 {
+    assert((int)_m_size >= 0 && (int)_m_size < (int)s_kNumSizes);
     _m_pCellGrid->resize(getWidth(), getHeight());
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
     aObjectLink.resize(1, _TObjectLink());
@@ -4435,12 +4523,17 @@ VA(0x0042a70f, 0x2b)
 TGameObject* TGameMap::TLayer::_TImpl::getPObject(unsigned int objID)
 {
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
-    return aObjectLink[objID].getPObject();
+    assert(objID != 0 && objID < aObjectLink.size());
+    TGameObject* pObj = aObjectLink[objID].getPObject();
+    assert(pObj != NULL);
+    return pObj;
 }
 
 VA(0x0042a824, 0x16)
 const TGameMap::TLayer::TCell* TGameMap::TLayer::_TImpl::getPCell(unsigned int x, unsigned int y) const
 {
+    assert(x < getWidth());
+    assert(y < getHeight());
     return _m_pCellGrid->getPCell(x, y);
 }
 
@@ -4448,13 +4541,18 @@ VA(0x0042a83a, 0x21)
 const TGameObject* TGameMap::TLayer::_TImpl::getPObject(unsigned int objID) const
 {
     const vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
-    return aObjectLink[objID].getPObject();
+    assert(objID != 0 && objID < aObjectLink.size());
+    const TGameObject* pObj = aObjectLink[objID].getPObject();
+    assert(pObj != NULL);
+    return pObj;
 }
 
 VA(0x0042a85b, 0x23)
 TTilePoint TGameMap::TLayer::_TImpl::getObjectLoc(unsigned int objID) const
 {
     const vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
+    assert(objID != 0 && objID < aObjectLink.size());
+    assert(aObjectLink[objID].getPObject() != NULL);
     return aObjectLink[objID].m_loc;
 }
 
@@ -4462,7 +4560,9 @@ VA(0x0042a87e, 0x5b)
 TTileExtent TGameMap::TLayer::_TImpl::getObjectExtent(unsigned int objID) const
 {
     const vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
+    assert(objID != 0 && objID < aObjectLink.size());
     const TGameObject* pObj = aObjectLink[objID].getPObject();
+    assert(pObj != NULL);
     return _computeObjExtent(aObjectLink[objID].m_loc, TPoint<unsigned int>(pObj->getWidth(), pObj->getHeight()));
 }
 
@@ -4478,6 +4578,8 @@ TMapLayerObjectID TGameMap::TLayer::_TImpl::getObjectIDAtCell(unsigned int x, un
                                                              unsigned int which) const
 {
     const vector<_TObjectCellInfo>* paObjInfo = getCell(x, y)._m_paObjInfo.get();
+    assert(paObjInfo != NULL && paObjInfo->size() > 0);
+    assert(which < paObjInfo->size());
     return (*paObjInfo)[which].m_objID;
 }
 
@@ -4487,6 +4589,7 @@ TMapLayerObjectID TGameMap::TLayer::_TImpl::_placeObject(auto_ptr<TGameObject> p
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
     TMapLayerObjectID objID;
     if (_m_nextAvail != s_kInvalidObjID) {
+        assert(_m_nextAvail < aObjectLink.size());
         objID = _m_nextAvail;
         _m_nextAvail = aObjectLink[_m_nextAvail].m_next;
     } else {
@@ -4520,6 +4623,8 @@ VA(0x0042ab68, 0x80)
 void TGameMap::TLayer::_TImpl::_removeObject(unsigned int objID)
 {
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
+    assert(objID != 0 && objID < aObjectLink.size());
+    assert(static_cast<const _TObjectLink&>(aObjectLink[objID]).getPObject() != NULL);
     if (_m_floatingObjID != objID)
         _unstampObject(objID);
     else
@@ -4534,6 +4639,7 @@ void TGameMap::TLayer::_TImpl::_removeObject(unsigned int objID)
 VA(0x0042ac12, 0x332)
 void TGameMap::TLayer::_TImpl::_stampObject(TGameObject* pObj, const TTilePoint& loc, unsigned int objID)
 {
+    assert(pObj != NULL);
     const TTileExtent objExtent = _computeObjExtent(loc, TPoint<unsigned int>(pObj->getWidth(), pObj->getHeight()));
     unsigned int heightMap[OBJECT_MASK_WIDTH][OBJECT_MASK_HEIGHT];
     constructObjectHeightMap(*pObj, heightMap);
@@ -4561,6 +4667,7 @@ void TGameMap::TLayer::_TImpl::_stampObject(TGameObject* pObj, const TTilePoint&
                             const TGameObject& objOnMap = getObject(objOnMapID);
                             TTilePoint objOnMapLoc = getObjectLoc(objOnMapID);
                             TTileExtent objOnMapExtent = getObjectExtent(objOnMapID);
+                            assert(intersect(objOnMapExtent, objExtent));
                             TTileExtent intersectExtent = objOnMapExtent & objExtent;
                             for (unsigned int ix = intersectExtent.left(); ix < intersectExtent.right(); ix++) {
                                 unsigned int objX = loc.x() - ix;
@@ -4574,10 +4681,14 @@ void TGameMap::TLayer::_TImpl::_stampObject(TGameObject* pObj, const TTilePoint&
                                         continue;
                                     unsigned int intersectHeight = heightMap[objX][objY];
                                     const TCell& intersectCell = getCell(ix, iy);
+                                    assert(intersectCell._m_paObjInfo.get() != NULL);
                                     const vector<_TObjectCellInfo>& aIntersectCellObjInfo = *intersectCell._m_paObjInfo;
                                     vector<_TObjectCellInfo>::const_iterator pObjOnMapCellInfo = aIntersectCellObjInfo.begin();
-                                    while (pObjOnMapCellInfo->m_objID != objOnMapID)
+                                    assert(pObjOnMapCellInfo != aIntersectCellObjInfo.end());
+                                    while (pObjOnMapCellInfo->m_objID != objOnMapID) {
                                         ++pObjOnMapCellInfo;
+                                        assert(pObjOnMapCellInfo != aIntersectCellObjInfo.end());
+                                    }
                                     unsigned int objOnMapHeight = pObjOnMapCellInfo->m_height;
                                     if (objOnMapHeight > intersectHeight) {
                                         bObjOnMapIsAbove = true;
@@ -4621,9 +4732,12 @@ void TGameMap::TLayer::_TImpl::_unstampObject(unsigned int objID)
             if (pObj->getBCellPlaced(objCell.x(), objCell.y())) {
                 TCell* pCell = getPCell(cell);
                 vector<_TObjectCellInfo>& aObjInfo = *pCell->_m_paObjInfo;
+                assert(aObjInfo.size() > 0);
                 vector<_TObjectCellInfo>::iterator pObjInfo = aObjInfo.begin();
-                while (pObjInfo->m_objID != objID)
+                while (pObjInfo->m_objID != objID) {
+                    assert(pObjInfo != aObjInfo.end());
                     ++pObjInfo;
+                }
                 aObjInfo.erase(pObjInfo);
                 if (aObjInfo.size() == 0)
                     pCell->_m_paObjInfo.clear();
@@ -4631,7 +4745,9 @@ void TGameMap::TLayer::_TImpl::_unstampObject(unsigned int objID)
             if (pObj->getBCellShadow(objCell.x(), objCell.y())) {
                 TCell* pCell = getPCell(cell);
                 vector<unsigned int>& aShadowID = *pCell->_m_paShadowID;
+                assert(aShadowID.size() > 0);
                 vector<unsigned int>::iterator pObjID = find(aShadowID.begin(), aShadowID.end(), objID);
+                assert(pObjID != aShadowID.end());
                 aShadowID.erase(pObjID);
                 if (aShadowID.size() == 0)
                     pCell->_m_paShadowID.clear();
@@ -4644,6 +4760,9 @@ VA(0x0042b32a, 0x6f)
 void TGameMap::TLayer::_TImpl::_floatObject(unsigned int objID)
 {
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
+    assert(_m_floatingObjID == s_kInvalidObjID);
+    assert(objID != 0 && objID < aObjectLink.size());
+    assert(static_cast<const _TObjectLink&>(aObjectLink[objID]).getPObject() != NULL);
     _unstampObject(objID);
     aObjectLink[aObjectLink[objID].m_prev].m_next = aObjectLink[objID].m_next;
     aObjectLink[aObjectLink[objID].m_next].m_prev = aObjectLink[objID].m_prev;
@@ -4655,6 +4774,7 @@ VA(0x0042b399, 0x99)
 void TGameMap::TLayer::_TImpl::_unfloatObject(const TTilePoint& loc)
 {
     vector<_TObjectLink>& aObjectLink = *_m_paObjectLink;
+    assert(_m_floatingObjID != s_kInvalidObjID);
     aObjectLink[_m_floatingObjID].m_loc = loc;
     aObjectLink[_m_floatingObjID].m_next = 0;
     aObjectLink[_m_floatingObjID].m_prev = aObjectLink[0].m_prev;
@@ -4668,6 +4788,8 @@ void TGameMap::TLayer::_TImpl::_unfloatObject(const TTilePoint& loc)
 VA(0x0042b432, 0x7f)
 TTileExtent TGameMap::TLayer::_TImpl::_computeObjExtent(const TTilePoint& loc, const TPoint<unsigned int>& size) const
 {
+    assert(loc.x() + 1 < size.x() || loc.x() - size.x() + 1 < getWidth());
+    assert(loc.y() + 1 < size.y() || loc.y() - size.y() + 1 < getHeight());
     TTilePoint lastCell = loc;
     TPoint<unsigned int> clippedSize = size;
     if (clippedSize.x() > lastCell.x() + 1)
@@ -4694,6 +4816,7 @@ TMapLayerObjectID TGameMap::TLayer::_TImpl::_findObject(const TTilePoint& loc,
         TMapLayerObjectID objID = getObjectIDAtCell(loc, i);
         const TGameObject& obj = getObject(objID);
         TTilePoint objLoc = getObjectLoc(objID);
+        assert(objLoc.x() >= loc.x() && objLoc.y() >= loc.y());
         TTilePoint objCell = objLoc - loc;
         if (obj.getBCellTrigger(objCell.x(), objCell.y()) && pfnPredicate(obj))
             return objID;
@@ -4837,6 +4960,8 @@ inline TMapLayerObjectID TGameMap::TLayer::_TImpl::getShadowIDAtCell(unsigned in
                                                                     unsigned int which) const
 {
     const vector<unsigned int>* paShadowID = getCell(x, y)._m_paShadowID.get();
+    assert(paShadowID != NULL && paShadowID->size() > 0);
+    assert(which < paShadowID->size());
     return (*paShadowID)[which];
 }
 

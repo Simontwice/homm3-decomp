@@ -8,6 +8,7 @@
 // sex, Shadow of Death the spells and primary skills.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <algorithm>
 #include <functional>
 
@@ -169,6 +170,9 @@ void THeroPrototype::TPrimarySkills::write(TRawOStream* pOStream, int version) c
 VA(0x0044a544, 0x3e)
 void THeroPrototype::setName(const std::string& newName)
 {
+    assert(newName.size() <= s_kMaxNameLen);
+    assert(newName.find('\n') == std::string::npos);
+    assert(newName.find('\t') == std::string::npos);
     if (newName != getName())
         _m_pImpl->m_name = newName;
 }
@@ -183,6 +187,7 @@ void THeroPrototype::setBiography(const std::string& newBiography)
 VA(0x0044a5c0, 0x4e)
 void THeroPrototype::setSecondarySkills(const TSecondarySkills& newSecondarySkills)
 {
+    assert(newSecondarySkills.size() <= s_kMaxSecSkills);
     if (newSecondarySkills != getSecondarySkills())
         *_m_pImpl->m_pSecondarySkills = newSecondarySkills;
 }
@@ -190,6 +195,7 @@ void THeroPrototype::setSecondarySkills(const TSecondarySkills& newSecondarySkil
 VA(0x0044a60e, 0x4e)
 void THeroPrototype::setArtifacts(const TArtifactContainer& newArtifacts)
 {
+    assert(newArtifacts.getBackpack().size() <= s_kMaxBackpackSize);
     if (newArtifacts != getArtifacts())
         *_m_pImpl->m_pArtifacts = newArtifacts;
 }
@@ -377,6 +383,8 @@ void THeroPlaceholder::write(TRawOStream* pOStream, int version) const
 VA(0x0044af11, 0x2b)
 void THero::initialize()
 {
+    assert(kRandomStr != NULL);
+    assert(kUnknownStr != NULL);
     initializeTraitsTable();
     InitializePrimarySkillTraitsTable();
     for (unsigned int skill = 0; skill < kNumSecSkills; skill++)
@@ -546,6 +554,7 @@ void THero::setPrimarySkills(const TArray<int, kNumPrimarySkills>& newPrimarySki
 VA(0x0044b5cb, 0xd)
 void THero::setExperience(int newExperience)
 {
+    assert(newExperience >= 0 && newExperience <= s_kMaxExperience);
     _m_experience = newExperience;
 }
 
@@ -558,6 +567,7 @@ void THero::setSex(int newSex)
 VA(0x0044b5e5, 0x321)
 void THero::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     if (_m_bCustomName) {
         getline(*pIStream, line);
@@ -678,6 +688,7 @@ void THero::write(TRawOStream* pOStream, int version) const
 VA(0x0044bcb2, 0x136)
 void THero::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
     if (_m_bCustomName)
         *pOStream << kNameStr << ':' << '\n' << _m_name << '\n';
     if (version >= GAME_VERSION_AB && _m_bCustomBiography) {

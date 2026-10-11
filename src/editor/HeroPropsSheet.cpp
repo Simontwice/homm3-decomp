@@ -3,6 +3,8 @@
 // constructor and destructor fold with the specific hero sheet's.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "adventureobjecttype.h"
 #include "exceptions.h"
 #include "objnames.h"
@@ -29,6 +31,7 @@ THeroPropsSheet::THeroPropsSheet(LPCTSTR pszCaption, CWnd* pParentWnd, const TGa
       _m_bPagesAdded(false),
       _m_numOKDisablers(0)
 {
+    assert(_m_pHero != NULL);
     m_psh.dwFlags |= PSH_NOAPPLYNOW;
 }
 
@@ -108,6 +111,7 @@ bool THeroPropsSheet::wasModified() const
 VA(0x00453fc7, 0x1c)
 void THeroPropsSheet::onEnableOK()
 {
+    assert(_m_disableOKCtr > 0);
     if (--_m_numOKDisablers == 0) {
         CWnd* pOKButton = GetDlgItem(IDOK);
         pOKButton->EnableWindow(TRUE);
@@ -148,6 +152,7 @@ TRandomHeroPropsSheet::TRandomHeroPropsSheet(CWnd* pParentWnd, TGameMap* pMap, b
       _m_bSecondLayer(bSecondLayer),
       _m_objectID(objID)
 {
+    assert(_m_pHero != NULL);
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())
         throw TAllocationFailure();
@@ -202,6 +207,7 @@ TNonRandomHeroPropsSheet::TNonRandomHeroPropsSheet(CWnd* pParentWnd, TGameMap* p
       _m_pOldHero(NULL),
       _m_pNewHero(NULL)
 {
+    assert(_m_pHero != NULL);
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())
         throw TAllocationFailure();
@@ -276,6 +282,7 @@ TPrisonPropsSheet::TPrisonPropsSheet(CWnd* pParentWnd, TGameMap* pMap, bool bSec
       _m_pOldPrison(NULL),
       _m_pNewPrison(NULL)
 {
+    assert(_m_pPrison != NULL);
     _m_pNewMap = std::auto_ptr<TGameMap>(new TGameMap(*_m_pMap));
     if (!_m_pNewMap.get())
         throw TAllocationFailure();

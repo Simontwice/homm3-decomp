@@ -7,6 +7,7 @@
 // asserts.
 #include "editor/stdafx.h"
 
+#include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <algorithm>
@@ -28,11 +29,14 @@ const unsigned int kNumTownEventReserved = 4;
 
 unsigned int TTown::TGeneratorBonuses::get(TGeneratorType type) const
 {
+    assert(type >= 0 && type < TTown::s_kNumGeneratorTypes);
     return _m_bonuses[type];
 }
 
 void TTown::TGeneratorBonuses::set(TGeneratorType type, unsigned int newBonus)
 {
+    assert(type >= 0 && type < TTown::s_kNumGeneratorTypes);
+    assert(newBonus <= s_kMax);
     _m_bonuses[type] = newBonus;
 }
 
@@ -105,6 +109,7 @@ TTown::TTown(const TTown& other)
         if (pClone.get() == NULL)
             throw TAllocationFailure();
         _m_pVisitingHero = dynamic_cast<THero*>(pClone.release());
+        assert(_m_pVisitingHero != NULL);
     }
 }
 
@@ -114,6 +119,8 @@ TTown::TTown(const TObjectType& objType, TPlayer owner)
       _m_bCustomGarrison(false), _m_bCustomBuildings(false), _m_bGroupedFormation(false), _m_pVisitingHero(NULL),
       _m_alignment(ePlayerNone)
 {
+    assert(objType.getType() == TOWN || objType.getType() == RANDOM_TOWN);
+    assert(objType.getType() == RANDOM_TOWN || getTownType() >= 0 && getTownType() < kNumTownTypes);
     _m_aBuildingState[eBuildingFort].setBBuilt(true);
 }
 
@@ -121,6 +128,8 @@ VA(0x004c1dc5, 0x4fc)
 TTown::TTown(const TObjectType& objType, TRawIStream* pIStream, int version)
     : TGameObject(objType), TLinkableObject(objType), TPlayableObject(objType), _m_pVisitingHero(NULL)
 {
+    assert(objType.getType() == TOWN || objType.getType() == RANDOM_TOWN);
+    assert(objType.getType() == RANDOM_TOWN || getTownType() >= 0 && getTownType() < kNumTownTypes);
     if (version >= 15)
         TLinkableObject::read(pIStream, version);
     TPlayableObject::read(pIStream, version);
@@ -215,6 +224,11 @@ TTown::~TTown()
 VA(0x004c238d, 0x17)
 void TTown::setName(const std::string& newName)
 {
+    assert(!_m_bCustomName || std::find_if(newName.begin(), newName.end(), std::not1(std::ptr_fun(::isspace)))
+                                  != newName.end());
+    assert(newName.size() <= s_kMaxNameLen);
+    assert(newName.find('\n') == std::string::npos);
+    assert(newName.find('\t') == std::string::npos);
     _m_name = newName;
 }
 
@@ -246,6 +260,7 @@ void TTown::setDisabledSpellsMask(const std::bitset<kNumSpells>& newMask)
 // GetStockTextMetrics (the same bytes).
 void TTown::setTimedEvents(const std::vector<TTimedEvent>& newTimedEvents)
 {
+    assert(newTimedEvents.size() <= s_kMaxTimedEvents);
     _m_events = newTimedEvents;
 }
 
@@ -254,10 +269,12 @@ void TTown::setVisitingHero(const THero* pHero)
 {
     delete _m_pVisitingHero;
     if (pHero != NULL) {
+        assert(dynamic_cast<const TNonRandomHero*>(pHero) != NULL || dynamic_cast<const TRandomHero*>(pHero) != NULL);
         std::auto_ptr<TGameObject> pClone = pHero->clone();
         if (pClone.get() == NULL)
             throw TAllocationFailure();
         _m_pVisitingHero = dynamic_cast<THero*>(pClone.release());
+        assert(_m_pVisitingHero != NULL);
     } else {
         _m_pVisitingHero = NULL;
     }
@@ -272,6 +289,7 @@ void TTown::setAlignment(TPlayer newAlignment)
 VA(0x004c24ef, 0x52e)
 void TTown::importText(std::istream* pIStream, EGameVersion version)
 {
+    assert(pIStream != NULL);
     std::string line;
     if (_m_bCustomName) {
         getline(*pIStream, line);
@@ -336,6 +354,7 @@ TTownType TTown::getTownType() const
 VA(0x004c2a3c, 0x4b)
 bool TTown::getBIsBuildingDisabled(TBuilding building) const
 {
+    assert(building >= 0 && building < kNumBuildings);
     TBuilding requiredBuilding = getTownTypeTraits().m_akBuildingTraits[building].m_building;
     return _m_bCustomBuildings
            && (_m_aBuildingState[building].getBDisabled()
@@ -421,6 +440,7 @@ bool TTown::hasText() const
 VA(0x004c2ddc, 0x1eb)
 void TTown::exportText(std::ostream* pOStream, EGameVersion version) const
 {
+    assert(pOStream != NULL);
     if (_m_bCustomName)
         *pOStream << kNameStr << ':' << '\n' << getName() << '\n';
     if (_m_pVisitingHero != NULL && _m_pVisitingHero->hasText()) {

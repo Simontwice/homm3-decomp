@@ -5,6 +5,8 @@
 // onto an identical one at 0x481a8d.
 #include "editor/stdafx.h"
 
+#include <assert.h>
+
 #include "va.h"
 #include "editor/MapEditorText.h"
 #include "editor/ObjectSpecializations.h"
@@ -16,6 +18,7 @@ TSignPropsDlg::TSignPropsDlg(CWnd* pParent, TSign* pSign)
       _m_pSign(pSign),
       _m_bModified(false)
 {
+    assert(_m_pSign != NULL);
     _m_text = _T("");
 }
 
