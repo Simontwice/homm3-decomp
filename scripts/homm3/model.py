@@ -147,6 +147,7 @@ def resolve(rows=None) -> Model:
         claims.setdefault((claim.kind, claim.rva), []).append(claim)
     internal_rvas = {c.rva for cs in claims.values() for c in cs
                      if c.meta.get('internal') == '1'}
+    internal_rvas |= _internal_placements()
     channels = {'src-VA': 'src', 'src-VA+ir': 'src', 'src-VA+base': 'src',
                 'src-VA_COMPGEN': 'src_compgen', 'zlib-map': 'functions_zlib',
                 'placement': 'src',
@@ -425,6 +426,14 @@ def msvc_names_scope(name: str) -> bool:
     return bool(msvc_names.LOCAL_STATIC_SCOPE.search(name))
 
 
+def _internal_placements() -> set[int]:
+    """The addresses of another image's placed internal-linkage definitions
+    (homm3.census.placements `linkage`): a unit's `static` function or datum
+    whose name another placed row also spells takes a `$RVA` discriminator,
+    as a source-local DATA claim does."""
+    return {c.rva for c in providers.placements() if c.meta.get("linkage") == "internal"}
+
+
 def _upgrade_dense_data_alias(row: dict, claim) -> dict:
     """Let a reviewed owner replace only a source DATA dense placeholder.
 
@@ -613,13 +622,17 @@ def _collect_inventory():
     # an rva suffix on collision; a colliding PROVEN symbol is a defect
     from collections import Counter
     internal_rvas = {c.rva for c in fragments.all_claims() if c.meta.get("internal") == "1"}
+    placed_internal = _internal_placements()
     counts = Counter(r["name"] for r in rows.values())
     seen = set()
     for rva in sorted(rows):
         r = rows[rva]
-        if counts[r['name']] > 1 and r['provenance'] == 'src-DATA':
+        if counts[r['name']] > 1 and (
+                r['provenance'] == 'src-DATA'
+                or (r['provenance'] == 'placement' and rva in placed_internal)):
             from homm3.core.msvc_names import discriminate
-            distinct = discriminate(r['name'], rva, internal=rva in internal_rvas)
+            distinct = discriminate(r["name"], rva,
+                                    internal=rva in internal_rvas or rva in placed_internal)
             if distinct:
                 r['name'] = distinct
         if counts[r["name"]] > 1 and r["name"] in seen:

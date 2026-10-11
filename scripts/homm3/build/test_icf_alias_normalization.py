@@ -5,8 +5,9 @@ import unittest
 from homm3.build import canonicalize_data_symbols as canon
 from homm3.build.normalize_objs import (FunctionBody, _canonicalize_icf_aliases,
                                         _canonicalize_proven_fold_calls,
+                                        _canonicalize_local_functions,
                                         _icf_identical, _linker_fold_mates,
-                                        _paired_references)
+                                        _local_function_names, _paired_references)
 
 TEXT = 0x60500020
 REL32 = 0x14
@@ -220,6 +221,34 @@ class IcfAliasRewriteTest(unittest.TestCase):
                       "?e": FunctionBody(b"\xe9\0\0\0\0", (1,))}
         self.assertEqual(_linker_fold_mates(candidates, "?a"), {"?a", "?d"})
         self.assertEqual(_linker_fold_mates(candidates, "?e"), {"?e"})
+
+
+class LocalFunctionNameTest(unittest.TestCase):
+    def test_a_static_definition_takes_the_model_name(self):
+        # coff() defines functions with storage class 2; mark ?static static.
+        payload = bytearray(coff(CALL * 2, [("?static", 0), ("?f", 6)],
+                                 [(1, "?ext"), (7, "?static")], ["?ext"]))
+        parsed = canon.CoffObject(bytes(payload))
+        symbol = next(row for row in parsed.symbols.values() if row.name == "?static")
+        payload[symbol.offset + 16] = 3
+        names = {"?static": "?static$RVA4bac0", "?ext": "?ext$RVA10"}
+        new, count = _canonicalize_local_functions(bytes(payload), names)
+        renamed = canon.CoffObject(new)
+        self.assertEqual(count, 1)
+        self.assertEqual([renamed.symbols[r.symbol_index].name for r in renamed.relocations],
+                         ["?ext", "?static$RVA4bac0"])
+
+    def test_symbol_names_give_each_unit_its_discriminated_functions(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "symbol_names.csv"
+            path.write_text("# generated\nrva,name,unit,size,kind,provenance\n"
+                            "0x4ae20,?f@@YAXXZ,palette,0x159,func,placement\n"
+                            "0x4bac0,?f@@YAXXZ$RVA4bac0,bitmap24,0x159,func,placement\n"
+                            "0x91534,_?x@@4MB$RVA91534,bitmap24,0x4,data,placement\n")
+            self.assertEqual(_local_function_names(path),
+                             {"bitmap24": {"?f@@YAXXZ": "?f@@YAXXZ$RVA4bac0"}})
 
 
 class ProvenFoldCallTest(unittest.TestCase):

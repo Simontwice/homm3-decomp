@@ -43,7 +43,15 @@ agree byte for byte with the same relocation sites, place the first of them
 there, and the comparison pairs the others' references with it. A name
 several units compile (a library template) is owned by the first unit whose
 body equals retail at its address, masked, else by the first definer: the
-linker kept that unit's copy. The result is
+linker kept that unit's copy. Internal linkage is per unit: a `static`
+function or datum whose decorated name another unit also defines (bitmap24's
+RGBToHSV beside palette's) is keyed by unit and name (`local_identities`),
+so each definition places alone. Names that differ only by that unit are
+one spelling at an address the linker shares between them (/OPT:ICF folded
+the static onto the external body); the external name, else the first,
+labels it. Each row records its definition's `linkage`; the label model
+gives an internal name that several rows spell a `$RVA` discriminator.
+The result is
 config/retail/<image>/placements.tsv; the label model reads it as the image's
 claims for shared units (channel `placement`). A derivation refuses to run
 while any of the image's unit objects is missing (a game-only `ninja objects`
@@ -77,7 +85,38 @@ DIR32, REL32 = 6, 20
 SCALAR = re.compile(r"@[0-6](?P<type>_[NJK]|[CDEFGHIJKMNO])[AB]$")
 SCALAR_SIZES = {"C": 1, "D": 1, "E": 1, "_N": 1, "F": 2, "G": 2, "H": 4, "I": 4,
                 "J": 4, "K": 4, "M": 4, "N": 8, "O": 8, "_J": 8, "_K": 8}
-HEADER = "rva\tsize\tkind\tname\tunit\tevidence"
+HEADER = "rva\tsize\tkind\tname\tunit\tlinkage\tevidence"
+#: Separates an internal-linkage name from its unit in a derivation key.
+LOCAL = "\x00"
+
+
+def plain(key: str) -> str:
+    """The decorated name a derivation key spells (`local_identities`)."""
+    return key.split(LOCAL, 1)[0]
+
+
+def _linkage(obj) -> dict[str, int]:
+    """{name: COFF storage class} of the functions and data an object
+    defines (2 external, 3 static)."""
+    out = {}
+    for sec in obj.section_table:
+        for _off, name, scl in obj.section_members(sec["index"]):
+            if scl in (2, 3) and not name.startswith(("$", ".")):
+                out.setdefault(name, scl)
+    return out
+
+
+def local_identities(linkages: dict[str, dict[str, int]]) -> set[tuple[str, str]]:
+    """The (unit, name) definitions with internal linkage whose decorated
+    name another unit also defines: one name, several addresses. Volatile
+    `$E` initializer ordinals are never names (`VOLATILE`)."""
+    units = defaultdict(set)
+    for unit, names in linkages.items():
+        for name in names:
+            units[name].add(unit)
+    return {(unit, name) for unit, names in linkages.items()
+            for name, scl in names.items()
+            if scl == 3 and len(units[name]) > 1 and not VOLATILE.match(name)}
 
 
 def _functions_of(obj):
@@ -310,6 +349,7 @@ def referrer(name: str, rva: int) -> str:
     a name that repeats it can pass the compiler's length limit in a
     checkout with a longer path, where the object then holds a shortened,
     hashed name: the note would depend on the checkout."""
+    name = plain(name)
     return f"0x{rva:08x}" if "?%" in name else name
 
 
@@ -398,7 +438,12 @@ def fold_label(at, names, bodies, definers, owned, rowable=lambda name: True):
     but are no placement), and among the image's own a name that can be a
     table row (`rowable`: a pick-any COMDAT) before an ordinary function,
     which is only a suggestion for its VA() claim; the comparison pairs the
-    others' references with it (normalize_objs ICF twins)."""
+    others' references with it (normalize_objs ICF twins). Names that spell
+    one decorated name (`plain`: a unit's static and another unit's external
+    or static definition) are labelled by that spelling whatever their
+    bodies: the external one, else the first."""
+    if len(at) > 1 and len({plain(name) for name in at}) == 1:
+        return min(at, key=lambda name: (LOCAL in name, name))
     group = sorted((name for name in at if len(names[name]) == 1),
                    key=lambda name: (definers[name][0] in owned,
                                      definers[name][0] in owned and not rowable(name), name))
@@ -487,27 +532,38 @@ def derive(log=print, want_suggestions=False):
     table_units = {}                      # vtable symbol -> first defining unit
     data_definers = {}                    # data name -> (unit, size, bytes)
     data_relocs = {}                      # data name -> {offset: (referent, kind)}
+    linkage = {}                          # name -> its first definition's linkage
+    objects = []
     for unit in units:
         path = paths.BUILD / "objdiff/base" / f"{unit['unit']}.obj"
-        obj = Obj(path)
+        objects.append((unit, path, Obj(path)))
+    linkages = {unit["unit"]: _linkage(obj) for unit, _path, obj in objects}
+    local = local_identities(linkages)
+    for unit, path, obj in objects:
+        def key(name, unit=unit["unit"]):
+            return f"{name}{LOCAL}{unit}" if (unit, name) in local else name
+        for name, scl in linkages[unit["unit"]].items():
+            linkage.setdefault(key(name), "internal" if scl == 3 else "external")
         semantic = (_compgen_names(path, unit["unit"], unit["source"])
                     if unit["source"] in shared_sources else {})
         if unit["unit"] in owned:
             inline_comdats.update(portable(name, unit["unit"])
                                   for name in _any_comdats(obj))
         for name, _sec, _off, body, relocs in _functions_of(obj):
-            name = semantic.get(name, name)
-            relocs = {site: (semantic.get(ref, ref), kind) for site, (ref, kind) in relocs.items()}
+            name = key(semantic.get(name, name))
+            relocs = {site: (key(semantic.get(ref, ref)), kind)
+                      for site, (ref, kind) in relocs.items()}
             compiled.append((unit["unit"], name, body, relocs))
             if unit["unit"] not in definers[name]:
                 definers[name].append(unit["unit"])
         for name, slots in _vtable_slots(obj).items():
-            tables.setdefault(name, slots)
+            tables.setdefault(name, [key(slot) for slot in slots])
             table_units.setdefault(name, unit["unit"])
         for name, (size, text) in _data_of(obj).items():
-            data_definers.setdefault(name, (unit["unit"], size, text))
+            data_definers.setdefault(key(name), (unit["unit"], size, text))
         for name, relocs in _data_relocations(obj).items():
-            data_relocs.setdefault(name, relocs)
+            data_relocs.setdefault(key(name), {site: (key(ref), kind)
+                                               for site, (ref, kind) in relocs.items()})
 
     by_size = defaultdict(list)
     for rva, size in functions.items():
@@ -569,9 +625,13 @@ def derive(log=print, want_suggestions=False):
     va_at_units = {path.stem for path in image_shared_sources()} & {u["unit"] for u in units}
     own_function_claims = _own_function_claims(owned | va_at_units)
     va_at_claims = [claim for claim in own_function_claims if claim.unit in va_at_units]
+    def claim_key(claim):
+        return (f"{claim.name}{LOCAL}{claim.unit}" if (claim.unit, claim.name) in local
+                else claim.name)
+
     own_named = defaultdict(set)          # rva -> {name} the image's own VA() claims
     for claim in own_function_claims:
-        own_named[claim.rva].add(claim.name)
+        own_named[claim.rva].add(claim_key(claim))
 
     # Bodies that agree once relocation fields are masked but reference
     # different symbols are no identity: /OPT:ICF folds only equal referents,
@@ -609,16 +669,17 @@ def derive(log=print, want_suggestions=False):
             multiple.append((name, hits, body, relocs))
 
     for claim in own_function_claims:
-        if claim.name not in bodies or named_at[claim.rva] - {claim.name}:
+        name = claim_key(claim)
+        if name not in bodies or named_at[claim.rva] - {name}:
             continue
-        body, relocs = bodies[claim.name]
+        body, relocs = bodies[name]
         if functions.get(claim.rva) != len(body):
             continue
         mask = bytearray(len(body))
         for site in relocs:
             mask[site:site + 4] = b"\1\1\1\1"
         if all(m or a == b for a, b, m in zip(blob(claim.rva, len(body)), body, mask)):
-            propose(claim.name, claim.rva, "the image's own VA() claim, masked body equal")
+            propose(name, claim.rva, "the image's own VA() claim, masked body equal")
 
     # vtables named by RTTI
     def place_table(symbol, vt_rva, why):
@@ -1006,38 +1067,64 @@ def derive(log=print, want_suggestions=False):
                           lambda name: portable(name, definers[name][0]) in inline_comdats)
 
     rows, conflicts = [], 0
+    placed_keys = set()                   # the function keys rows name
+
+    def table_row(rva, size, kind, name, unit, why):
+        return (rva, size, kind, portable(plain(name), unit), unit,
+                linkage.get(name, "external"), portable(why, unit))
+
     for name, rvas in sorted(names.items()):
-        if len(rvas) != 1 or name in library_names:
+        if len(rvas) != 1 or plain(name) in library_names:
             conflicts += 1
             continue
         (rva,) = rvas
         if len(by_rva[rva]) != 1:
             if folded(rva) == name:
                 unit = copy_unit(name, rva)
-                why = (f"{evidence[(name, rva)]}; ICF-folded with "
-                       f"{len(by_rva[rva]) - 1} identical bodies")
-                rows.append((rva, functions[rva], "func", portable(name, unit), unit,
-                             portable(why, unit)))
+                others = len(by_rva[rva]) - 1
+                if len({plain(other) for other in by_rva[rva]}) == 1:
+                    why = (f"{evidence[(name, rva)]}; the linker shares it with "
+                           f"{others} same-named static(s)")
+                else:
+                    why = f"{evidence[(name, rva)]}; ICF-folded with {others} identical bodies"
+                rows.append(table_row(rva, functions[rva], "func", name, unit, why))
+                placed_keys.add(name)
             else:
                 conflicts += 1
             continue
         unit = copy_unit(name, rva)
-        rows.append((rva, functions[rva], "func", portable(name, unit), unit,
-                     portable(evidence[(name, rva)], unit)))
+        rows.append(table_row(rva, functions[rva], "func", name, unit, evidence[(name, rva)]))
+        placed_keys.add(name)
     placed_functions = len(rows)
     data_by_rva = defaultdict(set)
     for name, rvas in data_names.items():
         for rva in rvas:
             data_by_rva[rva].add(name)
+    referenced = {ref for name in placed_keys if name in bodies
+                  for ref, _kind in bodies[name][1].values()}
+
+    def data_label(at):
+        """The one name of a data address: its only name, or among names
+        that spell one decorated name (each unit's copy of a function-local
+        static reached through a shared function), the one a placed
+        function references, else the external one, else the first."""
+        if len(at) == 1:
+            return next(iter(at))
+        if len({plain(name) for name in at}) != 1:
+            return None
+        cited = sorted(name for name in at if name in referenced)
+        if len(cited) == 1:
+            return cited[0]
+        return min(at, key=lambda name: (LOCAL in name, name))
+
     data_conflicts = 0
     for name, rvas in sorted(data_names.items()):
-        if len(rvas) != 1 or len(data_by_rva[next(iter(rvas))]) != 1:
+        if len(rvas) != 1 or data_label(data_by_rva[next(iter(rvas))]) != name:
             data_conflicts += 1
             continue
         (rva,) = rvas
         unit, size, _text = data_definers[name]
-        rows.append((rva, size, "data", portable(name, unit), unit,
-                     portable(data_evidence[(name, rva)], unit)))
+        rows.append(table_row(rva, size, "data", name, unit, data_evidence[(name, rva)]))
     rows = clip_data_extents(rows)
     rows.sort()
     # An own unit's pick-any COMDAT is a header inline, a template or a
@@ -1080,8 +1167,8 @@ def render(rows) -> str:
              "# image's compile of its units and its census; regenerate after a",
              "# census, manifest or shared-source change.",
              *common.provenance("homm3.census.placements"), HEADER]
-    lines += [f"0x{rva:08x}\t0x{size:x}\t{kind}\t{name}\t{unit}\t{why}"
-              for rva, size, kind, name, unit, why in rows]
+    lines += [f"0x{rva:08x}\t0x{size:x}\t{kind}\t{name}\t{unit}\t{link}\t{why}"
+              for rva, size, kind, name, unit, link, why in rows]
     return "\n".join(lines) + "\n"
 
 
@@ -1110,7 +1197,7 @@ def main(argv=None) -> int:
 def _run(args) -> int:
     if args.suggest:
         _rows, suggestions = derive(want_suggestions=True)
-        for rva, size, kind, name, unit, why in suggestions:
+        for rva, size, kind, name, unit, _linkage, why in suggestions:
             if unit in args.suggest:
                 macro = "VA" if kind == "func" else "DATA"
                 spelled = f"0x{rva + common.IMAGE_BASE:08x}"

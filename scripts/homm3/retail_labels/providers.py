@@ -29,14 +29,16 @@ RELOC_EVIDENCE = common.HOMM3_DIR / _image_path("config/retail/reloc-evidence.ts
 
 def placements(path: Path | None = None) -> list[Claim]:
     """Another image's placed shared-unit functions (homm3.census.placements):
-    channel `placement`, the census extent, the defining unit. The game has
-    no such table (its addresses are spelled in source)."""
+    channel `placement`, the census extent, the defining unit and its
+    `linkage` (meta). The game has no such table (its addresses are spelled
+    in source)."""
     path = path or PLACEMENTS
     if not path.is_file():
         return []
     _b, _h, raw = read_tsv(path)
     return [Claim(int(r["rva"], 16), r["name"], r["kind"], "placement",
-                  int(r["size"], 16), r["unit"], {"evidence": r["evidence"]})
+                  int(r["size"], 16), r["unit"],
+                  {"evidence": r["evidence"], "linkage": r.get("linkage", "external")})
             for r in raw]
 
 

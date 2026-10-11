@@ -7,6 +7,18 @@ import unittest
 from homm3.retail_labels import providers
 
 
+class PlacementsTest(unittest.TestCase):
+    def test_rows_carry_their_definitions_linkage(self):
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'placements.tsv'
+            path.write_text('rva\tsize\tkind\tname\tunit\tlinkage\tevidence\n'
+                            '0x4ae20\t0x159\tfunc\t?f@@YAXXZ\tpalette\texternal\tx\n'
+                            '0x4bac0\t0x159\tfunc\t?f@@YAXXZ\tbitmap24\tinternal\ty\n')
+            claims = providers.placements(path)
+        self.assertEqual([(c.unit, c.meta['linkage']) for c in claims],
+                         [('palette', 'external'), ('bitmap24', 'internal')])
+
+
 class ZlibMapTest(unittest.TestCase):
     def claims(self, body):
         with TemporaryDirectory() as tmp:

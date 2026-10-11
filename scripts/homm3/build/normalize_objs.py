@@ -109,6 +109,56 @@ def _retail_symbol_rvas(path: Path = SYMBOL_NAMES) -> dict[str, tuple[int, str]]
     return result
 
 
+_LOCAL_FUNCTIONS: tuple[tuple, dict[str, dict[str, str]]] | None = None
+
+
+def _local_function_names(path: Path = SYMBOL_NAMES) -> dict[str, dict[str, str]]:
+    """{unit: {decorated name: model name}} of the internal-linkage functions
+    the label model spells with a `$RVA` discriminator (homm3.model: a
+    unit's `static` that another placed definition also names, bitmap24's
+    RGBToHSV beside palette's). Raw objects keep cl's spelling."""
+    global _LOCAL_FUNCTIONS
+    try:
+        stat = path.stat()
+    except OSError:
+        return {}
+    key = (str(path), stat.st_mtime_ns, stat.st_size)
+    if _LOCAL_FUNCTIONS is not None and _LOCAL_FUNCTIONS[0] == key:
+        return _LOCAL_FUNCTIONS[1]
+    from homm3.core.msvc_names import mask
+    result: dict[str, dict[str, str]] = {}
+    with path.open(newline="") as stream:
+        for row in csv.DictReader(line for line in stream if not line.startswith("#")):
+            name = row.get("name", "")
+            if row.get("kind") == "func" and row.get("unit") and "$RVA" in name:
+                names = result.setdefault(row["unit"], {})
+                plain = mask(name)
+                if names.setdefault(plain, name) != name:
+                    raise ValueError(f"ambiguous local function identity in "
+                                     f"{row['unit']}: {plain}")
+    _LOCAL_FUNCTIONS = (key, result)
+    return result
+
+
+def _canonicalize_local_functions(base_payload: bytes, names: dict[str, str]
+                                  ) -> tuple[bytes, int]:
+    """Spell the candidate's internal-linkage functions as the model does.
+
+    `names` maps cl's decorated name of a unit's `static` function to its
+    model name (`_local_function_names`); renaming the object's symbol
+    renames its definition and every reference to it. Only a static
+    (storage class 3) definition is renamed."""
+    if not names:
+        return base_payload, 0
+    coff = canon.CoffObject(base_payload)
+    renames = {symbol.index: names[symbol.name] for symbol in coff.symbols.values()
+               if symbol.storage_class == STATIC_STORAGE and symbol.section > 0
+               and symbol.name in names}
+    if not renames:
+        return base_payload, 0
+    return canon._rewrite_names(coff, renames), len(renames)
+
+
 def _retail_funclet_owners() -> dict[int, tuple[int, int]]:
     """Admitted cleanup RVA -> (parent RVA, independently admitted size)."""
     if not FUNCLETS.is_file() or not FUNCTIONS.is_file():
@@ -1893,6 +1943,9 @@ def canonicalize_pair(base_payload: bytes, target_payload: bytes, unit: str,
                       ) -> tuple[bytes, bytes, Counter]:
     """Apply the shared full-build and candidate-search paired passes."""
     counts: Counter = Counter()
+    base_payload, local_count = _canonicalize_local_functions(
+        base_payload, _local_function_names().get(unit, {}))
+    counts["local"] += local_count
     base_payload, oldnames = _resolve_oldnames(base_payload)
     counts["oldnames"] += oldnames
     base_payload, weak = _resolve_weak_defaults(base_payload, target_payload)
@@ -2128,6 +2181,7 @@ def normalize_all(units: set[str] | None = None) -> Counter:
           f"{counts['identity']} relocation(s) compared by proven address "
           f"{counts['fold']} proven-fold call(s) named "
           f"{counts['weak']} weak-external reference(s) bound to their default "
+          f"{counts['local']} local function(s) given model names "
           f"-> {OBJDIFF / 'normalized'}")
     counts.update(wrote=wrote, skipped=skipped)
     return counts
