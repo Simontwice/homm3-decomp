@@ -4173,7 +4173,7 @@ rva	size	kind	name	unit	evidence
 0x000c8f18	0x8	data	_?pNames@?1??initialize@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@SAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by 0x00032b40 at +0x2d
 0x000c8f20	0x8	data	_?pRandomName@?9??InitializeTownTypeTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x224
 0x000c8f28	0x1	data	_?$S515@?2??InitializeTownTypeTraitsTable@@YAXXZ@4EA	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0xf
-0x000c8f30	0x10	data	_rampartGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator1 at +0x2
+0x000c8f30	0xc	data	_rampartGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator1 at +0x2
 0x000c8f40	0x8	data	_randomGenerator3	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x8
 0x000c8f48	0x8	data	_randomGenerator4	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0xc
 0x000c8f50	0x1f0	data	?aInfernoBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aInfernoBuildingTraits at +0x8
@@ -4223,7 +4223,7 @@ rva	size	kind	name	unit	evidence
 0x000ca0f8	0x10	data	_infernoGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator1 at +0x2
 0x000ca108	0x10	data	_dungeonGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator6 at +0x2
 0x000ca118	0x10	data	_fortressGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator4 at +0x2
-0x000ca128	0xc	data	_confluxGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator1 at +0x2
+0x000ca128	0x10	data	_confluxGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator1 at +0x2
 0x000ca138	0x10	data	_strongholdGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator7 at +0x2
 0x000ca148	0x10	data	_dungeonGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$dungeonGenerator5 at +0x2
 0x000ca158	0x10	data	_confluxGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator2 at +0x2
@@ -4250,7 +4250,7 @@ rva	size	kind	name	unit	evidence
 0x000ca4f8	0x10	data	_rampartGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator2 at +0x2
 0x000ca508	0x10	data	_necropolisGenerator4	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator4 at +0x2
 0x000ca518	0x10	data	_towerGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator6 at +0x2
-0x000ca528	0xc	data	_necropolisGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator5 at +0x2
+0x000ca528	0x10	data	_necropolisGenerator5	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$necropolisGenerator5 at +0x2
 0x000ca538	0x1f0	data	?aRampartBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aRampartBuildingTraits at +0x8
 0x000ca728	0x8	data	_randomGenerator7	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x18
 0x000ca730	0x10	data	_towerGenerator3	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$towerGenerator3 at +0x2
