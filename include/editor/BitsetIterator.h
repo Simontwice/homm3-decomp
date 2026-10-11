@@ -39,6 +39,8 @@ public:
         return _m_pBits == other._m_pBits && _m_pos == other._m_pos;
     }
     bool operator!=(const TBitsetIterator& other) const { return !(*this == other); }
+    // The bit's position (the artifact editor's slot search, h3maped 0x40d794).
+    size_t getPos() const { return _m_pos; }
 
 private:
     std::bitset<N>* _m_pBits;

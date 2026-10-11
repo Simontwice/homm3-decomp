@@ -907,6 +907,9 @@ public:
 
     // Loki h3maped TTextResource::GetNumberOfStrings; the map editor's
     // direction names search ArrayTxt.txt with it.
+    // The DC declaration survives, but no body source location does.
+    // Header ownership is provisional; no source order is claimed.
+    // @dc-declaration-only: 0x19ea
     int GetNumberOfStrings() const { return Text.size(); }
 
 private:

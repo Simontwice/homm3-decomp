@@ -44,11 +44,13 @@
 #include "editor/MiniMapWnd.h"
 #include "editor/MonsterPropsSheet.h"
 #include "editor/ObjectSpecializations.h"
+#include "editor/QuestGuardPropsDlg.h"
 #include "editor/random_object_placer.h"
 #include "editor/RandomGeneratorPropsDlg.h"
 #include "editor/resource.h"
 #include "editor/ResourcePropsSheet.h"
 #include "editor/ScholarPropsDlg.h"
+#include "editor/SeersHutPropsDlg.h"
 #include "editor/ShrinePropsDlg.h"
 #include "editor/SignPropsDlg.h"
 #include "editor/SpellScrollPropsSheet.h"
@@ -1060,6 +1062,14 @@ bool TMapView::onEditProperties(TScholar* pObj, TGameMap* pMap, bool bSecondLaye
     return dlg.wasModified();
 }
 
+VA(0x00481d2f, 0x5e)
+bool TMapView::onEditProperties(TSeersHut* pObj, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
+{
+    TSeersHutPropsDlg dlg(this, pMap, bSecondLayer, objID);
+    dlg.DoModal();
+    return dlg.wasModified();
+}
+
 VA(0x00481d8d, 0x55)
 bool TMapView::onEditProperties(THolyGrail* pObj, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
@@ -1096,6 +1106,14 @@ VA(0x00481f2e, 0x49)
 bool TMapView::onEditProperties(TRandomlyLeveledGenerator* pObj, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
 {
     TRandomlyLeveledGeneratorPropsDlg dlg(this, pObj);
+    dlg.DoModal();
+    return dlg.wasModified();
+}
+
+VA(0x00481f77, 0x5e)
+bool TMapView::onEditProperties(TQuestGuard* pObj, TGameMap* pMap, bool bSecondLayer, unsigned int objID)
+{
+    TQuestGuardPropsDlg dlg(this, pMap, bSecondLayer, objID);
     dlg.DoModal();
     return dlg.wasModified();
 }

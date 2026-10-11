@@ -50,13 +50,10 @@ public:
 class TQuestAchieveExperienceLevelDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_EXPERIENCE_LEVEL, s_kMaxLevel = 99 };
-
-    VA(0x00410f32, 0x70)
     TQuestAchieveExperienceLevelDlg(TClient* pClient, EGameVersion mapVersion)
         : TQuestTypeDlg(pClient, false), _m_mapVersion(mapVersion) {}
 
     virtual void OnOK();
-    VA(0x00410fa2, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual bool isAvailable() const { return _m_mapVersion >= GAME_VERSION_AB; }
     virtual std::auto_ptr<TQuest> getQuest() const;
@@ -81,13 +78,10 @@ private:
 class TQuestAchievePrimarySkillLevelDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_PRIMARY_SKILL_LEVEL, s_kMaxLevel = kMaxPrimarySkillLevel };
-
-    VA(0x00411016, 0x6f)
     TQuestAchievePrimarySkillLevelDlg(TClient* pClient, EGameVersion mapVersion)
         : TQuestTypeDlg(pClient, false), _m_mapVersion(mapVersion), _m_bCreated(false) {}
 
     virtual void OnOK() {}
-    VA(0x00411085, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual bool isAvailable() const { return _m_mapVersion >= GAME_VERSION_AB; }
     virtual std::auto_ptr<TQuest> getQuest() const;
@@ -122,8 +116,6 @@ private:
 class TQuestDefeatHeroDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_DEFEAT_HERO };
-
-    VA(0x00411170, 0x59)
     TQuestDefeatHeroDlg(TClient* pClient, const TGameMap* pMap) : TQuestTypeDlg(pClient, false), _m_pMap(pMap) {}
 
     virtual void OnOK()
@@ -131,7 +123,6 @@ public:
         CDialog::OnOK();
         _m_heroLinkID = _m_heroCombo.GetItemData(_m_heroCombo.GetCurSel());
     }
-    VA(0x004111c9, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual bool isAvailable() const;
     virtual std::auto_ptr<TQuest> getQuest() const;
@@ -160,12 +151,9 @@ private:
 class TQuestDefeatMonsterDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_DEFEAT_MONSTER };
-
-    VA(0x0041122b, 0x59)
     TQuestDefeatMonsterDlg(TClient* pClient, const TGameMap* pMap) : TQuestTypeDlg(pClient, false), _m_pMap(pMap) {}
 
     virtual void OnOK();
-    VA(0x00411284, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual bool isAvailable() const
     {
@@ -197,13 +185,10 @@ private:
 class TQuestBringArtifactsDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_BRING_ARTIFACTS };
-
-    VA(0x004112e6, 0xc7)
     TQuestBringArtifactsDlg(TClient* pClient, EGameVersion mapVersion)
         : TQuestTypeDlg(pClient, false), _m_mapVersion(mapVersion) {}
 
     virtual void OnOK();
-    VA(0x004113b2, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TQuest> getQuest() const;
     void setQuest(const TQuestBringArtifacts& quest);
@@ -242,7 +227,6 @@ public:
     TQuestBringCreaturesDlg(TClient* pClient, EGameVersion mapVersion);
 
     virtual void OnOK();
-    VA(0x0040fbc9, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual bool isAvailable() const { return _m_mapVersion >= GAME_VERSION_AB; }
     virtual std::auto_ptr<TQuest> getQuest() const;
@@ -276,15 +260,11 @@ private:
 class TQuestBringResourcesDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_BRING_RESOURCES };
-
-    VA(0x0041145f, 0x72)
     TQuestBringResourcesDlg(TClient* pClient, EGameVersion mapVersion)
         : TQuestTypeDlg(pClient, false), _m_mapVersion(mapVersion), _m_bCreated(false) {}
 
     virtual void OnOK() {}
-    VA(0x004114d1, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
-    VA(0x004114e2, 0xa)
     virtual bool isAvailable() const { return _m_mapVersion >= GAME_VERSION_AB; }
     virtual std::auto_ptr<TQuest> getQuest() const;
     void setQuest(const TQuestBringResources& quest);
@@ -321,14 +301,10 @@ private:
 class TQuestBeASpecificHeroDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_BE_A_SPECIFIC_HERO };
-
-    VA(0x004115cc, 0x6f)
     TQuestBeASpecificHeroDlg(TClient* pClient, const TGameMap* pMap) : TQuestTypeDlg(pClient, true), _m_pMap(pMap) {}
 
     virtual void OnOK();
-    VA(0x0041163b, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
-    VA(0x0041164c, 0x13)
     virtual bool isAvailable() const { return _m_pMap->getVersion() >= GAME_VERSION_SOD; }
     virtual std::auto_ptr<TQuest> getQuest() const;
     void setQuest(const TQuestBeASpecificHero& quest);
@@ -350,8 +326,6 @@ private:
 class TQuestBelongToASpecificPlayerDlg : public TQuestTypeDlg {
 public:
     enum { IDD = IDD_QUEST_BELONG_TO_A_SPECIFIC_PLAYER };
-
-    VA(0x004116c2, 0x59)
     TQuestBelongToASpecificPlayerDlg(TClient* pClient, EGameVersion mapVersion)
         : TQuestTypeDlg(pClient, true), _m_mapVersion(mapVersion) {}
 
@@ -360,9 +334,7 @@ public:
         CDialog::OnOK();
         _m_player = TPlayer(_m_playerCombo.GetItemData(_m_playerCombo.GetCurSel()));
     }
-    VA(0x0041171b, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
-    VA(0x0041172c, 0xa)
     virtual bool isAvailable() const { return _m_mapVersion >= GAME_VERSION_SOD; }
     virtual std::auto_ptr<TQuest> getQuest() const;
     void setQuest(const TQuestBelongToASpecificPlayer& quest);

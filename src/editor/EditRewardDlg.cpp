@@ -55,7 +55,6 @@ public:
     enum { IDD = IDD_REWARD_EXPERIENCE, s_kMaxBonus = 99999999 };
 
     virtual void OnOK();
-    VA(0x00414ada, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardExperience& reward);
@@ -78,7 +77,6 @@ public:
     enum { IDD = IDD_REWARD_MANA, s_kMaxBonus = 999 };
 
     virtual void OnOK();
-    VA(0x00414b90, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardMana& reward);
@@ -103,7 +101,6 @@ public:
     enum { IDD = IDD_REWARD_MORALE };
 
     virtual void OnOK();
-    VA(0x00414a5a, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardMorale& reward);
@@ -123,7 +120,6 @@ public:
     enum { IDD = IDD_REWARD_LUCK };
 
     virtual void OnOK();
-    VA(0x00414a6b, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardLuck& reward);
@@ -143,7 +139,6 @@ public:
     enum { IDD = IDD_REWARD_RESOURCE };
 
     virtual void OnOK();
-    VA(0x00414c5d, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardResource& reward);
@@ -168,7 +163,6 @@ public:
     enum { IDD = IDD_REWARD_PRIMARY_SKILL, s_kMaxBonus = 99 };
 
     virtual void OnOK();
-    VA(0x00414d39, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardPrimarySkill& reward);
@@ -193,7 +187,6 @@ public:
     enum { IDD = IDD_REWARD_SECONDARY_SKILL };
 
     virtual void OnOK();
-    VA(0x00414dfd, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardSecondarySkill& reward);
@@ -217,7 +210,6 @@ public:
     TRewardArtifactDlg(EGameVersion mapVersion);
 
     virtual void OnOK();
-    VA(0x00413ffc, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardArtifact& reward);
@@ -238,7 +230,6 @@ public:
     enum { IDD = IDD_REWARD_SPELL };
 
     virtual void OnOK();
-    VA(0x00414e9c, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardSpell& reward);
@@ -260,7 +251,6 @@ public:
     TRewardCreatureDlg(EGameVersion mapVersion);
 
     virtual void OnOK();
-    VA(0x004144ed, 0x11)
     virtual BOOL create(CWnd* pParent) { return Create(IDD, pParent); }
     virtual std::auto_ptr<TSeersHut::TReward> getReward() const;
     void setReward(const TSeersHut::TRewardCreature& reward);
@@ -861,7 +851,7 @@ static void insertCreature(CComboBox& combo, TCreatureType creature)
     combo.SetItemData(index, creature);
 }
 
-VA(0x00414463, 0x88)
+VA(0x00414463, 0x8a)
 TRewardCreatureDlg::TRewardCreatureDlg(EGameVersion mapVersion) : _m_mapVersion(mapVersion)
 {
 }

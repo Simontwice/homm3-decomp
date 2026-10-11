@@ -745,6 +745,13 @@ enum {
     IDC_QUEST_PLAYER_STATIC = 1959
 };
 
+// The artifact editor (EditArtifactDlg.cpp).
+enum {
+    IDD_EDIT_ARTIFACT = 178,
+    IDC_WHERE_COMBO = 1133,
+    IDC_EQUIP_WHERE_STATIC = 1668
+};
+
 // The reward editor and its pages (EditRewardDlg.cpp): a radio per reward
 // kind and the kinds' pages over the frame. The creature and resource
 // pages share the quest pages' type and quantity statics.

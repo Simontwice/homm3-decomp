@@ -323,6 +323,19 @@ DIBSection	?create@?$TBitmapBase@G@@QAEXII@Z	100.0000	100.0000	100.0000	0xd43d	t
 DIBSection	?destroy@?$TBitmapBase@G@@QAEXXZ	100.0000	100.0000	100.0000	0xd486	tokens1:f296ddcb5d2a
 DIBSection	?free@?$TBitmap@GK@@UAEXPAG@Z	100.0000	100.0000	100.0000	0xd52a	tokens1:34616bc6ba23
 DIBSection	?free@T16bppDIBSection@@UAEXPAG@Z	100.0000	100.0000	100.0000	0xd37d	tokens1:5111b89ec100
+EditArtifactDlg	??0TEditArtifactDlg@@QAE@PAVCWnd@@ABV?$bitset@$0BD@@std@@ABV?$TArray@H$0P@@@_NW4EGameVersion@@@Z	100.0000	100.0000	100.0000	0xd6d5	tokens1:d81886ba6a59
+EditArtifactDlg	??0TEditArtifactDlg@@QAE@PAVCWnd@@ABV?$bitset@$0BD@@std@@ABV?$TArray@H$0P@@@_NW4EGameVersion@@W4TArtifact@@W4TArtifactSlot@@@Z	100.0000	100.0000	100.0000	0xd7cf	tokens1:98a2babf01a8
+EditArtifactDlg	??1TEditArtifactDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x562b	-
+EditArtifactDlg	??_GTEditArtifactDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xd7b3	-
+EditArtifactDlg	?DoDataExchange@TEditArtifactDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xdac9	tokens1:4ac6ee34d304
+EditArtifactDlg	?GetMessageMap@TEditArtifactDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xdb06	tokens1:0cb4e65df59b
+EditArtifactDlg	?OnCreate@TEditArtifactDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0xdb0c	tokens1:3548869b373b
+EditArtifactDlg	?OnInitDialog@TEditArtifactDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xdb31	tokens1:7091fc710c6a
+EditArtifactDlg	?OnSelChangeArtifactCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdd12	tokens1:57ce982aa9f4
+EditArtifactDlg	?OnSelChangeWhereCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdcd7	tokens1:32cc2a045a1a
+EditArtifactDlg	?_isAllowed@TEditArtifactDlg@@ABE_NW4TArtifact@@W4TArtifactSlot@@@Z	67.6593	67.6593	67.6593	0xd9ae	tokens1:49bae48ff87b
+EditArtifactDlg	?_setArtifacts@TEditArtifactDlg@@AAEXXZ	97.6364	97.6364	97.6364	0xd87d	tokens1:6fae8de24f42
+EditArtifactDlg	?find_if@std@@YA?AV?$TBitsetIterator@$0BD@@@V2@0V?$binder2nd@U?$not_equal_to@_N@std@@@1@@Z	42.6191	42.6191	42.6191	0xdd78	-
 EditCreatureStackDlg	??0TEditCreatureStackDlg@@QAE@PAVCWnd@@ABVTCreatureStack@@W4EGameVersion@@ABV?$bitset@$0JB@@std@@@Z	89.6111	89.6111	89.6111	0xdfe7	tokens1:a8653bba0727
 EditCreatureStackDlg	??0TEditCreatureStackDlg@@QAE@PAVCWnd@@W4EGameVersion@@ABV?$bitset@$0JB@@std@@@Z	100.0000	100.0000	100.0000	0xdee8	tokens1:6fd685e40648
 EditCreatureStackDlg	??Breference@?$bitset@$0JB@@std@@QBE_NXZ	100.0000	100.0000	100.0000	0xe41f	-
@@ -337,6 +350,282 @@ EditCreatureStackDlg	?_Xran@?$bitset@$0JB@@std@@ABEXXZ	100.0000	100.0000	100.000
 EditCreatureStackDlg	?insertCreatureType@@YAXAAVCComboBox@@W4TCreatureType@@@Z	100.0000	100.0000	100.0000	0xde75	tokens1:d2c47bdf6fb2
 EditCreatureStackDlg	?isCreatureTypeBefore@@YA_NW4TCreatureType@@0@Z	100.0000	100.0000	100.0000	0xddf5	tokens1:247d1e125913
 EditCreatureStackDlg	?set@?$bitset@$0JB@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0xe44e	-
+EditQuestDlg	??0TEditQuestDlg@@QAE@PAVCWnd@@PBVTQuest@@PBVTGameMap@@@Z	100.0000	100.0000	100.0000	0x11787	tokens1:aac777691307
+EditQuestDlg	??0TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x10f32	tokens1:86fbbd6dcb97
+EditQuestDlg	??0TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x11016	tokens1:620aff135584
+EditQuestDlg	??0TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@PBVTGameMap@@@Z	100.0000	100.0000	100.0000	0x115cc	tokens1:e5570806abd0
+EditQuestDlg	??0TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x116c2	tokens1:e9f8afdd4dc3
+EditQuestDlg	??0TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x112e6	tokens1:c3e329f512c1
+EditQuestDlg	??0TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0xfac2	tokens1:00b26a29d179
+EditQuestDlg	??0TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x1145f	tokens1:ce74f6d58926
+EditQuestDlg	??0TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@PBVTGameMap@@@Z	100.0000	100.0000	100.0000	0x11170	tokens1:cea00bc22759
+EditQuestDlg	??0TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@PAVTClient@TQuestTypeDlg@@PBVTGameMap@@@Z	100.0000	100.0000	100.0000	0x1122b	tokens1:e2180a8f5861
+EditQuestDlg	??0_TPages@TEditQuestDlg@@QAE@PAVTClient@TQuestTypeDlg@@PBVTGameMap@@@Z	100.0000	100.0000	100.0000	0x10dc9	tokens1:3ef2c4142134
+EditQuestDlg	??0_TResourceControls@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@XZ	100.0000	100.0000	100.0000	0x11508	-
+EditQuestDlg	??0_TSkillControls@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@XZ	100.0000	100.0000	100.0000	0x110b2	-
+EditQuestDlg	??1?$auto_ptr@U_TPages@TEditQuestDlg@@@std@@QAE@XZ	100.0000	100.0000	100.0000	0x120cd	-
+EditQuestDlg	??1TEditQuestDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x11935	tokens1:f15d5d579985
+EditQuestDlg	??1TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x10fcf	-
+EditQuestDlg	??1TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x11128	-
+EditQuestDlg	??1TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x1167b	-
+EditQuestDlg	??1TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x11752	-
+EditQuestDlg	??1TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x113df	-
+EditQuestDlg	??1TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0xfbfb	-
+EditQuestDlg	??1TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x1157e	-
+EditQuestDlg	??1TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x111f6	-
+EditQuestDlg	??1TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAE@XZ	100.0000	100.0000	100.0000	0x112b1	-
+EditQuestDlg	??1_TPages@TEditQuestDlg@@QAE@XZ	100.0000	100.0000	100.0000	0x120ea	-
+EditQuestDlg	??1_TResourceControls@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@XZ	100.0000	100.0000	100.0000	0x11549	-
+EditQuestDlg	??1_TSkillControls@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAE@XZ	100.0000	100.0000	100.0000	0x110f3	-
+EditQuestDlg	??4?$_Tree@W4TCreatureType@@U?$pair@$$CBW4TCreatureType@@H@std@@U_Kfn@?$map@W4TCreatureType@@HU?$less@W4TCreatureType@@@std@@V?$allocator@H@3@@3@U?$less@W4TCreatureType@@@3@V?$allocator@H@3@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0x121e5	-
+EditQuestDlg	??4?$auto_ptr@U_TPages@TEditQuestDlg@@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0x12082	-
+EditQuestDlg	??_GTEditQuestDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x11919	-
+EditQuestDlg	??_GTQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x10fb3	-
+EditQuestDlg	??_GTQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x11096	-
+EditQuestDlg	??_GTQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x1165f	-
+EditQuestDlg	??_GTQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x11736	-
+EditQuestDlg	??_GTQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x113c3	-
+EditQuestDlg	??_GTQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xfbda	-
+EditQuestDlg	??_GTQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x114ec	-
+EditQuestDlg	??_GTQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x111da	-
+EditQuestDlg	??_GTQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x11295	-
+EditQuestDlg	?DoDataExchange@TEditQuestDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x11bca	tokens1:06ea5f747293
+EditQuestDlg	?DoDataExchange@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xe82e	tokens1:0264efd74bfe
+EditQuestDlg	?DoDataExchange@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xebdf	tokens1:11a07c8e3371
+EditQuestDlg	?DoDataExchange@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x108f8	tokens1:dc0aedddd14c
+EditQuestDlg	?DoDataExchange@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x10d31	tokens1:d784ab26ad54
+EditQuestDlg	?DoDataExchange@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xf5e4	tokens1:b15228d2a146
+EditQuestDlg	?DoDataExchange@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xfe1c	tokens1:41f8a68e50ae
+EditQuestDlg	?DoDataExchange@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x1058b	tokens1:f5311b2ba4a2
+EditQuestDlg	?DoDataExchange@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xefbf	tokens1:407dbb0f3a9c
+EditQuestDlg	?DoDataExchange@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xf2d2	tokens1:8c1e7210025f
+EditQuestDlg	?GetMessageMap@TEditQuestDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x11c19	tokens1:8304fe2b80fa
+EditQuestDlg	?GetMessageMap@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xe739	tokens1:eaa7aa7fc2a7
+EditQuestDlg	?GetMessageMap@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xea99	tokens1:24339fd5deca
+EditQuestDlg	?GetMessageMap@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x107af	tokens1:66bba6c779b7
+EditQuestDlg	?GetMessageMap@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xf450	tokens1:4274f87c0d41
+EditQuestDlg	?GetMessageMap@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xfabc	tokens1:6c2a7fb561de
+EditQuestDlg	?GetMessageMap@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x10442	tokens1:5a6f80ad13ac
+EditQuestDlg	?OnAddButton@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xf7ac	tokens1:ccd235a8d8f1
+EditQuestDlg	?OnAddButton@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xfff3	tokens1:f7d40ea4139e
+EditQuestDlg	?OnChangeAttackEdit@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xea79	tokens1:5d40244412a8
+EditQuestDlg	?OnChangeDefenseEdit@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xea81	tokens1:71a72d99f515
+EditQuestDlg	?OnChangeKnowledgeEdit@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xea91	tokens1:464e036bbc0e
+EditQuestDlg	?OnChangeLevelEdit@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xe950	tokens1:99f741589585
+EditQuestDlg	?OnChangeRes1Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1040a	tokens1:c0e2b9abecc7
+EditQuestDlg	?OnChangeRes2Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10412	tokens1:75c1104d321c
+EditQuestDlg	?OnChangeRes3Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1041a	tokens1:6f1245c9081e
+EditQuestDlg	?OnChangeRes4Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10422	tokens1:e18da82187aa
+EditQuestDlg	?OnChangeRes5Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1042a	tokens1:635255eb901b
+EditQuestDlg	?OnChangeRes6Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10432	tokens1:b88edd1030b9
+EditQuestDlg	?OnChangeRes7Edit@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1043a	tokens1:105b71e7fad9
+EditQuestDlg	?OnChangeSpellPowerEdit@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xea89	tokens1:d76f0a65a55c
+EditQuestDlg	?OnCreate@TEditQuestDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x11c1f	tokens1:7b78b0db96ed
+EditQuestDlg	?OnDblclkList@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xfa4f	tokens1:491e24fe5561
+EditQuestDlg	?OnDblclkList@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1039d	tokens1:5e89d63b0ca8
+EditQuestDlg	?OnDestroy@TEditQuestDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x11c6d	tokens1:b674cfd361f4
+EditQuestDlg	?OnDestroy@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xec2c	tokens1:cc8620b72bd5
+EditQuestDlg	?OnDestroy@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x105d8	tokens1:afd7adc5523a
+EditQuestDlg	?OnEditButton@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xf887	tokens1:1cc711cc48fa
+EditQuestDlg	?OnEditButton@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10104	tokens1:89bc306f2602
+EditQuestDlg	?OnInitDialog@TEditQuestDlg@@MAEHXZ	100.0000	100.0000	100.0000	0x11ca0	tokens1:bd091732da98
+EditQuestDlg	?OnInitDialog@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xe85c	tokens1:30b538cdd69a
+EditQuestDlg	?OnInitDialog@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xec38	tokens1:2b29fa7ad979
+EditQuestDlg	?OnInitDialog@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0x10926	tokens1:4072b34edd73
+EditQuestDlg	?OnInitDialog@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0x10d46	tokens1:183288df2c2c
+EditQuestDlg	?OnInitDialog@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xf648	tokens1:6a76ead9cb42
+EditQuestDlg	?OnInitDialog@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xfe83	tokens1:a52715898bfd
+EditQuestDlg	?OnInitDialog@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0x105e4	tokens1:9c293c75a6db
+EditQuestDlg	?OnInitDialog@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xefd4	tokens1:33569e89a006
+EditQuestDlg	?OnInitDialog@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@MAEHXZ	100.0000	100.0000	100.0000	0xf2e7	tokens1:7a074c299c00
+EditQuestDlg	?OnKillFocusLevelEdit@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xe9c9	tokens1:20f976a14a64
+EditQuestDlg	?OnOK@TEditQuestDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x11ef5	tokens1:661585d8641c
+EditQuestDlg	?OnOK@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEXXZ	100.0000	100.0000	100.0000	0xe8d2	tokens1:d0c582535c24
+EditQuestDlg	?OnOK@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEXXZ	100.0000	100.0000	100.0000	0x10ae8	tokens1:058a03e2a12f
+EditQuestDlg	?OnOK@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEXXZ	100.0000	100.0000	100.0000	0xf73c	tokens1:2fa0d85a858d
+EditQuestDlg	?OnOK@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEXXZ	100.0000	100.0000	100.0000	0xff7f	tokens1:2c48b6240a91
+EditQuestDlg	?OnOK@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEXXZ	100.0000	100.0000	100.0000	0xf41a	tokens1:ba30799a193f
+EditQuestDlg	?OnQuestTypeRadio@TEditQuestDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x11f46	tokens1:7140e0c2fdc1
+EditQuestDlg	?OnRemoveAllButton@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xf9fa	tokens1:285263db50f3
+EditQuestDlg	?OnRemoveAllButton@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1030a	tokens1:e58f38858c78
+EditQuestDlg	?OnRemoveButton@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0xf963	tokens1:7bb80f8cf7b3
+EditQuestDlg	?OnRemoveButton@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10256	tokens1:bdfef3844358
+EditQuestDlg	?OnSelCancelList@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1037e	tokens1:264e6220b17e
+EditQuestDlg	?OnSelChangeClassCombo@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x10b1e	tokens1:c208d3466dd0
+EditQuestDlg	?OnSelChangeList@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEXXZ	100.0000	100.0000	100.0000	0x1035f	tokens1:f5d7aa89a9ae
+EditQuestDlg	?OnVKeyToItem@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEHIPAVCListBox@@I@Z	100.0000	100.0000	100.0000	0xfa75	tokens1:40f6b08eddfc
+EditQuestDlg	?OnVKeyToItem@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@IAEHIPAVCListBox@@I@Z	100.0000	100.0000	100.0000	0x103c3	tokens1:e554deae3946
+EditQuestDlg	?_addHero@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@AAEXPBVTHero@@_NABV?$TPoint@I@@@Z	100.0000	100.0000	100.0000	0xee7b	tokens1:a4be2884094c
+EditQuestDlg	?_addMonster@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@AAEXPBVTMonster@@_NABV?$TPoint@I@@@Z	100.0000	100.0000	100.0000	0xf213	tokens1:1964883d1bd2
+EditQuestDlg	?_onLevelChange@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@AAEXH@Z	100.0000	100.0000	100.0000	0xed07	tokens1:ad322941976b
+EditQuestDlg	?_onQuantityChange@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@AAEXH@Z	100.0000	100.0000	100.0000	0x10703	tokens1:858d030a371e
+EditQuestDlg	?_setValid@TQuestTypeDlg@@IAEX_N@Z	100.0000	100.0000	100.0000	0xe6c9	tokens1:75fb0027de8d
+EditQuestDlg	?_showPage@TEditQuestDlg@@AAEXH@Z	100.0000	100.0000	100.0000	0x11a33	tokens1:9432294f029c
+EditQuestDlg	?clear@?$_Tree@W4TArtifact@@W41@U_Kfn@?$multiset@W4TArtifact@@U?$less@W4TArtifact@@@std@@V?$allocator@W4TArtifact@@@3@@std@@U?$less@W4TArtifact@@@4@V?$allocator@W4TArtifact@@@4@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x121d1	-
+EditQuestDlg	?clear@?$_Tree@W4TCreatureType@@U?$pair@$$CBW4TCreatureType@@H@std@@U_Kfn@?$map@W4TCreatureType@@HU?$less@W4TCreatureType@@@std@@V?$allocator@H@3@@3@U?$less@W4TCreatureType@@@3@V?$allocator@H@3@@std@@QAEXXZ	100.0000	100.0000	100.0000	0x122c3	-
+EditQuestDlg	?create@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x10fa2	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x11085	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x1163b	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x1171b	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x113b2	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0xfbc9	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x114d1	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x111c9	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x11284	tokens1:5884e3cc2da5
+EditQuestDlg	?create@TQuestNoneDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0xe6e5	tokens1:3541e60f4fc2
+EditQuestDlg	?getDigits@?$TDigits@$0BEH@@@SAIXZ	100.0000	100.0000	100.0000	0x3170	-
+EditQuestDlg	?getDigits@?$TDigits@$0HPPP@@@SAIXZ	100.0000	100.0000	100.0000	0xbcf0	-
+EditQuestDlg	?getQuest@TEditQuestDlg@@QAE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0x119b8	tokens1:99437bfa1796
+EditQuestDlg	?getQuest@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xe791	tokens1:1a5a11ac5280
+EditQuestDlg	?getQuest@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xeb41	tokens1:f4614d0916a6
+EditQuestDlg	?getQuest@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0x1085b	tokens1:a28c84080f5b
+EditQuestDlg	?getQuest@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0x10c94	tokens1:f348fbeff2c0
+EditQuestDlg	?getQuest@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xf546	tokens1:a170940e94e7
+EditQuestDlg	?getQuest@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xfd7e	tokens1:373aab0c9ce4
+EditQuestDlg	?getQuest@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0x104ed	tokens1:1748882e3713
+EditQuestDlg	?getQuest@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xedde	tokens1:6b9ff4b52ca3
+EditQuestDlg	?getQuest@TQuestDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0xf176	tokens1:6c1809824d64
+EditQuestDlg	?getQuest@TQuestNoneDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE?AV?$auto_ptr@VTQuest@@@std@@XZ	100.0000	100.0000	100.0000	0x7b634	-
+EditQuestDlg	?isAvailable@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE_NXZ	100.0000	100.0000	100.0000	0x114e2	tokens1:23db290a1514
+EditQuestDlg	?isAvailable@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE_NXZ	100.0000	100.0000	100.0000	0x1164c	tokens1:d266cdbf3520
+EditQuestDlg	?isAvailable@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE_NXZ	100.0000	100.0000	100.0000	0x1172c	tokens1:982129bc1394
+EditQuestDlg	?isAvailable@TQuestDefeatHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@UBE_NXZ	100.0000	100.0000	100.0000	0xedac	tokens1:3f8682c31b59
+EditQuestDlg	?onValidityChanged@TEditQuestDlg@@MAEXPAVTQuestTypeDlg@@_N@Z	100.0000	100.0000	100.0000	0x11f9f	tokens1:26e1702098f3
+EditQuestDlg	?setQuest@TQuestAchieveExperienceLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestAchieveExperienceLevel@@@Z	100.0000	100.0000	100.0000	0xe73f	tokens1:33c2cc91464e
+EditQuestDlg	?setQuest@TQuestAchievePrimarySkillLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestAchievePrimarySkillLevel@@@Z	100.0000	100.0000	100.0000	0xea9f	tokens1:f77e7017be8a
+EditQuestDlg	?setQuest@TQuestBeASpecificHeroDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestBeASpecificHero@@@Z	100.0000	100.0000	100.0000	0x107b5	tokens1:68bd77eddec0
+EditQuestDlg	?setQuest@TQuestBelongToASpecificPlayerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestBelongToASpecificPlayer@@@Z	100.0000	100.0000	100.0000	0x10c43	tokens1:89fc8a5d235d
+EditQuestDlg	?setQuest@TQuestBringArtifactsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestBringArtifacts@@@Z	100.0000	100.0000	100.0000	0xf456	tokens1:000bfeef08f2
+EditQuestDlg	?setQuest@TQuestBringCreaturesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestBringCreatures@@@Z	100.0000	100.0000	100.0000	0xfc7e	tokens1:14a194b88b39
+EditQuestDlg	?setQuest@TQuestBringResourcesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditQuestDlg.cpp2607015843@@QAEXABVTQuestBringResources@@@Z	100.0000	100.0000	100.0000	0x10448	tokens1:3bf85388ee7d
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestAchieveExperienceLevel@@@Z	100.0000	100.0000	100.0000	0x11a92	tokens1:30c424be741b
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestAchievePrimarySkillLevel@@@Z	100.0000	100.0000	100.0000	0x11ab2	tokens1:c1a5ae1a3fef
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestBeASpecificHero@@@Z	100.0000	100.0000	100.0000	0x11b84	tokens1:c75adecb6943
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestBelongToASpecificPlayer@@@Z	100.0000	100.0000	100.0000	0x11ba7	tokens1:703645449cf0
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestBringArtifacts@@@Z	100.0000	100.0000	100.0000	0x11b1b	tokens1:cf4e815960d4
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestBringCreatures@@@Z	100.0000	100.0000	100.0000	0x11b3e	tokens1:ec082d2d6399
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestBringResources@@@Z	100.0000	100.0000	100.0000	0x11b61	tokens1:ff54f41d9bd1
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestDefeatHero@@@Z	100.0000	100.0000	100.0000	0x11ad5	tokens1:3a95c939ddbb
+EditQuestDlg	?visit@TEditQuestDlg@@MAEXABVTQuestDefeatMonster@@@Z	100.0000	100.0000	100.0000	0x11af8	tokens1:3529d1b49a8f
+EditRewardDlg	??0TEditRewardDlg@@QAE@PAVCWnd@@PBVTReward@TSeersHut@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x14f8a	tokens1:60b9bb9080f3
+EditRewardDlg	??0TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x13fa8	tokens1:a6a1b15274b5
+EditRewardDlg	??0TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x14463	tokens1:c6f1f46d574d
+EditRewardDlg	??0TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14a7c	-
+EditRewardDlg	??0TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14b32	-
+EditRewardDlg	??0TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14cc4	-
+EditRewardDlg	??0TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14be8	-
+EditRewardDlg	??0TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14da0	-
+EditRewardDlg	??0TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAE@XZ	100.0000	100.0000	100.0000	0x14e55	-
+EditRewardDlg	??0_TPages@TEditRewardDlg@@QAE@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x14911	tokens1:36fc1e326d93
+EditRewardDlg	??1?$auto_ptr@U_TPages@TEditRewardDlg@@@std@@QAE@XZ	100.0000	100.0000	100.0000	0x1566a	-
+EditRewardDlg	??1TEditRewardDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x150ca	tokens1:750e646353f8
+EditRewardDlg	??1TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14029	-
+EditRewardDlg	??1TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x1451a	-
+EditRewardDlg	??1TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14aeb	-
+EditRewardDlg	??1TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14ba1	-
+EditRewardDlg	??1TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14d4a	-
+EditRewardDlg	??1TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14c6e	-
+EditRewardDlg	??1TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14e0e	-
+EditRewardDlg	??1TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAE@XZ	100.0000	100.0000	100.0000	0x14ead	-
+EditRewardDlg	??1_TPages@TEditRewardDlg@@QAE@XZ	100.0000	100.0000	100.0000	0x15687	-
+EditRewardDlg	??4?$auto_ptr@U_TPages@TEditRewardDlg@@@std@@QAEAAV01@ABV01@@Z	100.0000	100.0000	100.0000	0x1561f	-
+EditRewardDlg	??_GTEditRewardDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x150ae	-
+EditRewardDlg	??_GTRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x1400d	-
+EditRewardDlg	??_GTRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x144fe	-
+EditRewardDlg	??_GTRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14ee2	-
+EditRewardDlg	??_GTRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14efe	-
+EditRewardDlg	??_GTRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14f36	-
+EditRewardDlg	??_GTRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14f1a	-
+EditRewardDlg	??_GTRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14f52	-
+EditRewardDlg	??_GTRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x14f6e	-
+EditRewardDlg	?DoDataExchange@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x1413a	tokens1:9b878da56fae
+EditRewardDlg	?DoDataExchange@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x1469b	tokens1:08fe5914d83b
+EditRewardDlg	?DoDataExchange@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x12fa2	tokens1:4bfa800ba463
+EditRewardDlg	?DoDataExchange@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x13596	tokens1:1b1e43e7868c
+EditRewardDlg	?DoDataExchange@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x13241	tokens1:94e50ea235da
+EditRewardDlg	?DoDataExchange@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x13ac4	tokens1:71d582991f73
+EditRewardDlg	?DoDataExchange@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x13720	tokens1:519fe356c584
+EditRewardDlg	?DoDataExchange@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x13e45	tokens1:aa4caa4fb7b1
+EditRewardDlg	?DoDataExchange@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x14307	tokens1:f4cbc1929bf9
+EditRewardDlg	?GetMessageMap@TEditRewardDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x15300	tokens1:a974e4246d87
+EditRewardDlg	?GetMessageMap@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x143ea	tokens1:9fabdbdb7f94
+EditRewardDlg	?GetMessageMap@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x12ece	tokens1:63acef71646d
+EditRewardDlg	?GetMessageMap@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x1316d	tokens1:186af39a5643
+EditRewardDlg	?GetMessageMap@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x13991	tokens1:c736ef1e2f12
+EditRewardDlg	?GetMessageMap@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x135ed	tokens1:f046a2a9d76c
+EditRewardDlg	?OnCreate@TEditRewardDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x15306	tokens1:49748bd15989
+EditRewardDlg	?OnDestroy@TEditRewardDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x15351	tokens1:2a67d2c355b2
+EditRewardDlg	?OnInitDialog@TEditRewardDlg@@MAEHXZ	100.0000	100.0000	100.0000	0x1537a	tokens1:ba6cbfc4ef79
+EditRewardDlg	?OnInitDialog@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x1414f	tokens1:93634424db0d
+EditRewardDlg	?OnInitDialog@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x146db	tokens1:be87eb810d11
+EditRewardDlg	?OnInitDialog@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x12fd0	tokens1:36baf0225c11
+EditRewardDlg	?OnInitDialog@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x135ab	tokens1:a8ac4d2430bb
+EditRewardDlg	?OnInitDialog@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x1326f	tokens1:e5d252d58bc8
+EditRewardDlg	?OnInitDialog@TRewardMoraleDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x134ab	tokens1:ab8d35419e2f
+EditRewardDlg	?OnInitDialog@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x13b04	tokens1:bc4728d5f43a
+EditRewardDlg	?OnInitDialog@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x13760	tokens1:b7e1035f7f11
+EditRewardDlg	?OnInitDialog@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x13e73	tokens1:d3564832968a
+EditRewardDlg	?OnInitDialog@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@MAEHXZ	100.0000	100.0000	100.0000	0x1431c	tokens1:46ba54e238fe
+EditRewardDlg	?OnKillFocusBonusEdit@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@IAEXXZ	100.0000	100.0000	100.0000	0x130c8	tokens1:bab510a70cfc
+EditRewardDlg	?OnKillFocusBonusEdit@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@IAEXXZ	100.0000	100.0000	100.0000	0x1335d	tokens1:4b9a3474c9dd
+EditRewardDlg	?OnKillFocusBonusEdit@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@IAEXXZ	100.0000	100.0000	100.0000	0x13c88	tokens1:b31400e37bbd
+EditRewardDlg	?OnKillFocusQuantityEdit@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@IAEXXZ	100.0000	100.0000	100.0000	0x14869	tokens1:f77c17f0f3b4
+EditRewardDlg	?OnKillFocusQuantityEdit@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@IAEXXZ	100.0000	100.0000	100.0000	0x138e9	tokens1:5553427e9b70
+EditRewardDlg	?OnOK@TEditRewardDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x1559a	tokens1:b3b025f56ab8
+EditRewardDlg	?OnOK@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x141f8	tokens1:cedc71bf3c76
+EditRewardDlg	?OnOK@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x147ac	tokens1:fd03e89643c9
+EditRewardDlg	?OnOK@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x1303c	tokens1:35d5cbf43f66
+EditRewardDlg	?OnOK@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x135d6	tokens1:8fc77272834e
+EditRewardDlg	?OnOK@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x132d1	tokens1:8b3cbc34d6c6
+EditRewardDlg	?OnOK@TRewardMoraleDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x134d6	tokens1:4dc363dbba2c
+EditRewardDlg	?OnOK@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x13bd9	tokens1:faf4ce3234e6
+EditRewardDlg	?OnOK@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x13835	tokens1:c354f66cf71c
+EditRewardDlg	?OnOK@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x13f50	tokens1:96a65c006b49
+EditRewardDlg	?OnOK@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEXXZ	100.0000	100.0000	100.0000	0x143b7	tokens1:8584b31b9fb2
+EditRewardDlg	?OnRewardTypeRadio@TEditRewardDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x155e9	tokens1:838876655f5a
+EditRewardDlg	?_showPage@TEditRewardDlg@@AAEXH@Z	100.0000	100.0000	100.0000	0x15167	tokens1:5ec575215317
+EditRewardDlg	?create@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x13ffc	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x144ed	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14ada	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14a6b	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14b90	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardMoraleDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14a5a	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14d39	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14c5d	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14dfd	tokens1:5884e3cc2da5
+EditRewardDlg	?create@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UAEHPAVCWnd@@@Z	100.0000	100.0000	100.0000	0x14e9c	tokens1:5884e3cc2da5
+EditRewardDlg	?getReward@TEditRewardDlg@@QAE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x1511e	tokens1:d65b983ff4d6
+EditRewardDlg	?getReward@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x140b1	tokens1:25b5b7d0a9e0
+EditRewardDlg	?getReward@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x1460b	tokens1:ecb7ae40ef01
+EditRewardDlg	?getReward@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x12f21	tokens1:db58ccbaf75d
+EditRewardDlg	?getReward@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x13518	tokens1:cadced7183b8
+EditRewardDlg	?getReward@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x131c0	tokens1:e4312a364a50
+EditRewardDlg	?getReward@TRewardMoraleDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x1342d	tokens1:3e47072ca1b5
+EditRewardDlg	?getReward@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x13a35	tokens1:b160314f5c63
+EditRewardDlg	?getReward@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x13691	tokens1:4329b984653b
+EditRewardDlg	?getReward@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x13db6	tokens1:ff5769b273b8
+EditRewardDlg	?getReward@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@UBE?AV?$auto_ptr@VTReward@TSeersHut@@@std@@XZ	100.0000	100.0000	100.0000	0x1427e	tokens1:36e3bdb2c7ef
+EditRewardDlg	?insertCreature@@YAXAAVCComboBox@@W4TCreatureType@@@Z	100.0000	100.0000	100.0000	0x143f0	tokens1:fa5ee9ba0b02
+EditRewardDlg	?setReward@TRewardArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardArtifact@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x1405e	tokens1:4c11907f2317
+EditRewardDlg	?setReward@TRewardCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardCreature@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x14570	tokens1:5277a12950c3
+EditRewardDlg	?setReward@TRewardExperienceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardExperience@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x12ed4	tokens1:9edfe9196218
+EditRewardDlg	?setReward@TRewardLuckDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardLuck@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x134ed	tokens1:90043e4b1790
+EditRewardDlg	?setReward@TRewardManaDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardMana@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x13173	tokens1:d0084c8d3841
+EditRewardDlg	?setReward@TRewardMoraleDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardMorale@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x13402	tokens1:270092081d7c
+EditRewardDlg	?setReward@TRewardPrimarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardPrimarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x13997	tokens1:bc13d73360f5
+EditRewardDlg	?setReward@TRewardResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardResource@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x135f3	tokens1:cf92413cbc6c
+EditRewardDlg	?setReward@TRewardSecondarySkillDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardSecondarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x13d2e	tokens1:c26e734e78ac
+EditRewardDlg	?setReward@TRewardSpellDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\EditRewardDlg.cpp1654426747@@QAEXABVTRewardSpell@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x1422b	tokens1:cb20e13077dc
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardArtifact@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x15297	tokens1:d9f45bec20de
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardCreature@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x152dd	tokens1:d39bde0522e1
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardExperience@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x151a5	tokens1:cfa30d2de864
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardLuck@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x1520b	tokens1:82deeae82fc4
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardMana@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x151c5	tokens1:0c8d73988fa8
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardMorale@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x151e8	tokens1:d01371aa3fbe
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardPrimarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x15251	tokens1:371e799be8b7
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardResource@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x1522e	tokens1:2d5b7d1e5415
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardSecondarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x15274	tokens1:330241204acb
+EditRewardDlg	?visit@TEditRewardDlg@@MAEXABVTRewardSpell@TSeersHut@@@Z	100.0000	100.0000	100.0000	0x152ba	tokens1:eda60b564f44
 EditRumorDlg	??0TEditRumorDlg@@QAE@PAVCWnd@@ABVTRumor@@@Z	100.0000	100.0000	100.0000	0x1593f	tokens1:fa6f036e9c33
 EditRumorDlg	??0TRumor@@QAE@ABV0@@Z	100.0000	100.0000	100.0000	0x15a3f	-
 EditRumorDlg	??1TEditRumorDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x15aaa	-
@@ -691,7 +980,6 @@ GUIGameObject	??1TGUIPrison@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359
 GUIGameObject	??1TGUIRandomHero@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@UAE@XZ	100.0000	100.0000	100.0000	0x4611f	-
 GUIGameObject	??1TGUITown@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@UAE@XZ	100.0000	100.0000	100.0000	0x4605b	-
 GUIGameObject	??1TSprites@?1??_getPSprite@TGUITown@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@ABEPBVCSprite@@XZ@QAE@XZ	100.0000	100.0000	100.0000	0x41a11	-
-GUIGameObject	??4?$TResourcePtr@VCSprite@@@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0x99b7e	-
 GUIGameObject	??_E?$TGUIOwnableSpecializedObject@VTFlaggableObject@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@$4PPPPPPPM@A@AEPAXI@Z	100.0000	100.0000	100.0000	0x483a0	-
 GUIGameObject	??_E?$TGUIOwnableSpecializedObject@VTGarrison@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@$4PPPPPPPM@A@AEPAXI@Z	100.0000	100.0000	100.0000	0x48678	-
 GUIGameObject	??_E?$TGUIOwnableSpecializedObject@VTGenerator@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@$4PPPPPPPM@A@AEPAXI@Z	100.0000	100.0000	100.0000	0x49157	-
@@ -2811,7 +3099,7 @@ MapSpecsVictoryCondPage	?OnCreate@TMapSpecsVictoryCondPage@@IAEHPAUtagCREATESTRU
 MapSpecsVictoryCondPage	?OnCreate@TVictoryConditionDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x79347	tokens1:8f288bed7c11
 MapSpecsVictoryCondPage	?OnDestroy@TMapSpecsVictoryCondPage@@IAEXXZ	100.0000	100.0000	100.0000	0x7c01e	tokens1:2de5d196137f
 MapSpecsVictoryCondPage	?OnDestroy@TVictoryConditionDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x79375	tokens1:58841be9d2bb
-MapSpecsVictoryCondPage	?OnInitDialog@TAccumulateCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@MAEHXZ	99.8837	99.9419	99.9419	0x79a1c	tokens1:c01afbf8c507
+MapSpecsVictoryCondPage	?OnInitDialog@TAccumulateCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@MAEHXZ	99.9419	99.9419	99.9419	0x79a1c	tokens1:c01afbf8c507
 MapSpecsVictoryCondPage	?OnInitDialog@TAccumulateResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@MAEHXZ	100.0000	100.0000	100.0000	0x79e14	tokens1:91451a7166db
 MapSpecsVictoryCondPage	?OnInitDialog@TAquireArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@MAEHXZ	100.0000	100.0000	100.0000	0x795ba	tokens1:eecd82b2fe21
 MapSpecsVictoryCondPage	?OnInitDialog@TBuildHolyGrailStructDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@MAEHXZ	100.0000	100.0000	100.0000	0x7a4a2	tokens1:492ef7b26644
@@ -2836,7 +3124,7 @@ MapSpecsVictoryCondPage	?OnOK@TVictoryConditionDlg@@UAEXXZ	100.0000	100.0000	100
 MapSpecsVictoryCondPage	?OnVictoryConditionRadio@TMapSpecsVictoryCondPage@@IAEXXZ	100.0000	100.0000	100.0000	0x7c4bb	tokens1:aa57a1fbf87e
 MapSpecsVictoryCondPage	?_setVictoryConditionType@TMapSpecsVictoryCondPage@@AAEXH@Z	100.0000	100.0000	100.0000	0x7bc8b	tokens1:143bfb7de5cd
 MapSpecsVictoryCondPage	?fillTownCombo@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@YAXABVTGameMap@@ABV?$vector@VTMapObjectRef@@V?$allocator@VTMapObjectRef@@@std@@@std@@AAVCComboBox@@@Z	100.0000	100.0000	100.0000	0x78fac	tokens1:cbaf2a5f337e
-MapSpecsVictoryCondPage	?getDigits@?$TDigits@$0JIJGHP@@@SAIXZ	98.7500	100.0000	100.0000	0xbc34	-
+MapSpecsVictoryCondPage	?getDigits@?$TDigits@$0JIJGHP@@@SAIXZ	100.0000	100.0000	100.0000	0xbc34	-
 MapSpecsVictoryCondPage	?getVictoryCondition@TAccumulateCreatureDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x79923	tokens1:2127f6931d43
 MapSpecsVictoryCondPage	?getVictoryCondition@TAccumulateResourceDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x79d1b	tokens1:f86d315ffa6d
 MapSpecsVictoryCondPage	?getVictoryCondition@TAquireArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x794fd	tokens1:b7c39e939032
@@ -2846,7 +3134,6 @@ MapSpecsVictoryCondPage	?getVictoryCondition@TDefeatHeroDlg@?%C:\Dev\Heroes 3 Ex
 MapSpecsVictoryCondPage	?getVictoryCondition@TDefeatMonsterDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7ab00	tokens1:b681f33ec6ce
 MapSpecsVictoryCondPage	?getVictoryCondition@TFlagAllCreatureGeneratorsDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7ad9f	tokens1:283bccf55a4a
 MapSpecsVictoryCondPage	?getVictoryCondition@TFlagAllMinesDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7ae42	tokens1:b46492a283d3
-MapSpecsVictoryCondPage	?getVictoryCondition@TNullVictoryConditionDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7b634	-
 MapSpecsVictoryCondPage	?getVictoryCondition@TTransportArtifactDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7b070	tokens1:02981721ab1d
 MapSpecsVictoryCondPage	?getVictoryCondition@TUpgradeTownDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498@@UBE?AV?$auto_ptr@VTVictoryCondition@@@std@@XZ	100.0000	100.0000	100.0000	0x7a0c1	tokens1:40e7fad4c565
 MapSpecsVictoryCondPage	?isCreatureBefore@@YA_NW4TCreatureType@@0@Z	100.0000	100.0000	100.0000	0x797f2	tokens1:570760432b62
@@ -3186,11 +3473,13 @@ MapView	?onEditProperties@TMapView@@EAE_NPAVTHolyGrail@@PAVTGameMap@@_NI@Z	100.0
 MapView	?onEditProperties@TMapView@@EAE_NPAVTMonster@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x8188b	tokens1:a670c5376b87
 MapView	?onEditProperties@TMapView@@EAE_NPAVTNonRandomHero@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x8165d	tokens1:d0d6b504687f
 MapView	?onEditProperties@TMapView@@EAE_NPAVTPrison@@PAVTGameMap@@_NI@Z	99.8077	99.8077	99.8077	0x8172b	tokens1:7557252142cc
+MapView	?onEditProperties@TMapView@@EAE_NPAVTQuestGuard@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81f77	tokens1:deac30ee2c2a
 MapView	?onEditProperties@TMapView@@EAE_NPAVTRandomGenerator@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81e7e	tokens1:122b424cb544
 MapView	?onEditProperties@TMapView@@EAE_NPAVTRandomHero@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x816c4	tokens1:4fe5c6579c82
 MapView	?onEditProperties@TMapView@@EAE_NPAVTRandomlyAlignedGenerator@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81ed6	tokens1:6d39d0de67ea
 MapView	?onEditProperties@TMapView@@EAE_NPAVTRandomlyLeveledGenerator@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81f2e	tokens1:31d29185e251
 MapView	?onEditProperties@TMapView@@EAE_NPAVTScholar@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81c84	tokens1:2a1a0033dc17
+MapView	?onEditProperties@TMapView@@EAE_NPAVTSeersHut@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81d2f	tokens1:84a0e12ddc81
 MapView	?onEditProperties@TMapView@@EAE_NPAVTShrine@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81de2	tokens1:bcb93eb39c12
 MapView	?onEditProperties@TMapView@@EAE_NPAVTSign@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81a38	tokens1:36f40ce93753
 MapView	?onEditProperties@TMapView@@EAE_NPAVTSpellScroll@@PAVTGameMap@@_NI@Z	100.0000	100.0000	100.0000	0x81b40	tokens1:b7ed8fb56ef1
@@ -3284,7 +3573,6 @@ MonsterPropsGeneralPage	?OnInitDialog@TMonsterPropsGeneralPage@@UAEHXZ	100.0000	
 MonsterPropsGeneralPage	?OnKillFocusQuantityEdit@TMonsterPropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x89780	tokens1:2ad959eb28f3
 MonsterPropsGeneralPage	?OnOK@TMonsterPropsGeneralPage@@UAEXXZ	99.9533	99.9533	99.9533	0x89618	tokens1:a077ea79498f
 MonsterPropsGeneralPage	?OnRandomQtyRadio@TMonsterPropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0x8983d	tokens1:dd938f97b9ed
-MonsterPropsGeneralPage	?getDigits@?$TDigits@$0BJA@@@SAIXZ	100.0000	100.0000	100.0000	0x3170	-
 MonsterPropsSheet	??0TMonsterPropsSheet@@QAE@PAVCWnd@@PAVTMonster@@W4EGameVersion@@@Z	99.9583	99.9583	99.9583	0x89aa5	tokens1:cfaa0711db76
 MonsterPropsSheet	??1TMonsterPropsSheet@@UAE@XZ	100.0000	100.0000	100.0000	0x89c64	tokens1:8e6cf59968f9
 MonsterPropsSheet	??_GTMonsterPropsSheet@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x89c48	-
@@ -3299,7 +3587,7 @@ MonsterPropsTreasurePage	??1_TResourceControls@TMonsterPropsTreasurePage@@QAE@XZ
 MonsterPropsTreasurePage	??_GTMonsterPropsTreasurePage@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x8a0d4	-
 MonsterPropsTreasurePage	?DoDataExchange@TMonsterPropsTreasurePage@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x8a1c6	tokens1:4804eb370837
 MonsterPropsTreasurePage	?GetMessageMap@TMonsterPropsTreasurePage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x8a246	tokens1:0ed77c4604cb
-MonsterPropsTreasurePage	?OnInitDialog@TMonsterPropsTreasurePage@@UAEHXZ	97.7846	97.7846	97.7846	0x8a24c	tokens1:f1c76712db9b
+MonsterPropsTreasurePage	?OnInitDialog@TMonsterPropsTreasurePage@@UAEHXZ	97.8103	97.8103	97.8103	0x8a24c	tokens1:f1c76712db9b
 MonsterPropsTreasurePage	?OnOK@TMonsterPropsTreasurePage@@UAEXXZ	99.9231	99.9231	99.9231	0x8a4d9	tokens1:d7d6de7df09b
 MonsterPropsTreasurePage	?_areResourceQuantitiesModified@TMonsterPropsTreasurePage@@ABE_NXZ	100.0000	100.0000	100.0000	0x8a216	tokens1:b4c653fd9abe
 ObjectHelp	?displayObjectHelp@@YAXABUTObjectType@@@Z	100.0000	100.0000	100.0000	0x8bac3	tokens1:a6489d7588be
@@ -3664,6 +3952,10 @@ QuestGuard	?hasText@TQuestLocation@@$4PPPPPPPM@A@BE_NXZ	100.0000	100.0000	100.00
 QuestGuard	?importText@TQuestLocation@@$4PPPPPPPM@A@AEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@W4EGameVersion@@@Z	100.0000	100.0000	100.0000	0x47fb1	-
 QuestGuard	?isCustomized@TQuestLocation@@$4PPPPPPPM@A@BE_NXZ	100.0000	100.0000	100.0000	0x47fc1	-
 QuestGuard	?write@TQuestLocation@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x47fb9	-
+QuestGuardPropsDlg	??0TQuestGuardPropsDlg@@QAE@PAVCWnd@@PAVTGameMap@@_NI@Z	99.9242	99.9242	99.9242	0x95fbd	tokens1:a2786f182e66
+QuestGuardPropsDlg	??1TQuestGuardPropsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x960ba	tokens1:2ea2f6fef8f4
+QuestGuardPropsDlg	??_GTQuestGuardPropsDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x9609e	-
+QuestGuardPropsDlg	?DoModal@TQuestGuardPropsDlg@@UAEHXZ	100.0000	100.0000	100.0000	0x960f8	tokens1:e2f9713a11d1
 QuestLocation	??0?$TArray@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$02@@QAE@ABV0@@Z	100.0000	100.0000	100.0000	0x970a8	-
 QuestLocation	??0?$TArray@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$02@@QAE@XZ	48.7667	48.7667	48.7667	0x9713e	-
 QuestLocation	??0TQuestLocation@@QAE@ABUTObjectType@@@Z	100.0000	100.0000	100.0000	0x969af	tokens1:2c8793926875
@@ -3706,6 +3998,55 @@ QuestLocation	?visit@TQuestWriter@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocation.c
 QuestLocation	?visit@TQuestWriter@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocation.cpp472427463@@UAEXABVTQuestDefeatMonster@@@Z	100.0000	100.0000	100.0000	0x963c0	tokens1:546855f05e5c
 QuestLocation	?write@TQuestLocation@@UBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0x96ed6	tokens1:842712f1f2ad
 QuestLocation	?write@TQuestWriter@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocation.cpp472427463@@QAEXPBVTQuest@@@Z	100.0000	100.0000	100.0000	0x962f8	tokens1:2c89a689fd1a
+QuestLocationPropsDlg	??0TMapObjectRef@@QAE@_NI@Z	100.0000	100.0000	100.0000	0x9955a	-
+QuestLocationPropsDlg	??0TQuestLocationPropsDlg@@QAE@IPAVCWnd@@PAVTGameMap@@_NIH@Z	100.0000	100.0000	100.0000	0x984d0	tokens1:f4c9ad3ba27e
+QuestLocationPropsDlg	??0_TMessage@TQuestLocationPropsDlg@@QAE@XZ	100.0000	100.0000	100.0000	0xce9c2	-
+QuestLocationPropsDlg	??1TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@QAE@XZ	100.0000	100.0000	100.0000	0x98b3b	-
+QuestLocationPropsDlg	??1TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@QAE@XZ	100.0000	100.0000	100.0000	0x99267	-
+QuestLocationPropsDlg	??1TQuestLocationPropsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x986b4	tokens1:8f80e60b98af
+QuestLocationPropsDlg	??1_TMessage@TQuestLocationPropsDlg@@QAE@XZ	100.0000	100.0000	100.0000	0x986af	-
+QuestLocationPropsDlg	??RTGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@QAE?AVCString@@ABVTQuest@@PBVTGameMap@@IH@Z	100.0000	100.0000	100.0000	0x97ca3	tokens1:15de416dc2d5
+QuestLocationPropsDlg	??RTGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@QAE?AVCString@@PBVTQuest@@@Z	100.0000	100.0000	100.0000	0x97382	tokens1:7f07a18b9d25
+QuestLocationPropsDlg	??_GCTabCtrl@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x99bbe	-
+QuestLocationPropsDlg	?DoDataExchange@TQuestLocationPropsDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0x98bd3	tokens1:a567c35b1683
+QuestLocationPropsDlg	?GetMessageMap@TQuestLocationPropsDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0x984ca	tokens1:569d2f76d293
+QuestLocationPropsDlg	?OnChangeMessageEdit@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x99b2f	tokens1:7a091a919d6e
+QuestLocationPropsDlg	?OnCreate@TQuestLocationPropsDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0x98b43	tokens1:d0e973ef79d7
+QuestLocationPropsDlg	?OnCustomizeMessageCheck@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x99a7a	tokens1:9e35b5b00d75
+QuestLocationPropsDlg	?OnDeadlineCheck@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x99683	tokens1:a6e5ff97ef09
+QuestLocationPropsDlg	?OnEditQuestButton@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x9956c	tokens1:9f14a608fe76
+QuestLocationPropsDlg	?OnInitDialog@TQuestLocationPropsDlg@@MAEHXZ	100.0000	100.0000	100.0000	0x98ceb	tokens1:410a93c2cbb1
+QuestLocationPropsDlg	?OnKillFocusDayEdit@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x9992b	tokens1:9eeea682accc
+QuestLocationPropsDlg	?OnKillFocusMonthEdit@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x997df	tokens1:45f7b875c50d
+QuestLocationPropsDlg	?OnKillFocusWeekEdit@TQuestLocationPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0x99885	tokens1:4a0f738630ef
+QuestLocationPropsDlg	?OnOK@TQuestLocationPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0x9926f	tokens1:e8fccfba1913
+QuestLocationPropsDlg	?OnSelChangeMessageTab@TQuestLocationPropsDlg@@IAEXPAUtagNMHDR@@PAJ@Z	100.0000	100.0000	100.0000	0x999d1	tokens1:099968317e1f
+QuestLocationPropsDlg	?_addBlankMessage@TQuestLocationPropsDlg@@AAEXXZ	100.0000	100.0000	100.0000	0x98a9e	tokens1:82cc9abe73c6
+QuestLocationPropsDlg	?_getDefaultMessage@TQuestLocationPropsDlg@@ABE?AVCString@@PBVTQuest@@I@Z	100.0000	100.0000	100.0000	0x98ad8	tokens1:e7f87e98f082
+QuestLocationPropsDlg	?_getOldLocation@TQuestLocationPropsDlg@@IBEPBVTQuestLocation@@XZ	100.0000	100.0000	100.0000	0x987ec	tokens1:6f74038f7307
+QuestLocationPropsDlg	?_onQuestChanged@TQuestLocationPropsDlg@@MAEXPBVTQuest@@@Z	100.0000	100.0000	100.0000	0x98867	tokens1:705fcaa1baa8
+QuestLocationPropsDlg	?_removeBlankMessage@TQuestLocationPropsDlg@@AAEXXZ	100.0000	100.0000	100.0000	0x98ac2	tokens1:9ef665c7afd9
+QuestLocationPropsDlg	?_setNewMap@TQuestLocationPropsDlg@@IAEXPAVTGameMap@@@Z	100.0000	100.0000	100.0000	0x98825	tokens1:049921dff603
+QuestLocationPropsDlg	?getQuestText@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@YAPBDW4TQuestTexts@@IH@Z	100.0000	100.0000	100.0000	0x97bde	tokens1:c75d429ad4fa
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestAchieveExperienceLevel@@@Z	100.0000	100.0000	100.0000	0x97d37	tokens1:96a06a6bc4ce
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestAchievePrimarySkillLevel@@@Z	100.0000	100.0000	100.0000	0x97d62	tokens1:621b576ac061
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBeASpecificHero@@@Z	100.0000	100.0000	100.0000	0x98450	tokens1:6fad0cc7fb8b
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBelongToASpecificPlayer@@@Z	100.0000	100.0000	100.0000	0x98495	tokens1:48e4c041e942
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringArtifacts@@@Z	86.0533	86.0533	86.0533	0x980d0	tokens1:3cd9a474bc1b
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringCreatures@@@Z	89.1301	89.1301	89.1301	0x981ba	tokens1:364a01f64700
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringResources@@@Z	100.0000	100.0000	100.0000	0x98346	tokens1:063e1beaa754
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestDefeatHero@@@Z	100.0000	100.0000	100.0000	0x97e72	tokens1:cd2f8708b992
+QuestLocationPropsDlg	?visit@TGetDefaultQuestMessageFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestDefeatMonster@@@Z	100.0000	100.0000	100.0000	0x97f62	tokens1:6924242278b8
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestAchieveExperienceLevel@@@Z	100.0000	100.0000	100.0000	0x97416	tokens1:e8f9b7958ce6
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestAchievePrimarySkillLevel@@@Z	100.0000	100.0000	100.0000	0x97433	tokens1:569cbeb627be
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBeASpecificHero@@@Z	92.3404	92.3404	92.3404	0x97b27	tokens1:150cbaa9aaa2
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBelongToASpecificPlayer@@@Z	100.0000	100.0000	100.0000	0x97bb8	tokens1:523241cd4ad2
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringArtifacts@@@Z	100.0000	100.0000	100.0000	0x97853	tokens1:fa23b81c737a
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringCreatures@@@Z	100.0000	100.0000	100.0000	0x978e2	tokens1:8d58cfd0565c
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestBringResources@@@Z	100.0000	100.0000	100.0000	0x97a2e	tokens1:6c1286ed6f64
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestDefeatHero@@@Z	81.5963	81.5963	81.5963	0x9752f	tokens1:2e3e47f75cd3
+QuestLocationPropsDlg	?visit@TGetQuestDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644@@UAEXABVTQuestDefeatMonster@@@Z	100.0000	100.0000	100.0000	0x97717	tokens1:94861776747c
+QuestLocationPropsDlg	__h3cg$QuestLocationPropsDlg$static_dtor$pQuestTexts	100.0000	100.0000	100.0000	0x97c99	-
 RandomGeneratorPropsDlg	??0CComboBox@@QAE@XZ	100.0000	100.0000	100.0000	0xb1d30	-
 RandomGeneratorPropsDlg	??0TRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@QAE@PBVTGameMap@@PAV2@_NI@Z	100.0000	100.0000	100.0000	0xb05dc	tokens1:010cc9bf16ed
 RandomGeneratorPropsDlg	??0TRandomGeneratorLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@QAE@PBVTAbstractRandomlyLeveledGenerator@@PAV2@@Z	100.0000	100.0000	100.0000	0xafed5	tokens1:b54e88cd2b73
@@ -3793,7 +4134,7 @@ ResourcePropsGeneralPage	??_GTResourcePropsGeneralPage@@UAEPAXI@Z	100.0000	100.0
 ResourcePropsGeneralPage	?DoDataExchange@TResourcePropsGeneralPage@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xb29a1	tokens1:cc03127ab830
 ResourcePropsGeneralPage	?GetMessageMap@TResourcePropsGeneralPage@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xb2a19	tokens1:9f6fb60363ab
 ResourcePropsGeneralPage	?OnCustomQtyRadio@TResourcePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0xb2e76	tokens1:1a1f9c8e0d3f
-ResourcePropsGeneralPage	?OnInitDialog@TResourcePropsGeneralPage@@UAEHXZ	99.9677	99.9677	99.9677	0xb2a1f	tokens1:35c1a55a46ea
+ResourcePropsGeneralPage	?OnInitDialog@TResourcePropsGeneralPage@@UAEHXZ	100.0000	100.0000	100.0000	0xb2a1f	tokens1:35c1a55a46ea
 ResourcePropsGeneralPage	?OnKillFocusQuantityEdit@TResourcePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0xb2d6f	tokens1:962b9cb3bb43
 ResourcePropsGeneralPage	?OnOK@TResourcePropsGeneralPage@@UAEXXZ	99.9444	99.9444	99.9444	0xb2c4a	tokens1:9f85c106ddda
 ResourcePropsGeneralPage	?OnRandomQtyRadio@TResourcePropsGeneralPage@@IAEXXZ	100.0000	100.0000	100.0000	0xb2e2c	tokens1:2a756081ee31
@@ -3815,9 +4156,8 @@ ResourceQuantitiesDlg	??1_TControls@TResourceQuantitiesDlg@@QAE@XZ	100.0000	100.
 ResourceQuantitiesDlg	??_GTResourceQuantitiesDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb34d5	-
 ResourceQuantitiesDlg	?DoDataExchange@TResourceQuantitiesDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xb35b0	tokens1:6a8198443e61
 ResourceQuantitiesDlg	?GetMessageMap@TResourceQuantitiesDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xb35f9	tokens1:6bf54404f7ad
-ResourceQuantitiesDlg	?OnInitDialog@TResourceQuantitiesDlg@@UAEHXZ	99.9784	100.0000	100.0000	0xb35ff	tokens1:1551bd7fd91b
+ResourceQuantitiesDlg	?OnInitDialog@TResourceQuantitiesDlg@@UAEHXZ	100.0000	100.0000	100.0000	0xb35ff	tokens1:1551bd7fd91b
 ResourceQuantitiesDlg	?OnOK@TResourceQuantitiesDlg@@UAEXXZ	100.0000	100.0000	100.0000	0xb3910	tokens1:20843622ba48
-ResourceQuantitiesDlg	?getDigits@?$TDigits@$0BIGJP@@@SAIXZ	-	100.0000	100.0000	0xbcf0	-
 RiverToolkit	??0TRiverToolkit@@QAE@PAVCWnd@@@Z	94.8897	94.8897	94.8897	0xb3dcf	tokens1:0111d9d49ba9
 RiverToolkit	??1TRiverToolkit@@UAE@XZ	100.0000	100.0000	100.0000	0xb3fb4	tokens1:179fe1839485
 RiverToolkit	??_GTRiverToolkit@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb3f98	-
@@ -3972,6 +4312,29 @@ SeersHut	?visit@TRewardWriter@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHut.cpp1706729
 SeersHut	?write@TRewardWriter@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHut.cpp1706729111@@QAEXPBVTReward@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb61d6	tokens1:669291f84aba
 SeersHut	?write@TSeersHut@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0xb7389	-
 SeersHut	?write@TSeersHut@@UBEXPAVTRawOStream@@H@Z	100.0000	100.0000	100.0000	0xb6ccb	tokens1:dd577ba6d431
+SeersHutPropsDlg	??0TSeersHutPropsDlg@@QAE@PAVCWnd@@PAVTGameMap@@_NI@Z	99.9537	99.9537	99.9537	0xb777c	tokens1:8bf3d6346fc7
+SeersHutPropsDlg	??1TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@QAE@XZ	100.0000	100.0000	100.0000	0xb7aa6	-
+SeersHutPropsDlg	??1TSeersHutPropsDlg@@UAE@XZ	100.0000	100.0000	100.0000	0xb791e	tokens1:aa3bbf0eb5a1
+SeersHutPropsDlg	??RTGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@QAE?AVCString@@PBVTReward@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7567	tokens1:c56265b8f8c8
+SeersHutPropsDlg	??_GTSeersHutPropsDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb7902	-
+SeersHutPropsDlg	?DoDataExchange@TSeersHutPropsDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xb7aae	tokens1:ac486d12c6d2
+SeersHutPropsDlg	?DoModal@TSeersHutPropsDlg@@UAEHXZ	100.0000	100.0000	100.0000	0xb7aeb	tokens1:4c39251438bb
+SeersHutPropsDlg	?GetMessageMap@TSeersHutPropsDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xb7ae5	tokens1:bf9b59ff82f1
+SeersHutPropsDlg	?OnEditRewardButton@TSeersHutPropsDlg@@IAEXXZ	92.5085	92.5085	92.5085	0xb7cf3	tokens1:2dd09a591218
+SeersHutPropsDlg	?OnInitDialog@TSeersHutPropsDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xb7b1a	tokens1:d523de90d5a3
+SeersHutPropsDlg	?OnOK@TSeersHutPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0xb7c4a	tokens1:715c910037b9
+SeersHutPropsDlg	?_getOldHut@TSeersHutPropsDlg@@ABEPBVTSeersHut@@XZ	100.0000	100.0000	100.0000	0xb7995	tokens1:92a18fe9e641
+SeersHutPropsDlg	?_onQuestChanged@TSeersHutPropsDlg@@MAEXPBVTQuest@@@Z	93.7500	93.7500	93.7500	0xb79d7	tokens1:0e2401990834
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardArtifact@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb76dc	tokens1:f366404b283c
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardCreature@TSeersHut@@@Z	85.0000	85.0000	85.0000	0xb7727	tokens1:87aeba8c1d9e
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardExperience@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb75e3	tokens1:bbbfc5ec41f0
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardLuck@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb763a	tokens1:c38b65890945
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardMana@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7600	tokens1:f3af7c011c52
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardMorale@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb761d	tokens1:19484adda8e6
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardPrimarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7680	tokens1:5b2c8487acfe
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardResource@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7657	tokens1:16fc915c8aba
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardSecondarySkill@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb76a9	tokens1:d230d9bf8241
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardSpell@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb76fa	tokens1:52c310b7d55b
 SelectArtifactDlg	??0TSelectArtifactDlg@@QAE@PAVCWnd@@W4EGameVersion@@H@Z	100.0000	100.0000	100.0000	0xb7deb	tokens1:370f33c9540c
 SelectArtifactDlg	??1TSelectArtifactDlg@@UAE@XZ	100.0000	100.0000	100.0000	0x99d6	-
 SelectArtifactDlg	??_GCListBox@@UAEPAXI@Z	100.0000	100.0000	100.0000	0x9bc6	-
@@ -4050,6 +4413,7 @@ TerrainToolkit	?DoDataExchange@TTerrainToolkit@@MAEXPAVCDataExchange@@@Z	100.000
 TerrainToolkit	?GetMessageMap@TTerrainToolkit@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xbdfd5	tokens1:7fbb2ade3ba4
 TerrainToolkit	?OnInitDialog@TTerrainToolkit@@MAEHXZ	100.0000	100.0000	100.0000	0xbdfdb	tokens1:aacea6bccd39
 TerrainToolkit	?_deleteAll@TTerrainToolkit@@AAEXXZ	100.0000	100.0000	100.0000	0xbdf80	tokens1:7227d3dc7080
+Tile	??4?$TResourcePtr@VCSprite@@@@QAEAAV0@ABV0@@Z	100.0000	100.0000	100.0000	0x99b7e	-
 Tile	?DrawAdvObj@?A0xe68c7ee5847e0401@@YAXPBVCSprite@@IHHIIHHPAGIIIG@Z	100.0000	100.0000	100.0000	0xbe1eb	tokens1:798e026522fa
 Tile	?DrawAdvObjScaled25@?A0xe68c7ee5847e0401@@YAXPBVCSprite@@IHHIIHHPAGIIIG@Z	100.0000	100.0000	100.0000	0xbe313	tokens1:617d964098f3
 Tile	?DrawAdvObjScaled50@?A0xe68c7ee5847e0401@@YAXPBVCSprite@@IHHIIHHPAGIIIG@Z	100.0000	100.0000	100.0000	0xbe281	tokens1:28310bd3e324
@@ -4469,14 +4833,18 @@ WitchHutPropsDlg	?OnCheckChangeSkillsList@TWitchHutPropsDlg@@IAEXXZ	98.9683	98.9
 WitchHutPropsDlg	?OnCreate@TWitchHutPropsDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000	100.0000	100.0000	0xcd30c	tokens1:574efa058774
 WitchHutPropsDlg	?OnInitDialog@TWitchHutPropsDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xcd399	tokens1:1977d9336323
 WitchHutPropsDlg	?OnOK@TWitchHutPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0xcd48a	tokens1:e4fc739daf0a
+WorldDirections	?InitializeWorldDirectionNamesTable@@YAXXZ	100.0000	100.0000	100.0000	0xcd583	tokens1:ae7a692100df
+WorldDirections	?getWorldDirection@@YA?AW4TWorldDirection@@ABV?$TPoint@I@@0@Z	100.0000	100.0000	100.0000	0xcd71a	tokens1:2ca0a1734d6c
+WorldDirections	__h3cg$WorldDirections$static_dtor$apNames	100.0000	100.0000	100.0000	0xcd704	-
 adler32	@adler32@12	100.0000	100.0000	100.0000	0xd6dd0	-
 artifact	??1?$TResourcePtr@VTSpreadsheetResource@@@@QAE@XZ	100.0000	100.0000	100.0000	0x2215	-
 artifact	??8?$bitset@$0BD@@std@@QBE_NABV01@@Z	100.0000	100.0000	100.0000	0x2d03d	-
 artifact	??9?$bitset@$0BD@@std@@QBE_NABV01@@Z	100.0000	100.0000	100.0000	0x90e69	-
 artifact	??A?$bitset@$0BD@@std@@QBE_NI@Z	100.0000	100.0000	100.0000	0x5a77	-
-artifact	?InitializeArtifactTraitsTable@@YA_NXZ	62.4476	62.4618	62.4618	0x36a8	-
+artifact	?InitializeArtifactTraitsTable@@YA_NXZ	62.4618	62.4618	62.4618	0x36a8	-
 artifact	?_Tidy@?$bitset@$0BD@@std@@AAEXK@Z	100.0000	100.0000	100.0000	0x3b75	-
 artifact	?_Xran@?$bitset@$0BD@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x3bd6	-
+artifact	?find_if@std@@YA?AV?$TConstBitsetIterator@$0JA@@@V2@0V?$binder2nd@U?$not_equal_to@_N@std@@@1@@Z	100.0000	100.0000	100.0000	0x3c8a	-
 artifact	?flip@?$bitset@$0BD@@std@@QAEAAV12@XZ	100.0000	100.0000	100.0000	0x5a69	-
 artifact	?makeArtifactComponentMask@@YA?AV?$bitset@$0JA@@std@@IZZ	99.8864	99.8864	99.8864	0x329d	-
 artifact	?makeArtifactSlotMask@@YA?AV?$bitset@$0BD@@std@@IZZ	99.8529	99.8529	99.8529	0x3245	-
@@ -4964,7 +5332,7 @@ rmg	?createRoads@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0x
 rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	89.5710	89.5710	89.5710	0xa696b	-
 rmg	?createSubterraneanGate@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	87.7247	87.7247	87.7247	0xa6cf2	-
 rmg	?decorateMap@t_abstract_random_generator@@QAEXXZ	100.0000	100.0000	100.0000	0x9eb8d	-
-rmg	?decorateMapCell@t_abstract_random_generator@@QAEXUTRmgMapPosition@@H@Z	79.0297	79.0297	79.0297	0x9e700	-
+rmg	?decorateMapCell@t_abstract_random_generator@@QAEXUTRmgMapPosition@@H@Z	79.0162	79.0297	79.0297	0x9e700	-
 rmg	?decorateUnderground@type_random_map_generator@@QAEXXZ	99.1055	99.1055	99.1055	0xa7ecc	-
 rmg	?discard@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x9cebd	-
 rmg	?drawIrregularZoneBoundary@type_random_map_generator@@QAEXUTRmgPoint@@0HHH@Z	100.0000	100.0000	100.0000	0xa2413	-
