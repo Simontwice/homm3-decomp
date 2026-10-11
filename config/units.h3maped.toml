@@ -1129,3 +1129,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "HeroPrototypePropsSheet"
 source = "src/editor/HeroPrototypePropsSheet.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "MainFrame"
+source = "src/editor/MainFrame.cpp"
+flags = "editor_o1_ob2_gr_windows"

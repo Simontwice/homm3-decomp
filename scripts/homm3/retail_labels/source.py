@@ -1957,6 +1957,13 @@ def vc6_function_name(mangled: str, candidates, unit: str) -> str | None:
     # not count `?A0x`, so a later class name reused in the signature can
     # carry a different back-reference digit (`ABV2@` against `ABV1@`).
     backref = re.compile(r"(?<=[VU])\d(?=@)|(?<=W4)\d(?=@)")
+
+    # VC6 also back-references its `?%` scope where it recurs in the
+    # signature (a class of the same anonymous namespace: `VTClass@1@`);
+    # Clang spells the hashed namespace out again (`VTClass@?A0x..@@`).
+    def scope_recurrence(name: str) -> str:
+        head, scope, tail = name.partition("@?anonymous@")
+        return head + scope + re.sub(r"@(?:\?anonymous@|\d)@", "@#@", tail)
     exact, masked = [], []
     for candidate in candidates:
         anon = re.search(r"@\?%([^@]+)@", candidate)
@@ -1969,6 +1976,8 @@ def vc6_function_name(mangled: str, candidates, unit: str) -> str | None:
         if spelled == expected:
             exact.append(candidate)
         elif backref.sub("#", spelled) == backref.sub("#", expected):
+            masked.append(candidate)
+        elif scope_recurrence(spelled) == scope_recurrence(expected):
             masked.append(candidate)
     if exact:
         return exact[0] if len(exact) == 1 else None
