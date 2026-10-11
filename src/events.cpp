@@ -2100,13 +2100,13 @@ inline void advManager::doEventFaerieRing(hero* currentHero,
 {
     if (currentHero->m_flags & 0x2000) {
         if (humanPlayer)
-            normalDialog(g_adventureEventText->GetText(
-                             ADV_EVENT_TEXT_FAERIE_RING_VISITED),
+            normalDialog((*g_adventureEventText)[
+                             ADV_EVENT_TEXT_FAERIE_RING_VISITED],
                          1, -1, -1, -1, 0, -1, 0, -1, 0, -1, 0);
     } else {
         if (humanPlayer)
-            normalDialog(g_adventureEventText->GetText(
-                             ADV_EVENT_TEXT_FAERIE_RING),
+            normalDialog((*g_adventureEventText)[
+                             ADV_EVENT_TEXT_FAERIE_RING],
                          1, -1, -1, 11, 0, -1, 0, -1, 0, -1, 0);
         currentHero->m_flags |= 0x2000;
         g_game->setInfoFlag(FaerieRingInfo, g_netLocalGamePos);

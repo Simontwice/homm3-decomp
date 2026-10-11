@@ -7049,8 +7049,7 @@ void game::nextPlayer()
     int i;
     unsigned char lastWasHuman;
     int giCurPlayerSave;
-    int save;
-    bool makeOrig;
+    bool weekSave;
 
     m_mapHeader.m_victoryCondition.checkForArtifactWin();
     m_mapHeader.m_victoryCondition.checkForTotalCreatures();
@@ -7092,7 +7091,7 @@ void game::nextPlayer()
     g_advManager->deactivateCurrHero(0);
 
     lastWasHuman = m_players[g_netLocalGamePos].isHuman();
-    makeOrig = 0;
+    weekSave = 0;
     do {
         while (++g_netLocalGamePos < g_mapHeaderPlayerCount) {
             if (!m_playerDisabled[g_netLocalGamePos]
@@ -7104,7 +7103,7 @@ void game::nextPlayer()
         if (g_netLocalGamePos == g_mapHeaderPlayerCount) {
             lastWasHuman = !lastWasHuman;
             if (lastWasHuman) {
-                makeOrig = 1;
+                weekSave = 1;
                 perDay();
                 if (g_remoteOn) {
                     m_mapHeader.m_lossCondition.checkForTimeLimitExpired();
@@ -7117,7 +7116,7 @@ void game::nextPlayer()
         }
     } while (g_netLocalGamePos == -1);
 
-    if (g_goSolo && makeOrig
+    if (g_goSolo && weekSave
         && (!g_remoteOn || g_numHumanPlayers == 1)) {
         g_advManager->drawRolloverText(
             const_cast<char*>((*g_generalText)[GENERAL_TEXT_AUTOSAVING]));
@@ -7125,7 +7124,7 @@ void game::nextPlayer()
         g_advManager->drawRolloverText(
             DATA_COMPGEN(0x00691210, nextPlayerSoloEmptyRollover, ""));
 
-        save = g_remoteOn;
+        int save = g_remoteOn;
         g_remoteOn = 1;
         g_goSolo = 0;
         normalDialogTimeOut((*g_generalText)[GENERAL_TEXT_PRESS_ESC_TO_CANCEL_SOLO_MODE], 2, 2000,
@@ -7181,7 +7180,7 @@ void game::nextPlayer()
         g_completeDrawEnabled = 0;
 
         if (g_remoteOn && isHuman(g_netLocalGamePos)) {
-            makeOrig = 0;
+            bool makeOrig = 0;
             g_thisNetGotAdventureControl = 0;
             toWho = g_netLocalGamePos;
             if (g_playerDrop) {
@@ -7193,7 +7192,7 @@ void game::nextPlayer()
                 g_playerDrop = 0;
                 makeOrig = 1;
             }
-            save = g_game->transmitSaveGame(toWho, 0, 1, makeOrig);
+            int save = g_game->transmitSaveGame(toWho, 0, 1, makeOrig);
             if (!save && g_playerDrop) {
                 g_netLocalGamePos = giCurPlayerSave;
                 g_playerDrop = 0;
