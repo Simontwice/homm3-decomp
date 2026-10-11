@@ -1030,7 +1030,7 @@ VA(0x00408dd0, 0x573)
 void TScenario::_TImpl::setMap(auto_ptr<TCampaignScenarioMap> pMap)
 {
     TRefCountingAutoPtr<TCampaignScenarioMap> pOldMap(m_pMap);
-    m_pMap = TRefCountingAutoPtr<TCampaignScenarioMap>(pMap);
+    m_pMap = pMap;
     int firstPlayer = 0;
     while (!m_pMap.get()->m_aPlayer[firstPlayer].isHumanPlayable())
         firstPlayer++;
@@ -1089,8 +1089,11 @@ void TScenario::_TImpl::setMap(auto_ptr<TCampaignScenarioMap> pMap)
                         }
                         const TCampaignScenarioMap::TPlayerInfo& player
                             = m_pMap.get()->m_aPlayer[pHeroOptions->m_choices[i].m_player];
-                        if (!player.isHumanPlayable() || !(player.m_bGenerateHeroAtMainTown || player.m_bHasRandomHero))
-                            pHeroOptions->m_choices[i].m_player = heroPlayer;
+                        if (!player.isHumanPlayable() || !(player.m_bGenerateHeroAtMainTown || player.m_bHasRandomHero)) {
+                            TScenarioOptionsStartingHero::TChoice choice = pHeroOptions->m_choices[i];
+                            choice.m_player = heroPlayer;
+                            pHeroOptions->m_choices[i] = choice;
+                        }
                     }
                     if (pHeroOptions->m_choices.empty())
                         m_pStartingOptions = auto_ptr<TScenarioStartingOptions>();
