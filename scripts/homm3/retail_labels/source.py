@@ -132,6 +132,9 @@ MACRO_HEADS = {
 ADDR_ARG_RE = re.compile(r"0x[0-9a-fA-F]+$")
 SIZE_ARG_RE = re.compile(r"0x[0-9a-fA-F]+$|\d+$")
 IDENT_ARG_RE = re.compile(r"[A-Za-z_]\w*$")
+#: A VA_COMPGEN owner may name a datum in a namespace (`SNewCampaignDlgText::
+#: kCaptionStr`): its claim name spells the path with `__` separators.
+OWNER_ARG_RE = re.compile(r"[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$")
 ANNOTATION_RE = re.compile(
     r"^\s*(?:VA|VA_AT|VA_COMPGEN|DATA|DC_ADDRESS|MAC_ADDRESS|MAC_COMPGEN_ADDRESS)\s*\(")
 #: `VA_AT(image, addr, size)`: where a shared source's definition sits in
@@ -936,7 +939,7 @@ def scan_file(path, functions: set[int],
                 rows[-1]["vector_helper_signature"] = signature
         elif macro == "VA_COMPGEN":
             kind = _arg(args[2], IDENT_ARG_RE, "kind", where)
-            owner = _arg(args[3], IDENT_ARG_RE, "owner", where)
+            owner = _arg(args[3], OWNER_ARG_RE, "owner", where)
             if kind == "BITSET_ITERATOR_DEREF":
                 common.die(f"{where}: BITSET_ITERATOR_DEREF is a written function; "
                            "put VA and a VA instance selector on its generic header definition")
@@ -949,7 +952,7 @@ def scan_file(path, functions: set[int],
                          "size": int(_arg(args[1], SIZE_ARG_RE, "size",
                                           where), 0),
                          "kind": "func",
-                         "name": f"__h3cg${unit}${kind.lower()}${owner}",
+                         "name": f"__h3cg${unit}${kind.lower()}${owner.replace('::', '__')}",
                          "channel": "src-VA_COMPGEN",
                          "ckind": kind, "owner": owner})
         elif macro == "DATA_COMPGEN_GUARD":

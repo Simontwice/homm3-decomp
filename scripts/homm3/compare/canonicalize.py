@@ -947,6 +947,11 @@ def _compgen_renames(coff: CoffObject, claims: tuple[CompgenClaim, ...],
                  & MEM_EXECUTE)}
 
     def owner_present(names, owner):
+        if "::" in owner:
+            # A namespace-scoped datum: `Ns::name` is mangled `?name@Ns@@`.
+            *scope, leaf = owner.split("::")
+            scoped = "?%s@%s@@" % (leaf, "@".join(reversed(scope)))
+            return any(name.startswith(scoped) for name in names)
         return any(
             name == "_" + owner or
             name.startswith("?" + owner + "@@") or
