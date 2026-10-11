@@ -27,6 +27,7 @@ namespace {
 DATA(0x0059e690) TObjectTypeTable aHeroObjType(kNumHeroClasses + 1);
 
 DATA(0x0059e6a0) THero::TTraits aHeroTraitsImp[kNumHeroes];
+VA_COMPGEN(0x0044a077, 0x1c, STATIC_CTOR, aHeroTraitsImp)
 
 DATA(0x0059f060) THero::TClassTraits aHeroClassTraitsImp[kNumHeroClasses + 1] = {
     THero::TClassTraits(aHeroObjType.m_objectTypes[0], TOWN_CASTLE),
@@ -49,6 +50,7 @@ DATA(0x0059f060) THero::TClassTraits aHeroClassTraitsImp[kNumHeroClasses + 1] = 
     THero::TClassTraits(aHeroObjType.m_objectTypes[17], TOWN_CONFLUX),
     THero::TClassTraits(aHeroObjType.m_objectTypes[18], kNumTownTypes)
 };
+VA_COMPGEN(0x0044a0db, 0x1af, STATIC_CTOR, aHeroClassTraitsImp)
 
 DATA(0x0059f274) THero::TSecondarySkillTraits aHeroSecondarySkillTraitsImp[kNumSecSkills];
 }

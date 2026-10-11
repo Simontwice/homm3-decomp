@@ -1,5 +1,5 @@
 // GameObject.cpp - TGameObject's reference-counted interning of object
-// types and its type name (h3maped 0x43d2f1..0x43d3fd; Loki h3maped
+// types and its type name (h3maped 0x43d2f1..0x43d420; Loki h3maped
 // object 13). Release drops Loki's range assert.
 #include "editor/stdafx.h"
 
@@ -39,13 +39,14 @@ std::string TGameObject::getTypeName() const
     return std::string(akAdvObjectTypeTraits[getType()].m_name);
 }
 
+VA(0x0043d3c1, 0x3c)
 TGameObject& TGameObject::operator=(const TGameObject& other)
 {
-    if (this == &other)
-        return *this;
-    if (--_m_objectTypeIter->second == 0)
-        _s_objectTypeMap.erase(_m_objectTypeIter);
-    _m_objectTypeIter = other._m_objectTypeIter;
-    ++_m_objectTypeIter->second;
+    if (this != &other) {
+        if (--_m_objectTypeIter->second == 0)
+            _s_objectTypeMap.erase(_m_objectTypeIter);
+        _m_objectTypeIter = other._m_objectTypeIter;
+        ++_m_objectTypeIter->second;
+    }
     return *this;
 }
