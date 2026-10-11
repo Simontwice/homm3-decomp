@@ -5025,7 +5025,7 @@ cspriteframe	?DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2
 cspriteframe	?DrawTile@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z	99.9248	99.9248	99.9248	0xe0a00	-
 cspriteframe	?DrawTileScaled25@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z	76.9911	76.9911	76.9911	0xe2c40	-
 cspriteframe	?DrawTileScaled50@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z	64.1098	64.1098	64.1098	0xe1ca0	-
-cspriteframe	?GetPixel@CSpriteFrame@@QBEEHH@Z	48.0124	48.0124	48.0124	0xdef60	-
+cspriteframe	?GetPixel@CSpriteFrame@@QBEEHH@Z	100.0000	100.0000	100.0000	0xdef60	-
 cspriteframe	?SetPixelFormat@CSpriteFrame@@SAXIII@Z	100.0000	100.0000	100.0000	0xdee60	-
 cspriteframe	?getSize@CSpriteFrame@@UBEIXZ	100.0000	100.0000	100.0000	0xdef50	-
 deflate	@deflate@8	100.0000	100.0000	100.0000	0xd5640	-

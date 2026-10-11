@@ -2478,7 +2478,7 @@ rva	size	kind	name	unit	evidence
 0x000dee00	0x5a	func	??1CSpriteFrame@@UAE@XZ	cspriteframe	referenced by ??_GCSpriteFrame@@UAEPAXI@Z at +0x4
 0x000dee60	0xf0	func	?SetPixelFormat@CSpriteFrame@@SAXIII@Z	cspriteframe	masked body (240 bytes, 2 relocations) unique at a census start
 0x000def50	0x7	func	?getSize@CSpriteFrame@@UBEIXZ	cspriteframe	vtable of CSpriteFrame (RTTI) slot 2
-0x000def60	0x178	func	?GetPixel@CSpriteFrame@@QBEEHH@Z	cspriteframe	referenced by 0x0003f717 at +0x54
+0x000def60	0x178	func	?GetPixel@CSpriteFrame@@QBEEHH@Z	cspriteframe	masked body (376 bytes, 6 relocations) unique at a census start
 0x000df0e0	0x494	func	?Draw@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z	cspriteframe	referenced by ?DrawTile@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z at +0x4f
 0x000df580	0x6fc	func	?DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z	cspriteframe	referenced by ?DrawAdvObjImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG@Z at +0x55
 0x000dfc80	0x4a3	func	?DrawAdvObjImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG@Z	cspriteframe	masked body (1187 bytes, 2 relocations) unique at a census start
@@ -3915,7 +3915,7 @@ rva	size	kind	name	unit	evidence
 0x001a990c	0x4	data	?_Nilrefs@?$_Tree@VTCacheMapKey@ResourceManager@@U?$pair@$$CBVTCacheMapKey@ResourceManager@@PAVresource@@@std@@U_Kfn@?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@4@U?$less@VTCacheMapKey@ResourceManager@@@4@V?$allocator@PAVresource@@@4@@std@@1IA	resourcemanager	referenced by ??0?$map@VTCacheMapKey@ResourceManager@@PAVresource@@U?$less@VTCacheMapKey@ResourceManager@@@std@@V?$allocator@PAVresource@@@5@@std@@QAE@ABU?$less@VTCacheMapKey@ResourceManager@@@1@ABV?$allocator@PAVresource@@@1@@Z at +0x6c
 0x001a9910	0x1	data	_?kOpaqueRunCode@?8??Draw@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z@4EB	cspriteframe	referenced by ?Draw@CSpriteFrame@@QBEXHHHHPAGHHHHHAAVTPalette16@@_N2@Z at +0x87 (retail +0x8b, by operand order)
 0x001a9918	0x2	data	?div2mask@CSpriteFrame@@2GA	cspriteframe	referenced by ?SetPixelFormat@CSpriteFrame@@SAXIII@Z at +0xb4
-0x001a991b	0x1	data	_kGeneralRLEOpaqueRunCode	cspriteframe	referenced by ?DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z at +0xdf
+0x001a991b	0x1	data	_kGeneralRLEOpaqueRunCode	cspriteframe	referenced by ?GetPixel@CSpriteFrame@@QBEEHH@Z at +0x74
 0x001a991c	0x2	data	?div4mask@CSpriteFrame@@2GA	cspriteframe	referenced by ?SetPixelFormat@CSpriteFrame@@SAXIII@Z at +0xe7
 0x001a9924	0x1	data	_?$S14@?L@??DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z@4EA	cspriteframe	referenced by ?DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z at +0xcb
 0x001a9926	0x1	data	_?kOpaqueRunCode@?L@??DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z@4EB	cspriteframe	referenced by ?DrawCreatureImpl@CSpriteFrame@@ABEXHHHHPAGHHHHHAAVTPalette16@@_NG2@Z at +0xe5

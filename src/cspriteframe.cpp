@@ -312,20 +312,19 @@ unsigned char CSpriteFrame::GetPixel(int x, int y) const
             static_cast<const unsigned int*>(static_cast<const void*>(map));
         const unsigned char* source = map + lineOffsets[y];
         unsigned int position = 0;
-        while (1) {
-            unsigned char code = *source++;
-            unsigned int run = *source++ + 1;
-            if (position + run > static_cast<unsigned int>(x)) {
-                if (code == kGeneralRLEOpaqueRunCode)
-                    pixel = source[x - position];
-                else
-                    pixel = code;
-                break;
-            }
+        unsigned char code = *source++;
+        unsigned int run = *source++ + 1;
+        while (position + run <= static_cast<unsigned int>(x)) {
             position += run;
             if (code == kGeneralRLEOpaqueRunCode)
                 source += run;
+            code = *source++;
+            run = *source++ + 1;
         }
+        if (code == kGeneralRLEOpaqueRunCode)
+            pixel = source[x - position];
+        else
+            pixel = code;
         break;
     }
     case eEncodeTilesetRLE: {
@@ -333,43 +332,48 @@ unsigned char CSpriteFrame::GetPixel(int x, int y) const
             static_cast<const unsigned short*>(static_cast<const void*>(map));
         const unsigned char* source = map + lineOffsets[y];
         unsigned int position = 0;
-        while (1) {
-            unsigned char control = *source++;
-            unsigned char code = control >> 5;
-            unsigned int run = (control & 31) + 1;
-            if (position + run > static_cast<unsigned int>(x)) {
-                if (code == ePackedRleLiteral)
-                    pixel = source[x - position];
-                else
-                    pixel = code;
-                break;
-            }
+        unsigned char control = *source;
+        unsigned char code = control >> 5;
+        unsigned int run = (control & 31) + 1;
+        ++source;
+        while (position + run <= static_cast<unsigned int>(x)) {
             position += run;
             if (code == ePackedRleLiteral)
                 source += run;
+            control = *source;
+            code = control >> 5;
+            run = (control & 31) + 1;
+            ++source;
         }
+        if (code == ePackedRleLiteral)
+            pixel = source[x - position];
+        else
+            pixel = code;
         break;
     }
     case eEncodeAdvObjRLE: {
         unsigned int cellsPerRow = static_cast<unsigned int>(CroppedWidth) >> 5;
         const unsigned short* cellOffsets =
             static_cast<const unsigned short*>(static_cast<const void*>(map));
-        const unsigned char* source = map + cellOffsets[y * cellsPerRow + (x >> 5)];
+        const unsigned char* source = map + cellOffsets[y * cellsPerRow + (static_cast<unsigned int>(x) >> 5)];
         unsigned int position = x - (x & 31);
-        while (1) {
-            unsigned char control = *source++;
-            unsigned char code = control >> 5;
-            unsigned int run = (control & 31) + 1;
-            if (position + run > static_cast<unsigned int>(x)) {
-                pixel = code;
-                if (code == ePackedRleLiteral)
-                    pixel = source[x - position];
-                break;
-            }
+        unsigned char control = *source;
+        unsigned char code = control >> 5;
+        unsigned int run = (control & 31) + 1;
+        ++source;
+        while (position + run <= static_cast<unsigned int>(x)) {
             position += run;
             if (code == ePackedRleLiteral)
                 source += run;
+            control = *source;
+            code = control >> 5;
+            run = (control & 31) + 1;
+            ++source;
         }
+        if (code == ePackedRleLiteral)
+            pixel = source[x - position];
+        else
+            pixel = code;
         break;
     }
     }
