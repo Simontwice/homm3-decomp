@@ -48,7 +48,7 @@ rva	size	kind	name	unit	evidence
 0x000023cf	0x1c	func	??_GTReadFailure@TRawIStream@@UAEPAXI@Z	Army	vtable of TReadFailure@TRawIStream (RTTI) slot 0
 0x000023eb	0x3d	func	??1TReadFailure@TRawIStream@@UAE@XZ	Army	referenced by ??_GTReadFailure@TRawIStream@@UAEPAXI@Z at +0x4
 0x00002428	0x39	func	??0TReadFailure@TRawIStream@@QAE@ABV01@@Z	Army	referenced by __CT??_R0?AVTReadFailure@TRawIStream@@@8??0TReadFailure@TRawIStream@@QAE@ABV01@@Z36 at +0x18
-0x00002461	0x38	func	??5TRawIStream@@QAEAAV0@AAE@Z	Army	referenced by ??5@YAAAVTRawIStream@@AAV0@AAUTMapLoc@@@Z at +0xf
+0x00002461	0x38	func	??5TRawIStream@@QAEAAV0@AAE@Z	Army	referenced by 0x0002b8bd at +0x4f
 0x00002499	0x38	func	??6TRawOStream@@QAEAAV0@ABF@Z	Army	referenced by ?write@TCreatureStack@@QBEXPAVTRawOStream@@H@Z at +0x1a
 0x000024d1	0x1b	func	??0TWriteFailure@TRawOStream@@QAE@H@Z	Army	referenced by ?write@TRawOStream@@QAEAAV1@PBDI@Z at +0x20
 0x000024ec	0x1c	func	??_GTWriteFailure@TRawOStream@@UAEPAXI@Z	Army	vtable of TWriteFailure@TRawOStream (RTTI) slot 0
@@ -117,7 +117,7 @@ rva	size	kind	name	unit	evidence
 0x0000750b	0x5b	func	??0?$TRefCountingPtr@VTContents@TBlackBox@@@@QAE@XZ	BlackBox	masked body (91 bytes, 7 relocations) unique at a census start
 0x00007566	0x20	func	??1?$TRefCountingPtr@VTContents@TBlackBox@@@@QAE@XZ	BlackBox	referenced by ??1TBlackBox@@UAE@XZ at +0x19
 0x00007586	0x7f	func	?_split@?$TRefCountingPtr@VTContents@TBlackBox@@@@AAEXXZ	BlackBox	referenced by ??0TEvent@@QAE@ABUTObjectType@@PAVTRawIStream@@H@Z at +0xeb
-0x00007605	0x38	func	??6TRawOStream@@QAEAAV0@ABC@Z	GameMap	referenced by ?_writeLossCondition@TGameMapHeader@@CAXABUTLossConditionData@@AAVTRawOStream@@W4EGameVersion@@@Z at +0x17
+0x00007605	0x38	func	??6TRawOStream@@QAEAAV0@ABC@Z	GameMap	referenced by 0x0002b95d at +0xb7
 0x0000763d	0x38	func	??5TRawIStream@@QAEAAV0@AAC@Z	GameMap	referenced by 0x0002b8bd at +0x25
 0x00007675	0x38	func	??5TRawIStream@@QAEAAV0@AAJ@Z	GameMap	referenced by ?read@TQuestLocation@@IAEXPAVTRawIStream@@H@Z at +0x4f; ICF-folded with 1 identical bodies
 0x000076ad	0x38	func	??5TRawIStream@@QAEAAV0@AAY07C@Z	BlackBox	masked body (56 bytes, 3 relocations) unique at a census start

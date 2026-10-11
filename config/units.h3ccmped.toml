@@ -457,6 +457,11 @@ source = "src/campaign_editor/EditStartingBonusDlg.cpp"
 flags = "ccmped_o2_gr_windows"
 
 [[unit]]
+unit = "GameMapHeader"
+source = "src/campaign_editor/GameMapHeader.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
 unit = "ScenarioPropsCrossoverPage"
 source = "src/campaign_editor/ScenarioPropsCrossoverPage.cpp"
 flags = "ccmped_o2_gr_windows"
