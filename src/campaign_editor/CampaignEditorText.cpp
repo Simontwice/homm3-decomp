@@ -16,17 +16,15 @@
 
 namespace {
 
-const char kEllipsis[] = "\x85";
-
 // The length of a text once each ellipsis is spelled out.
 VA(0x00416ea0, 0x3e)
 int getTextLength(const char* pText)
 {
-    int length = strcspn(pText, kEllipsis);
+    int length = strcspn(pText, "\x85");
     const char* p = pText + length;
     while (*p != '\0') {
         p++;
-        int span = strcspn(p, kEllipsis);
+        int span = strcspn(p, "\x85");
         p += span;
         length += span + 3;
     }

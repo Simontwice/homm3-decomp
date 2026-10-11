@@ -27,7 +27,7 @@ TMapFrameWnd::TMapFrameWnd(CWnd* pParent, TMapEditingWnd::TController* pControll
     assert(!bSecondLayer || pMap->isTwoLayer());
     DATA_COMPGEN_GUARD(0x005a1c30, mapFrameWndClassNameGuard, className)
     VA_COMPGEN(0x0046f900, 0xa, STATIC_DTOR, className)
-    static CString className;
+    DATA(0x005a1c2c) static CString className;
     if (className.IsEmpty())
         className = AfxRegisterWndClass(CS_DBLCLKS, ::LoadCursor(NULL, IDC_ARROW), (HBRUSH)(COLOR_BTNFACE + 1));
     if (!Create(className, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS, CRect(0, 0, 0, 0), pParent, 0))

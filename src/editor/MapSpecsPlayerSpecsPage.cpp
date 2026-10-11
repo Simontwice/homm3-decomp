@@ -81,7 +81,8 @@ VA(0x00472fb2, 0x4c)
 static const char* getBehaviorTypeName(TPlayerInfo::TBehaviorType behaviorType)
 {
     assert(behaviorType >= 0 && behaviorType < TPlayerInfo::s_kNumBehaviorTypes);
-    static const char* const akBehaviorTypeName[TPlayerInfo::s_kNumBehaviorTypes] = {
+    DATA_COMPGEN_GUARD(0x005a1cfc, behaviorTypeNamesGuard, akBehaviorTypeName)
+    DATA(0x005a1d28) static const char* const akBehaviorTypeName[TPlayerInfo::s_kNumBehaviorTypes] = {
         kRandomStr, kWarriorStr, kBuilderStr, kExplorerStr
     };
     return akBehaviorTypeName[behaviorType];

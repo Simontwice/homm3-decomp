@@ -235,7 +235,7 @@ TMapEditWnd::TMapEditWnd(CWnd* pParent, TMapEditingWnd::TController* pController
     }
     DATA_COMPGEN_GUARD(0x005a1bdc, mapEditWndClassNameGuard, className)
     VA_COMPGEN(0x0046998e, 0xa, STATIC_DTOR, className)
-    static CString className;
+    DATA(0x005a1bd8) static CString className;
     if (className.IsEmpty())
         className = AfxRegisterWndClass(CS_DBLCLKS, khArrowCursor);
     if (!CreateEx(WS_EX_CLIENTEDGE, className, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_HSCROLL | WS_VSCROLL,

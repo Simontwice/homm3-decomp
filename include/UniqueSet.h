@@ -15,6 +15,9 @@
 
 template <class T>
 class TUniqueSet {
+    typedef std::map<T, size_t> TMap;
+    typedef TMap::value_type TMapItem;
+
 public:
     MAC_ADDRESS(0x2268d0, 0xc4)
     size_t add(const T& item)
@@ -22,7 +25,7 @@ public:
         std::map<T, size_t>::iterator pItem = _m_map.find(item);
         if (pItem == _m_map.end()) {
             std::pair<std::map<T, size_t>::iterator, bool> insResult =
-                _m_map.insert(std::map<T, size_t>::value_type(item, _m_apItem.size()));
+                _m_map.insert(TMapItem(item, _m_apItem.size()));
             assert(insResult.second);
             pItem = insResult.first;
             _m_apItem.push_back(pItem);

@@ -37,7 +37,7 @@ TMiniMapWnd::TMiniMapWnd(CWnd* pParent, TMapViewingWnd::TController* pController
     assert(!_m_bSecondLayer || _m_pMap->isTwoLayer());
     DATA_COMPGEN_GUARD(0x005a1edc, miniMapWndClassNameGuard, className)
     VA_COMPGEN(0x00487a1c, 0xa, STATIC_DTOR, className)
-    static CString className;
+    DATA(0x005a1ed8) static CString className;
     if (className.IsEmpty())
         className = AfxRegisterWndClass(0, ::LoadCursor(NULL, IDC_ARROW), (HBRUSH)(COLOR_WINDOW + 1));
     int cxEdge = ::GetSystemMetrics(SM_CXEDGE);

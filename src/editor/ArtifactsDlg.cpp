@@ -134,7 +134,8 @@ namespace {
 VA(0x00404d80, 0x2c)
 const TArtifactsDlg::TSlots& getListedSlots()
 {
-    static const TListedSlots slots;
+    DATA_COMPGEN_GUARD(0x005aa701, listedSlotsGuard, slots)
+    DATA(0x005aa704) static const TListedSlots slots;
     return slots;
 }
 

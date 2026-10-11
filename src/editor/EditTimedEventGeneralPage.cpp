@@ -136,7 +136,9 @@ BOOL TEditTimedEventGeneralPage::OnInitDialog()
     text.Format("%d", _m_firstOccurence + 1);
     _m_firstOccurenceEdit.SetWindowText(text);
     _m_firstOccurenceSpin.SetRange(1, kNumDaysPerYear * 2);
-    static const TSubsequentIntervalEntryInfo akSubsequentIntervals[] = {
+    DATA_COMPGEN_GUARD(0x0059af30, subsequentIntervalsGuard, akSubsequentIntervals)
+    VA_COMPGEN(0x00416753, 0x1, STATIC_DTOR, akSubsequentIntervals)
+    DATA(0x0059aed8) static const TSubsequentIntervalEntryInfo akSubsequentIntervals[] = {
         TSubsequentIntervalEntryInfo(kNeverStr, 0),
         TSubsequentIntervalEntryInfo(kEveryDayStr, 1),
         TSubsequentIntervalEntryInfo(kEvery2DaysStr, 2),

@@ -1367,7 +1367,9 @@ bool TGameMap::_TImpl::onTerrainTypeChanged(bool bSecondLayer, unsigned int x, u
     TTerrainType newTerrainType = layer.getCell(x, y).getTerrainType();
     assert(newTerrainType != oldTerrainType);
     unsigned int numObjs = layer.getNumObjectIDsAtCell(x, y);
-    static vector<int> aObjID;
+    DATA_COMPGEN_GUARD(0x0059e280, terrainChangeObjIDsGuard, aObjID)
+    VA_COMPGEN(0x00420911, 0xa, STATIC_DTOR, aObjID)
+    DATA(0x0059e2b0) static vector<int> aObjID;
     aObjID.clear();
     aObjID.reserve(numObjs);
     for (unsigned int i = 0; i < numObjs; i++)
@@ -1399,7 +1401,8 @@ bool TGameMap::_TImpl::onTerrainTypeChanged(bool bSecondLayer, unsigned int x, u
             TTilePoint adjLoc = TPoint<int>(x, y) + akAdjOffset[dir];
             if (layer.getCell(adjLoc).getTerrainType() != eTerrainWater) {
                 unsigned int numAdjObjs = layer.getNumObjectIDsAtCell(adjLoc.x(), adjLoc.y());
-                static vector<int> aAdjObjID;
+                VA_COMPGEN(0x00420907, 0xa, STATIC_DTOR, aAdjObjID)
+                DATA(0x0059e250) static vector<int> aAdjObjID;
                 aAdjObjID.clear();
                 aAdjObjID.reserve(numAdjObjs);
                 for (unsigned int i = 0; i < numAdjObjs; i++)
@@ -2158,7 +2161,8 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
     header.m_desc = _m_pProperties->m_desc;
     header.m_difficulty = _m_pProperties->m_difficulty;
     header.m_maxHeroLevel = _m_pProperties->m_maxHeroLevel;
-    for (int player = 0; player < kNumPlayers; player++) {
+    int player;
+    for (player = 0; player < kNumPlayers; player++) {
         const _TPlayerBookkeeping& playerBookkeeping = *_m_apPlayerBookkeeping[player];
         const TPlayerInfo& playerInfo = (*_m_pProperties->m_paPlayer)[player];
         TGameMapHeader::TPlayerSlot& slot = header.m_aPlayer[player];
@@ -2225,7 +2229,8 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
             header.m_aTeam[player] = teamInfo.getPlayerTeam(TPlayer(player));
     }
     int numHeroes = _m_version != GAME_VERSION_ROE ? kNumHeroes : 128;
-    for (THeroID heroID = 0; heroID < numHeroes; heroID++)
+    THeroID heroID;
+    for (heroID = 0; heroID < numHeroes; heroID++)
         header.m_availableHeroes.set(heroID, !_m_pBookkeeping->m_heroesOnMap.test(heroID)
                                                  && !_m_pProperties->m_disabledHeroes.test(heroID));
     unsigned int numPlaceholderHeroes = 0;
@@ -2286,7 +2291,9 @@ void TGameMap::_TImpl::save(streambuf* pStreamBuf) const
         }
     }
     TUniqueSet<TObjectType> objTypes;
-    static const TObjectTypeTable kObjTypeTable("objtmplt.txt");
+    DATA_COMPGEN_GUARD(0x0059e2c0, objTypeTableGuard, kObjTypeTable)
+    VA_COMPGEN(0x0042489a, 0xa, STATIC_DTOR, kObjTypeTable)
+    DATA(0x0059e380) static const TObjectTypeTable kObjTypeTable("objtmplt.txt");
     for (vector<TObjectType>::const_iterator pObjType = kObjTypeTable.m_objectTypes.begin();
          pObjType != kObjTypeTable.m_objectTypes.end(); ++pObjType)
         objTypes.add(*pObjType);
@@ -2360,8 +2367,9 @@ VA(0x00424926, 0x124a)
 void TGameMap::_TImpl::importText(istream* pIStream)
 {
     assert(pIStream != NULL);
-    static const string kSectionStart("===== ");
-    static const string kSectionEnd(" =====");
+    DATA_COMPGEN_GUARD(0x0059e358, importTextSectionGuard, kSectionStart)
+    DATA(0x0059e268) static const string kSectionStart("===== ");
+    DATA(0x0059e298) static const string kSectionEnd(" =====");
     string line;
     getline(*pIStream, line);
     if (line != kSectionStart + kMapNameStr + kSectionEnd)
@@ -2541,8 +2549,9 @@ VA(0x00425bbe, 0x936)
 void TGameMap::_TImpl::exportText(ostream* pOStream) const
 {
     assert(pOStream != NULL);
-    static const string kSectionStart("===== ");
-    static const string kSectionEnd(" =====");
+    DATA_COMPGEN_GUARD(0x0059e2e8, exportTextSectionGuard, kSectionStart)
+    DATA(0x0059e360) static const string kSectionStart("===== ");
+    DATA(0x0059e2d8) static const string kSectionEnd(" =====");
     *pOStream << kSectionStart + kMapNameStr + kSectionEnd << '\n' << getName() << "\n\n";
     string desc = getDesc();
     replace(desc.begin(), desc.end(), '\n', '\t');
@@ -2615,8 +2624,11 @@ void TGameMap::_TImpl::exportText(ostream* pOStream) const
 VA(0x0042650e, 0x3dd)
 bool TGameMap::_TImpl::_isValidPlacement(const TLayer& layer, const TGameObject& obj, unsigned int x, unsigned int y)
 {
-    static vector<int> aLowerObjIDs;
-    static vector<int> aHigherObjIDs;
+    DATA_COMPGEN_GUARD(0x0059e370, placementObjIDsGuard, aLowerObjIDs)
+    VA_COMPGEN(0x00426931, 0xa, STATIC_DTOR, aLowerObjIDs)
+    DATA(0x0059e2c8) static vector<int> aLowerObjIDs;
+    VA_COMPGEN(0x00426927, 0xa, STATIC_DTOR, aHigherObjIDs)
+    DATA(0x0059e288) static vector<int> aHigherObjIDs;
     aLowerObjIDs.clear();
     aHigherObjIDs.clear();
     unsigned int heightMap[OBJECT_MASK_WIDTH][OBJECT_MASK_HEIGHT];
@@ -2699,7 +2711,9 @@ bool TGameMap::_TImpl::_isValidShipyardPlacement(const TLayer& layer, const TGam
                                                  unsigned int y)
 {
     assert(shipyard.getType() == SHIPYARD);
-    static const TPoint<int> akWaterOffset[] = {
+    DATA_COMPGEN_GUARD(0x0059e2e9, waterOffsetGuard, akWaterOffset)
+    VA_COMPGEN(0x00426a64, 0x1, STATIC_DTOR, akWaterOffset)
+    DATA(0x0059e2f0) static const TPoint<int> akWaterOffset[] = {
         TPoint<int>(1, 1), TPoint<int>(1, 0), TPoint<int>(1, -1), TPoint<int>(0, 1), TPoint<int>(0, -1),
         TPoint<int>(-1, 1), TPoint<int>(-1, -1), TPoint<int>(-2, 1), TPoint<int>(-2, -1), TPoint<int>(-3, 1),
         TPoint<int>(-3, 0), TPoint<int>(-3, -1)
