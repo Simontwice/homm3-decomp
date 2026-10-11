@@ -519,10 +519,22 @@ bool operator==(const TScenarioOptionsBonus& lhs, const TScenarioOptionsBonus& r
     return true;
 }
 
+VA(0x00405af0, 0xa6)
+TScenarioOptionsCrossoverScenario::TScenarioOptionsCrossoverScenario(const vector<TChoice>& choices)
+    : m_choices(choices)
+{
+}
+
 VA(0x00405bc0, 0x3f)
 void TScenarioOptionsCrossoverScenario::removeChoice(int index)
 {
     m_choices.erase(m_choices.begin() + index);
+}
+
+VA(0x00405c00, 0xa6)
+TScenarioOptionsStartingHero::TScenarioOptionsStartingHero(const vector<TChoice>& choices)
+    : m_choices(choices)
+{
 }
 
 void TScenarioOptionsStartingHero::removeChoice(int index)

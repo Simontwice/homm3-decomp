@@ -267,7 +267,7 @@ public:
         int m_player;
     };
 
-    explicit TScenarioOptionsCrossoverScenario(const std::vector<TChoice>& choices) : m_choices(choices) {}
+    explicit TScenarioOptionsCrossoverScenario(const std::vector<TChoice>& choices);
 
     virtual void accept(TVisitor& visitor) const { visitor.visit(*this); }
 
@@ -295,7 +295,7 @@ public:
         int m_player;
     };
 
-    explicit TScenarioOptionsStartingHero(const std::vector<TChoice>& choices) : m_choices(choices) {}
+    explicit TScenarioOptionsStartingHero(const std::vector<TChoice>& choices);
 
     virtual void accept(TVisitor& visitor) const { visitor.visit(*this); }
 
@@ -445,6 +445,9 @@ public:
 
     void setCrossover(const TScenarioCrossover& newCrossover);
     const TCampaignScenarioMap* getMap() const;
+    // A player of the scenario's map (callers read the player before the
+    // map, h3ccmped 0x42e5a0 and 0x42f780).
+    const TCampaignScenarioMap::TPlayerInfo& getPlayer(int player) const { return getMap()->m_aPlayer[player]; }
     int getRegionColor() const;
     int getDifficulty() const;
     const std::string& getRegionDesc() const;
