@@ -11136,6 +11136,10 @@ unsigned char type_random_map_generator::placeSeerHutForArtifact(t_quest_artifac
 // the helper is an experimental inference from four repeated retail scans.
 // See generate-rmg-key-tent-family.py / generate-rmg-key-color-helper-family.py.
 // 207 native caller/helper combinations pass with thirteen wrong controls.
+// The placement result is a local cleared before the fill: Mac 0x250a90
+// zeroes r27 and stores placeQuestGroup's result into it at 0x250b04, and
+// the map editor's copy keeps it in a byte home tested after the guard
+// delete (h3maped 92.30% -> 97.11%; the game body moves 89.48 -> 88.48).
 VA(0x0054B8C0, 0x385)
 MAC_ADDRESS(0x2508e8, 0x334) // anchor-callee 0x5338e0; retail-only
 unsigned char type_random_map_generator::placeKeyTentGuard(type_object* object, int maxValue)
@@ -11156,15 +11160,17 @@ unsigned char type_random_map_generator::placeKeyTentGuard(type_object* object, 
     while (m_nextKeyTentColor < m_disabledKeyTents.size()
         && m_disabledKeyTents[m_nextKeyTentColor])
         ++m_nextKeyTentColor;
+    unsigned char placed = 0;
     if (fillTreasureGroup(origin, &group, 0, maxValue) && group.addGuard(guard)) {
         group.updateBounds();
         group.traceOutline();
         group.markPlacementOutline();
-        if (placeQuestGroup(&group, origin))
-            return 1;
+        placed = placeQuestGroup(&group, origin);
     } else {
         delete guard;
     }
+    if (placed)
+        return 1;
     group.discard();
     m_disabledKeyTents[color] = 0;
     m_nextKeyTentColor = 0;
