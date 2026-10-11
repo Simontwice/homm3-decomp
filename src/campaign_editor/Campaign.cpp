@@ -1354,6 +1354,11 @@ TCampaignScenarioMap::TCampaignScenarioMap(const string& fileName, streambuf* pS
     }
 }
 
+VA_COMPGEN(0x0040a7c0, 0x12, CLASS_CTOR, TCreateFailure)
+VA_COMPGEN(0x0040ab80, 0x19, IMPLICIT_COPY_CTOR, TCreateFailure)
+VA_COMPGEN(0x0040aba0, 0x19, IMPLICIT_COPY_CTOR, TMapIsUnplayable)
+VA_COMPGEN(0x0040abc0, 0x19, IMPLICIT_COPY_CTOR, TMapFileIsInvalid)
+
 VA(0x0040abe0, 0x116)
 TCampaignScenarioMap::~TCampaignScenarioMap()
 {
