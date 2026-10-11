@@ -6884,7 +6884,7 @@ unsigned char type_random_map_generator::createGroundConnection(
     int destinationZone = destination->m_templateZone->m_zoneIndex;
     if (source->getLevelPosition().m_z != destination->getLevelPosition().m_z)
         return 0;
-    if (source->m_terrain == eTerrainWater)
+    if (source->getTerrain() == eTerrainWater)
         return 0;
     if (destination->m_terrain == eTerrainWater)
         return 0;
@@ -6926,7 +6926,7 @@ unsigned char type_random_map_generator::createGroundConnection(
     if (bestCost == 1 && guardValue == 0 && !connection->m_placeBorderObjects)
         return 1;
 
-    int count = min(candidates.size(), (eligibleCount + 39) / 40);
+    int count = min((eligibleCount + 39) / 40, candidates.size());
     for (int crossing = 0; crossing < count; ++crossing) {
         int selected = rand() % candidates.size();
         TRmgMapPosition position = candidates[selected];
