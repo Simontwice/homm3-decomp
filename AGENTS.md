@@ -68,8 +68,8 @@ commit and publish with `homm3 land`. This applies to workers too.
 `homm3 land` waits its turn for a repository-wide lock (first come, first
 served; `homm3 land --status` shows the holder and the queue), rebases onto
 `origin/decomp-complete-4.0`, runs the full gate cycle for every image
-(build, both editors' `placements --write`, the build again, `homm3 mac
-build` when the lane touched game sources or shared headers), commits the
+(build, both editors' `placements --write`, the build again; `homm3 mac
+build` only with `--mac`, when the lane used Mac evidence), commits the
 refreshed scores and pushes a fast-forward; `--dry-run` stops before the push.
 Never rebase and push by hand. See [docs/tooling/land.md](docs/tooling/land.md).
 Do not run routine full builds, tests, standalone validation checks or broad

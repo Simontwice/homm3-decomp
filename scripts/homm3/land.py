@@ -20,9 +20,10 @@ order) and, while holding it:
 3. runs `homm3 --image KEY placements --write` for every editor image whose
    objects that build compiled, then the full build again when a table
    changed or the first build was not green; that build must be green;
-4. runs `homm3 mac build` when the lane's own commits touch the Mac build's
-   inputs (`mac_paths`: game unit sources, the game include roots outside
-   the editors' trees, config/units.toml, config/mac/), or with --mac;
+4. runs `homm3 mac build` only with --mac (the Mac build is evidence for
+   Windows, not a landing gate); without it the log names the own commits'
+   Mac inputs (`mac_paths`: game unit sources, the game include roots
+   outside the editors' trees, config/units.toml, config/mac/);
 5. commits the refreshed ledgers, README blocks, placements and cleanliness
    floors as "Refresh scores ... after the rebase" (any other change fails);
 6. pushes `git push origin HEAD:decomp-complete-4.0`, a plain fast-forward
@@ -394,14 +395,15 @@ def cycle(log: Log, turn, args, timings: list, untracked) -> int:
         if problems:
             raise GateFailed("build (after placements)", "; ".join(problems))
     relevant = mac_paths(own_paths)
-    if relevant or args.mac:
+    touched = (f"own commits touch {len(relevant)} Mac input(s): " + ", ".join(relevant[:8])
+               + (" ..." if len(relevant) > 8 else "")) if relevant else \
+        "own commits touch no Mac input"
+    if args.mac:
         phase("mac build")
-        log("Mac build: " + ("forced (--mac)" if not relevant else
-                             f"own commits touch {len(relevant)} Mac input(s): "
-                             + ", ".join(relevant[:8]) + (" ..." if len(relevant) > 8 else "")))
+        log(f"Mac build: --mac ({touched})")
         run(log, *homm3("mac", "build"), check="mac build")
     else:
-        log("Mac build: skipped (own commits touch no Mac input)")
+        log(f"Mac build: skipped without --mac ({touched})")
     phase("commit")
     refresh_commit(log, untracked)
     if subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=ROOT).returncode:
@@ -516,7 +518,7 @@ def main(argv=None) -> int:
     parser.add_argument("--dry-run", action="store_true",
                         help="everything but the push (rebase and refresh commit stay local)")
     parser.add_argument("--mac", action="store_true",
-                        help="run `homm3 mac build` even when no own commit touches a Mac input")
+                        help="also run `homm3 mac build` (never run otherwise)")
     parser.add_argument("--jobs", type=int, default=4, metavar="N",
                         help="ninja parallelism for the full builds (default 4)")
     parser.add_argument("--branch", default=BRANCH, help=argparse.SUPPRESS)

@@ -91,6 +91,63 @@ class MacRelevanceTests(unittest.TestCase):
             "docs/tooling/land.md", "scripts/homm3/land.py"]), [])
 
 
+class _Quiet:
+    def __call__(self, message):
+        pass
+
+    def raw(self, line):
+        pass
+
+
+class CycleMacTests(unittest.TestCase):
+    """The gate cycle runs `homm3 mac build` only when asked (`--mac`)."""
+
+    class _Turn:
+        def __init__(self):
+            self.record, self.phases = {}, []
+
+        def phase(self, name):
+            self.phases.append(name)
+
+    def cycle(self, mac: bool):
+        from types import SimpleNamespace
+        commands = []
+
+        def run(log, *command, check=None):
+            commands.append(command)
+            return 0, ""
+
+        def git(*args):
+            if args[0] == "rev-parse":
+                return "f" * 40 + "\n"
+            if args[0] == "rev-list":
+                return "a" * 40 + "\n"
+            if args[0] == "diff":
+                return "src/hero.cpp\ninclude/hero.h\n"
+            return ""
+
+        turn = self._Turn()
+        args = SimpleNamespace(branch=land.BRANCH, jobs=4, mac=mac, dry_run=True)
+        with patch.object(land, "run", run), patch.object(land, "git", git), \
+                patch.object(land, "rebase"), patch.object(land, "editor_images",
+                                                           return_value=IMAGES), \
+                patch.object(land, "full_build", return_value=build_output()), \
+                patch.object(land, "refresh_commit"), \
+                patch.object(land.subprocess, "run",
+                             return_value=subprocess.CompletedProcess([], 0)):
+            self.assertEqual(land.cycle(_Quiet(), turn, args, [], ()), 0)
+        return [command for command in commands if "mac" in command], turn.phases
+
+    def test_game_source_commits_skip_the_mac_build_without_the_flag(self):
+        mac, phases = self.cycle(mac=False)
+        self.assertEqual((mac, "mac build" in phases), ([], False))
+
+    def test_the_flag_runs_it(self):
+        mac, phases = self.cycle(mac=True)
+        self.assertEqual(len(mac), 1)
+        self.assertIn("mac build", phases)
+
+
 README = """# Title
 
 Prose.

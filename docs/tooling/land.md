@@ -39,14 +39,14 @@ lock. While holding both it:
    compiled (never after a game-only compile, which would blank the tables),
    and the full build again when a table changed or the first build was not
    green. That build must pass every gate for every image;
-4. runs `homm3 mac build` when the lane's own commits (`origin..HEAD` after
-   the rebase) touch a Mac build input, or always with `--mac`. Inputs are
-   derived from the build configuration: the `source` of every
-   `config/units.toml` unit, files under the game's include roots (`src`,
-   `include`, `[build].includes`) outside the editors' own trees
+4. runs `homm3 mac build` only with `--mac`. The Mac build is evidence for
+   recovering Windows source, not a landing gate, so a lane passes `--mac`
+   when it used Mac evidence. Without the flag the log still names the own
+   commits' (`origin..HEAD` after the rebase) Mac build inputs: the `source`
+   of every `config/units.toml` unit, files under the game's include roots
+   (`src`, `include`, `[build].includes`) outside the editors' own trees
    (`src/<dir>`, `include/<dir>` of each image's `sources`),
-   `config/units.toml` and `config/mac/`. Upstream commits are not
-   re-checked: their own landing ran the Mac build when they needed it;
+   `config/units.toml` and `config/mac/`;
 5. commits what the cycle rewrote (README score blocks, `build.ninja`, the
    ledgers, placements tables, the Mac ledger and profiles, cleanliness
    floors) as `Refresh scores [and placements] after the rebase`. Any other
