@@ -4332,7 +4332,7 @@ RandomGeneratorPropsDlg	??4?$auto_ptr@VTRandomlyLeveledGenerator@@@std@@QAEAAV01
 RandomGeneratorPropsDlg	??4TAbstractRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	99.8077	99.8077	99.8077	0xb1f4c	-
 RandomGeneratorPropsDlg	??4TFlaggableObject@@QAEAAV0@ABV0@@Z	99.7917	99.7917	99.7917	0xb1f13	-
 RandomGeneratorPropsDlg	??4TRandomlyLeveledGenerator@@QAEAAV0@ABV0@@Z	99.8611	99.8611	99.8611	0xb1ebb	-
-RandomGeneratorPropsDlg	??RTTownDistanceLess@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@QBE_NABVTMapObjectRef@@0@Z	67.3750	67.3750	67.3750	0xb0483	tokens1:f37a39754ac8
+RandomGeneratorPropsDlg	??RTTownDistanceLess@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@QBE_NABVTMapObjectRef@@0@Z	72.5865	72.5865	72.5865	0xb0483	tokens1:f37a39754ac8
 RandomGeneratorPropsDlg	??_GTRandomGeneratorAlignmentDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb07c9	-
 RandomGeneratorPropsDlg	??_GTRandomGeneratorLevelDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xaff69	-
 RandomGeneratorPropsDlg	??_GTRandomGeneratorOwnerDlg@?%C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xafd4e	-
@@ -5575,10 +5575,13 @@ rmg	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTr
 rmg	?buildOutline@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x9b76d	-
 rmg	?buildOverlapPriorities@TRmgObjectPropertiesRef@@QAEXXZ	100.0000	100.0000	100.0000	0x9b89c	-
 rmg	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	89.3959	89.3959	89.3959	0xaae7b	-
+rmg	?buildZoneBoundaries@type_random_map_generator@@QAEXPAUTRmgTemplate@@H@Z	96.0749	96.0749	96.0749	0xa3a03	-
 rmg	?buildZoneConnectionPaths@type_random_map_generator@@QAEXXZ	74.6549	74.6549	74.6549	0xa5767	-
+rmg	?canConnect@TRmgZone@@QBEEPBU1@@Z	99.4444	99.4444	99.4444	0x9b6e2	-
 rmg	?canFitObject@TRmgTreasureGroup@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@@Z	96.5517	96.5517	96.5517	0x9d2e0	-
 rmg	?canPlaceObject@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@PAUTRmgZone@@@Z	91.2097	91.2097	91.2097	0x9aa93	-
 rmg	?canPlaceShipyard@type_random_map_generator@@QAEEUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xa6795	-
+rmg	?canPlaceZone@type_random_map_generator@@QAEEPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa1701	-
 rmg	?chooseCreatureTownType@TRmgZone@@QAEXE@Z	100.0000	100.0000	100.0000	0x9b4e1	-
 rmg	?chooseTerrain@TRmgZone@@QAEXXZ	100.0000	100.0000	100.0000	0x9b53d	-
 rmg	?clear@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXXZ	100.0000	100.0000	100.0000	0xae27c	-
@@ -5590,13 +5593,13 @@ rmg	?completePlacement@t_quest_artifact@@UAEEXZ	100.0000	100.0000	100.0000	0x9c0
 rmg	?completePlacement@type_key_tent@@UAEEXZ	100.0000	100.0000	100.0000	0x9c019	-
 rmg	?completePlacement@type_object@@UAEEXZ	100.0000	100.0000	100.0000	0x9baf5	-
 rmg	?connectZones@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xa79a3	-
-rmg	?countPlacedZoneConnections@type_random_map_generator@@QBEHPAUTRmgZone@@@Z	84.9057	84.9057	84.9057	0xa1967	-
+rmg	?countPlacedZoneConnections@type_random_map_generator@@QBEHPAUTRmgZone@@@Z	85.0000	85.0000	85.0000	0xa1967	-
 rmg	?countRmgOccupiedCells@@YAHPBUTObjectType@@@Z	100.0000	100.0000	100.0000	0xaa195	-
 rmg	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@PAV?$vector@PAUTRmgMapItem@@V?$allocator@PAUTRmgMapItem@@@std@@@std@@PAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@5@@Z	99.0137	99.0137	99.0137	0xa61bc	-
 rmg	?createGuard@type_random_map_generator@@QAEPAVtype_object@@HPAUTRmgZone@@@Z	99.1751	99.1751	99.1751	0xa5c07	-
 rmg	?createMonolithConnection@type_random_map_generator@@QAEXPAUTRmgZone@@PAUTRmgZoneConnection@@H@Z	96.2915	96.2915	96.2915	0xa7605	-
 rmg	?createRiverToJoin@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	98.3755	98.3755	98.3755	0xab6ac	-
-rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3709	84.3805	84.3805	0xabd5f	-
+rmg	?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	84.3805	84.3805	84.3805	0xabd5f	-
 rmg	?createRivers@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xac4ae	-
 rmg	?createRoads@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xab52a	-
 rmg	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	89.1568	89.5710	89.5710	0xa696b	-
@@ -5638,7 +5641,7 @@ rmg	?generate@type_prison_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PA
 rmg	?generate@type_quest_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9cac2	-
 rmg	?generate@type_quest_experience_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9cb83	-
 rmg	?generate@type_quest_gold_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9cc22	-
-rmg	?generate@type_random_map_generator@@QAEEXZ	82.4145	82.4145	82.4145	0xac552	-
+rmg	?generate@type_random_map_generator@@QAEEXZ	82.4525	82.4525	82.4525	0xac552	-
 rmg	?generate@type_resource_lump_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c8b0	-
 rmg	?generate@type_scholar_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c97c	-
 rmg	?generate@type_shrine_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x9c9e3	-
@@ -5698,8 +5701,9 @@ rmg	?markRiverJoinTargets@type_random_map_generator@@QAEXXZ	100.0000	100.0000	10
 rmg	?markRiverOutletTargets@type_random_map_generator@@QAEXXZ	100.0000	100.0000	100.0000	0xabc20	-
 rmg	?objectsAllowEntrances@TRmgTreasureGroup@@QBEEXZ	100.0000	100.0000	100.0000	0x9d65c	-
 rmg	?paintRoad@type_random_map_generator@@QAEEUTRmgMapPosition@@H@Z	100.0000	100.0000	100.0000	0xab37f	-
+rmg	?placeAdditionalTowns@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	98.7185	98.7185	98.7185	0xa8db2	-
 rmg	?placeBorderGuard@type_random_map_generator@@QAEHUTRmgMapPosition@@HPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa5e73	-
-rmg	?placeExtraMines@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	97.0645	97.0645	97.0645	0xa9c7c	-
+rmg	?placeExtraMines@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa9c7c	-
 rmg	?placeGuard@type_random_map_generator@@QAEXHUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xa5e03	-
 rmg	?placeKeyTentGuard@type_random_map_generator@@QAEEPAVtype_object@@H@Z	97.1964	97.1964	97.1964	0xadb72	-
 rmg	?placeMineSite@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@EH@Z	93.2857	93.2857	93.2857	0xa9641	-
@@ -5708,7 +5712,7 @@ rmg	?placeMonolithBorderGuard@type_random_map_generator@@QAEEUTRmgMapPosition@@P
 rmg	?placeObjectInZone@type_random_map_generator@@QAEEPAVtype_object@@PAUTRmgZone@@@Z	98.2985	98.2985	98.2985	0xa7312	-
 rmg	?placePrimaryTown@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0xa8d2c	-
 rmg	?placeSeerHutForArtifact@type_random_map_generator@@QAEEPAVt_quest_artifact@@@Z	94.2652	94.2652	94.2652	0xad947	-
-rmg	?positionZone@type_random_map_generator@@QAEXPAUTRmgZone@@H@Z	98.9226	98.9226	98.9226	0xa1f3b	-
+rmg	?positionZone@type_random_map_generator@@QAEXPAUTRmgZone@@H@Z	98.9524	98.9524	98.9524	0xa1f3b	-
 rmg	?push_back@?$vector@HV?$allocator@H@std@@@std@@QAEXABH@Z	100.0000	100.0000	100.0000	0xbb26	-
 rmg	?push_back@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXABUTRmgMapPosition@@@Z	100.0000	100.0000	100.0000	0xae1fd	-
 rmg	?push_back@?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@QAEXABUTRmgNoiseRegion@@@Z	100.0000	100.0000	100.0000	0xae294	-
@@ -5895,7 +5899,7 @@ rmg_voronoi	?detach@TRmgHalfEdge@@QAEXXZ	100.0000	100.0000	100.0000	0xcc670	-
 rmg_voronoi	?flipRmgEdge@@YIXPAUTRmgHalfEdge@@@Z	100.0000	100.0000	100.0000	0xcc68e	-
 rmg_voronoi	?isRmgPointInsideCircle@@YAEUTRmgPoint@@000@Z	49.8333	50.8750	50.8750	0xccc7a	-
 rmg_voronoi	?isRmgPointOnSegment@@YIEUTRmgPoint@@PAUTRmgHalfEdge@@@Z	59.0147	59.0147	59.0147	0xcc6f2	-
-rmg_voronoi	?length@TRmgVector@@QBEHXZ	82.8571	82.8571	82.8571	0xcc5ad	-
+rmg_voronoi	?length@TRmgVector@@QBEHXZ	100.0000	100.0000	100.0000	0xcc5ad	-
 rmg_voronoi	?locate@TRmgVoronoi@@QAEPAUTRmgHalfEdge@@UTRmgPoint@@@Z	100.0000	100.0000	100.0000	0xcca55	-
 rmg_voronoi	?removeEdge@TRmgVoronoi@@QAEXPAUTRmgHalfEdge@@@Z	100.0000	100.0000	100.0000	0xcc9cc	-
 rmg_voronoi	?splice@TRmgHalfEdge@@QAEXPAU1@@Z	100.0000	100.0000	100.0000	0xcc643	-

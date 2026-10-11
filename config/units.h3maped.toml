@@ -5,7 +5,12 @@
 # (config/retail/h3maped/placements.tsv), never from the game's VA() claims.
 #
 # Profiles (editor-plan.md section 4, fingerprinted against retail):
-#   map editor objects          /O1 /Ob2 /GR, default __cdecl, NDEBUG:
+#   map editor objects          /O1 /Ob2 /GR, default __cdecl, NDEBUG, no
+#                               /Op (homm3 patterns flags --try: without it
+#                               placeExtraMines, TRmgVector::length and
+#                               readBitset compile exactly and no body of
+#                               the profile's units gets worse;
+#                               docs/vc6/pattern-sweeps.md):
 #                               GameMap.cpp's anonymous helpers and
 #                               computeAdjacentDirs take stack arguments
 #                               and the caller pops them; no assert text
@@ -105,7 +110,6 @@ editor_o1_ob2_gr_windows = [
   "/c",
   "/O1",
   "/Ob2",
-  "/Op",
   "/MT",
   "/GX",
   "/GR",
@@ -118,7 +122,6 @@ editor_fastcall_o1_ob2_gr_windows = [
   "/c",
   "/O1",
   "/Ob2",
-  "/Op",
   "/MT",
   "/Gr",
   "/GX",

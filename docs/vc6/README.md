@@ -24,6 +24,7 @@ Wine remains the verdict. Do not use leaked compiler source as evidence.
 | Compiler generation comparison | [RTM generation](rtm-generation.md) |
 | Compiler instrumentation | [Shim](shim.md), [state unrelated edits disturb](unstable-state.md), [decision forcing](decision-forcing.md), [context variants](context-variants.md) |
 | Known compiler behavior | [Behavior catalog](behavior-catalog.md) |
+| Image-wide mechanism sweeps and profile controls | [Pattern sweeps](pattern-sweeps.md) |
 | Victor library compiler findings | [Victor](victor-library.md) |
 
 For experiments, see [source families](source-families.md),
