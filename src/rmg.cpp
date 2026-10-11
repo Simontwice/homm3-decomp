@@ -8391,6 +8391,8 @@ void type_random_map_generator::placeAdditionalTowns(TRmgZone* zone)
 // First reconstruction: 76.6787%. Both CFGs have 61 blocks; remaining
 // differences include candidate-loop layout and compiler-generated cleanup.
 // Preserve the alignment fallback, full neighbourhood scan and tied-site list.
+// Both Windows images form the fallback's town count before calling rand()
+// and keep it in alignment's home; Mac 0x248888 branches to 9 or 8 first.
 VA(0x00544D90, 0x4B7)
 MAC_ADDRESS(0x24882c, 0x5d4)
 unsigned char type_random_map_generator::tryPlaceAdditionalTown(TRmgZone* zone,
@@ -8399,8 +8401,10 @@ unsigned char type_random_map_generator::tryPlaceAdditionalTown(TRmgZone* zone,
     TRmgTemplateZone* slot = zone->m_templateZone;
     if ((player == -1 && !slot->m_neutralTownsMatchZone) || alignment == -1) {
         alignment = slot->selectAllowedTown();
-        if (alignment == -1)
-            alignment = rand() % (8 + (m_mapVersion >= 1));
+        if (alignment == -1) {
+            int townCount = m_mapVersion >= 1 ? 9 : 8;
+            alignment = rand() % townCount;
+        }
     }
     if (!zone->m_hasPrimaryTown)
         return tryPlacePrimaryTown(zone, alignment, player, hasFort);

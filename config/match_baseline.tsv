@@ -3493,7 +3493,7 @@ rmg	?traceBranchEnd@type_random_map@@QAE?AUTRmgPoint@@U2@0H@Z	99.8683	99.8683	99
 rmg	?traceOutline@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x135ee0	tokens1:0b78ab6fa8c4
 rmg	?traceZoneBoundary@type_random_map_generator@@QAEXPAUTRmgHalfEdge@@E@Z	86.5926	86.5926	86.6846	0x13c390	tokens1:99bc6bef2f91
 rmg	?tryAddObject@TRmgTreasureGroup@@QAEEPAVtype_object@@@Z	89.3048	89.3048	89.3048	0x135970	tokens1:e9acbfb21179
-rmg	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	81.9095	81.9095	81.9095	0x144d90	tokens1:eb2932bbb2b2
+rmg	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	84.3054	84.3054	84.3054	0x144d90	tokens1:ddc6b5e0b1a9
 rmg	?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z	95.1020	95.1020	99.4005	0x145990	tokens1:c96e747117bc
 rmg	?tryPlacePrimaryTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHE@Z	92.0621	92.0621	92.0724	0x145250	tokens1:eb865d935a3b
 rmg	?updateBounds@TRmgTreasureGroup@@QAEXXZ	100.0000	100.0000	100.0000	0x135df0	tokens1:028861093bed
