@@ -1139,3 +1139,8 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "MapEditorText"
 source = "src/editor/MapEditorText.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "MapEditor"
+source = "src/editor/MapEditor.cpp"
+flags = "editor_o1_ob2_gr_windows"

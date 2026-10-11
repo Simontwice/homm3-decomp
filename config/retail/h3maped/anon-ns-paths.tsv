@@ -5,7 +5,8 @@
 # h3maped.exe; the file offset of its first `?%` spelling is given per row.
 # Units the image compiles today are `objecttype` and `resourcemanager`;
 # the editor's own units take their original file stem (`Player`, `MapDoc`).
-# `Map Editor.cpp` (file offset 0x18b724) is absent: a unit name has no space.
+# `Map Editor.cpp` (file offset 0x18b724) is the unit `MapEditor`: a unit name
+# has no space.
 #
 # BlackBoxPropsContentsPage: `?%` at file offset 0x17c938
 # EditQuestDlg: `?%` at file offset 0x1821c4
@@ -39,15 +40,14 @@ FindDlg	finddlg.cpp	C:\Dev\Heroes 3 Exp 2\Editor\FindDlg.cpp315515326
 GUIGameObject	guigameobject.cpp	C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662
 MapDoc	mapdoc.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapDoc.cpp166062000
 MapEditWnd	mapeditwnd.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapEditWnd.cpp618416512
+MapEditor	mapeditor.cpp	C:\Dev\Heroes 3 Exp 2\Editor\Map Editor.cpp284242958
 MapSpecsGeneralPage	mapspecsgeneralpage.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsGeneralPage.cpp2959323531
 MapSpecsLossCondPage	mapspecslosscondpage.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsLossCondPage.cpp3258122417
 MapSpecsVictoryCondPage	mapspecsvictorycondpage.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapSpecsVictoryCondPage.cpp2126225498
 MapView	mapview.cpp	C:\Dev\Heroes 3 Exp 2\Editor\MapView.cpp2283717553
-objecttype	objecttype.cpp	C:\Dev\Heroes 3 Exp 2\Editor\ObjectType.cpp3104028164
 Quest	quest.cpp	C:\Dev\Heroes 3 Exp 2\Editor\Quest.cpp225741631
 QuestLocation	questlocation.cpp	C:\Dev\Heroes 3 Exp 2\Editor\QuestLocation.cpp472427463
 QuestLocationPropsDlg	questlocationpropsdlg.cpp	C:\Dev\Heroes 3 Exp 2\Editor\QuestLocationPropsDlg.cpp2981517644
-random_object_placer	random_object_placer.cpp	C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752
 RandomGeneratorPropsDlg	randomgeneratorpropsdlg.cpp	C:\Dev\Heroes 3 Exp 2\Editor\RandomGeneratorPropsDlg.cpp677222979
 SeersHut	seershut.cpp	C:\Dev\Heroes 3 Exp 2\Editor\SeersHut.cpp1706729111
 SeersHutPropsDlg	seershutpropsdlg.cpp	C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200
@@ -55,4 +55,6 @@ TerrainPlacement	terrainplacement.cpp	C:\Dev\Heroes 3 Exp 2\Editor\TerrainPlacem
 ToolkitBase	toolkitbase.cpp	C:\Dev\Heroes 3 Exp 2\Editor\ToolkitBase.cpp94647960
 TownTypeTraits	towntypetraits.cpp	C:\Dev\Heroes 3 Exp 2\Editor\TownTypeTraits.cpp373414956
 VictoryCondition	victorycondition.cpp	C:\Dev\Heroes 3 Exp 2\Editor\VictoryCondition.cpp3269924907
+objecttype	objecttype.cpp	C:\Dev\Heroes 3 Exp 2\Editor\ObjectType.cpp3104028164
+random_object_placer	random_object_placer.cpp	C:\Dev\Heroes 3 Exp 2\Editor\random_object_placer.cpp2512720752
 resourcemanager	resourcemanager.cpp	C:\Dev\Heroes 3 Exp 2\Libraries\ResourceManager\ResourceManager.cpp207539485

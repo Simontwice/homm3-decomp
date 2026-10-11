@@ -229,7 +229,6 @@ typedef std::pair<const CString, const CString> TCommandTexts;
 class TCommandTextMap : public std::map<UINT, TCommandTexts> {
 public:
     TCommandTextMap();
-    VA(0x0045a8d8, 0x5)
     ~TCommandTextMap() {}
 
 private:
@@ -404,7 +403,6 @@ void TCommandTextMap::_add(UINT id, const TSpreadsheetResource& spreadsheet, int
     insert(value_type(id, make_pair(prompt, toolTip)));
 }
 
-VA(0x0045a8a3, 0x2b)
 inline const TCommandTextMap& getCommandTexts()
 {
     static const TCommandTextMap commandTexts;

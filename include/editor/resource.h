@@ -114,6 +114,18 @@ enum {
     IDR_MODE_BAR = 314
 };
 
+// The application's about box, splash bitmap and fatal error caption
+// (MapEditor.cpp). The error string's id is the application's own.
+enum {
+    IDD_ABOUTBOX = 100,
+    IDB_SPLASH = 303,
+    IDC_ABOUT_TITLE_STATIC = 1626,
+    IDC_ABOUT_VERSION_STATIC = 1627,
+    IDC_ABOUT_BUILD_STATIC = 1628,
+    IDC_ABOUT_COPYRIGHT_STATIC = 1630,
+    IDS_FATAL_ERROR = 57346
+};
+
 // The map edit window's context menu.
 enum {
     IDR_CONTEXT_MENU = 214

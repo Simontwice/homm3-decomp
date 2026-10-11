@@ -74,4 +74,7 @@ enum { kNumRandomCreatureTypes = 14 };
 // h3maped 0x58b170: points at the rows.
 extern const TRandomCreatureTraits* akRandomCreatureTraits;
 
+// Loads the rows' names (h3maped 0x458605; the name is inferred).
+void InitializeRandomCreatureTraitsTable();
+
 #endif  /* HOMM3_EDITOR_ARMY_H */

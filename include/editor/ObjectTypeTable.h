@@ -13,6 +13,9 @@
 
 DATA(0x005a23a8) extern const TObjectTypeTable& kObjectTypeTable;
 
+// Loads objects.txt into the table (h3maped 0x492926; Loki's name).
+void loadObjectTypeTable();
+
 // The map editor's object palette slots: one per terrain but rock, the
 // all-terrain slot and one per non-generic category, in the order of
 // apObjectSlotTraits (Loki h3maped objecttype.h; the enumerator names
