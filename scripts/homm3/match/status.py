@@ -1140,8 +1140,8 @@ def image_title(image: str | None = None) -> str:
 
 def image_data_line(image: str | None = None) -> str | None:
     """Another image's data line: named data objects (its placements and its
-    own DATA() claims) over the relocation targets of its census. A pure
-    function of config/ like the rest of the block."""
+    own DATA() claims, one per address) over the relocation targets of its
+    census. A pure function of config/ and the image's sources."""
     from homm3.core import paths
     key = image or paths.image_key()
     if paths.is_game(key):
@@ -1154,11 +1154,18 @@ def image_data_line(image: str | None = None) -> str | None:
     _b, _h, rows = read_tsv(evidence)
     targets = {r["value"] for r in rows if r["disposition"] == "kept"
                and r["target_class"] in ("data", "literal-start")}
-    placed = 0
+    claimed = set()
     if (retail / "placements.tsv").is_file():
         _b, _h, placements = read_tsv(retail / "placements.tsv")
-        placed = sum(1 for r in placements if r["kind"] == "data")
-    return (f"**Data:** {placed:,} / {len(targets):,} referenced data objects "
+        claimed = {int(r["rva"], 16) for r in placements if r["kind"] == "data"}
+    if key == paths.image_key():
+        # the image's own sources and headers: DATA(), DATA_COMPGEN() and
+        # DATA_COMPGEN_GUARD() sites (homm3.retail_labels.source.sweep_sites)
+        from homm3.retail_labels.source import sweep_sites
+        sites = sweep_sites()
+        for macro in ("DATA", "DATA_COMPGEN", "DATA_COMPGEN_GUARD"):
+            claimed |= set(sites.get(macro, {}))
+    return (f"**Data:** {len(claimed):,} / {len(targets):,} referenced data objects "
             "claimed (placements and the image's own `DATA()` claims).")
 
 
