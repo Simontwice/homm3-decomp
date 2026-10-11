@@ -3865,7 +3865,7 @@ seerhuttext	??0TSeerHutTextColumn@@QAE@XZ	100.0000	100.0000	100.0000	0x16bde0	-
 seerhuttext	??1TSeerHutQuestText@@QAE@XZ	100.0000	100.0000	100.0000	0x16bf30	-
 seerhuttext	??1TSeerHutTextColumn@@QAE@XZ	100.0000	100.0000	100.0000	0x16be40	-
 seerhuttext	?joinTextList@@YI?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@@Z	100.0000	100.0000	100.0000	0x16c960	tokens1:5e2f3b34ec6b
-seerhuttext	?loadSeerHutTextColumn@@YIXPAVTSpreadsheetResource@@PAUTSeerHutTextColumn@@H@Z	99.9621	99.9621	99.9621	0x16c120	tokens1:507a25b80e10
+seerhuttext	?loadSeerHutTextColumn@@YIXPAVTSpreadsheetResource@@PAUTSeerHutTextColumn@@H@Z	100.0000	100.0000	100.0000	0x16c120	tokens1:507a25b80e10
 singleselectionpopups	??0CBonusDlg@@QAE@_N@Z	100.0000	100.0000	100.0000	0x175410	tokens1:26011cee0c22
 singleselectionpopups	??0CHeroDlg@@QAE@_N@Z	100.0000	100.0000	100.0000	0x175a70	tokens1:1cd6c8f8ee0e
 singleselectionpopups	??0CHotspotWidget@@QAE@HHHHH@Z	100.0000	100.0000	100.0000	0x175220	tokens1:8b058aec3953
