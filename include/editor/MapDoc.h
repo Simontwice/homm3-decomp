@@ -258,7 +258,7 @@ private:
     _TRoadPlacementOp* _m_pRoadPlacementOp;
     _TRoadEraseOp* _m_pRoadEraseOp;
     bool _m_bEraseUnderground;
-    bool _m_bOwnsAutosave;
+    volatile bool _m_bOwnsAutosave;
     CString _m_autosavePathName;
     CMutex _m_autosaveMutex;
     CWinThread _m_autosaveThread;

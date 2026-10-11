@@ -119,6 +119,8 @@ private:
 };
 
 DATA(0x005a1e80) std::set<TMapView*> allMapViews;
+VA_COMPGEN(0x004800e0, 0x23, STATIC_CTOR, allMapViews)
+VA_COMPGEN(0x00480103, 0xa, STATIC_DTOR, allMapViews)
 
 VA(0x00480112, 0x6)
 BEGIN_MESSAGE_MAP(TObjectPropsDlg, CDialog)

@@ -104,13 +104,18 @@ bool isTransparentPixel(CBitmap* pBitmap, int x, int y)
 VA(0x004875d4, 0x3f)
 unsigned int getFirstMenuItem(CMenu* pMenu)
 {
+    unsigned int index = 0;
     MENUITEMINFO info;
     info.cbSize = sizeof(info);
     info.fMask = MIIM_TYPE;
     info.dwTypeData = NULL;
-    unsigned int index = 0;
-    while (info.cch = 0, ::GetMenuItemInfo(pMenu->m_hMenu, index, TRUE, &info), info.fType & MFT_SEPARATOR)
+    for (;;) {
+        info.cch = 0;
+        pMenu->GetMenuItemInfo(index, &info, TRUE);
+        if (!(info.fType & MFT_SEPARATOR))
+            break;
         index++;
+    }
     return index;
 }
 
@@ -122,17 +127,17 @@ bool setMenuItemText(CMenu* pMenu, unsigned int& index, CString text)
     info.fMask = MIIM_TYPE;
     info.dwTypeData = NULL;
     info.cch = 0;
-    ::GetMenuItemInfo(pMenu->m_hMenu, index, TRUE, &info);
+    pMenu->GetMenuItemInfo(index, &info, TRUE);
     info.dwTypeData = text.GetBuffer(0);
     ::SetMenuItemInfo(pMenu->m_hMenu, index, TRUE, &info);
     text.ReleaseBuffer();
     info.dwTypeData = NULL;
     for (;;) {
         index++;
-        if (index >= (unsigned int)::GetMenuItemCount(pMenu->m_hMenu))
+        if (index >= pMenu->GetMenuItemCount())
             return false;
         info.cch = 0;
-        ::GetMenuItemInfo(pMenu->m_hMenu, index, TRUE, &info);
+        pMenu->GetMenuItemInfo(index, &info, TRUE);
         if (!(info.fType & MFT_SEPARATOR))
             return true;
     }

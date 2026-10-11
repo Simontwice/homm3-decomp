@@ -39,6 +39,8 @@
 namespace {
 
 DATA(0x0059fe70) std::set<TMapDoc*> allMapDocs;
+VA_COMPGEN(0x0045d7fb, 0x23, STATIC_CTOR, allMapDocs)
+VA_COMPGEN(0x0045d81e, 0xa, STATIC_DTOR, allMapDocs)
 
 // Asks for a file name with the common file dialog, filtering by the
 // file type the filter text names ("description\n.ext") and by all files.
@@ -967,6 +969,46 @@ TMapDoc::~TMapDoc()
     WaitForSingleObject(_m_autosaveThread.m_hThread, INFINITE);
 }
 
+VA(0x0045f329, 0x204)
+BOOL TMapDoc::OnNewDocument()
+{
+    if (_m_bOfferAutosave) {
+        _m_bOfferAutosave = false;
+        if (_m_bOwnsAutosave) {
+            WIN32_FIND_DATA findData;
+            HANDLE hFind = FindFirstFile(_m_autosavePathName, &findData);
+            if (hFind != INVALID_HANDLE_VALUE) {
+                FindClose(hFind);
+                if (AfxMessageBox(kRecoverAutosavedMapStr, MB_YESNO | MB_ICONQUESTION) == IDYES)
+                    return OnOpenDocument(_m_autosavePathName);
+            }
+        }
+    }
+    CWaitCursor waitCursor;
+    if (!CDocument::OnNewDocument())
+        return FALSE;
+    _m_bCreatingMap = true;
+    _m_lastSaveTime = GetTickCount();
+    if (_m_newMapParams.m_pRandomMapParams.get() == NULL || !_generateRandomMap()) {
+        _m_pMap = new TGameMap(this, _m_newMapParams.m_version, _m_newMapParams.m_size, _m_newMapParams.m_bTwoLayer);
+        if (_m_pMap == NULL)
+            throw TAllocationFailure();
+        _m_revision = 0;
+        _m_lastRevision = 1;
+        {
+            _TTerrainPlacementOp op(this, false, eTerrainWater, _s_specialTileFrequency);
+            op(0, 0, _m_pMap->getWidth(), _m_pMap->getHeight());
+        }
+        if (_m_pMap->isTwoLayer()) {
+            _TTerrainPlacementOp op(this, true, eTerrainRock, _s_specialTileFrequency);
+            op(0, 0, _m_pMap->getWidth(), _m_pMap->getHeight());
+        }
+    }
+    _m_newMapParams = s_kDefaultNewMapParams;
+    _m_bCreatingMap = false;
+    return TRUE;
+}
+
 // The new-map parameters' implicit assignment (setNewMapParams).
 VA_COMPGEN(0x0045f52d, 0x29, IMPLICIT_COPY_ASSIGN, TNewMapParams)
 
@@ -979,26 +1021,24 @@ void TMapDoc::Serialize(CArchive& ar)
     assert(_m_pRoadPlacementOp == NULL);
     assert(_m_pRoadEraseOp == NULL);
     TMFCFileBuf buf(ar.GetFile());
-    try {
-        if (ar.IsStoring()) {
-            TGzDeflateBuf deflateBuf(&buf);
-            TRawOStream stream(&deflateBuf);
-            long version = akMapFileVersion[_m_pMap->getVersion()];
-            stream << version;
-            _m_pMap->save(&deflateBuf);
-        } else {
-            assert(_m_pMap == NULL);
-            {
-                TGzInflateBuf inflateBuf(&buf);
-                _m_pMap = _readMap(&inflateBuf).release();
-            }
-            if (_m_pMap == NULL)
-                throw TAllocationFailure();
-            _m_revision = 0;
-            _m_lastRevision = 1;
+    if (ar.IsStoring()) {
+        TGzDeflateBuf deflateBuf(&buf);
+        TRawOStream stream(&deflateBuf);
+        long version = akMapFileVersion[_m_pMap->getVersion()];
+        stream << version;
+        _m_pMap->save(&deflateBuf);
+    } else {
+        assert(_m_pMap == NULL);
+        try {
+            TGzInflateBuf inflateBuf(&buf);
+            _m_pMap = _readMap(&inflateBuf).release();
+        } catch (...) {
+            throw new TMapDocLoadFailure;
         }
-    } catch (...) {
-        throw new TMapDocLoadFailure;
+        if (_m_pMap == NULL)
+            throw TAllocationFailure();
+        _m_revision = 0;
+        _m_lastRevision = 1;
     }
 }
 
@@ -1520,14 +1560,16 @@ int TMapDoc::_autosave()
                 int i = _m_autosavePathName.ReverseFind('\\');
                 if (i != -1) {
                     bool bDirectory;
-                    CString directory = _m_autosavePathName.Left(i);
-                    WIN32_FIND_DATA findData;
-                    HANDLE hFind = FindFirstFile(directory, &findData);
-                    if (hFind != INVALID_HANDLE_VALUE) {
-                        FindClose(hFind);
-                        bDirectory = (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-                    } else {
-                        bDirectory = CreateDirectory(directory, NULL) != FALSE;
+                    {
+                        CString directory = _m_autosavePathName.Left(i);
+                        WIN32_FIND_DATA findData;
+                        HANDLE hFind = FindFirstFile(directory, &findData);
+                        if (hFind != INVALID_HANDLE_VALUE) {
+                            FindClose(hFind);
+                            bDirectory = (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+                        } else {
+                            bDirectory = CreateDirectory(directory, NULL) != FALSE;
+                        }
                     }
                     if (!bDirectory)
                         return 0;

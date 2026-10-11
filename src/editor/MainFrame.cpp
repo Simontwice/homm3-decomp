@@ -405,7 +405,7 @@ void TCommandTextMap::_add(UINT id, const TSpreadsheetResource& spreadsheet, int
 
 inline const TCommandTextMap& getCommandTexts()
 {
-    static const TCommandTextMap commandTexts;
+    DATA(0x005aa660) static const TCommandTextMap commandTexts;
     return commandTexts;
 }
 

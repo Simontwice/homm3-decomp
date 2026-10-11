@@ -48,7 +48,9 @@ DATA(0x005a1c28) HCURSOR hClosedHandCursor = NULL;
 
 // The cursors the window shows over the map and over an invalid drop.
 DATA(0x005a1bf4) HCURSOR khArrowCursor = ::LoadCursor(NULL, IDC_ARROW);
+VA_COMPGEN(0x004692d1, 0x13, STATIC_CTOR, khArrowCursor)
 DATA(0x005a1bf0) HCURSOR khNoCursor = ::LoadCursor(NULL, IDC_NO);
+VA_COMPGEN(0x004692e4, 0x13, STATIC_CTOR, khNoCursor)
 
 // The mouse wheel's scroll line count: MFC's _AfxGetMouseScrollLines as a
 // function object (Loki keeps the class with an empty operator()). The
@@ -118,6 +120,7 @@ unsigned int TGetMouseScrollLinesFunc::operator()()
 }
 
 DATA(0x005a1be0) TGetMouseScrollLinesFunc getMouseScrollLines;
+VA_COMPGEN(0x0046944f, 0x1d, STATIC_CTOR, getMouseScrollLines)
 
 // The context menu's command UI: it records whether a command is enabled
 // and ignores the check, radio and text updates.
