@@ -4,7 +4,8 @@
 # Evidence: each scope as the editor's RTTI type descriptors spell it in
 # h3ccmped.exe; the file offset of its first `?%` spelling is given per row.
 # The editor's own units take their original file stem (`CampaignDoc`).
-# `Campaign Editor.cpp` is absent: a unit name has no space.
+# The original's `Campaign Editor.cpp` is the unit CampaignEditor (a unit
+# name has no space).
 #
 # Campaign Editor.cpp: `?%` at file offset 0xa57ef
 # Campaign: `?%` at file offset 0xa5b64
@@ -14,6 +15,7 @@
 # TownTypeTraits: `?%` at file offset 0xc0f25
 # resourcemanager: `?%` at file offset 0xc34a7
 unit	source_basename	canonical_scope
+CampaignEditor	campaigneditor.cpp	C:\Dev\Heroes 3 Exp 2\CampaignEditor\Campaign Editor.cpp2351922671
 Campaign	campaign.cpp	C:\Dev\Heroes 3 Exp 2\CampaignEditor\Campaign.cpp2305427830
 CampaignDoc	campaigndoc.cpp	C:\Dev\Heroes 3 Exp 2\CampaignEditor\CampaignDoc.cpp1959726197
 EditStartingBonusDlg	editstartingbonusdlg.cpp	C:\Dev\Heroes 3 Exp 2\CampaignEditor\EditStartingBonusDlg.cpp1740010184

@@ -84,11 +84,10 @@ victor_kernels_o2_ogoff_ml_gd_windows = [
   "/D_WINDOWS",
 ]
 
-ccmped_fastcall_o2_ob2_gr_windows = [
+ccmped_fastcall_o2_gr_windows = [
   "/nologo",
   "/c",
   "/O2",
-  "/Ob2",
   "/Op",
   "/MT",
   "/Gr",
@@ -325,7 +324,7 @@ flags = "libraries_o2_gr_windows"
 unit = "gzinflatebuf"
 module = "codec"
 source = "src/gzinflatebuf.cpp"
-flags = "ccmped_fastcall_o2_ob2_gr_windows"
+flags = "ccmped_fastcall_o2_gr_windows"
 
 [[unit]]
 unit = "campaignmap"
@@ -473,4 +472,9 @@ flags = "ccmped_o2_gr_windows"
 [[unit]]
 unit = "MainFrame"
 source = "src/campaign_editor/MainFrame.cpp"
+flags = "ccmped_o2_gr_windows"
+
+[[unit]]
+unit = "CampaignEditor"
+source = "src/campaign_editor/CampaignEditor.cpp"
 flags = "ccmped_o2_gr_windows"

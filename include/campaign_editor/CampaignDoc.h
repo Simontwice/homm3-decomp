@@ -40,6 +40,9 @@ public:
     TCampaign* getCampaign() const { return _m_pCampaign.get(); }
     int getVersion() const { return _m_version; }
     void setVersion(int newVersion);
+    // File New on an open document: SaveModified asks for the new
+    // campaign's map (the document template sets it).
+    void setBNewCampaign(bool bNewCampaign) { _m_bNewCampaign = bNewCampaign; }
 
     virtual BOOL OnNewDocument();
     virtual void Serialize(CArchive& ar);
