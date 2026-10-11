@@ -12,7 +12,7 @@ VA(0x00421c10, 0x1e0)
 TEditStartingHeroOptionDlg::TEditStartingHeroOptionDlg(CWnd* pParent, const TScenario* pScenario,
                                                        const THeroMask& heroes, bool bRandomHeroAllowed)
     : CDialog(TEditStartingHeroOptionDlg::IDD, pParent), _m_pScenario(pScenario), _m_heroes(heroes),
-      _m_bRandomHeroAllowed(bRandomHeroAllowed), _m_hero(TScenarioOptionsStartingHero::kRandomHero), _m_player(0)
+      _m_bRandomHeroAllowed(bRandomHeroAllowed)
 {
     _initPlayers();
     int player = 0;
@@ -26,8 +26,7 @@ TEditStartingHeroOptionDlg::TEditStartingHeroOptionDlg(CWnd* pParent, const TSce
         while (!_m_heroes[hero])
             hero++;
     }
-    _m_hero = hero;
-    _m_player = player;
+    _m_choice = TScenarioOptionsStartingHero::TChoice(hero, player);
 }
 
 VA_COMPGEN(0x00421df0, 0x1e, SCALAR_DELETING_DTOR, TEditStartingHeroOptionDlg)
@@ -38,13 +37,13 @@ TEditStartingHeroOptionDlg::TEditStartingHeroOptionDlg(CWnd* pParent, const TSce
                                                        const THeroMask& heroes, bool bRandomHeroAllowed,
                                                        const TScenarioOptionsStartingHero::TChoice& choice)
     : CDialog(TEditStartingHeroOptionDlg::IDD, pParent), _m_pScenario(pScenario), _m_heroes(heroes),
-      _m_bRandomHeroAllowed(bRandomHeroAllowed), _m_hero(choice.m_hero), _m_player(choice.m_player)
+      _m_bRandomHeroAllowed(bRandomHeroAllowed), _m_choice(choice)
 {
     _initPlayers();
-    if (_m_hero == TScenarioOptionsStartingHero::kRandomHero)
+    if (_m_choice.m_hero == TScenarioOptionsStartingHero::kRandomHero)
         _m_bRandomHeroAllowed = true;
     else
-        _m_heroes[_m_hero] = true;
+        _m_heroes[_m_choice.m_hero] = true;
 }
 
 // The players whose part of the map is human-playable and gets a hero: one
@@ -97,14 +96,14 @@ BOOL TEditStartingHeroOptionDlg::OnInitDialog()
         }
     }
     int item;
-    for (item = 0; _m_heroCombo.GetItemData(item) != _m_hero; item++)
+    for (item = 0; _m_heroCombo.GetItemData(item) != getHero(); item++)
         ;
     _m_heroCombo.SetCurSel(item);
     for (unsigned int player = 0; player < kNumPlayers; player++) {
         if (_m_players[player])
             _m_playerCombo.SetItemData(_m_playerCombo.AddString(akPlayerTraits[player].m_pName), player);
     }
-    for (item = 0; _m_playerCombo.GetItemData(item) != _m_player; item++)
+    for (item = 0; _m_playerCombo.GetItemData(item) != getPlayer(); item++)
         ;
     _m_playerCombo.SetCurSel(item);
     return TRUE;
@@ -116,6 +115,5 @@ void TEditStartingHeroOptionDlg::OnOK()
     CDialog::OnOK();
     int hero = _m_heroCombo.GetItemData(_m_heroCombo.GetCurSel());
     int player = _m_playerCombo.GetItemData(_m_playerCombo.GetCurSel());
-    _m_hero = hero;
-    _m_player = player;
+    _m_choice = TScenarioOptionsStartingHero::TChoice(hero, player);
 }

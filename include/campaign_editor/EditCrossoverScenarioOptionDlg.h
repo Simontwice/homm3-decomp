@@ -23,8 +23,8 @@ public:
                                     const std::vector<bool>& abScenarioAllowed, const TPlayerMask& players,
                                     const TScenarioOptionsCrossoverScenario::TChoice& choice);
 
-    int getScenario() const { return _m_scenario; }
-    int getPlayer() const { return _m_player; }
+    int getScenario() const { return _m_choice.m_scenario; }
+    int getPlayer() const { return _m_choice.m_player; }
 
     enum { IDD = IDD_EDIT_CROSSOVER_SCENARIO_OPTION };
     CComboBox _m_playerCombo;
@@ -41,8 +41,7 @@ private:
     const TCampaign* _m_pCampaign;
     std::vector<bool> _m_abScenarioAllowed;
     TPlayerMask _m_players;
-    int _m_scenario;
-    int _m_player;
+    TScenarioOptionsCrossoverScenario::TChoice _m_choice;
 };
 
 #endif  /* HOMM3_CAMPAIGN_EDITOR_EDITCROSSOVERSCENARIOOPTIONDLG_H */

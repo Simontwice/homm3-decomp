@@ -258,6 +258,9 @@ bool operator==(const TScenarioOptionsBonus& lhs, const TScenarioOptionsBonus& r
 class TScenarioOptionsCrossoverScenario : public TScenarioStartingOptions {
 public:
     struct TChoice {
+        TChoice() : m_player(0) {}
+        TChoice(int scenario, int player) : m_scenario(scenario), m_player(player) {}
+
         bool operator==(const TChoice& other) const
         {
             return m_scenario == other.m_scenario && m_player == other.m_player;
@@ -286,6 +289,9 @@ public:
     enum { kRandomHero = -1 };
 
     struct TChoice {
+        TChoice() : m_hero(kRandomHero), m_player(0) {}
+        TChoice(int hero, int player) : m_hero(hero), m_player(player) {}
+
         bool operator==(const TChoice& other) const
         {
             return m_hero == other.m_hero && m_player == other.m_player;

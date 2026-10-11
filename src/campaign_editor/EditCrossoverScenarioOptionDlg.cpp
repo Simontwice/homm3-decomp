@@ -15,7 +15,7 @@ TEditCrossoverScenarioOptionDlg::TEditCrossoverScenarioOptionDlg(CWnd* pParent, 
                                                                  const vector<bool>& abScenarioAllowed,
                                                                  const TPlayerMask& players)
     : CDialog(TEditCrossoverScenarioOptionDlg::IDD, pParent), _m_pCampaign(pCampaign),
-      _m_abScenarioAllowed(abScenarioAllowed), _m_players(players), _m_player(0)
+      _m_abScenarioAllowed(abScenarioAllowed), _m_players(players)
 {
     int scenario = 0;
     while (!_m_abScenarioAllowed[scenario])
@@ -23,8 +23,7 @@ TEditCrossoverScenarioOptionDlg::TEditCrossoverScenarioOptionDlg(CWnd* pParent, 
     int player = 0;
     while (!_m_players[player])
         player++;
-    _m_scenario = scenario;
-    _m_player = player;
+    _m_choice = TScenarioOptionsCrossoverScenario::TChoice(scenario, player);
 }
 
 VA_COMPGEN(0x0041d9a0, 0x1e, SCALAR_DELETING_DTOR, TEditCrossoverScenarioOptionDlg)
@@ -35,11 +34,10 @@ TEditCrossoverScenarioOptionDlg::TEditCrossoverScenarioOptionDlg(
     CWnd* pParent, const TCampaign* pCampaign, const vector<bool>& abScenarioAllowed, const TPlayerMask& players,
     const TScenarioOptionsCrossoverScenario::TChoice& choice)
     : CDialog(TEditCrossoverScenarioOptionDlg::IDD, pParent), _m_pCampaign(pCampaign),
-      _m_abScenarioAllowed(abScenarioAllowed), _m_players(players), _m_scenario(choice.m_scenario),
-      _m_player(choice.m_player)
+      _m_abScenarioAllowed(abScenarioAllowed), _m_players(players), _m_choice(choice)
 {
-    _m_abScenarioAllowed[_m_scenario] = true;
-    _m_players[_m_player] = true;
+    _m_abScenarioAllowed[_m_choice.m_scenario] = true;
+    _m_players[_m_choice.m_player] = true;
 }
 
 VA(0x0041dc40, 0x2e)
@@ -82,14 +80,14 @@ BOOL TEditCrossoverScenarioOptionDlg::OnInitDialog()
         }
     }
     int item;
-    for (item = 0; _m_scenarioCombo.GetItemData(item) != _m_scenario; item++)
+    for (item = 0; _m_scenarioCombo.GetItemData(item) != getScenario(); item++)
         ;
     _m_scenarioCombo.SetCurSel(item);
     for (unsigned int player = 0; player < kNumPlayers; player++) {
         if (_m_players[player])
             _m_playerCombo.SetItemData(_m_playerCombo.AddString(akPlayerTraits[player].m_pName), player);
     }
-    for (item = 0; _m_playerCombo.GetItemData(item) != _m_player; item++)
+    for (item = 0; _m_playerCombo.GetItemData(item) != getPlayer(); item++)
         ;
     _m_playerCombo.SetCurSel(item);
     return TRUE;
@@ -101,6 +99,5 @@ void TEditCrossoverScenarioOptionDlg::OnOK()
     CDialog::OnOK();
     int scenario = _m_scenarioCombo.GetItemData(_m_scenarioCombo.GetCurSel());
     int player = _m_playerCombo.GetItemData(_m_playerCombo.GetCurSel());
-    _m_scenario = scenario;
-    _m_player = player;
+    _m_choice = TScenarioOptionsCrossoverScenario::TChoice(scenario, player);
 }
