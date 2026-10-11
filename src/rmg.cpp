@@ -2150,20 +2150,20 @@ type_object::~type_object()
 // Mac 0x250ec8 snapshots position before removing the object, then fills
 // its cell with treasure worth between value and 1.5 * value. The retained
 // callers are the key-tent fallback (0x23107c) and quest fallback (0x250824).
-// Both Windows callers expand it, so keep one visible ordinary source body.
+// Both game callers expand it, so keep one visible ordinary source body.
+// The map editor's copy 0x4adef7 is a generator member: the callers pass the
+// generator in ECX, push object and value, and it returns with ret 8.
 MAC_ADDRESS(0x250ec8, 0x118)
-static void replaceRmgObjectWithTreasure(type_random_map_generator* generator,
-    type_object* object, int value)
+void type_random_map_generator::replaceObjectWithTreasure(type_object* object, int value)
 {
     TRmgMapPosition position = object->getPosition();
-    generator->removeObject(object);
-    TRmgZone* zone = generator->m_zones[
-        generator->m_map.getMapItem(position)->m_zoneState.m_zone];
+    removeObject(object);
+    TRmgZone* zone = m_zones[m_map.getMapItem(position)->m_zoneState.m_zone];
     int actualValue;
-    type_object* replacement = generator->createTreasureObject(
+    type_object* replacement = createTreasureObject(
         zone, value, value * 3 / 2, &actualValue, 0, 0, 0, position);
     if (replacement)
-        generator->addObject(replacement, position);
+        addObject(replacement, position);
 }
 
 VA(0x005338E0, 0xD4)
@@ -2172,7 +2172,7 @@ unsigned char type_key_tent::completePlacement()
 {
     if (m_generator->placeKeyTentGuard(this, m_value * 3 / 2))
         return 1;
-    replaceRmgObjectWithTreasure(m_generator, this, m_value);
+    m_generator->replaceObjectWithTreasure(this, m_value);
 #if defined(HOMM3_RMG_HOTFIX)
     // Removed from the map, so nothing else owns it.
     delete this;
@@ -11097,7 +11097,7 @@ unsigned char type_random_map_generator::placeSeerHutForArtifact(t_quest_artifac
     group.markPlacementOutline();
     if (!placeQuestGroup(&group, origin)) {
         int value = object->m_definition->getValue(origin, this);
-        replaceRmgObjectWithTreasure(this, object, value);
+        replaceObjectWithTreasure(object, value);
         return 0;
     }
     m_usedQuestArtifacts[artifact] = 1;

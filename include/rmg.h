@@ -1962,6 +1962,8 @@ public:
     void setHumanPlayer(int seat);
     void setTownChoice(int seat, int town);
     void removeObject(type_object* object);
+    // Shared failure path of the key-tent and quest-artifact placements.
+    void replaceObjectWithTreasure(type_object* object, int value);
     // Retail 0x548040 walks predecessor runs for the caller at 0x548408.
     // The Complete-only name is provisional; the by-value ABI is proven.
     unsigned char paintRoad(TRmgMapPosition position, int roadType);
