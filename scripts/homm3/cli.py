@@ -122,6 +122,15 @@ Subcommands
         seeded comparison state so `homm3 build --fast TU` works at once;
         remove a clean one and stop its Wine server.
 
+  land [--dry-run] [--mac] [--jobs N] | land --status [--json]
+        Publish this worktree's commits (homm3.land): take the repository-wide
+        landing lock (FIFO, an flock in the common git dir), fetch, rebase onto
+        origin/decomp-complete-4.0, full `homm3 build` of every image, both
+        editors' `placements --write`, the full build again when a table
+        changed, `homm3 mac build` when own commits touch Mac inputs, the
+        refresh commit, then a fast-forward push. --dry-run stops before the
+        push; --status prints the holder, the queue and recent turns.
+
   mac <labels|show|disasm|diff|build> ...
         Navigate and byte-compare admitted Classic Mac PowerPC counterparts.
 
@@ -350,6 +359,8 @@ def _dispatch(argv: list[str]) -> int:
         return run_module("homm3.worktree", *argv[1:])
     if argv and argv[0] == "evidence":
         return run_module("homm3.evidence", *argv[1:])
+    if argv and argv[0] == "land":
+        return run_module("homm3.land", *argv[1:])
     if argv and argv[0] == "census":
         return run_module("homm3.census", *argv[1:])
     if argv and argv[0] == "placements":
@@ -370,6 +381,9 @@ def _dispatch(argv: list[str]) -> int:
     sub.add_parser("worktree", add_help=False,
                    help="create/remove a linked worktree ready for `build --fast` "
                         "(homm3 worktree --help)")
+    sub.add_parser("land", add_help=False,
+                   help="rebase, run every gate and fast-forward push, one lane at a time "
+                        "(homm3 land --help)")
     sub.add_parser("evidence", add_help=False,
                    help="one-shot matching evidence pass for selectors (homm3 evidence --help)")
     sub.add_parser("placements", add_help=False,

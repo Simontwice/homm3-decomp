@@ -27,6 +27,7 @@ iterate on a function.
 
 ## Tooling and reference
 
+- [Landing lane commits](tooling/land.md): `homm3 land`, the FIFO landing lock and the gate cycle it runs
 - [Data flow](tooling/data-flow.md), [telemetry](tooling/telemetry.md), [performance measurement](tooling/performance.md), [compiler warnings](tooling/compiler-warnings.md)
 - [Retail data coverage and linking](tooling/data-coverage.md)
 - [Images](tooling/images.md): the GOG map editor `h3maped` beside the game, `homm3 --image`, its census and placements
