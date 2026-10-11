@@ -214,8 +214,8 @@ public:
         if (y + height > this->_m_height)
             height = this->_m_height - y;
         color &= 0xfbdf;
-        for (unsigned int row = 0; row < height; row++) {
-            unsigned short* pPixel = (unsigned short*)((unsigned char*)this->_m_pPixels + (y + row) * this->_m_pitch) + x;
+        for (; height > 0; height--, y++) {
+            unsigned short* pPixel = (unsigned short*)((unsigned char*)this->_m_pPixels + y * this->_m_pitch) + x;
             for (unsigned int i = 0; i < width; i++, pPixel++)
                 *pPixel = (unsigned short)((*pPixel & 0xfbdf) + color) >> 1;
         }
@@ -245,9 +245,10 @@ public:
         if (y + height > this->_m_height)
             height = this->_m_height - y;
         unsigned short* pRow = (unsigned short*)((unsigned char*)this->_m_pPixels + y * this->_m_pitch) + x;
-        for (unsigned int row = 0; row < height; row++) {
-            for (unsigned int i = width; i > 0; i--)
-                pRow[i - 1] = color;
+        while (height-- > 0) {
+            unsigned int i = width;
+            while (i-- > 0)
+                pRow[i] = color;
             pRow = (unsigned short*)((unsigned char*)pRow + this->_m_pitch);
         }
     }
@@ -275,8 +276,8 @@ public:
         if (y + height > this->_m_height)
             height = this->_m_height - y;
         color &= 0xfbdf;
-        for (unsigned int row = 0; row < height; row++) {
-            unsigned short* pPixel = (unsigned short*)((unsigned char*)this->_m_pPixels + (y + row) * this->_m_pitch) + x;
+        for (; height > 0; height--, y++) {
+            unsigned short* pPixel = (unsigned short*)((unsigned char*)this->_m_pPixels + y * this->_m_pitch) + x;
             for (unsigned int i = 0; i < width; i++, pPixel++) {
                 unsigned short pixel = *pPixel & 0xfbdf;
                 *pPixel = (unsigned short)((((pixel + color) >> 1) & 0xfbdf) + pixel) >> 1;
