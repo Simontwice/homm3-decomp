@@ -3445,7 +3445,7 @@ rmg	?markRiverOutletTargets@type_random_map_generator@@QAEXXZ	100.0000	100.0000	
 rmg	?markZoneBoundaryObstacles@type_random_map_generator@@QAEXXZ	91.7350	91.7350	91.7350	0x13f880	tokens1:d021e169a184
 rmg	?openConnectionPath@type_random_map_generator@@QAEXUTRmgMapPosition@@E@Z	79.9447	79.9447	79.9698	0x1408e0	tokens1:1e08e5bac8e1
 rmg	?openPathPatch@type_random_map@@QAEXHHH@Z	100.0000	100.0000	100.0000	0x131ad0	tokens1:6375228bfaa2
-rmg	?paintRoad@type_random_map_generator@@QAEEUTRmgMapPosition@@H@Z	65.3483	65.3483	70.4101	0x148040	tokens1:3af6b0226131
+rmg	?paintRoad@type_random_map_generator@@QAEEUTRmgMapPosition@@H@Z	93.5562	93.5562	93.5562	0x148040	tokens1:48a79be34d0e
 rmg	?paintZoneTerrain@type_random_map_generator@@QAEXXZ	96.0410	96.0410	96.0410	0x13e6a0	tokens1:ea5fdd1145c5
 rmg	?placeAdditionalTowns@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x144ae0	tokens1:5665f75f653c
 rmg	?placeBorderGuard@type_random_map_generator@@QAEHUTRmgMapPosition@@HPAUTRmgZone@@@Z	100.0000	100.0000	100.0000	0x140d60	tokens1:508204c67a95

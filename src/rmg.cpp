@@ -9653,9 +9653,11 @@ void type_random_map_generator::buildRoadCostMap(TRmgMapPosition position)
 // any painter was constructed. The source spelling is a Complete-only role.
 // The stack adapter at 0x548120 is the natural construction site for its
 // concrete vtable and deleting wrapper; both cleanup exits restore 0x640a20.
-// Sixteen loop/lifetime controls: a cached cell pointer in the decorated
-// run reaches 70.4101%; repeated lookup is 51.8371%. A continue guard loses
-// the shared cleanup layout (68.9944%); direct/goto loop tests remain lower.
+// The map editor's /O1 copy (exact) shows the source shape: the existing-road
+// walk tests its looked-up cell at the top of a while (1) loop, which VC6
+// does not rotate, and the run test compares previous against position.
+// Game 65.35% -> 93.56%; the game copy still expands the vector-deleting
+// destructor inside the third levelMap cleanup where retail calls it.
 VA(0x00548040, 0x244)
 MAC_ADDRESS(0x24c3c4, 0x2bc) // anchor-callee 0x548408 + adapter/painter vtables; retail-only
 unsigned char type_random_map_generator::paintRoad(TRmgMapPosition position, int roadType)
@@ -9666,13 +9668,14 @@ unsigned char type_random_map_generator::paintRoad(TRmgMapPosition position, int
         type_random_map levelMap(m_map.getMapItem(0, 0, level),
             m_map.m_mapWidth, m_map.m_mapHeight);
         TRmgMapPosition previous = position;
-        TRmgMapItem* existing = m_map.getMapItem(position);
-        while (existing->m_tile.m_roadType == roadType) {
+        while (1) {
+            TRmgMapItem* existing = m_map.getMapItem(position);
+            if (existing->m_tile.m_roadType != roadType)
+                break;
             if (existing->m_movement.m_cost == 0)
                 return painted;
             previous = position;
             position = existing->m_previousTile;
-            existing = m_map.getMapItem(position);
         }
         if (position.m_z == level) {
             position = previous;
@@ -9686,7 +9689,7 @@ unsigned char type_random_map_generator::paintRoad(TRmgMapPosition position, int
                     return painted;
                 position = item->m_previousTile;
                 if (position.m_z != level
-                    || (position.m_x != previous.m_x && position.m_y != previous.m_y))
+                    || (previous.m_x != position.m_x && previous.m_y != position.m_y))
                     break;
                 painted = 1;
                 painter.m_walker.drawTo(TTilePoint(position.m_x, position.m_y));
