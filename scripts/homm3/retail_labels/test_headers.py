@@ -326,6 +326,15 @@ class DataSpellingTest(unittest.TestCase):
         self.assertEqual(vc6_data_name(vc6[:-1] + "A", {vc6}, "CampaignEditorText"), vc6)
         self.assertIsNone(vc6_data_name("?g@@3HA", {"?g@@3HB"}, "CampaignEditorText"))
 
+    def test_a_static_of_an_inline_function_in_the_anonymous_namespace(self):
+        from homm3.retail_labels.source import vc6_data_name
+        clang = ("_?commandTexts@?1??getCommandTexts@?A0x2392511C@@YAABVTCommandTextMap@?A0x2392511C@@XZ"
+                 "@4V2?A0x2392511C@@B")
+        vc6 = (r"?commandTexts@?1??getCommandTexts@?%Z:\tmp\src\editor\MainFrame.cpp4422946@@"
+               "YAABVTCommandTextMap@2@XZ@4V32@B")
+        self.assertEqual(vc6_data_name(clang, {vc6}, "MainFrame"), vc6)
+        self.assertIsNone(vc6_data_name(clang.replace("commandTexts", "other"), {vc6}, "MainFrame"))
+
     def test_type_back_reference_to_the_anonymous_scope(self):
         from homm3.retail_labels.source import vc6_data_name
         clang = "?lines@?A0xD01D01FD@@3VTLinesFunc@?A0xD01D01FD@@A"

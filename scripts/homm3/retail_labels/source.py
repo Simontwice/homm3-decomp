@@ -2030,6 +2030,13 @@ def vc6_data_name(mangled: str, candidates, unit: str) -> str | None:
     # Clang back-references the class and spells the namespace (`1?A0x..@@`).
     scope_backref = re.compile(r"(?<=\d)\d@")
     anon_scope = re.compile(r"(?<=\d)\?anonymous@@")
+
+    # A static of an inline function is a COMDAT VC6 names without the
+    # local static's `_` (`?s@?1??f@...`), and its type back-references the
+    # function's anonymous scope (`@4V32@B`) where Clang spells it out
+    # (`@4V2?A0x..@@B`): mask the scope spellings and back-reference digits.
+    def inline_static(name: str) -> str:
+        return re.sub(r"\?anonymous@|\d", "#", name[1:] if name.startswith("_?") else name)
     for candidate in candidates:
         origins = [re.fullmatch(r"(.+\.(?:cpp|cxx|cc|c|h|hpp|inl))\d+", m.group(1), re.I)
                    for m in vc6_anon.finditer(candidate)]
@@ -2042,6 +2049,8 @@ def vc6_data_name(mangled: str, candidates, unit: str) -> str | None:
         elif backref.sub("@#@", spelled) == anon_backref.sub("@#@", backref.sub("@#@", expected)):
             masked.append(candidate)
         elif scope_backref.sub("#@", spelled) == anon_scope.sub("#@", expected):
+            masked.append(candidate)
+        elif inline_static(spelled) == inline_static(expected):
             masked.append(candidate)
     if matches:
         return matches[0] if len(matches) == 1 else None
