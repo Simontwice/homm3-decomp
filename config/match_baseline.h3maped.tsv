@@ -333,7 +333,7 @@ EditArtifactDlg	?OnCreate@TEditArtifactDlg@@IAEHPAUtagCREATESTRUCTA@@@Z	100.0000
 EditArtifactDlg	?OnInitDialog@TEditArtifactDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xdb31	tokens1:7091fc710c6a
 EditArtifactDlg	?OnSelChangeArtifactCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdd12	tokens1:57ce982aa9f4
 EditArtifactDlg	?OnSelChangeWhereCombo@TEditArtifactDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xdcd7	tokens1:32cc2a045a1a
-EditArtifactDlg	?_isAllowed@TEditArtifactDlg@@ABE_NW4TArtifact@@W4TArtifactSlot@@@Z	67.6593	67.6593	67.6593	0xd9ae	tokens1:49bae48ff87b
+EditArtifactDlg	?_isAllowed@TEditArtifactDlg@@ABE_NW4TArtifact@@W4TArtifactSlot@@@Z	80.5934	80.5934	80.5934	0xd9ae	tokens1:3cd8137db0ac
 EditArtifactDlg	?_setArtifacts@TEditArtifactDlg@@AAEXXZ	97.6364	97.6364	97.6364	0xd87d	tokens1:6fae8de24f42
 EditArtifactDlg	?find_if@std@@YA?AV?$TBitsetIterator@$0BD@@@V2@0V?$binder2nd@U?$not_equal_to@_N@std@@@1@@Z	42.6191	42.6191	42.6191	0xdd78	-
 EditCreatureStackDlg	??0TEditCreatureStackDlg@@QAE@PAVCWnd@@ABVTCreatureStack@@W4EGameVersion@@ABV?$bitset@$0JB@@std@@@Z	89.6111	89.6111	89.6111	0xdfe7	tokens1:a8653bba0727
@@ -4320,13 +4320,13 @@ SeersHutPropsDlg	??_GTSeersHutPropsDlg@@UAEPAXI@Z	100.0000	100.0000	100.0000	0xb
 SeersHutPropsDlg	?DoDataExchange@TSeersHutPropsDlg@@MAEXPAVCDataExchange@@@Z	100.0000	100.0000	100.0000	0xb7aae	tokens1:ac486d12c6d2
 SeersHutPropsDlg	?DoModal@TSeersHutPropsDlg@@UAEHXZ	100.0000	100.0000	100.0000	0xb7aeb	tokens1:4c39251438bb
 SeersHutPropsDlg	?GetMessageMap@TSeersHutPropsDlg@@MBEPBUAFX_MSGMAP@@XZ	100.0000	100.0000	100.0000	0xb7ae5	tokens1:bf9b59ff82f1
-SeersHutPropsDlg	?OnEditRewardButton@TSeersHutPropsDlg@@IAEXXZ	92.5085	92.5085	92.5085	0xb7cf3	tokens1:2dd09a591218
+SeersHutPropsDlg	?OnEditRewardButton@TSeersHutPropsDlg@@IAEXXZ	100.0000	100.0000	100.0000	0xb7cf3	tokens1:cffffc14006b
 SeersHutPropsDlg	?OnInitDialog@TSeersHutPropsDlg@@MAEHXZ	100.0000	100.0000	100.0000	0xb7b1a	tokens1:d523de90d5a3
 SeersHutPropsDlg	?OnOK@TSeersHutPropsDlg@@MAEXXZ	100.0000	100.0000	100.0000	0xb7c4a	tokens1:715c910037b9
 SeersHutPropsDlg	?_getOldHut@TSeersHutPropsDlg@@ABEPBVTSeersHut@@XZ	100.0000	100.0000	100.0000	0xb7995	tokens1:92a18fe9e641
-SeersHutPropsDlg	?_onQuestChanged@TSeersHutPropsDlg@@MAEXPBVTQuest@@@Z	93.7500	93.7500	93.7500	0xb79d7	tokens1:0e2401990834
+SeersHutPropsDlg	?_onQuestChanged@TSeersHutPropsDlg@@MAEXPBVTQuest@@@Z	100.0000	100.0000	100.0000	0xb79d7	tokens1:852d1a54118c
 SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardArtifact@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb76dc	tokens1:f366404b283c
-SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardCreature@TSeersHut@@@Z	85.0000	85.0000	85.0000	0xb7727	tokens1:87aeba8c1d9e
+SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardCreature@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7727	tokens1:d56a32f71459
 SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardExperience@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb75e3	tokens1:bbbfc5ec41f0
 SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardLuck@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb763a	tokens1:c38b65890945
 SeersHutPropsDlg	?visit@TGetRewardDescFunc@?%C:\Dev\Heroes 3 Exp 2\Editor\SeersHutPropsDlg.cpp929930200@@UAEXABVTRewardMana@TSeersHut@@@Z	100.0000	100.0000	100.0000	0xb7600	tokens1:f3af7c011c52

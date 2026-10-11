@@ -279,6 +279,8 @@ const TCombinationArtifact g_combinationArtifactTable[12] = {
         makeArtifactComponentMask(4, 0x6f, 0x6d, 0x6e, 0x71)),
 };
 
+VA_COMPGEN(0x0044c960, 0x298, STATIC_CTOR, g_combinationArtifactTable)
+
 // The fifteen allowable-slot classes searched by the traits initializer,
 // recovered from 0x44cc00. Class 0 is empty; classes 7 and 9 are the ring
 // pair (6, 7) and misc/backpack group (9, 10, 11, 12, 18).
@@ -312,6 +314,8 @@ const TArtifactSlotMask g_artifactSlotMasks[15] = {
     TArtifactSlotMask(makeArtifactSlotMask(1, 16)),
     TArtifactSlotMask(makeArtifactSlotMask(1, 17)),
 };
+
+VA_COMPGEN(0x0044cc00, 0x145, STATIC_CTOR, g_artifactSlotMasks)
 
 DATA(0x00660b64)
 const TArtifactSlotTraits (&akArtifactSlotTraits)[19] = g_artifactSlotTraitsStorage;

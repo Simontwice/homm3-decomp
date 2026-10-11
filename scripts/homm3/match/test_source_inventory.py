@@ -299,6 +299,23 @@ class SourceInventoryTest(unittest.TestCase):
             {(d.file, d.name, d.signature): 'Unproven type'})
         self.assertTrue(any(e.startswith('DECLARATION_ONLY ') for e in errors))
 
+    def test_class_template_declared_body_gap_compares_by_family(self):
+        d = replace(definition('Ptr::operator='), file='include/widget.h', inline=True,
+                    va=None, class_offset=1, declaration_only_type=0x1234, template=True,
+                    signature='Ptr<T> &(const Ptr<T> &)', parameters=1,
+                    argument_types=('const Ptr<T> &',), return_type='Ptr<T> &')
+        o = replace(origin('Ptr::operator='), file='', line=0, module='', offset='',
+                    declaration_only=True, type_index=0x1234,
+                    argument_types=('const Ptr<Text> &',), return_type='Ptr<Text> &')
+        rows, errors = reconcile([d], [o], {},
+            {(d.file, d.name, d.signature): 'Exact DC declaration; body provenance unknown'})
+        self.assertEqual(errors, [])
+        self.assertEqual(rows[0]['status'], 'documented_win_only')
+        # A non-template body still needs the exact instantiation's types.
+        _, errors = reconcile([replace(d, template=False)], [o], {},
+            {(d.file, d.name, d.signature): 'Exact DC declaration; body provenance unknown'})
+        self.assertTrue(any(e.startswith('DECLARATION_ONLY ') for e in errors))
+
     def test_compiler_and_library_bodies_do_not_silently_disappear(self):
         rows, errors = reconcile([], [replace(origin(), generated=True),
                                       replace(origin('std::helper'), file='../stlport/helper.h',

@@ -1299,13 +1299,18 @@ def compare(definitions: list[Definition], origins: list[Origin], dc_only: dict,
             # An explicitly reviewed coverage gap carries no invented source
             # line. Require the exact declared interface and one in-class
             # header body; it cannot waive a located body or an overload.
+            # A class template's member spells T where CodeView records the
+            # declared instantiation (TResourcePtr<T>& for
+            # TResourcePtr<TTextResource>&), so its types compare by family.
+            def declared(name):
+                return type_identity(family_name(name) if d.template else name)
             exact = [o for o in written if o.declaration_only
                      and o.type_index == d.declaration_only_type
                      and o.argument_types is not None
-                     and tuple(type_identity(t) for t in o.argument_types)
-                     == tuple(type_identity(t) for t in definition_arguments)
+                     and tuple(declared(t) for t in o.argument_types)
+                     == tuple(declared(t) for t in definition_arguments)
                      and o.const == d.const and o.return_type and d.return_type
-                     and type_identity(o.return_type) == type_identity(d.return_type)]
+                     and declared(o.return_type) == declared(d.return_type)]
             if (len(exact) != 1 or len(written) != 1 or not d.inline or not d.member
                     or d.class_offset is None or not d.file.startswith('include/')
                     or d.inline_origin or d.va is not None):

@@ -658,6 +658,8 @@ artifact	?_Xran@?$bitset@$0BD@@std@@ABEXXZ	100.0000	100.0000	100.0000	0x4d400	-
 artifact	?makeArtifactComponentMask@@YA?AV?$bitset@$0JA@@std@@IZZ	100.0000	100.0000	100.0000	0x4c830	tokens1:ac0a6675c850
 artifact	?makeArtifactSlotMask@@YA?AV?$bitset@$0BD@@std@@IZZ	100.0000	100.0000	100.0000	0x4c720	tokens1:5fdf34a64f8e
 artifact	?set@?$bitset@$0BD@@std@@QAEAAV12@I_N@Z	100.0000	100.0000	100.0000	0x4d380	-
+artifact	__h3cg$artifact$static_ctor$g_artifactSlotMasks	100.0000	100.0000	100.0000	0x4cc00	-
+artifact	__h3cg$artifact$static_ctor$g_combinationArtifactTable	100.0000	100.0000	100.0000	0x4c960	-
 artifact	__h3cg$artifact$static_dtor$artifactSlotStrings	100.0000	100.0000	100.0000	0x4d340	-
 artifact	__h3cg$artifact$static_dtor$artifactStrings	100.0000	100.0000	100.0000	0x4d360	-
 basemgr	??0baseManager@@QAE@XZ	100.0000	100.0000	100.0000	0x4d530	tokens1:3b9df445741c
