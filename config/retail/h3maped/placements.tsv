@@ -1958,11 +1958,11 @@ rva	size	kind	name	unit	evidence
 0x0009a09c	0x13c	func	?hasConnectedOutline@type_random_map@@QAEEABV?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@UTRmgMapPosition@@EPAUTRmgZone@@E@Z	rmg	masked body (316 bytes, 1 relocations) unique at a census start
 0x0009a1d8	0x17	func	?isPassable@TRmgMapItem@@QBEEXZ	rmg	masked body (23 bytes, 0 relocations) unique at a census start
 0x0009a1ef	0x129	func	?markCoastalTiles@type_random_map@@QAEXXZ	rmg	masked body (297 bytes, 0 relocations) unique at a census start
-0x0009a6f9	0x164	func	?isPlacementBlocked@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@HE@Z	rmg	referenced by ?canPlaceObject@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@PAUTRmgZone@@@Z at +0x2d
+0x0009a6f9	0x164	func	?isPlacementBlocked@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@HE@Z	rmg	masked body (356 bytes, 4 relocations) unique at a census start
 0x0009a932	0x30	func	?setPathClearance@TRmgMapItem@@QAEXE@Z	rmg	masked body (48 bytes, 0 relocations) unique at a census start
 0x0009aa63	0x30	func	?setObstacleFill@TRmgMapItem@@QAEXE@Z	rmg	masked body (48 bytes, 0 relocations) unique at a census start
 0x0009aa93	0x143	func	?canPlaceObject@type_random_map@@QAEEPAUTRmgObjectPropertiesRef@@UTRmgMapPosition@@PAUTRmgZone@@@Z	rmg	masked prefix (47 fixed bytes agree, 309 compiled, 323 retail)
-0x0009abd6	0xef	func	?addObject@type_random_map@@QAEXAAVtype_object@@UTRmgMapPosition@@@Z	rmg	referenced by ?addObject@TRmgTreasureGroup@@QAEXPAVtype_object@@UTRmgPoint@@@Z at +0x38
+0x0009abd6	0xef	func	?addObject@type_random_map@@QAEXAAVtype_object@@UTRmgMapPosition@@@Z	rmg	masked body (239 bytes, 4 relocations) unique at a census start
 0x0009acc5	0x31	func	?setTile@type_random_map@@UAEXABV?$TPoint@I@@ABUTRmgTerrainTile@@@Z	rmg	masked body (49 bytes, 1 relocations) unique at a census start
 0x0009acf6	0x48	func	?setTerrain@TRmgMapItem@@QAEXHHEE@Z	rmg	masked body (72 bytes, 0 relocations) unique at a census start
 0x0009ad3e	0x33	func	?setFrame@type_random_map@@UAEXABV?$TPoint@I@@H@Z	rmg	masked body (51 bytes, 0 relocations) unique at a census start
