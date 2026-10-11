@@ -84,7 +84,9 @@ compiles the file with its own profile and **places** its functions
 (`homm3.census.placements`, `config/retail/<image>/placements.tsv`):
 
 1. a compiled body that equals exactly one census function of the same size,
-   relocation fields masked;
+   relocation fields masked; a body equal at several (one template member
+   instantiated for two element types) is placed at the one start whose
+   referents agree with retail's, once the other steps have placed them;
 2. the callees and referents named by the relocations of each placed body,
    read from the retail bytes (where the layouts differ, the absolute
    operands pair by order when both bodies have the same number). A shared
