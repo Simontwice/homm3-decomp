@@ -9603,7 +9603,7 @@ void type_random_map_generator::buildRoadCostMap(TRmgMapPosition position)
                 nextPosition.m_z = 1 - position.m_z;
                 TRmgMapItem* nextMapItem = m_map.getMapItem(nextPosition);
                 int nextCost = positionCost + 1;
-                if (nextMapItem->m_movement.m_cost > nextCost) {
+                if (nextCost < nextMapItem->m_movement.m_cost) {
                     nextMapItem->setMovementCost(nextCost, position);
                     insertRmgWorkItem(
                         openPositions, openCosts,
@@ -9646,7 +9646,7 @@ void type_random_map_generator::buildRoadCostMap(TRmgMapPosition position)
                 nextCost *= 3;
             nextCost += positionCost;
 
-            if (nextMapItem->m_movement.m_cost <= nextCost)
+            if (nextCost >= nextMapItem->m_movement.m_cost)
                 continue;
 
             nextMapItem->setMovementCost(nextCost, position);
