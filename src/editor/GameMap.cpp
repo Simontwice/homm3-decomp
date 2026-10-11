@@ -42,6 +42,10 @@
 
 namespace {
 
+// The Shadow of Death artifact before Armageddon's Blade (the shared
+// artifact enum has no enumerator for it).
+const unsigned int kArtifactVialOfDragonBlood = 127;
+
 VA(0x0041e799, 0x92)
 bool isBeachBorder(const TGameMap::TLayer& layer, const TTilePoint& loc)
 {
@@ -5097,6 +5101,40 @@ inline void TGameMap::TLayer::_floatObject(unsigned int objID)
 inline void TGameMap::TLayer::_unfloatObject(const TTilePoint& loc)
 {
     _m_pImpl->_unfloatObject(loc);
+}
+
+// Every hero starts from the game's prototype, and the combination
+// artifacts, the Vial of Dragon Blood and Armageddon's Blade start disabled.
+VA(0x0043334a, 0x189)
+inline TGameMap::_TImpl::_TProperties::_TProperties()
+    : m_difficulty(TDifficulty(1)), m_maxHeroLevel(0),
+      m_pVictoryCondition(auto_ptr<TVictoryCondition>()),
+      m_pLossCondition(auto_ptr<TLossCondition>()),
+      m_aHeroPrototype(TArray<THeroPrototype, kNumHeroes>(THero::s_akTraits[0].m_prototype))
+{
+    for (int artifact = 0; artifact < kNumArtifacts; artifact++)
+        m_disabledArtifacts.set(artifact, akArtifactTraits[artifact].m_comboType != -1);
+    m_disabledArtifacts.set(kArtifactVialOfDragonBlood);
+    m_disabledArtifacts.set(ARTIFACT_ARMAGEDDONS_BLADE);
+    TArray<THeroPrototype, kNumHeroes>& aPrototype = *m_aHeroPrototype;
+    TArray<THeroPrototype, kNumHeroes>::iterator pPrototype = aPrototype.begin();
+    const THero::TTraits* pEnd = THero::s_akTraits + aPrototype.size();
+    for (const THero::TTraits* pTraits = THero::s_akTraits; pTraits != pEnd; pTraits++, pPrototype++)
+        *pPrototype = pTraits->m_prototype;
+}
+
+VA(0x004338c8, 0x7c)
+inline TGameMap::_TImpl::_TBookkeeping::_TBookkeeping()
+    : m_numPlayableSlots(0), m_numTowns(0), m_numHeroes(0), m_bGrailPlaced(false),
+      m_aNumObjsOfCappedType(getCappedObjectTypeInfoMap().getNumInfos(), 0U)
+{
+}
+
+VA(0x00438696, 0x94)
+inline TGameMap::_TImpl::_TPlayerBookkeeping::_TPlayerBookkeeping()
+    : m_numUnits(0), m_numRandomTowns(0), m_aNumTownsOfType(0), m_numHeroes(0), m_numRandomHeroes(0),
+      m_numHeroPlaceholders(0), m_aNumHeroesOfType(0)
+{
 }
 
 // The capped-type map's and info vector's template members, emitted here; the

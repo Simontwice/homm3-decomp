@@ -550,6 +550,7 @@ def derive(log=print, want_suggestions=False):
     # say which (GetPalette24 and loadPalette differ only in their callee).
     referents_of_shape = defaultdict(set)
     shared_shape = []                     # (name, rva, body, relocs) settled by referents
+    multiple = []                         # (name, [rva], body, relocs) settled by referents
     for unit, name, body, relocs in compiled:
         shape = bytearray(body)
         for site in relocs:
@@ -575,6 +576,8 @@ def derive(log=print, want_suggestions=False):
                 continue
             propose(name, hits[0], f"masked body ({len(body)} bytes, "
                                    f"{len(relocs)} relocations) unique at a census start")
+        elif len(hits) > 1:
+            multiple.append((name, hits, body, relocs))
 
     for claim in own_function_claims:
         if claim.name not in bodies or named_at[claim.rva] - {claim.name}:
@@ -804,6 +807,27 @@ def derive(log=print, want_suggestions=False):
             body, relocs = bodies[name]
             propose(name, rva, f"masked body ({len(body)} bytes, {len(relocs)} relocations) "
                                f"unique at a census start; its referents agree with retail's")
+    propagate()
+
+    # A body whose masked bytes sit at several census starts (the same
+    # template member instantiated for two element types, map<int,
+    # TCustomHero> and map<int, TMapObjectRef>'s insert): the one start
+    # whose referents agree with retail's, when exactly one does.
+    settled = defaultdict(list)
+    for name, hits, body, relocs in multiple:
+        if names.get(name):
+            continue
+        agreeing = [rva for rva in hits
+                    if not named_at[rva] and referents_agree(body, relocs, rva)]
+        if len(agreeing) == 1 and not foreign_to_claim(name, own_named[agreeing[0]], bodies):
+            settled[agreeing[0]].append((name, len(hits)))
+    for rva, group in settled.items():
+        if len(group) == 1:
+            name, count = group[0]
+            body, relocs = bodies[name]
+            propose(name, rva, f"masked body ({len(body)} bytes, {len(relocs)} relocations) "
+                               f"at {count} census starts; its referents agree with "
+                               "retail's at this one only")
     propagate()
 
     def claimed():
