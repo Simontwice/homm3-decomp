@@ -1303,6 +1303,7 @@ void TRmgTerrainPainter::buildNeighbourKinds(
 //   o ? ?
 VA(0x005b6ba0, 0x24c)
 MAC_ADDRESS(0x258f18, 0x360)
+VA_AT(h3maped, 0x004bcb91, 0x1b1)
 b8 TRmgTerrainPainter::hasMatchingDiagonalNeighbour(
     const TTilePoint& point, const TRmgTerrainFlip& flip)
 {
@@ -1370,6 +1371,7 @@ b8 TRmgTerrainPainter::hasDifferentOuterAxisNeighbour(
 
 VA(0x005b6fd0, 0x271)
 MAC_ADDRESS(0x259500, 0x444)
+VA_AT(h3maped, 0x004bce6d, 0x156)
 s32 TRmgTerrainPainter::getTransitionStrength(
     const TTilePoint& point, s32 terrain)
 {

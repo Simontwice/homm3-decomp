@@ -213,9 +213,11 @@ void THeroPrototype::setSpells(const TSpells& newSpells)
         _m_pImpl->m_spells = newSpells;
 }
 
+VA(0x0044a692, 0x4c)
 void THeroPrototype::setPrimarySkills(const TArray<int, kNumPrimarySkills>& newPrimarySkills)
 {
-    if (!(newPrimarySkills == getPrimarySkills()))
+    const TArray<int, kNumPrimarySkills>& current = getPrimarySkills();
+    if (!(newPrimarySkills == current))
         _m_pImpl->m_aPrimarySkill = newPrimarySkills;
 }
 

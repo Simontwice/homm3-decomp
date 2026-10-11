@@ -136,9 +136,10 @@ template <class T>
 void readContainer(TRawIStream& stream, std::vector<T>& aItem)
 {
     aItem.erase(aItem.begin(), aItem.end());
-    unsigned int numItems;
+    long numItems;
     stream >> numItems;
-    for (unsigned int i = 0; i < numItems; i++) {
+    unsigned int count = numItems;
+    while (count-- > 0) {
         T item;
         stream >> item;
         aItem.push_back(item);
