@@ -8,8 +8,8 @@ inline-depth pins	0
 end-position inserts	0
 std internal references	0
 cpp extern decls	0
-.cpp-local views	177
-.cpp-local enums	65
+.cpp-local views	79
+.cpp-local enums	19
 casts to enum types	0
 magic case labels	0
 unnamed domain compares	29

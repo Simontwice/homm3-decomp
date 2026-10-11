@@ -316,3 +316,28 @@ class VolatileAllowlist(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EditorRttiLocalClasses(unittest.TestCase):
+    def test_anonymous_scope_names_its_source_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            table = root / "config/retail/h3maped/vtables.tsv"
+            table.parent.mkdir(parents=True)
+            table.write_text(
+                "rva\tslots\tclass\n"
+                "0x13a598\t7\tTTerrainPlacementMapAdapter@?%C:\\Dev\\Heroes 3 Exp 2\\Editor\\"
+                "MapSpecsGeneralPage.cpp2959323531\n"
+                "0x131400\t2\t_TSkillControls@TPrimarySkillBonusesDlg@?%C:\\Dev\\Heroes 3 Exp 2\\Editor\\"
+                "BlackBoxPropsContentsPage.cpp544924908\n"
+                "0x13b000\t4\tTSplashWnd@?%C:\\Dev\\Heroes 3 Exp 2\\Editor\\Map Editor.cpp1\n"
+                "0x13c000\t3\tTMapView\n")
+            with patch.object(board, "REPO", root):
+                origins = board._image_rtti_private_origins("h3maped")
+        self.assertEqual(origins, {
+            "TTerrainPlacementMapAdapter": {"mapspecsgeneralpage.cpp"},
+            "TSplashWnd": {"mapeditor.cpp"},
+        })
+
+    def test_the_game_has_no_editor_rtti_origins(self):
+        self.assertEqual(board._image_rtti_private_origins(board.images.DEFAULT_IMAGE), {})

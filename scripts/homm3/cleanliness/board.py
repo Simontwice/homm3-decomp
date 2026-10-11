@@ -67,7 +67,11 @@ The rows (ratcheted unless noted; floors start at the tree's current counts):
                       in the owner header and #include it.
   .cpp-local views    an unproven/duplicate class definition in a .cpp.
                       A unique class whose CodeView methods originate only
-                      in that .cpp is a legitimate source-local class.
+                      in that .cpp is a legitimate source-local class; so
+                      is an editor image's anonymous-namespace class whose
+                      RTTI type descriptor spells that file as its scope
+                      (`Name@?%C:\\Dev\\...\\File.cpp<n>`, the image's
+                      vtables.tsv).
   .cpp-local enums    the enum twin: a cross-TU domain stranded in a .cpp
                       gets re-declared by the next TU that needs it. Member
                       enums stay with their proven source-local class.
@@ -329,11 +333,40 @@ def _cpp_local_enum_sites(code: str, ctx) -> list:
     return out
 
 
-def _dc_local_classes(sources, dc_origins=None):
+_RTTI_ANONYMOUS_CLASS = re.compile(r"^([A-Za-z_]\w*)@\?%.*\\([^\\]+\.cpp)\d+$")
+
+
+def _image_rtti_private_origins(image: str | None) -> dict:
+    """{class: {source file}} for an editor image's anonymous-namespace
+    classes: an RTTI type descriptor spells the scope's source path
+    (`TTerrainPlacementMapAdapter@?%C:\\Dev\\Heroes 3 Exp 2\\Editor\\
+    MapSpecsGeneralPage.cpp2959323531`). Only direct classes of the scope;
+    a file name is compared without spaces (`Map Editor.cpp` is the unit
+    MapEditor)."""
+    if _image(image) == images.DEFAULT_IMAGE:
+        return {}
+    table = REPO / "config/retail" / _image(image) / "vtables.tsv"
+    origins = {}
+    if not table.is_file():
+        return origins
+    for line in table.read_text(errors="ignore").splitlines():
+        fields = line.split("\t")
+        if len(fields) < 3 or line.startswith("#"):
+            continue
+        match = _RTTI_ANONYMOUS_CLASS.match(fields[2])
+        if match:
+            origins.setdefault(match.group(1), set()).add(
+                match.group(2).replace(" ", "").lower())
+    return origins
+
+
+def _dc_local_classes(sources, dc_origins=None, rtti_origins=None):
     from collections import Counter, defaultdict
     from homm3.match.source_ownership import read_dc, read_win_filters, family_name
     origins = defaultdict(set)
     private_origins = defaultdict(set)
+    for name, files in (rtti_origins or {}).items():
+        private_origins[name].update(files)
     for row in (read_dc(REPO) if dc_origins is None else dc_origins):
         if row.declaration_only:
             continue  # This metric needs proven procedure locations only.
@@ -747,7 +780,7 @@ def count(per_file: bool = False, *, dc_origins=None, image: str | None = None):
     ctx = {"enums": names, "enum_cast_re": _enum_cast_pattern(names),
            "pp_legit": _legit_pp_names(sources)}
 
-    local_classes = _dc_local_classes(sources, dc_origins)
+    local_classes = _dc_local_classes(sources, dc_origins, _image_rtti_private_origins(image))
     totals = {label: 0 for label, _, _, _ in METRICS}
     offenders = []
     for path, code in sources:
