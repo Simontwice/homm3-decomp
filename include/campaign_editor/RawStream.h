@@ -17,8 +17,6 @@
 #ifndef HOMM3_EDITOR_RAWSTREAM_H
 #define HOMM3_EDITOR_RAWSTREAM_H
 
-#include <string.h>
-
 #include <algorithm>
 #include <bitset>
 #include <streambuf>
@@ -143,10 +141,9 @@ inline void readBitset(TRawIStream& stream, std::bitset<N>& bits)
 template <size_t N>
 inline void writeBitset(TRawOStream& stream, const std::bitset<N>& bits)
 {
-    unsigned char bytes[(N + 7) / 8];
-    memset(bytes, 0, sizeof(bytes));
+    unsigned char bytes[(N + 7) / 8] = { 0 };
     for (unsigned int i = 0; i < N; i++) {
-        if (bits[i])
+        if (bits.test(i))
             bytes[i / 8] |= 1 << (i % 8);
     }
     stream << bytes;
