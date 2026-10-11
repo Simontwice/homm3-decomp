@@ -107,8 +107,8 @@ void TPannerCtrl::relayEvent(const MSG* pMsg)
             _m_bitmap.GetBitmap(&bitmap);
             _m_size = CSize(bitmap.bmWidth, bitmap.bmHeight);
             _m_point = CPoint(_m_size.cx / 2, _m_size.cy / 2);
-            MoveWindow(LOWORD(pMsg->lParam) - _m_point.x, HIWORD(pMsg->lParam) - _m_point.y,
-                       _m_size.cx, _m_size.cy);
+            CPoint position = CPoint(LOWORD(pMsg->lParam), HIWORD(pMsg->lParam)) - _m_point;
+            MoveWindow(position.x, position.y, _m_size.cx, _m_size.cy);
             ShowWindow(SW_SHOW);
             _m_hPrevFocus = SetFocus()->GetSafeHwnd();
             SetCapture();
