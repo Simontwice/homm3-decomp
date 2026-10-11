@@ -131,7 +131,7 @@ rva	size	kind	name	unit	evidence
 0x000078f3	0x59	func	??0?$vector@HV?$allocator@H@std@@@std@@QAE@ABV01@@Z	rmg	masked body (89 bytes, 1 relocations) unique at a census start
 0x00007968	0x8	func	??_ETBlackBox@@$4PPPPPPPM@A@AEPAXI@Z	BlackBox	vtable of TBlackBox (RTTI) slot 0
 0x00007970	0x2b	func	??_GTBlackBox@@UAEPAXI@Z	BlackBox	referenced by ??_ETBlackBox@@$4PPPPPPPM@A@AEPAXI@Z at +0x4
-0x0000799b	0x36	func	??1TBlackBox@@UAE@XZ	BlackBox	referenced by 0x000463f4 at +0x31
+0x0000799b	0x36	func	??1TBlackBox@@UAE@XZ	BlackBox	referenced by 0x000469bb at +0x31
 0x000079d1	0xb	func	?importText@TTreasure@@$4PPPPPPPM@3AEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@W4EGameVersion@@@Z	BlackBox	vtable of TBlackBox (RTTI) slot 1
 0x000079dc	0x8	func	?write@TBlackBox@@$4PPPPPPPM@A@BEXPAVTRawOStream@@H@Z	BlackBox	vtable of TBlackBox (RTTI) slot 3
 0x000079e4	0x8	func	?isCustomized@TBlackBox@@$4PPPPPPPM@A@BE_NXZ	BlackBox	vtable of TBlackBox (RTTI) slot 5
@@ -973,7 +973,7 @@ rva	size	kind	name	unit	evidence
 0x00041c36	0x8e	func	??0TGUIGenerator@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (142 bytes, 9 relocations) unique at a census start
 0x00041cc4	0xaa	func	??0?$TGUIOwnableSpecializedObject@VTGenerator@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	referenced by 0x00041c36 at +0x59
 0x00041d6e	0x7a	func	??0TGenerator@@QAE@ABV0@@Z	GUIGameObject	referenced by 0x00041cc4 at +0x65
-0x00041de8	0x57	func	??0TFlaggableObject@@QAE@ABV0@@Z	GUIGameObject	referenced by ??0TRandomGenerator@@QAE@ABV0@@Z at +0x6c
+0x00041de8	0x57	func	??0TFlaggableObject@@QAE@ABV0@@Z	GUIGameObject	referenced by ??0TGarrison@@QAE@ABV0@@Z at +0x4e
 0x00042038	0x8e	func	??0TGUIAbandonedMine@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (142 bytes, 9 relocations) unique at a census start
 0x000420c6	0xaa	func	??0?$TGUIStandardSpecializedObject@VTAbandonedMine@@@?%C:\Dev\Heroes 3 Exp 2\Editor\GUIGameObject.cpp1359517662@@QAE@ABV01@@Z	GUIGameObject	masked body (170 bytes, 10 relocations) unique at a census start
 0x00042170	0x80	func	??0TAbandonedMine@@QAE@ABV0@@Z	GUIGameObject	masked body (128 bytes, 7 relocations) unique at a census start
@@ -2039,6 +2039,7 @@ rva	size	kind	name	unit	evidence
 0x0009ef5c	0x1c	func	??_Gtype_random_map_generator@@UAEPAXI@Z	rmg	vtable of type_random_map_generator (RTTI) slot 0
 0x0009ef78	0x155	func	??1type_random_map_generator@@UAE@XZ	rmg	masked body (341 bytes, 18 relocations) unique at a census start
 0x0009f0cd	0x228	func	?loadTemplates@type_random_map_generator@@QAEXXZ	rmg	referenced by ??0type_random_map_generator@@QAE@HHHHHHHHHPAVtype_progress_bar@@H@Z at +0x145
+0x0009f2f5	0x4cf	func	?readRmgTemplateZones@@YAXPBVTSpreadsheetResource@@PAUTRmgTemplate@@HHHHH@Z	rmg	masked prefix (636 fixed bytes agree, 1231 compiled, 1231 retail)
 0x0009f95a	0x1da7	func	?initializeObjectGenerators@type_random_map_generator@@QAEXXZ	rmg	referenced by ??0type_random_map_generator@@QAE@HHHHHHHHHPAVtype_progress_bar@@H@Z at +0x1ae
 0x000a1967	0x86	func	?countPlacedZoneConnections@type_random_map_generator@@QBEHPAUTRmgZone@@@Z	rmg	referenced by ?filterZonePositions@type_random_map_generator@@QAEXPAUTRmgZone@@AAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@H@Z at +0x121
 0x000a19ed	0xeb	func	?getInitialZoneBounds@type_random_map_generator@@QBEXAAH000@Z	rmg	masked body (235 bytes, 0 relocations) unique at a census start
@@ -2047,10 +2048,11 @@ rva	size	kind	name	unit	evidence
 0x000a218c	0x287	func	?initializeZones@type_random_map_generator@@QAEXPAUTRmgTemplate@@@Z	rmg	masked prefix (145 fixed bytes agree, 647 compiled, 647 retail)
 0x000a2413	0x207	func	?drawIrregularZoneBoundary@type_random_map_generator@@QAEXUTRmgPoint@@0HHH@Z	rmg	masked body (519 bytes, 10 relocations) unique at a census start
 0x000a261a	0x15d	func	?drawStraightZoneBoundary@type_random_map_generator@@QAEXUTRmgPoint@@0HH@Z	rmg	masked prefix (40 fixed bytes agree, 332 compiled, 349 retail)
-0x000a2777	0x3bc	func	?traceZoneBoundary@type_random_map_generator@@QAEXPAUTRmgHalfEdge@@E@Z	rmg	masked prefix (75 fixed bytes agree, 933 compiled, 956 retail)
+0x000a2777	0x3bc	func	?traceZoneBoundary@type_random_map_generator@@QAEXPAUTRmgHalfEdge@@E@Z	rmg	masked prefix (81 fixed bytes agree, 952 compiled, 956 retail)
 0x000a2cdc	0x1e7	func	?drawIslandBoundary@type_random_map_generator@@QAEXUTRmgPoint@@0HHH@Z	rmg	masked body (487 bytes, 10 relocations) unique at a census start
-0x000a4694	0x209	func	?floodWaterZoneDistances@type_random_map_generator@@QAEXUTRmgMapPosition@@H@Z	rmg	masked prefix (52 fixed bytes agree, 512 compiled, 521 retail)
-0x000a489d	0x76	func	?insertRmgWorkItem@@YIXAAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@UTRmgMapPosition@@H@Z	rmg	referenced by ?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z at +0x4b5
+0x000a41b4	0x11d	func	?subdivideRmgNoiseRegion@@YAXAAV?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@UTRmgNoiseRegion@@UTRmgNoiseMidpoints@@H@Z	rmg	masked body (285 bytes, 4 relocations) unique at a census start
+0x000a4694	0x209	func	?floodWaterZoneDistances@type_random_map_generator@@QAEXUTRmgMapPosition@@H@Z	rmg	masked prefix (52 fixed bytes agree, 517 compiled, 521 retail)
+0x000a489d	0x76	func	?insertRmgWorkItem@@YAXAAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@UTRmgMapPosition@@H@Z	rmg	masked body (118 bytes, 2 relocations) unique at a census start
 0x000a4fc5	0x4e2	func	?repairWaterZoneBorders@type_random_map_generator@@QAEXXZ	rmg	masked prefix (211 fixed bytes agree, 1250 compiled, 1250 retail)
 0x000a54a7	0x2c0	func	?addObject@type_random_map_generator@@UAEXPAVtype_object@@UTRmgMapPosition@@@Z	rmg	vtable of type_random_map_generator (RTTI) slot 1
 0x000a5767	0x27b	func	?buildZoneConnectionPaths@type_random_map_generator@@QAEXXZ	rmg	referenced by ?placeMonolithBorderGuard@type_random_map_generator@@QAEEUTRmgMapPosition@@PAUTRmgZone@@@Z at +0x3b
@@ -2058,7 +2060,8 @@ rva	size	kind	name	unit	evidence
 0x000a5e03	0x70	func	?placeGuard@type_random_map_generator@@QAEXHUTRmgMapPosition@@@Z	rmg	masked body (112 bytes, 1 relocations) unique at a census start
 0x000a5e73	0x1f8	func	?placeBorderGuard@type_random_map_generator@@QAEHUTRmgMapPosition@@HPAUTRmgZone@@@Z	rmg	masked body (504 bytes, 8 relocations) unique at a census start
 0x000a61bc	0x3e9	func	?createGroundConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@PAV?$vector@PAUTRmgMapItem@@V?$allocator@PAUTRmgMapItem@@@std@@@std@@PAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@5@@Z	rmg	referenced by ?connectZones@type_random_map_generator@@QAEXXZ at +0x253
-0x000a6601	0x155	func	?floodConnectionRegion@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	rmg	referenced by ?floodShipyardWater@type_random_map_generator@@QAEXPAVtype_object@@@Z at +0x80
+0x000a65a5	0x5c	func	?getRmgGuardValue@@YAHHH@Z	rmg	masked body (92 bytes, 4 relocations) unique at a census start
+0x000a6601	0x155	func	?floodConnectionRegion@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	rmg	masked body (341 bytes, 9 relocations) unique at a census start
 0x000a6795	0x14b	func	?canPlaceShipyard@type_random_map_generator@@QAEEUTRmgMapPosition@@@Z	rmg	masked body (331 bytes, 4 relocations) unique at a census start
 0x000a68e0	0x8b	func	?floodShipyardWater@type_random_map_generator@@QAEXPAVtype_object@@@Z	rmg	masked body (139 bytes, 3 relocations) unique at a census start
 0x000a696b	0x387	func	?createShipyardConnection@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgZoneConnection@@@Z	rmg	referenced by ?connectZones@type_random_map_generator@@QAEXXZ at +0x262
@@ -2072,11 +2075,13 @@ rva	size	kind	name	unit	evidence
 0x000a8d2c	0x86	func	?placePrimaryTown@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	rmg	masked body (134 bytes, 4 relocations) unique at a census start
 0x000a901a	0x388	func	?tryPlaceAdditionalTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHEH@Z	rmg	masked prefix (34 fixed bytes agree, 896 compiled, 904 retail)
 0x000a93a2	0x268	func	?tryPlacePrimaryTown@type_random_map_generator@@QAEEPAUTRmgZone@@HHE@Z	rmg	referenced by ?placePrimaryTown@type_random_map_generator@@QAEXPAUTRmgZone@@@Z at +0x2f
+0x000a960a	0x37	func	?getZoneGuardValue@type_random_map_generator@@QBEHPBUTRmgZone@@H@Z	rmg	masked body (55 bytes, 1 relocations) unique at a census start
 0x000a9911	0x36b	func	?tryPlaceMine@type_random_map_generator@@QAEEPAUTRmgZone@@HEH@Z	rmg	referenced by ?placeMines@type_random_map_generator@@QAEXXZ at +0x85
 0x000a9c7c	0xee	func	?placeExtraMines@type_random_map_generator@@QAEXPAUTRmgZone@@@Z	rmg	referenced by ?placeMines@type_random_map_generator@@QAEXXZ at +0xaf
 0x000a9d6a	0xd6	func	?placeMines@type_random_map_generator@@QAEXXZ	rmg	masked body (214 bytes, 2 relocations) unique at a census start
 0x000a9e40	0xdc	func	?selectObjectPrototype@type_random_map_generator@@QAEPAUTRmgObjectPropertiesRef@@HHH@Z	rmg	referenced by ?generate@type_quest_creature_def@@UAEPAVtype_object@@PAUTRmgObjectPropertiesRef@@PAVtype_random_map_generator@@PAUTRmgZone@@@Z at +0x40
-0x000aa354	0x95	func	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	rmg	masked prefix (36 fixed bytes agree, 180 compiled, 149 retail)
+0x000aa195	0x46	func	?countRmgOccupiedCells@@YAHPBUTObjectType@@@Z	rmg	masked body (70 bytes, 2 relocations) unique at a census start
+0x000aa354	0x95	func	?assembleTreasureGroup@type_random_map_generator@@QAEEPAUTRmgZone@@PAUTRmgTreasureGroup@@EHH@Z	rmg	masked prefix (36 fixed bytes agree, 182 compiled, 149 retail)
 0x000aad8e	0x44	func	??1TRmgTreasureGroup@@QAE@XZ	rmg	masked body (68 bytes, 6 relocations) unique at a census start
 0x000aae2f	0x4c	func	?resetMovementCosts@type_random_map_generator@@QAEXXZ	rmg	masked body (76 bytes, 0 relocations) unique at a census start
 0x000aae7b	0x504	func	?buildRoadCostMap@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z	rmg	referenced by ?createRoads@type_random_map_generator@@QAEXXZ at +0x6c
@@ -2095,17 +2100,20 @@ rva	size	kind	name	unit	evidence
 0x000ad947	0x22b	func	?placeSeerHutForArtifact@type_random_map_generator@@QAEEPAVt_quest_artifact@@@Z	rmg	referenced by ?completePlacement@t_quest_artifact@@UAEEXZ at +0x8
 0x000adb72	0x204	func	?placeKeyTentGuard@type_random_map_generator@@QAEEPAVtype_object@@H@Z	rmg	referenced by ?completePlacement@type_key_tent@@UAEEXZ at +0x14
 0x000add76	0x181	func	?removeObject@type_random_map_generator@@QAEXPAVtype_object@@@Z	rmg	masked body (385 bytes, 4 relocations) unique at a census start
+0x000adef7	0x91	func	?replaceRmgObjectWithTreasure@@YAXPAVtype_random_map_generator@@PAVtype_object@@H@Z	rmg	referenced by ?completePlacement@type_key_tent@@UAEEXZ at +0x28
 0x000adf88	0x59	func	??0TRandomMapRequest@@QAE@HHH@Z	rmg	referenced by ?_generateRandomMap@TMapDoc@@AAE_NXZ at +0x5a
 0x000adfe1	0xe2	func	?generateToFile@TRandomMapRequest@@QAE?AW4ERandomMapResult@@PAVTAbstractFile@@PAVtype_progress_bar@@@Z	rmg	masked body (226 bytes, 8 relocations) unique at a census start
 0x000ae0c3	0x5f	func	?resize@?$vector@PBVCSprite@@V?$allocator@PBVCSprite@@@std@@@std@@QAEXIABQBVCSprite@@@Z	ObjectSprites	referenced by ?_lockSprite@TObjectSpritePtr@@CAPBVCSprite@@ABUTObjectType@@@Z at +0x37
 0x000ae122	0x33	func	??1?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAE@XZ	rmg	referenced by ??1t_abstract_random_generator@@UAE@XZ at +0xb3
+0x000ae155	0x11	func	?push_back@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXABUTRmgObjectPlacementRule@@@Z	rmg	referenced by ?readObjectPlacementRules@t_abstract_random_generator@@QAEXXZ at +0x16f
 0x000ae177	0x18	func	??0?$vector@PAUTRmgTemplateZone@@V?$allocator@PAUTRmgTemplateZone@@@std@@@std@@QAE@ABV?$allocator@PAUTRmgTemplateZone@@@1@@Z	rmg	masked body (24 bytes, 0 relocations) unique at a census start
 0x000ae18f	0x5c	func	?resize@?$vector@UTRmgPackedTerrainCell@@V?$allocator@UTRmgPackedTerrainCell@@@std@@@std@@QAEXIABUTRmgPackedTerrainCell@@@Z	rmg_terrain	referenced by ??0TRmgTerrainPainter@@QAE@PAVTAbstractMap@TTerrainPlacementOp@@HH@Z at +0x97
 0x000ae1fd	0x11	func	?push_back@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXABUTRmgMapPosition@@@Z	rmg	referenced by ?floodConnectionRegion@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z at +0x11c
-0x000ae20e	0x30	func	?insert@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEPAUTRmgMapPosition@@PAU3@ABU3@@Z	rmg	referenced by ?connectZones@type_random_map_generator@@QAEXXZ at +0x11a
+0x000ae20e	0x30	func	?insert@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEPAUTRmgMapPosition@@PAU3@ABU3@@Z	rmg	referenced by ?floodConnectionRegion@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z at +0x2f
 0x000ae23e	0x3e	func	?erase@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEPAUTRmgMapPosition@@PAU3@@Z	rmg	masked body (62 bytes, 0 relocations) unique at a census start
 0x000ae27c	0xc	func	?clear@?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@QAEXXZ	rmg	referenced by ?repairWaterZoneBorders@type_random_map_generator@@QAEXXZ at +0x485
 0x000ae288	0xc	func	?clear@?$vector@W4TTerrainType@@V?$allocator@W4TTerrainType@@@std@@@std@@QAEXXZ	rmg	referenced by ?repairWaterZoneBorders@type_random_map_generator@@QAEXXZ at +0x48d
+0x000ae294	0x11	func	?push_back@?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@QAEXABUTRmgNoiseRegion@@@Z	rmg	referenced by ?subdivideRmgNoiseRegion@@YAXAAV?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@UTRmgNoiseRegion@@UTRmgNoiseMidpoints@@H@Z at +0x60
 0x000ae2a5	0x2b	func	??1?$list@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAE@XZ	rmg	masked body (43 bytes, 2 relocations) unique at a census start
 0x000ae2d0	0x38	func	?erase@?$vector@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAEPAUTRmgPoint@@PAU3@0@Z	rmg	masked body (56 bytes, 0 relocations) unique at a census start
 0x000ae308	0x1c7	func	?insert@?$vector@FV?$allocator@F@std@@@std@@QAEXPAFIABF@Z	rmg	masked body (455 bytes, 2 relocations) unique at a census start; ICF-folded with 1 identical bodies
@@ -2117,10 +2125,10 @@ rva	size	kind	name	unit	evidence
 0x000ae5e6	0x2e	func	?erase@?$list@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAE?AViterator@12@V312@@Z	rmg	masked body (46 bytes, 1 relocations) unique at a census start
 0x000ae614	0x38	func	?erase@?$list@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@QAE?AViterator@12@V312@0@Z	rmg	masked body (56 bytes, 1 relocations) unique at a census start
 0x000ae64c	0x24	func	?_Buynode@?$list@UTRmgPoint@@V?$allocator@UTRmgPoint@@@std@@@std@@IAEPAU_Node@12@PAU312@0@Z	rmg	masked body (36 bytes, 1 relocations) unique at a census start
-0x000ae670	0x235	func	?insert@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXPAUTRmgObjectPlacementRule@@IABU3@@Z	rmg	masked prefix (35 fixed bytes agree, 557 compiled, 565 retail)
+0x000ae670	0x235	func	?insert@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXPAUTRmgObjectPlacementRule@@IABU3@@Z	rmg	referenced by ?push_back@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXABUTRmgObjectPlacementRule@@@Z at +0xa
 0x000ae8a5	0x254	func	?insert@?$vector@UTRmgZoneConnection@@V?$allocator@UTRmgZoneConnection@@@std@@@std@@QAEXPAUTRmgZoneConnection@@IABU3@@Z	rmg	masked body (596 bytes, 2 relocations) unique at a census start
 0x000aeaf9	0x257	func	?insert@?$vector@UTRmgNoiseRegion@@V?$allocator@UTRmgNoiseRegion@@@std@@@std@@QAEXPAUTRmgNoiseRegion@@IABU3@@Z	rmg	masked body (599 bytes, 2 relocations) unique at a census start
-0x000af09c	0x2d	func	?_Construct@std@@YIXPAUTRmgObjectPlacementRule@@ABU2@@Z	rmg	referenced by ?insert@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXPAUTRmgObjectPlacementRule@@IABU3@@Z at +0x99
+0x000af09c	0x2d	func	?_Construct@std@@YAXPAUTRmgObjectPlacementRule@@ABU2@@Z	rmg	referenced by ?insert@?$vector@UTRmgObjectPlacementRule@@V?$allocator@UTRmgObjectPlacementRule@@@std@@@std@@QAEXPAUTRmgObjectPlacementRule@@IABU3@@Z at +0x7b
 0x000af0c9	0x42	func	??4TRmgObjectPlacementRule@@QAEAAU0@ABU0@@Z	rmg	masked body (66 bytes, 2 relocations) unique at a census start
 0x000af10b	0x57	func	??0TRmgObjectPlacementRule@@QAE@ABU0@@Z	rmg	masked body (87 bytes, 5 relocations) unique at a census start
 0x000af162	0x12d	func	??4?$vector@HV?$allocator@H@std@@@std@@QAEAAV01@ABV01@@Z	rmg	masked body (301 bytes, 2 relocations) unique at a census start
@@ -2383,7 +2391,7 @@ rva	size	kind	name	unit	evidence
 0x000ccb64	0x116	func	?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z	rmg_voronoi	masked prefix (38 fixed bytes agree, 275 compiled, 278 retail)
 0x000ccc7a	0xef	func	?isRmgPointInsideCircle@@YIEUTRmgPoint@@000@Z	rmg_voronoi	referenced by ?addSite@TRmgVoronoi@@QAEXUTRmgPoint@@PAUTRmgZone@@@Z at +0xe6
 0x000cce95	0x36	func	?erase@?$vector@HV?$allocator@H@std@@@std@@QAEPAHPAH@Z	rmg	masked body (54 bytes, 0 relocations) unique at a census start; ICF-folded with 3 identical bodies
-0x000ccecb	0x1d0	func	?insert@?$vector@HV?$allocator@H@std@@@std@@QAEXPAHIABH@Z	rmg	referenced by ?push_back@?$vector@HV?$allocator@H@std@@@std@@QAEXABH@Z at +0xa; ICF-folded with 7 identical bodies
+0x000ccecb	0x1d0	func	?insert@?$vector@HV?$allocator@H@std@@@std@@QAEXPAHIABH@Z	rmg	referenced by ?insertRmgWorkItem@@YAXAAV?$vector@UTRmgMapPosition@@V?$allocator@UTRmgMapPosition@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@UTRmgMapPosition@@H@Z at +0x6d; ICF-folded with 7 identical bodies
 0x000ce9c2	0xb	func	??0_TMessage@TQuestLocationPropsDlg@@QAE@XZ	QuestLocationPropsDlg	referenced by ??0TQuestLocationPropsDlg@@QAE@IPAVCWnd@@PAVTGameMap@@_NIH@Z at +0x5c
 0x000d53d0	0x1f9	func	@deflateInit2_@32	deflate	masked body (505 bytes, 6 relocations) unique at a census start
 0x000d55d0	0x6e	func	@deflateReset@4	deflate	masked body (110 bytes, 2 relocations) unique at a census start
@@ -2739,6 +2747,8 @@ rva	size	kind	name	unit	evidence
 0x00136c54	0x8	data	??_8TWitchHut@@7B@	ObjectSpecializations	referenced by ??0TWitchHut@@QAE@ABUTObjectType@@@Z at +0x19
 0x00136c80	0x8	data	??_8TGarrison@@7B@	ObjectSpecializations	referenced by ??0TGarrison@@QAE@ABUTObjectType@@W4TPlayer@@@Z at +0x28
 0x00136c88	0x8	data	_g_gzMagic	gzinflatebuf	referenced by ??0TGzDeflateBuf@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@HH@Z at +0x131
+0x00138a04	0x80	data	_g_rmgLineReflectedNeighbours	rmg_support	referenced by ?selectRmgLinePattern@@YAXPB_NPBUTRmgLinePatternTable@@AAHAA_N3@Z at +0xd7
+0x00138a84	0x8	data	_g_rmgLineReflections	rmg_support	referenced by ?selectRmgLinePattern@@YAXPB_NPBUTRmgLinePatternTable@@AAHAA_N3@Z at +0xbd
 0x0013997c	0x8	data	??_8?$basic_istream@DU?$char_traits@D@std@@@std@@7B@	objecttype	referenced by ??0?$basic_istream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z at +0x1e
 0x0013f974	0x4	data	?kMaxObjWidth@@3IB	objecttype	referenced by ??0TObjectType@@QAE@XZ at +0x5d
 0x0013f978	0x4	data	?kMaxObjHeight@@3IB	objecttype	referenced by ??0TObjectType@@QAE@XZ at +0x65
@@ -3248,7 +3258,6 @@ rva	size	kind	name	unit	evidence
 0x00183b34	0x4	data	??_C@_03GIGI@?$CK?$CK?$CK?$AA@	GameMap	referenced by ?importText@_TImpl@TGameMap@@QAEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z at +0xc9a
 0x00183b38	0x7	data	??_C@_06PGIC@?5?$DN?$DN?$DN?$DN?$DN?$AA@	GameMap	referenced by ?importText@_TImpl@TGameMap@@QAEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z at +0x8a
 0x00183b40	0x7	data	??_C@_06DPKC@?$DN?$DN?$DN?$DN?$DN?5?$AA@	GameMap	referenced by ?importText@_TImpl@TGameMap@@QAEXPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z at +0x41
-0x00183b50	0x3	data	??_C@_02GIEM@?0?5?$AA@	rmg	referenced by 0x00097d62 at +0xb1
 0x00183b54	0x3	data	??_C@_02JJJH@?6?6?$AA@	GameMap	referenced by ?InitInstance@TMapEditorApp@@UAEHXZ at +0x4b3
 0x00183fec	0x15	data	??_C@_0BF@MMAA@missing?5locale?5facet?$AA@	resourcemanager	referenced by ?use_facet@std@@YAABV?$numpunct@D@1@ABVlocale@1@PBV21@_N@Z at +0xa6
 0x00184064	0x2	data	??_C@_01FKHJ@C?$AA@	resourcemanager	referenced by ?use_facet@std@@YAABV?$num_get@DV?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@1@ABVlocale@1@PBV21@_N@Z at +0x65
@@ -3677,12 +3686,15 @@ rva	size	kind	name	unit	evidence
 0x0018da0c	0x6	data	??_C@_05DFPL@?$CFd?5?$CFs?$AA@	QuestLocationPropsDlg	referenced by 0x000978e2 at +0x6a
 0x0018da14	0xc	data	??_C@_0M@DOIK@SeerHut?4txt?$AA@	QuestLocationPropsDlg	referenced by 0x00097bde at +0x41
 0x0018da20	0x6	data	??_C@_05GGPB@?$CFs?5?$CFd?$AA@	QuestLocationPropsDlg	referenced by 0x00097d62 at +0x5d
+0x0018db18	0x18	data	?g_rmgGuardThresholdLow@?A0x8197b2fbbced3331@@3PAHA	rmg	referenced by ?getRmgGuardValue@@YAHHH@Z at +0x13
+0x0018db30	0x18	data	?g_rmgGuardThresholdHigh@?A0x8197b2fbbced3331@@3PAHA	rmg	referenced by ?getRmgGuardValue@@YAHHH@Z at +0x30
+0x0018db48	0x18	data	?g_rmgGuardScaleLow@?A0x8197b2fbbced3331@@3PAHA	rmg	referenced by ?getRmgGuardValue@@YAHHH@Z at +0x25
+0x0018db60	0x18	data	?g_rmgGuardScaleHigh@?A0x8197b2fbbced3331@@3PAHA	rmg	referenced by ?getRmgGuardValue@@YAHHH@Z at +0x41
 0x0018db78	0x90	data	?g_rmgTerrainTownChoices@?A0x8197b2fbbced3331@@3PAY03HA	rmg	referenced by ?chooseCreatureTownType@TRmgZone@@QAEXE@Z at +0x15
 0x0018dc08	0x1c	data	?g_rmgCreatureValueByLevel@@3PAHA	rmg	referenced by ??0type_black_box_creature_def@@QAE@H@Z at +0x37
 0x0018e43c	0xd	data	??_C@_0N@IOHA@rand_trn?4txt?$AA@	rmg	string literal referenced by ?readObjectPlacementRules@t_abstract_random_generator@@QAEXXZ
-0x0018e478	0x8	data	??_C@_07LJPC@rmg?4txt?$AA@	rmg	string literal referenced by ?loadTemplates@type_random_map_generator@@QAEXXZ
+0x0018e478	0x8	data	??_C@_07LJPC@rmg?4txt?$AA@	rmg	referenced by ?loadTemplates@type_random_map_generator@@QAEXXZ at +0x13
 0x0018e480	0x11	data	??_C@_0BB@INDM@?5town?5choice?5is?5?$AA@	rmg	string literal referenced by ?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z
-0x0018e494	0xa	data	??_C@_09HIAN@?5is?5human?$AA@	rmg	string literal referenced by ?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z
 0x0018e4a0	0xf	data	??_C@_0P@BJHP@?0?5original?5map?$AA@	rmg	string literal referenced by ?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z
 0x0018e4b0	0x16	data	??_C@_0BG@DJFM@?0?5first?5expansion?5map?$AA@	rmg	string literal referenced by ?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z
 0x0018e4c8	0x17	data	??_C@_0BH@MNNA@?0?5second?5expansion?5map?$AA@	rmg	string literal referenced by ?writeMapHeader@type_random_map_generator@@QAEXPAVTAbstractFile@@@Z
@@ -3943,7 +3955,7 @@ rva	size	kind	name	unit	evidence
 0x001a2698	0x20	data	?g_rmgShipyardWaterOffsets@?A0x8197b2fbbced3331@@3PAUTRmgPoint@@A	rmg	referenced by ?canPlaceShipyard@type_random_map_generator@@QAEEUTRmgMapPosition@@@Z at +0x96
 0x001a26e4	0x3a0	data	?g_rmgMapObjectLimits@@3PAHA	rmg	referenced by ??0type_random_map_generator@@QAE@HHHHHHHHHPAVtype_progress_bar@@H@Z at +0x203
 0x001a2a8c	0x3a0	data	?g_rmgZoneObjectLimits@@3PAHA	rmg	referenced by ??0type_random_map_generator@@QAE@HHHHHHHHHPAVtype_progress_bar@@H@Z at +0x1f7
-0x001a2e34	0x1	data	_?$S38@?CB@??createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z@4EA	rmg	referenced by ?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z at +0x3e8 (retail +0x3e4, by operand order)
+0x001a2e34	0x1	data	_?$S38@?CB@??createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z@4EA	rmg	referenced by ?createRiverToOutlet@type_random_map_generator@@QAEXUTRmgMapPosition@@@Z at +0x3ed (retail +0x3e4, by operand order)
 0x001a2ee8	0x50	data	?g_rmgRiverPatternTable@@3UTRmgLinePatternTable@@A	rmg_river	referenced by ?getPatternTable@TRiverOp@@UAEPAUTRmgLinePatternTable@@H@Z at +0x1
 0x001a2f80	0x50	data	?g_rmgRoadPatternTable@@3UTRmgLinePatternTable@@A	rmg_road	referenced by ?getPatternTable@TRoadOp@@UAEPAUTRmgLinePatternTable@@H@Z at +0x1
 0x001a310c	0x1	data	_?$S10@?1??initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z@4EA	spelldefs	referenced by ?initializeSpellTraits@@YAXHABV?$vector@PADV?$allocator@PAD@std@@@std@@@Z at +0x1a
