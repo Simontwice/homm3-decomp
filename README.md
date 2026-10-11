@@ -37,9 +37,11 @@ Library and compiler-generated code (outside the scores; each function verified 
 | Category              | Functions | Verified | Code (B) | Status                                   | How verified                                                                                            |
 | :-------------------- | --------: | -------: | -------: | :--------------------------------------- | :------------------------------------------------------------------------------------------------------ |
 | `CRT/C++ runtime`     |       912 |      912 |  110,461 | library, verified                        | bytes and relocations equal pinned VC6 SP3 LIBCMT/LIBCPMT members (config/retail/runtime-functions.tsv) |
-| `EH unwind funclets`  |     5,125 |    4,558 |   53,151 | compiler-generated, verified with parent | parent's `.text$x` COMDAT: bytes and every relocation target (library parents: their library section)   |
-| `init/cleanup thunks` |     1,173 |    1,166 |   95,322 | compiler-generated, verified             | source-emitted CRT bodies, bytes and named relocations                                                  |
+| `EH unwind funclets`  |     5,125 |    4,624 |   53,151 | compiler-generated, verified with parent | parent's `.text$x` COMDAT: bytes and every relocation target (library parents: their library section)   |
+| `init/cleanup thunks` |     1,173 |    1,164 |   95,322 | compiler-generated, verified             | source-emitted CRT bodies, bytes and named relocations                                                  |
 | `import thunks`       |        27 |       26 |      162 | linker-generated, verified               | `FF 25` through a named IAT slot (and the pinned import library where one exists)                       |
+
+**Byte accountability:** 1,051 file bytes unclaimed; 0 bytes with conflicting claims; 703 unverified and 0 mismatching game data bytes; 568 bytes of exception records pending their functions' matches; 26,080 bytes of reviewed padding. 12,188 / 12,200 enrolled initializer comparisons exact. 973 source-emitted CRT bodies exact (89,376 bytes). [Data reports](docs/tooling/data-matching.md) separate ownership, raw byte comparisons and verified library ranges.
 
 <!-- match-score:end -->
 

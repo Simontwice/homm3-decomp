@@ -15,7 +15,7 @@ rva	size	category	owner	verdict	reason
 0x12b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1310	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1370	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x4dd0	32	init-thunk	misc:_$E25	exact	-
+0x4dd0	32	init-thunk	misc:_$E55	exact	-
 0x4e00	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x4e60	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x4ec0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -26,7 +26,7 @@ rva	size	category	owner	verdict	reason
 0x50b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x5110	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x5170	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x5930	32	init-thunk	misc:_$E25	exact	-
+0x5930	32	init-thunk	misc:_$E55	exact	-
 0x5950	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x59b0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x5a10	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -39,8 +39,8 @@ rva	size	category	owner	verdict	reason
 0x5cc0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
 0x5db0	36	init-thunk	advmgr:_$E51	exact	-
 0xf240	43	init-thunk	advmgr:_$E54	exact	-
-0x1b4e0	32	init-thunk	misc:_$E25	exact	-
-0x1bf00	32	init-thunk	misc:_$E25	exact	-
+0x1b4e0	32	init-thunk	misc:_$E55	exact	-
+0x1bf00	32	init-thunk	misc:_$E55	exact	-
 0x1bf20	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1bf80	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1bfe0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -51,7 +51,7 @@ rva	size	category	owner	verdict	reason
 0x1c1d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1c230	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1c290	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1dda0	32	init-thunk	misc:_$E25	exact	-
+0x1dda0	32	init-thunk	misc:_$E55	exact	-
 0x1ddc0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1de20	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1de80	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -62,7 +62,7 @@ rva	size	category	owner	verdict	reason
 0x1e070	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1e0d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1e130	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x23610	32	init-thunk	misc:_$E25	exact	-
+0x23610	32	init-thunk	misc:_$E55	exact	-
 0x238b0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x23910	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x23970	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -73,7 +73,7 @@ rva	size	category	owner	verdict	reason
 0x23b60	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x23bc0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x23c20	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x27a70	32	init-thunk	misc:_$E25	exact	-
+0x27a70	32	init-thunk	misc:_$E55	exact	-
 0x27ca0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x27d00	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x27d60	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -84,10 +84,10 @@ rva	size	category	owner	verdict	reason
 0x27f50	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x27fb0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x28010	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x28070	101	init-thunk	ai_player:_$E73	exact	-
-0x32460	39	init-thunk	ai_player:_$E70	exact	-
-0x32490	23	init-thunk	ai_player:_$E68	exact	-
-0x34cc0	32	init-thunk	misc:_$E25	exact	-
+0x28070	101	init-thunk	ai_player:_$E103	exact	-
+0x32460	39	init-thunk	ai_player:_$E100	exact	-
+0x32490	23	init-thunk	ai_player:_$E98	exact	-
+0x34cc0	32	init-thunk	misc:_$E55	exact	-
 0x35460	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x354c0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x35520	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -98,7 +98,7 @@ rva	size	category	owner	verdict	reason
 0x35710	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x35770	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x357d0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x3ce60	32	init-thunk	misc:_$E25	exact	-
+0x3ce60	32	init-thunk	misc:_$E55	exact	-
 0x3ce80	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x3cee0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x3cf40	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -109,7 +109,7 @@ rva	size	category	owner	verdict	reason
 0x3d130	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x3d190	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x3d1f0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x492b0	32	init-thunk	misc:_$E25	exact	-
+0x492b0	32	init-thunk	misc:_$E55	exact	-
 0x492d0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x49330	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x49390	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -120,18 +120,18 @@ rva	size	category	owner	verdict	reason
 0x49580	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x495e0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x49640	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x4a4c0	1	init-thunk	armygrp:_$E49	exact	-
-0x4c700	32	init-thunk	misc:_$E25	exact	-
+0x4a4c0	1	init-thunk	armygrp:_$E79	exact	-
+0x4c700	32	init-thunk	misc:_$E55	exact	-
 0x4c960	664	init-thunk	artifact:_$E23	exact	-
 0x4cc00	325	init-thunk	artifact:_$E26	exact	-
-0x4d510	32	init-thunk	misc:_$E25	exact	-
-0x4d580	32	init-thunk	misc:_$E25	exact	-
-0x4df50	32	init-thunk	misc:_$E25	exact	-
-0x4ed00	32	init-thunk	misc:_$E25	exact	-
-0x4f790	32	init-thunk	misc:_$E25	exact	-
-0x4f7b0	32	init-thunk	misc:_$E25	exact	-
-0x4fec0	32	init-thunk	misc:_$E25	exact	-
-0x50930	32	init-thunk	misc:_$E25	exact	-
+0x4d510	32	init-thunk	misc:_$E55	exact	-
+0x4d580	32	init-thunk	misc:_$E55	exact	-
+0x4df50	32	init-thunk	misc:_$E55	exact	-
+0x4ed00	32	init-thunk	misc:_$E55	exact	-
+0x4f790	32	init-thunk	misc:_$E55	exact	-
+0x4f7b0	32	init-thunk	misc:_$E55	exact	-
+0x4fec0	32	init-thunk	misc:_$E55	exact	-
+0x50930	32	init-thunk	misc:_$E55	exact	-
 0x50950	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x509b0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x50a10	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -142,9 +142,9 @@ rva	size	category	owner	verdict	reason
 0x50c00	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x50c60	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x50cc0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x55e60	92	init-thunk	bottomviewsubwindow:_$E59	exact	-
-0x56ea0	32	init-thunk	misc:_$E25	exact	-
-0x575a0	32	init-thunk	misc:_$E25	exact	-
+0x55e60	92	init-thunk	bottomviewsubwindow:_$E89	exact	-
+0x56ea0	32	init-thunk	misc:_$E55	exact	-
+0x575a0	32	init-thunk	misc:_$E55	exact	-
 0x575c0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x57620	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x57680	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -155,10 +155,10 @@ rva	size	category	owner	verdict	reason
 0x57870	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x578d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x57930	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x5dec0	32	init-thunk	misc:_$E25	exact	-
-0x5e210	32	init-thunk	misc:_$E25	exact	-
-0x5e230	32	init-thunk	misc:_$E25	exact	-
-0x5e3d0	32	init-thunk	misc:_$E25	exact	-
+0x5dec0	32	init-thunk	misc:_$E55	exact	-
+0x5e210	32	init-thunk	misc:_$E55	exact	-
+0x5e230	32	init-thunk	misc:_$E55	exact	-
+0x5e3d0	32	init-thunk	misc:_$E55	exact	-
 0x5e3f0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x5e450	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x5e4b0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -169,7 +169,7 @@ rva	size	category	owner	verdict	reason
 0x5e6a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x5e700	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x5e760	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x60830	32	init-thunk	misc:_$E25	exact	-
+0x60830	32	init-thunk	misc:_$E55	exact	-
 0x60d10	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x60d70	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x60dd0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -180,7 +180,7 @@ rva	size	category	owner	verdict	reason
 0x60fc0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x61020	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x61080	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x62220	32	init-thunk	misc:_$E25	exact	-
+0x62220	32	init-thunk	misc:_$E55	exact	-
 0x62240	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x622a0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x62300	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -191,14 +191,14 @@ rva	size	category	owner	verdict	reason
 0x624f0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x62550	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x625b0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x62610	33	init-thunk	cmbtmgr:_$E66	exact	-
-0x62640	41	init-thunk	cmbtmgr:_$E69	exact	-
-0x62670	41	init-thunk	cmbtmgr:_$E72	exact	-
-0x626a0	41	init-thunk	cmbtmgr:_$E84	exact	-
-0x626d0	41	init-thunk	cmbtmgr:_$E81	exact	-
-0x62700	41	init-thunk	cmbtmgr:_$E75	exact	-
-0x62730	41	init-thunk	cmbtmgr:_$E78	exact	-
-0x6b220	32	init-thunk	misc:_$E25	exact	-
+0x62610	33	init-thunk	cmbtmgr:_$E96	exact	-
+0x62640	41	init-thunk	cmbtmgr:_$E99	exact	-
+0x62670	41	init-thunk	cmbtmgr:_$E102	exact	-
+0x626a0	41	init-thunk	cmbtmgr:_$E114	exact	-
+0x626d0	41	init-thunk	cmbtmgr:_$E111	exact	-
+0x62700	41	init-thunk	cmbtmgr:_$E105	exact	-
+0x62730	41	init-thunk	cmbtmgr:_$E108	exact	-
+0x6b220	32	init-thunk	misc:_$E55	exact	-
 0x6b240	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x6b2a0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x6b300	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -209,7 +209,7 @@ rva	size	category	owner	verdict	reason
 0x6b4f0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x6b550	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x6b5b0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x6dfc0	32	init-thunk	misc:_$E25	exact	-
+0x6dfc0	32	init-thunk	misc:_$E55	exact	-
 0x6dfe0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x6e040	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x6e0a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -220,7 +220,7 @@ rva	size	category	owner	verdict	reason
 0x6e290	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x6e2f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x6e350	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x6fee0	32	init-thunk	misc:_$E25	exact	-
+0x6fee0	32	init-thunk	misc:_$E55	exact	-
 0x6ff00	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x6ff60	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x6ffc0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -231,7 +231,7 @@ rva	size	category	owner	verdict	reason
 0x701b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x70210	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x70270	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x71c20	32	init-thunk	misc:_$E25	exact	-
+0x71c20	32	init-thunk	misc:_$E55	exact	-
 0x71c40	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x71ca0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x71d00	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -242,7 +242,7 @@ rva	size	category	owner	verdict	reason
 0x71ef0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x71f50	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x71fb0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x73810	32	init-thunk	misc:_$E25	exact	-
+0x73810	32	init-thunk	misc:_$E55	exact	-
 0x73830	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x73890	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x738f0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -253,7 +253,7 @@ rva	size	category	owner	verdict	reason
 0x73ae0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x73b40	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x73ba0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x7a690	32	init-thunk	misc:_$E25	exact	-
+0x7a690	32	init-thunk	misc:_$E55	exact	-
 0x7a6b0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x7a710	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x7a770	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -264,18 +264,18 @@ rva	size	category	owner	verdict	reason
 0x7a960	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x7a9c0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x7aa20	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x7aa80	39	init-thunk	creature_bank:_$E47	exact	-
-0x7aab0	23	init-thunk	creature_bank:_$E45	exact	-
-0x7b100	32	init-thunk	misc:_$E25	exact	-
+0x7aa80	39	init-thunk	creature_bank:_$E77	exact	-
+0x7aab0	23	init-thunk	creature_bank:_$E75	exact	-
+0x7b100	32	init-thunk	misc:_$E55	exact	-
 0x7b7c0	23	init-thunk	creaturetype:_$E30	exact	-
 0x7b7e0	23	init-thunk	creaturetype:_$E29	exact	-
 0x7b800	23	init-thunk	creaturetype:_$E28	exact	-
-0x7b820	32	init-thunk	misc:_$E25	exact	-
-0x7b8d0	32	init-thunk	misc:_$E25	exact	-
-0x7c240	32	init-thunk	misc:_$E25	exact	-
+0x7b820	32	init-thunk	misc:_$E55	exact	-
+0x7b8d0	32	init-thunk	misc:_$E55	exact	-
+0x7c240	32	init-thunk	misc:_$E55	exact	-
 0x7c260	8	init-thunk	cspriteframe:_$E7	exact	-
 0x7c270	11	init-thunk	cspriteframe:_$E10	exact	-
-0x7f3e0	32	init-thunk	misc:_$E25	exact	-
+0x7f3e0	32	init-thunk	misc:_$E55	exact	-
 0x7f400	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x7f460	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x7f4c0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -286,7 +286,7 @@ rva	size	category	owner	verdict	reason
 0x7f6b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x7f710	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x7f770	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x823c0	32	init-thunk	misc:_$E25	exact	-
+0x823c0	32	init-thunk	misc:_$E55	exact	-
 0x823e0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x82440	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x824a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -297,7 +297,7 @@ rva	size	category	owner	verdict	reason
 0x82690	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x826f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x82750	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x83920	32	init-thunk	misc:_$E25	exact	-
+0x83920	32	init-thunk	misc:_$E55	exact	-
 0x83b40	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x83ba0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x83c00	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -308,8 +308,8 @@ rva	size	category	owner	verdict	reason
 0x83df0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x83e50	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x83eb0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x8f5f0	63	init-thunk	customcampaign:_$E64	exact	-
-0x90b70	32	init-thunk	misc:_$E25	exact	-
+0x8f5f0	63	init-thunk	customcampaign:_$E94	exact	-
+0x90b70	32	init-thunk	misc:_$E55	exact	-
 0x90b90	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x90bf0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x90c50	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -320,7 +320,7 @@ rva	size	category	owner	verdict	reason
 0x90e40	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x90ea0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x90f00	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x91300	32	init-thunk	misc:_$E25	exact	-
+0x91300	32	init-thunk	misc:_$E55	exact	-
 0x91320	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x91380	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x913e0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -331,8 +331,8 @@ rva	size	category	owner	verdict	reason
 0x915d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x91630	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x91690	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x91ee0	32	init-thunk	misc:_$E25	exact	-
-0x91f00	32	init-thunk	misc:_$E25	exact	-
+0x91ee0	32	init-thunk	misc:_$E55	exact	-
+0x91f00	32	init-thunk	misc:_$E55	exact	-
 0x91f20	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x91f80	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x91fe0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -343,9 +343,9 @@ rva	size	category	owner	verdict	reason
 0x921d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x92230	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x92290	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x96c50	32	init-thunk	misc:_$E25	exact	-
-0x9a0a0	32	init-thunk	misc:_$E25	exact	-
-0x9a1c0	32	init-thunk	misc:_$E25	exact	-
+0x96c50	32	init-thunk	misc:_$E55	exact	-
+0x9a0a0	32	init-thunk	misc:_$E55	exact	-
+0x9a1c0	32	init-thunk	misc:_$E55	exact	-
 0x9a1e0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x9a240	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x9a2a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -356,7 +356,7 @@ rva	size	category	owner	verdict	reason
 0x9a490	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x9a4f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x9a550	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x9dcf0	32	init-thunk	misc:_$E25	exact	-
+0x9dcf0	32	init-thunk	misc:_$E55	exact	-
 0x9dd10	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x9dd70	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x9ddd0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -367,7 +367,7 @@ rva	size	category	owner	verdict	reason
 0x9dfc0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x9e020	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x9e080	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xb0090	32	init-thunk	misc:_$E25	exact	-
+0xb0090	32	init-thunk	misc:_$E55	exact	-
 0xb0530	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xb0590	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xb05f0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -378,7 +378,7 @@ rva	size	category	owner	verdict	reason
 0xb07e0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xb0840	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xb08a0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xb0f40	32	init-thunk	misc:_$E25	exact	-
+0xb0f40	32	init-thunk	misc:_$E55	exact	-
 0xb0f60	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xb0fc0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xb1020	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -389,7 +389,7 @@ rva	size	category	owner	verdict	reason
 0xb1210	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xb1270	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xb12d0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xb42d0	32	init-thunk	misc:_$E25	exact	-
+0xb42d0	32	init-thunk	misc:_$E55	exact	-
 0xb42f0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xb4350	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xb43b0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -400,11 +400,11 @@ rva	size	category	owner	verdict	reason
 0xb45a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xb4600	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xb4660	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xb5020	32	init-thunk	misc:_$E25	exact	-
-0xb6190	32	init-thunk	misc:_$E25	exact	-
+0xb5020	32	init-thunk	misc:_$E55	exact	-
+0xb6190	32	init-thunk	misc:_$E55	exact	-
 0xb61b0	39	init-thunk	forcefeedback:_$E28	exact	-
 0xb61e0	10	init-thunk	forcefeedback:_$E26	exact	-
-0xb8000	63	init-thunk	customcampaign:_$E64	exact	-
+0xb8000	63	init-thunk	customcampaign:_$E94	exact	-
 0xb8040	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xb80a0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xb8100	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -417,7 +417,7 @@ rva	size	category	owner	verdict	reason
 0xb83b0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
 0xca9e0	36	init-thunk	game:_$E86	exact	-
 0xcaa20	20	init-thunk	game:_$E84	exact	-
-0xd50d0	32	init-thunk	misc:_$E25	exact	-
+0xd50d0	32	init-thunk	misc:_$E55	exact	-
 0xd50f0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xd5150	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xd51b0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -428,8 +428,8 @@ rva	size	category	owner	verdict	reason
 0xd53a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xd5400	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xd5460	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xd5b60	32	init-thunk	misc:_$E25	exact	-
-0xd5b80	32	init-thunk	misc:_$E25	exact	-
+0xd5b60	32	init-thunk	misc:_$E55	exact	-
+0xd5b80	32	init-thunk	misc:_$E55	exact	-
 0xd5ba0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xd5c00	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xd5c60	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -442,8 +442,8 @@ rva	size	category	owner	verdict	reason
 0xd5f10	95	init-thunk	include/terrain.h:g_rockMask	exact	-
 0xd5f70	28	init-thunk	kb:_$E68	exact	-
 0xd5f90	22	init-thunk	puzzlewindow:_$E48	exact	-
-0xd5fb0	32	init-thunk	misc:_$E25	exact	-
-0xd6c30	32	init-thunk	misc:_$E25	exact	-
+0xd5fb0	32	init-thunk	misc:_$E55	exact	-
+0xd6c30	32	init-thunk	misc:_$E55	exact	-
 0xd6dc0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xd6e20	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xd6e80	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -455,12 +455,12 @@ rva	size	category	owner	verdict	reason
 0xd70d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xd7130	95	init-thunk	include/terrain.h:g_rockMask	exact	-
 0xd7190	14	init-thunk	hero:_$E51	exact	-
-0xe6780	32	init-thunk	misc:_$E25	exact	-
+0xe6780	32	init-thunk	misc:_$E55	exact	-
 0xe6ce0	23	init-thunk	herodefs:_$E28	exact	-
 0xe6d00	20	init-thunk	herodefs:_$E30	exact	-
 0xe6d20	20	init-thunk	herodefs:_$E33	exact	-
 0xe6d40	20	init-thunk	herodefs:_$E32	exact	-
-0xe6d60	32	init-thunk	misc:_$E25	exact	-
+0xe6d60	32	init-thunk	misc:_$E55	exact	-
 0xe6d80	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xe6de0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xe6e40	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -471,7 +471,7 @@ rva	size	category	owner	verdict	reason
 0xe7030	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xe7090	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xe70f0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xe7200	32	init-thunk	misc:_$E25	exact	-
+0xe7200	32	init-thunk	misc:_$E55	exact	-
 0xe7220	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xe7280	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xe72e0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -482,7 +482,7 @@ rva	size	category	owner	verdict	reason
 0xe74d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xe7530	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xe7590	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xe8bc0	32	init-thunk	misc:_$E25	exact	-
+0xe8bc0	32	init-thunk	misc:_$E55	exact	-
 0xe8be0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xe8c40	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xe8ca0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -493,8 +493,8 @@ rva	size	category	owner	verdict	reason
 0xe8e90	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xe8ef0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xe8f50	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xea6d0	32	init-thunk	misc:_$E25	exact	-
-0xeb340	32	init-thunk	misc:_$E25	exact	-
+0xea6d0	32	init-thunk	misc:_$E55	exact	-
+0xeb340	32	init-thunk	misc:_$E55	exact	-
 0xeb360	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xeb3c0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xeb420	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -505,7 +505,7 @@ rva	size	category	owner	verdict	reason
 0xeb610	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xeb670	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xeb6d0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xebcf0	32	init-thunk	misc:_$E25	exact	-
+0xebcf0	32	init-thunk	misc:_$E55	exact	-
 0xebd10	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xebd70	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xebdd0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -516,10 +516,10 @@ rva	size	category	owner	verdict	reason
 0xebfc0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xec020	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xec080	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xeccd0	32	init-thunk	misc:_$E25	exact	-
+0xeccd0	32	init-thunk	misc:_$E55	exact	-
 0xeccf0	11	init-thunk	gamecontext:_$E15	exact	-
 0xecd00	212	init-thunk	gamecontext:_$E18	exact	-
-0xece40	32	init-thunk	misc:_$E25	exact	-
+0xece40	32	init-thunk	misc:_$E55	exact	-
 0xece60	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xecec0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xecf20	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -530,9 +530,9 @@ rva	size	category	owner	verdict	reason
 0xed110	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xed170	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xed1d0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xf7a10	32	init-thunk	misc:_$E25	exact	-
+0xf7a10	32	init-thunk	misc:_$E55	exact	-
 0xf82e0	6	import-thunk	-	unverified	no import directory/library proof
-0xf8490	32	init-thunk	misc:_$E25	exact	-
+0xf8490	32	init-thunk	misc:_$E55	exact	-
 0xf84b0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xf8510	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xf8570	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -543,9 +543,9 @@ rva	size	category	owner	verdict	reason
 0xf8760	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xf87c0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xf8820	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xf9bc0	32	init-thunk	misc:_$E25	exact	-
-0xfa570	32	init-thunk	misc:_$E25	exact	-
-0xfaeb0	32	init-thunk	misc:_$E25	exact	-
+0xf9bc0	32	init-thunk	misc:_$E55	exact	-
+0xfa570	32	init-thunk	misc:_$E55	exact	-
+0xfaeb0	32	init-thunk	misc:_$E55	exact	-
 0xfaed0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xfaf30	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xfaf90	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -556,7 +556,7 @@ rva	size	category	owner	verdict	reason
 0xfb180	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0xfb1e0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xfb240	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0xfbba0	32	init-thunk	misc:_$E25	exact	-
+0xfbba0	32	init-thunk	misc:_$E55	exact	-
 0xfbbc0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0xfbc20	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0xfbc80	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -568,7 +568,7 @@ rva	size	category	owner	verdict	reason
 0xfbed0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0xfbf30	95	init-thunk	include/terrain.h:g_rockMask	exact	-
 0x104260	46	init-thunk	mapcell:_$E48	exact	-
-0x10ade0	32	init-thunk	misc:_$E25	exact	-
+0x10ade0	32	init-thunk	misc:_$E55	exact	-
 0x10ae00	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x10ae60	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x10aec0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -579,9 +579,9 @@ rva	size	category	owner	verdict	reason
 0x10b0b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x10b110	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x10b170	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x10c7f0	32	init-thunk	misc:_$E25	exact	-
-0x10cb30	32	init-thunk	misc:_$E25	exact	-
-0x10da60	32	init-thunk	misc:_$E25	exact	-
+0x10c7f0	32	init-thunk	misc:_$E55	exact	-
+0x10cb30	32	init-thunk	misc:_$E55	exact	-
+0x10da60	32	init-thunk	misc:_$E55	exact	-
 0x10da80	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x10dae0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x10db40	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -592,7 +592,7 @@ rva	size	category	owner	verdict	reason
 0x10dd30	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x10dd90	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x10ddf0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1126e0	32	init-thunk	misc:_$E25	exact	-
+0x1126e0	32	init-thunk	misc:_$E55	exact	-
 0x112700	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x112760	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1127c0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -603,7 +603,7 @@ rva	size	category	owner	verdict	reason
 0x1129b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x112a10	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x112a70	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x112ec0	32	init-thunk	misc:_$E25	exact	-
+0x112ec0	32	init-thunk	misc:_$E55	exact	-
 0x112ee0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x112f40	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x112fa0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -614,39 +614,39 @@ rva	size	category	owner	verdict	reason
 0x113190	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1131f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x113250	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x114030	32	init-thunk	misc:_$E25	exact	-
-0x114050	10	init-thunk	objecttype:_$E41	exact	-
-0x114280	24	init-thunk	objecttype:_$E45	exact	-
-0x1142f0	10	init-thunk	objecttype:_$E43	exact	-
-0x114300	24	init-thunk	objecttype:_$E50	exact	-
-0x114320	10	init-thunk	objecttype:_$E48	exact	-
-0x114330	24	init-thunk	objecttype:_$E55	exact	-
-0x114350	10	init-thunk	objecttype:_$E53	exact	-
-0x114360	24	init-thunk	objecttype:_$E60	exact	-
-0x114380	10	init-thunk	objecttype:_$E58	exact	-
-0x114390	24	init-thunk	objecttype:_$E65	exact	-
-0x1143b0	10	init-thunk	objecttype:_$E63	exact	-
-0x1143c0	24	init-thunk	objecttype:_$E70	exact	-
-0x1143e0	10	init-thunk	objecttype:_$E68	exact	-
-0x1143f0	24	init-thunk	objecttype:_$E75	exact	-
-0x114410	10	init-thunk	objecttype:_$E73	exact	-
-0x114420	24	init-thunk	objecttype:_$E80	exact	-
-0x114440	10	init-thunk	objecttype:_$E78	exact	-
-0x114450	24	init-thunk	objecttype:_$E85	exact	-
-0x114470	10	init-thunk	objecttype:_$E83	exact	-
-0x114480	22	init-thunk	objecttype:_$E90	exact	-
-0x1144a0	10	init-thunk	objecttype:_$E88	exact	-
-0x1144f0	24	init-thunk	objecttype:_$E95	exact	-
-0x114540	10	init-thunk	objecttype:_$E93	exact	-
-0x114550	24	init-thunk	objecttype:_$E100	exact	-
-0x114570	10	init-thunk	objecttype:_$E98	exact	-
-0x114580	24	init-thunk	objecttype:_$E105	exact	-
-0x1145a0	10	init-thunk	objecttype:_$E103	exact	-
-0x1145b0	24	init-thunk	objecttype:_$E110	exact	-
-0x1145d0	10	init-thunk	objecttype:_$E108	exact	-
-0x1145e0	24	init-thunk	objecttype:_$E115	exact	-
-0x114600	10	init-thunk	objecttype:_$E113	exact	-
-0x114a10	69	init-thunk	objecttype:_$E119	exact	-
+0x114030	32	init-thunk	misc:_$E55	exact	-
+0x114050	10	init-thunk	-	unverified	no source comparison binds this body
+0x114280	24	init-thunk	objecttype:_$E46	exact	-
+0x1142f0	10	init-thunk	objecttype:_$E44	exact	-
+0x114300	24	init-thunk	objecttype:_$E51	exact	-
+0x114320	10	init-thunk	objecttype:_$E49	exact	-
+0x114330	24	init-thunk	objecttype:_$E56	exact	-
+0x114350	10	init-thunk	objecttype:_$E54	exact	-
+0x114360	24	init-thunk	objecttype:_$E61	exact	-
+0x114380	10	init-thunk	objecttype:_$E59	exact	-
+0x114390	24	init-thunk	objecttype:_$E66	exact	-
+0x1143b0	10	init-thunk	objecttype:_$E64	exact	-
+0x1143c0	24	init-thunk	objecttype:_$E71	exact	-
+0x1143e0	10	init-thunk	objecttype:_$E69	exact	-
+0x1143f0	24	init-thunk	objecttype:_$E76	exact	-
+0x114410	10	init-thunk	objecttype:_$E74	exact	-
+0x114420	24	init-thunk	objecttype:_$E81	exact	-
+0x114440	10	init-thunk	objecttype:_$E79	exact	-
+0x114450	24	init-thunk	objecttype:_$E86	exact	-
+0x114470	10	init-thunk	objecttype:_$E84	exact	-
+0x114480	22	init-thunk	objecttype:_$E91	exact	-
+0x1144a0	10	init-thunk	objecttype:_$E89	exact	-
+0x1144f0	24	init-thunk	objecttype:_$E96	exact	-
+0x114540	10	init-thunk	objecttype:_$E94	exact	-
+0x114550	24	init-thunk	objecttype:_$E101	exact	-
+0x114570	10	init-thunk	objecttype:_$E99	exact	-
+0x114580	24	init-thunk	objecttype:_$E106	exact	-
+0x1145a0	10	init-thunk	objecttype:_$E104	exact	-
+0x1145b0	24	init-thunk	objecttype:_$E111	exact	-
+0x1145d0	10	init-thunk	objecttype:_$E109	exact	-
+0x1145e0	24	init-thunk	objecttype:_$E116	exact	-
+0x114600	10	init-thunk	objecttype:_$E114	exact	-
+0x114a10	69	init-thunk	-	unverified	no source comparison binds this body
 0x116060	13	init-thunk	-	unverified	no source comparison binds this body
 0x116190	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1161f0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
@@ -673,8 +673,8 @@ rva	size	category	owner	verdict	reason
 0x11bc30	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x11bc90	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x11bcf0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x122630	32	init-thunk	misc:_$E25	exact	-
-0x1235e0	32	init-thunk	misc:_$E25	exact	-
+0x122630	32	init-thunk	misc:_$E55	exact	-
+0x1235e0	32	init-thunk	misc:_$E55	exact	-
 0x123600	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x123660	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1236c0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -685,7 +685,7 @@ rva	size	category	owner	verdict	reason
 0x1238b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x123910	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x123970	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x123ee0	32	init-thunk	misc:_$E25	exact	-
+0x123ee0	32	init-thunk	misc:_$E55	exact	-
 0x123f00	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x123f60	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x123fc0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -696,9 +696,9 @@ rva	size	category	owner	verdict	reason
 0x1241b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x124210	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x124270	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x12bd30	32	init-thunk	misc:_$E25	exact	-
+0x12bd30	32	init-thunk	misc:_$E55	exact	-
 0x12bda0	46	init-thunk	-	unverified	no source comparison binds this body
-0x12bdf0	32	init-thunk	misc:_$E25	exact	-
+0x12bdf0	32	init-thunk	misc:_$E55	exact	-
 0x12be10	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x12be70	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x12bed0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -709,7 +709,7 @@ rva	size	category	owner	verdict	reason
 0x12c0c0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x12c120	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x12c180	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x12d4d0	32	init-thunk	misc:_$E25	exact	-
+0x12d4d0	32	init-thunk	misc:_$E55	exact	-
 0x12d4f0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x12d550	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x12d5b0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -720,7 +720,7 @@ rva	size	category	owner	verdict	reason
 0x12d7a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x12d800	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x12d860	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x12e6e0	32	init-thunk	misc:_$E25	exact	-
+0x12e6e0	32	init-thunk	misc:_$E55	exact	-
 0x12e700	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x12e760	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x12e7c0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -731,7 +731,7 @@ rva	size	category	owner	verdict	reason
 0x12e9b0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x12ea10	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x12ea70	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x12f490	92	init-thunk	quickherowindow:_$E61	exact	-
+0x12f490	92	init-thunk	quickherowindow:_$E91	exact	-
 0x12f4f0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x12f550	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x12f5b0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -742,7 +742,7 @@ rva	size	category	owner	verdict	reason
 0x12f7a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x12f800	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x12f860	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x12fd30	32	init-thunk	misc:_$E25	exact	-
+0x12fd30	32	init-thunk	misc:_$E55	exact	-
 0x12fd50	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x12fdb0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x12fe10	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -753,8 +753,8 @@ rva	size	category	owner	verdict	reason
 0x130000	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x130060	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1300c0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x130d40	92	init-thunk	quicktownwindow:_$E61	exact	-
-0x130da0	127	init-thunk	rmg:_$E40	exact	-
+0x130d40	92	init-thunk	quicktownwindow:_$E91	exact	-
+0x130da0	127	init-thunk	rmg:_$E30	exact	-
 0x1357e0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x135840	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1358a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -765,9 +765,9 @@ rva	size	category	owner	verdict	reason
 0x135cd0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x135d30	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x135d90	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x141910	69	init-thunk	rmg:_$E43	exact	-
+0x141910	69	init-thunk	rmg:_$E33	exact	-
 0x149790	1	init-thunk	-	unverified	no source comparison binds this body
-0x14df70	32	init-thunk	misc:_$E25	exact	-
+0x14df70	32	init-thunk	misc:_$E55	exact	-
 0x14df90	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x14dff0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x14e050	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -778,7 +778,7 @@ rva	size	category	owner	verdict	reason
 0x14e240	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x14e2a0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x14e300	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x14e360	32	init-thunk	misc:_$E25	exact	-
+0x14e360	32	init-thunk	misc:_$E55	exact	-
 0x14e380	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x14e3e0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x14e440	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -789,7 +789,7 @@ rva	size	category	owner	verdict	reason
 0x14e630	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x14e690	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x14e6f0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x151dd0	32	init-thunk	misc:_$E25	exact	-
+0x151dd0	32	init-thunk	misc:_$E55	exact	-
 0x151df0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x151e50	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x151eb0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -800,13 +800,13 @@ rva	size	category	owner	verdict	reason
 0x1520a0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x152100	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x152160	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1521c0	118	init-thunk	remote:_$E49	exact	-
-0x152240	27	init-thunk	remote:_$E47	exact	-
-0x152260	42	init-thunk	remote:_$E55	exact	-
-0x152290	26	init-thunk	remote:_$E58	exact	-
-0x1522b0	23	init-thunk	remote:_$E52	exact	-
-0x158700	32	init-thunk	misc:_$E25	exact	-
-0x1587b0	32	init-thunk	misc:_$E25	exact	-
+0x1521c0	118	init-thunk	remote:_$E79	exact	-
+0x152240	27	init-thunk	remote:_$E77	exact	-
+0x152260	42	init-thunk	remote:_$E85	exact	-
+0x152290	26	init-thunk	remote:_$E88	exact	-
+0x1522b0	23	init-thunk	remote:_$E82	exact	-
+0x158700	32	init-thunk	misc:_$E55	exact	-
+0x1587b0	32	init-thunk	misc:_$E55	exact	-
 0x1587d0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x158830	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x158890	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -817,7 +817,7 @@ rva	size	category	owner	verdict	reason
 0x158a80	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x158ae0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x158b40	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1590d0	32	init-thunk	misc:_$E25	exact	-
+0x1590d0	32	init-thunk	misc:_$E55	exact	-
 0x159150	132	init-thunk	resourcemanager:_$E40	exact	-
 0x159200	23	init-thunk	resourcemanager:_$E38	exact	-
 0x159230	46	init-thunk	resourcemanager:_$E32	exact	-
@@ -827,8 +827,8 @@ rva	size	category	owner	verdict	reason
 0x159400	39	init-thunk	resourcemanager:_$E27	exact	-
 0x159430	10	init-thunk	resourcemanager:_$E25	exact	-
 0x15ed10	92	init-thunk	resourcemanager:_$E60	exact	-
-0x15ed70	29	init-thunk	rmg:_$E32	exact	-
-0x15ef00	32	init-thunk	misc:_$E25	exact	-
+0x15ed70	29	init-thunk	rmg_river:_$E24	exact	-
+0x15ef00	32	init-thunk	misc:_$E55	exact	-
 0x15ef20	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x15ef80	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x15efe0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -839,8 +839,8 @@ rva	size	category	owner	verdict	reason
 0x15f1d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x15f230	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x15f290	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x15f2f0	29	init-thunk	rmg:_$E37	exact	-
-0x15f470	32	init-thunk	misc:_$E25	exact	-
+0x15f2f0	29	init-thunk	rmg_road:_$E24	exact	-
+0x15f470	32	init-thunk	misc:_$E55	exact	-
 0x15f490	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x15f4f0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x15f550	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -861,8 +861,8 @@ rva	size	category	owner	verdict	reason
 0x15fb10	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x15fb70	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x15fbd0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x166d80	32	init-thunk	misc:_$E25	exact	-
-0x166ea0	32	init-thunk	misc:_$E25	exact	-
+0x166d80	32	init-thunk	misc:_$E55	exact	-
+0x166ea0	32	init-thunk	misc:_$E55	exact	-
 0x166ec0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x166f20	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x166f80	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -873,7 +873,7 @@ rva	size	category	owner	verdict	reason
 0x167170	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1671d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x167230	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x169ce0	32	init-thunk	misc:_$E25	exact	-
+0x169ce0	32	init-thunk	misc:_$E55	exact	-
 0x169d00	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x169d60	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x169dc0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -884,7 +884,7 @@ rva	size	category	owner	verdict	reason
 0x169fb0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x16a010	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x16a070	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x16bd70	32	init-thunk	misc:_$E25	exact	-
+0x16bd70	32	init-thunk	misc:_$E55	exact	-
 0x16bd90	39	init-thunk	seerhuttext:_$E30	exact	-
 0x16bdc0	23	init-thunk	seerhuttext:_$E28	exact	-
 0x16c030	39	init-thunk	seerhuttext:_$E25	exact	-
@@ -892,7 +892,7 @@ rva	size	category	owner	verdict	reason
 0x16c080	46	init-thunk	seerhuttext:_$E35	exact	-
 0x16c0b0	109	init-thunk	seerhuttext:_$E33	exact	-
 0x16c3d0	11	init-thunk	seerhut:_$E49	exact	-
-0x16c570	32	init-thunk	misc:_$E25	exact	-
+0x16c570	32	init-thunk	misc:_$E55	exact	-
 0x16c590	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x16c5f0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x16c650	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -903,7 +903,7 @@ rva	size	category	owner	verdict	reason
 0x16c840	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x16c8a0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x16c900	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x174e30	32	init-thunk	misc:_$E25	exact	-
+0x174e30	32	init-thunk	misc:_$E55	exact	-
 0x174e50	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x174eb0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x174f10	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -914,7 +914,7 @@ rva	size	category	owner	verdict	reason
 0x175100	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x175160	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1751c0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x176a10	32	init-thunk	misc:_$E25	exact	-
+0x176a10	32	init-thunk	misc:_$E55	exact	-
 0x176a30	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x176a90	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x176af0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -925,9 +925,9 @@ rva	size	category	owner	verdict	reason
 0x176ce0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x176d40	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x176da0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x192070	32	init-thunk	misc:_$E25	exact	-
-0x197190	32	init-thunk	misc:_$E25	exact	-
-0x1990c0	32	init-thunk	misc:_$E25	exact	-
+0x192070	32	init-thunk	misc:_$E55	exact	-
+0x197190	32	init-thunk	misc:_$E55	exact	-
+0x1990c0	32	init-thunk	misc:_$E55	exact	-
 0x1990e0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x199140	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1991a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -938,7 +938,7 @@ rva	size	category	owner	verdict	reason
 0x199390	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1993f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x199450	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x19b2a0	32	init-thunk	misc:_$E25	exact	-
+0x19b2a0	32	init-thunk	misc:_$E55	exact	-
 0x19b2c0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x19b320	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x19b380	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -949,7 +949,7 @@ rva	size	category	owner	verdict	reason
 0x19b570	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x19b5d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x19b630	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x19b690	32	init-thunk	misc:_$E25	exact	-
+0x19b690	32	init-thunk	misc:_$E55	exact	-
 0x19b6b0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x19b710	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x19b770	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -960,8 +960,8 @@ rva	size	category	owner	verdict	reason
 0x19b960	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x19b9c0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x19ba20	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x19dc70	32	init-thunk	misc:_$E25	exact	-
-0x19e510	32	init-thunk	misc:_$E25	exact	-
+0x19dc70	32	init-thunk	misc:_$E55	exact	-
+0x19e510	32	init-thunk	misc:_$E55	exact	-
 0x19e530	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x19e590	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x19e5f0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -972,7 +972,7 @@ rva	size	category	owner	verdict	reason
 0x19e7e0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x19e840	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x19e8a0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1a9930	32	init-thunk	misc:_$E25	exact	-
+0x1a9930	32	init-thunk	misc:_$E55	exact	-
 0x1a9950	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1a99b0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1a9a10	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -983,8 +983,8 @@ rva	size	category	owner	verdict	reason
 0x1a9c00	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1a9c60	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1a9cc0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1aa320	32	init-thunk	misc:_$E25	exact	-
-0x1aa690	32	init-thunk	misc:_$E25	exact	-
+0x1aa320	32	init-thunk	misc:_$E55	exact	-
+0x1aa690	32	init-thunk	misc:_$E55	exact	-
 0x1aa6b0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1aa710	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1aa770	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -995,7 +995,7 @@ rva	size	category	owner	verdict	reason
 0x1aa960	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1aa9c0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1aaa20	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1b13a0	32	init-thunk	misc:_$E25	exact	-
+0x1b13a0	32	init-thunk	misc:_$E55	exact	-
 0x1b13c0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1b1420	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1b1480	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1006,28 +1006,28 @@ rva	size	category	owner	verdict	reason
 0x1b1670	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1b16d0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1b1730	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1b3760	32	init-thunk	misc:_$E25	exact	-
-0x1b3a10	10	init-thunk	rmg_terrain:_$E22	exact	-
-0x1b3b60	35	init-thunk	rmg_terrain:_$E33	exact	-
-0x1b3b90	10	init-thunk	rmg_terrain:_$E31	exact	-
-0x1b3ba0	35	init-thunk	rmg_terrain:_$E38	exact	-
-0x1b3bd0	10	init-thunk	rmg_terrain:_$E36	exact	-
-0x1b3be0	35	init-thunk	rmg_terrain:_$E43	exact	-
-0x1b3c10	10	init-thunk	rmg_terrain:_$E41	exact	-
-0x1b3c20	35	init-thunk	rmg_terrain:_$E48	exact	-
-0x1b3c50	10	init-thunk	rmg_terrain:_$E46	exact	-
-0x1b3c60	35	init-thunk	rmg_terrain:_$E53	exact	-
-0x1b3c90	10	init-thunk	rmg_terrain:_$E51	exact	-
-0x1b3ca0	35	init-thunk	rmg_terrain:_$E58	exact	-
-0x1b3cd0	10	init-thunk	rmg_terrain:_$E56	exact	-
-0x1b3ce0	35	init-thunk	rmg_terrain:_$E63	exact	-
-0x1b3d10	10	init-thunk	rmg_terrain:_$E61	exact	-
-0x1b3d20	35	init-thunk	rmg_terrain:_$E68	exact	-
-0x1b3d50	10	init-thunk	rmg_terrain:_$E66	exact	-
-0x1b3d60	35	init-thunk	rmg_terrain:_$E73	exact	-
-0x1b3d90	10	init-thunk	rmg_terrain:_$E71	exact	-
-0x1b3da0	22	init-thunk	rmg_terrain:_$E78	exact	-
-0x1b3dc0	10	init-thunk	rmg_terrain:_$E76	exact	-
+0x1b3760	32	init-thunk	misc:_$E55	exact	-
+0x1b3a10	10	init-thunk	rmg_terrain:_$E23	exact	-
+0x1b3b60	35	init-thunk	rmg_terrain:_$E34	exact	-
+0x1b3b90	10	init-thunk	rmg_terrain:_$E32	exact	-
+0x1b3ba0	35	init-thunk	rmg_terrain:_$E39	exact	-
+0x1b3bd0	10	init-thunk	rmg_terrain:_$E37	exact	-
+0x1b3be0	35	init-thunk	rmg_terrain:_$E44	exact	-
+0x1b3c10	10	init-thunk	rmg_terrain:_$E42	exact	-
+0x1b3c20	35	init-thunk	rmg_terrain:_$E49	exact	-
+0x1b3c50	10	init-thunk	rmg_terrain:_$E47	exact	-
+0x1b3c60	35	init-thunk	rmg_terrain:_$E54	exact	-
+0x1b3c90	10	init-thunk	rmg_terrain:_$E52	exact	-
+0x1b3ca0	35	init-thunk	rmg_terrain:_$E59	exact	-
+0x1b3cd0	10	init-thunk	rmg_terrain:_$E57	exact	-
+0x1b3ce0	35	init-thunk	rmg_terrain:_$E64	exact	-
+0x1b3d10	10	init-thunk	rmg_terrain:_$E62	exact	-
+0x1b3d20	35	init-thunk	rmg_terrain:_$E69	exact	-
+0x1b3d50	10	init-thunk	rmg_terrain:_$E67	exact	-
+0x1b3d60	35	init-thunk	rmg_terrain:_$E74	exact	-
+0x1b3d90	10	init-thunk	rmg_terrain:_$E72	exact	-
+0x1b3da0	22	init-thunk	rmg_terrain:_$E79	exact	-
+0x1b3dc0	10	init-thunk	rmg_terrain:_$E77	exact	-
 0x1b45e0	1	init-thunk	-	unverified	no source comparison binds this body
 0x1b6df0	1	init-thunk	-	unverified	no source comparison binds this body
 0x1b6fc0	1	init-thunk	-	unverified	no source comparison binds this body
@@ -1041,7 +1041,7 @@ rva	size	category	owner	verdict	reason
 0x1b7bb0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1b7c10	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1b7c70	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1b8d00	32	init-thunk	misc:_$E25	exact	-
+0x1b8d00	32	init-thunk	misc:_$E55	exact	-
 0x1b8d20	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1b8d80	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1b8de0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1052,11 +1052,11 @@ rva	size	category	owner	verdict	reason
 0x1b8fd0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1b9030	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1b9090	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1b9f80	32	init-thunk	misc:_$E25	exact	-
-0x1ba8d0	32	init-thunk	misc:_$E25	exact	-
-0x1bbb50	32	init-thunk	misc:_$E25	exact	-
-0x1bc230	32	init-thunk	misc:_$E25	exact	-
-0x1bc870	32	init-thunk	misc:_$E25	exact	-
+0x1b9f80	32	init-thunk	misc:_$E55	exact	-
+0x1ba8d0	32	init-thunk	misc:_$E55	exact	-
+0x1bbb50	32	init-thunk	misc:_$E55	exact	-
+0x1bc230	32	init-thunk	misc:_$E55	exact	-
+0x1bc870	32	init-thunk	misc:_$E55	exact	-
 0x1bc890	122	init-thunk	tiles:_$E20	exact	-
 0x1bc990	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1bc9f0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
@@ -1068,7 +1068,7 @@ rva	size	category	owner	verdict	reason
 0x1bcc40	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1bcca0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1bcd00	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1c16c0	32	init-thunk	misc:_$E25	exact	-
+0x1c16c0	32	init-thunk	misc:_$E55	exact	-
 0x1c16e0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1c1740	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1c17a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1079,7 +1079,7 @@ rva	size	category	owner	verdict	reason
 0x1c1990	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1c19f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1c1a50	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1c2a10	32	init-thunk	misc:_$E25	exact	-
+0x1c2a10	32	init-thunk	misc:_$E55	exact	-
 0x1c2a30	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1c2a90	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1c2af0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1090,9 +1090,9 @@ rva	size	category	owner	verdict	reason
 0x1c2ce0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1c2d40	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1c2da0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1c2e00	28	init-thunk	townmgr:_$E52	exact	-
-0x1c2e20	125	init-thunk	townmgr:_$E49	exact	-
-0x1df200	32	init-thunk	misc:_$E25	exact	-
+0x1c2e00	28	init-thunk	townmgr:_$E82	exact	-
+0x1c2e20	125	init-thunk	townmgr:_$E79	exact	-
+0x1df200	32	init-thunk	misc:_$E55	exact	-
 0x1df220	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1df280	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1df2e0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1103,8 +1103,8 @@ rva	size	category	owner	verdict	reason
 0x1df4d0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1df530	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1df590	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1eed80	32	init-thunk	misc:_$E25	exact	-
-0x1ef070	32	init-thunk	misc:_$E25	exact	-
+0x1eed80	32	init-thunk	misc:_$E55	exact	-
+0x1ef070	32	init-thunk	misc:_$E55	exact	-
 0x1ef090	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1ef0f0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1ef150	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1115,7 +1115,7 @@ rva	size	category	owner	verdict	reason
 0x1ef340	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1ef3a0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1ef400	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1f11b0	32	init-thunk	misc:_$E25	exact	-
+0x1f11b0	32	init-thunk	misc:_$E55	exact	-
 0x1f11d0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1f1230	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1f1290	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1126,7 +1126,7 @@ rva	size	category	owner	verdict	reason
 0x1f1480	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1f14e0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1f1540	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1f2f70	32	init-thunk	misc:_$E25	exact	-
+0x1f2f70	32	init-thunk	misc:_$E55	exact	-
 0x1f2f90	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1f2ff0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1f3050	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1137,7 +1137,7 @@ rva	size	category	owner	verdict	reason
 0x1f3240	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1f32a0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1f3300	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1f6fc0	32	init-thunk	misc:_$E25	exact	-
+0x1f6fc0	32	init-thunk	misc:_$E55	exact	-
 0x1f6fe0	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1f7040	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1f70a0	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1148,7 +1148,7 @@ rva	size	category	owner	verdict	reason
 0x1f7290	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1f72f0	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1f7350	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1fce90	32	init-thunk	misc:_$E25	exact	-
+0x1fce90	32	init-thunk	misc:_$E55	exact	-
 0x1fdf50	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x1fdfb0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x1fe010	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1159,13 +1159,13 @@ rva	size	category	owner	verdict	reason
 0x1fe200	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x1fe260	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x1fe2c0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x1fe320	32	init-thunk	misc:_$E25	exact	-
-0x1fe9d0	32	init-thunk	misc:_$E25	exact	-
-0x1ffb00	32	init-thunk	misc:_$E25	exact	-
-0x1ffdd0	32	init-thunk	misc:_$E25	exact	-
+0x1fe320	32	init-thunk	misc:_$E55	exact	-
+0x1fe9d0	32	init-thunk	misc:_$E55	exact	-
+0x1ffb00	32	init-thunk	misc:_$E55	exact	-
+0x1ffdd0	32	init-thunk	misc:_$E55	exact	-
 0x1ffdf0	26	init-thunk	wingraph:_$E33	exact	-
 0x1ffe10	10	init-thunk	wingraph:_$E31	exact	-
-0x201d20	32	init-thunk	misc:_$E25	exact	-
+0x201d20	32	init-thunk	misc:_$E55	exact	-
 0x201d40	89	init-thunk	include/terrain.h:g_dirtMask	exact	-
 0x201da0	96	init-thunk	include/terrain.h:g_sandMask	exact	-
 0x201e00	97	init-thunk	include/terrain.h:g_grassMask	exact	-
@@ -1176,9 +1176,9 @@ rva	size	category	owner	verdict	reason
 0x201ff0	95	init-thunk	include/terrain.h:g_lavaMask	exact	-
 0x202050	95	init-thunk	include/terrain.h:g_waterMask	exact	-
 0x2020b0	95	init-thunk	include/terrain.h:g_rockMask	exact	-
-0x202110	33	init-thunk	winmgr:_$E31	exact	-
-0x202140	33	init-thunk	winmgr:_$E34	exact	-
-0x2034d0	32	init-thunk	misc:_$E25	exact	-
+0x202110	33	init-thunk	winmgr:_$E61	exact	-
+0x202140	33	init-thunk	winmgr:_$E64	exact	-
+0x2034d0	32	init-thunk	misc:_$E55	exact	-
 0x2034f0	6	import-thunk	VERSION.dll!GetFileVersionInfoA	exact	-
 0x2034f6	6	import-thunk	VERSION.dll!GetFileVersionInfoSizeA	exact	-
 0x2034fc	6	import-thunk	VERSION.dll!VerQueryValueA	exact	-
@@ -1265,8 +1265,8 @@ rva	size	category	owner	verdict	reason
 0x227590	8	eh-funclet	0xabe0	exact	-
 0x2275b0	8	eh-funclet	0xb150	exact	-
 0x2275d0	8	eh-funclet	0xec90	exact	-
-0x2275f0	8	eh-funclet	0x137c0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
-0x2275f8	8	eh-funclet	0x137c0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x2275f0	8	eh-funclet	0x137c0	exact	-
+0x2275f8	8	eh-funclet	0x137c0	exact	-
 0x227610	11	eh-funclet	0x15f20	exact	-
 0x227630	11	eh-funclet	0x15fb0	exact	-
 0x227650	11	eh-funclet	0x16160	exact	-
@@ -1764,7 +1764,7 @@ rva	size	category	owner	verdict	reason
 0x229880	8	eh-funclet	0x66290	exact	-
 0x2298a0	8	eh-funclet	0x668a0	exact	-
 0x2298c0	8	eh-funclet	0x66a70	exact	-
-0x2298e0	11	eh-funclet	0x67a00	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
+0x2298e0	11	eh-funclet	0x67a00	exact	-
 0x229900	8	eh-funclet	0x67db0	exact	-
 0x229920	8	eh-funclet	0x68220	exact	-
 0x229940	8	eh-funclet	0x686b0	exact	-
@@ -2215,12 +2215,12 @@ rva	size	category	owner	verdict	reason
 0x22b356	11	eh-funclet	0xacd70	exact	-
 0x22b361	11	eh-funclet	0xacd70	exact	-
 0x22b36c	11	eh-funclet	0xacd70	exact	-
-0x22b390	8	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22b398	11	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22b3a3	11	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22b3ae	11	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22b3b9	11	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22b3c4	11	eh-funclet	0xad470	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
+0x22b390	8	eh-funclet	0xad470	exact	-
+0x22b398	11	eh-funclet	0xad470	exact	-
+0x22b3a3	11	eh-funclet	0xad470	exact	-
+0x22b3ae	11	eh-funclet	0xad470	exact	-
+0x22b3b9	11	eh-funclet	0xad470	exact	-
+0x22b3c4	11	eh-funclet	0xad470	exact	-
 0x22b3e0	8	eh-funclet	0xaea00	exact	-
 0x22b3e8	14	eh-funclet	0xaea00	exact	-
 0x22b400	8	eh-funclet	0xaeb00	exact	-
@@ -2285,10 +2285,10 @@ rva	size	category	owner	verdict	reason
 0x22b86b	14	eh-funclet	0xbc0e0	exact	-
 0x22b879	14	eh-funclet	0xbc0e0	exact	-
 0x22b887	11	eh-funclet	0xbc0e0	exact	-
-0x22b8a0	8	eh-funclet	0xbc750	mismatch	1 byte(s) differ, first +0x1d
-0x22b8a8	8	eh-funclet	0xbc750	mismatch	1 byte(s) differ, first +0x1d
-0x22b8b0	11	eh-funclet	0xbc750	mismatch	1 byte(s) differ, first +0x1d
-0x22b8bb	11	eh-funclet	0xbc750	mismatch	1 byte(s) differ, first +0x1d
+0x22b8a0	8	eh-funclet	0xbc750	exact	-
+0x22b8a8	8	eh-funclet	0xbc750	exact	-
+0x22b8b0	11	eh-funclet	0xbc750	exact	-
+0x22b8bb	11	eh-funclet	0xbc750	exact	-
 0x22b8d0	11	eh-funclet	0xbcda0	exact	-
 0x22b8db	11	eh-funclet	0xbcda0	exact	-
 0x22b8e6	11	eh-funclet	0xbcda0	exact	-
@@ -2466,19 +2466,19 @@ rva	size	category	owner	verdict	reason
 0x22c0f0	8	eh-funclet	0xc3ef0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
 0x22c0f8	8	eh-funclet	0xc3ef0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
 0x22c100	8	eh-funclet	0xc3ef0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
-0x22c120	8	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c128	8	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c130	11	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c13b	11	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
+0x22c120	8	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
+0x22c128	8	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
+0x22c130	11	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
+0x22c13b	11	eh-funclet	0xc4390	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
 0x22c150	8	eh-funclet	0xc4cc0	exact	-
 0x22c170	8	eh-funclet	0xc4f10	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
 0x22c178	8	eh-funclet	0xc4f10	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
 0x22c180	8	eh-funclet	0xc4f10	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
 0x22c188	8	eh-funclet	0xc4f10	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c1a0	8	eh-funclet	0xc5630	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c1a8	8	eh-funclet	0xc5630	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c1b0	8	eh-funclet	0xc5630	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
-0x22c1b8	11	eh-funclet	0xc5630	pending-parent	parent not byte-exact; 4 byte(s) differ, first +0x2
+0x22c1a0	8	eh-funclet	0xc5630	exact	-
+0x22c1a8	8	eh-funclet	0xc5630	exact	-
+0x22c1b0	8	eh-funclet	0xc5630	exact	-
+0x22c1b8	11	eh-funclet	0xc5630	exact	-
 0x22c1d0	8	eh-funclet	0xc5e00	exact	-
 0x22c1d8	8	eh-funclet	0xc5e00	exact	-
 0x22c1f0	11	eh-funclet	0xc6c50	exact	-
@@ -2598,9 +2598,9 @@ rva	size	category	owner	verdict	reason
 0x22c980	8	eh-funclet	0xd6690	exact	-
 0x22c9a0	8	eh-funclet	0xd6820	exact	-
 0x22c9c0	8	eh-funclet	0xd6c50	exact	-
-0x22c9e0	8	eh-funclet	0xd7a20	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
-0x22c9e8	8	eh-funclet	0xd7a20	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
-0x22c9f0	8	eh-funclet	0xd7a20	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
+0x22c9e0	8	eh-funclet	0xd7a20	exact	-
+0x22c9e8	8	eh-funclet	0xd7a20	exact	-
+0x22c9f0	8	eh-funclet	0xd7a20	exact	-
 0x22ca10	8	eh-funclet	0xd9a00	exact	-
 0x22ca18	8	eh-funclet	0xd9a00	exact	-
 0x22ca30	8	eh-funclet	0xd9b30	exact	-
@@ -2623,12 +2623,12 @@ rva	size	category	owner	verdict	reason
 0x22cb38	8	eh-funclet	0xdcac0	exact	-
 0x22cb40	8	eh-funclet	0xdcac0	exact	-
 0x22cb48	8	eh-funclet	0xdcac0	exact	-
-0x22cb60	8	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
-0x22cb68	11	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
-0x22cb73	8	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
-0x22cb7b	8	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
-0x22cb83	8	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
-0x22cb8b	11	eh-funclet	0xdd2d0	pending-parent	parent not byte-exact; section is 61 bytes, retail group 64
+0x22cb60	8	eh-funclet	0xdd2d0	exact	-
+0x22cb68	11	eh-funclet	0xdd2d0	exact	-
+0x22cb73	8	eh-funclet	0xdd2d0	exact	-
+0x22cb7b	8	eh-funclet	0xdd2d0	exact	-
+0x22cb83	8	eh-funclet	0xdd2d0	exact	-
+0x22cb8b	11	eh-funclet	0xdd2d0	exact	-
 0x22cba0	8	eh-funclet	0xde710	exact	-
 0x22cba8	11	eh-funclet	0xde710	exact	-
 0x22cbb3	11	eh-funclet	0xde710	exact	-
@@ -2772,9 +2772,9 @@ rva	size	category	owner	verdict	reason
 0x22d1c0	11	eh-funclet	0xe1800	exact	-
 0x22d1e0	8	eh-funclet	0xe2840	exact	-
 0x22d1e8	8	eh-funclet	0xe2840	exact	-
-0x22d200	8	eh-funclet	0xe3070	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
-0x22d208	8	eh-funclet	0xe3070	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
-0x22d210	8	eh-funclet	0xe3070	pending-parent	parent not byte-exact; 3 byte(s) differ, first +0x2
+0x22d200	8	eh-funclet	0xe3070	exact	-
+0x22d208	8	eh-funclet	0xe3070	exact	-
+0x22d210	8	eh-funclet	0xe3070	exact	-
 0x22d230	8	eh-funclet	0xe33b0	exact	-
 0x22d250	8	eh-funclet	0xe75f0	exact	-
 0x22d258	11	eh-funclet	0xe75f0	exact	-
@@ -3017,16 +3017,16 @@ rva	size	category	owner	verdict	reason
 0x22dff0	8	eh-funclet	0x101270	exact	-
 0x22e010	8	eh-funclet	0x1013b0	exact	-
 0x22e030	8	eh-funclet	0x101790	exact	-
-0x22e050	8	eh-funclet	0x1019f0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x15
-0x22e058	11	eh-funclet	0x1019f0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x15
-0x22e063	11	eh-funclet	0x1019f0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x15
-0x22e06e	11	eh-funclet	0x1019f0	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x15
+0x22e050	8	eh-funclet	0x1019f0	exact	-
+0x22e058	11	eh-funclet	0x1019f0	exact	-
+0x22e063	11	eh-funclet	0x1019f0	exact	-
+0x22e06e	11	eh-funclet	0x1019f0	exact	-
 0x22e090	8	eh-funclet	0x1021c0	exact	-
 0x22e098	8	eh-funclet	0x1021c0	exact	-
 0x22e0a0	8	eh-funclet	0x1021c0	exact	-
-0x22e0c0	8	eh-funclet	0x104470	pending-parent	parent not byte-exact; section is 40 bytes, retail group 34
-0x22e0c8	8	eh-funclet	0x104470	pending-parent	parent not byte-exact; section is 40 bytes, retail group 34
-0x22e0d0	8	eh-funclet	0x104470	pending-parent	parent not byte-exact; section is 40 bytes, retail group 34
+0x22e0c0	8	eh-funclet	0x104470	exact	-
+0x22e0c8	8	eh-funclet	0x104470	exact	-
+0x22e0d0	8	eh-funclet	0x104470	exact	-
 0x22e0f0	8	eh-funclet	0x104b70	exact	-
 0x22e0f8	8	eh-funclet	0x104b70	exact	-
 0x22e100	8	eh-funclet	0x104b70	exact	-
@@ -3489,14 +3489,14 @@ rva	size	category	owner	verdict	reason
 0x22fe90	8	eh-funclet	0x146190	exact	-
 0x22fe98	8	eh-funclet	0x146190	exact	-
 0x22feb0	8	eh-funclet	0x1470d0	exact	-
-0x22fed0	11	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22fedb	8	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22fee3	8	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22feeb	11	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22fef6	11	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22ff01	8	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22ff09	11	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
-0x22ff14	8	eh-funclet	0x147360	pending-parent	parent not byte-exact; section is 43 bytes, retail group 86
+0x22fed0	11	eh-funclet	0x147360	exact	-
+0x22fedb	8	eh-funclet	0x147360	exact	-
+0x22fee3	8	eh-funclet	0x147360	exact	-
+0x22feeb	11	eh-funclet	0x147360	exact	-
+0x22fef6	11	eh-funclet	0x147360	exact	-
+0x22ff01	8	eh-funclet	0x147360	exact	-
+0x22ff09	11	eh-funclet	0x147360	exact	-
+0x22ff14	8	eh-funclet	0x147360	exact	-
 0x22ff30	8	eh-funclet	0x1477c0	exact	-
 0x22ff50	8	eh-funclet	0x147880	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
 0x22ff58	8	eh-funclet	0x147880	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
@@ -3506,43 +3506,43 @@ rva	size	category	owner	verdict	reason
 0x22ff88	8	eh-funclet	0x148040	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
 0x22ff90	8	eh-funclet	0x148040	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
 0x22ff98	8	eh-funclet	0x148040	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffb0	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffb8	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffc0	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffcb	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffd3	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x22ffde	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 6 byte(s) differ, first +0x2
-0x230000	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x230008	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x230010	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x23001b	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x230023	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x23002e	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x230039	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; 7 byte(s) differ, first +0x2
-0x230050	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; section is 53 bytes, retail group 50
-0x230058	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; section is 53 bytes, retail group 50
-0x230060	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; section is 53 bytes, retail group 50
-0x230068	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; section is 53 bytes, retail group 50
-0x230070	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; section is 53 bytes, retail group 50
+0x22ffb0	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x22ffb8	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x22ffc0	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x22ffcb	8	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x22ffd3	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x22ffde	11	eh-funclet	0x148500	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0x2
+0x230000	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x230008	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x230010	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x23001b	8	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x230023	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x23002e	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x230039	11	eh-funclet	0x148df0	pending-parent	parent not byte-exact; section is 72 bytes, retail group 78
+0x230050	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
+0x230058	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
+0x230060	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
+0x230068	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
+0x230070	8	eh-funclet	0x149cb0	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
 0x230090	8	eh-funclet	0x14b180	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x2
 0x2300b0	8	eh-funclet	0x14b300	exact	-
-0x2300d0	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x2300db	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x2300e3	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x2300eb	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x2300f6	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x230101	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x230109	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x230114	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x23011c	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 78 bytes, retail group 97
-0x230140	11	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x23014b	8	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x230153	8	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x23015b	11	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x230166	11	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x230171	8	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x230179	11	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
-0x230184	8	eh-funclet	0x14b8c0	pending-parent	parent not byte-exact; section is 78 bytes, retail group 86
+0x2300d0	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x2300db	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x2300e3	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x2300eb	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x2300f6	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x230101	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x230109	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x230114	8	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x23011c	11	eh-funclet	0x14b490	pending-parent	parent not byte-exact; section is 86 bytes, retail group 97
+0x230140	11	eh-funclet	0x14b8c0	exact	-
+0x23014b	8	eh-funclet	0x14b8c0	exact	-
+0x230153	8	eh-funclet	0x14b8c0	exact	-
+0x23015b	11	eh-funclet	0x14b8c0	exact	-
+0x230166	11	eh-funclet	0x14b8c0	exact	-
+0x230171	8	eh-funclet	0x14b8c0	exact	-
+0x230179	11	eh-funclet	0x14b8c0	exact	-
+0x230184	8	eh-funclet	0x14b8c0	exact	-
 0x2301a0	11	eh-funclet	0x14bf60	exact	-
 0x2301c0	8	eh-funclet	0x14c090	exact	-
 0x2301e0	17	eh-funclet	0x14dd80	exact	-
@@ -4593,9 +4593,9 @@ rva	size	category	owner	verdict	reason
 0x233c8e	8	eh-funclet	0x19fe30	exact	-
 0x233c96	11	eh-funclet	0x19fe30	exact	-
 0x233cb0	8	eh-funclet	0x1a2c60	exact	-
-0x233cd0	8	eh-funclet	0x1a3250	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0xa
-0x233cd8	8	eh-funclet	0x1a3250	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0xa
-0x233ce0	8	eh-funclet	0x1a3250	pending-parent	parent not byte-exact; 2 byte(s) differ, first +0xa
+0x233cd0	8	eh-funclet	0x1a3250	exact	-
+0x233cd8	8	eh-funclet	0x1a3250	exact	-
+0x233ce0	8	eh-funclet	0x1a3250	exact	-
 0x233d00	8	eh-funclet	0x1a46f0	exact	-
 0x233d20	8	eh-funclet	0x1a4810	exact	-
 0x233d40	8	eh-funclet	0x1a4970	exact	-
@@ -5916,17 +5916,17 @@ rva	size	category	owner	verdict	reason
 0x237d48	11	eh-funclet	0x1f3360	exact	-
 0x237d53	11	eh-funclet	0x1f3360	exact	-
 0x237d5e	11	eh-funclet	0x1f3360	exact	-
-0x237d80	8	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237d88	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237d93	14	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237da1	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237dac	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237db7	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237dc2	8	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237dca	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237dd5	8	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237ddd	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
-0x237de8	11	eh-funclet	0x1f3b50	pending-parent	parent not byte-exact; 1 byte(s) differ, first +0x4c
+0x237d80	8	eh-funclet	0x1f3b50	exact	-
+0x237d88	11	eh-funclet	0x1f3b50	exact	-
+0x237d93	14	eh-funclet	0x1f3b50	exact	-
+0x237da1	11	eh-funclet	0x1f3b50	exact	-
+0x237dac	11	eh-funclet	0x1f3b50	exact	-
+0x237db7	11	eh-funclet	0x1f3b50	exact	-
+0x237dc2	8	eh-funclet	0x1f3b50	exact	-
+0x237dca	11	eh-funclet	0x1f3b50	exact	-
+0x237dd5	8	eh-funclet	0x1f3b50	exact	-
+0x237ddd	11	eh-funclet	0x1f3b50	exact	-
+0x237de8	11	eh-funclet	0x1f3b50	exact	-
 0x237e00	8	eh-funclet	0x1f4210	exact	-
 0x237e08	11	eh-funclet	0x1f4210	exact	-
 0x237e13	14	eh-funclet	0x1f4210	exact	-
