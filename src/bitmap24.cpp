@@ -18,12 +18,12 @@
 // dossier proves its double parameter and sole named local, const unsigned long
 // magic; reusing d's representation is what gives retail its shared qword home.
 // DC bitmap24.cpp:40 initializes magic, line 42 updates d, and line 43 reads
-// its low word. Removing the unsupported forced-inline attribute produces
-// the same code object: AdjustHSV stays 95.7470% and all seven exact siblings
-// hold. The ordinary static helper expands naturally through HSVToRGB.
+// its low word. The editors' /Ob1 Libraries build still expands it in
+// HSVToRGB (h3maped 0x4e4f89 `mov eax, 0x59c00000; ... fadd`), so it is
+// declared inline; the game's /Ob2 expands it either way.
 // Original: ftol; bitmap24.cpp:39
 DC_ADDRESS(0x0525b4, 0x62)
-static long ftol(double d)
+static inline long ftol(double d)
 {
     const unsigned long magic = 0x59c00000;
     d += *static_cast<const float*>(static_cast<const void*>(&magic));
