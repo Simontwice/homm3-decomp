@@ -122,7 +122,7 @@ rva	size	kind	name	unit	evidence
 0x0000b1b0	0xd	func	??A?$vector@VTScenario@@V?$allocator@VTScenario@@@std@@@std@@QAEAAVTScenario@@I@Z	Campaign	masked body (13 bytes, 0 relocations) unique at a census start
 0x0000b1c0	0x1e	func	??_GTScenarioPrologue@@QAEPAXI@Z	Campaign	referenced by ??0_TImpl@TScenario@@QAE@ABV01@@Z at +0x155
 0x0000b1e0	0x76	func	?_Freeze@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXXZ	Campaign	masked body (118 bytes, 3 relocations) unique at a census start
-0x0000b260	0x5d	func	?set@?$bitset@$04@std@@QAEAAV12@I_N@Z	ScenarioPropsCrossoverPage	masked body (93 bytes, 1 relocations) unique at a census start
+0x0000b260	0x5d	func	?set@?$bitset@$04@std@@QAEAAV12@I_N@Z	Campaign	masked body (93 bytes, 1 relocations) unique at a census start
 0x0000b300	0x30	func	?_Ucopy@?$vector@V?$auto_ptr@VTScenarioStartingBonus@@@std@@V?$allocator@V?$auto_ptr@VTScenarioStartingBonus@@@std@@@2@@std@@IAEPAV?$auto_ptr@VTScenarioStartingBonus@@@2@PBV32@0PAV32@@Z	Campaign	masked body (48 bytes, 0 relocations) unique at a census start
 0x0000b330	0x28	func	??0?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE@ABU?$less@H@1@_NABV?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@1@@Z	Campaign	referenced by ??0TCampaignScenarioMap@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV?$basic_streambuf@DU?$char_traits@D@std@@@2@H_N@Z at +0xa4
 0x0000b360	0xc	func	?end@?$_Tree@HU?$pair@$$CBHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@U_Kfn@?$map@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@U?$less@H@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QBE?AVconst_iterator@12@XZ	Campaign	masked body (12 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
@@ -307,7 +307,7 @@ rva	size	kind	name	unit	evidence
 0x00015dd0	0x3b	func	??0?$fpos@H@std@@QAE@J@Z	resourcemanager	masked body (59 bytes, 5 relocations) unique at a census start
 0x00015e10	0x187	func	?insert@?$vector@V?$auto_ptr@VTScenarioStartingBonus@@@std@@V?$allocator@V?$auto_ptr@VTScenarioStartingBonus@@@std@@@2@@std@@QAEPAV?$auto_ptr@VTScenarioStartingBonus@@@2@PAV32@ABV32@@Z	CampaignDoc	masked body (391 bytes, 13 relocations) unique at a census start
 0x00015fa0	0x2c	func	?_Destroy@?$vector@V?$auto_ptr@VTScenarioStartingBonus@@@std@@V?$allocator@V?$auto_ptr@VTScenarioStartingBonus@@@std@@@2@@std@@IAEXPAV?$auto_ptr@VTScenarioStartingBonus@@@2@0@Z	CampaignDoc	masked body (44 bytes, 0 relocations) unique at a census start
-0x00015fd0	0x13	func	?capacity@?$vector@UTChoice@TScenarioOptionsCrossoverScenario@@V?$allocator@UTChoice@TScenarioOptionsCrossoverScenario@@@std@@@std@@QBEIXZ	CampaignDoc	masked body (19 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
+0x00015fd0	0x13	func	?capacity@?$vector@UTChoice@TScenarioOptionsCrossoverScenario@@V?$allocator@UTChoice@TScenarioOptionsCrossoverScenario@@@std@@@std@@QBEIXZ	CampaignDoc	masked body (19 bytes, 0 relocations) unique at a census start; ICF-folded with 2 identical bodies
 0x00015ff0	0x1b0	func	?insert@?$vector@UTChoice@TScenarioOptionsCrossoverScenario@@V?$allocator@UTChoice@TScenarioOptionsCrossoverScenario@@@std@@@std@@QAEPAUTChoice@TScenarioOptionsCrossoverScenario@@PAU34@ABU34@@Z	CampaignDoc	masked body (432 bytes, 10 relocations) unique at a census start; its referents agree with retail's
 0x000161a0	0x34	func	?_Ucopy@?$vector@UTChoice@TScenarioOptionsCrossoverScenario@@V?$allocator@UTChoice@TScenarioOptionsCrossoverScenario@@@std@@@std@@IAEPAUTChoice@TScenarioOptionsCrossoverScenario@@PBU34@0PAU34@@Z	CampaignDoc	masked body (52 bytes, 0 relocations) unique at a census start; ICF-folded with 1 identical bodies
 0x000161e0	0x23	func	?_Ufill@?$vector@EV?$allocator@E@std@@@std@@IAEXPAEIABE@Z	CampaignDoc	masked body (35 bytes, 0 relocations) unique at a census start
@@ -4198,7 +4198,7 @@ rva	size	kind	name	unit	evidence
 0x000c8f18	0x8	data	_?pNames@?1??initialize@TIndeterminateGeneratorTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@SAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by 0x00032b40 at +0x2d
 0x000c8f20	0x8	data	_?pRandomName@?9??InitializeTownTypeTraitsTable@@YAXXZ@4V?$TAutoArrayPtr@D@@A	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0x224
 0x000c8f28	0x1	data	_?$S515@?2??InitializeTownTypeTraitsTable@@YAXXZ@4EA	TownTypeTraits	referenced by ?InitializeTownTypeTraitsTable@@YAXXZ at +0xf
-0x000c8f30	0x10	data	_rampartGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator1 at +0x2
+0x000c8f30	0xc	data	_rampartGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$rampartGenerator1 at +0x2
 0x000c8f40	0x8	data	_randomGenerator3	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x8
 0x000c8f48	0x8	data	_randomGenerator4	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0xc
 0x000c8f50	0x1f0	data	?aInfernoBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aInfernoBuildingTraits at +0x8
@@ -4219,7 +4219,7 @@ rva	size	kind	name	unit	evidence
 0x000c97b8	0x10	data	_confluxGenerator6	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$confluxGenerator6 at +0x2
 0x000c97c8	0x10	data	_strongholdGenerator2	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator2 at +0x2
 0x000c97d8	0x10	data	_fortressGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$fortressGenerator7 at +0x2
-0x000c97e8	0x1ec	data	?aStrongholdBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aStrongholdBuildingTraits at +0x8
+0x000c97e8	0x1f0	data	?aStrongholdBuildingTraits@?%C:\Dev\Heroes 3 Exp 2\CampaignEditor\TownTypeTraits.cpp496021698@@3PAUTBuildingTraits@TTown@@A	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$aStrongholdBuildingTraits at +0x8
 0x000c99d8	0x10	data	_infernoGenerator7	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$infernoGenerator7 at +0x2
 0x000c99e8	0x10	data	_strongholdGenerator1	TownTypeTraits	referenced by __h3cg$TownTypeTraits$static_ctor$strongholdGenerator1 at +0x2
 0x000c99f8	0x8	data	_randomGenerator6	TownTypeTraits	referenced by _apRandomGeneratorTraits at +0x14
