@@ -41,7 +41,7 @@
 
 class TGzInflateBuf::TDataError : public std::runtime_error {
 public:
-    TDataError();
+    inline TDataError();
 };
 
 // Retail .rdata 0x63e6fc, immediately ahead of this unit's two vftables.
@@ -60,7 +60,7 @@ DATA(0x0063e6fc) static const int g_gzMagic[2] = {0x1f, 0x8b};
 
 // The deflating half views its char windows as zlib's bytes through one
 // helper, with Loki GzBuf.cpp's `reinterpret_cast< Bytef * >` spelling.
-static Bytef* zlibBytes(char* window)
+static inline Bytef* zlibBytes(char* window)
 {
     return reinterpret_cast<Bytef*>(window);
 }

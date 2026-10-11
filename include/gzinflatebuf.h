@@ -88,8 +88,11 @@ public:
 private:
     int _getC();                // 0x4d5fd0
     void _putBackC(char c);        // Mac 0x220ac8
-    int _mustGetC();            // 0x4d6ba0
-    unsigned long _mustGetLong();
+    // The two throwing readers are inline: the campaign editor's /O2 build,
+    // which expands only inline functions, expands _mustGetLong in underflow
+    // and some _mustGetC calls, but never _getC or _putBackC.
+    inline int _mustGetC();     // 0x4d6ba0
+    inline unsigned long _mustGetLong();
 };
 SIZE(TGzInflateBuf, 0x84);
 
