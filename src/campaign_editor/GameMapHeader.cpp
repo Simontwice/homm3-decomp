@@ -253,8 +253,8 @@ TGameMapHeader::TGameMapHeader(TRawIStream& stream, int version)
         }
     }
     if (version < 9) {
-        signed char unused;
-        stream >> unused;
+        char unused;
+        stream.read(&unused, sizeof(unused));
     }
     _readVictoryCondition(m_vcData, stream, version);
     _readLossCondition(m_lcData, stream, version);
