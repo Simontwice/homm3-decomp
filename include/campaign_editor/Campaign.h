@@ -421,6 +421,9 @@ public:
     void read(TRawIStream& stream, int version);
     void write(TRawOStream& stream, int version) const;
 
+    bool getBRetained(TRetained retained) const { return m_retained[retained]; }
+    void setBRetained(TRetained retained, bool bRetained) { m_retained[retained] = bRetained; }
+
     bool operator==(const TScenarioCrossover& other) const
     {
         return m_retained == other.m_retained && m_creatures == other.m_creatures

@@ -905,10 +905,10 @@ bool TCampaign::getBDirectPrerequisite(int scenario, int prerequisite) const
 VA(0x00407e90, 0x4c)
 TScenarioCrossover::TScenarioCrossover()
 {
-    m_retained.set(eRetainExperience);
-    m_retained.set(eRetainPrimarySkills);
-    m_retained.set(eRetainSecondarySkills);
-    m_retained.set(eRetainSpells);
+    setBRetained(eRetainExperience, true);
+    setBRetained(eRetainPrimarySkills, true);
+    setBRetained(eRetainSecondarySkills, true);
+    setBRetained(eRetainSpells, true);
 }
 
 VA(0x00407ee0, 0x36b)

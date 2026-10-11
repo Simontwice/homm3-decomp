@@ -45,11 +45,11 @@ void TScenarioPropsCrossoverPage::update()
 VA(0x0042a0d0, 0x1a3)
 void TScenarioPropsCrossoverPage::_setCrossover(const TScenarioCrossover& crossover)
 {
-    _m_experienceCheck.SetCheck(crossover.m_retained[TScenarioCrossover::eRetainExperience]);
-    _m_primarySkillsCheck.SetCheck(crossover.m_retained[TScenarioCrossover::eRetainPrimarySkills]);
-    _m_secondarySkillsCheck.SetCheck(crossover.m_retained[TScenarioCrossover::eRetainSecondarySkills]);
-    _m_spellsCheck.SetCheck(crossover.m_retained[TScenarioCrossover::eRetainSpells]);
-    _m_artifactsCheck.SetCheck(crossover.m_retained[TScenarioCrossover::eRetainArtifacts]);
+    _m_experienceCheck.SetCheck(crossover.getBRetained(TScenarioCrossover::eRetainExperience));
+    _m_primarySkillsCheck.SetCheck(crossover.getBRetained(TScenarioCrossover::eRetainPrimarySkills));
+    _m_secondarySkillsCheck.SetCheck(crossover.getBRetained(TScenarioCrossover::eRetainSecondarySkills));
+    _m_spellsCheck.SetCheck(crossover.getBRetained(TScenarioCrossover::eRetainSpells));
+    _m_artifactsCheck.SetCheck(crossover.getBRetained(TScenarioCrossover::eRetainArtifacts));
     int count = _m_creatureList.GetCount();
     int i;
     for (i = 0; i < count; i++)
@@ -62,17 +62,17 @@ void TScenarioPropsCrossoverPage::_setCrossover(const TScenarioCrossover& crosso
 VA(0x0042a280, 0x248)
 void TScenarioPropsCrossoverPage::_getCrossover(TScenarioCrossover& crossover)
 {
-    crossover.m_retained[TScenarioCrossover::eRetainExperience] = _m_experienceCheck.GetCheck() != 0;
-    crossover.m_retained[TScenarioCrossover::eRetainPrimarySkills] = _m_primarySkillsCheck.GetCheck() != 0;
-    crossover.m_retained[TScenarioCrossover::eRetainSecondarySkills] = _m_secondarySkillsCheck.GetCheck() != 0;
-    crossover.m_retained[TScenarioCrossover::eRetainSpells] = _m_spellsCheck.GetCheck() != 0;
-    crossover.m_retained[TScenarioCrossover::eRetainArtifacts] = _m_artifactsCheck.GetCheck() != 0;
+    crossover.setBRetained(TScenarioCrossover::eRetainExperience, _m_experienceCheck.GetCheck() != 0);
+    crossover.setBRetained(TScenarioCrossover::eRetainPrimarySkills, _m_primarySkillsCheck.GetCheck() != 0);
+    crossover.setBRetained(TScenarioCrossover::eRetainSecondarySkills, _m_secondarySkillsCheck.GetCheck() != 0);
+    crossover.setBRetained(TScenarioCrossover::eRetainSpells, _m_spellsCheck.GetCheck() != 0);
+    crossover.setBRetained(TScenarioCrossover::eRetainArtifacts, _m_artifactsCheck.GetCheck() != 0);
     std::bitset<TScenarioCrossover::kNumCreatures> creatures;
     int count = _m_creatureList.GetCount();
     int i;
     for (i = 0; i < count; i++) {
         int creature = _m_creatureList.GetItemData(i);
-        creatures.set(creature, _m_creatureList.GetCheck(i) != 0);
+        creatures[creature] = _m_creatureList.GetCheck(i) != 0;
     }
     crossover.m_creatures = creatures;
     std::bitset<TScenarioCrossover::kNumArtifacts> artifacts;
