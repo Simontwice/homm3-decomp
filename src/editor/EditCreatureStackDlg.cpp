@@ -61,7 +61,7 @@ TEditCreatureStackDlg::TEditCreatureStackDlg(CWnd* pParent, const TCreatureStack
       _m_mapVersion(mapVersion),
       _m_abAllowedCreature(abAllowedCreature)
 {
-    _m_abAllowedCreature.set(_m_stack.getCreatureType(), true);
+    _m_abAllowedCreature[_m_stack.getCreatureType()] = true;
 }
 
 VA(0x0040e0a3, 0x40)

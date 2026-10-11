@@ -132,7 +132,7 @@ void TAbandonedMinePropsDlg::OnOK()
     unsigned int type;
     for (type = 0; type < kNumGameResourceTypes; type++) {
         if (type != eResourceWood)
-            _m_abPotentialResource.set(type, _m_aResourceCheck[type].GetCheck() != 0);
+            _m_abPotentialResource[type] = _m_aResourceCheck[type].GetCheck() != 0;
     }
     for (type = 0; !_m_bModified && type < kNumGameResourceTypes; type++) {
         if (type != eResourceWood)

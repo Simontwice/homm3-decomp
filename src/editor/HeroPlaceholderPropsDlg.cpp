@@ -198,7 +198,8 @@ void THeroPlaceholderPropsDlg::OnHeroRadio()
 {
     bool bHadHero = _m_heroChoice != 0;
     UpdateData(TRUE);
-    if (_m_heroChoice != 0) {
+    bool bHasHero = _m_heroChoice != 0;
+    if (bHasHero) {
         if (!bHadHero) {
             _m_powerRatingEdit.SetWindowText("");
             _m_powerRatingStatic.EnableWindow(FALSE);

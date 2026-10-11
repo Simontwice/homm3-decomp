@@ -1146,3 +1146,13 @@ flags = "editor_o1_ob2_gr_windows"
 unit = "MapEditor"
 source = "src/editor/MapEditor.cpp"
 flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "FormattedStdString"
+source = "src/editor/FormattedStdString.cpp"
+flags = "editor_o1_ob2_gr_windows"
+
+[[unit]]
+unit = "T16bppPalette"
+source = "src/editor/T16bppPalette.cpp"
+flags = "editor_o1_ob2_gr_windows"

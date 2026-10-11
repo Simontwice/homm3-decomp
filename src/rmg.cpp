@@ -902,6 +902,7 @@ static void insertRmgWorkItem(
 // erase's cost, which retail calls (91.05%; every call matches).
 VA(0x00531460, 0x441)
 MAC_ADDRESS(0x22d9ac, 0x5cc)
+VA_AT(h3maped, 0x0049a318, 0x3e1)
 void type_random_map::floodConnectionCosts(TRmgMapPosition position, unsigned char waterZone)
 {
     std::vector<int> costs;
@@ -1032,6 +1033,7 @@ unsigned char type_random_map::isPlacementBlocked(
 
 VA(0x00531AD0, 0x100)
 MAC_ADDRESS(0x22e284, 0x1d0) // anchor-callee 0x5441a1; Complete-only, ret 0xc
+VA_AT(h3maped, 0x0049a85d, 0xd5)
 void type_random_map::openPathPatch(int x, int y, int level)
 {
     TRmgMapItem* item = getMapItem(x, y, level);
@@ -1051,6 +1053,7 @@ void type_random_map::openPathPatch(int x, int y, int level)
 
 VA(0x00531BD0, 0x11F)
 MAC_ADDRESS(0x22e454, 0x254) // anchor-callee 0x544343; Complete-only, ret 0xc
+VA_AT(h3maped, 0x0049a962, 0x101)
 void type_random_map::markObstacleFillPatch(TRmgMapPosition position)
 {
     TRmgMapItem* item = getMapItem(position);
@@ -2926,6 +2929,7 @@ void TRmgTreasureGroup::addObject(type_object* object, TRmgPoint point)
 // budget 52 against 48) while addObject still expands its own (92.07%).
 VA(0x00535110, 0x4AB)
 MAC_ADDRESS(0x233028, 0x6a8) // anchor-callee 0x546843; thiscall, ret 4
+VA_AT(h3maped, 0x0049cf34, 0x393)
 unsigned char TRmgTreasureGroup::addGuard(type_object* guard)
 {
     traceOutline();
@@ -3578,6 +3582,7 @@ void t_abstract_random_generator::readObjectPlacementRules()
 //      o o o o o  r = 0
 VA(0x00536BC0, 0x5F4)
 MAC_ADDRESS(0x23515c, 0x7a0) // anchor-callee 0x5375ff; thiscall, ret 0x10; retail-only
+VA_AT(h3maped, 0x0049e1bf, 0x50e)
 int t_abstract_random_generator::scoreObjectPlacement(
     TRmgObjectPropertiesRef* properties, TRmgMapPosition position)
 {
@@ -4515,6 +4520,7 @@ void type_random_map_generator::initializeObjectGenerators()
 // its source partner TRmgZone::canConnect uses the same helper.
 VA(0x0053AD60, 0x113)
 MAC_ADDRESS(0x23be70, 0x14c) // anchor-callee 0x53e2ea/0x53af04; thiscall, ret 4
+VA_AT(h3maped, 0x004a1701, 0xf4)
 unsigned char type_random_map_generator::canPlaceZone(TRmgZone* zone)
 {
     TRmgTemplateZone* slot = zone->m_templateZone;
@@ -4559,6 +4565,7 @@ unsigned char type_random_map_generator::canPlaceZone(TRmgZone* zone)
 // changes the exact boundary-builder copy and worsens the filtering caller.
 VA(0x0053AE80, 0x36A)
 MAC_ADDRESS(0x23bfbc, 0x28c) // anchor-callee 0x53bab9/0x53bb23; thiscall, ret 0xc
+VA_AT(h3maped, 0x004a17f5, 0x172)
 void type_random_map_generator::appendZonePositions(TRmgZone* center,
     TRmgZone* zone, std::vector<TRmgMapPosition>& candidates)
 {
@@ -4810,6 +4817,7 @@ void type_random_map_generator::positionZone(TRmgZone* zone, int mapSize)
 
 VA(0x0053BBB0, 0xFD)
 MAC_ADDRESS(0x23cc8c, 0xf8)
+VA_AT(h3maped, 0x004a2105, 0x87)
 void type_random_map_generator::calculateZoneBounds()
 {
     TRmgMapItem* item = m_map.m_mapItems;
@@ -5118,6 +5126,7 @@ void type_random_map_generator::traceZoneBoundary(
 
 VA(0x0053CAC0, 0x266)
 MAC_ADDRESS(0x23d1dc, 0x4a8)
+VA_AT(h3maped, 0x004a2b33, 0x1a9)
 TRmgPoint clipRmgBoundaryPoint(
     const TRmgZoneBounds& bounds, TRmgPoint point, TRmgPoint toward)
 {
@@ -5234,6 +5243,7 @@ void type_random_map_generator::drawIslandBoundary(TRmgPoint from, TRmgPoint to,
 
 VA(0x0053CF50, 0x177)
 MAC_ADDRESS(0x23e738, 0x1f0)
+VA_AT(h3maped, 0x004a2ec3, 0x137)
 void type_random_map_generator::fillIslandInterior(TRmgZone* zone)
 {
     std::vector<TRmgMapPosition> pending;
@@ -5277,6 +5287,7 @@ void type_random_map_generator::fillIslandInterior(TRmgZone* zone)
 // or accumulator/scan rewrite is supported by these measurements.
 VA(0x0053D0D0, 0xE3)
 MAC_ADDRESS(0x23e928, 0x184) // anchor-callee 0x53e6e8; thiscall, ret 4
+VA_AT(h3maped, 0x004a2ffa, 0xc8)
 void type_random_map_generator::recenterZone(TRmgZone* zone)
 {
     TRmgZoneBounds bounds = zone->m_bounds;
@@ -5314,6 +5325,7 @@ void type_random_map_generator::recenterZone(TRmgZone* zone)
 // multiply/divide scheduling and the reverse-loop register roles differ.
 VA(0x0053D1C0, 0x1B9)
 MAC_ADDRESS(0x23eaac, 0x2b0) // anchor-callee 0x53e70f; thiscall, ret 4
+VA_AT(h3maped, 0x004a30c2, 0x182)
 void type_random_map_generator::insetIslandZone(TRmgZone* zone)
 {
     int zoneIndex = zone->m_templateZone->m_zoneIndex;
@@ -5384,6 +5396,7 @@ void type_random_map_generator::insetIslandZone(TRmgZone* zone)
 // which retail calls (97.10%; every call matches).
 VA(0x0053D380, 0x551)
 MAC_ADDRESS(0x23ed74, 0x4a4) // anchor-caller 0x53e050; Complete-only, thiscall ret 8
+VA_AT(h3maped, 0x004a325d, 0x2f7)
 void type_random_map_generator::fillZoneArea(TRmgZone* zone, TRmgHalfEdge* first)
 {
     int zoneIndex = zone->m_templateZone->m_zoneIndex;
@@ -5482,6 +5495,7 @@ void type_random_map_generator::fillZoneArea(TRmgZone* zone, TRmgHalfEdge* first
 // graph/root-count cases against an independent Floyd-Warshall distance table.
 VA(0x0053D8E0, 0x1EC)
 MAC_ADDRESS(0x23f218, 0x2f0) // anchor-callee 0x53dcd2/0x53e020; Complete-only, ret 4
+VA_AT(h3maped, 0x004a3554, 0x1bc)
 void type_random_map_generator::propagateZoneDistances(TRmgZone* zone)
 {
     std::vector<TRmgZone*> pending;
@@ -5554,6 +5568,7 @@ static void initializeRmgZoneDistances(
 // their ring-search exits and final insertion expansion remain to reconcile.
 VA(0x0053DAD0, 0x57F)
 MAC_ADDRESS(0x23f518, 0x40c) // anchor-callee buildZoneBoundaries; Complete-only, ret 8
+VA_AT(h3maped, 0x004a3710, 0x2f3)
 void type_random_map_generator::joinExtraZones(int originalZones, TRmgVoronoi* diagram)
 {
     TRmgZoneBounds bounds = {0, 0, m_map.m_mapWidth, m_map.m_mapHeight};
@@ -5654,6 +5669,7 @@ VA_COMPGEN(0x0054DE90, 0x14, STD_CONSTRUCT, TRmgZoneConnection)
 // preserves all 1613 retail bytes, including the original cleanup sequence.
 VA(0x0053E050, 0x64D)
 MAC_ADDRESS(0x23f924, 0x798) // anchor-callee 0x549af9; thiscall, ret 8
+VA_AT(h3maped, 0x004a3a03, 0x524)
 void type_random_map_generator::buildZoneBoundaries(
     TRmgTemplate* mapTemplate, int level)
 {
@@ -5789,6 +5805,7 @@ void type_random_map_generator::buildZoneBoundaries(
 // Mac retains the view-map constructor at 0x22d320 and expands that lookup.
 VA(0x0053E6A0, 0x337)
 MAC_ADDRESS(0x2400bc, 0x354)
+VA_AT(h3maped, 0x004a3f27, 0x28d)
 void type_random_map_generator::paintZoneTerrain()
 {
     calculateZoneBounds();
@@ -5934,6 +5951,7 @@ void generateRmgIslandMask(unsigned char* mask, int width, int height);
 // Therefore the bounds are height by width and the index is X * width + Y.
 VA(0x0053ED00, 0x29B)
 MAC_ADDRESS(0x2406bc, 0x484)
+VA_AT(h3maped, 0x004a42d1, 0x251)
 void generateRmgIslandMask(unsigned char* mask, int width, int height)
 {
     std::vector<TRmgNoiseRegion> patches;
@@ -5988,6 +6006,7 @@ void generateRmgIslandMask(unsigned char* mask, int width, int height)
 // the retained getMapItem body remains exact and is not changed for this site.
 VA(0x0053EFA0, 0x1F2)
 MAC_ADDRESS(0x240ba8, 0x270)
+VA_AT(h3maped, 0x004a4522, 0x172)
 void type_random_map_generator::createWaterZoneIsland(const TRmgZoneBounds& bounds, int level)
 {
     int width = bounds.m_maximumX - bounds.m_minimumX;
@@ -6102,6 +6121,7 @@ void type_random_map_generator::floodWaterZoneDistances(TRmgMapPosition position
 // and ADD-negative limit expressions do not recover the remaining differences.
 VA(0x0053F470, 0x409)
 MAC_ADDRESS(0x24123c, 0x638)
+VA_AT(h3maped, 0x004a4913, 0x37b)
 void type_random_map_generator::populateWaterZoneIslands(TRmgZone* zone)
 {
     if (zone->m_terrain != eTerrainWater)
@@ -6174,6 +6194,7 @@ void type_random_map_generator::populateWaterZoneIslands(TRmgZone* zone)
 // the ordinary findConnection helper and progress call remain canonical.
 VA(0x0053F880, 0x429)
 MAC_ADDRESS(0x241874, 0x628)
+VA_AT(h3maped, 0x004a4c8e, 0x337)
 void type_random_map_generator::markZoneBoundaryObstacles()
 {
     TRmgMapItem* current = m_map.m_mapItems;
@@ -6580,6 +6601,7 @@ void type_random_map_generator::buildZoneConnectionPaths()
 // do not replace them with a pasted body or an inline-depth pin.
 VA(0x005408E0, 0x23F)
 MAC_ADDRESS(0x242e88, 0x380) // anchor-callee createGroundConnection; thiscall, ret 0x10
+VA_AT(h3maped, 0x004a5a23, 0x1e4)
 void type_random_map_generator::openConnectionPath(
     TRmgMapPosition position, unsigned char narrow)
 {
@@ -6738,6 +6760,7 @@ int type_random_map_generator::placeBorderGuard(
 
 VA(0x00540FC0, 0x172)
 MAC_ADDRESS(0x243824, 0x2d4) // anchor-callee createGroundConnection; thiscall, ret 0x10
+VA_AT(h3maped, 0x004a606b, 0x151)
 void type_random_map_generator::markBorderObjectArea(
     TRmgMapPosition position, int color)
 {
@@ -7991,6 +8014,7 @@ bool type_random_map_generator::contains(const TRmgPoint& point) const
 // recovery of commitTreasureGroup's retained constructor and live snapshots.
 VA(0x00543E20, 0x574)
 MAC_ADDRESS(0x24705c, 0x750) // anchor-callee 0x544920; Complete-only, thiscall, no arguments
+VA_AT(h3maped, 0x004a8260, 0x4c2)
 void type_random_map_generator::carveBranchingPaths()
 {
     TRmgMapItem* item = m_map.m_mapItems;
@@ -8107,6 +8131,7 @@ void type_random_map_generator::carveBranchingPaths()
 // or using the existing position as the loop cursor leaves that pair flat.
 VA(0x005443A0, 0x2F5)
 MAC_ADDRESS(0x247800, 0x59c)
+VA_AT(h3maped, 0x004a8722, 0x2b8)
 void type_random_map_generator::connectJunctionEntrance(TRmgPoint from, TRmgPoint to,
     TRmgZone* zone)
 {
@@ -8174,6 +8199,7 @@ void type_random_map_generator::connectJunctionEntrance(TRmgPoint from, TRmgPoin
 // 0x247fb0..0x248014 copies that value before storing the zero movement cost.
 VA(0x005446A0, 0x27E)
 MAC_ADDRESS(0x247d9c, 0x3e0)
+VA_AT(h3maped, 0x004a89da, 0x222)
 void type_random_map_generator::prepareJunctionZone(TRmgZone* zone)
 {
     TRmgZoneBounds bounds = zone->m_bounds;
@@ -8237,6 +8263,7 @@ int TRmgZone::getEntranceCount() const
 
 VA(0x00544920, 0x124)
 MAC_ADDRESS(0x24817c, 0x1ac)
+VA_AT(h3maped, 0x004a8c15, 0x117)
 void type_random_map_generator::prepareZoneConnections()
 {
     carveBranchingPaths();
@@ -8292,6 +8319,7 @@ void type_random_map_generator::placePrimaryTown(TRmgZone* zone)
 // All 49 blocks and the complete instruction/relocation stream reproduce.
 VA(0x00544AE0, 0x2B0)
 MAC_ADDRESS(0x248418, 0x414)
+VA_AT(h3maped, 0x004a8db2, 0x268)
 void type_random_map_generator::placeAdditionalTowns(TRmgZone* zone)
 {
     TRmgTemplateZone* slot = zone->m_templateZone;
@@ -8568,6 +8596,7 @@ int type_random_map_generator::getZoneGuardValue(const TRmgZone* zone, int value
 // The three _Destroy calls fold to the retail artifact-vector ret-8 body.
 VA(0x00545580, 0x401)
 MAC_ADDRESS(0x249214, 0x46c)
+VA_AT(h3maped, 0x004a9641, 0x2d0)
 unsigned char type_random_map_generator::placeMineSite(type_object* object,
     TRmgZone* zone, unsigned char startingMine, int spacing)
 {
@@ -8970,6 +8999,7 @@ type_object* type_random_map_generator::createTreasureObject(TRmgZone* zone,
 // fit's deletion/null-selection exit; duplicate bounds updates change CFG.
 VA(0x00546520, 0x1B6)
 MAC_ADDRESS(0x24a584, 0x22c) // anchor-callee 0x54678a; thiscall, ret 0x10
+VA_AT(h3maped, 0x004aa1db, 0x179)
 int type_random_map_generator::fillTreasureGroup(TRmgZone* zone,
     TRmgTreasureGroup* group, unsigned char compact, int value)
 {
@@ -9186,6 +9216,7 @@ TRmgMapPosition type_object::getPlacedGroupPosition(
 // and one reload placement at the inner-loop latch (register/schedule).
 VA(0x005469B0, 0x2B4)
 MAC_ADDRESS(0x24a8c0, 0x44c) // anchor-callee 0x547330; thiscall, ret 0x10
+VA_AT(h3maped, 0x004aa3e9, 0x21a)
 void type_random_map_generator::commitTreasureGroup(TRmgTreasureGroup* group,
     TRmgMapPosition position)
 {
@@ -9279,6 +9310,7 @@ void type_random_map_generator::commitTreasureGroup(TRmgTreasureGroup* group,
 // three locals that share one 4-byte home here in separate slots (0x48).
 VA(0x00546C70, 0x452)
 MAC_ADDRESS(0x24ad0c, 0x6cc) // anchor-callee 0x54721c; thiscall, ret 0x14
+VA_AT(h3maped, 0x004aa603, 0x3b4)
 unsigned char type_random_map_generator::canPlaceTreasureGroup(TRmgTreasureGroup* group,
     TRmgMapPosition position, TRmgZone* zone)
 {
@@ -9392,6 +9424,7 @@ unsigned char type_random_map_generator::canPlaceTreasureGroup(TRmgTreasureGroup
 //   . . # # # .
 VA(0x005470D0, 0x286)
 MAC_ADDRESS(0x24b3d8, 0x310) // anchor-callee 0x5475b2/0x5476aa; thiscall, ret 0xc
+VA_AT(h3maped, 0x004aa9b7, 0x1c7)
 unsigned char type_random_map_generator::placeTreasureGroup(TRmgTreasureGroup* group,
     TRmgZone* zone, int spacing)
 {
@@ -9437,6 +9470,7 @@ unsigned char type_random_map_generator::placeTreasureGroup(TRmgTreasureGroup* g
 // retail ICF copies' labels on the clear/erase/destructor twins.
 VA(0x00547360, 0x460)
 MAC_ADDRESS(0x24b6e8, 0x358)
+VA_AT(h3maped, 0x004aab7e, 0x210)
 void type_random_map_generator::placeZoneTreasures(TRmgZone* zone)
 {
     TRmgTemplateZone* slot = zone->m_templateZone;
@@ -10712,6 +10746,7 @@ void type_random_map_generator::writeMapHeader(TAbstractFile* outfile)
 
 VA(0x0054AB40, 0xAD)
 MAC_ADDRESS(0x24e6b0, 0x124)
+VA_AT(h3maped, 0x004ad140, 0xa3)
 static void assignRmgTeams(
     int teamCount,
     int playerCount,
@@ -10841,6 +10876,7 @@ unsigned char type_random_map_generator::writeMap(TAbstractFile* outfile)
 //   40 41 .. 46  P   (bit 47)
 VA(0x0054AE30, 0x2C5)
 MAC_ADDRESS(0x24f980, 0x398)
+VA_AT(h3maped, 0x004ad3eb, 0x255)
 void writeRmgObjectPrototype(TAbstractFile* outfile, TObjectType* prototype)
 {
     unsigned char terrainMask[2];
@@ -10976,6 +11012,7 @@ static void insertRmgWorkItem(std::vector<TRmgZone*>& zones, TRmgZone* zone)
 // both retail-retained wrappers. No speculative worklist wrapper is retained.
 VA(0x0054B180, 0x174)
 MAC_ADDRESS(0x25013c, 0x210) // anchor-callee + zone/template layouts; retail-only
+VA_AT(h3maped, 0x004ad6a8, 0x14f)
 void type_random_map_generator::calculateQuestZoneDistances(TRmgZone* origin)
 {
     std::vector<TRmgZone*> pending;
@@ -11012,6 +11049,7 @@ void type_random_map_generator::calculateQuestZoneDistances(TRmgZone* origin)
 // five corrupted controls fail.
 VA(0x0054B300, 0x18B)
 MAC_ADDRESS(0x25034c, 0x23c) // anchor-callee + placement call + zone fields; retail-only
+VA_AT(h3maped, 0x004ad7f7, 0x150)
 unsigned char type_random_map_generator::placeQuestGroup(
     TRmgTreasureGroup* group, TRmgZone* origin)
 {
