@@ -655,7 +655,7 @@ static bool isRmgTemplateFieldSet(const char* value)
 
 } // namespace
 
-static void __fastcall assignRmgTeams(
+static void assignRmgTeams(
     int teamCount,
     int playerCount,
     int firstTeam,
@@ -5941,8 +5941,9 @@ TRmgZoneConnection* TRmgTemplateZone::findConnection(int destinationZone)
 
 // Complete-only island and distance helpers, called at 0x53f81d and 0x53f603.
 // Retail 0x53f048 passes the byte mask in ECX, width in EDX and height
-// on the stack. This free fastcall boundary has no Dreamcast counterpart.
-void __fastcall generateRmgIslandMask(unsigned char* mask, int width, int height);
+// on the stack: the game's /Gr default. This free boundary has no
+// Dreamcast counterpart.
+void generateRmgIslandMask(unsigned char* mask, int width, int height);
 
 // Exact 667-byte body. The subdivision's center is the last source argument:
 // fastcall still passes it in EDX, but VC6 prepares it before copying the two
@@ -5956,7 +5957,7 @@ void __fastcall generateRmgIslandMask(unsigned char* mask, int width, int height
 // Therefore the bounds are height by width and the index is X * width + Y.
 VA(0x0053ED00, 0x29B)
 MAC_ADDRESS(0x2406bc, 0x484)
-void __fastcall generateRmgIslandMask(unsigned char* mask, int width, int height)
+void generateRmgIslandMask(unsigned char* mask, int width, int height)
 {
     std::vector<TRmgNoiseRegion> patches;
     TRmgNoiseRegion patch = {
@@ -10734,7 +10735,7 @@ void type_random_map_generator::writeMapHeader(TAbstractFile* outfile)
 
 VA(0x0054AB40, 0xAD)
 MAC_ADDRESS(0x24e6b0, 0x124)
-static void __fastcall assignRmgTeams(
+static void assignRmgTeams(
     int teamCount,
     int playerCount,
     int firstTeam,
@@ -10770,7 +10771,7 @@ static void __fastcall assignRmgTeams(
     }
 }
 
-void __fastcall writeRmgObjectPrototype(TAbstractFile*, TObjectType*);
+void writeRmgObjectPrototype(TAbstractFile*, TObjectType*);
 
 // Retail stream order: header, zero reserved count, every cell, prototype
 // indices and records, then placed objects in two trait-ordered passes.
@@ -10863,7 +10864,7 @@ unsigned char type_random_map_generator::writeMap(TAbstractFile* outfile)
 //   40 41 .. 46  P   (bit 47)
 VA(0x0054AE30, 0x2C5)
 MAC_ADDRESS(0x24f980, 0x398)
-void __fastcall writeRmgObjectPrototype(TAbstractFile* outfile, TObjectType* prototype)
+void writeRmgObjectPrototype(TAbstractFile* outfile, TObjectType* prototype)
 {
     unsigned char terrainMask[2];
     int nameLength = prototype->getImageName().size();
