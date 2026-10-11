@@ -1,6 +1,7 @@
 // 18 functions in link order.
 #include "va.h"
 
+#include <assert.h>
 #include <string.h>
 
 #include "font.h"
@@ -78,6 +79,7 @@ DC_ADDRESS(0x0a1d58, 0xd6)
 MAC_ADDRESS(0x0c8e70, 0xd0)
 void font::DrawCharacter(int c, Bitmap16Bit* bmp, int x, int y, int color) const
 {
+    assert(c >= 0 && c < 256);
     if (c < 0)
         return;
     if (c >= 256)

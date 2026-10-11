@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <string.h>
 
 #include "textresource.h"
@@ -39,8 +40,10 @@ TTextResource::TTextResource(const char* name, int size, const char* data)
         char* end;
         if (*next != '"') {
             *it = next;
-            while (*next != '\r')
+            while (*next != '\r') {
                 ++next;
+                assert(next - Data < size);
+            }
 
             end = next;
             while (end > *it && end[-1] == '\t')
@@ -48,8 +51,10 @@ TTextResource::TTextResource(const char* name, int size, const char* data)
         } else {
             ++next;
             *it = next;
-            while (*next != '\r')
+            while (*next != '\r') {
                 ++next;
+                assert(next - Data < size);
+            }
 
             end = next;
             while (end > *it && end[-1] == '\t')

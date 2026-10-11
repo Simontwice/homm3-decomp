@@ -1,5 +1,6 @@
 #include "va.h"
 
+#include <assert.h>
 #include <limits>
 #include <math.h>
 #include <new>
@@ -52,6 +53,8 @@ Bitmap16Bit::Bitmap16Bit(const char* name, int w, int h)
       ImageSize(w * h * 2), Width(w), Height(h), Pitch(w * 2),
       referenced(0)
 {
+    assert(w >= 0);
+    assert(h >= 0);
     DataSize = ImageSize;
 
     if (w > 0 && h > 0)
@@ -141,6 +144,11 @@ VA(0x0044e130, 0x110)
 DC_ADDRESS(0x050fd4, 0xa4)
 void Bitmap16Bit::Remap(int oldGreenBits)
 {
+    if (oldGreenBits == BITMAP_GREEN_BITS_565)
+        assert(green_mask != 0x7e0);
+    else
+        assert(green_mask == 0x7e0);
+
     for (int col = 0; col < Width; col++) {
         for (int row = 0; row < Height; row++) {
             Bitmap16MapPointer pixel;
