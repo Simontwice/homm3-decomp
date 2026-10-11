@@ -29928,7 +29928,7 @@ site_rva	value	channel	detail	target_class	ctx	disposition
 0x135504	0x435029	data	.rdata	code-start	-	kept
 0x135508	0x434fd1	data	.rdata	code-start	-	kept
 0x13550c	0x434f79	data	.rdata	code-start	-	kept
-0x135510	0x434ddd	data	.rdata	code-interior	-	dropped
+0x135510	0x434ddd	data	.rdata	code-start	-	kept
 0x135514	0x550f30	data	.rdata	data	-	kept
 0x135518	0x4360bf	data	.rdata	code-start	-	kept
 0x13551c	0x435fc9	data	.rdata	code-start	-	kept
@@ -33400,13 +33400,13 @@ site_rva	value	channel	detail	target_class	ctx	disposition
 0x1398a8	0x4e6ab4	data	.rdata	code-start	-	kept
 0x1398ac	0x554ab0	data	.rdata	data	-	kept
 0x1398b0	0x45e31a	data	.rdata	code-start	-	kept
-0x1398b4	0x45f6be	data	.rdata	code-interior	-	dropped
+0x1398b4	0x45f6be	data	.rdata	code-start	-	kept
 0x1398b8	0x411916	data	.rdata	code-start	-	kept
 0x1398bc	0x5062d0	data	.rdata	code-start	-	kept
 0x1398c0	0x5062f1	data	.rdata	code-start	-	kept
 0x1398c4	0x554b08	data	.rdata	data	-	kept
 0x1398c8	0x45e320	data	.rdata	code-start	-	kept
-0x1398cc	0x45f6be	data	.rdata	code-interior	-	dropped
+0x1398cc	0x45f6be	data	.rdata	code-start	-	kept
 0x1398d0	0x411916	data	.rdata	code-start	-	kept
 0x1398d4	0x5062d0	data	.rdata	code-start	-	kept
 0x1398d8	0x5062f1	data	.rdata	code-start	-	kept
@@ -42839,7 +42839,7 @@ site_rva	value	channel	detail	target_class	ctx	disposition
 0x14ba08	0x55bfd8	data	.rdata	data	-	kept
 0x14ba0c	0x420567	data	.rdata	code-start	-	kept
 0x14ba10	0x4e62ad	data	.rdata	code-start	-	kept
-0x14ba2c	0x4e6e87	data	.rdata	code-interior	-	dropped
+0x14ba2c	0x4e6e87	data	.rdata	code-start	-	kept
 0x14ba30	0x4e6e9b	data	.rdata	code-start	-	kept
 0x14ba34	0x55c028	data	.rdata	data	-	kept
 0x14ba38	0x420567	data	.rdata	code-start	-	kept

@@ -29919,6 +29919,7 @@ site_rva	kind
 0x135504	dir32
 0x135508	dir32
 0x13550c	dir32
+0x135510	dir32
 0x135514	dir32
 0x135518	dir32
 0x13551c	dir32
@@ -33390,11 +33391,13 @@ site_rva	kind
 0x1398a8	dir32
 0x1398ac	dir32
 0x1398b0	dir32
+0x1398b4	dir32
 0x1398b8	dir32
 0x1398bc	dir32
 0x1398c0	dir32
 0x1398c4	dir32
 0x1398c8	dir32
+0x1398cc	dir32
 0x1398d0	dir32
 0x1398d4	dir32
 0x1398d8	dir32
@@ -42825,6 +42828,7 @@ site_rva	kind
 0x14ba08	dir32
 0x14ba0c	dir32
 0x14ba10	dir32
+0x14ba2c	dir32
 0x14ba30	dir32
 0x14ba34	dir32
 0x14ba38	dir32

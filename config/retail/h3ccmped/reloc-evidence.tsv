@@ -16736,7 +16736,7 @@ site_rva	value	channel	detail	target_class	ctx	disposition
 0x91760	0x4984f8	data	.rdata	data	-	kept
 0x91764	0x4502b1	data	.rdata	code-start	-	kept
 0x91768	0x44f602	data	.rdata	code-start	-	kept
-0x91784	0x450267	data	.rdata	code-interior	-	dropped
+0x91784	0x450267	data	.rdata	code-start	-	kept
 0x91788	0x45027b	data	.rdata	code-start	-	kept
 0x9178c	0x498548	data	.rdata	data	-	kept
 0x91790	0x4502b1	data	.rdata	code-start	-	kept

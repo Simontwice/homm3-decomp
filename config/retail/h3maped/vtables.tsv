@@ -168,7 +168,7 @@ rva	function_count	class
 0x1354c8	3	bad_cast@std
 0x1354d8	5	?$ctype@D@std
 0x1354f0	1	facet@locale@std
-0x1354f8	6	?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std
+0x1354f8	7	?$num_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std
 0x135518	10	?$num_get@DV?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@std
 0x135544	6	?$numpunct@D@std
 0x135560	8	TGameObject
@@ -377,8 +377,8 @@ rva	function_count	class
 0x1397ec	1	??_7TMapDoc@@6BTClient@TGameMap@@@
 0x1397f4	44	??_7TMapDoc@@6BCDocument@@@
 0x1398a8	1	TClient@TGameMap
-0x1398b0	1	TMapDocLoadFailure
-0x1398c8	1	TMapDocInvalidFileVersion
+0x1398b0	5	TMapDocLoadFailure
+0x1398c8	5	TMapDocInvalidFileVersion
 0x1398e0	13	?$basic_stringbuf@DU?$char_traits@D@std@@V?$allocator@D@2@@std
 0x139918	3	TStreamBufFile@?%C:\Dev\Heroes 3 Exp 2\Editor\MapDoc.cpp166062000
 0x139928	5	CFileException

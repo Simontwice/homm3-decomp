@@ -62,6 +62,26 @@ class ThrowSeedsTest(unittest.TestCase):
         self.assertEqual(functions.throw_helpers(c), {0x5000})
 
 
+class AdjustingThunkTest(unittest.TestCase):
+    """A this-adjusting thunk is `add/sub ecx, n` and its jump."""
+    def census(self, mnemonic, reg):
+        first = SimpleNamespace(mnemonic=mnemonic, operands=[
+            SimpleNamespace(type=functions.x86.X86_OP_REG, reg=reg)])
+        return SimpleNamespace(insn=lambda rva: first)
+
+    def test_add_ecx_then_jump_is_a_thunk(self):
+        c = self.census("add", functions.x86.X86_REG_ECX)
+        self.assertTrue(functions.adjusting_thunk(c, 0x1000, {0x1000, 0x1003}))
+
+    def test_a_longer_body_is_not(self):
+        c = self.census("add", functions.x86.X86_REG_ECX)
+        self.assertFalse(functions.adjusting_thunk(c, 0x1000, {0x1000, 0x1003, 0x1008}))
+
+    def test_another_register_is_not(self):
+        c = self.census("add", functions.x86.X86_REG_EAX)
+        self.assertFalse(functions.adjusting_thunk(c, 0x1000, {0x1000, 0x1003}))
+
+
 class TableSeedsAfterCallsTest(unittest.TestCase):
     def test_vtable_slot_after_a_call_is_a_seed(self):
         covered = {0x1005: 0x1000, 0x100a: 0x1000}

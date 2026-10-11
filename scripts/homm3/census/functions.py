@@ -359,10 +359,11 @@ def throw_helpers(c):
 
 
 def throw_seeds(c, lone_targets, covered, ends, helpers):
-    """The isolated data pointers to the code after a call of a throw
-    helper: the throw never returns, so the pointer starts a function the
-    descent ran into past the throw (a message map's handler after a
-    function that ends in a throw)."""
+    """The data pointers to the code after a call of a throw helper: the
+    throw never returns, so the pointer starts a function the descent ran
+    into past the throw (a message map's handler after a function that
+    ends in a throw, a deleting destructor's vtable slot after a catch
+    block that throws)."""
     out = []
     for t, s in lone_targets:
         if t not in covered or t not in ends:
@@ -374,6 +375,17 @@ def throw_seeds(c, lone_targets, covered, ends, helpers):
                 and covered[t] == covered.get(ends[t])):
             out.append((t, s))
     return out
+
+
+def adjusting_thunk(c, start, seen):
+    """Whether the function at `start` is a this-adjusting thunk: two
+    instructions, `add` or `sub` on ecx, then (by `descend`) its jump."""
+    if len(seen) != 2:
+        return False
+    first = c.insn(start)
+    return (first is not None and first.mnemonic in ("add", "sub")
+            and first.operands[0].type == x86.X86_OP_REG
+            and first.operands[0].reg == x86.X86_REG_ECX)
 
 
 def padded_call_ends(c, ends, limit=16):
@@ -558,7 +570,7 @@ def run(image, log=print, catch_bodies=False):
         if c.in_text(t):
             take(t, f"data-after-padding@0x{s:x}", check=False)
     # or right after a call of the throw helper, with no padding between
-    for t, s in throw_seeds(c, lone_targets, covered, ends, throw_helpers(c)):
+    for t, s in throw_seeds(c, lone_targets + run_targets, covered, ends, throw_helpers(c)):
         take(t, f"data-after-throw@0x{s:x}", check=False)
     drain(True)
     index()
@@ -591,11 +603,25 @@ def run(image, log=print, catch_bodies=False):
         index()
         if not added:
             break
-    # final pass: re-descend with the final start set
-    for s in sorted(c.starts):
-        res = c.descend(s)
-        if res is not None:
-            c.reached[s] = res[0] | c.extra.get(s, set())
+    # final pass: re-descend with the final start set. A this-adjusting
+    # thunk (`add/sub ecx, n; jmp`) descended before the start after it was
+    # known took its jump target as its own code; with the final starts the
+    # jump leaves it, so the target starts a function (a tail call)
+    while True:
+        late = set()
+        for s in sorted(c.starts):
+            res = c.descend(s)
+            if res is not None:
+                c.reached[s] = res[0] | c.extra.get(s, set())
+                if adjusting_thunk(c, s, res[0]):
+                    late |= {t for t in res[3] if t not in c.starts and c.in_text(t)
+                             and t not in c.continuations}
+        if not late:
+            break
+        for t in sorted(late):
+            take(t, "tail", check=False)
+        drain(True)
+        index()
     # a weak seed (a code-looking data or immediate value) is no start when
     # the function before it, descended without it, falls into it or runs
     # through it: the seed was taken before that descent covered it
