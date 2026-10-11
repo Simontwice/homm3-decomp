@@ -58,11 +58,18 @@ Example: our `TTextResource::operator[]` calls `GetText`, which indexes a
 | `g_generalText->GetText(i)` | `vector_pod<unsigned long>::data()` |
 | `(*g_generalText)[i]` | `vector_pod<unsigned long>::operator[]` (retail 0x2a0c) |
 
-Retail sites call 0x2a0c, so under our header model the original indexed
-through `operator[]`. This only measures depth: if the original `GetText`
-carried one more wrapper layer than ours, its calls would leave the same call.
-State that caveat, and treat a conflict with an `AGENTS.md` rule as a decision
-for the user rather than a silent rewrite.
+Retail is mixed, site by site: the image calls 0x2a0c 1,232 times and `data()`
+(0x5eec) 353 times (text and other pointer vectors). Every text-table
+initializer (`initializeArrayText`,
+`InitializeCreatureTypeTraitsTable`, ...), which Dreamcast spells with
+`GetText`, leaves `data()`. So `GetText` has exactly our depth, and no extra
+wrapper layer exists (Dreamcast types `Text` as a plain `std::vector<char*>`;
+Loki has only `GetText` and `operator[]` calling it). A site that leaves
+0x2a0c is one level deeper: `(*text)[i]` under our header. One function can hold both: `getCreatureSpellMessage` leaves `data()` at nine
+texts and 0x2a0c at Complete's added faerie-dragon text; `doCombat` leaves
+0x2a0c at the four town-under-attack texts and `data()` at the two
+necromancy texts. Treat a conflict with an `AGENTS.md` rule (keep `GetText`)
+as a decision for the user rather than a silent rewrite.
 
 ## Probe a spelling
 

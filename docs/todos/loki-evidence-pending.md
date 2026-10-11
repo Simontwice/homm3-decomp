@@ -178,7 +178,9 @@ items.
   loop and its `*dd++ = 0` terminators.
 - **`TTextResource::GetText`.** Loki has it out of line, with
   `assert((r >= 0) && (r < Text.size()))`, and `operator[]` calls it.
-  Complete expands it.
+  Complete expands it. Loki, Dreamcast (`Text` a plain
+  `std::vector<char*>`) and the Mac initializers' `data()` calls agree on
+  our depth: there is no extra layer (mac-evidence skill, "Inline depth").
 
 ### LODFile
 
