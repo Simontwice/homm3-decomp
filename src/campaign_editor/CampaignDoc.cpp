@@ -421,63 +421,63 @@ auto_ptr<TScenarioStartingOptions> readStartingOptions(TRawIStream& iStream, int
     signed char type;
     iStream >> type;
     auto_ptr<TScenarioStartingOptions> pOptions;
-    switch (type) {
-    case eOptionsNone:
-        return pOptions;
-    case eOptionsBonus: {
-        signed char player;
-        iStream >> player;
-        signed char bonusCount;
-        iStream >> bonusCount;
-        unsigned int numBonuses = bonusCount;
-        vector<auto_ptr<TScenarioStartingBonus> > bonuses;
-        bonuses.reserve(numBonuses);
-        for (unsigned int i = 0; i < numBonuses; i++)
-            bonuses.push_back(readStartingBonus(iStream, version));
-        pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsBonus(player, bonuses));
-        break;
-    }
-    case eOptionsCrossoverScenario: {
-        signed char choiceCount;
-        iStream >> choiceCount;
-        unsigned int numChoices = choiceCount;
-        vector<TScenarioOptionsCrossoverScenario::TChoice> choices;
-        choices.reserve(numChoices);
-        for (unsigned int i = 0; i < numChoices; i++) {
+    if (type != eOptionsNone) {
+        switch (type) {
+        case eOptionsBonus: {
             signed char player;
             iStream >> player;
-            signed char scenario;
-            iStream >> scenario;
-            TScenarioOptionsCrossoverScenario::TChoice choice;
-            choice.m_scenario = scenario;
-            choice.m_player = player;
-            choices.push_back(choice);
+            signed char bonusCount;
+            iStream >> bonusCount;
+            unsigned int numBonuses = bonusCount;
+            vector<auto_ptr<TScenarioStartingBonus> > bonuses;
+            bonuses.reserve(numBonuses);
+            for (unsigned int i = 0; i < numBonuses; i++)
+                bonuses.push_back(readStartingBonus(iStream, version));
+            pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsBonus(player, bonuses));
+            break;
         }
-        pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsCrossoverScenario(choices));
-        break;
-    }
-    default: {
-        signed char choiceCount;
-        iStream >> choiceCount;
-        unsigned int numChoices = choiceCount;
-        vector<TScenarioOptionsStartingHero::TChoice> choices;
-        choices.reserve(numChoices);
-        for (unsigned int i = 0; i < numChoices; i++) {
-            signed char player;
-            iStream >> player;
-            short hero;
-            iStream >> hero;
-            TScenarioOptionsStartingHero::TChoice choice;
-            choice.m_hero = hero;
-            choice.m_player = player;
-            choices.push_back(choice);
+        case eOptionsCrossoverScenario: {
+            signed char choiceCount;
+            iStream >> choiceCount;
+            unsigned int numChoices = choiceCount;
+            vector<TScenarioOptionsCrossoverScenario::TChoice> choices;
+            choices.reserve(numChoices);
+            for (unsigned int i = 0; i < numChoices; i++) {
+                signed char player;
+                iStream >> player;
+                signed char scenario;
+                iStream >> scenario;
+                TScenarioOptionsCrossoverScenario::TChoice choice;
+                choice.m_scenario = scenario;
+                choice.m_player = player;
+                choices.push_back(choice);
+            }
+            pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsCrossoverScenario(choices));
+            break;
         }
-        pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsStartingHero(choices));
-        break;
+        default: {
+            signed char choiceCount;
+            iStream >> choiceCount;
+            unsigned int numChoices = choiceCount;
+            vector<TScenarioOptionsStartingHero::TChoice> choices;
+            choices.reserve(numChoices);
+            for (unsigned int i = 0; i < numChoices; i++) {
+                signed char player;
+                iStream >> player;
+                short hero;
+                iStream >> hero;
+                TScenarioOptionsStartingHero::TChoice choice;
+                choice.m_hero = hero;
+                choice.m_player = player;
+                choices.push_back(choice);
+            }
+            pOptions = auto_ptr<TScenarioStartingOptions>(new TScenarioOptionsStartingHero(choices));
+            break;
+        }
+        }
+        if (pOptions.get() == NULL)
+            throw TAllocationFailure();
     }
-    }
-    if (pOptions.get() == NULL)
-        throw TAllocationFailure();
     return pOptions;
 }
 
