@@ -346,12 +346,18 @@ unit = "font"
 source = "src/font.cpp"
 flags = "libraries_o2_gr_windows"
 
-# Game sources compiled into the map editor
+# Game sources compiled into the map editor.
+# rmg and rmg_support take stack arguments in their free functions here:
+# insertRmgWorkItem 0x4a489d and std::_Construct<TRmgObjectPlacementRule>
+# 0x4af09c read [ebp+8] and their callers pop (`add esp`), as do
+# selectRmgLinePattern 0x458893, refreshRmgLinePoint 0x458a2f and
+# clearRmgLineRectangle 0x458af6. The game's /Gr build passes them in
+# registers.
 [[unit]]
 unit = "rmg"
 module = "rmg"
 source = "src/rmg.cpp"
-flags = "h3maped_o1_ob2_gr_windows"
+flags = "editor_o1_ob2_gr_windows"
 
 [[unit]]
 unit = "rmg_river"
@@ -375,7 +381,7 @@ flags = "h3maped_o1_ob2_gr_windows"
 unit = "rmg_support"
 module = "rmg"
 source = "src/rmg_support.cpp"
-flags = "h3maped_o1_ob2_gr_windows"
+flags = "editor_o1_ob2_gr_windows"
 
 # The terrain painter is a map editor object here (Loki's
 # TerrainPlacement.cpp is one): its free and static functions take stack
