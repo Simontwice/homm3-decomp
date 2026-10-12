@@ -1616,6 +1616,35 @@ void TRmgZone::setLevelPosition(TRmgMapPosition position)
 // affects five instructions. Declaration-lifetime, canonical minimum/accessor
 // and reference-binding controls do not improve it. Keep the shared helper
 // and the native source order through that compiler-allocation residual.
+// One zone's row of the distance table: every original zone at the 32000
+// sentinel, its own column zero. Mac 0x22fc74 and h3maped 0x49b61b (thiscall,
+// ret 4) keep it out of line, called from joinExtraZones' zone loop; the game
+// expands it. Role-derived name.
+VA_AT(h3maped, 0x0049b61b, 0x52)
+MAC_ADDRESS(0x22fc74, 0x90)
+void TRmgZone::initializeDistances(int originalZones)
+{
+    m_zoneDistances.resize(originalZones);
+    for (int column = originalZones; column--;)
+        m_zoneDistances[column] = 32000;
+    if (m_templateZone->m_zoneIndex < originalZones)
+        m_zoneDistances[m_templateZone->m_zoneIndex] = 0;
+}
+
+// Grows the zone's bounding rectangle over one map cell. Mac 0x22fd04 and
+// h3maped 0x49b66d (thiscall, the position by value, ret 0xc) keep it out of
+// line for calculateZoneBounds, its only caller; the game expands it.
+// Role-derived name.
+VA_AT(h3maped, 0x0049b66d, 0x75)
+MAC_ADDRESS(0x22fd04, 0xbc)
+void TRmgZone::extendBounds(TRmgMapPosition position)
+{
+    m_bounds.m_minimumX = min(m_bounds.m_minimumX, position.m_x);
+    m_bounds.m_minimumY = min(m_bounds.m_minimumY, position.m_y);
+    m_bounds.m_maximumX = max(m_bounds.m_maximumX, position.m_x + 1);
+    m_bounds.m_maximumY = max(m_bounds.m_maximumY, position.m_y + 1);
+}
+
 VA(0x00532BD0, 0xA8)
 MAC_ADDRESS(0x22fdc0, 0xc8) // anchor-callee 0x53b4b7/0x53b5ae; thiscall, ret 4
 unsigned char TRmgZone::canConnect(const TRmgZone* other) const
@@ -4825,13 +4854,8 @@ void type_random_map_generator::calculateZoneBounds()
     for (position.m_z = 0; position.m_z < m_map.m_numberLevels; ++position.m_z) {
         for (position.m_y = 0; position.m_y < m_map.m_mapHeight; ++position.m_y) {
             for (position.m_x = 0; position.m_x < m_map.m_mapWidth; ++position.m_x, ++item) {
-                if (item->m_zoneState.m_zone >= 0) {
-                    TRmgZone* zone = m_zones[item->m_zoneState.m_zone];
-                    zone->m_bounds.m_minimumX = min(zone->m_bounds.m_minimumX, position.m_x);
-                    zone->m_bounds.m_minimumY = min(zone->m_bounds.m_minimumY, position.m_y);
-                    zone->m_bounds.m_maximumX = max(zone->m_bounds.m_maximumX, position.m_x + 1);
-                    zone->m_bounds.m_maximumY = max(zone->m_bounds.m_maximumY, position.m_y + 1);
-                }
+                if (item->m_zoneState.m_zone >= 0)
+                    m_zones[item->m_zoneState.m_zone]->extendBounds(position);
             }
         }
     }
@@ -5330,7 +5354,7 @@ void type_random_map_generator::insetIslandZone(TRmgZone* zone)
 {
     int zoneIndex = zone->m_templateZone->m_zoneIndex;
     TRmgMapPosition center = zone->getLevelPosition();
-    int count = zone->m_boundary.size();
+    int count = zone->getBoundaryCount();
     TRmgPoint point = zone->m_boundary[0];
     TRmgVector delta(center.m_x - point.m_x, center.m_y - point.m_y);
     int length = delta.length();
@@ -5356,6 +5380,15 @@ void type_random_map_generator::insetIslandZone(TRmgZone* zone)
         drawIslandBoundary(point, previous, zoneIndex, center.m_z, zone->m_scaledSize / 2);
     }
     fillIslandInterior(zone);
+}
+
+// The map editor keeps this accessor out of line right after the island
+// inset (h3maped 0x4a3244, this in ECX), its only caller; the game expands
+// it and drops the body. Role-derived name, after getEntranceCount.
+VA_AT(h3maped, 0x004a3244, 0x19)
+int TRmgZone::getBoundaryCount() const
+{
+    return m_boundary.size();
 }
 
 // The zone coordinator passes its zone and a closed Voronoi edge ring.
@@ -5525,25 +5558,6 @@ VA_COMPGEN(0x0054C1E0, 0x1E9, VECTOR_RESIZE, Short)
 
 VA_COMPGEN(0x0054C3D0, 0x12, VECTOR_SIZE, Short)
 
-// The distance table is one cohesive operation: size every signed-short row,
-// fill it with the 32000 sentinel, then clear an original zone's diagonal.
-// Complete-only source inference. A nine-state JSON family compared whole-set,
-// per-zone and post-resize boundaries. This ordinary helper and the source-
-// inline spelling compile identically, raise JoinExtraZones 68.8871 -> 79.6078,
-// emit the exact retained resize above, and leave every sibling score fixed.
-static void initializeRmgZoneDistances(
-    type_random_map_generator* generator, int originalZones)
-{
-    for (int index = 0; index < generator->m_zones.size(); ++index) {
-        TRmgZone* zone = generator->m_zones[index];
-        zone->m_zoneDistances.resize(originalZones);
-        for (int column = originalZones; column--;)
-            zone->m_zoneDistances[column] = 32000;
-        if (zone->m_templateZone->m_zoneIndex < originalZones)
-            zone->m_zoneDistances[zone->m_templateZone->m_zoneIndex] = 0;
-    }
-}
-
 // BuildZoneBoundaries passes the count from before the radial sites were
 // added and its live Voronoi diagram. Extra-to-extra edges become completed
 // unguarded connections when their shared boundary intersects the map.
@@ -5561,11 +5575,18 @@ static void initializeRmgZoneDistances(
 // A sixteen-state connection push_back/insert batch emits no short-vector
 // resize specialization in any object. Its caller peak of 72.7823% does
 // not recover the missing 0x54c1e0 boundary, so no connection edit is retained.
-// Residual 79.6078%: extracting the complete distance initializer as the
-// ordinary helper above recovers that exact boundary and cuts the candidate
-// CFG from 86 to 73 blocks (retail 79). Per-zone helpers reach 79.2772%; moving
-// only the post-resize fill loses at 66.1663%. The two large connection loops,
-// their ring-search exits and final insertion expansion remain to reconcile.
+// Residual 79.6078%: a generator-level distance initializer recovered that
+// exact boundary (TRmgZone::initializeDistances keeps it) and cut the
+// candidate CFG from 86 to 73 blocks (retail 79). Moving only the post-resize
+// fill loses at 66.1663%. The two large connection loops, their ring-search
+// exits and final insertion expansion remain to reconcile.
+// Mac 0x23f714 and h3maped 0x4a389b call TRmgZone::initializeDistances from
+// a zone loop in this body (Mac reuses the index register), so the earlier
+// generator-level initializeRmgZoneDistances wrapper is gone: the map editor
+// rises 82.60 -> 88.18, the game falls 76.31 -> 42.52. The direct loop raises
+// this root's cb from 877 to 918 (budget 1754 -> 1836) and the game then
+// expands the later connection inserts that retail calls; a cheaper
+// statement elsewhere in this body is the open lead.
 VA(0x0053DAD0, 0x57F)
 MAC_ADDRESS(0x23f518, 0x40c) // anchor-callee buildZoneBoundaries; Complete-only, ret 8
 VA_AT(h3maped, 0x004a3710, 0x2f3)
@@ -5602,7 +5623,8 @@ void type_random_map_generator::joinExtraZones(int originalZones, TRmgVoronoi* d
             }
         }
     }
-    initializeRmgZoneDistances(this, originalZones);
+    for (index = 0; index < m_zones.size(); ++index)
+        m_zones[index]->initializeDistances(originalZones);
     for (index = 0; index < originalZones; ++index)
         propagateZoneDistances(m_zones[index]);
 

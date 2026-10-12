@@ -604,18 +604,6 @@ u32 TRmgTerrainPainter::getHeight() const
     return m_size.m_y;
 }
 
-// The base-frame paths in PaintPoint and PaintTransitions first compute
-// strength, then load the selected rule's virtual receiver. Keep that shared
-// evaluation boundary and the captured terrain index across the first call.
-// The helper's role and signature are inferred from retail expansions.
-MAC_ADDRESS(0x259998, 0x60)
-s32 TRmgTerrainPainter::selectBaseFrame(
-    const TTilePoint& point, s32 terrain, s32 oldFrame)
-{
-    s32 strength = getTransitionStrength(point, terrain);
-    return g_rmgTerrainRules[terrain]->selectBaseFrame(strength, oldFrame);
-}
-
 // PaintPoint and both transition updates repeat this adapter/cache write.
 // Preserve the shared operation, including validity before the four values;
 // cache initialization from an adapter read has a different store order.
@@ -636,9 +624,15 @@ void TRmgTerrainPainter::setTile(
 // The base-tile block of paintPoint as paintRectangle's own helper: its one
 // site is what paintRectangle's terrain test needs (see there), while
 // paintPoint expands the same three operations from its own block.
+// Loki's TTerrainPlacementOp::operator() spells the block inline, and
+// h3maped's paintRectangle (0x4bb681) carries it expanded; there this helper
+// is vetoed 21/12 (one-expression and two-statement bodies too), leaving
+// that body at 52.08. Spelled inline here, the editor body is exact but the
+// game's getTerrain site loses the nested budget for initializePackedCell
+// (paintRectangle 100 -> 74.24): four later sites instead of one.
 void TRmgTerrainPainter::paintBaseTile(const TTilePoint& point)
 {
-    s32 frame = selectBaseFrame(point, m_paintTerrain, -1);
+    s32 frame = selectBaseFrame(point, m_paintTerrain);
     TRmgTerrainTile tile(m_paintTerrain, frame);
     setTile(point, tile);
 }
@@ -691,7 +685,7 @@ MAC_ADDRESS(0x256014, 0x580) // anchor-callee 0x5b4960, 0x5b5440; thiscall, ret 
 void TRmgTerrainPainter::paintPoint(const TTilePoint& point)
 {
     {
-        s32 frame = selectBaseFrame(point, m_paintTerrain, -1);
+        s32 frame = selectBaseFrame(point, m_paintTerrain);
         setTile(point, TRmgTerrainTile(m_paintTerrain, frame));
     }
 
@@ -1080,7 +1074,7 @@ void TRmgTerrainPainter::paintTransitions()
                         transition = 13;
                 }
 
-                TRmgTerrainTile tile = getPackedCell(point)->getTile();
+                TRmgTerrainTile tile = getTile(point);
 
                 s32 newFrame;
                 if (transition) {
@@ -1099,7 +1093,7 @@ void TRmgTerrainPainter::paintTransitions()
                     setTile(point, tile);
                 }
             } else {
-                TRmgTerrainTile tile = getPackedCell(point)->getTile();
+                TRmgTerrainTile tile = getTile(point);
 
                 s32 newFrame = selectBaseFrame(point, tile.m_terrain, tile.m_frame);
                 if (tile.m_frame != newFrame || tile.m_flipX || tile.m_flipY) {
@@ -1111,6 +1105,18 @@ void TRmgTerrainPainter::paintTransitions()
             }
         }
     }
+}
+
+// The cell's tile as the packed cache holds it. h3maped keeps it out of line
+// right after paintTransitions (0x4bc5a3, the tile returned through a hidden
+// pointer), its only caller; the game expands it. Role-derived name.
+// Retail expands the cell's field reads here; this compile vetoes the
+// cell's getTile 18/12 (50.12). The four reads written here are exact in
+// the editor but cost the game's paintTransitions 100 -> 95.76.
+VA_AT(h3maped, 0x004bc5a3, 0x4d)
+TRmgTerrainTile TRmgTerrainPainter::getTile(const TTilePoint& point)
+{
+    return getPackedCell(point)->getTile();
 }
 
 VA(0x005b6320, 0x107)
@@ -1406,6 +1412,27 @@ s32 TRmgTerrainPainter::getTransitionStrength(
             strength >>= 1;
     }
     return strength;
+}
+
+// A base frame for one cell: strength first, then the selected rule's
+// virtual receiver. Loki's TerrainPlacement.cpp has the same pair after
+// _computeEffectiveFrequency: _pickFullTile(x, y, terrain) for a fresh
+// tile and _pickFullTile(x, y, terrain, requestedTileNum) to keep one.
+// h3maped keeps the fresh-tile form out of line (0x4bcfc3, called by
+// paintRectangle and paintPoint) and expands the other in paintTransitions.
+VA_AT(h3maped, 0x004bcfc3, 0x22)
+s32 TRmgTerrainPainter::selectBaseFrame(const TTilePoint& point, s32 terrain)
+{
+    s32 strength = getTransitionStrength(point, terrain);
+    return g_rmgTerrainRules[terrain]->selectBaseFrame(strength, RMG_NO_TERRAIN_FRAME);
+}
+
+MAC_ADDRESS(0x259998, 0x60)
+s32 TRmgTerrainPainter::selectBaseFrame(
+    const TTilePoint& point, s32 terrain, s32 oldFrame)
+{
+    s32 strength = getTransitionStrength(point, terrain);
+    return g_rmgTerrainRules[terrain]->selectBaseFrame(strength, oldFrame);
 }
 
 // The same primary/secondary worklist appears in the brush's terrain change

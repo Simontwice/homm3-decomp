@@ -1557,6 +1557,7 @@ struct TRmgZone {
     TRmgMapPosition getLevelPosition() const;
     void setLevelPosition(TRmgMapPosition position);
     TRmgMapPosition getPrimaryTownEntrance() const;
+    int getBoundaryCount() const;
     int getEntranceCount() const;
     // Template slot radius; the position filter reads it through this
     // accessor, which is what makes its first counting pass call size().
@@ -1564,6 +1565,8 @@ struct TRmgZone {
     {
         return m_templateZone->m_size;
     }
+    void initializeDistances(int originalZones);
+    void extendBounds(TRmgMapPosition position);
     unsigned char canConnect(const TRmgZone* other) const;
 };
 
