@@ -13,12 +13,12 @@ executables.
 
 <!-- match-score:start -->
 
-**Windows `HEROES3.EXE`: 98.95% matched (MAX)** — 4,542 / 4,785 functions exact (94.9%), weighted by size over 1,999,585 bytes of code.
+**Windows `HEROES3.EXE`: 98.93% matched (MAX)** — 4,542 / 4,785 functions exact (94.9%), weighted by size over 1,999,585 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           4,539 |   98.95% | last measured score                            |
-| MAX   |           4,542 |   98.95% | best result for each function's current source |
+| CUR   |           4,539 |   98.92% | last measured score                            |
+| MAX   |           4,542 |   98.93% | best result for each function's current source |
 | HIST  |           4,558 |   99.11% | all-time peak across source revisions          |
 
 MAX by module:
@@ -26,7 +26,7 @@ MAX by module:
 | Module       | Units | Functions exact MAX | Fuzzy MAX |
 | :----------- | ----: | ------------------: | --------: |
 | `game`       |   123 | 3815 / 3998 (95.4%) |    99.14% |
-| `rmg`        |     6 |   311 / 369 (84.3%) |    96.04% |
+| `rmg`        |     6 |   311 / 369 (84.3%) |    95.70% |
 | `network`    |     4 |   278 / 280 (99.3%) |    99.68% |
 | `zlib-1.1.3` |    14 |    69 / 69 (100.0%) |   100.00% |
 | `codec`      |     4 |    43 / 43 (100.0%) |   100.00% |
@@ -53,24 +53,24 @@ Library and compiler-generated code (outside the scores; each function verified 
 
 <!-- h3maped-match-score:start -->
 
-**GOG Complete map editor `h3maped.exe`: 93.98% matched (MAX)** — 5,571 / 6,847 functions exact (81.4%), weighted by size over 851,190 bytes of code.
+**GOG Complete map editor `h3maped.exe`: 94.09% matched (MAX)** — 5,576 / 6,847 functions exact (81.4%), weighted by size over 851,190 bytes of code.
 
 | Score | Functions exact | Weighted | Meaning                                        |
 | :---- | --------------: | -------: | :--------------------------------------------- |
-| CUR   |           5,545 |   93.96% | last measured score                            |
-| MAX   |           5,571 |   93.98% | best result for each function's current source |
-| HIST  |           5,571 |   94.00% | all-time peak across source revisions          |
+| CUR   |           5,549 |   93.91% | last measured score                            |
+| MAX   |           5,576 |   94.09% | best result for each function's current source |
+| HIST  |           5,576 |   94.11% | all-time peak across source revisions          |
 
 MAX by module:
 
 | Module        | Units | Functions exact MAX | Fuzzy MAX |
 | :------------ | ----: | ------------------: | --------: |
 | `game`        |   159 | 5113 / 5385 (94.9%) |    99.03% |
-| `rmg`         |     6 |   346 / 453 (76.4%) |    93.45% |
+| `rmg`         |     6 |   351 / 458 (76.6%) |    94.03% |
 | `zlib-1.1.3`  |    12 |    56 / 56 (100.0%) |   100.00% |
 | `codec`       |     3 |     40 / 51 (78.4%) |    91.92% |
 | `victor`      |     6 |     16 / 17 (94.1%) |    99.99% |
-| `(unmatched)` |     — |      0 / 885 (0.0%) |      0.0% |
+| `(unmatched)` |     — |      0 / 880 (0.0%) |      0.0% |
 
 Library and compiler-generated code (outside the scores; each function verified against what produced it):
 
@@ -81,7 +81,7 @@ Library and compiler-generated code (outside the scores; each function verified 
 | `init/cleanup thunks` |     3,593 |        2 |   80,415 | compiler-generated, verified             | source-emitted CRT bodies, bytes and named relocations                                                |
 | `import thunks`       |        13 |        0 |       78 | linker-generated, verified               | `FF 25` through a named IAT slot (and the pinned import library where one exists)                     |
 
-**Data:** 2,677 / 16,670 referenced data objects claimed (placements and the image's own `DATA()` claims).
+**Data:** 2,674 / 16,670 referenced data objects claimed (placements and the image's own `DATA()` claims).
 
 <!-- h3maped-match-score:end -->
 
